@@ -58,44 +58,28 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
-gem "simple_form"
-gem "wobapphelpers", git: "https://github.com/swobspace/wobapphelpers", branch: "master"
-gem "rails-i18n", "~> 7.0.0"
-gem "font-awesome-sass", "~> 6.0"
-gem "view_component"
-gem "cancancan"
+
+# --- TEMPLATE START ---
+gem 'simple_form'
+gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers', 
+                   branch: 'master'
+gem 'rails-i18n', '~> 7.0.0'
+gem 'font-awesome-sass', '~> 6.0'
+gem 'view_component'
+gem 'cancancan'
 
 group :test, :development do
-  gem "rspec-rails"
-  gem "dotenv"
+  gem 'rspec-rails'
+  gem 'dotenv'
+  # gem 'json_spec', require: false
 end
 
 group :test do
   gem "shoulda-matchers", require: false
-  gem "factory_bot_rails"
+  gem 'factory_bot_rails'
   gem "capybara"
-  gem "selenium-webdriver"
-  gem "webdriver"
-  gem "launchy"
+  gem 'selenium-webdriver'
+  gem 'webdriver'
+  gem 'launchy'
 end
-gem "simple_form"
-gem "simple_form"
-gem "wobapphelpers", git: "https://github.com/swobspace/wobapphelpers", branch: "master"
-gem "rails-i18n", "~> 7.0.0"
-gem "font-awesome-sass", "~> 6.0"
-gem "view_component"
-gem "cancancan"
-
-group :test, :development do
-  gem "rspec-rails"
-  gem "dotenv"
-end
-
-group :test do
-  gem "shoulda-matchers", require: false
-  gem "factory_bot_rails"
-  gem "capybara"
-  gem "selenium-webdriver"
-  gem "webdriver"
-  gem "launchy"
-end
+# --- TEMPLATE END ---

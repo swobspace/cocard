@@ -1,0 +1,33 @@
+site:
+  title: Cocard
+  start_page: cocard::index.adoc
+content:
+  sources:
+  - url: ../..
+    branches: HEAD
+    start_paths: [docsrc/app, docsrc/devnotes]
+    edit_url: ~
+output:
+  dir: ../../docs
+  clean: true
+ui:
+  bundle:
+    url: ./ui-bundle/ui-bundle.zip
+    snapshot: false
+  supplemental_files:
+  - path: ui.yml
+    contents: |
+      static_files:
+      - .nojekyll
+  - path: .nojekyll
+  - path: /css/main.css
+    contents: ./ui-bundle/supplemental/css/main.css
+  - path: js/vendor/medium-zoom.min.js
+    contents: ./ui-bundle/supplemental/js/vendor/medium-zoom.min.js
+  - path: partials/header-content.hbs
+    contents: ./ui-bundle/supplemental/partials/header-content.hbs
+  - path: partials/footer-content.hbs
+    contents: ./ui-bundle/supplemental/partials/footer-content.hbs
+  - path: partials/footer-scripts.hbs
+    contents: ./ui-bundle/supplemental/partials/footer-scripts.hbs
+

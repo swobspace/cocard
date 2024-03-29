@@ -10,5 +10,9 @@
   },
   "browserslist": [
     "defaults"
-  ]
+  ],
+  "devDependencies": {
+    "@antora/cli": "3.1.0",
+    "@antora/site-generator": "3.1.0"
+  }
 }
