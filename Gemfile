@@ -67,6 +67,7 @@ gem 'rails-i18n', '~> 7.0.0'
 gem 'font-awesome-sass', '~> 6.0'
 gem 'view_component'
 gem 'cancancan'
+gem "wobauth", git: "https://github.com/swobspace/wobauth.git", branch: "master"
 
 group :test, :development do
   gem 'rspec-rails'
