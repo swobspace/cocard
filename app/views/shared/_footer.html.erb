@@ -1,0 +1,5 @@
+<%= ( current_user.nil? ) ? "not logged in" : current_user.username %> |
+<%= Time.now.strftime("%Y-%m-%d %H:%Mh") %> |
+<%= "Cocard"  + '::' + 
+    controller.controller_name + '::' +
+              controller.action_name %> 

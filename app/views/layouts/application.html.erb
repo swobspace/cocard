@@ -2,15 +2,55 @@
 <html>
   <head>
     <title>Cocard</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="refresh" content="600" />
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "modules %>
+
+    <% if content_for?(:head) %>
+      <%= yield(:head) %>
+    <% end %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body data-updated-at="<%= Time.current.to_s %>">
+    <%= turbo_frame_tag "modal" %>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" role="navigation">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="<%= main_app.root_path if defined?(main_app.root_path)%>#">Cocard</a>
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerMirco">
+        <%= render partial: 'shared/navi' %>
+        <%= render partial: 'wobauth/shared/admin' %>
+        <%= render partial: 'wobauth/shared/accounting' %>
+        <%= render partial: 'shared/info' %>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+       <% unless controller.action_name =~ /(new|edit)/ %>
+         <%= render_breadcrumbs %>
+       <% end %>
+      <div id="flash">
+        <%= render "shared/flash_alert" %>
+      </div>
+      <%= yield %>
+    </div>
+
+    <div id="footer" class="container-fluid">
+      <div class="row">
+        <div class="col-sm-9">
+          <%= render :partial => 'shared/footer' %>
+        </div>
+        <div class="col-sm-3">
+          <%= render :partial => 'shared/version' %>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

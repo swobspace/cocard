@@ -1,0 +1,3 @@
+<% flash.each do |severity,message| %>
+  <%= render AlertComponent.new(severity: severity, message: message) %>
+<% end %>
