@@ -1,0 +1,80 @@
+de:
+  wobauth:
+    action: Aktion
+    configuration: Konfiguration
+    change_columns: Spalten ändern
+    show_all: alles anzeigen
+    restore: zurücksetzen
+    search: Suche
+    sort_helper: Sortierhilfe
+    applied_filter: Angewandter Filter
+    new_user_from_ad: Benutzer mit Vorlage erstellen
+
+  activerecord:
+    models:
+      wobauth/user: Benutzer
+      wobauth/ad_user: Active Directory User
+      wobauth/authority: Berechtigung
+      wobauth/group: Gruppe
+      wobauth/membership: Mitgliedschaft
+      wobauth/role: Rolle
+      wobauth/users/authority: Berechtigung
+      wobauth/users/membership: Mitgliedschaft
+      wobauth/groups/authority: Berechtigung
+      wobauth/groups/membership: Mitgliedschaft
+      wobauth/registration: Userprofil
+      wobauth/session: Login
+
+
+  attributes:
+    active_directory_guid: Active Directory GUID
+    authorizable: Authorisierbar
+    authorizable_id: Authorisierbar
+    authorizable_type: Authorisierbar/Typ
+    authorized_for: Berechtigung auf
+    authorized_for_id: Berechtigung auf
+    authorized_for_type: Berechtigung auf/Typ
+    auto: Auto
+    care_of: c/o
+    company: Organisation
+    current_sign_in_at: Login am
+    current_sign_in_ip: Login-IP
+    department: Abteilung
+    description: Beschreibung
+    displayname: Anzeigename
+    email: E-Mail
+    facsimiletelephonenumber: Telefax
+    group: Gruppe
+    gruppen: Gruppen (auto)
+    last_sign_in_at: Letzter Login
+    last_sign_in_ip: Letzte Login-IP
+    location: Ort
+    mail: E-Mail
+    members: Mitglieder
+    membership: Mitgliedschaft
+    mobile: Mobil
+    name: Name
+    ort: Ort
+    plz: PLZ
+    position: Position
+    postfach: Postfach
+    postfachplz: PLZ (Postfach)
+    role: Rolle
+    sign_in_count: Anzahl Logins
+    streetaddress: Straße, Nr.
+    telephone: Telefon
+    telephonenumber: Telefon
+    title: Titel
+    user: Benutzer
+    username: Username
+    userprincipalname: Principalname
+    valid_from: gültig von
+    valid_until: gültig bis
+
+  controller:
+    wobauth/users: Benutzer
+    wobauth/ad_users: Active Directory User
+    wobauth/authorities: Berechtigungen
+    wobauth/groups: Gruppen
+    wobauth/memberships: Mitgliedschaften
+    wobauth/roles: Rollen

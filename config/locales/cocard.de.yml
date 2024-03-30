@@ -1,0 +1,15 @@
+de:
+  activerecord:
+    models:
+      user: User
+
+  attributes:
+    description: Beschreibung
+    displayname: Anzeigename
+    givenname: Vorname
+    name: Name
+    sn: Nachname
+    username: Username
+
+  controller:
+    users: Benutzer

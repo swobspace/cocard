@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/swobspace/wobapphelpers
-  revision: 2fc8e5eff8e22f5a2c3a60ae675fddf5d97cc0a8
+  revision: f818c595edabe82724c2a64c54a91323971b1e59
   branch: master
   specs:
     wobapphelpers (6.0.0)
@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/swobspace/wobauth.git
-  revision: 0b408669f4deda7392cb016567e52e652a554947
+  revision: fe56baa6890f92db93687bcdc5f27befcce7239d
   branch: master
   specs:
     wobauth (7.0.0)
@@ -127,7 +127,7 @@ GEM
     cssbundling-rails (1.4.0)
       railties (>= 6.0.0)
     date (3.3.4)
-    debug (1.9.1)
+    debug (1.9.2)
       irb (~> 1.10)
       reline (>= 0.3.8)
     devise (4.9.3)
