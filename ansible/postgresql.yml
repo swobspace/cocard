@@ -4,6 +4,8 @@
     - vars/secure.yml
   vars:
     postgres_users_no_log: false
+    # don't touch pg_hba.conf with empty list
+    postgresql_hba_entries: {}
     postgresql_users:
       - name: cocard
         password: "{{ postgresql_user_password }}"
