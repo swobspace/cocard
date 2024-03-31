@@ -16,6 +16,7 @@
     "@antora/site-generator": "3.1.0"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "6",
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^8.0.4",
     "@popperjs/core": "^2.11.8",
@@ -31,6 +32,7 @@
     "pdfmake": "^0.2.10",
     "postcss": "^8.4.38",
     "postcss-cli": "^11.0.0",
-    "sass": "^1.72.0"
+    "sass": "^1.72.0",
+    "tom-select": "^2.3.1"
   }
 }
