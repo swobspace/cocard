@@ -1,0 +1,13 @@
+<%%= simple_form_for(@<%= singular_table_name %>) do |form| %>
+<%%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
+
+  <div class="form-input">
+   <%- attributes.each do |attribute| -%>
+    <%%= form.<%= attribute.reference? ? :association : :input %> :<%= attribute.name %><% (attribute.field_type == :date_select) ? ', as: :string' : '' %>
+       %>
+   <%- end -%>
+
+    <%%= form.button :submit, class: 'btn btn-primary' %>
+    <%%= cancel_button %>
+  </div>
+<%% end %>

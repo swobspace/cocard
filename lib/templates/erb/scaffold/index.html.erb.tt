@@ -1,0 +1,51 @@
+<%% content_for :head do %>
+  <meta name="turbolinks-cache-control" content="no-cache">
+<%% end %>
+
+<h1><%%= t('controller.<%= plural_table_name %>') %></h1>
+
+<div data-controller="datatables">
+  <%%= content_tag :table, role: :datatable,
+        id: "<%= plural_table_name + "_table" %>",
+        class: "table table-bordered table-responsive-xl",
+        data: {
+          'datatables-target': 'datatable',
+          order: [[0, 'asc']].to_json
+        } do %>
+    <thead>
+      <tr>
+    <% attributes.each do |attribute| -%>
+        <th><%%= t('attributes.<%= attribute.name %>') %></th>
+    <% end -%>
+        <th class="nosort"><%%= t('mirco.action') %></th>
+      </tr>
+    </thead>
+    <tfoot class="search">
+      <tr>
+    <% attributes.each do |attribute| -%>
+        <th></th>
+    <% end -%>
+        <th class="nosearch"></th>
+      </tr>
+    </tfoot>
+    <tbody>
+      <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+        <%%= content_tag(:tr, id: dom_id(<%= singular_table_name %>), class: dom_class(<%= singular_table_name %>)) do %>
+      <% attributes.each do |attribute| -%>
+          <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
+      <% end -%>
+          <td class="text-nowrap">
+            <%%= show_link <%= singular_table_name %> %>
+            <%%= edit_link <%= singular_table_name %> %>
+            <%%= delete_link <%= singular_table_name %> %>
+          </td>
+        <%% end %>
+      <%% end %>
+    </tbody>
+  <%% end %>
+</div>
+
+<br />
+
+<%%= back_link %>
+<%%= new_link <%= class_name %> %>

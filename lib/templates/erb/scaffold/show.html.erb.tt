@@ -1,0 +1,31 @@
+<div class="card mb-2">
+  <div class="card-header">
+    <div class="d-flex w-100 justify-content-between">
+      <div>
+        <span class="subtitle">
+          <%%= t('activerecord.models.<%= singular_table_name %>') %>: 
+          #<%%= @<%= singular_table_name %>.id %>
+        </span>
+        <h4 class="title"><%%= @<%= singular_table_name %> %></h4>
+      </div>
+      <div role="toolbar" class="pt-3">
+        <%%= edit_link(@<%= singular_table_name %>) %>
+        <%%= delete_link(@<%= singular_table_name %>) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <table class="table table-sm table-borderless">
+    <% attributes.each do |attribute| %>
+      <tr>
+        <th class="w-10 pe-3"><%%= t('attributes.<%= attribute.name %>')%>:</th>
+        <td><%%= @<%= singular_table_name %>.<%= attribute.name %> %></td>
+      </tr>
+    <%- end -%>
+    </table>
+  </div>
+</div>
+
+<%%= back_link %>
+<%%= new_link <%= class_name %> %>
