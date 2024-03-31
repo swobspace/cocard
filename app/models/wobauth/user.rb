@@ -3,7 +3,7 @@ class Wobauth::User < ActiveRecord::Base
   # dependencies within wobauth models
   include UserConcerns
 
-  # devise *#{@app_name}.devise_modules 
+  # devise *cocard.devise_modules 
   # or ... basic usage:
   devise :database_authenticatable
 

@@ -13,7 +13,6 @@
     <% if content_for?(:head) %>
       <%= yield(:head) %>
     <% end %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
   <body data-updated-at="<%= Time.current.to_s %>">

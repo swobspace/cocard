@@ -1,0 +1,7 @@
+roles:
+  - name: geerlingguy.postgresql
+
+collections:
+  - name: community.postgresql
+    source: https://galaxy.ansible.com
+
