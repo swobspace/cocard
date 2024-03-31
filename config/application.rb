@@ -45,6 +45,10 @@ module Cocard
       g.jbuilder          false
     end
 
+    config.after_initialize do
+      Rails.application.reload_routes!
+    end
+
     config.responders.error_status = :unprocessable_entity
     config.responders.redirect_status = :see_other
   end

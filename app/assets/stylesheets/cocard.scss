@@ -1,0 +1,201 @@
+// ------------------------------------------------------------------------
+// bootstrap
+// ------------------------------------------------------------------------
+$font-family-sans-serif:
+  // Android
+  Roboto,
+  // Cross-platform generic font family (default user interface font)
+  system-ui,
+  // Safari for macOS and iOS (San Francisco)
+  -apple-system,
+  // Chrome < 56 for macOS (San Francisco)
+  BlinkMacSystemFont,
+  // Windows
+  "Segoe UI",
+  // Basic web fallback
+  "Helvetica Neue", Arial,
+  // Linux
+  "Noto Sans",
+  "Liberation Sans",
+  // Sans serif fallback
+  sans-serif,
+  // Emoji fonts
+  "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$primary: #136F79;
+
+// @import "font-awesome-sprockets.css";
+// @import "font-awesome.css";
+@import "bootstrap/scss/bootstrap";
+
+// ------------------------------------------------------------------------
+// FONTS
+// ------------------------------------------------------------------------
+@font-face {
+        font-family: 'Roboto';
+        src: font-url('Roboto-Regular.ttf') format('truetype');
+        font-weight: 400;
+        font-style: normal;
+}
+@font-face {
+        font-family: 'Roboto';
+        src: font-url('Roboto-Italic.ttf') format('truetype');
+        font-weight: 400;
+        font-style: italic;
+}
+@font-face {
+        font-family: 'Roboto';
+        src: font-url('Roboto-Bold.ttf') format('truetype');
+        font-weight: 700;
+        font-style: normal;
+}
+@font-face {
+        font-family: 'Roboto';
+        src: font-url('Roboto-BoldItalic.ttf') format('truetype');
+        font-weight: 700;
+        font-style: italic;
+}
+
+// ------------------------------------------------------------------------
+// main
+// ------------------------------------------------------------------------
+body {
+  padding-top: 60px;
+}
+
+// login form
+#new_user.card {
+  max-width: 800px;
+}
+// ------------------------------------------------------------------------
+// FOOTER
+// ------------------------------------------------------------------------
+div#footer{
+  font-size: 0.9em;
+  color: #999;
+  margin-top: 24px;
+  padding-top: 4px;
+  border-top: 1px solid #eee;
+}
+
+// ------------------------------------------------------------------------
+// search fields for datatables
+// ------------------------------------------------------------------------
+.table {
+  tfoot.search {
+    display: table-header-group;
+    th {
+      padding: 0.25rem;
+      input[type="text"] {
+        width: 100%;
+        padding: 0.25rem;
+        border-radius: 0.25rem;
+        box-sizing: border-box;
+        border: 1px solid #ced4da;
+      }
+    }
+  }
+}
+
+
+// ------------------------------------------------------------------------
+// required/mandantory fields
+// ------------------------------------------------------------------------
+.required {
+  span.select-selection,
+  div.ss-main.select.required > div.ss-single-selected,
+  div.ss-main.select.required > div.ss-multi-selected,
+  textarea.required, input.required, select.required {
+    background-color: #FFFAC2;
+  }
+}
+
+select.required + div.ts-wrapper {
+  background-color: #FFFAC2;
+}
+
+td.mandantory {
+  background-color: #FFFAC2;
+}
+
+// ------------------------------------------------------------------------
+// misc
+// ------------------------------------------------------------------------
+.btn {
+  margin-bottom: .2em;
+}
+
+trix-editor.form-control {
+  height: auto;
+}
+
+.subtitle {
+  color: #999;
+} 
+
+a.primary-link {
+  text-decoration: none;
+}
+
+table.connector.table.table-sm > :not(caption) > * > * {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.script_color {
+  background-color: #FFFDDB;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.bg-alert, .bg-ALERT {
+  background-color: #B800FF !important;
+  color: white !important;
+  font-weight: bold;
+}
+
+.bg-OK {
+  background-color: #E6FFE6 !important;
+}
+.bg-WARN, .bg-ignore {
+  background-color:  #FFFF80 !important;
+}
+.bg-CRITICAL, .bg-disabled {
+  background-color: #FF8080 !important;
+}
+.bg-UNKNOWN {
+  background-color: #FFD280 !important;
+}
+
+// ------------------------------------------------------------------------
+// button_to: behaving just like a normal bootstrap button
+// ------------------------------------------------------------------------
+form.button_to {
+  display: inline-block;
+}
+
+.no_button {
+  border: 0;
+  border-radius: none;
+  background-color: transparent;
+  color: darkred;
+}
+
+
+// ------------------------------------------------------------------------
+// tom-select
+// ------------------------------------------------------------------------
+
+.ts-dropdown-content {
+  max-height: 400px;
+}
+// ------------------------------------------------------------------------
+// turbo progress bar
+// ------------------------------------------------------------------------
+.turbo-progress-bar {
+  height: 5px;
+  background-color: white;
+}
+
+.w-10 { width: 10%; }
