@@ -61,7 +61,7 @@ end
 
 # --- TEMPLATE START ---
 gem 'simple_form'
-gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers', 
+gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers',
                    branch: 'master'
 gem 'rails-i18n', '~> 7.0.0'
 gem 'font-awesome-sass', '~> 6.0'
