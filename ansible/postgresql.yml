@@ -4,6 +4,10 @@
     - vars/secure.yml
   vars:
     postgres_users_no_log: false
+    postgresql_users:
+      - name: cocard
+        password: "{{ postgresql_user_password }}"
+        encrypted: yes
     postgresql_databases:
       - name: cocard_development
         owner: cocard
@@ -14,11 +18,6 @@
         owner: cocard
         lc_collate: de_DE.UTF-8
         lc_ctype: de_DE.UTF-8
-
-    postgresql_users:
-      - name: Cocard
-        password: "{{ postgresql_user_password }}"
-        encrypted: yes
 
   roles:
     - role: geerlingguy.postgresql
