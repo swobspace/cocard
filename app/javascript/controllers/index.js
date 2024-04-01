@@ -4,5 +4,20 @@
 
 import { application } from "./application"
 
+import DatatablesController from "./datatables_controller"
+application.register("datatables", DatatablesController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import ModalController from "./modal_controller"
+application.register("modal", ModalController)
+
+import SelectController from "./ts/select_controller"
+application.register("select", SelectController)
+
+import ToastController from "./toast_controller"
+application.register("toast", ToastController)
+
+import PolymorphicSelectController from "@swobspace/stimulus-polymorphic-select"
+application.register("polymorphic-select", PolymorphicSelectController)
