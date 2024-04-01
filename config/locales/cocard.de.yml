@@ -20,6 +20,7 @@ de:
     displayname: Anzeigename
     givenname: Vorname
     ip: IP-Adresse
+    lid: Standort-Kürzel
     location: Standort
     manual_update: manuelles Update
     name: Name

@@ -2,11 +2,13 @@
 <%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
 
   <div class="form-input">
-    <%= form.input :name
+    <%= form.input :name,
+        hint: "Default: 'TIKONN-<IP-Adresse>'"
        %>
-    <%= form.input :ip
+    <%= form.input :ip, as: :string
        %>
-    <%= form.input :sds_url
+    <%= form.input :sds_url,
+        hint: "Default: 'http://<ip-adresse>/connector.sds'"
        %>
     <%= form.input :manual_update
        %>
