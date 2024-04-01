@@ -9,6 +9,7 @@ class Ability
       can :read, Home
     else
       can :manage, :all
+      cannot %i[update destroy], :roles, ro: true
     end
   end
 end
