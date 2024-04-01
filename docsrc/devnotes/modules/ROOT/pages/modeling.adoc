@@ -45,13 +45,15 @@ bin/rails g scaffold Connector \
   name:string \
   ip:inet \
   sds_url:string \
+  manual_update:boolean \
+    --no-stylesheets --no-javascripts --no-helper
+
+bin/rails g migration AddReadonlyToConnector \
   sds_xml:text \
   sds_updated_at: \
   properties:jsonb \
   last_check:timestamp last_check_ok:timestamp \
-  manual_update:boolean \
-  condition:integer:index \
-  --no-stylesheets --no-javascripts --no-helper
+  condition:integer:index
 ----
 
 .Install ActionText

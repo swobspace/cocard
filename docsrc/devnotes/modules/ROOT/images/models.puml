@@ -5,15 +5,17 @@ top to bottom direction
 
 class Connector  {
   name: string
+  description: rich_text
   ip: inet
   sds_url: string
+  manual_update: boolean
+  --
   sds_xml: text
   sds_updated_at: timestamp
   properties: jsonb
   last_check: timestamp
   last_check_ok: timestamp
   condition: integer
-  manual_update: boolean
 }
 
 class Location {
