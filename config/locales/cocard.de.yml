@@ -2,21 +2,28 @@ de:
   activerecord:
     models:
       client: Mandant
+      connector: Konnektor
       location: Standort
       user: User
 
   attributes:
+    action: Aktion
     client: Mandant
+    connector: Konnektor
     description: Beschreibung
     displayname: Anzeigename
     givenname: Vorname
+    ip: IP-Adresse
     location: Standort
+    manual_update: manuelles Update
     name: Name
+    sds_url: SDS-Url
     sn: Nachname
     username: Username
 
   controller:
     clients: Mandanten
+    connectors: Konnektoren
     home: Home
     locations: Standorte
     users: Benutzer
