@@ -1,0 +1,29 @@
+<% if can? :navigate, :configuration %>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarConfigurationDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+      <%= t('attributes.configuration') %>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarConfigurationDropdown">
+      <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
+                       t('controller.locations')), 
+                  main_app.locations_path, class: "dropdown-item" %>
+      <% if can? :create, Location %>
+        <%= link_to raw( '<span class="fas fa-fw fa-plus" aria-hidden="true"></span> ' +
+                         t('cocard.new_location')), 
+                    main_app.new_location_path, class: "dropdown-item" %>
+      <% end %>
+      <div class="dropdown-divider"></div>
+        <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
+                         t('controller.clients')), 
+                    main_app.clients_path, class: "dropdown-item" %>
+      <% if can? :create, Client %>
+        <%= link_to raw( '<span class="fas fa-fw fa-plus" aria-hidden="true"></span> ' +
+                         t('cocard.new_client')), 
+                    main_app.new_client_path, class: "dropdown-item" %>
+      <% end %>
+    </div>
+  </li>
+<% end %>
+
+

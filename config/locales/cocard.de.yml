@@ -1,4 +1,9 @@
 de:
+  cocard:
+    new_client: Neuer Mandant
+    new_connector: Neuer Konnektor
+    new_location: Neuer Standort
+
   activerecord:
     models:
       client: Mandant
@@ -9,6 +14,7 @@ de:
   attributes:
     action: Aktion
     client: Mandant
+    configuration: Konfiguration
     connector: Konnektor
     description: Beschreibung
     displayname: Anzeigename

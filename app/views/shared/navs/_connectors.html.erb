@@ -1,0 +1,21 @@
+<% if can? :navigate, :connectors %>
+  <li class="nav-item dropdown <%= active_class('connectors') %>">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarConnectorDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+      <%= t('controller.connectors') %>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarConnectorDropdown">
+      <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
+            t('controller.connectors')),
+          main_app.connectors_path, class: "dropdown-item" %>
+      <% if can? :create, Connector %>
+        <%= link_to raw('<span class="fas fa-fw fa-plus" aria-hidden="true"></span> ' +
+                        t('cocard.new_connector')),
+              main_app.new_connector_path,
+              class: "dropdown-item" %>
+      <% end %>
+    </div>
+  </li>
+<% end %>
+
+
