@@ -1,0 +1,17 @@
+<%= simple_form_for(@connector) do |form| %>
+<%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
+
+  <div class="form-input">
+    <%= form.input :name
+       %>
+    <%= form.input :ip
+       %>
+    <%= form.input :sds_url
+       %>
+    <%= form.input :manual_update
+       %>
+
+    <%= form.button :submit, class: 'btn btn-primary' %>
+    <%= cancel_button %>
+  </div>
+<% end %>

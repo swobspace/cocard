@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_01_114324) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_01_155422) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -57,6 +57,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_01_114324) do
     t.string "description", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "connectors", force: :cascade do |t|
+    t.string "name", default: ""
+    t.inet "ip", null: false
+    t.string "sds_url", default: ""
+    t.boolean "manual_update", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "sds_xml"
+    t.string "sds_updated_at"
+    t.jsonb "properties"
+    t.datetime "last_check", precision: nil
+    t.datetime "last_check_ok", precision: nil
+    t.integer "condition", default: 0
+    t.index ["condition"], name: "index_connectors_on_condition"
   end
 
   create_table "locations", force: :cascade do |t|

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :connectors
   resources :clients
   resources :locations
   root to: 'home#index'

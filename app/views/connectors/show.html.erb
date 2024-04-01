@@ -1,0 +1,45 @@
+<div class="card mb-2">
+  <div class="card-header">
+    <div class="d-flex w-100 justify-content-between">
+      <div>
+        <span class="subtitle">
+          <%= t('activerecord.models.connector') %>: 
+          #<%= @connector.id %>
+        </span>
+        <h4 class="title"><%= @connector %></h4>
+      </div>
+      <div role="toolbar" class="pt-3">
+        <%= edit_link(@connector) %>
+        <%= delete_link(@connector) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <table class="table table-sm table-borderless">
+    
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.name')%>:</th>
+        <td><%= @connector.name %></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.ip')%>:</th>
+        <td><%= @connector.ip %></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.sds_url')%>:</th>
+        <td><%= @connector.sds_url %></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.manual_update')%>:</th>
+        <td><%= @connector.manual_update %></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<%= back_link %>
+<%= new_link Connector %>
