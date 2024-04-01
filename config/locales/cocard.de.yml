@@ -1,16 +1,19 @@
 de:
   activerecord:
     models:
+      location: Standort
       user: User
 
   attributes:
     description: Beschreibung
     displayname: Anzeigename
     givenname: Vorname
+    location: Standort
     name: Name
     sn: Nachname
     username: Username
 
   controller:
-    users: Benutzer
     home: Home
+    locations: Standorte
+    users: Benutzer

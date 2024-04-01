@@ -1,0 +1,48 @@
+<% content_for :head do %>
+  <meta name="turbolinks-cache-control" content="no-cache">
+<% end %>
+
+<h1><%= t('controller.locations') %></h1>
+
+<div data-controller="datatables">
+  <%= content_tag :table, role: :datatable,
+        id: "locations_table",
+        class: "table table-bordered table-responsive-xl",
+        data: {
+          'datatables-target': 'datatable',
+          order: [[0, 'asc']].to_json
+        } do %>
+    <thead>
+      <tr>
+            <th><%= t('attributes.lid') %></th>
+            <th><%= t('attributes.description') %></th>
+            <th class="nosort"><%= t('mirco.action') %></th>
+      </tr>
+    </thead>
+    <tfoot class="search">
+      <tr>
+            <th></th>
+            <th></th>
+            <th class="nosearch"></th>
+      </tr>
+    </tfoot>
+    <tbody>
+      <% @locations.each do |location| %>
+        <%= content_tag(:tr, id: dom_id(location), class: dom_class(location)) do %>
+                <td><%= location.lid %></td>
+                <td><%= location.description %></td>
+                <td class="text-nowrap">
+            <%= show_link location %>
+            <%= edit_link location %>
+            <%= delete_link location %>
+          </td>
+        <% end %>
+      <% end %>
+    </tbody>
+  <% end %>
+</div>
+
+<br />
+
+<%= back_link %>
+<%= new_link Location %>
