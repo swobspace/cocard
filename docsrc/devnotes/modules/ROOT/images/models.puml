@@ -1,0 +1,32 @@
+@startuml
+top to bottom direction
+
+!theme cocard from .
+
+class Connector  {
+  name: string
+  ip: inet
+  sds_url: string
+  sds_xml: text
+  sds_updated_at: timestamp
+  properties: jsonb
+  last_check: timestamp
+  last_check_ok: timestamp
+  condition: integer
+  manual_update: boolean
+}
+
+class Location {
+  lid: string
+  description: string
+}
+
+class Client {
+  name: string
+  description: string
+}
+
+Location "*" -- "*" Connector
+Client "*" -- "*" Connector
+
+@enduml

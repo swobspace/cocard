@@ -1,0 +1,69 @@
+= Modeling cocard
+:imagesdir: ../images
+
+== Overall Picture
+
+image::models.svg[]
+
+== Home controller
+
+[source,sh]
+----
+bin/rails g controller Home index \
+  --no-stylesheets --no-javascripts --no-helper
+----
+
+== model Location
+
+[source,sh]
+----
+bin/rails g scaffold Location \
+  lid:string \
+  description:string \
+  --no-stylesheets --no-javascripts --no-helper
+----
+
+i.e. `NRH`, `BNA`. Only for grouping and information.
+
+== model Client
+
+[source,sh]
+----
+bin/rails g scaffold Client \
+  name:string \
+  description:string \
+  --no-stylesheets --no-javascripts --no-helper
+----
+
+i.e. `ORBIS`, `Ein1`. Used as `Mandant_id` in SOAP requests.
+
+== model Connector
+
+[source,sh]
+----
+bin/rails g scaffold Connector \
+  name:string \
+  ip:inet \
+  sds_url:string \
+  sds_xml:text \
+  sds_updated_at: \
+  properties:jsonb \
+  last_check:timestamp last_check_ok:timestamp \
+  manual_update:boolean \
+  condition:integer:index \
+  --no-stylesheets --no-javascripts --no-helper
+----
+
+.Install ActionText
+[source,sh]
+----
+bin/rails action_text:install
+----
+
+.app/models/connector.rb
+[source,sh]
+----
+class Connector < ApplicationRecord
+  has_rich_text :description
+end
+----
