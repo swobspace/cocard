@@ -1,0 +1,35 @@
+<div class="card mb-2">
+  <div class="card-header">
+    <div class="d-flex w-100 justify-content-between">
+      <div>
+        <span class="subtitle">
+          <%= t('activerecord.models.client') %>: 
+          #<%= @client.id %>
+        </span>
+        <h4 class="title"><%= @client %></h4>
+      </div>
+      <div role="toolbar" class="pt-3">
+        <%= edit_link(@client) %>
+        <%= delete_link(@client) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <table class="table table-sm table-borderless">
+    
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.name')%>:</th>
+        <td><%= @client.name %></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.description')%>:</th>
+        <td><%= @client.description %></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<%= back_link %>
+<%= new_link Client %>

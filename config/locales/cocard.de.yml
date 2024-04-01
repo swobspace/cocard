@@ -1,10 +1,12 @@
 de:
   activerecord:
     models:
+      client: Mandant
       location: Standort
       user: User
 
   attributes:
+    client: Mandant
     description: Beschreibung
     displayname: Anzeigename
     givenname: Vorname
@@ -14,6 +16,7 @@ de:
     username: Username
 
   controller:
+    clients: Mandanten
     home: Home
     locations: Standorte
     users: Benutzer
