@@ -176,8 +176,37 @@ bin/rails g migration AddReadonlyToConnector \
 <div class="listingblock">
 <div class="title">app/models/connector.rb</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">class Connector &lt; ApplicationRecord
+<pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">class Connector &lt; ApplicationRecord
   has_rich_text :description
+end</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_habtm_tables"><a class="anchor" href="#_habtm_tables"></a>HABTM Tables</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="title">Join Tables for HABTM</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g migration CreateJoinTableClientConnector \
+  client connector
+bin/rails g migration CreateJoinTableConnectorLocation \
+  connector location</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Add index and set index to unique:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">class CreateJoinTableClientConnector &lt; ActiveRecord::Migration[7.1]
+  def change
+    create_join_table :clients, :connectors do |t|
+      t.index [:client_id, :connector_id], unique: true
+      t.index [:connector_id, :client_id], unique: true
+    end
+  end
 end</code></pre>
 </div>
 </div>

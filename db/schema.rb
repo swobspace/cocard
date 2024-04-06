@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_01_155422) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_06_080830) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -59,6 +59,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_01_155422) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "clients_connectors", id: false, force: :cascade do |t|
+    t.bigint "client_id", null: false
+    t.bigint "connector_id", null: false
+    t.index ["client_id", "connector_id"], name: "index_clients_connectors_on_client_id_and_connector_id", unique: true
+    t.index ["connector_id", "client_id"], name: "index_clients_connectors_on_connector_id_and_client_id", unique: true
+  end
+
   create_table "connectors", force: :cascade do |t|
     t.string "name", default: ""
     t.inet "ip", null: false
@@ -73,6 +80,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_01_155422) do
     t.datetime "last_check_ok", precision: nil
     t.integer "condition", default: 0
     t.index ["condition"], name: "index_connectors_on_condition"
+  end
+
+  create_table "connectors_locations", id: false, force: :cascade do |t|
+    t.bigint "connector_id", null: false
+    t.bigint "location_id", null: false
+    t.index ["connector_id", "location_id"], name: "index_connectors_locations_on_connector_id_and_location_id", unique: true
+    t.index ["location_id", "connector_id"], name: "index_connectors_locations_on_location_id_and_connector_id", unique: true
   end
 
   create_table "locations", force: :cascade do |t|

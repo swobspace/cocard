@@ -63,9 +63,34 @@ bin/rails action_text:install
 ----
 
 .app/models/connector.rb
-[source,sh]
+[source,ruby]
 ----
 class Connector < ApplicationRecord
   has_rich_text :description
+end
+----
+
+== HABTM Tables
+
+.Join Tables for HABTM
+[source,sh]
+----
+bin/rails g migration CreateJoinTableClientConnector \
+  client connector
+bin/rails g migration CreateJoinTableConnectorLocation \
+  connector location
+----
+
+Add index and set index to unique:
+
+[source,ruby]
+----
+class CreateJoinTableClientConnector < ActiveRecord::Migration[7.1]
+  def change
+    create_join_table :clients, :connectors do |t|
+      t.index [:client_id, :connector_id], unique: true
+      t.index [:connector_id, :client_id], unique: true
+    end
+  end
 end
 ----
