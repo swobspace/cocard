@@ -7,6 +7,34 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
+require 'shoulda/matchers'
+require 'factory_bot_rails'
+require 'view_component/test_helpers'
+require 'capybara/rspec'
+
+Capybara.register_driver :chrome_headless do |app|
+  url = "http://#{ENV['SELENIUM_REMOTE_HOST']}:4444/wd/hub"
+  options = Selenium::WebDriver::Chrome::Options.new
+
+  options.add_argument("--headless")
+  options.add_argument("--no-sandbox")
+  options.add_argument("--disable-dev-shm-usage")
+  options.add_argument("--window-size=1280x1280")
+  # options.add_argument("disable-gpu")
+
+  Capybara::Selenium::Driver.new(
+    app,
+    browser: :remote,
+    url: url,
+    options: options
+  )
+end
+
+# Capybara.javascript_driver = :selenium_chrome
+# Capybara.javascript_driver = :selenium_chrome_headless
+Capybara.javascript_driver = :chrome_headless
+Capybara.disable_animation = true
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -20,46 +48,50 @@ require 'rspec/rails'
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-# Rails.root.glob('spec/support/**/*.rb').sort.each { |f| require f }
+Rails.root.glob('spec/support/**/*.rb').sort.each { |f| require f }
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
-begin
-  ActiveRecord::Migration.maintain_test_schema!
-rescue ActiveRecord::PendingMigrationError => e
-  abort e.to_s.strip
-end
+# begin
+#   ActiveRecord::Migration.maintain_test_schema!
+# rescue ActiveRecord::PendingMigrationError => e
+#   abort e.to_s.strip
+# end
+
 RSpec.configure do |config|
-  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
+  config.include Capybara::DSL
+
   config.fixture_paths = [
     Rails.root.join('spec/fixtures')
   ]
 
-  # If you're not using ActiveRecord, or you'd prefer not to run each of your
-  # examples within a transaction, remove the following line or assign false
-  # instead of true.
   config.use_transactional_fixtures = true
-
-  # You can uncomment this line to turn off ActiveRecord support entirely.
-  # config.use_active_record = false
-
-  # RSpec Rails can automatically mix in different behaviours to your tests
-  # based on their file location, for example enabling you to call `get` and
-  # `post` in specs under `spec/controllers`.
-  #
-  # You can disable this behaviour by removing the line below, and instead
-  # explicitly tag your specs with their type, e.g.:
-  #
-  #     RSpec.describe UsersController, type: :controller do
-  #       # ...
-  #     end
-  #
-  # The different available types are documented in the features, such as in
-  # https://rspec.info/features/6-0/rspec-rails
   config.infer_spec_type_from_file_location!
-
-  # Filter lines from Rails gems in backtraces.
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # -- devise stuff
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Devise::Test::IntegrationHelpers, type: :feature
+  config.extend ControllerMacros, type: :controller
+  config.extend ControllerMacros, type: :view
+  config.include RequestMacros, type: :request
+  config.include RequestMacros, type: :feature
+  config.include ViewComponent::TestHelpers, type: :component
+  config.include Capybara::RSpecMatchers, type: :component
+
+  config.before :each, type: :feature, js: true do
+    Capybara.server_host = `/sbin/ip route|awk '/scope/ { print $9 }'`.strip
+    Capybara.server_port = "43447"
+    session_server       = Capybara.current_session.server
+    Capybara.app_host    = "http://#{session_server.host}:#{session_server.port}"
+  end
+
+
+  config.after(:suite) do
+    FileUtils.rm_rf(ActiveStorage::Blob.service.root)
+  end
+
 end
