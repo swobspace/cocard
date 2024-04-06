@@ -3,16 +3,24 @@
 
   <div class="form-input">
     <%= form.input :name,
-        hint: "Default: 'TIKONN-<IP-Adresse>'"
+        placeholder: "Default: 'TIKONN-<IP-Adresse>'"
        %>
     <%= form.input :ip, as: :string
        %>
     <%= form.input :sds_url,
-        hint: "Default: 'http://<ip-adresse>/connector.sds'"
+        placeholder: "Default: http://<ip-adresse>/connector.sds"
        %>
-    <%= form.input :manual_update
+    <%= form.input :description, as: :rich_text_area
+       %>
+    <%= form.input :location_ids, as: :select, collection: Location.all,
+          input_html: { multiple: true }
+       %>
+    <%= form.input :client_ids, as: :select, collection: Client.all,
+          input_html: { multiple: true }
        %>
 
+    <%= form.input :manual_update
+       %>
     <%= form.button :submit, class: 'btn btn-primary' %>
     <%= cancel_button %>
   </div>
