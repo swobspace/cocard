@@ -1,0 +1,2 @@
+---
+postgresql_user_password: <%= SecureRandom.base64(32) %>
