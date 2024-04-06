@@ -85,3 +85,5 @@ group :test do
   gem 'launchy'
 end
 # --- TEMPLATE END ---
+
+gem "faker", "~> 3.3", :groups => [:test, :development]
