@@ -14,6 +14,7 @@ de:
   attributes:
     action: Aktion
     client: Mandant
+    client_ids: Mandanten
     configuration: Konfiguration
     connector: Konnektor
     description: Beschreibung
@@ -22,6 +23,7 @@ de:
     ip: IP-Adresse
     lid: Standort-Kürzel
     location: Standort
+    location_ids: Standorte
     manual_update: manuelles Update
     name: Name
     sds_url: SDS-Url

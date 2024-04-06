@@ -51,6 +51,9 @@ class ConnectorsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def connector_params
-      params.require(:connector).permit(:name, :ip, :sds_url, :manual_update)
+      params.require(:connector)
+            .permit(:name, :ip, :sds_url, :manual_update, :description,
+                    client_ids: [], location_ids: [])
+ 
     end
 end
