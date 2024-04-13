@@ -7,10 +7,13 @@ module Cocard
       @hash = Nori.new(strip_namespaces: true).parse(xml)
     end
 
+    def connector_services
+      hash['ConnectorServices']
+    end
+
     def product_information
       ProductInformation.new(hash['ConnectorServices']['ProductInformation'])
     end
-
 
   end
 end
