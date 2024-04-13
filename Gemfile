@@ -87,3 +87,9 @@ end
 # --- TEMPLATE END ---
 
 gem "faker", "~> 3.3", :groups => [:test, :development]
+
+gem "faraday", "~> 2.9"
+
+gem "nori", "~> 2.7"
+
+gem "savon", "~> 2.15"
