@@ -73,7 +73,7 @@ export default class extends Controller {
 
 
   buttonOptions(options) {
-    options.dom = "<'row mt-2 justify-content-between'<'col-md-auto me-auto'l><'col'B><'col-md-auto ms-auto'f>>" +
+    options.dom = "<'row mt-2 justify-content-between'<'col-md-auto me-auto'l><'col-md-auto'B>>" +
                     "<'row mt-2 justify-content-md-center'<'col-sm-12'tr>>" +
                     "<'row mt-2 justify-content-between'<'col-md-auto me-auto'i><'col-md-auto ms-auto'p>>"
     options.buttons = {
