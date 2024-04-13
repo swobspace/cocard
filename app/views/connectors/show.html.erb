@@ -1,4 +1,4 @@
-<div class="card mb-2">
+<div class="card mb-3">
   <div class="card-header">
     <div class="d-flex w-100 justify-content-between">
       <div>
@@ -36,6 +36,18 @@
       <tr>
         <th class="w-10 pe-3"><%= t('attributes.manual_update')%>:</th>
         <td><%= @connector.manual_update %></td>
+      </tr>
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.locations')%>:</th>
+        <td><%= @connector.locations.map(&:to_s).join('; ') %></td>
+      </tr>
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.clients')%>:</th>
+        <td><%= @connector.clients.map(&:to_s).join('; ') %></td>
+      </tr>
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.description')%>:</th>
+        <td><%= @connector.description %></td>
       </tr>
     </table>
   </div>

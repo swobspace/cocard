@@ -23,6 +23,6 @@ RSpec.describe "connectors/show", type: :view do
     expect(rendered).to match(/192.0.2.1/)
     expect(rendered).to match(/Sds Url/)
     expect(rendered).to match(/false/)
-    expect(rendered).to match(/some_text/)
+    expect(rendered).to match(/some text/)
   end
 end
