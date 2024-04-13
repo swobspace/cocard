@@ -188,6 +188,7 @@ GEM
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
     immutable-struct (2.4.1)
+    immutable_struct (1.2.0)
     io-console (0.7.2)
     irb (1.12.0)
       rdoc
@@ -430,6 +431,7 @@ DEPENDENCIES
   guard
   guard-rspec
   image_processing (~> 1.2)
+  immutable_struct (~> 1.2)
   jsbundling-rails
   launchy
   nori (~> 2.7)

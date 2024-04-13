@@ -93,3 +93,5 @@ gem "faraday", "~> 2.9"
 gem "nori", "~> 2.7"
 
 gem "savon", "~> 2.15"
+
+gem "immutable_struct", "~> 1.2"
