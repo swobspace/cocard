@@ -2,9 +2,15 @@ require 'rails_helper'
 
 RSpec.describe "connectors/new", type: :view do
   before(:each) do
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    allow(controller).to receive(:current_ability) { @ability }
+    allow(controller).to receive(:controller_name) { 'connectors' }
+    allow(controller).to receive(:action_name) { 'new' }
+
     assign(:connector, Connector.new(
       name: "MyString",
-      ip: "",
+      ip: "192.0.2.1",
       sds_url: "MyString",
       manual_update: false
     ))
@@ -14,14 +20,13 @@ RSpec.describe "connectors/new", type: :view do
     render
 
     assert_select "form[action=?][method=?]", connectors_path, "post" do
-
       assert_select "input[name=?]", "connector[name]"
-
       assert_select "input[name=?]", "connector[ip]"
-
       assert_select "input[name=?]", "connector[sds_url]"
-
       assert_select "input[name=?]", "connector[manual_update]"
+      assert_select "input[name=?]", "connector[description]"
+      assert_select "select[name=?]", "connector[location_ids][]"
+      assert_select "select[name=?]", "connector[client_ids][]"
     end
   end
 end

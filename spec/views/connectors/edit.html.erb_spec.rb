@@ -4,13 +4,19 @@ RSpec.describe "connectors/edit", type: :view do
   let(:connector) {
     Connector.create!(
       name: "MyString",
-      ip: "",
+      ip: "192.0.2.1",
       sds_url: "MyString",
       manual_update: false
     )
   }
 
   before(:each) do
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    allow(controller).to receive(:current_ability) { @ability }
+    allow(controller).to receive(:controller_name) { 'connectors' }
+    allow(controller).to receive(:action_name) { 'edit' }
+
     assign(:connector, connector)
   end
 
@@ -18,14 +24,13 @@ RSpec.describe "connectors/edit", type: :view do
     render
 
     assert_select "form[action=?][method=?]", connector_path(connector), "post" do
-
       assert_select "input[name=?]", "connector[name]"
-
       assert_select "input[name=?]", "connector[ip]"
-
       assert_select "input[name=?]", "connector[sds_url]"
-
       assert_select "input[name=?]", "connector[manual_update]"
+      assert_select "input[name=?]", "connector[description]"
+      assert_select "select[name=?]", "connector[location_ids][]"
+      assert_select "select[name=?]", "connector[client_ids][]"
     end
   end
 end

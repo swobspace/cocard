@@ -2,13 +2,19 @@ require 'rails_helper'
 
 RSpec.describe "locations/edit", type: :view do
   let(:location) {
-    Location.create!(
+    FactoryBot.create(:location,
       lid: "MyString",
       description: "MyString"
     )
   }
 
   before(:each) do
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    allow(controller).to receive(:current_ability) { @ability }
+    allow(controller).to receive(:controller_name) { 'locations' }
+    allow(controller).to receive(:action_name) { 'edit' }
+
     assign(:location, location)
   end
 

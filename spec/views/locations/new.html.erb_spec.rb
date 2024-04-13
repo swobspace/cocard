@@ -2,10 +2,13 @@ require 'rails_helper'
 
 RSpec.describe "locations/new", type: :view do
   before(:each) do
-    assign(:location, Location.new(
-      lid: "MyString",
-      description: "MyString"
-    ))
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    allow(controller).to receive(:current_ability) { @ability }
+    allow(controller).to receive(:controller_name) { 'locations' }
+    allow(controller).to receive(:action_name) { 'new' }
+
+    assign(:location, FactoryBot.build(:location))
   end
 
   it "renders new location form" do
