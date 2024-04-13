@@ -12,7 +12,7 @@ class Connector  {
   --
   sds_xml: text
   sds_updated_at: timestamp
-  properties: jsonb
+  connector_services: jsonb
   last_check: timestamp
   last_check_ok: timestamp
   condition: integer

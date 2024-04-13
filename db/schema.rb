@@ -75,7 +75,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_06_080830) do
     t.datetime "updated_at", null: false
     t.text "sds_xml"
     t.string "sds_updated_at"
-    t.jsonb "properties"
+    t.jsonb "connector_services"
     t.datetime "last_check", precision: nil
     t.datetime "last_check_ok", precision: nil
     t.integer "condition", default: 0
