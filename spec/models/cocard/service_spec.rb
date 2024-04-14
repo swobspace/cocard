@@ -20,6 +20,13 @@ module Cocard
     describe "#abstract" do
       it { expect(subject.abstract).to eq("NFD auf eGK verwalten") }
     end
+
+    describe "#version(1.0.0)" do
+      it { expect(subject.version('1.0.0')).to be_kind_of(Hash) }
+      it { expect(subject.version('1.0.0').keys).to contain_exactly(
+            "version", "abstract", "endpoint", "endpoint_tls", "target_namespace"
+           ) }
+    end
    
     describe "#to_s" do
       it "shows product information summary" do

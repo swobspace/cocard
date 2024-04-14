@@ -30,6 +30,10 @@ module Cocard
       end
     end
 
+    def version(ver)
+      versions.select{|v| v['version'].to_s == ver.to_s}.first
+    end
+
     def to_s
       text = <<~TOTEXT
         #{name} - #{abstract}
