@@ -37,6 +37,15 @@ class ConnectorsController < ApplicationController
     respond_with(@connector)
   end
 
+  def fetch_sds
+    result = ConnectorServices::Fetch.new(connector: @connector).call
+    unless result.success?
+      @connector.errors.add(:base, :invalid)
+      @connector.errors.add(:base, result.error_messages.join("; "))
+    end
+    respond_with(@connector, action: :show)
+  end
+
   # DELETE /connectors/1
   def destroy
     @connector.destroy!

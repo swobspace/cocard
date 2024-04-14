@@ -9,6 +9,9 @@
         <h4 class="title"><%= @connector %></h4>
       </div>
       <div role="toolbar" class="pt-3">
+        <%= button_to(t('mirco.fetch_sds'),
+                      fetch_sds_connector_path(@connector),
+                      class: 'btn btn-warning me-1') if can? :manage, @connector %>
         <%= edit_link(@connector) %>
         <%= delete_link(@connector) %>
       </div>

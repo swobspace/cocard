@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :connectors
+  resources :connectors do
+    member do
+      post :fetch_sds
+    end
+  end
   resources :clients
   resources :locations
   root to: 'home#index'
