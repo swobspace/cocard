@@ -22,10 +22,10 @@ module Cocard
 
     def to_s
       text = <<~TOTEXT
-        InformationDate: #{information_date}
         ProduktTypeInformation:
           ProductType: #{product_type_information['ProductType']}
           ProductTypeVersion: #{product_type_information['ProductTypeVersion']}
+
         ProductIdentification:
           ProductVendorID: #{product_identification['ProductVendorID']}
           ProductCode: #{product_identification['ProductCode']}
@@ -33,9 +33,12 @@ module Cocard
             Local:
               HWVersion: #{product_identification['ProductVersion']['Local']['HWVersion']}
               FWVersion: #{product_identification['ProductVersion']['Local']['FWVersion']}
+
         ProductMiscellaneous:
           ProductVendorName: #{product_miscellaneous['ProductVendorName']}
           ProductName: #{product_miscellaneous['ProductName']}
+
+        #{information_date}
       TOTEXT
     end
 

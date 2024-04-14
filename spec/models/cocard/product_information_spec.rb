@@ -16,10 +16,10 @@ module Cocard
     describe "#to_s" do
       it "shows product information summary" do
         expect(subject.to_s).to eq(<<~PRODINFO
-          InformationDate: 2024-04-13T10:36:01+02:00
           ProduktTypeInformation:
             ProductType: Konnektor
             ProductTypeVersion: 5.1.0
+
           ProductIdentification:
             ProductVendorID: KOCOC
             ProductCode: kocobox
@@ -27,9 +27,12 @@ module Cocard
               Local:
                 HWVersion: 2.0.0
                 FWVersion: 5.1.8
+
           ProductMiscellaneous:
             ProductVendorName: KoCo Connector
             ProductName: KoCoBox MED+
+
+          2024-04-13T10:36:01+02:00
          PRODINFO
        )
 
