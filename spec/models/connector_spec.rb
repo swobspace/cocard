@@ -1,7 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Connector, type: :model do
-  let(:connector) { FactoryBot.create(:connector, ip: '192.0.2.17') }
+  let(:yaml) do
+    File.join(Rails.root, 'spec', 'fixtures', 'files', 'connector_services.yaml')
+  end
+  let(:connector) do 
+    FactoryBot.create(:connector, 
+      ip: '192.0.2.17',
+      connector_services: YAML.load_file(yaml)
+    )
+  end
   it { is_expected.to have_and_belong_to_many(:clients) }
   it { is_expected.to have_and_belong_to_many(:locations) }
   it { is_expected.to validate_presence_of(:ip) }
@@ -16,5 +24,14 @@ RSpec.describe Connector, type: :model do
 
   describe "#to_s" do
     it { expect(connector.to_s).to match('- / 192.0.2.17') }
+  end
+
+  describe "#product_information" do
+    it { expect(connector.product_information).to be_kind_of(Cocard::ProductInformation) }
+  end
+
+  describe "#service_information" do
+    it { expect(connector.service_information).to be_kind_of(Array) }
+    it { expect(connector.service_information.first).to be_kind_of(Cocard::Service) }
   end
 end

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 module Cocard
-  RSpec.describe SDS, type: :model do
+  RSpec.describe ProductInformation, type: :model do
     let(:sds_file) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'connector.sds') }
     let(:sds_string) { File.read(sds_file) }
     let(:hash) { Nori.new(strip_namespaces: true).parse(sds_string) }
@@ -10,6 +10,12 @@ module Cocard
     describe "without argument" do
       it "::new raise an KeyError" do
         expect { Cocard::ProductInformation.new() }.to raise_error(ArgumentError)
+      end
+    end
+
+    describe "empty connector_services" do
+      it "returns nil" do
+        expect { Cocard::ProductInformation.new(nil) }.not_to raise_error
       end
     end
    

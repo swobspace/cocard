@@ -1,23 +1,23 @@
 module Cocard
   class ProductInformation
     def initialize(hash)
-      @hash = hash
+      @hash = hash || {}
     end
 
     def information_date
-      hash['InformationDate']
+      hash['InformationDate'] || nil
     end
 
     def product_type_information
-      hash['ProductTypeInformation']
+      hash['ProductTypeInformation'] || {}
     end
 
     def product_identification
-      hash['ProductIdentification']
+      hash['ProductIdentification'] || {}
     end
 
     def product_miscellaneous
-      hash['ProductMiscellaneous']
+      hash['ProductMiscellaneous'] || {}
     end
 
     def to_s

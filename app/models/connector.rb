@@ -14,6 +14,19 @@ class Connector < ApplicationRecord
     "#{_name} / #{ip}"
   end
 
+  def product_information
+    return nil if connector_services.nil?
+    Cocard::ProductInformation.new(connector_services['ProductInformation'])
+  end
+
+  def service_information
+    return [] if connector_services.nil?
+    connector_services['ServiceInformation']['Service'].map do |svc|
+      Cocard::Service.new(svc)
+    end
+  end
+
+
 private
   def _name
     if name.blank?

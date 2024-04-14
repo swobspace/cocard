@@ -19,40 +19,51 @@
   </div>
 
   <div class="card-body">
-    <table class="table table-sm table-borderless">
-    
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.name')%>:</th>
-        <td><%= @connector.name %></td>
-      </tr>
+    <div class="row">
+      <div class="col-6">
+        <table class="table table-sm table-borderless">
+        
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.name')%>:</th>
+            <td><%= @connector.name %></td>
+          </tr>
 
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.ip')%>:</th>
-        <td><%= @connector.ip %></td>
-      </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.ip')%>:</th>
+            <td><%= @connector.ip %></td>
+          </tr>
 
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.sds_url')%>:</th>
-        <td><%= @connector.sds_url %></td>
-      </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.sds_url')%>:</th>
+            <td><%= @connector.sds_url %></td>
+          </tr>
 
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.manual_update')%>:</th>
-        <td><%= @connector.manual_update %></td>
-      </tr>
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.locations')%>:</th>
-        <td><%= @connector.locations.map(&:to_s).join('; ') %></td>
-      </tr>
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.clients')%>:</th>
-        <td><%= @connector.clients.map(&:to_s).join('; ') %></td>
-      </tr>
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.description')%>:</th>
-        <td><%= @connector.description %></td>
-      </tr>
-    </table>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.manual_update')%>:</th>
+            <td><%= @connector.manual_update %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.locations')%>:</th>
+            <td><%= @connector.locations.map(&:to_s).join('; ') %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.clients')%>:</th>
+            <td><%= @connector.clients.map(&:to_s).join('; ') %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.description')%>:</th>
+            <td><%= @connector.description %></td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-6">
+        <b>ProductInformation:</b>
+        <pre>
+<%= @connector.product_information&.to_s %>
+        </pre>
+      </div>
+
+    </div>
   </div>
 </div>
 
