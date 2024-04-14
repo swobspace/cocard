@@ -34,4 +34,8 @@ RSpec.describe Connector, type: :model do
     it { expect(connector.service_information).to be_kind_of(Array) }
     it { expect(connector.service_information.first).to be_kind_of(Cocard::Service) }
   end
+
+  describe "#service('EventService')" do
+    it { expect(connector.service('EventService')).to be_kind_of(Cocard::Service) }
+  end
 end

@@ -26,6 +26,10 @@ class Connector < ApplicationRecord
     end
   end
 
+  def service(svcname)
+    service_information.select{|x| x.name == svcname }.first
+  end
+
 
 private
   def _name
