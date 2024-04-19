@@ -34,6 +34,14 @@ module Cocard
       versions.select{|v| v['version'].to_s == ver.to_s}.first
     end
 
+    def endpoint_location(ver)
+      version(ver)['endpoint']['@Location']
+    end
+
+    def target_namespace(ver)
+      version(ver)['target_namespace']
+    end
+
     def to_s
       text = <<~TOTEXT
         #{name} - #{abstract}

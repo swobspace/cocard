@@ -27,6 +27,16 @@ module Cocard
             "version", "abstract", "endpoint", "endpoint_tls", "target_namespace"
            ) }
     end
+
+    describe "#endpoint_location" do
+      it { expect(subject.endpoint_location('1.0.0')).to eq(
+                  "http://10.200.149.3:80/service/fm/nfdm/nfdservice") }
+    end
+
+    describe "#target_namespace" do
+      it { expect(subject.target_namespace('1.0.0')).to eq(
+                  "http://ws.gematik.de/conn/nfds/NFDService/WSDL/v1.0") }
+    end
    
     describe "#to_s" do
       it "shows product information summary" do
