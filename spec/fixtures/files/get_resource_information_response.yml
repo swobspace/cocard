@@ -1,0 +1,426 @@
+---
+:get_resource_information_response:
+  :status:
+    :result: !ruby/string:Nori::StringWithAttributes
+      str: OK
+      attributes: {}
+  :connector:
+    :vpnti_status:
+      :connection_status: !ruby/string:Nori::StringWithAttributes
+        str: Online
+        attributes: {}
+      :timestamp: !ruby/object:DateTime 2024-04-16 07:59:25.043000000 Z
+    :vpnsis_status:
+      :connection_status: !ruby/string:Nori::StringWithAttributes
+        str: Offline
+        attributes: {}
+      :timestamp: !ruby/object:DateTime 2023-09-04 06:31:33.441000000 Z
+    :operating_state:
+      :error_state:
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_No_VPN_TI_Connection
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Error
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Operation
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2024-04-16 07:59:25.008000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_Firewall_Not_Reliable
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Fatal
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Security
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2023-09-04 06:30:35.884000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_FW_Not_Valid_Status_Blocked
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Fatal
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Security
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2023-09-04 06:32:11.627000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_CardTerminal_gSMC-KT_Certificate_Expires_Soon(CT_ID_0176)
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Info
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Operation
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2024-03-26 15:33:02.913000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_OTHER_ERROR_STATE(1)
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Fatal
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Security
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2023-09-04 06:30:46.417000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_CRL_Expiring
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Warning
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Security
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2023-09-04 06:32:11.887000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_IP_Adresses_Not_Available
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Error
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Security
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2023-09-04 06:30:34.325000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_LOG_OVERFLOW
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Warning
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Operation
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2023-09-04 06:30:29.152000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_TSL_Update_Not_Successful
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Info
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Operation
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2024-04-20 01:01:08.487000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_Time_Difference_Intolerable
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Fatal
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Security
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2023-09-04 06:30:32.774000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_Time_Sync_Pending_Critical
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Fatal
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Security
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2023-09-04 06:30:34.106000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_TSL_Trust_Anchor_Expiring
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Info
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Security
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2023-09-04 06:31:09.162000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_Software_Integrity_Check_Failed
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Fatal
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Security
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2023-09-04 06:30:29.901000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_Time_Sync_Not_Successful
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Info
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Operation
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2024-04-07 04:25:36.825000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_NK_Certificate_Expiring
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Warning
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Security
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2023-09-04 06:31:29.992000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_OTHER_ERROR_STATE(4)
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Error
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Security
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2023-09-04 06:31:09.283000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_Security_Log_Not_Writable
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Fatal
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Operation
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2023-09-04 06:30:29.769000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_CardTerminal_Not_Available(CT_ID_0176)
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Error
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Operation
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2024-03-26 15:33:03.264000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_CardTerminal_Software_Out_Of_Date(CT_ID_0176)
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Info
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Operation
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2024-03-26 15:48:53.963000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_Connector_Software_Out_Of_Date
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Info
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Operation
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2023-09-04 06:32:12.723000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_OTHER_ERROR_STATE(2)
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Warning
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Operation
+          attributes: {}
+        :value: true
+        :valid_from: !ruby/object:DateTime 2023-09-04 06:30:29.332000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_TSL_Out_Of_Date_Beyond_Grace_Period
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Fatal
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Security
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2023-09-04 06:31:09.311000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_No_VPN_SIS_Connection
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Error
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Operation
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2023-09-04 06:30:37.630000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_BNetzA_VL_Update_Not_Successful
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Info
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Operation
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2024-03-07 20:41:49.714000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_CRL_Out_Of_Date
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Fatal
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Security
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2023-09-04 06:32:12.006000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_TSL_Out_Of_Date_Within_Grace_Period
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Warning
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Security
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2023-09-04 06:31:09.227000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_Random_Generator_Not_Reliable
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Fatal
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Security
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2023-09-04 06:30:40.365000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_TSL_Trust_Anchor_Out_Of_Date
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Fatal
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Security
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2023-09-04 06:31:09.205000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_Time_Sync_Pending_Warning
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Warning
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Security
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2023-09-04 06:30:34.199000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_No_Online_Connection
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Error
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Operation
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2024-04-16 07:57:53.735000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_FW_Update_Available
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Info
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Operation
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2024-04-19 17:57:15.091000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_TSL_Expiring
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Info
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Security
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2023-09-04 06:31:09.354000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_BNetzA_VL_not_valid
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Warning
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Security
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2024-04-20 01:01:38.510000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_CRYPTOPERATION_ALARM
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Warning
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Security
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2023-09-04 06:31:09.687000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_NK_Certificate_Expired
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Fatal
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Security
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2023-09-04 06:31:30.017000000 Z
+      - :error_condition: !ruby/string:Nori::StringWithAttributes
+          str: EC_Secure_KeyStore_Not_Available
+          attributes: {}
+        :severity: !ruby/string:Nori::StringWithAttributes
+          str: Fatal
+          attributes: {}
+        :type: !ruby/string:Nori::StringWithAttributes
+          str: Security
+          attributes: {}
+        :value: false
+        :valid_from: !ruby/object:DateTime 2023-09-04 06:30:40.399000000 Z
+  :@xmlns:ns2: http://ws.gematik.de/conn/ConnectorCommon/v5.0
+  :@xmlns:ns3: http://ws.gematik.de/tel/error/v2.0
+  :@xmlns:ns4: urn:oasis:names:tc:dss:1.0:core:schema
+  :@xmlns:ns5: http://www.w3.org/2000/09/xmldsig#
+  :@xmlns:ns6: http://ws.gematik.de/conn/CardServiceCommon/v2.0
+  :@xmlns:ns7: http://ws.gematik.de/conn/CardService/v8.1
+  :@xmlns:ns8: http://ws.gematik.de/conn/ConnectorContext/v2.0
+  :@xmlns:ns9: http://ws.gematik.de/int/version/ProductInformation/v1.1
+  :@xmlns:ns10: http://ws.gematik.de/conn/CardTerminalInfo/v8.0
+  :@xmlns:ns11: http://ws.gematik.de/conn/EventService/v7.2
+  :@xmlns:ns12: urn:oasis:names:tc:SAML:1.0:assertion

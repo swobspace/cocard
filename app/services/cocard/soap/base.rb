@@ -3,8 +3,6 @@ module Cocard::SOAP
   # Base class to be inherited by operation specific classes
   #
   class Base
-    # attr_reader :connector
-
     Result = ImmutableStruct.new(:success?, :error_messages, :response)
 
     # service = Cocard::SOAP::Base.new(options)
@@ -30,31 +28,22 @@ module Cocard::SOAP
     # do all the work here ;-)
     def call
       error_messages = []
-      response = @savon_client
-                 .call(soap_operation,
-                       :attributes => soap_operation_attributes,
-                       message: {
-                         "CCTX:Context" => {
-                         "CONN:MandantId"      => @mandant,
-                         "CONN:ClientSystemId" => @client_system_id,
-                         "CONN:WorkplaceId"    => @workplace_id  }})
+      begin
+        response = @savon_client
+                   .call(soap_operation,
+                         :attributes => soap_operation_attributes,
+                         message: {
+                           "CCTX:Context" => {
+                           "CONN:MandantId"      => @mandant,
+                           "CONN:ClientSystemId" => @client_system_id,
+                           "CONN:WorkplaceId"    => @workplace_id  }})
+      rescue Savon::Error => error
+        fault = error.to_hash[:fault]
+        error_messages = [fault[:faultcode], fault[:faultstring]]
+        return Result.new(success?: false, error_messages: error_messages, response: nil)
+      end
 
-      # response = Faraday.get(connector.sds_url)
-      # unless response.success?
-      #   error_messages << response.headers.join(' ')
-      #   error_messages << response.status
-      #   error_messages << response.body
-      #   return Result.new(success?: false, error_messages: error_messages, sds: nil)
-      # end
-# 
-      # sds = Cocard::SDS.new(response.body)
-      # if sds.nil?
-      #   error_messages << "No SDS retrieved"
-      #   return Result.new(success?: false, error_messages: error_messages, sds: nil)
-      # end
-# 
-      # connector.update(connector_services: sds.connector_services)
-      # Result.new(success?: true, error_messages: error_messages, sds: sds.connector_services)
+      Result.new(success?: true, error_messages: error_messages, response: response.body)
     end
 
     def soap_operation

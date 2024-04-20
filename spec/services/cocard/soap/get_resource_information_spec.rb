@@ -32,7 +32,25 @@ module Cocard::SOAP
 
     # must be explicit called with rspec --tag soap
     describe '#call', :soap => true do
-      it { puts subject.call }
+      describe "return error if not successfull" do
+        let(:result) do
+          Cocard::SOAP::GetResourceInformation.new(
+            connector: connector,
+            mandant: 'dontexist',
+            client_system_id: 'dontexist',
+            workplace_id: 'dontexist'
+          ).call
+        end
+        it { expect(result.success?).to eq(false) }
+        it { expect(result.error_messages).to contain_exactly(
+               "S:Server", "Ungültige Mandanten-ID")}
+      end
+
+      describe "successful call" do
+        let(:result) { subject.call }
+
+        it { expect(result.response.keys).to contain_exactly(:get_resource_information_response) }
+      end
     end
   end
 end
