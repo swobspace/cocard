@@ -15,9 +15,9 @@ module Cocard::SOAP
     subject do
       Cocard::SOAP::GetResourceInformation.new(
         connector: connector,
-        mandant: 'Ein1',
-        client_system_id: 'iMedOne',
-        workplace_id: 'Konnektor'
+        mandant: ENV['CONN_MANDANT'],
+        client_system_id: ENV['CONN_CLIENT_SYSTEM_ID'],
+        workplace_id: ENV['CONN_WORKPLACE_ID']
       )
     end
 
@@ -30,7 +30,8 @@ module Cocard::SOAP
       it { expect(subject.respond_to?(:call)).to be_truthy }
     end
 
-    describe '#call' do
+    # must be explicit called with rspec --tag soap
+    describe '#call', :soap => true do
       it { puts subject.call }
     end
   end

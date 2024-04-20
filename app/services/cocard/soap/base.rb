@@ -4,8 +4,6 @@ module Cocard::SOAP
   #
   class Base
     # attr_reader :connector
-    @@soap_operation = nil
-    @@attributes = {}
 
     Result = ImmutableStruct.new(:success?, :error_messages, :response)
 
@@ -19,13 +17,12 @@ module Cocard::SOAP
     #
     def initialize(options = {})
       options.symbolize_keys
+      # test for soap operation
+      opera = soap_operation
       @connector        = options.fetch(:connector)
       @mandant          = options.fetch(:mandant)
       @client_system_id = options.fetch(:client_system_id)
       @workplace_id     = options.fetch(:workplace_id)
-      if @@soap_operation.nil?
-        raise NotImplementedError, "#{self.class.name} - missing class variable @@soap_action"
-      end
       @savon_client = init_savon_client
     end
 
@@ -34,13 +31,13 @@ module Cocard::SOAP
     def call
       error_messages = []
       response = @savon_client
-                 .call(@@soap_operation,
-                       :attributes => @@attributes,
+                 .call(soap_operation,
+                       :attributes => soap_operation_attributes,
                        message: {
-                         "m0:Context" => {
-                         "m1:MandantId"      => @mandant,
-                         "m1:ClientSystemId" => @client_system_id,
-                         "m1:WorkplaceId"    => @workplace_id  }})
+                         "CCTX:Context" => {
+                         "CONN:MandantId"      => @mandant,
+                         "CONN:ClientSystemId" => @client_system_id,
+                         "CONN:WorkplaceId"    => @workplace_id  }})
 
       # response = Faraday.get(connector.sds_url)
       # unless response.success?
@@ -58,6 +55,15 @@ module Cocard::SOAP
 # 
       # connector.update(connector_services: sds.connector_services)
       # Result.new(success?: true, error_messages: error_messages, sds: sds.connector_services)
+    end
+
+    def soap_operation
+      raise NotImplementedError, 
+            "#{self.class.name} - missing operation, soap_operation is not defined"
+    end
+
+    def soap_operation_attributes
+      {}
     end
 
   private
@@ -78,19 +84,23 @@ module Cocard::SOAP
     
     def endpoint
       # "http://#{connector_ip}/service/systeminformationservice"
-      @connector.service("EventService").endpoint_location(Cocard::EventServiceVersion)
+      return nil unless @connector.kind_of? Connector
+      @connector.service("EventService")&.endpoint_location(Cocard::EventServiceVersion)
     end
 
     def namespace
-      'http://ws.gematik.de/conn/EventService/v7.2'
-      # @connector.service("EventService").target_namespace(Cocard::EventServiceVersion)
+      return nil unless @connector.kind_of? Connector
+      # 'http://ws.gematik.de/conn/EventService/v7.2'
+      # sorry, wild hack for Gematik namespace troubles, savon couldn't handle it
+      @connector.service("EventService")
+                &.target_namespace(Cocard::EventServiceVersion)
+                &.gsub(/WSDL\//, '')
     end
 
     def namespaces
       {
-        # "xmlns:m" => 'http://ws.gematik.de/conn/EventService/v7.2',
-        "xmlns:m0" => "http://ws.gematik.de/conn/ConnectorContext/v2.0",
-        "xmlns:m1" => "http://ws.gematik.de/conn/ConnectorCommon/v5.0",
+        # "xmlns:CCTX" => "http://ws.gematik.de/conn/ConnectorContext/v2.0",
+        "xmlns:CONN" => "http://ws.gematik.de/conn/ConnectorCommon/v5.0",
         # "xmlns:m2" => "http://ws.gematik.de/conn/CardServiceCommon/v2.0",
        }
     end
