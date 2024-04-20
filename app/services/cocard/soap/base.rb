@@ -13,6 +13,9 @@ module Cocard::SOAP
     # * :client_system_id - string
     # * :workplace_id - string
     #
+    # returns:
+    # Result.new(:success? (Boolean), :error_messages (Array), :response (Hash))
+    #
     def initialize(options = {})
       options.symbolize_keys
       # test for soap operation

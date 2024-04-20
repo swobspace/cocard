@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 module Cocard::SOAP
-  RSpec.describe GetResourceInformation do
+  RSpec.describe GetCardTerminals do
     let(:yaml) do
       File.join(Rails.root, 'spec', 'fixtures', 'files', 'connector_services.yaml')
     end
@@ -13,7 +13,7 @@ module Cocard::SOAP
     end
 
     subject do
-      Cocard::SOAP::GetResourceInformation.new(
+      Cocard::SOAP::GetCardTerminals.new(
         connector: connector,
         mandant: ENV['CONN_MANDANT'],
         client_system_id: ENV['CONN_CLIENT_SYSTEM_ID'],
@@ -32,9 +32,9 @@ module Cocard::SOAP
 
     # must be explicit called with rspec --tag soap
     describe '#call', :soap => true do
-      describe "return error if not successfull" do
+      describe "return error if not successful" do
         let(:result) do
-          Cocard::SOAP::GetResourceInformation.new(
+          Cocard::SOAP::GetCardTerminals.new(
             connector: connector,
             mandant: 'dontexist',
             client_system_id: 'dontexist',
@@ -48,9 +48,10 @@ module Cocard::SOAP
 
       describe "successful call" do
         let(:result) { subject.call }
+        it { pp  result.response }
 
         it { expect(result.success?).to be_truthy }
-        it { expect(result.response.keys).to contain_exactly(:get_resource_information_response) }
+        it { expect(result.response.keys).to contain_exactly(:get_card_terminals_response) }
       end
     end
   end

@@ -1,0 +1,17 @@
+= How to create response fixtures from connector
+
+== GetResourceInformation
+
+----
+c = Connector.first
+result = Cocard::SOAP::GetResourceInformation.new(connector: c, mandant: 'Service_Mandant', client_system_id: 'intern', workplace_id: 'Konnektor').call
+File.write('get_resource_information_response.yml',  result.response.to_yaml )
+----
+
+== GetCardTerminals
+----
+c = Connector.first
+result = Cocard::SOAP::GetCardTerminals.new(connector: c, mandant: 'Service_Mandant', client_system_id: 'intern', workplace_id: 'Konnektor').call
+File.write('get_card_terminals_response.yml',  result.response.to_yaml )
+----
+

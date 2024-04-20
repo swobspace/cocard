@@ -1,0 +1,66 @@
+---
+:get_card_terminals_response:
+  :status:
+    :result: !ruby/string:Nori::StringWithAttributes
+      str: OK
+      attributes: {}
+  :card_terminals:
+    :card_terminal:
+      :product_information:
+        :information_date: !ruby/object:DateTime 1970-01-01 00:00:00.000000000 Z
+        :product_type_information:
+          :product_type:
+          :product_type_version: !ruby/string:Nori::StringWithAttributes
+            str: 0.0.0
+            attributes: {}
+        :product_identification:
+          :product_vendor_id:
+          :product_code:
+          :product_version:
+            :local:
+              :hw_version: !ruby/string:Nori::StringWithAttributes
+                str: 0.0.0
+                attributes: {}
+              :fw_version: !ruby/string:Nori::StringWithAttributes
+                str: 0.0.0
+                attributes: {}
+        :product_miscellaneous:
+          :product_vendor_name:
+          :product_name:
+      :ct_id: !ruby/string:Nori::StringWithAttributes
+        str: CT_ID_0000
+        attributes: {}
+      :workplace_ids:
+        :workplace_id:
+        - !ruby/string:Nori::StringWithAttributes
+          str: Konnektor
+          attributes: {}
+        - !ruby/string:Nori::StringWithAttributes
+          str: GUSbox03
+          attributes: {}
+      :name: !ruby/string:Nori::StringWithAttributes
+        str: ORGA6100-014000000179AD
+        attributes: {}
+      :mac_address: !ruby/string:Nori::StringWithAttributes
+        str: 00-0D-F8-07-2C-67
+        attributes: {}
+      :ip_address:
+        :ipv4_address: !ruby/string:Nori::StringWithAttributes
+          str: 10.200.149.152
+          attributes: {}
+      :slots: !ruby/string:Nori::StringWithAttributes
+        str: '0'
+        attributes: {}
+      :is_physical: true
+      :connected: false
+  :@xmlns:ns2: http://ws.gematik.de/conn/ConnectorCommon/v5.0
+  :@xmlns:ns3: http://ws.gematik.de/tel/error/v2.0
+  :@xmlns:ns4: urn:oasis:names:tc:dss:1.0:core:schema
+  :@xmlns:ns5: http://www.w3.org/2000/09/xmldsig#
+  :@xmlns:ns6: http://ws.gematik.de/conn/CardServiceCommon/v2.0
+  :@xmlns:ns7: http://ws.gematik.de/conn/CardService/v8.1
+  :@xmlns:ns8: http://ws.gematik.de/conn/ConnectorContext/v2.0
+  :@xmlns:ns9: http://ws.gematik.de/int/version/ProductInformation/v1.1
+  :@xmlns:ns10: http://ws.gematik.de/conn/CardTerminalInfo/v8.0
+  :@xmlns:ns11: http://ws.gematik.de/conn/EventService/v7.2
+  :@xmlns:ns12: urn:oasis:names:tc:SAML:1.0:assertion
