@@ -195,9 +195,7 @@ end</code></pre>
 <div class="title">Join Tables for HABTM</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g migration CreateJoinTableConnectorLocation \
-  connector location
-bin/rails g migration CreateJoinTableConnectorContext \
-  connector context</code></pre>
+  connector location</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -205,14 +203,38 @@ bin/rails g migration CreateJoinTableConnectorContext \
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">class CreateJoinTableConnectorContext &lt; ActiveRecord::Migration[7.1]
+<pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">class CreateJoinTableConnectorLocation &lt; ActiveRecord::Migration[7.1]
   def change
-    create_join_table :connectors, :contexts do |t|
-      t.index [:context_id, :connector_id], unique: true
-      t.index [:connector_id, :context_id], unique: true
+    create_join_table :connectors, :locations do |t|
+      t.index [:location_id, :connector_id], unique: true
+      t.index [:connector_id, :location_id], unique: true
     end
   end
 end</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_habtm_connector_context_through_connectorcontext"><a class="anchor" href="#_habtm_connector_context_through_connectorcontext"></a>HABTM Connector &lt;&#8594; Context through ConnectorContext</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>HABTM for Connector and Context with additional attributes</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g model ConnectorContext \
+  connector:belongs_to \
+  context:belongs_to \
+  position:integer:index \
+  --no-stylesheets --no-javascripts --no-helper</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Unique Index for ConnectorContext</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">t.index [:connector_id, :context_id], unique: true
+t.index [:context_id, :connector_id], unique: true</code></pre>
 </div>
 </div>
 </div>

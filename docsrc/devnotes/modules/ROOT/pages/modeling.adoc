@@ -81,20 +81,38 @@ end
 ----
 bin/rails g migration CreateJoinTableConnectorLocation \
   connector location
-bin/rails g migration CreateJoinTableConnectorContext \
-  connector context
 ----
 
 Add index and set index to unique:
 
 [source,ruby]
 ----
-class CreateJoinTableConnectorContext < ActiveRecord::Migration[7.1]
+class CreateJoinTableConnectorLocation < ActiveRecord::Migration[7.1]
   def change
-    create_join_table :connectors, :contexts do |t|
-      t.index [:context_id, :connector_id], unique: true
-      t.index [:connector_id, :context_id], unique: true
+    create_join_table :connectors, :locations do |t|
+      t.index [:location_id, :connector_id], unique: true
+      t.index [:connector_id, :location_id], unique: true
     end
   end
 end
+----
+
+== HABTM Connector <-> Context through ConnectorContext
+
+HABTM for Connector and Context with additional attributes
+
+[source,sh]
+----
+bin/rails g model ConnectorContext \
+  connector:belongs_to \
+  context:belongs_to \
+  position:integer:index \
+  --no-stylesheets --no-javascripts --no-helper
+----
+
+.Unique Index for ConnectorContext
+[source,ruby]
+----
+t.index [:connector_id, :context_id], unique: true
+t.index [:context_id, :connector_id], unique: true
 ----

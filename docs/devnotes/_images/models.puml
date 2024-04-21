@@ -30,7 +30,15 @@ class Context {
   description: string
 }
 
+class ConnectorContext {
+  connector_id
+  context_id
+  position: integer
+}
+
 Location "*" -- "*" Connector
 Context "*" -- "*" Connector
+
+(Connector, Context) .. ConnectorContext
 
 @enduml
