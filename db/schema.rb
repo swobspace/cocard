@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_21_113627) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_21_155025) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -66,6 +66,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_21_113627) do
     t.index ["connector_id", "client_id"], name: "index_clients_connectors_on_connector_id_and_client_id", unique: true
   end
 
+  create_table "connector_contexts", force: :cascade do |t|
+    t.bigint "connector_id", null: false
+    t.bigint "context_id", null: false
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["connector_id", "context_id"], name: "index_connector_contexts_on_connector_id_and_context_id", unique: true
+    t.index ["connector_id"], name: "index_connector_contexts_on_connector_id"
+    t.index ["context_id", "connector_id"], name: "index_connector_contexts_on_context_id_and_connector_id", unique: true
+    t.index ["context_id"], name: "index_connector_contexts_on_context_id"
+    t.index ["position"], name: "index_connector_contexts_on_position"
+  end
+
   create_table "connectors", force: :cascade do |t|
     t.string "name", default: ""
     t.inet "ip", null: false
@@ -80,13 +93,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_21_113627) do
     t.datetime "last_check_ok", precision: nil
     t.integer "condition", default: 0
     t.index ["condition"], name: "index_connectors_on_condition"
-  end
-
-  create_table "connectors_contexts", id: false, force: :cascade do |t|
-    t.bigint "connector_id", null: false
-    t.bigint "context_id", null: false
-    t.index ["connector_id", "context_id"], name: "index_connectors_contexts_on_connector_id_and_context_id", unique: true
-    t.index ["context_id", "connector_id"], name: "index_connectors_contexts_on_context_id_and_connector_id", unique: true
   end
 
   create_table "connectors_locations", id: false, force: :cascade do |t|
@@ -181,4 +187,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_21_113627) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "connector_contexts", "connectors"
+  add_foreign_key "connector_contexts", "contexts"
 end
