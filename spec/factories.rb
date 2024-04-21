@@ -15,12 +15,19 @@ FactoryBot.define do
     "tcp://#{Faker::Internet.ip_v4_address}:#{n}"
   end
 
-  factory :client do
-    name { generate(:aname) }
-  end
-
   factory :connector do
     ip { Faker::Internet.ip_v4_address }
+  end
+
+  factory :connector_context do
+    connector
+    context
+  end
+
+  factory :context do
+    mandant { generate(:aname) }
+    client_system { generate(:aname) }
+    workplace { generate(:aname) }
   end
 
   factory :location do

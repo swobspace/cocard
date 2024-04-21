@@ -1,7 +1,8 @@
 class Connector < ApplicationRecord
   # -- associations
   has_and_belongs_to_many :locations
-  has_and_belongs_to_many :clients
+  has_many :connector_contexts
+  has_many :contexts, through: :connector_contexts
 
   # -- configuration
   has_rich_text :description

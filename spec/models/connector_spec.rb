@@ -10,7 +10,7 @@ RSpec.describe Connector, type: :model do
       connector_services: YAML.load_file(yaml)
     )
   end
-  it { is_expected.to have_and_belong_to_many(:clients) }
+  it { is_expected.to have_many(:contexts).through(:connector_contexts) }
   it { is_expected.to have_and_belong_to_many(:locations) }
   it { is_expected.to validate_presence_of(:ip) }
 
