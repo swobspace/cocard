@@ -16,8 +16,8 @@ module Cocard::SOAP
       Cocard::SOAP::GetResourceInformation.new(
         connector: connector,
         mandant: ENV['CONN_MANDANT'],
-        client_system_id: ENV['CONN_CLIENT_SYSTEM_ID'],
-        workplace_id: ENV['CONN_WORKPLACE_ID']
+        client_system: ENV['CONN_CLIENT_SYSTEM_ID'],
+        workplace: ENV['CONN_WORKPLACE_ID']
       )
     end
 
@@ -37,8 +37,8 @@ module Cocard::SOAP
           Cocard::SOAP::GetResourceInformation.new(
             connector: connector,
             mandant: 'dontexist',
-            client_system_id: 'dontexist',
-            workplace_id: 'dontexist'
+            client_system: 'dontexist',
+            workplace: 'dontexist'
           ).call
         end
         it { expect(result.success?).to be_falsey }

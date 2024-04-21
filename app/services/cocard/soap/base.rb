@@ -10,8 +10,8 @@ module Cocard::SOAP
     # mandantory options:
     # * :connector - object
     # * :mandant - string
-    # * :client_system_id - string
-    # * :workplace_id - string
+    # * :client_system - string
+    # * :workplace - string
     #
     # returns:
     # Result.new(:success? (Boolean), :error_messages (Array), :response (Hash))
@@ -22,8 +22,8 @@ module Cocard::SOAP
       opera = soap_operation
       @connector        = options.fetch(:connector)
       @mandant          = options.fetch(:mandant)
-      @client_system_id = options.fetch(:client_system_id)
-      @workplace_id     = options.fetch(:workplace_id)
+      @client_system = options.fetch(:client_system)
+      @workplace     = options.fetch(:workplace)
       @savon_client = init_savon_client
     end
 
@@ -38,8 +38,8 @@ module Cocard::SOAP
                          message: {
                            "CCTX:Context" => {
                            "CONN:MandantId"      => @mandant,
-                           "CONN:ClientSystemId" => @client_system_id,
-                           "CONN:WorkplaceId"    => @workplace_id  }})
+                           "CONN:ClientSystemId" => @client_system,
+                           "CONN:WorkplaceId"    => @workplace  }})
       rescue Savon::Error => error
         fault = error.to_hash[:fault]
         error_messages = [fault[:faultcode], fault[:faultstring]]

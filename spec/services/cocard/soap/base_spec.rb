@@ -13,8 +13,8 @@ module Cocard::SOAP
         Cocard::SOAP::Base.new(
           connector: connector,
           mandant: 'Ein1',
-          client_system_id: 'Cocard',
-          workplace_id: 'Konnektor'
+          client_system: 'Cocard',
+          workplace: 'Konnektor'
         )
       }.to raise_error NotImplementedError
     end
