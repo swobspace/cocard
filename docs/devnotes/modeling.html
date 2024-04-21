@@ -132,12 +132,17 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_model_client"><a class="anchor" href="#_model_client"></a>model Client</h2>
+<h2 id="_model_context"><a class="anchor" href="#_model_context"></a>model Context</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Context for SOAP requests.</p>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g scaffold Client \
-  name:string \
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g scaffold Context \
+  mandant:string \
+  client_system:string \
+  workplace:string \
   description:string \
   --no-stylesheets --no-javascripts --no-helper</code></pre>
 </div>
@@ -189,10 +194,10 @@ end</code></pre>
 <div class="listingblock">
 <div class="title">Join Tables for HABTM</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g migration CreateJoinTableClientConnector \
-  client connector
-bin/rails g migration CreateJoinTableConnectorLocation \
-  connector location</code></pre>
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g migration CreateJoinTableConnectorLocation \
+  connector location
+bin/rails g migration CreateJoinTableConnectorContext \
+  connector context</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -200,11 +205,11 @@ bin/rails g migration CreateJoinTableConnectorLocation \
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">class CreateJoinTableClientConnector &lt; ActiveRecord::Migration[7.1]
+<pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">class CreateJoinTableConnectorContext &lt; ActiveRecord::Migration[7.1]
   def change
-    create_join_table :clients, :connectors do |t|
-      t.index [:client_id, :connector_id], unique: true
-      t.index [:connector_id, :client_id], unique: true
+    create_join_table :connectors, :contexts do |t|
+      t.index [:context_id, :connector_id], unique: true
+      t.index [:connector_id, :context_id], unique: true
     end
   end
 end</code></pre>

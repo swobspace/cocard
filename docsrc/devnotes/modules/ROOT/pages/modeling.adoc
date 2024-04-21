@@ -25,12 +25,16 @@ bin/rails g scaffold Location \
 
 i.e. `NRH`, `BNA`. Only for grouping and information.
 
-== model Client
+== model Context
+
+Context for SOAP requests.
 
 [source,sh]
 ----
-bin/rails g scaffold Client \
-  name:string \
+bin/rails g scaffold Context \
+  mandant:string \
+  client_system:string \
+  workplace:string \
   description:string \
   --no-stylesheets --no-javascripts --no-helper
 ----
@@ -75,21 +79,21 @@ end
 .Join Tables for HABTM
 [source,sh]
 ----
-bin/rails g migration CreateJoinTableClientConnector \
-  client connector
 bin/rails g migration CreateJoinTableConnectorLocation \
   connector location
+bin/rails g migration CreateJoinTableConnectorContext \
+  connector context
 ----
 
 Add index and set index to unique:
 
 [source,ruby]
 ----
-class CreateJoinTableClientConnector < ActiveRecord::Migration[7.1]
+class CreateJoinTableConnectorContext < ActiveRecord::Migration[7.1]
   def change
-    create_join_table :clients, :connectors do |t|
-      t.index [:client_id, :connector_id], unique: true
-      t.index [:connector_id, :client_id], unique: true
+    create_join_table :connectors, :contexts do |t|
+      t.index [:context_id, :connector_id], unique: true
+      t.index [:connector_id, :context_id], unique: true
     end
   end
 end

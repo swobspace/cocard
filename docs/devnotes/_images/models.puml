@@ -23,12 +23,14 @@ class Location {
   description: string
 }
 
-class Client {
-  name: string
+class Context {
+  mandant: string
+  client_system: string
+  workplace: string
   description: string
 }
 
 Location "*" -- "*" Connector
-Client "*" -- "*" Connector
+Context "*" -- "*" Connector
 
 @enduml
