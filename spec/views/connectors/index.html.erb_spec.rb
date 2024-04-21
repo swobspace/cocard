@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe "connectors/index", type: :view do
   let(:location) { FactoryBot.create(:location, lid: 'AAC') }
-  let(:client)   { FactoryBot.create(:client, name: 'Otto') }
   before(:each) do
     @ability = Object.new
     @ability.extend(CanCan::Ability)
@@ -16,7 +15,6 @@ RSpec.describe "connectors/index", type: :view do
         ip: "192.0.2.1",
         sds_url: "Sds Url",
         manual_update: false,
-        client_ids: [client.id],
         location_ids: [location.id]
       ),
       Connector.create!(
@@ -24,7 +22,6 @@ RSpec.describe "connectors/index", type: :view do
         ip: "192.0.2.2",
         sds_url: "Sds Url",
         manual_update: false,
-        client_ids: [client.id],
         location_ids: [location.id]
       )
     ])
@@ -39,6 +36,5 @@ RSpec.describe "connectors/index", type: :view do
     assert_select cell_selector, text: Regexp.new("Sds Url".to_s), count: 2
     assert_select cell_selector, text: Regexp.new(false.to_s), count: 2
     assert_select cell_selector, text: Regexp.new("AAC".to_s), count: 2
-    assert_select cell_selector, text: Regexp.new("Otto".to_s), count: 2
   end
 end

@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "/connectors", type: :request do
-  let(:client) { FactoryBot.create(:client) }
   let(:location) { FactoryBot.create(:location) }
   
   let(:valid_attributes) {
@@ -84,7 +83,6 @@ RSpec.describe "/connectors", type: :request do
         sds_url: 'http://192.0.2.99',
         manual_update: true,
         location_ids: [location.id],
-        client_ids: [client.id],
       }}
 
       it "updates the requested connector" do
@@ -94,7 +92,6 @@ RSpec.describe "/connectors", type: :request do
         expect(connector.description.to_plain_text).to eq('HighSpeed')
         expect(connector.sds_url).to eq('http://192.0.2.99')
         expect(connector.locations).to contain_exactly(location)
-        expect(connector.clients).to contain_exactly(client)
       end
 
       it "redirects to the connector" do

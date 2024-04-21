@@ -30,7 +30,6 @@ RSpec.describe "connectors/edit", type: :view do
       assert_select "input[name=?]", "connector[manual_update]"
       assert_select "input[name=?]", "connector[description]"
       assert_select "select[name=?]", "connector[location_ids][]"
-      assert_select "select[name=?]", "connector[client_ids][]"
     end
   end
 end

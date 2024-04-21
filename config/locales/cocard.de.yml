@@ -1,12 +1,12 @@
 de:
   cocard:
-    new_client: Neuer Mandant
+    new_context: Neuer Context
     new_connector: Neuer Konnektor
     new_location: Neuer Standort
 
   activerecord:
     models:
-      client: Mandant
+      context: Context
       connector: Konnektor
       location: Standort
       user: User
@@ -18,6 +18,9 @@ de:
     client_ids: Mandanten
     configuration: Konfiguration
     connector: Konnektor
+    context: Context
+    contexts: Contexte
+    context_ids: Contexte
     description: Beschreibung
     displayname: Anzeigename
     givenname: Vorname
@@ -33,8 +36,8 @@ de:
     username: Username
 
   controller:
-    clients: Mandanten
     connectors: Konnektoren
+    contexts: Contexte
     home: Home
     locations: Standorte
     users: Benutzer

@@ -15,9 +15,6 @@
     <%= form.input :location_ids, as: :select, collection: Location.all,
           input_html: { multiple: true }
        %>
-    <%= form.input :client_ids, as: :select, collection: Client.all,
-          input_html: { multiple: true }
-       %>
 
     <%= form.input :manual_update
        %>

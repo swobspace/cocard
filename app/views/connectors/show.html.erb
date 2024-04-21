@@ -47,10 +47,6 @@
             <td><%= @connector.locations.map(&:to_s).join('; ') %></td>
           </tr>
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.clients')%>:</th>
-            <td><%= @connector.clients.map(&:to_s).join('; ') %></td>
-          </tr>
-          <tr>
             <th class="w-10 pe-3"><%= t('attributes.description')%>:</th>
             <td><%= @connector.description %></td>
           </tr>

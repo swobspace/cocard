@@ -5,7 +5,6 @@ Rails.application.routes.draw do
       post :fetch_sds
     end
   end
-  resources :clients
   resources :locations
   root to: 'home#index'
   get 'home/index'

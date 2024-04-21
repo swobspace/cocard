@@ -17,13 +17,11 @@
             <th><%= t('attributes.sds_url') %></th>
             <th class="notvisible"><%= t('attributes.manual_update') %></th>
             <th><%= t('attributes.locations') %></th>
-            <th><%= t('attributes.clients') %></th>
             <th class="nosort"><%= t('mirco.action') %></th>
       </tr>
     </thead>
     <tfoot class="search">
       <tr>
-            <th></th>
             <th></th>
             <th></th>
             <th></th>
@@ -40,7 +38,6 @@
                 <td><%= connector.sds_url %></td>
                 <td><%= connector.manual_update %></td>
                 <td><%= connector.locations.map(&:lid).join('; ') %></td>
-                <td><%= connector.clients.map(&:name).join('; ') %></td>
                 <td class="text-nowrap">
             <%= show_link connector %>
             <%= edit_link connector %>
