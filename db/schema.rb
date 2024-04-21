@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_06_080830) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_21_113627) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -82,11 +82,27 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_06_080830) do
     t.index ["condition"], name: "index_connectors_on_condition"
   end
 
+  create_table "connectors_contexts", id: false, force: :cascade do |t|
+    t.bigint "connector_id", null: false
+    t.bigint "context_id", null: false
+    t.index ["connector_id", "context_id"], name: "index_connectors_contexts_on_connector_id_and_context_id", unique: true
+    t.index ["context_id", "connector_id"], name: "index_connectors_contexts_on_context_id_and_connector_id", unique: true
+  end
+
   create_table "connectors_locations", id: false, force: :cascade do |t|
     t.bigint "connector_id", null: false
     t.bigint "location_id", null: false
     t.index ["connector_id", "location_id"], name: "index_connectors_locations_on_connector_id_and_location_id", unique: true
     t.index ["location_id", "connector_id"], name: "index_connectors_locations_on_location_id_and_connector_id", unique: true
+  end
+
+  create_table "contexts", force: :cascade do |t|
+    t.string "mandant", null: false
+    t.string "client_system", null: false
+    t.string "workplace", null: false
+    t.string "description", default: ""
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "locations", force: :cascade do |t|
