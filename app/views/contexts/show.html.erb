@@ -1,0 +1,45 @@
+<div class="card mb-2">
+  <div class="card-header">
+    <div class="d-flex w-100 justify-content-between">
+      <div>
+        <span class="subtitle">
+          <%= t('activerecord.models.context') %>: 
+          #<%= @context.id %>
+        </span>
+        <h4 class="title"><%= @context %></h4>
+      </div>
+      <div role="toolbar" class="pt-3">
+        <%= edit_link(@context) %>
+        <%= delete_link(@context) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <table class="table table-sm table-borderless">
+    
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.mandant')%>:</th>
+        <td><%= @context.mandant %></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.client_system')%>:</th>
+        <td><%= @context.client_system %></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.workplace')%>:</th>
+        <td><%= @context.workplace %></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.description')%>:</th>
+        <td><%= @context.description %></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<%= back_link %>
+<%= new_link Context %>
