@@ -50,6 +50,14 @@
             <th class="w-10 pe-3"><%= t('attributes.description')%>:</th>
             <td><%= @connector.description %></td>
           </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.last_check')%>:</th>
+            <td><%= @connector.last_check.localtime %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.last_check_ok')%>:</th>
+            <td><%= @connector.last_check_ok.localtime %></td>
+          </tr>
         </table>
       </div>
       <div class="col-6">

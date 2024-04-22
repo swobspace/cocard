@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "connectors/show", type: :view do
+  let(:current) { Time.current }
   before(:each) do
     @ability = Object.new
     @ability.extend(CanCan::Ability)
@@ -13,7 +14,9 @@ RSpec.describe "connectors/show", type: :view do
       ip: "192.0.2.1",
       sds_url: "Sds Url",
       manual_update: false,
-      description: "some text"
+      description: "some text",
+      last_check: current,
+      last_check_ok: current
     ))
   end
 
@@ -24,5 +27,7 @@ RSpec.describe "connectors/show", type: :view do
     expect(rendered).to match(/Sds Url/)
     expect(rendered).to match(/false/)
     expect(rendered).to match(/some text/)
+    expect(rendered).to match(/#{current.localtime}/)
+    
   end
 end
