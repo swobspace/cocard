@@ -27,7 +27,6 @@ RSpec.describe "connectors/show", type: :view do
     expect(rendered).to match(/Sds Url/)
     expect(rendered).to match(/false/)
     expect(rendered).to match(/some text/)
-    expect(rendered).to match(/#{current.localtime}/)
-    
+    expect(rendered).to match(/#{current.localtime.to_s.gsub('+', '.')}/)
   end
 end

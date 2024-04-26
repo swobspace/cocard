@@ -52,11 +52,11 @@
           </tr>
           <tr>
             <th class="w-10 pe-3"><%= t('attributes.last_check')%>:</th>
-            <td><%= @connector.last_check.localtime %></td>
+            <td><%= @connector.last_check&.localtime %></td>
           </tr>
           <tr>
             <th class="w-10 pe-3"><%= t('attributes.last_check_ok')%>:</th>
-            <td><%= @connector.last_check_ok.localtime %></td>
+            <td><%= @connector.last_check_ok&.localtime %></td>
           </tr>
         </table>
       </div>
