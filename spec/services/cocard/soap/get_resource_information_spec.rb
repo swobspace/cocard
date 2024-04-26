@@ -48,6 +48,7 @@ module Cocard::SOAP
 
       describe "successful call" do
         let(:result) { subject.call }
+        it { pp  result.response }
 
         it { expect(result.success?).to be_truthy }
         it { expect(result.response.keys).to contain_exactly(:get_resource_information_response) }
