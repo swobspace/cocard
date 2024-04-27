@@ -1,4 +1,6 @@
 = Modeling cocard
+:author: Wolfgang Barth
+:revdate: 2024-04-27
 :imagesdir: ../images
 
 == Overall Picture

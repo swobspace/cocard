@@ -1,0 +1,23 @@
+@startuml
+
+state OK #lightgreen
+
+OK: Connector erreichbar
+OK: fetch SDS ok
+OK: VPNTI-Status "Online"
+
+state WARNING #LightYellow
+
+WARNING: Connector erreichbar
+WARNING: fetch SDS ok
+WARNING: VPNTI-Status "Offline"
+
+state CRITICAL #orangered
+
+CRITICAL: Connector nicht erreichbar
+
+state UNKNOWN #Orange
+UNKNOWN: Connector erreichbar
+UNKNOWN: fetch SDS failed or 
+UNKNOWN: GetResourceInformation failed
+@enduml
