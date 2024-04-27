@@ -20,4 +20,10 @@ state UNKNOWN #Orange
 UNKNOWN: Connector erreichbar
 UNKNOWN: fetch SDS failed or 
 UNKNOWN: GetResourceInformation failed
+
+note bottom of CRITICAL
+Connector erreichbar:
+  soap_request ok
+  OR Ping ok
+end note
 @enduml

@@ -16,6 +16,8 @@ class Connector  {
   last_check: timestamp
   last_check_ok: timestamp
   condition: integer
+  soap_request_success: boolean
+  vpnti_online: boolean
 }
 
 class Location {

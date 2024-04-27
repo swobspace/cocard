@@ -59,7 +59,9 @@ bin/rails g migration AddReadonlyToConnector \
   sds_updated_at: \
   connector_services:jsonb \
   last_check:timestamp last_check_ok:timestamp \
-  condition:integer:index
+  condition:integer:index \
+  soap_request_success:boolean \
+  vpnti_online:boolean
 ----
 
 .Install ActionText
@@ -99,7 +101,7 @@ class CreateJoinTableConnectorLocation < ActiveRecord::Migration[7.1]
 end
 ----
 
-== HABTM Connector <-> Context through ConnectorContext
+== HABTM Connector -- Context through ConnectorContext
 
 HABTM for Connector and Context with additional attributes
 

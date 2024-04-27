@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_21_155025) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_27_150000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -91,7 +91,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_21_155025) do
     t.jsonb "connector_services"
     t.datetime "last_check", precision: nil
     t.datetime "last_check_ok", precision: nil
-    t.integer "condition", default: 0
+    t.integer "condition", default: -1
+    t.boolean "soap_request_success", default: false
+    t.boolean "vpnti_online", default: false
     t.index ["condition"], name: "index_connectors_on_condition"
   end
 

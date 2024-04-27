@@ -172,7 +172,9 @@ bin/rails g migration AddReadonlyToConnector \
   sds_updated_at: \
   connector_services:jsonb \
   last_check:timestamp last_check_ok:timestamp \
-  condition:integer:index</code></pre>
+  condition:integer:index \
+  soap_request_success:boolean \
+  vpnti_online:boolean</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -219,7 +221,7 @@ end</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_habtm_connector_context_through_connectorcontext"><a class="anchor" href="#_habtm_connector_context_through_connectorcontext"></a>HABTM Connector &lt;&#8594; Context through ConnectorContext</h2>
+<h2 id="_habtm_connectorcontext_through_connectorcontext"><a class="anchor" href="#_habtm_connectorcontext_through_connectorcontext"></a>HABTM Connector&#8201;&#8212;&#8201;Context through ConnectorContext</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>HABTM for Connector and Context with additional attributes</p>
