@@ -6,7 +6,7 @@ RSpec.describe Connector, type: :model do
   end
   let(:connector) do 
     FactoryBot.create(:connector, 
-      ip: '192.0.2.17',
+      ip: '127.0.0.1',
       connector_services: YAML.load_file(yaml)
     )
   end
@@ -23,7 +23,7 @@ RSpec.describe Connector, type: :model do
   end
 
   describe "#to_s" do
-    it { expect(connector.to_s).to match('- / 192.0.2.17') }
+    it { expect(connector.to_s).to match('- / 127.0.0.1') }
   end
 
   describe "#product_information" do
@@ -82,5 +82,17 @@ RSpec.describe Connector, type: :model do
         }.to change(connector, :condition).to(Cocard::States::OK)
       end
     end
+
+    describe "#save" do
+      describe "with changed soap_request_success" do
+        it "updates condition" do
+          connector.soap_request_success = true
+          expect {
+            connector.save
+          }.to change(connector, :condition)
+        end
+      end
+    end
+
   end
 end

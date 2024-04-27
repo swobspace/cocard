@@ -53,8 +53,28 @@ module Cocard
         before(:each) do
           expect(Cocard::SOAP::GetResourceInformation).to receive(:new).and_return(soap)
           expect(soap).to receive(:call).and_return(fake_err)
+          connector.update(soap_request_success: true)
         end
+
         it { expect(subject.call.success?).to be_falsey }
+
+        describe "Ping failed" do
+          it "update connector_condition" do
+            expect(connector).to receive(:up?).and_return(false)
+            expect {
+              subject.call
+            }.to change(connector, :condition).to(Cocard::States::CRITICAL)
+          end
+        end
+
+        describe "Ping ok" do
+          it "update connector_condition" do
+            expect(connector).to receive(:up?).and_return(true)
+            expect {
+              subject.call
+            }.to change(connector, :condition).to(Cocard::States::UNKNOWN)
+          end
+        end
       end
 
       describe "successful call" do

@@ -31,14 +31,18 @@ module Cocard
                  mandant: mandant,
                  client_system: client_system,
                  workplace: workplace).call
-      unless result.success?
-        return Result.new(success?: false, error_messages: result.error_messages, 
-                          resource_information: nil)
-      end
-      resource_information = Cocard::ResourceInformation.new(result.response)
+      if result.success?
+        resource_information = Cocard::ResourceInformation.new(result.response)
+        connector.update(soap_request_success: true,
+                         vpnti_online: resource_information.vpnti_online)
 
-      Result.new(success?: true, error_messages: error_messages, 
-                 resource_information: resource_information)
+        Result.new(success?: true, error_messages: error_messages, 
+                   resource_information: resource_information)
+      else
+        connector.update(soap_request_success: false)
+        Result.new(success?: false, error_messages: result.error_messages, 
+                   resource_information: nil)
+      end
     end
 
   private

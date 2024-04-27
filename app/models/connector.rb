@@ -8,7 +8,9 @@ class Connector < ApplicationRecord
   # -- configuration
   has_rich_text :description
 
+
   # -- validations and callbacks
+  before_save :ensure_update_condition
   validates :ip, presence: true, uniqueness: true
 
   # -- common methods
@@ -43,6 +45,12 @@ class Connector < ApplicationRecord
       else
         self[:condition] = Cocard::States::OK
       end
+    end
+  end
+
+  def ensure_update_condition
+    if soap_request_success_changed? or vpnti_online_changed?
+      update_condition
     end
   end
 
