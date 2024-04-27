@@ -15,7 +15,11 @@ module Cocard
     #
     def initialize(options = {})
       options.symbolize_keys
-      @context = options.fetch(:context)
+      @connector_context = options.fetch(:connector_context)
+      @connector = @connector_context.connector
+      @mandant   = @connector_context.context.mandant
+      @client_system  = @connector_context.context.client_system
+      @workplace = @connector_context.context.workplace
     end
 
     # service.call()
@@ -23,10 +27,10 @@ module Cocard
     def call
       error_messages = []
       result = Cocard::SOAP::GetResourceInformation.new(
-                 connector: context.connector,
-                 mandant: context.mandant,
-                 client_system: context.client_system,
-                 workplace: context.workplace).call
+                 connector: connector,
+                 mandant: mandant,
+                 client_system: client_system,
+                 workplace: workplace).call
       unless result.success?
         return Result.new(success?: false, error_messages: result.error_messages, 
                           resource_information: nil)
@@ -37,5 +41,7 @@ module Cocard
                  resource_information: resource_information)
     end
 
+  private
+    attr_reader :connector, :context, :workplace, :mandant, :client_system
   end
 end
