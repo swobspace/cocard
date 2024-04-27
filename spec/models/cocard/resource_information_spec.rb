@@ -38,6 +38,7 @@ module Cocard
       it { expect(subject.vpnti_status).to eq(resource_information_hash[:connector][:vpnti_status])}
       it { expect(subject.vpnti_connection_status).to eq("Online")}
       it { expect(subject.vpnti_connection_timestamp).to eq(ts)}
+      it { expect(subject.vpnti_online).to be_truthy }
     end
   end
 end

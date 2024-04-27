@@ -20,8 +20,8 @@ module Cocard
       vpnti_status[:timestamp]
     end
 
-    def vpnti_connection_condition
-      
+    def vpnti_online
+      !!(vpnti_connection_status == "Online")
     end
 
   private
