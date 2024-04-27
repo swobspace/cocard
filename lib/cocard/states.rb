@@ -1,5 +1,5 @@
 module Cocard
-  module State
+  module States
     #
     # Global states
     #

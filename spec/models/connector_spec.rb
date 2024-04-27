@@ -38,4 +38,49 @@ RSpec.describe Connector, type: :model do
   describe "#service('EventService')" do
     it { expect(connector.service('EventService')).to be_kind_of(Cocard::Service) }
   end
+
+  describe "#update_condition" do
+    it { expect(connector.condition).to eq(Cocard::States::NOTHING) }
+
+    describe "with ping failed" do
+      it "-> CRITICAL" do
+        expect(connector).to receive(:up?).and_return(false)
+        expect {
+          connector.update_condition
+        }.to change(connector, :condition).to(Cocard::States::CRITICAL)
+      end
+    end
+
+    describe "with soap request failed" do
+      it "-> UKNOWN" do
+        expect(connector).to receive(:up?).and_return(true)
+        expect(connector).to receive(:soap_request_success).and_return(false)
+        expect {
+          connector.update_condition
+        }.to change(connector, :condition).to(Cocard::States::UNKNOWN)
+      end
+    end
+
+    describe "with vpnti_status offline" do
+      it "-> WARNING" do
+        expect(connector).to receive(:up?).and_return(true)
+        expect(connector).to receive(:soap_request_success).and_return(true)
+        expect(connector).to receive(:vpnti_online).and_return(false)
+        expect {
+          connector.update_condition
+        }.to change(connector, :condition).to(Cocard::States::WARNING)
+      end
+    end
+
+    describe "with vpnti_status online" do
+      it "-> CRITICAL" do
+        expect(connector).to receive(:up?).and_return(true)
+        expect(connector).to receive(:soap_request_success).and_return(true)
+        expect(connector).to receive(:vpnti_online).and_return(true)
+        expect {
+          connector.update_condition
+        }.to change(connector, :condition).to(Cocard::States::OK)
+      end
+    end
+  end
 end

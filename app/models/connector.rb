@@ -1,4 +1,5 @@
 class Connector < ApplicationRecord
+  include PingConcerns
   # -- associations
   has_and_belongs_to_many :locations
   has_many :connector_contexts
@@ -31,6 +32,19 @@ class Connector < ApplicationRecord
     service_information.select{|x| x.name == svcname }.first
   end
 
+  def update_condition
+    unless up?
+      self[:condition] = Cocard::States::CRITICAL
+    else 
+      if !soap_request_success
+        self[:condition] = Cocard::States::UNKNOWN
+      elsif !vpnti_online
+        self[:condition] = Cocard::States::WARNING
+      else
+        self[:condition] = Cocard::States::OK
+      end
+    end
+  end
 
 private
   def _name
