@@ -42,6 +42,11 @@
           </tr>
 
           <tr>
+            <th class="w-10 pe-3"><%= t('attributes.sds_updated_at')%>:</th>
+            <td><%= @connector.sds_updated_at&.localtime %></td>
+          </tr>
+
+          <tr>
             <th class="w-10 pe-3"><%= t('attributes.manual_update')%>:</th>
             <td><%= @connector.manual_update %></td>
           </tr>
