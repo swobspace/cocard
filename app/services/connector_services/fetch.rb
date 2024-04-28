@@ -33,7 +33,7 @@ module ConnectorServices
           error_messages << response.headers.join(' ')
           error_messages << response.status
           error_messages << response.body
-          connector.update(soap_request_success: false)
+          connector.update(condition: Cocard::States::UNKNOWN)
           return Result.new(success?: false, error_messages: error_messages, sds: nil)
         end
       rescue Faraday::Error => e
@@ -42,7 +42,7 @@ module ConnectorServices
         error_messages << e.response_body
         error_messages << e.message
         error_messages.compact!
-        connector.update(soap_request_success: false)
+        connector.update(condition: Cocard::States::CRITICAL)
         return Result.new(success?: false, error_messages: error_messages, sds: nil)
       end
 
