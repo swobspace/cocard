@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_28_142136) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_28_163522) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -87,13 +87,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_28_142136) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "sds_xml"
-    t.string "sds_updated_at"
     t.jsonb "connector_services"
     t.datetime "last_check", precision: nil
     t.datetime "last_check_ok", precision: nil
     t.integer "condition", default: -1
     t.boolean "soap_request_success", default: false
     t.boolean "vpnti_online", default: false
+    t.datetime "sds_updated_at", precision: nil
     t.index ["condition"], name: "index_connectors_on_condition"
   end
 
