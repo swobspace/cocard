@@ -48,6 +48,19 @@ class Connector < ApplicationRecord
     end
   end
 
+  def condition_message
+    case condition
+      when Cocard::States::CRITICAL
+        "CRITICAL - Connector unreachable"
+      when Cocard::States::UNKNOWN
+        "UNKNOWN - soap request failed, may be a configuration problem"
+      when Cocard::States::WARNING
+        "WARNING - Connector reachable but TI offline!"
+      when Cocard::States::OK
+        "OK - Connector TI online"
+    end
+  end
+
   def ensure_update_condition
     if soap_request_success_changed? or vpnti_online_changed?
       update_condition

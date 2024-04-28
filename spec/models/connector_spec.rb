@@ -102,5 +102,32 @@ RSpec.describe Connector, type: :model do
       end
     end
 
+    describe "#condition_message" do
+      describe "with condition = CRITICAL" do
+        before(:each) do
+          expect(connector).to receive(:condition).and_return(Cocard::States::CRITICAL)
+        end
+        it { expect(connector.condition_message).to match(/CRITICAL/) }
+      end
+      describe "with condition = UNKNOWN" do
+        before(:each) do
+          expect(connector).to receive(:condition).and_return(Cocard::States::UNKNOWN)
+        end
+        it { expect(connector.condition_message).to match(/UNKNOWN/) }
+      end
+      describe "with condition = WARNING" do
+        before(:each) do
+          expect(connector).to receive(:condition).and_return(Cocard::States::WARNING)
+        end
+        it { expect(connector.condition_message).to match(/WARNING/) }
+      end
+      describe "with condition = OK" do
+        before(:each) do
+          expect(connector).to receive(:condition).and_return(Cocard::States::OK)
+        end
+        it { expect(connector.condition_message).to match(/OK/) }
+      end
+    end
+
   end
 end
