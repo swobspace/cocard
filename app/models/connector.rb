@@ -11,6 +11,7 @@ class Connector < ApplicationRecord
 
   # -- validations and callbacks
   before_save :ensure_update_condition
+  before_save :ensure_sds_url
   validates :ip, presence: true, uniqueness: true
 
   # -- common methods
@@ -67,6 +68,12 @@ class Connector < ApplicationRecord
     end
     if condition_changed? and condition == Cocard::States::OK
       self[:last_check_ok] = Time.current
+    end
+  end
+
+  def ensure_sds_url
+    if sds_url.blank?
+      self[:sds_url] = "http://#{ip.to_s}/connector.sds"
     end
   end
 

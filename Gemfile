@@ -97,3 +97,5 @@ gem "savon", "~> 2.15"
 gem "immutable_struct", "~> 1.2"
 
 gem "net-ping", "~> 2.0"
+
+gem "good_job", "~> 3.28"

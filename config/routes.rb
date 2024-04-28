@@ -16,5 +16,10 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-mount Wobauth::Engine, at: '/auth'
+
+  mount Wobauth::Engine, at: '/auth'
+  authenticate :user, ->(user) { user.is_admin? } do
+    mount GoodJob::Engine => "good_job"
+  end
+
 end

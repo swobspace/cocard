@@ -49,6 +49,11 @@ module Cocard
       Rails.application.reload_routes!
     end
 
+    unless Rails.env.test?
+      config.active_job.queue_adapter = :good_job
+      config.active_job.queue_name_prefix = "mirco_#{Rails.env}"
+    end
+
     config.responders.error_status = :unprocessable_entity
     config.responders.redirect_status = :see_other
   end
