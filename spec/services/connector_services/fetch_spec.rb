@@ -43,11 +43,6 @@ module ConnectorServices
           end.to change(connector, :last_check)
         end
 
-        it 'updates last_check' do
-          expect do
-            subject.call
-          end.to change(connector, :last_check_ok)
-        end
       end
 
       describe 'with status 500' do

@@ -84,6 +84,17 @@ module Cocard
         end
         it { expect(subject.call.success?).to be_truthy }
         it { expect(subject.call.resource_information).to be_kind_of(Cocard::ResourceInformation) }
+        it 'updates last_check' do
+          expect do
+            subject.call
+          end.to change(connector, :last_check)
+        end
+
+        it 'updates last_check_ok' do
+          expect do
+            subject.call
+          end.to change(connector, :last_check_ok)
+        end
       end
     end
   end

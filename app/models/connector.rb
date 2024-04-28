@@ -52,6 +52,9 @@ class Connector < ApplicationRecord
     if soap_request_success_changed? or vpnti_online_changed?
       update_condition
     end
+    if condition_changed? and condition == Cocard::States::OK
+      self[:last_check_ok] = Time.current
+    end
   end
 
 private

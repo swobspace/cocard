@@ -37,7 +37,6 @@ module ConnectorServices
         return Result.new(success?: false, error_messages: error_messages, sds: nil)
       end
 
-      connector.touch(:last_check_ok)
       connector.update(connector_services: sds.connector_services)
       Result.new(success?: true, error_messages: error_messages, sds: sds.connector_services)
     end

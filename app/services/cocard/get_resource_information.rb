@@ -25,6 +25,7 @@ module Cocard
     # service.call()
     # do all the work here ;-)
     def call
+      connector.touch(:last_check)
       error_messages = []
       result = Cocard::SOAP::GetResourceInformation.new(
                  connector: connector,
