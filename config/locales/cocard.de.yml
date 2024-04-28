@@ -22,6 +22,7 @@ de:
     client: Mandant
     clients: Mandanten
     client_ids: Mandanten
+    condition: Zustand
     configuration: Konfiguration
     connector: Konnektor
     context: Context
