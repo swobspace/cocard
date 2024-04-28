@@ -42,6 +42,7 @@ class ConnectorsController < ApplicationController
     unless result.success?
       @connector.errors.add(:base, :invalid)
       @connector.errors.add(:base, result.error_messages.join("; "))
+      flash[:alert] = result.error_messages.join(', ')
     end
     respond_with(@connector, action: :show)
   end
