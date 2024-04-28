@@ -3,6 +3,7 @@ require 'rails_helper'
 module ConnectorServices
   RSpec.describe Fetch do
     Fake = Struct.new(:headers, :success?, :status, :body)
+    let(:conn) { instance_double(Faraday::Connection) }
     let(:sds_file) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'connector.sds') }
     let(:sds_string)      { File.read(sds_file) }
     let(:connector) do
@@ -13,6 +14,10 @@ module ConnectorServices
     end
     subject { ConnectorServices::Fetch.new( connector: connector) }
 
+
+    before(:each) do
+      allow(Faraday).to receive(:new).and_return(conn)
+    end
 
     # check for instance methods
     describe 'check if instance methods exists' do
@@ -27,7 +32,7 @@ module ConnectorServices
         end
 
         before(:each) do
-          expect(Faraday).to receive(:get).with(any_args).and_return(fake)
+          expect(conn).to receive(:get).with(any_args).and_return(fake)
         end
 
         it { expect(result.success?).to be_truthy }
@@ -52,7 +57,7 @@ module ConnectorServices
         end
 
         before(:each) do
-          expect(Faraday).to receive(:get).with(any_args).and_return(fake)
+          expect(conn).to receive(:get).with(any_args).and_return(fake)
         end
 
         it { expect(result.success?).to be_falsey }

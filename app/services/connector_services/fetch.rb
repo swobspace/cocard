@@ -23,11 +23,26 @@ module ConnectorServices
     def call
       error_messages = []
       connector.touch(:last_check)
-      response = Faraday.get(connector.sds_url)
-      unless response.success?
-        error_messages << response.headers.join(' ')
-        error_messages << response.status
-        error_messages << response.body
+      begin
+        uri = URI(connector.sds_url)
+        conn = Faraday.new("#{uri.scheme}://#{uri.host}", 
+                           request: { open_timeout: 5, timeout: 10 })
+        response = conn.get(uri.path)
+
+        unless response.success?
+          error_messages << response.headers.join(' ')
+          error_messages << response.status
+          error_messages << response.body
+          connector.update(soap_request_success: false)
+          return Result.new(success?: false, error_messages: error_messages, sds: nil)
+        end
+      rescue Faraday::Error => e
+        error_messages << e.response_status
+        error_messages << e.response_headers
+        error_messages << e.response_body
+        error_messages << e.message
+        error_messages.compact!
+        connector.update(soap_request_success: false)
         return Result.new(success?: false, error_messages: error_messages, sds: nil)
       end
 
@@ -37,7 +52,8 @@ module ConnectorServices
         return Result.new(success?: false, error_messages: error_messages, sds: nil)
       end
 
-      connector.update(connector_services: sds.connector_services)
+      connector.update(connector_services: sds.connector_services,
+                       sds_updated_at: Time.current)
       Result.new(success?: true, error_messages: error_messages, sds: sds.connector_services)
     end
   end
