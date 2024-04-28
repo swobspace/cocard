@@ -158,14 +158,14 @@ table.connector.table.table-sm > :not(caption) > * > * {
 .bg-OK {
   background-color: #E6FFE6 !important;
 }
-.bg-WARN, .bg-ignore {
+.bg-WARNING {
   background-color:  #FFFF80 !important;
 }
-.bg-CRITICAL, .bg-disabled {
+.bg-CRITICAL {
   background-color: #FF8080 !important;
 }
 .bg-UNKNOWN {
-  background-color: #FFD280 !important;
+  background-color: #D507D6 !important;
 }
 
 // ------------------------------------------------------------------------
