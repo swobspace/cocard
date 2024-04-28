@@ -26,6 +26,9 @@ class ConditionIconComponent < ViewComponent::Base
       when Cocard::States::OK
         @color = "btn-success"
         @icon  = "fa-solid fa-circle-check"
+      else
+        @color = "btn-secondary"
+        @icon  = "fa-solid fa-circle-question"
     end
   end
 
