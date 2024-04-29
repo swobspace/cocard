@@ -21,7 +21,7 @@ module Cocard
    
     describe "#to_s" do
       it "shows product information summary" do
-        expect(subject.to_s).to eq(<<~PRODINFO
+        expect(subject.to_s).to eq(<<~PRODINFO.chomp
           ProduktTypeInformation:
             ProductType: Konnektor
             ProductTypeVersion: 5.1.0

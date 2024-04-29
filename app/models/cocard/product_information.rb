@@ -21,7 +21,7 @@ module Cocard
     end
 
     def to_s
-      text = <<~TOTEXT
+      text = <<~TOTEXT.chomp
         ProduktTypeInformation:
           ProductType: #{product_type_information['ProductType']}
           ProductTypeVersion: #{product_type_information['ProductTypeVersion']}
