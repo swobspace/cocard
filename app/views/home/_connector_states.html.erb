@@ -1,22 +1,16 @@
-<div id="connector_states">
-  <% if Connector.ok.any? %>
-    <button type="button" class="btn btn-success">
-      <i class="fas fa-lg fa-fw fa-check-circle"></i>
-      <span class="badge text-bg-white"><%= Connector.ok.count %></span>
-    </button>
-  <% end %>
-
-  <% if Connector.warning.any? %>
-    <button type="button" class="btn btn-warning">
-      <i class="fas fa-lg fa-fw fa-exclamation-triangle text-white"></i>
-      <span class="badge text-bg-white"><%= Connector.warning.count %></span>
-    </button>
-  <% end %>
-
-  <% if Connector.critical.any? %>
-    <button type="button" class="btn btn-danger">
-      <i class="fas fa-lg fa-fw fa-exclamation-circle text-white"></i>
-      <span class="badge text-bg-white"><%= Connector.critical.count %></span>
-    </button>
-  <% end %>
+<div class="me-2">
+  <%= render ConditionBadgeComponent.new(state: Cocard::States::OK, 
+                                         count: Connector.ok.count) %>
+</div>
+<div class="me-2">
+  <%= render ConditionBadgeComponent.new(state: Cocard::States::WARNING, 
+                                         count: Connector.warning.count) %>
+</div>
+<div class="me-2">
+  <%= render ConditionBadgeComponent.new(state: Cocard::States::CRITICAL, 
+                                         count: Connector.critical.count) %>
+</div>
+<div class="me-2">
+  <%= render ConditionBadgeComponent.new(state: Cocard::States::UNKNOWN, 
+                                         count: Connector.unknown.count) %>
 </div>

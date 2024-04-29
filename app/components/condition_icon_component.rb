@@ -24,7 +24,7 @@ class ConditionIconComponent < ViewComponent::Base
         @button_class = "#{size} btn-danger"
         @icon  = "fa-solid fa-circle-exclamation"
       when Cocard::States::UNKNOWN
-        @button_class = "#{size} bg-UNKNOWN"
+        @button_class = "#{size} btn-info"
         @icon  = "fa-solid fa-circle-question text-white"
       when Cocard::States::WARNING
         @button_class = "#{size} btn-warning"
