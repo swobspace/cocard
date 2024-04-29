@@ -1,0 +1,6 @@
+<div data-controller="sortable"  
+     data-sortable-handle-value=".handle" 
+     class="list-group mb-3">
+  <%= render partial: 'connector_contexts/connector_context', 
+             collection: connector.connector_contexts, as: :connector_context %>
+</div>

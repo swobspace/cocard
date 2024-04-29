@@ -8,6 +8,9 @@ class Connector < ApplicationRecord
   # -- configuration
   has_rich_text :description
 
+  accepts_nested_attributes_for :connector_contexts,
+    allow_destroy: true,
+    reject_if: proc { |att| att['context_id'].blank? }
 
   # -- validations and callbacks
   before_save :ensure_update_condition

@@ -1,0 +1,20 @@
+<div id="connector_contexts_list" data-controller="nested-form" class="offset-3">
+  <template data-nested-form-target='template'>
+    <%= f.simple_fields_for :connector_contexts, ConnectorContext.new,
+                             child_index: 'TEMPLATE_RECORD' do |builder| %>
+      <%= render 'connector_context_fields', f: builder %>
+    <% end %>
+  </template>
+
+  <%= f.simple_fields_for :connector_contexts do |builder| %>
+    <%= render 'connector_context_fields', f: builder %>
+  <% end %>
+
+  <div data-nested-form-target="add_item">
+    <%= link_to t('contexts.add'), "#",
+              data: { action: "nested-form#add_association" },
+              class: 'btn btn-outline-secondary float-end'
+     %>
+  </div>
+
+</div>

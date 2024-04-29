@@ -78,7 +78,10 @@
 <%= @connector.product_information&.to_s %>
         </pre>
       </div>
-
+    </div>
+    <div id="list_contexts">
+      <%= render partial: 'connector_contexts/list', 
+                 locals: { connector: @connector }%>
     </div>
   </div>
 </div>

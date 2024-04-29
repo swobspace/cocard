@@ -13,8 +13,14 @@ application.register("hello", HelloController)
 import ModalController from "./modal_controller"
 application.register("modal", ModalController)
 
+import NestedFormController from "./nested_form_controller"
+application.register("nested-form", NestedFormController)
+
 import SelectController from "./ts/select_controller"
 application.register("select", SelectController)
+
+import SortableController from "./sortable_controller.js"
+application.register("sortable", SortableController)
 
 import ToastController from "./toast_controller"
 application.register("toast", ToastController)

@@ -1,6 +1,6 @@
 de:
   cocard:
-    new_context: Neuer Context
+    new_context: Neuer Kontext
     new_connector: Neuer Konnektor
     new_location: Neuer Standort
     condition:
@@ -12,8 +12,9 @@ de:
 
   activerecord:
     models:
-      context: Context
+      context: Kontext
       connector: Konnektor
+      connector_context: Konnektor Kontext
       location: Standort
       user: User
 
@@ -25,9 +26,11 @@ de:
     condition: Zustand
     configuration: Konfiguration
     connector: Konnektor
-    context: Context
-    contexts: Contexte
-    context_ids: Contexte
+    connector_context: Konnektor Kontext
+    context: Kontext
+    contexts: Kontexte
+    context: Kontext
+    context_ids: Kontexte
     description: Beschreibung
     displayname: Anzeigename
     givenname: Vorname
@@ -44,7 +47,10 @@ de:
 
   controller:
     connectors: Konnektoren
-    contexts: Contexte
+    contexts: Kontexte
     home: Home
     locations: Standorte
     users: Benutzer
+
+  contexts:
+    add: Kontext hinzufügen

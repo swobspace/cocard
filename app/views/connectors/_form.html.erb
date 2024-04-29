@@ -18,6 +18,9 @@
 
     <%= form.input :manual_update
        %>
+
+    <%= render 'nested_connector_contexts_form', f: form %>
+
     <%= form.button :submit, class: 'btn btn-primary' %>
     <%= cancel_button %>
   </div>
