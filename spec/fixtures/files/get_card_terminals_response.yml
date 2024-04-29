@@ -6,7 +6,60 @@
       attributes: {}
   :card_terminals:
     :card_terminal:
-      :product_information:
+    - :product_information:
+        :information_date: !ruby/object:DateTime 2024-03-26 15:33:03.945000000 Z
+        :product_type_information:
+          :product_type: !ruby/string:Nori::StringWithAttributes
+            str: KT
+            attributes: {}
+          :product_type_version: !ruby/string:Nori::StringWithAttributes
+            str: 1.5.0
+            attributes: {}
+        :product_identification:
+          :product_vendor_id: !ruby/string:Nori::StringWithAttributes
+            str: INGHC
+            attributes: {}
+          :product_code: !ruby/string:Nori::StringWithAttributes
+            str: ORGA6100
+            attributes: {}
+          :product_version:
+            :local:
+              :hw_version: !ruby/string:Nori::StringWithAttributes
+                str: 1.2.0
+                attributes: {}
+              :fw_version: !ruby/string:Nori::StringWithAttributes
+                str: 3.8.2
+                attributes: {}
+        :product_miscellaneous:
+          :product_vendor_name:
+          :product_name:
+      :ct_id: !ruby/string:Nori::StringWithAttributes
+        str: CT_ID_0176
+        attributes: {}
+      :workplace_ids:
+        :workplace_id:
+        - !ruby/string:Nori::StringWithAttributes
+          str: Konnektor
+          attributes: {}
+        - !ruby/string:Nori::StringWithAttributes
+          str: GUSbox03
+          attributes: {}
+      :name: !ruby/string:Nori::StringWithAttributes
+        str: ORGA6100-0241000000B692
+        attributes: {}
+      :mac_address: !ruby/string:Nori::StringWithAttributes
+        str: 00-0D-F8-0C-86-52
+        attributes: {}
+      :ip_address:
+        :ipv4_address: !ruby/string:Nori::StringWithAttributes
+          str: 10.200.149.235
+          attributes: {}
+      :slots: !ruby/string:Nori::StringWithAttributes
+        str: '4'
+        attributes: {}
+      :is_physical: true
+      :connected: true
+    - :product_information:
         :information_date: !ruby/object:DateTime 1970-01-01 00:00:00.000000000 Z
         :product_type_information:
           :product_type:
