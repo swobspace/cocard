@@ -63,6 +63,8 @@ class Connector < ApplicationRecord
         "WARNING - Connector reachable but TI offline!"
       when Cocard::States::OK
         "OK - Connector TI online"
+      when Cocard::States::NOTHING
+        "UNUSED - Configuration may not be complete yet"
     end
   end
 

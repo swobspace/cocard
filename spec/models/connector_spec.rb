@@ -127,6 +127,12 @@ RSpec.describe Connector, type: :model do
         end
         it { expect(connector.condition_message).to match(/OK/) }
       end
+      describe "with condition = NOTHING" do
+        before(:each) do
+          expect(connector).to receive(:condition).and_return(Cocard::States::NOTHING)
+        end
+        it { expect(connector.condition_message).to match(/UNUSED/) }
+      end
     end
 
   end
