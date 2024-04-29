@@ -3,13 +3,19 @@
 require "rails_helper"
 
 RSpec.describe ConditionBadgeComponent, type: :component do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:connector) { FactoryBot.create(:connector) }
 
-  # it "renders something useful" do
-  #   expect(
-  #     render_inline(described_class.new(attr: "value")) { "Hello, components!" }.css("p").to_html
-  #   ).to include(
-  #     "Hello, components!"
-  #   )
-  # end
+  describe "with condition = CRITICAL" do
+    it "shows CRITICAL button" do
+      render_inline(described_class.new(state: 2, count: 2))
+      expect(page).to have_css('button[class="btn btn-danger"]')
+    end
+  end
+
+  describe "with condition = UNKNOWN" do
+    it "shows UNKNOWN button" do
+      render_inline(described_class.new(state: 3, count: 1))
+      expect(page).to have_css('button[class="btn btn-info"]')
+    end
+  end
 end

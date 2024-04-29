@@ -19,16 +19,7 @@ RSpec.describe ConditionIconComponent, type: :component do
       expect(connector).to receive(:condition).at_least(:once)
                                               .and_return(Cocard::States::UNKNOWN)
       render_inline(described_class.new(item: connector))
-      expect(page).to have_css('button[class="btn bg-UNKNOWN"]')
+      expect(page).to have_css('button[class="btn btn-info"]')
     end
   end
-
-
-  # it "renders something useful" do
-  #   expect(
-  #     render_inline(described_class.new(attr: "value")) { "Hello, components!" }.css("p").to_html
-  #   ).to include(
-  #     "Hello, components!"
-  #   )
-  # end
 end
