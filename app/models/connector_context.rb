@@ -4,6 +4,8 @@ class ConnectorContext < ApplicationRecord
   belongs_to :context, optional: false
 
   # -- configuration
+  acts_as_list scope: :connector
+
   # -- validations and callbacks
   validates :connector_id, presence: true,
                            uniqueness: { scope: :context_id, allow_blank: false }
