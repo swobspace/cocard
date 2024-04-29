@@ -9,6 +9,8 @@ Rails.application.configure do
     poll_interval: 30,
     retry_on_unhandled_error: false,
     preserve_job_records: true,
+    # cleanup_interval_jobs: 100,
+    cleanup_interval_seconds: 3600,
 
     cron: {
       fetch_sds: {
