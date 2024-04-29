@@ -15,7 +15,9 @@
     <tbody>
       <% connectors.each do |connector| %>
         <%= content_tag(:tr, id: dom_id(connector), class: dom_class(connector)) do %>
-          <td> <%= render ConditionIconComponent.new(item: connector) %> </td>
+          <td class="text-center">
+            <%= render ConditionIconComponent.new(item: connector, small: true) %>
+          </td>
           <td><%= link_to(
                     connector.name, 
                     connector_path(connector), 
