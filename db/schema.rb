@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_28_163522) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_29_091116) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -69,7 +69,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_28_163522) do
   create_table "connector_contexts", force: :cascade do |t|
     t.bigint "connector_id", null: false
     t.bigint "context_id", null: false
-    t.integer "position"
+    t.integer "position", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["connector_id", "context_id"], name: "index_connector_contexts_on_connector_id_and_context_id", unique: true
