@@ -1,6 +1,15 @@
-<%= render 'shared/turbo-cache-control' %>
+<%= turbo_stream_from :home_index %>
+<div class="container-xl">
 
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
-
-<div data-controller="hello"></div>
+  <div class="card mt-3">
+    <div class="card-header">
+      <div class="d-flex">
+        <h4 class="me-4 pt-1">Connector Status</h4>
+        <%= render 'connector_states' %>
+      </div>
+    </div>
+    <div>
+      <%= render 'connectors', connectors: @connectors %>
+    </div>
+  </div>
+</div>
