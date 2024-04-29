@@ -20,6 +20,22 @@ class Connector  {
   vpnti_online: boolean
 }
 
+class CardTerminal {
+  description: rich_text
+  --
+  connector_id
+  name: string
+  properties: jsonb
+  last_check: timestamp
+  last_check_ok: timestamp
+  condition: integer
+  ctid: string
+  mac: macaddr
+  ip: inet
+  connected: boolean
+  last_seen: timestamp
+}
+
 class Location {
   lid: string
   description: string
@@ -38,8 +54,10 @@ class ConnectorContext {
   position: integer
 }
 
+
 Location "*" -- "*" Connector
 Context "*" -- "*" Connector
+Connector "1" -- "*" CardTerminal
 
 (Connector, Context) .. ConnectorContext
 
