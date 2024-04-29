@@ -8,13 +8,18 @@ Rails.application.configure do
     max_threads: 4,
     poll_interval: 30,
     retry_on_unhandled_error: false,
-    preserve_job_records: false,
+    preserve_job_records: true,
 
     cron: {
       fetch_sds: {
-        cron: 'every day',
+        cron: '0 4 * * *',
         class: "ConnectorServices::FetchJob",
         description: "Fetch current SDS info from all connectors"
+      },
+      get_resource_information: {
+        cron: '*/5 * * * *',
+        class: "Cocard::GetResourceInformationJob",
+        description: "Get resource information from connector"
       }
     }
   }

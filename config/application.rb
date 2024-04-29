@@ -51,7 +51,7 @@ module Cocard
 
     unless Rails.env.test?
       config.active_job.queue_adapter = :good_job
-      config.active_job.queue_name_prefix = "mirco_#{Rails.env}"
+      config.active_job.queue_name_prefix = "cocard_#{Rails.env}"
     end
 
     config.responders.error_status = :unprocessable_entity
