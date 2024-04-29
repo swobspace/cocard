@@ -79,6 +79,12 @@
         </pre>
       </div>
     </div>
+    <div>
+      <%= turbo_frame_tag "connector_#{@connector.id}_ping", 
+                          src: ping_connector_path(@connector) do %>
+        <%= image_tag 'process-working.png' %>
+      <% end %>
+    </div>
     <h5 class="card-title"><%= t('cocard.assigned_contexts') %>:</h5>
     <div id="list_contexts">
       <%= render partial: 'connector_contexts/list',

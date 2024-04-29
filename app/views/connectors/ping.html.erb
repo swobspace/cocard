@@ -1,0 +1,3 @@
+<%= turbo_frame_tag "connector_#{@connector.id}_ping" do %>
+  <%= render PingComponent.new(pingable: @connector) %>
+<% end %>

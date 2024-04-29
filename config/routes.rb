@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :connectors do
     member do
       post :fetch_sds
+      get :ping
     end
   end
   resources :locations

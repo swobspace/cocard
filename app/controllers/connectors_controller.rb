@@ -13,6 +13,11 @@ class ConnectorsController < ApplicationController
     respond_with(@connector)
   end
 
+  def ping
+    respond_with(@connector) do |format|
+    end
+  end
+
   # GET /connectors/new
   def new
     @connector = Connector.new
