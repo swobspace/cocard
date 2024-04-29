@@ -3,7 +3,7 @@
     <div class="d-flex w-100">
       <div >
         <span class="subtitle">
-          <%= t('activerecord.models.connector') %>: 
+          <%= t('activerecord.models.connector') %>:
           #<%= @connector.id %>
         </span>
         <h4 class="title"> <%= @connector %> </h4>
@@ -25,7 +25,7 @@
     <div class="row">
       <div class="col-6">
         <table class="table table-sm table-borderless">
-        
+
           <tr>
             <th class="w-10 pe-3"><%= t('attributes.name')%>:</th>
             <td><%= @connector.name %></td>
@@ -79,8 +79,9 @@
         </pre>
       </div>
     </div>
+    <h5 class="card-title"><%= t('cocard.assigned_contexts') %>:</h5>
     <div id="list_contexts">
-      <%= render partial: 'connector_contexts/list', 
+      <%= render partial: 'connector_contexts/list',
                  locals: { connector: @connector }%>
     </div>
   </div>

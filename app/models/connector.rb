@@ -2,7 +2,7 @@ class Connector < ApplicationRecord
   include PingConcerns
   # -- associations
   has_and_belongs_to_many :locations
-  has_many :connector_contexts
+  has_many :connector_contexts, -> { order(position: :asc) }, dependent: :destroy
   has_many :contexts, through: :connector_contexts
 
   # -- configuration

@@ -9,6 +9,7 @@ de:
       1: WARNING
       2: CRITICAL
       3: UNKNOWN
+    assigned_contexts: Zugewiesene Kontexte
 
   activerecord:
     models:
