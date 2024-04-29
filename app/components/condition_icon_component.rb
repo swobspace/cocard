@@ -5,33 +5,39 @@
 # item must respond_to :condition, :condition_text
 #
 class ConditionIconComponent < ViewComponent::Base
-  def initialize(item:)
+  def initialize(item:, small: false)
     @item = item
-    @color = ""
+    @button_class = ""
     @icon  = ""
+    @small = small
     set_variant
   end
 
   def set_variant
+    if @small
+      size = "btn btn-sm"
+    else
+      size = "btn"
+    end
     case item.condition
      when Cocard::States::CRITICAL
-        @color = "btn-danger"
+        @button_class = "#{size} btn-danger"
         @icon  = "fa-solid fa-circle-exclamation"
       when Cocard::States::UNKNOWN
-        @color = "bg-UNKNOWN"
+        @button_class = "#{size} bg-UNKNOWN"
         @icon  = "fa-solid fa-circle-question text-white"
       when Cocard::States::WARNING
-        @color = "btn-warning"
+        @button_class = "#{size} btn-warning"
         @icon  = "fa-solid fa-triangle-exclamation text-white"
       when Cocard::States::OK
-        @color = "btn-success"
+        @button_class = "#{size} btn-success"
         @icon  = "fa-solid fa-circle-check"
       else
-        @color = "btn-secondary"
+        @button_class = "#{size} btn-secondary"
         @icon  = "fa-solid fa-circle-question"
     end
   end
 
 private
-  attr_reader :item, :color, :icon
+  attr_reader :item, :button_class, :icon
 end
