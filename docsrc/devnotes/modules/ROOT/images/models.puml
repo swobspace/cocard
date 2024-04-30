@@ -27,7 +27,7 @@ class CardTerminal {
   --
   properties: jsonb
   name: string
-  ctid: string
+  ct_id: string
   mac: macaddr
   ip: inet
   connected: boolean
