@@ -3,6 +3,7 @@ class Connector < ApplicationRecord
   include ConnectorConcerns
   # -- associations
   has_and_belongs_to_many :locations
+  has_many :card_terminals, dependent: :restrict_with_error
   has_many :connector_contexts, -> { order(position: :asc) }, dependent: :destroy
   has_many :contexts, through: :connector_contexts
 

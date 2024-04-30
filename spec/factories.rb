@@ -15,6 +15,10 @@ FactoryBot.define do
     "tcp://#{Faker::Internet.ip_v4_address}:#{n}"
   end
 
+  factory :card_terminal do
+    connector
+  end
+
   factory :connector do
     ip { Faker::Internet.ip_v4_address }
   end

@@ -11,6 +11,7 @@ RSpec.describe Connector, type: :model do
     )
   end
   it { is_expected.to have_many(:contexts).through(:connector_contexts) }
+  it { is_expected.to have_many(:card_terminals).dependent(:restrict_with_error) }
   it { is_expected.to have_and_belong_to_many(:locations) }
   it { is_expected.to validate_presence_of(:ip) }
 
