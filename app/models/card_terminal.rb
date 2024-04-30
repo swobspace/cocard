@@ -8,7 +8,9 @@ class CardTerminal < ApplicationRecord
   has_rich_text :description
 
   # -- validations and callbacks
+  before_save :ensure_displayname
   validates_uniqueness_of :mac, allow_blank: true
+
 
   # -- common methods
   def to_s
@@ -18,6 +20,12 @@ class CardTerminal < ApplicationRecord
   def product_information
     return nil if properties.blank?
     Cocard::ProductInformation.new(properties[:product_information])
+  end
+
+  def ensure_displayname
+    if displayname.blank? and name.present?
+      self[:displayname] = name
+    end
   end
 
 end

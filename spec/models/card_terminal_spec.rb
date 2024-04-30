@@ -23,4 +23,14 @@ RSpec.describe CardTerminal, type: :model do
     it { expect(ct.to_s).to match('ACME Term (ACX)') }
   end
 
+  describe "on #save" do
+    it "adds missing displayname" do
+      ct.displayname = ''
+      ct.name = "New Name"
+      expect {
+        ct.save 
+      }.to change(ct, :displayname).to ('New Name')
+    end
+  end
+
 end
