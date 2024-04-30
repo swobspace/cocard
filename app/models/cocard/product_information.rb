@@ -1,42 +1,47 @@
+require 'active_support'
 module Cocard
   class ProductInformation
     def initialize(hash)
-      @hash = hash || {}
+      if hash.nil?
+        @hash = nil
+      else
+        @hash = hash.deep_transform_keys{|key| key.snakecase.to_sym } || {}
+      end
     end
 
     def information_date
-      hash['InformationDate'] || nil
+      hash[:information_date] || nil
     end
 
     def product_type_information
-      hash['ProductTypeInformation'] || {}
+      hash[:product_type_information] || {}
     end
 
     def product_identification
-      hash['ProductIdentification'] || {}
+      hash[:product_identification] || {}
     end
 
     def product_miscellaneous
-      hash['ProductMiscellaneous'] || {}
+      hash[:product_miscellaneous] || {}
     end
 
     def to_s
       text = <<~TOTEXT.chomp
         ProduktTypeInformation:
-          ProductType: #{product_type_information['ProductType']}
-          ProductTypeVersion: #{product_type_information['ProductTypeVersion']}
+          ProductType: #{product_type_information[:product_type]}
+          ProductTypeVersion: #{product_type_information[:product_type_version]}
 
         ProductIdentification:
-          ProductVendorID: #{product_identification['ProductVendorID']}
-          ProductCode: #{product_identification['ProductCode']}
+          ProductVendorID: #{product_identification[:product_vendor_id]}
+          ProductCode: #{product_identification[:product_code]}
           ProductVersion:
             Local:
-              HWVersion: #{product_identification['ProductVersion']['Local']['HWVersion']}
-              FWVersion: #{product_identification['ProductVersion']['Local']['FWVersion']}
+              HWVersion: #{product_identification[:product_version][:local][:hw_version]}
+              FWVersion: #{product_identification[:product_version][:local][:fw_version]}
 
         ProductMiscellaneous:
-          ProductVendorName: #{product_miscellaneous['ProductVendorName']}
-          ProductName: #{product_miscellaneous['ProductName']}
+          ProductVendorName: #{product_miscellaneous[:product_vendor_name]}
+          ProductName: #{product_miscellaneous[:product_name]}
 
         #{information_date}
       TOTEXT
