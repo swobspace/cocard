@@ -33,4 +33,25 @@ RSpec.describe CardTerminal, type: :model do
     end
   end
 
+
+  describe "product_information" do
+    let(:prodinfo)  {{ product_information:
+      {:information_date=> Time.current,
+       :product_type_information=> {:product_type=>"KardTerm", :product_type_version=>"1.2.3.4"},
+       :product_identification=> {
+         :product_vendor_id=>"Heinrich GmbH",
+         :product_code=>nil,
+         :product_version=> { :local=>{:hw_version=>"5.6.7", :fw_version=>"8.9.1"}}
+       },
+       :product_miscellaneous=> {:product_vendor_name=>nil, :product_name=>nil}}
+    }}
+    before(:each) do
+      ct.update(properties: prodinfo)
+    end
+
+    it { expect(ct.product_information).to be_kind_of(Cocard::ProductInformation) }
+    it { expect(ct.product_information.product_type_information).to include(
+           :product_type=>"KardTerm", :product_type_version=>"1.2.3.4"
+         )}
+  end
 end

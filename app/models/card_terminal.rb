@@ -19,7 +19,7 @@ class CardTerminal < ApplicationRecord
 
   def product_information
     return nil if properties.blank?
-    Cocard::ProductInformation.new(properties[:product_information])
+    Cocard::ProductInformation.new(properties['product_information'])
   end
 
   def ensure_displayname
