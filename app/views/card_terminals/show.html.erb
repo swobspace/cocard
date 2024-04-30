@@ -16,24 +16,37 @@
   </div>
 
   <div class="card-body">
-    <table class="table table-sm table-borderless">
-    
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.displayname')%>:</th>
-        <td><%= @card_terminal.displayname %></td>
-      </tr>
+    <div class="row">
+      <div class="col-6">
+        <table class="table table-sm table-borderless">
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.displayname')%>:</th>
+            <td><%= @card_terminal.displayname %></td>
+          </tr>
 
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.location')%>:</th>
-        <td><%= @card_terminal.location %></td>
-      </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.location')%>:</th>
+            <td><%= @card_terminal.location %></td>
+          </tr>
 
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.description')%>:</th>
-        <td><%= @card_terminal.description %></td>
-      </tr>
-
-    </table>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.description')%>:</th>
+            <td><%= @card_terminal.description %></td>
+          </tr>
+        </table>
+      <div class="col-6">
+        <b>ProductInformation:</b>
+        <pre>
+<%= @card_terminal.product_information&.to_s %>
+        </pre>
+      </div>
+    </div>
+    <div>
+      <%= turbo_frame_tag "card_terminal_#{@card_terminal.id}_ping",
+                          src: ping_card_terminal_path(@card_terminal) do %>
+        <%= image_tag 'process-working.png' %>
+      <% end %>
+    </div>
   </div>
 </div>
 
