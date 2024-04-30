@@ -48,6 +48,9 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="conditions.html">Zustände</a>
   </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="todo.html">Todos</a>
+  </li>
 </ul>
   </li>
 </ul>
@@ -187,6 +190,37 @@ bin/rails g migration AddReadonlyToConnector \
 <div class="title">app/models/connector.rb</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">class Connector &lt; ApplicationRecord
+  has_rich_text :description
+end</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_model_cardterminal"><a class="anchor" href="#_model_cardterminal"></a>model CardTerminal</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g scaffold CardTerminal \
+  displayname:string \
+  location:belongs_to \
+    --no-stylesheets --no-javascripts --no-helper
+
+bin/rails g migration AddInternalToCardTerminal \
+  properties:jsonb \
+  name:string \
+  ctid:string \
+  mac:macaddr \
+  ip:inet \
+  connected:boolean \
+  condition:integer \
+  connector:belongs_to</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">app/models/card_terminal.rb</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">class CardTerminal &lt; ApplicationRecord
   has_rich_text :description
 end</code></pre>
 </div>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Zustände :: Cocard</title>
+    <title>Todos :: Cocard</title>
     <meta name="generator" content="Antora 3.1.0">
     <link rel="stylesheet" href="../_/css/site.css">
     <script>var uiRootPath = '../_'</script>
@@ -45,10 +45,10 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="modeling.html">Modeling cocard</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="conditions.html">Zustände</a>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <a class="nav-link" href="todo.html">Todos</a>
   </li>
 </ul>
@@ -90,7 +90,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">DevNotes</a></li>
-    <li><a href="conditions.html">Zustände</a></li>
+    <li><a href="todo.html">Todos</a></li>
   </ul>
 </nav>
 </div>
@@ -99,15 +99,39 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Zustände</h1>
-<div class="sect1">
-<h2 id="_konnektor"><a class="anchor" href="#_konnektor"></a>Konnektor</h2>
+<h1 class="page">Todos</h1>
+<div id="preamble">
 <div class="sectionbody">
-<div class="imageblock">
-<div class="content">
-<img src="_images/connector-condition.svg" alt="connector condition">
+<div class="paragraph">
+<p>Tasks, die während der ersten Entwicklungsphase nicht umgesetzt wurden
+aber für einen späteren Betrieb sinnvoll/notwendig sind.</p>
 </div>
 </div>
+</div>
+<div class="sect1">
+<h2 id="_connector"><a class="anchor" href="#_connector"></a>Connector</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 11.1111%;">
+<col style="width: 44.4444%;">
+<col style="width: 44.4445%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-center valign-top">ID</th>
+<th class="tableblock halign-left valign-top">Task</th>
+<th class="tableblock halign-left valign-top">Bemerkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">c1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">connectors#show: Sortable für zugeordnete Contexte</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nur der erste Kontext wird für <code>GetResourceInformation</code> genutzt.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </article>

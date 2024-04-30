@@ -1,0 +1,17 @@
+= Todos
+:author: Wolfgang Barth
+:revdate: 2024-04-30
+
+Tasks, die während der ersten Entwicklungsphase nicht umgesetzt wurden
+aber für einen späteren Betrieb sinnvoll/notwendig sind.
+
+== Connector
+
+[cols="^1,4,4"]
+|===
+|ID | Task | Bemerkung
+
+|c1
+|connectors#show: Sortable für zugeordnete Contexte
+|Nur der erste Kontext wird für `GetResourceInformation` genutzt.
+|===

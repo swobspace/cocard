@@ -78,6 +78,36 @@ class Connector < ApplicationRecord
 end
 ----
 
+== model CardTerminal
+
+[source,sh]
+----
+bin/rails g scaffold CardTerminal \
+  displayname:string \
+  location:belongs_to \
+    --no-stylesheets --no-javascripts --no-helper
+
+bin/rails g migration AddInternalToCardTerminal \
+  properties:jsonb \
+  name:string \
+  ctid:string \
+  mac:macaddr \
+  ip:inet \
+  connected:boolean \
+  condition:integer \
+  connector:belongs_to
+----
+
+
+.app/models/card_terminal.rb
+[source,ruby]
+----
+class CardTerminal < ApplicationRecord
+  has_rich_text :description
+end
+----
+
+
 == HABTM Tables
 
 .Join Tables for HABTM

@@ -21,19 +21,18 @@ class Connector  {
 }
 
 class CardTerminal {
+  displayname: string
   description: rich_text
+  location_id
   --
-  connector_id
-  name: string
   properties: jsonb
-  last_check: timestamp
-  last_check_ok: timestamp
-  condition: integer
+  name: string
   ctid: string
   mac: macaddr
   ip: inet
   connected: boolean
-  last_seen: timestamp
+  condition: integer
+  connector_id
 }
 
 class Location {
@@ -54,11 +53,23 @@ class ConnectorContext {
   position: integer
 }
 
+Class Card {
+  --
+  card_handle: string
+  card_type: string
+  iccsn: string
+  slotid: integer
+  insert_time: timestamp
+  card_holder_name: string
+  expiration_date: date
+  card_terminal_id
+}
+
 
 Location "*" -- "*" Connector
-Context "*" -- "*" Connector
-Connector "1" -- "*" CardTerminal
-
+Context "*" - "*" Connector
+Connector "1" - "*" CardTerminal
+Location "1" - "*" CardTerminal
 (Connector, Context) .. ConnectorContext
-
+CardTerminal "1" -- "*" Card
 @enduml
