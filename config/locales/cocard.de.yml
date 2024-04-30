@@ -13,6 +13,8 @@ de:
 
   activerecord:
     models:
+      card: Karte
+      card_terminal: Kartenterminal
       context: Kontext
       connector: Konnektor
       connector_context: Konnektor Kontext
@@ -21,6 +23,8 @@ de:
 
   attributes:
     action: Aktion
+    card: Karte
+    card_terminal: Kartenterminal
     client: Mandant
     clients: Mandanten
     client_ids: Mandanten
@@ -45,8 +49,12 @@ de:
     sds_url: SDS-Url
     sn: Nachname
     username: Username
+    workplace: Arbeitsplatz
+    workplaces: Arbeitsplätze
 
   controller:
+    cards: Karten
+    card_terminals: Kartenterminals
     connectors: Konnektoren
     contexts: Kontexte
     home: Home
