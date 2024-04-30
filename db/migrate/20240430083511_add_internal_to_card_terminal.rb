@@ -5,6 +5,7 @@ class AddInternalToCardTerminal < ActiveRecord::Migration[7.1]
     add_column :card_terminals, :ct_id, :string, default: ""
     add_column :card_terminals, :mac, :macaddr
     add_column :card_terminals, :ip, :inet
+    add_column :card_terminals, :slots, :integer, default: 0
     add_column :card_terminals, :connected, :boolean, default: false
     add_column :card_terminals, :condition, :integer, default: -1
     add_reference :card_terminals, :connector, null: false, foreign_key: true

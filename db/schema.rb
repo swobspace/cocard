@@ -62,6 +62,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_30_083511) do
     t.string "ct_id", default: ""
     t.macaddr "mac"
     t.inet "ip"
+    t.integer "slots", default: 0
     t.boolean "connected", default: false
     t.integer "condition", default: -1
     t.bigint "connector_id", null: false

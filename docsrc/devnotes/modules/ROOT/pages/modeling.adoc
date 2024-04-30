@@ -93,6 +93,7 @@ bin/rails g migration AddInternalToCardTerminal \
   ct_id:string \
   mac:macaddr \
   ip:inet \
+  slots:integer \
   connected:boolean \
   condition:integer \
   connector:belongs_to

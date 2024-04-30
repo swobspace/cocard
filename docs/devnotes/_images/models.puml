@@ -30,6 +30,7 @@ class CardTerminal {
   ct_id: string
   mac: macaddr
   ip: inet
+  slots: integer
   connected: boolean
   condition: integer
   connector_id
