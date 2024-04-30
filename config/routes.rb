@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :card_terminals
+  resources :card_terminals, except: [:new, :create]
   resources :contexts
   resources :connectors do
     member do

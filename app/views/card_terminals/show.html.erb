@@ -27,9 +27,14 @@
         <th class="w-10 pe-3"><%= t('attributes.location')%>:</th>
         <td><%= @card_terminal.location %></td>
       </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.description')%>:</th>
+        <td><%= @card_terminal.description %></td>
+      </tr>
+
     </table>
   </div>
 </div>
 
 <%= back_link %>
-<%= new_link CardTerminal %>

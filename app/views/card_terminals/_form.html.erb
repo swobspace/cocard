@@ -6,6 +6,8 @@
        %>
     <%= form.association :location
        %>
+    <%= form.input :description, as: :rich_text_area
+       %>
 
     <%= form.button :submit, class: 'btn btn-primary' %>
     <%= cancel_button %>
