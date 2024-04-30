@@ -1,0 +1,35 @@
+<div class="card mb-2">
+  <div class="card-header">
+    <div class="d-flex w-100 justify-content-between">
+      <div>
+        <span class="subtitle">
+          <%= t('activerecord.models.card_terminal') %>: 
+          #<%= @card_terminal.id %>
+        </span>
+        <h4 class="title"><%= @card_terminal %></h4>
+      </div>
+      <div role="toolbar" class="pt-3">
+        <%= edit_link(@card_terminal) %>
+        <%= delete_link(@card_terminal) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <table class="table table-sm table-borderless">
+    
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.displayname')%>:</th>
+        <td><%= @card_terminal.displayname %></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.location')%>:</th>
+        <td><%= @card_terminal.location %></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<%= back_link %>
+<%= new_link CardTerminal %>

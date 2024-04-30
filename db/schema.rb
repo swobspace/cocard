@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_29_091116) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_30_083511) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,6 +50,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_29_091116) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "card_terminals", force: :cascade do |t|
+    t.string "displayname", default: ""
+    t.bigint "location_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.jsonb "properties"
+    t.string "name", default: ""
+    t.string "ct_id", default: ""
+    t.macaddr "mac"
+    t.inet "ip"
+    t.boolean "connected", default: false
+    t.integer "condition", default: -1
+    t.bigint "connector_id", null: false
+    t.index ["connector_id"], name: "index_card_terminals_on_connector_id"
+    t.index ["location_id"], name: "index_card_terminals_on_location_id"
+    t.index ["mac"], name: "index_card_terminals_on_mac", unique: true
   end
 
   create_table "clients", force: :cascade do |t|
@@ -269,6 +287,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_29_091116) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "card_terminals", "connectors"
+  add_foreign_key "card_terminals", "locations"
   add_foreign_key "connector_contexts", "connectors"
   add_foreign_key "connector_contexts", "contexts"
 end

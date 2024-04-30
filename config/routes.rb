@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :card_terminals
   resources :contexts
   resources :connectors do
     member do
