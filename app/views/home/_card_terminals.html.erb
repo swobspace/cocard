@@ -7,9 +7,9 @@
       <tr class="">
             <th class="text-center"><%= t('attributes.condition') %></th>
             <th><%= t('attributes.name') %></th>
+            <th><%= t('attributes.location') %></th>
             <th><%= t('attributes.condition_message') %></th>
-            <th class="text-center"><%= t('attributes.last_check') %></th>
-            <th class="text-center"><%= t('attributes.last_check_ok') %></th>
+            <th class="text-center"><%= t('attributes.updated_at') %></th>
       </tr>
     </thead>
     <tbody>
@@ -22,9 +22,9 @@
                     card_terminal.name, 
                     card_terminal_path(card_terminal), 
                     class: "primary-link") %></td>
+          <td><%= card_terminal.location&.lid %></td>
           <td><%= card_terminal.condition_message %></td>
-          <td><%= card_terminal.last_check&.localtime %></td>
-          <td><%= card_terminal.last_check_ok&.localtime %></td>
+          <td><%= card_terminal.updated_at&.localtime %></td>
         <% end %>
       <% end %>
     </tbody>

@@ -12,7 +12,14 @@
         } do %>
     <thead>
       <tr>
+            <th class="text-center"><%= t('attributes.condition') %></th>
             <th><%= t('attributes.displayname') %></th>
+            <th><%= t('attributes.ct_id') %></th>
+            <th><%= t('attributes.connector') %></th>
+            <th><%= t('attributes.name') %></th>
+            <th><%= t('attributes.mac') %></th>
+            <th><%= t('attributes.ip') %></th>
+            <th><%= t('attributes.connected') %></th>
             <th><%= t('attributes.location') %></th>
             <th class="nosort"><%= t('mirco.action') %></th>
       </tr>
@@ -21,15 +28,29 @@
       <tr>
             <th></th>
             <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
             <th class="nosearch"></th>
       </tr>
     </tfoot>
     <tbody>
       <% @card_terminals.each do |card_terminal| %>
         <%= content_tag(:tr, id: dom_id(card_terminal), class: dom_class(card_terminal)) do %>
-                <td><%= card_terminal.displayname %></td>
-                <td><%= card_terminal.location %></td>
-                <td class="text-nowrap">
+          <td class="text-center"><%= render ConditionIconComponent.new(item: card_terminal, small: true) %>
+          <td><%= card_terminal.displayname %></td>
+          <td><%= card_terminal.ct_id %></td>
+          <td><%= card_terminal.connector %></td>
+          <td><%= card_terminal.name %></td>
+          <td><%= card_terminal.mac %></td>
+          <td><%= card_terminal.ip %></td>
+          <td><%= card_terminal.connected %></td>
+          <td><%= card_terminal.location %></td>
+          <td class="text-nowrap">
             <%= show_link card_terminal %>
             <%= edit_link card_terminal %>
             <%= delete_link card_terminal %>
