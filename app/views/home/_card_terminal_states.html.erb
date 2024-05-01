@@ -1,0 +1,20 @@
+<div class="me-2">
+  <%= render ConditionBadgeComponent.new(state: Cocard::States::OK,
+                                         count: CardTerminal.ok.count) %>
+</div>
+<div class="me-2">
+  <%= render ConditionBadgeComponent.new(state: Cocard::States::WARNING,
+                                         count: CardTerminal.warning.count) %>
+</div>
+<div class="me-2">
+  <%= render ConditionBadgeComponent.new(state: Cocard::States::CRITICAL,
+                                         count: CardTerminal.critical.count) %>
+</div>
+<div class="me-2">
+  <%= render ConditionBadgeComponent.new(state: Cocard::States::UNKNOWN,
+                                         count: CardTerminal.unknown.count) %>
+</div>
+<div class="me-2">
+  <%= render ConditionBadgeComponent.new(state: Cocard::States::NOTHING,
+                                         count: CardTerminal.nothing.count) %>
+</div>

@@ -12,4 +12,16 @@
       <%= render 'connectors', connectors: @connectors %>
     </div>
   </div>
+
+  <div class="card mt-3">
+    <div class="card-header">
+      <div class="d-flex">
+        <h4 class="me-4 pt-1">Card Terminal Status</h4>
+        <%= render 'card_terminal_states' %>
+      </div>
+    </div>
+    <div>
+      <%= render 'card_terminals', card_terminals: @card_terminals %>
+    </div>
+  </div>
 </div>

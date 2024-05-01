@@ -1,5 +1,6 @@
 class CardTerminal < ApplicationRecord
   include PingConcerns
+  include CardTerminalConcerns
   # -- associations
   belongs_to :location, optional: true
   belongs_to :connector
