@@ -55,8 +55,9 @@ module CardTerminals
 
       context 'with an existing card_terminal' do
         let!(:ct) do
-          FactoryBot.create(:card_terminal, mac: '00:0d:f8:0c:86:52')
+          FactoryBot.create(:card_terminal, mac: '00-0D-F8-0C-86-52')
         end
+        before(:each) { ct.reload }
         it 'does not create a card terminal' do
           expect {
             subject.save
