@@ -54,7 +54,7 @@ class ConnectorContext {
   position: integer
 }
 
-Class Card {
+class Card {
   --
   card_handle: string
   card_type: string
@@ -66,11 +66,23 @@ Class Card {
   card_terminal_id
 }
 
+class Workplace {
+  description: string
+  --
+  name: string
+}
+Class TerminalWorkplaces {
+  card_terminal_id
+  workplace_id
+  updated_at
+}
 
 Location "*" -- "*" Connector
-Context "*" - "*" Connector
+Context "*" -- "*" Connector
 Connector "1" - "*" CardTerminal
 Location "1" - "*" CardTerminal
 (Connector, Context) .. ConnectorContext
-CardTerminal "1" -- "*" Card
+CardTerminal "1" - "*" Card
+CardTerminal "*" -- "*" Workplace
+(CardTerminal, Workplace) .. TerminalWorkplaces
 @enduml
