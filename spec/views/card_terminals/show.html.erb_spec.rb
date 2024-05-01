@@ -32,9 +32,9 @@ RSpec.describe "card_terminals/show", type: :view do
       name: "ORGA-DINGDONG001",
       ct_id: "CT_ID0815",
       mac: "00-0D-F8-07-2C-67",
-      ip: "192.0.2.31",
+      ip: "127.0.0.5",
       connected: true,
-      condition: Cocard::States::OK
+      condition: Cocard::States::UNKNOWN
     )
   end
 
@@ -52,8 +52,9 @@ RSpec.describe "card_terminals/show", type: :view do
     expect(rendered).to match(/ORGA-DINGDONG001/)
     expect(rendered).to match(/CT_ID0815/)
     expect(rendered).to match(/00-0D-F8-07-2C-67/)
-    expect(rendered).to match(/192.0.2.31/)
+    expect(rendered).to match(/127.0.0.5/)
     expect(rendered).to match(/true/)
+    # -- should be OK with connected == true and pingable
     expect(rendered).to match(/OK/)
   end
 end
