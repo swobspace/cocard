@@ -34,6 +34,7 @@ module CardTerminals
           next if attr == :mac
           @card_terminal.send("#{attr}=", cct.send(attr))
         end
+        @card_terminal.update_condition
       end
 
       if @card_terminal.save
