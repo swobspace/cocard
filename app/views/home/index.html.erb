@@ -3,9 +3,11 @@
 
   <div class="card mt-3">
     <div class="card-header">
-      <div class="d-flex">
+      <div class="d-flex justify-content-evenly">
         <h4 class="me-4 pt-1">Connector Status</h4>
-        <%= render 'connector_states' %>
+        <div class="d-flex">
+          <%= render 'connector_states' %>
+        </div>
       </div>
     </div>
     <div>
@@ -15,9 +17,11 @@
 
   <div class="card mt-3">
     <div class="card-header">
-      <div class="d-flex">
+      <div class="d-flex justify-content-evenly">
         <h4 class="me-4 pt-1">Card Terminal Status</h4>
-        <%= render 'card_terminal_states' %>
+        <div class="d-flex">
+          <%= render 'card_terminal_states' %>
+        </div>
       </div>
     </div>
     <div>
