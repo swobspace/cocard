@@ -18,7 +18,7 @@ module Cocard
         Rails.logger.debug("DEBUG:: get_card_terminals from #{connector.name}")
 
         connector.connector_contexts.each do |con_ctx|
-          result = Cocard::GetCardTerminal.new(
+          result = Cocard::GetCardTerminals.new(
                      connector_context: con_ctx
                    ).call
           if result.success?
