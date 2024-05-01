@@ -22,6 +22,11 @@ Rails.application.configure do
         cron: '*/5 * * * *',
         class: "Cocard::GetResourceInformationJob",
         description: "Get resource information from connector"
+      },
+      get_card_terminals: {
+        cron: '*/5 * * * *',
+        class: "Cocard::GetCardTerminalsJob",
+        description: "Get configured card terminals from connector"
       }
     }
   }
