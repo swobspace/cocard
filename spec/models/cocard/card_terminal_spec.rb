@@ -31,13 +31,13 @@ module Cocard
       end
     end
 
-    describe "empty connector_services" do
+    describe "empty card terminal" do
       it "returns nil" do
         expect { Cocard::CardTerminal.new(nil) }.not_to raise_error
       end
     end
    
-    describe "#connector" do
+    describe "with real card terminal" do
       it { expect(subject.product_information).to be_kind_of Cocard::ProductInformation }
       it { expect(subject.ct_id).to eq("CT_ID_0176")}
       it { expect(subject.workplace_ids).to include(workplace_id: ["Konnektor", "GUSbox03"]) }
@@ -49,6 +49,10 @@ module Cocard
       it { expect(subject.slots).to eq(4)}
       it { expect(subject.is_physical).to be_truthy }
       it { expect(subject.connected).to be_truthy }
+    end
+
+    describe "Cocard::CardTerminal::ATTRIBUTES" do
+      it { expect(Cocard::CardTerminal::ATTRIBUTES).to contain_exactly(:properties, :name, :ct_id, :mac, :ip, :slots, :connected ) }
     end
   end
 end
