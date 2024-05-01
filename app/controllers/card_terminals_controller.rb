@@ -13,6 +13,11 @@ class CardTerminalsController < ApplicationController
     respond_with(@card_terminal)
   end
 
+  def ping
+    respond_with(@connector) do |format|
+    end
+  end
+
   # GET /card_terminals/new
   # def new
   #   @card_terminal = CardTerminal.new

@@ -54,4 +54,84 @@ RSpec.describe CardTerminal, type: :model do
            :product_type=>"KardTerm", :product_type_version=>"1.2.3.4"
          )}
   end
+
+
+  describe "#update_condition" do
+    it { expect(ct.condition).to eq(Cocard::States::NOTHING) }
+
+    describe "with ping failed" do
+      it "-> CRITICAL" do
+        expect(ct).to receive(:up?).and_return(false)
+        expect {
+          ct.update_condition
+        }.to change(ct, :condition).to(Cocard::States::CRITICAL)
+      end
+    end
+
+    describe "with connected == false" do
+      it "-> WARNING" do
+        expect(ct).to receive(:up?).and_return(true)
+        expect(ct).to receive(:connected).and_return(false)
+        expect {
+          ct.update_condition
+        }.to change(ct, :condition).to(Cocard::States::WARNING)
+      end
+    end
+
+    describe "with connected online" do
+      it "-> OK" do
+        expect(ct).to receive(:up?).and_return(true)
+        expect(ct).to receive(:connected).and_return(true)
+        expect {
+          ct.update_condition
+        }.to change(ct, :condition).to(Cocard::States::OK)
+      end
+    end
+
+    describe "#save" do
+      describe "with changed connected" do
+        it "updates condition" do
+          ct.connected = true
+          expect {
+            ct.save
+          }.to change(ct, :condition)
+        end
+      end
+    end
+
+    describe "#condition_message" do
+      describe "with condition = CRITICAL" do
+        before(:each) do
+          expect(ct).to receive(:condition).and_return(Cocard::States::CRITICAL)
+        end
+        it { expect(ct.condition_message).to match(/CRITICAL/) }
+      end
+      describe "with condition = UNKNOWN" do
+        before(:each) do
+          expect(ct).to receive(:condition).and_return(Cocard::States::UNKNOWN)
+        end
+        it { expect(ct.condition_message).to match(/UNKNOWN/) }
+      end
+      describe "with condition = WARNING" do
+        before(:each) do
+          expect(ct).to receive(:condition).and_return(Cocard::States::WARNING)
+        end
+        it { expect(ct.condition_message).to match(/WARNING/) }
+      end
+      describe "with condition = OK" do
+        before(:each) do
+          expect(ct).to receive(:condition).and_return(Cocard::States::OK)
+        end
+        it { expect(ct.condition_message).to match(/OK/) }
+      end
+      describe "with condition = NOTHING" do
+        before(:each) do
+          expect(ct).to receive(:condition).and_return(Cocard::States::NOTHING)
+        end
+        it { expect(ct.condition_message).to match(/UNUSED/) }
+      end
+    end
+
+      
+  end
 end

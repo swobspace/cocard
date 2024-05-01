@@ -69,6 +69,8 @@ class Connector < ApplicationRecord
     end
   end
 
+private
+
   def ensure_update_condition
     if soap_request_success_changed? or vpnti_online_changed?
       update_condition
@@ -84,7 +86,6 @@ class Connector < ApplicationRecord
     end
   end
 
-private
   def _name
     if name.blank?
       "-"

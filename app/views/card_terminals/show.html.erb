@@ -1,6 +1,6 @@
-<div class="card mb-2">
+<div class="card mb-3">
   <div class="card-header">
-    <div class="d-flex w-100 justify-content-between">
+    <div class="d-flex w-100">
       <div>
         <span class="subtitle">
           <%= t('activerecord.models.card_terminal') %>: 
@@ -8,7 +8,10 @@
         </span>
         <h4 class="title"><%= @card_terminal %></h4>
       </div>
-      <div role="toolbar" class="pt-3">
+      <div class="ms-3 pt-3">
+        <%= render ConditionIconComponent.new(item: @card_terminal) %>
+      </div>
+      <div role="toolbar" class="ms-auto pt-3">
         <%= edit_link(@card_terminal) %>
         <%= delete_link(@card_terminal) %>
       </div>
@@ -30,10 +33,51 @@
           </tr>
 
           <tr>
+            <th class="w-10 pe-3"><%= t('attributes.name')%>:</th>
+            <td><%= @card_terminal.name %></td>
+          </tr>
+
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.ct_id')%>:</th>
+            <td><%= @card_terminal.ct_id %></td>
+          </tr>
+
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.mac')%>:</th>
+            <td><%= @card_terminal.mac %></td>
+          </tr>
+
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.ip')%>:</th>
+            <td><%= @card_terminal.ip %></td>
+          </tr>
+
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.slots')%>:</th>
+            <td><%= @card_terminal.slots %></td>
+          </tr>
+
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.connected')%>:</th>
+            <td><%= @card_terminal.connected %></td>
+          </tr>
+
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.condition')%>:</th>
+            <td><%= @card_terminal.condition_message %></td>
+          </tr>
+
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.connector')%>:</th>
+            <td><%= @card_terminal.connector %></td>
+          </tr>
+
+          <tr>
             <th class="w-10 pe-3"><%= t('attributes.description')%>:</th>
             <td><%= @card_terminal.description %></td>
           </tr>
         </table>
+      </div>
       <div class="col-6">
         <b>ProductInformation:</b>
         <pre>

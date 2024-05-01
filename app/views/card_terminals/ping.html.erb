@@ -1,0 +1,3 @@
+<%= turbo_frame_tag "card_terminal_#{@card_terminal.id}_ping" do %>
+  <%= render PingComponent.new(pingable: @card_terminal) %>
+<% end %>
