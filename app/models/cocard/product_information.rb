@@ -2,8 +2,10 @@ require 'active_support'
 module Cocard
   class ProductInformation
     def initialize(hash)
-      if hash.nil?
+      if hash.nil? 
         @hash = nil
+      elsif hash.keys.include?(:information_date)
+        @hash = hash
       else
         @hash = hash.deep_transform_keys{|key| key.snakecase.to_sym } || {}
       end
