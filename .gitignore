@@ -41,3 +41,4 @@
 /node_modules
 .*.swp
 /test
+yarn-error.log
