@@ -13,22 +13,8 @@ class CardsController < ApplicationController
     respond_with(@card)
   end
 
-  # GET /cards/new
-  def new
-    @card = Card.new
-    respond_with(@card)
-  end
-
   # GET /cards/1/edit
   def edit
-  end
-
-  # POST /cards
-  def create
-    @card = Card.new(card_params)
-
-    @card.save
-    respond_with(@card)
   end
 
   # PATCH/PUT /cards/1
