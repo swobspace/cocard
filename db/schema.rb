@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_30_083511) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_04_105250) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -69,6 +69,29 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_30_083511) do
     t.index ["connector_id"], name: "index_card_terminals_on_connector_id"
     t.index ["location_id"], name: "index_card_terminals_on_location_id"
     t.index ["mac"], name: "index_card_terminals_on_mac", unique: true
+  end
+
+  create_table "cards", force: :cascade do |t|
+    t.string "name", default: ""
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "card_handle", default: ""
+    t.string "card_type", default: ""
+    t.string "iccsn", default: ""
+    t.integer "slotid", default: -1
+    t.datetime "insert_time", precision: nil
+    t.string "card_holder_name", default: ""
+    t.date "expiration_date"
+    t.bigint "card_terminal_id", null: false
+    t.index ["card_terminal_id"], name: "index_cards_on_card_terminal_id"
+    t.index ["iccsn"], name: "index_cards_on_iccsn", unique: true
+  end
+
+  create_table "clients", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description", default: ""
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "clients_connectors", id: false, force: :cascade do |t|
@@ -283,6 +306,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_30_083511) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "card_terminals", "connectors"
   add_foreign_key "card_terminals", "locations"
+  add_foreign_key "cards", "card_terminals"
   add_foreign_key "connector_contexts", "connectors"
   add_foreign_key "connector_contexts", "contexts"
 end

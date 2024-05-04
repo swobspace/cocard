@@ -8,5 +8,7 @@ class AddInternalToCard < ActiveRecord::Migration[7.1]
     add_column :cards, :card_holder_name, :string, default: ''
     add_column :cards, :expiration_date, :date
     add_reference :cards, :card_terminal, null: false, foreign_key: true
+
+    add_index :cards, :iccsn, unique: true
   end
 end
