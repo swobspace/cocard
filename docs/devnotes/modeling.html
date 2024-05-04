@@ -229,6 +229,36 @@ end</code></pre>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_model_card"><a class="anchor" href="#_model_card"></a>model Card</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g scaffold Card \
+  name:string \
+    --no-stylesheets --no-javascripts --no-helper
+
+bin/rails g migration AddInternalToCard \
+  card_handle:string \
+  card_type:string \
+  iccsn:string \
+  slotid:integer \
+  insert_time:timestamp \
+  card_holder_name:string \
+  expiration_date:date \
+  card_terminal:belongs_to</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">app/models/card_terminal.rb</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">class Card &lt; ApplicationRecord
+  has_rich_text :description
+end</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_habtm_tables"><a class="anchor" href="#_habtm_tables"></a>HABTM Tables</h2>
 <div class="sectionbody">
 <div class="listingblock">

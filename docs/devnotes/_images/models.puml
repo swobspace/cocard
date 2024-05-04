@@ -55,6 +55,8 @@ class ConnectorContext {
 }
 
 class Card {
+  name: string
+  description: rich_text
   --
   card_handle: string
   card_type: string

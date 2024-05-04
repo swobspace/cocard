@@ -108,6 +108,33 @@ class CardTerminal < ApplicationRecord
 end
 ----
 
+== model Card
+
+[source,sh]
+----
+bin/rails g scaffold Card \
+  name:string \
+    --no-stylesheets --no-javascripts --no-helper
+
+bin/rails g migration AddInternalToCard \
+  card_handle:string \
+  card_type:string \
+  iccsn:string \
+  slotid:integer \
+  insert_time:timestamp \
+  card_holder_name:string \
+  expiration_date:date \
+  card_terminal:belongs_to
+----
+
+.app/models/card_terminal.rb
+[source,ruby]
+----
+class Card < ApplicationRecord
+  has_rich_text :description
+end
+----
+
 
 == HABTM Tables
 
