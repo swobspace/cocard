@@ -1,8 +1,8 @@
 module Cocard
   class Card
 
-    ATTRIBUTES = %i( properties card_handle card_type iccsn ct_id slot_id 
-                     insert_time card_holder_name certificate_expiration_date )
+    ATTRIBUTES = %i( properties card_handle card_type iccsn slotid 
+                     insert_time card_holder_name expiration_date )
 
     def initialize(hash)
       @hash = hash || {}
@@ -28,7 +28,7 @@ module Cocard
       hash[:iccsn]
     end
 
-    def slot_id
+    def slotid
       hash[:slot_id]&.to_i
     end
 
@@ -40,7 +40,7 @@ module Cocard
       hash[:card_holder_name]
     end
 
-    def certificate_expiration_date
+    def expiration_date
       hash[:certificate_expiration_date]
     end
 

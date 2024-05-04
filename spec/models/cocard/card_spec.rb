@@ -39,14 +39,14 @@ module Cocard
       it { expect(subject.card_type).to eq("SMC-B")}
       it { expect(subject.iccsn).to eq("80276002711000051250")}
       it { expect(subject.ct_id).to eq("CT_ID_0176")}
-      it { expect(subject.slot_id).to eq(1)}
+      it { expect(subject.slotid).to eq(1)}
       it { expect(subject.insert_time).to eq(ts)}
       it { expect(subject.card_holder_name).to eq("Institutsambulanz - Dr. Lepping")}
-      it { expect(subject.certificate_expiration_date).to eq(1.year.after(Date.current))}
+      it { expect(subject.expiration_date).to eq(1.year.after(Date.current))}
     end
 
     describe "Cocard::Card::ATTRIBUTES" do
-      it { expect(Cocard::Card::ATTRIBUTES).to contain_exactly(:properties, :card_handle, :card_type, :ct_id, :iccsn, :slot_id, :insert_time, :card_holder_name, :certificate_expiration_date ) }
+      it { expect(Cocard::Card::ATTRIBUTES).to contain_exactly(:properties, :card_handle, :card_type, :iccsn, :slotid, :insert_time, :card_holder_name, :expiration_date ) }
     end
   end
 end
