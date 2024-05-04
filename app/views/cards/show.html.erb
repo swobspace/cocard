@@ -17,10 +17,18 @@
 
   <div class="card-body">
     <table class="table table-sm table-borderless">
-    
       <tr>
         <th class="w-10 pe-3"><%= t('attributes.name')%>:</th>
+        <td><%= @card.card_terminal.to_s %></td>
         <td><%= @card.name %></td>
+        <td><%= @card.description %></td>
+        <td><%= @card.card_handle %></td>
+        <td><%= @card.card_type %></td>
+        <td><%= @card.iccsn %></td>
+        <td><%= @card.slotid %></td>
+        <td><%= @card.insert_time %></td>
+        <td><%= @card.card_holder_name %></td>
+        <td><%= @card.expiration_date %></td>
       </tr>
     </table>
   </div>
