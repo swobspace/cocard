@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_04_105250) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_04_170914) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -83,6 +83,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_04_105250) do
     t.string "card_holder_name", default: ""
     t.date "expiration_date"
     t.bigint "card_terminal_id", null: false
+    t.jsonb "properties"
     t.index ["card_terminal_id"], name: "index_cards_on_card_terminal_id"
     t.index ["iccsn"], name: "index_cards_on_iccsn", unique: true
   end

@@ -58,6 +58,7 @@ class Card {
   name: string
   description: rich_text
   --
+  properties: jsonb
   card_handle: string
   card_type: string
   iccsn: string

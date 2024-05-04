@@ -238,6 +238,7 @@ end</code></pre>
     --no-stylesheets --no-javascripts --no-helper
 
 bin/rails g migration AddInternalToCard \
+  properties:jsonb \
   card_handle:string \
   card_type:string \
   iccsn:string \
