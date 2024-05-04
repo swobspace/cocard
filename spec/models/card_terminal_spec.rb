@@ -10,6 +10,7 @@ RSpec.describe CardTerminal, type: :model do
   end
   it { is_expected.to belong_to(:connector) }
   it { is_expected.to belong_to(:location).optional }
+  it { is_expected.to have_many(:cards).dependent(:destroy) }
 
   it 'should get plain factory working' do
     f = FactoryBot.create(:card_terminal)

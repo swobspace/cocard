@@ -4,6 +4,7 @@ class CardTerminal < ApplicationRecord
   # -- associations
   belongs_to :location, optional: true
   belongs_to :connector
+  has_many :cards, dependent: :destroy
 
   # -- configuration
   has_rich_text :description

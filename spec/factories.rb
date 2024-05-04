@@ -3,6 +3,10 @@ FactoryBot.define do
     "aname_#{n}"
   end
 
+  sequence :iccsn do |n|
+    "802764711#{sprintf('%08d', n)}"
+  end
+
   sequence :lid do |n|
     "L#{n}"
   end
@@ -13,6 +17,11 @@ FactoryBot.define do
 
   sequence :url do |n|
     "tcp://#{Faker::Internet.ip_v4_address}:#{n}"
+  end
+
+  factory :card do
+    card_terminal
+    iccsn { generate(:iccsn) }
   end
 
   factory :card_terminal do
