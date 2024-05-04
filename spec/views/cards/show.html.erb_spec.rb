@@ -15,7 +15,6 @@ RSpec.describe "cards/show", type: :view do
       insert_time: ts,
       card_holder_name: "Doctor Who's Universe",
       expiration_date: 1.year.after(Date.current)
-
     ))
   end
 
