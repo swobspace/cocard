@@ -17,7 +17,7 @@ class CardTerminal < ApplicationRecord
 
   # -- common methods
   def to_s
-    "#{name} (#{location&.lid})"
+    "#{name} - #{ct_id} (#{location&.lid})"
   end
 
   def product_information

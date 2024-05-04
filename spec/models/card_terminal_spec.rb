@@ -5,6 +5,7 @@ RSpec.describe CardTerminal, type: :model do
   let(:ct) do
     FactoryBot.create(:card_terminal,
       name: 'ACME Term',
+      ct_id: 'CT_ID_0123',
       location: location,
     )
   end
@@ -21,7 +22,7 @@ RSpec.describe CardTerminal, type: :model do
   end
 
   describe "#to_s" do
-    it { expect(ct.to_s).to match('ACME Term (ACX)') }
+    it { expect(ct.to_s).to match('ACME Term - CT_ID_0123 (ACX)') }
   end
 
   describe "on #save" do
