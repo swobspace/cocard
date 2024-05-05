@@ -24,7 +24,10 @@ de:
   attributes:
     action: Aktion
     card: Karte
+    card_handle: CardHandle
+    card_holder_name: CardHolder
     card_terminal: Kartenterminal
+    card_type: Kartentyp
     client: Mandant
     clients: Mandanten
     client_ids: Mandanten
@@ -34,11 +37,13 @@ de:
     connector_context: Konnektor Kontext
     context: Kontext
     contexts: Kontexte
-    context: Kontext
     context_ids: Kontexte
     description: Beschreibung
     displayname: Anzeigename
+    expiration_date: Ablaufdatum
     givenname: Vorname
+    iccsn: ICCSN
+    insert_time: eingesteckt seit
     ip: IP-Adresse
     lid: Standort-Kürzel
     location: Standort
@@ -47,6 +52,7 @@ de:
     manual_update: manuelles Update
     name: Name
     sds_url: SDS-Url
+    slotid: Schachtnummer
     sn: Nachname
     username: Username
     workplace: Arbeitsplatz
