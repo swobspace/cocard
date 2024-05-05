@@ -14,7 +14,22 @@
       <div role="toolbar" class="ms-auto pt-3">
         <%= button_to(t('mirco.fetch_sds'),
                       fetch_sds_connector_path(@connector),
-                      class: 'btn btn-warning me-1') if can? :manage, @connector %>
+                      class: 'btn btn-warning me-1') if can? :manage, @connector 
+         %>
+        <% if @connector.manual_update %>
+          <%= button_to(t('mirco.get_resource_information'),
+                        get_resource_information_connector_path(@connector),
+                        class: 'btn btn-warning me-1') if can? :manage, @connector 
+           %>
+          <%= button_to(t('mirco.get_card_terminals'),
+                        get_card_terminals_connector_path(@connector),
+                        class: 'btn btn-warning me-1') if can? :manage, @connector 
+           %>
+          <%= button_to(t('mirco.get_cards'),
+                        get_cards_connector_path(@connector),
+                        class: 'btn btn-warning me-1') if can? :manage, @connector 
+           %>
+        <% end %>
         <%= edit_link(@connector) %>
         <%= delete_link(@connector) %>
       </div>
