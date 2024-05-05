@@ -1,0 +1,15 @@
+<% if can? :navigate, :cards %>
+  <li class="nav-item dropdown <%= active_class('cards') %>">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarCardDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+      <%= t('controller.cards') %>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarCardDropdown">
+      <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
+            t('controller.cards')),
+          main_app.cards_path, class: "dropdown-item" %>
+    </div>
+  </li>
+<% end %>
+
+
