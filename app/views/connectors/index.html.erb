@@ -12,16 +12,22 @@
         } do %>
     <thead>
       <tr>
+            <th><%= t('attributes.condition') %></th>
             <th><%= t('attributes.name') %></th>
             <th><%= t('attributes.ip') %></th>
             <th><%= t('attributes.sds_url') %></th>
             <th class="notvisible"><%= t('attributes.manual_update') %></th>
             <th><%= t('attributes.locations') %></th>
+            <th><%= t('attributes.last_check') %></th>
+            <th><%= t('attributes.last_check_ok') %></th>
             <th class="nosort"><%= t('cocard.action') %></th>
       </tr>
     </thead>
     <tfoot class="search">
       <tr>
+            <th></th>
+            <th></th>
+            <th></th>
             <th></th>
             <th></th>
             <th></th>
@@ -33,11 +39,14 @@
     <tbody>
       <% @connectors.each do |connector| %>
         <%= content_tag(:tr, id: dom_id(connector), class: dom_class(connector)) do %>
+          <td class="text-center"><%= render ConditionIconComponent.new(item: connector, small: true) %>
                 <td><%= connector.name %></td>
                 <td><%= connector.ip %></td>
                 <td><%= connector.sds_url %></td>
                 <td><%= connector.manual_update %></td>
                 <td><%= connector.locations.map(&:lid).join('; ') %></td>
+                <td><%= connector.last_check&.localtime %></td>
+                <td><%= connector.last_check_ok&.localtime %></td>
                 <td class="text-nowrap">
             <%= show_link connector %>
             <%= edit_link connector %>
