@@ -15,7 +15,7 @@
     <% attributes.each do |attribute| -%>
         <th><%%= t('attributes.<%= attribute.name %>') %></th>
     <% end -%>
-        <th class="nosort"><%%= t('mirco.action') %></th>
+        <th class="nosort"><%%= t('app.action') %></th>
       </tr>
     </thead>
     <tfoot class="search">
