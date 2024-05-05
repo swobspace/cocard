@@ -12,7 +12,7 @@ class CardTerminal < ApplicationRecord
   # -- validations and callbacks
   before_save :ensure_displayname
   before_save :ensure_update_condition
-  validates_uniqueness_of :mac, allow_blank: true
+  validates_uniqueness_of :ct_id, scope: [:connector_id]
 
 
   # -- common methods

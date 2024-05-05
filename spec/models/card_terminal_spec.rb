@@ -18,7 +18,7 @@ RSpec.describe CardTerminal, type: :model do
     g = FactoryBot.create(:card_terminal)
     expect(f).to be_valid
     expect(g).to be_valid
-    # expect(f).to validate_uniqueness_of(:mac)
+    expect(f).to validate_uniqueness_of(:ct_id).scoped_to(:connector_id)
   end
 
   describe "#to_s" do
