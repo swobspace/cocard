@@ -125,7 +125,7 @@
             str: '0'
             attributes: {}
       :iccsn: !ruby/string:Nori::StringWithAttributes
-        str: '80276002711000051250'
+        str: '80276002711000000000'
         attributes: {}
       :ct_id: !ruby/string:Nori::StringWithAttributes
         str: CT_ID_0176
@@ -135,7 +135,7 @@
         attributes: {}
       :insert_time: !ruby/object:DateTime 2024-03-26 15:33:03.441000000 Z
       :card_holder_name: !ruby/string:Nori::StringWithAttributes
-        str: Institutsambulanz - Dr. Lepping
+        str: Doctor Who's Universe
         attributes: {}
       :certificate_expiration_date: 2027-01-19
   :@xmlns:ns2: http://ws.gematik.de/conn/ConnectorCommon/v5.0

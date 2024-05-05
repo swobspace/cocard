@@ -11,11 +11,11 @@ module Cocard
           :object_system_version=>{:major=>"4", :minor=>"8", :revision=>"0"},
           :atr_version=>{:major=>"2", :minor=>"0", :revision=>"0"},
           :gdo_version=>{:major=>"1", :minor=>"0", :revision=>"0"}},
-        :iccsn=>"80276002711000051250",
+        :iccsn=>"80276002711000000000",
         :ct_id=>"CT_ID_0176",
         :slot_id=>"1",
         :insert_time=>ts,
-        :card_holder_name=>"Institutsambulanz - Dr. Lepping",
+        :card_holder_name=>"Doctor Who's Universe",
         :certificate_expiration_date=>1.year.after(Date.current)}
     end
 
@@ -37,11 +37,11 @@ module Cocard
       it { expect(subject.properties).to eq(card_hash) }
       it { expect(subject.card_handle).to eq("ee676b27-5b40-4a40-9c65-979cc3113a1e")}
       it { expect(subject.card_type).to eq("SMC-B")}
-      it { expect(subject.iccsn).to eq("80276002711000051250")}
+      it { expect(subject.iccsn).to eq("80276002711000000000")}
       it { expect(subject.ct_id).to eq("CT_ID_0176")}
       it { expect(subject.slotid).to eq(1)}
       it { expect(subject.insert_time).to eq(ts)}
-      it { expect(subject.card_holder_name).to eq("Institutsambulanz - Dr. Lepping")}
+      it { expect(subject.card_holder_name).to eq("Doctor Who's Universe")}
       it { expect(subject.expiration_date).to eq(1.year.after(Date.current))}
     end
 
