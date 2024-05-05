@@ -1,5 +1,6 @@
 de:
   cocard:
+    action: Aktion
     new_context: Neuer Kontext
     new_connector: Neuer Konnektor
     new_location: Neuer Standort
