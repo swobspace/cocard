@@ -18,16 +18,43 @@
   <div class="card-body">
     <table class="table table-sm table-borderless">
       <tr>
-        <th class="w-10 pe-3"><%= t('attributes.name')%>:</th>
+        <th class="w-10 pe-3"><%= t('attributes.card_terminal')%>:</th>
         <td><%= @card.card_terminal.to_s %></td>
+      </tr>
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.name')%>:</th>
         <td><%= @card.name %></td>
+      </tr>
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.description')%>:</th>
         <td><%= @card.description %></td>
+      </tr>
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.card_handle')%>:</th>
         <td><%= @card.card_handle %></td>
+      </tr>
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.card_type')%>:</th>
         <td><%= @card.card_type %></td>
+      </tr>
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.iccsn')%>:</th>
         <td><%= @card.iccsn %></td>
+      </tr>
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.slotid')%>:</th>
         <td><%= @card.slotid %></td>
+      </tr>
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.insert_time')%>:</th>
         <td><%= @card.insert_time %></td>
+      </tr>
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.card_holder_name')%>:</th>
         <td><%= @card.card_holder_name %></td>
+      </tr>
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.expiration_date')%>:</th>
         <td><%= @card.expiration_date %></td>
       </tr>
     </table>
