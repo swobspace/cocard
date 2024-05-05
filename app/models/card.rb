@@ -1,6 +1,6 @@
 class Card < ApplicationRecord
   # -- associations
-  belongs_to :card_terminal
+  belongs_to :card_terminal, optional: true
 
   # -- configuration
   has_rich_text :description

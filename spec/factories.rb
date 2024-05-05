@@ -20,7 +20,6 @@ FactoryBot.define do
   end
 
   factory :card do
-    card_terminal
     iccsn { generate(:iccsn) }
   end
 

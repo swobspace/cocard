@@ -82,7 +82,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_04_170914) do
     t.datetime "insert_time", precision: nil
     t.string "card_holder_name", default: ""
     t.date "expiration_date"
-    t.bigint "card_terminal_id", null: false
+    t.bigint "card_terminal_id"
     t.jsonb "properties"
     t.index ["card_terminal_id"], name: "index_cards_on_card_terminal_id"
     t.index ["iccsn"], name: "index_cards_on_iccsn", unique: true
@@ -307,7 +307,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_04_170914) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "card_terminals", "connectors"
   add_foreign_key "card_terminals", "locations"
-  add_foreign_key "cards", "card_terminals"
   add_foreign_key "connector_contexts", "connectors"
   add_foreign_key "connector_contexts", "contexts"
 end

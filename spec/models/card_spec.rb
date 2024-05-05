@@ -1,15 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Card, type: :model do
-  let(:ct) { FactoryBot.create(:card_terminal, name: 'ACME Term') }
   let(:card) do
     FactoryBot.create(:card, 
-      card_terminal: ct,
       card_holder_name: "Doctor Who's Universe",
     )
   end
 
-  it { is_expected.to belong_to(:card_terminal) }
+  it { is_expected.to belong_to(:card_terminal).optional }
 
   it 'should get plain factory working' do
     f = FactoryBot.create(:card)

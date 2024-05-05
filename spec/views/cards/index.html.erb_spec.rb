@@ -18,7 +18,6 @@ RSpec.describe "cards/index", type: :view do
         expiration_date: 1.year.after(Date.current)
       ),
       Card.create!(
-        card_terminal_id: ct.id,
         name: "GemaCard",
         description: "some other text",
         card_handle: "7fb65ede-0a37-11ef-8f85-c025a5b36994",
@@ -34,7 +33,7 @@ RSpec.describe "cards/index", type: :view do
   it "renders a list of cards" do
     render
     cell_selector = 'tr>td'
-    assert_select cell_selector, text: Regexp.new(ct.ct_id), count: 2
+    assert_select cell_selector, text: Regexp.new(ct.ct_id), count: 1
     assert_select cell_selector, text: Regexp.new("GemaCard".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("7fb65ede-0a37-11ef-8f85-c025a5b36994".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("SMC-KT".to_s), count: 1
