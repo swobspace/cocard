@@ -6,7 +6,7 @@ class Card < ApplicationRecord
   has_rich_text :description
 
   # -- validations and callbacks
-  validates_uniqueness_of :iccsn, case_sensitive: false
+  validates :iccsn, presence: true, uniqueness: { case_sensitive: false }
 
   # -- common methods
   def to_s

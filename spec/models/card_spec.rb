@@ -8,6 +8,7 @@ RSpec.describe Card, type: :model do
   end
 
   it { is_expected.to belong_to(:card_terminal).optional }
+  it { is_expected.to validate_presence_of(:iccsn) }
 
   it 'should get plain factory working' do
     f = FactoryBot.create(:card)
