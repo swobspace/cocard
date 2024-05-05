@@ -38,6 +38,17 @@ RSpec.describe ConnectorsController, type: :routing do
       expect(post: "/connectors/1/fetch_sds").to route_to("connectors#fetch_sds", id: "1")
     end
 
+    it "routes to #fetch_resource_information via POST" do
+      expect(post: "/connectors/1/fetch_resource_information").to route_to("connectors#fetch_resource_information", id: "1")
+    end
+
+    it "routes to #fetch_card_terminals via POST" do
+      expect(post: "/connectors/1/fetch_card_terminals").to route_to("connectors#fetch_card_terminals", id: "1")
+    end
+
+    it "routes to #fetch_cards via POST" do
+      expect(post: "/connectors/1/fetch_cards").to route_to("connectors#fetch_cards", id: "1")
+    end
 
     it "routes to #destroy" do
       expect(delete: "/connectors/1").to route_to("connectors#destroy", id: "1")

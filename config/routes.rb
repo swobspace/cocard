@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   resources :connectors do
     member do
       post :fetch_sds
+      post :fetch_resource_information
+      post :fetch_card_terminals
+      post :fetch_cards
       get :ping
     end
   end
