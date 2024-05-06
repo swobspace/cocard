@@ -1,5 +1,12 @@
 # syntax = docker/dockerfile:1
 
+# Github Containers
+LABEL "org.opencontainers.image.source"="https://github.com/swobspace/cocard"
+LABEL "org.opencontainers.image.description"="Cocard"
+LABEL "org.opencontainers.image.licenses"="MIT"
+LABEL "org.opencontainers.image.documentation"="https://swobspace.github.io/cocard/cocard/index.html"
+
+
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
 ARG RUBY_VERSION=3.2.2
 FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
@@ -55,7 +62,11 @@ FROM base
 
 # Install packages needed for deployment
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libvips postgresql-client && \
+    apt-get install --no-install-recommends -y \
+                      curl libvips postgresql-client && \
+                      iputils-ping uuid && \
+    setcap cap_net_raw+p `which ping` && \
+
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Copy built artifacts: gems, application
