@@ -21,6 +21,9 @@
             <th><%= t('attributes.ip') %></th>
             <th><%= t('attributes.connected') %></th>
             <th><%= t('attributes.location') %></th>
+            <th><%= t('attributes.room') %></th>
+            <th><%= t('attributes.contact') %></th>
+            <th><%= t('attributes.plugged_in') %></th>
             <th><%= t('attributes.updated_at') %></th>
             <th class="nosort"><%= t('cocard.action') %></th>
       </tr>
@@ -37,13 +40,19 @@
             <th></th>
             <th></th>
             <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
             <th class="nosearch"></th>
       </tr>
     </tfoot>
     <tbody>
       <% @card_terminals.each do |card_terminal| %>
         <%= content_tag(:tr, id: dom_id(card_terminal), class: dom_class(card_terminal)) do %>
-          <td class="text-center"><%= render ConditionIconComponent.new(item: card_terminal, small: true) %>
+          <td class="text-center">
+            <%= render ConditionIconComponent.new(item: card_terminal, small: true) %>
+            <span style="visibility:hidden;"><%= card_terminal.condition %></span>
+          </td>
           <td><%= card_terminal.displayname %></td>
           <td><%= card_terminal.ct_id %></td>
           <td><%= card_terminal.connector %></td>
@@ -52,6 +61,9 @@
           <td><%= card_terminal.ip %></td>
           <td><%= card_terminal.connected %></td>
           <td><%= card_terminal.location %></td>
+          <td><%= card_terminal.room %></td>
+          <td><%= card_terminal.contact %></td>
+          <td><%= card_terminal.plugged_in %></td>
           <td><%= card_terminal.updated_at.localtime %></td>
           <td class="text-nowrap">
             <%= show_link card_terminal %>

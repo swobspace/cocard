@@ -42,7 +42,7 @@ RSpec.describe "connectors/index", type: :view do
     assert_select cell_selector, text: Regexp.new("Sds Url".to_s), count: 2
     assert_select cell_selector, text: Regexp.new(false.to_s), count: 2
     assert_select cell_selector, text: Regexp.new("AAC".to_s), count: 2
-    assert_select cell_selector, text: Regexp.new("#{current.localtime.to_s.gsub('+', '.')}")
+    assert_select cell_selector, text: Regexp.new("#{current.localtime.to_s.gsub('+', '.')}"), count: 4
 
   end
 end

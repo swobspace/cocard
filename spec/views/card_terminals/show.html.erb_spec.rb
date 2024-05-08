@@ -34,7 +34,10 @@ RSpec.describe "card_terminals/show", type: :view do
       mac: "00-0D-F8-07-2C-67",
       ip: "127.0.0.5",
       connected: true,
-      condition: Cocard::States::UNKNOWN
+      condition: Cocard::States::UNKNOWN,
+      room: "Raum U.16",
+      contact: "Der Hausmeister",
+      plugged_in: "Dose 17/4, Patchfeld 5"
     )
   end
 
@@ -56,5 +59,9 @@ RSpec.describe "card_terminals/show", type: :view do
     expect(rendered).to match(/true/)
     # -- should be OK with connected == true and pingable
     expect(rendered).to match(/OK/)
+    expect(rendered).to match(/Raum U.16/)
+    expect(rendered).to match(/Der Hausmeister/)
+    expect(rendered).to match(/Dose 17\/4, Patchfeld 5/)
+
   end
 end

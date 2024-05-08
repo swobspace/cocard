@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_04_170914) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_08_150144) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -66,6 +66,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_04_170914) do
     t.boolean "connected", default: false
     t.integer "condition", default: -1
     t.bigint "connector_id", null: false
+    t.string "room", default: ""
+    t.string "contact", default: ""
+    t.string "plugged_in", default: ""
     t.index ["connector_id"], name: "index_card_terminals_on_connector_id"
     t.index ["location_id"], name: "index_card_terminals_on_location_id"
     t.index ["mac"], name: "index_card_terminals_on_mac", unique: true
@@ -86,13 +89,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_04_170914) do
     t.jsonb "properties"
     t.index ["card_terminal_id"], name: "index_cards_on_card_terminal_id"
     t.index ["iccsn"], name: "index_cards_on_iccsn", unique: true
-  end
-
-  create_table "clients_connectors", id: false, force: :cascade do |t|
-    t.bigint "client_id", null: false
-    t.bigint "connector_id", null: false
-    t.index ["client_id", "connector_id"], name: "index_clients_connectors_on_client_id_and_connector_id", unique: true
-    t.index ["connector_id", "client_id"], name: "index_clients_connectors_on_connector_id_and_client_id", unique: true
   end
 
   create_table "connector_contexts", force: :cascade do |t|

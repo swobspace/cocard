@@ -23,6 +23,9 @@ class Connector  {
 class CardTerminal {
   displayname: string
   description: rich_text
+  room: string
+  contact: string
+  plugged_in: string
   location_id
   --
   properties: jsonb

@@ -82,7 +82,10 @@ RSpec.describe "/card_terminals", type: :request do
       let(:new_attributes) {{
         displayname: "Something",
         location_id: location.id,
-        description: "some other text"
+        description: "some other text",
+        room: "Raum U.16",
+        contact: "Der Hausmeister",
+        plugged_in: "Dose P17/4, Patchfeld 5"
       }}
 
       it "updates the requested card_terminal" do
@@ -92,6 +95,9 @@ RSpec.describe "/card_terminals", type: :request do
         expect(card_terminal.displayname).to eq('Something')
         expect(card_terminal.location.lid).to eq('AXC')
         expect(card_terminal.description.to_plain_text).to eq('some other text')
+        expect(card_terminal.room).to eq('Raum U.16')
+        expect(card_terminal.contact).to eq('Der Hausmeister')
+        expect(card_terminal.plugged_in).to eq('Dose P17/4, Patchfeld 5')
       end
 
       it "redirects to the card_terminal" do

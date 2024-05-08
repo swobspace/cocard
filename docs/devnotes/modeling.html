@@ -204,7 +204,10 @@ end</code></pre>
 <pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g scaffold CardTerminal \
   displayname:string \
   location:belongs_to \
-    --no-stylesheets --no-javascripts --no-helper
+  room:string \
+  contact:string \
+  plugged_in:string \
+  --no-stylesheets --no-javascripts --no-helper
 
 bin/rails g migration AddInternalToCardTerminal \
   properties:jsonb \

@@ -26,6 +26,9 @@ RSpec.describe "card_terminals/edit", type: :view do
       assert_select "input[name=?]", "card_terminal[displayname]"
       assert_select "select[name=?]", "card_terminal[location_id]"
       assert_select "input[name=?]", "card_terminal[description]"
+      assert_select "input[name=?]", "card_terminal[room]"
+      assert_select "input[name=?]", "card_terminal[contact]"
+      assert_select "input[name=?]", "card_terminal[plugged_in]"
     end
   end
 end

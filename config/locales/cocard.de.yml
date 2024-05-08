@@ -36,6 +36,7 @@ de:
     configuration: Konfiguration
     connector: Konnektor
     connector_context: Konnektor Kontext
+    contact: Ansprechpartner
     context: Kontext
     contexts: Kontexte
     context_ids: Kontexte
@@ -48,10 +49,13 @@ de:
     ip: IP-Adresse
     lid: Standort-Kürzel
     location: Standort
+    location_id: Standort
     locations: Standorte
     location_ids: Standorte
     manual_update: manuelles Update
     name: Name
+    plugged_in: Netzwerk/Dose/Switch
+    room: Raum
     sds_url: SDS-Url
     slotid: Schachtnummer
     sn: Nachname

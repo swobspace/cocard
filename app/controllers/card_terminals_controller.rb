@@ -56,6 +56,8 @@ class CardTerminalsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def card_terminal_params
-      params.require(:card_terminal).permit(:displayname, :location_id, :description)
+      params.require(:card_terminal)
+            .permit(:displayname, :location_id, :description, :room,
+                    :contact, :plugged_in)
     end
 end
