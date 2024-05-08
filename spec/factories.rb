@@ -7,6 +7,10 @@ FactoryBot.define do
     "802764711#{sprintf('%08d', n)}"
   end
 
+  sequence :macaddress do |n|
+    sprintf("%012x", n)
+  end
+
   sequence :lid do |n|
     "L#{n}"
   end
@@ -24,7 +28,8 @@ FactoryBot.define do
   end
 
   factory :card_terminal do
-    connector
+    ct_id { generate(:aname) }
+    mac   { generate(:macaddress) }
   end
 
   factory :connector do

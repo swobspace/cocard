@@ -5,11 +5,11 @@ RSpec.describe "/card_terminals", type: :request do
   let(:location) { FactoryBot.create(:location, lid: 'AXC') }
   
   let(:valid_attributes) {
-    FactoryBot.attributes_for(:card_terminal, connector_id: connector.id)
+    FactoryBot.attributes_for(:card_terminal)
   }
 
   let(:invalid_attributes) {
-    { }
+    { mac: nil }
   }
 
   before(:each) do
@@ -32,12 +32,12 @@ RSpec.describe "/card_terminals", type: :request do
     end
   end
 
-#  describe "GET /new" do
-#    it "renders a successful response" do
-#      get new_card_terminal_url
-#      expect(response).to be_successful
-#    end
-#  end
+  describe "GET /new" do
+    it "renders a successful response" do
+      get new_card_terminal_url
+      expect(response).to be_successful
+    end
+  end
 
   describe "GET /edit" do
     it "renders a successful response" do
@@ -47,35 +47,35 @@ RSpec.describe "/card_terminals", type: :request do
     end
   end
 
-#  describe "POST /create" do
-#    context "with valid parameters" do
-#      it "creates a new CardTerminal" do
-#        expect {
-#          post card_terminals_url, params: { card_terminal: valid_attributes }
-#        }.to change(CardTerminal, :count).by(1)
-#      end
-#
-#      it "redirects to the created card_terminal" do
-#        post card_terminals_url, params: { card_terminal: valid_attributes }
-#        expect(response).to redirect_to(card_terminal_url(CardTerminal.last))
-#      end
-#    end
-#
-#    context "with invalid parameters" do
-#      it "does not create a new CardTerminal" do
-#        expect {
-#          post card_terminals_url, params: { card_terminal: invalid_attributes }
-#        }.to change(CardTerminal, :count).by(0)
-#      end
-#
-#    
-#      it "renders a response with 422 status (i.e. to display the 'new' template)" do
-#        post card_terminals_url, params: { card_terminal: invalid_attributes }
-#        expect(response).to have_http_status(:unprocessable_entity)
-#      end
-#    
-#    end
-#  end
+  describe "POST /create" do
+    context "with valid parameters" do
+      it "creates a new CardTerminal" do
+        expect {
+          post card_terminals_url, params: { card_terminal: valid_attributes }
+        }.to change(CardTerminal, :count).by(1)
+      end
+
+      it "redirects to the created card_terminal" do
+        post card_terminals_url, params: { card_terminal: valid_attributes }
+        expect(response).to redirect_to(card_terminal_url(CardTerminal.last))
+      end
+    end
+
+    context "with invalid parameters" do
+      it "does not create a new CardTerminal" do
+        expect {
+          post card_terminals_url, params: { card_terminal: invalid_attributes }
+        }.to change(CardTerminal, :count).by(0)
+      end
+
+    
+      it "renders a response with 422 status (i.e. to display the 'new' template)" do
+        post card_terminals_url, params: { card_terminal: invalid_attributes }
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+    
+    end
+  end
 
   describe "PATCH /update" do
     context "with valid parameters" do
@@ -85,7 +85,9 @@ RSpec.describe "/card_terminals", type: :request do
         description: "some other text",
         room: "Raum U.16",
         contact: "Der Hausmeister",
-        plugged_in: "Dose P17/4, Patchfeld 5"
+        plugged_in: "Dose P17/4, Patchfeld 5",
+        ip: '1.2.3.4',
+        slots: 3993
       }}
 
       it "updates the requested card_terminal" do
@@ -98,6 +100,8 @@ RSpec.describe "/card_terminals", type: :request do
         expect(card_terminal.room).to eq('Raum U.16')
         expect(card_terminal.contact).to eq('Der Hausmeister')
         expect(card_terminal.plugged_in).to eq('Dose P17/4, Patchfeld 5')
+        expect(card_terminal.slots).to eq(3993)
+        expect(card_terminal.ip).to eq('1.2.3.4')
       end
 
       it "redirects to the card_terminal" do
@@ -110,7 +114,6 @@ RSpec.describe "/card_terminals", type: :request do
 
     context "with invalid parameters" do
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        skip "invalid params not yet possible" 
         card_terminal = CardTerminal.create! valid_attributes
         patch card_terminal_url(card_terminal), params: { card_terminal: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)

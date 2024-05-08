@@ -3,7 +3,7 @@ class CardTerminal < ApplicationRecord
   include CardTerminalConcerns
   # -- associations
   belongs_to :location, optional: true
-  belongs_to :connector
+  belongs_to :connector, optional: true
   has_many :cards, dependent: :destroy
 
   # -- configuration
@@ -13,6 +13,7 @@ class CardTerminal < ApplicationRecord
   before_save :ensure_displayname
   before_save :ensure_update_condition
   validates_uniqueness_of :ct_id, scope: [:connector_id]
+  validates :mac, presence: true
 
 
   # -- common methods

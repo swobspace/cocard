@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_08_150144) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_08_154940) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -65,7 +65,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_08_150144) do
     t.integer "slots", default: 0
     t.boolean "connected", default: false
     t.integer "condition", default: -1
-    t.bigint "connector_id", null: false
+    t.bigint "connector_id"
     t.string "room", default: ""
     t.string "contact", default: ""
     t.string "plugged_in", default: ""

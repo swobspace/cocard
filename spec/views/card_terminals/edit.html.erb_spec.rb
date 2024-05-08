@@ -6,6 +6,7 @@ RSpec.describe "card_terminals/edit", type: :view do
     CardTerminal.create!(
       connector_id: connector.id,
       displayname: "MyString",
+      mac: '01:23:45:67:89:ab',
       location: nil
     )
   }
@@ -29,6 +30,11 @@ RSpec.describe "card_terminals/edit", type: :view do
       assert_select "input[name=?]", "card_terminal[room]"
       assert_select "input[name=?]", "card_terminal[contact]"
       assert_select "input[name=?]", "card_terminal[plugged_in]"
+      assert_select "input[name=?]", "card_terminal[mac]" do |input|
+        assert input.attr("disabled").present?
+      end
+      assert_select "input[name=?]", "card_terminal[ip]"
+      assert_select "input[name=?]", "card_terminal[slots]"
     end
   end
 end

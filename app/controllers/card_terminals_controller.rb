@@ -19,22 +19,22 @@ class CardTerminalsController < ApplicationController
   end
 
   # GET /card_terminals/new
-  # def new
-  #   @card_terminal = CardTerminal.new
-  #   respond_with(@card_terminal)
-  # end
+  def new
+    @card_terminal = CardTerminal.new
+    respond_with(@card_terminal)
+  end
 
   # GET /card_terminals/1/edit
   def edit
   end
 
   # POST /card_terminals
-  # def create
-  #   @card_terminal = CardTerminal.new(card_terminal_params)
-  #
-  #   @card_terminal.save
-  #   respond_with(@card_terminal)
-  # end
+  def create
+    @card_terminal = CardTerminal.new(card_terminal_params)
+ 
+    @card_terminal.save
+    respond_with(@card_terminal)
+  end
 
   # PATCH/PUT /card_terminals/1
   def update
@@ -58,6 +58,6 @@ class CardTerminalsController < ApplicationController
     def card_terminal_params
       params.require(:card_terminal)
             .permit(:displayname, :location_id, :description, :room,
-                    :contact, :plugged_in)
+                    :contact, :plugged_in, :mac, :ip, :slots)
     end
 end

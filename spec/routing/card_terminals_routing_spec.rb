@@ -7,9 +7,7 @@ RSpec.describe CardTerminalsController, type: :routing do
     end
 
     it "routes to #new" do
-      # expect(get: "/card_terminals/new").to route_to("card_terminals#new")
-      skip "testing #new to be not routable does not work"
-      expect(get: "/card_terminals/new").not_to be_routable
+      expect(get: "/card_terminals/new").to route_to("card_terminals#new")
     end
 
     it "routes to #show" do
@@ -25,8 +23,7 @@ RSpec.describe CardTerminalsController, type: :routing do
     end
 
     it "routes to #create" do
-      # expect(post: "/card_terminals").to route_to("card_terminals#create")
-      expect(post: "/card_terminals").not_to be_routable
+      expect(post: "/card_terminals").to route_to("card_terminals#create")
     end
 
     it "routes to #update via PUT" do
