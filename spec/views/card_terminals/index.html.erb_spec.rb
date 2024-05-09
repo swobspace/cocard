@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "card_terminals/index", type: :view do
   let(:location)  { FactoryBot.create(:location, lid: 'AXC') }
-  let(:connector) { FactoryBot.create(:connector) }
+  let(:connector) { FactoryBot.create(:connector, name: 'TIK-XXX-39' ) }
 
   before(:each) do
     @ability = Object.new
@@ -49,6 +49,7 @@ RSpec.describe "card_terminals/index", type: :view do
     @card_terminals.map{|ct| ct.reload}
     render
     cell_selector = 'tr>td'
+    assert_select cell_selector, text: Regexp.new("TIK-XXX-39".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("Displayname".to_s), count: 2
     assert_select cell_selector, text: Regexp.new('AXC'.to_s), count: 2
     assert_select cell_selector, text: Regexp.new('ORGA-DINGDONG00.'.to_s), count: 2
