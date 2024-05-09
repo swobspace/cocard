@@ -13,8 +13,22 @@ class CardsController < ApplicationController
     respond_with(@card)
   end
 
+  # GET /cards/new
+  def new
+    @card = Card.new
+    respond_with(@card)
+  end
+    
   # GET /cards/1/edit
   def edit
+  end
+
+  # POST /cards
+  def create
+    @card = Card.new(card_params)
+
+    @card.save
+    respond_with(@card)
   end
 
   # PATCH/PUT /cards/1
@@ -37,6 +51,8 @@ class CardsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def card_params
-      params.require(:card).permit(:name, :description)
+      params.require(:card)
+            .permit(:name, :description, :iccsn, :slotid, :card_type, 
+                    :card_holder_name, :card_terminal_id)
     end
 end

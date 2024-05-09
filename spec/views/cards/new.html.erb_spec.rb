@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe "cards/edit", type: :view do
+RSpec.describe "cards/new", type: :view do
   let(:card) do
-    FactoryBot.create(:card,
+    FactoryBot.build(:card,
       name: "MyString"
     )
   end
@@ -11,10 +11,10 @@ RSpec.describe "cards/edit", type: :view do
     assign(:card, card)
   end
 
-  it "renders the edit card form" do
+  it "renders the new card form" do
     render
 
-    assert_select "form[action=?][method=?]", card_path(card), "post" do
+    assert_select "form[action=?][method=?]", cards_path, "post" do
 
       assert_select "input[name=?]", "card[name]"
       assert_select "input[name=?]", "card[description]"
@@ -23,7 +23,7 @@ RSpec.describe "cards/edit", type: :view do
       assert_select "input[name=?]", "card[card_holder_name]"
       assert_select "select[name=?]", "card[card_terminal_id]"
       assert_select "input[name=?]", "card[iccsn]" do |input|
-        assert input.attr("disabled").present?
+        assert input.attr("disabled").blank?
       end
     end
   end

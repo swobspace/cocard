@@ -1,13 +1,20 @@
 de:
   cocard:
     action: Aktion
+    new_card: Neues Kartenterminal
+    new_card_manual_warning: |
+      Die folgenden Felder sind nur für die Neuanlage von Karten
+      gedacht, die in keinem Kartenterminal verwendet werden. Die Felder werden
+      später nach der Inbetriebnahme im Kartenterminal regelmäßig überschrieben!
+      Die Identifikation der Karte erfolgt über die ICCSN. Diese kann nur bei 
+      einer Neuanlage bearbeitet und später nicht mehr geändert werden.
     new_card_terminal: Neues Kartenterminal
     new_card_terminal_manual_warning: |
       Die folgenden Felder sind nur für die Neuanlage von Kartenterminals
       gedacht, die noch keinem Konnektor zugewiesen wurden. Die Felder werden
       später bei Kopplung mit einem Konnektor regelmäßig überschrieben!
       Die Identifikation des Kartenterminals erfolgt über die MAC-Adresse. Diese
-      kann nur bei einer Neunanlage bearbeitet und später nicht mehr geändert werden.
+      kann nur bei einer Neuanlage bearbeitet und später nicht mehr geändert werden.
     new_context: Neuer Kontext
     new_connector: Neuer Konnektor
     new_location: Neuer Standort

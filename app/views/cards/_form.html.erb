@@ -4,8 +4,24 @@
   <div class="form-input">
     <%= form.input :name
        %>
-
     <%= form.input :description, as: :rich_text_area
+       %>
+
+    <div class="alert alert-warning" role="alert">
+      <%= t('cocard.new_card_manual_warning') %>
+    </div>
+
+    <%= form.input :iccsn,
+          input_html: { disabled: @card.persisted? }
+       %>
+    <%= form.input :card_type
+       %>
+    <%= form.input :card_holder_name
+       %>
+    <%= form.association :card_terminal,
+          label_method: :to_s
+       %>
+    <%= form.input :slotid
        %>
 
     <%= form.button :submit, class: 'btn btn-primary' %>

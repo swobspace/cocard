@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :cards, except: [:new, :create]
+  resources :cards
   resources :card_terminals do
     member do
       get :ping
