@@ -12,6 +12,7 @@
         } do %>
     <thead>
       <tr>
+        <th><%= t('attributes.connector') %></th>
         <th><%= t('attributes.card_terminal') %></th>
         <th><%= t('attributes.name') %></th>
         <th class="notvisible"><%= t('attributes.card_handle') %></th>
@@ -35,12 +36,14 @@
         <th></th>
         <th></th>
         <th></th>
+        <th></th>
         <th class="nosearch"></th>
       </tr>
     </tfoot>
     <tbody>
       <% @cards.each do |card| %>
         <%= content_tag(:tr, id: dom_id(card)) do %>
+          <td><%= card.card_terminal&.connector %></td>
           <td><%= card.card_terminal&.ct_id %></td>
           <td><%= card.name %></td>
           <td><%= card.card_handle %></td>

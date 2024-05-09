@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "cards/index", type: :view do
-  let(:ct) { FactoryBot.create(:card_terminal, ct_id: 'CT_ID_0176') }
+  let(:conn) { FactoryBot.create(:connector, name: 'TIK-XXX-39') }
+  let(:ct) { FactoryBot.create(:card_terminal, connector: conn, ct_id: 'CT_ID_0176') }
   let(:ts) { Time.current }
   before(:each) do
     assign(:cards, [
@@ -33,6 +34,7 @@ RSpec.describe "cards/index", type: :view do
   it "renders a list of cards" do
     render
     cell_selector = 'tr>td'
+    assert_select cell_selector, text: Regexp.new("TIK-XXX-39"), count: 1
     assert_select cell_selector, text: Regexp.new(ct.ct_id), count: 1
     assert_select cell_selector, text: Regexp.new("GemaCard".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("7fb65ede-0a37-11ef-8f85-c025a5b36994".to_s), count: 2
