@@ -61,6 +61,7 @@ class Card {
   name: string
   description: rich_text
   operational_state_id
+  location_id
   lanr: string
   fachrichtung: string
   bsnr: string

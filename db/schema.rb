@@ -88,6 +88,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_12_075359) do
     t.bigint "card_terminal_id"
     t.jsonb "properties"
     t.bigint "operational_state_id"
+    t.bigint "location_id"
     t.string "lanr", default: ""
     t.string "bsnr", default: ""
     t.string "fachrichtung", default: ""
@@ -101,6 +102,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_12_075359) do
     t.string "cert_subject_l", default: ""
     t.index ["card_terminal_id"], name: "index_cards_on_card_terminal_id"
     t.index ["iccsn"], name: "index_cards_on_iccsn", unique: true
+    t.index ["location_id"], name: "index_cards_on_location_id"
     t.index ["operational_state_id"], name: "index_cards_on_operational_state_id"
   end
 

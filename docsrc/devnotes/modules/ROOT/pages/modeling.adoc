@@ -118,6 +118,7 @@ end
 bin/rails g scaffold Card \
   name:string \
   operational_state:belongs_to \
+  location:belongs_to \
   lanr:string \
   bsnr:string \
   fachrichtung:string \
