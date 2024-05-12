@@ -154,7 +154,7 @@ class Card < ApplicationRecord
 end
 ----
 
-== model Card
+== model OperationalState
 
 [source,sh]
 ----
