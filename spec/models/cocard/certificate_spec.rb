@@ -21,7 +21,8 @@ module Cocard
     end
    
     describe "with real certificate" do
-      it { expect(subject.subject.to_utf8).to eq("CN=Institutsambulanz - Dr. Lepping,title=Dr. med.,GN=Thomas,SN=Lepping,O=477412100,street=Mühlenstraße  31-35,postalCode=53518,L=Adenau,C=DE")}
+      it { expect(subject.subject).to eq("CN=Institutsambulanz - Dr. Lepping,title=Dr. med.,GN=Thomas,SN=Lepping,O=477412100,street=Mühlenstraße  31-35,postalCode=53518,L=Adenau,C=DE")}
+      it { expect(subject.to_s).to eq("CN=Institutsambulanz - Dr. Lepping,title=Dr. med.,GN=Thomas,SN=Lepping,O=477412100,street=Mühlenstraße  31-35,postalCode=53518,L=Adenau,C=DE")}
       it { expect(subject.cert).to be_kind_of(OpenSSL::X509::Certificate) }
       it { expect(subject.cn).to eq("Institutsambulanz - Dr. Lepping") }
       it { expect(subject.title).to eq("Dr. med.") }

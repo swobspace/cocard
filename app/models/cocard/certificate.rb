@@ -9,7 +9,11 @@ module Cocard
     end
 
     def subject
-      cert.subject
+      _subject.to_utf8
+    end
+
+    def to_s
+      subject
     end
 
     def cn
@@ -51,8 +55,13 @@ module Cocard
 
   private
 
+    def _subject
+      cert.subject
+    end
+
+
     def from_subject(attr)
-      entry = subject.to_a.select{|a| a[0] == attr}.first
+      entry = _subject.to_a.select{|a| a[0] == attr}.first
       ( entry.nil? ) ? "" : entry[1].force_encoding('UTF-8')
     end
 
