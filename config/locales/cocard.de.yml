@@ -1,7 +1,7 @@
 de:
   cocard:
     action: Aktion
-    new_card: Neues Kartenterminal
+    new_card: Neue Karte
     new_card_manual_warning: |
       Die folgenden Felder sind nur für die Neuanlage von Karten
       gedacht, die in keinem Kartenterminal verwendet werden. Die Felder werden
