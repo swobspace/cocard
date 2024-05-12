@@ -84,7 +84,9 @@
 
           <tr>
             <th class="w-10 pe-3"><%= t('attributes.connector')%>:</th>
-            <td><%= @card_terminal.connector %></td>
+            <td><%= link_to(@card_terminal.connector,
+                            connector_path(@card_terminal.connector)
+                           ) if @card_terminal.connector %></td>
           </tr>
 
           <tr>

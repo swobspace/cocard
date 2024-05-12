@@ -67,8 +67,12 @@
     <tbody>
       <% @cards.each do |card| %>
         <%= content_tag(:tr, id: dom_id(card)) do %>
-          <td><%= card.card_terminal&.connector %></td>
-          <td><%= card.card_terminal&.ct_id %></td>
+          <td><%= link_to(card.card_terminal&.connector, 
+                          connector_path(card.card_terminal&.connector)
+                         ) if card.card_terminal&.connector %></td>
+          <td><%= link_to(card.card_terminal&.ct_id, 
+                          card_terminal_path(card.card_terminal)
+                         ) if card.card_terminal %></td>
           <td><%= card.name %></td>
           <td><%= card.card_handle %></td>
           <td><%= card.card_type %></td>

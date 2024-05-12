@@ -55,7 +55,9 @@
           </td>
           <td><%= card_terminal.displayname %></td>
           <td><%= card_terminal.ct_id %></td>
-          <td><%= card_terminal.connector %></td>
+          <td><%= link_to(card_terminal.connector,
+                          connector_path(card_terminal.connector)
+                         ) if card_terminal.connector %></td>
           <td><%= card_terminal.name %></td>
           <td><%= card_terminal.mac %></td>
           <td><%= card_terminal.ip %></td>
