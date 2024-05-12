@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_08_154940) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_12_075359) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -87,8 +87,35 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_08_154940) do
     t.date "expiration_date"
     t.bigint "card_terminal_id"
     t.jsonb "properties"
+    t.bigint "operational_state_id"
+    t.string "lanr", default: ""
+    t.string "bsnr", default: ""
+    t.string "fachrichtung", default: ""
+    t.string "telematikid", default: ""
+    t.text "certificate"
+    t.string "cert_subject_title", default: ""
+    t.string "cert_subject_sn", default: ""
+    t.string "cert_subject_givenname", default: ""
+    t.string "cert_subject_street", default: ""
+    t.string "cert_subject_postalcode", default: ""
+    t.string "cert_subject_l", default: ""
     t.index ["card_terminal_id"], name: "index_cards_on_card_terminal_id"
     t.index ["iccsn"], name: "index_cards_on_iccsn", unique: true
+    t.index ["operational_state_id"], name: "index_cards_on_operational_state_id"
+  end
+
+  create_table "clients", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description", default: ""
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "clients_connectors", id: false, force: :cascade do |t|
+    t.bigint "client_id", null: false
+    t.bigint "connector_id", null: false
+    t.index ["client_id", "connector_id"], name: "index_clients_connectors_on_client_id_and_connector_id", unique: true
+    t.index ["connector_id", "client_id"], name: "index_clients_connectors_on_connector_id_and_client_id", unique: true
   end
 
   create_table "connector_contexts", force: :cascade do |t|
@@ -220,6 +247,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_08_154940) do
 
   create_table "locations", force: :cascade do |t|
     t.string "lid", null: false
+    t.string "description", default: ""
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "operational_states", force: :cascade do |t|
+    t.string "name", default: "", null: false
     t.string "description", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

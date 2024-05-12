@@ -60,6 +60,11 @@ class ConnectorContext {
 class Card {
   name: string
   description: rich_text
+  operational_state_id
+  lanr: string
+  fachrichtung: string
+  bsnr: string
+  telematikid: string
   --
   properties: jsonb
   card_handle: string
@@ -70,6 +75,14 @@ class Card {
   card_holder_name: string
   expiration_date: date
   card_terminal_id
+  --
+  certificate:text
+  cert_subject_title: string
+  cert_subject_sn: string
+  cert_subject_givenname: string
+  cert_subject_street: string
+  cert_subject_postalcode: string
+  cert_subject_l: string
 }
 
 class Workplace {
@@ -82,13 +95,19 @@ Class TerminalWorkplaces {
   workplace_id
   updated_at
 }
+Class OperationalState {
+  name: string
+  description: string
+}
 
 Location "*" -- "*" Connector
 Context "*" -- "*" Connector
-Connector "1" - "*" CardTerminal
-Location "1" - "*" CardTerminal
+Connector "0..1" - "*" CardTerminal
+Location "0..1" - "*" CardTerminal
 (Connector, Context) .. ConnectorContext
-CardTerminal "1" - "*" Card
+CardTerminal "0..1" - "*" Card
 CardTerminal "*" -- "*" Workplace
 (CardTerminal, Workplace) .. TerminalWorkplaces
+Location "0..1" -- "*" Card
+OperationalState "1" -- "*" Card
 @enduml

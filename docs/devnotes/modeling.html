@@ -238,6 +238,11 @@ end</code></pre>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g scaffold Card \
   name:string \
+  operational_state:belongs_to \
+  lanr:string \
+  bsnr:string \
+  fachrichtung:string \
+  telematikid:string \
     --no-stylesheets --no-javascripts --no-helper
 
 bin/rails g migration AddInternalToCard \
@@ -249,7 +254,16 @@ bin/rails g migration AddInternalToCard \
   insert_time:timestamp \
   card_holder_name:string \
   expiration_date:date \
-  card_terminal:belongs_to</code></pre>
+  card_terminal:belongs_to
+
+bin/rails g migration AddCertificateToCard \
+  certificate:text \
+  cert_subject_title:string \
+  cert_subject_sn:string \
+  cert_subject_givenname:string \
+  cert_subject_street:string \
+  cert_subject_postalcode:string \
+  cert_subject_l:string</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -258,6 +272,19 @@ bin/rails g migration AddInternalToCard \
 <pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">class Card &lt; ApplicationRecord
   has_rich_text :description
 end</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_model_card_2"><a class="anchor" href="#_model_card_2"></a>model Card</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g scaffold OperationalState \
+  name:string \
+  description:string \
+  --no-stylesheets --no-javascripts --no-helper</code></pre>
 </div>
 </div>
 </div>

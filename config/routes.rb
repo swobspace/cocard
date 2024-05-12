@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :operational_states
   resources :cards
   resources :card_terminals do
     member do

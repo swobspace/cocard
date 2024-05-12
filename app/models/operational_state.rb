@@ -1,0 +1,2 @@
+class OperationalState < ApplicationRecord
+end
