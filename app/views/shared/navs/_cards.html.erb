@@ -8,6 +8,13 @@
       <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
             t('controller.cards')),
           main_app.cards_path, class: "dropdown-item" %>
+      <% if can? :create, Card %>
+        <%= link_to raw('<span class="fas fa-fw fa-plus" aria-hidden="true"></span> ' +
+                        t('cocard.new_card')),
+              main_app.new_card_path,
+              class: "dropdown-item" %>
+      <% end %>
+
     </div>
   </li>
 <% end %>

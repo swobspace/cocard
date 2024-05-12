@@ -22,6 +22,15 @@
                          t('cocard.new_context')), 
                     main_app.new_context_path, class: "dropdown-item" %>
       <% end %>
+      <div class="dropdown-divider"></div>
+        <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
+                         t('controller.operational_states')), 
+                    main_app.operational_states_path, class: "dropdown-item" %>
+      <% if can? :create, Context %>
+        <%= link_to raw( '<span class="fas fa-fw fa-plus" aria-hidden="true"></span> ' +
+                         t('cocard.new_operational_state')), 
+                    main_app.new_operational_state_path, class: "dropdown-item" %>
+      <% end %>
     </div>
   </li>
 <% end %>

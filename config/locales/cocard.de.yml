@@ -18,6 +18,7 @@ de:
     new_context: Neuer Kontext
     new_connector: Neuer Konnektor
     new_location: Neuer Standort
+    new_operational_state: Neuer Betriebszustand
     condition:
       -1: '-'
       0: OK
@@ -28,6 +29,10 @@ de:
     administrativa: Administrativa
     card_data: Kartendaten
     certificate_data: Daten des Zertfikats
+    fetch_sds: Abfrage SDS
+    get_resource_information: Abfrage Konnektor
+    get_cards_terminal: Abfrage Kartenterminals
+    get_cards: Abfrage Karten
 
   activerecord:
     models:
@@ -100,7 +105,9 @@ de:
     contexts: Kontexte
     home: Home
     locations: Standorte
+    operational_states: Betriebszustände
     users: Benutzer
+    workplaces: Arbeitsplätze
 
   contexts:
     add: Kontext hinzufügen
