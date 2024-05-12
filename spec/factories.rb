@@ -51,5 +51,9 @@ FactoryBot.define do
     lid { generate(:lid) }
   end
 
+  factory :operational_state do
+    name { generate(:aname) }
+  end
+
 end
 

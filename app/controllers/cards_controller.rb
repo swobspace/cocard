@@ -53,6 +53,8 @@ class CardsController < ApplicationController
     def card_params
       params.require(:card)
             .permit(:name, :description, :iccsn, :slotid, :card_type, 
-                    :card_holder_name, :card_terminal_id)
+                    :card_holder_name, :card_terminal_id, :location_id,
+                    :operational_state_id, :lanr, :bsnr, :telematikid,
+                    :fachrichtung)
     end
 end

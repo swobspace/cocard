@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe Location, type: :model do
   let(:location) { FactoryBot.create(:location, lid: 'BER') }
   it { is_expected.to have_and_belong_to_many(:connectors) }
+  it { is_expected.to have_many(:cards).dependent(:restrict_with_error) }
+  it { is_expected.to have_many(:card_terminals).dependent(:restrict_with_error) }
   it { is_expected.to validate_presence_of(:lid) }
 
   it 'should get plain factory working' do

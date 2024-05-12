@@ -7,6 +7,29 @@
     <%= form.input :description, as: :rich_text_area
        %>
 
+     <hr/>
+    <div class="card-title">
+      <h6><%= t('cocard.administrativa')%></h6>
+    </div>
+
+    <%= form.association :location
+       %>
+
+    <%= form.association :operational_state
+       %>
+    <%= form.input :lanr
+     %>
+    <%= form.input :bsnr
+       %>
+    <%= form.input :fachrichtung
+       %>
+    <%= form.input :telematikid
+       %>
+
+    <hr/>
+    <div class="card-title">
+      <h6><%= t('cocard.card_data')%></h6>
+    </div>
     <div class="alert alert-warning" role="alert">
       <%= t('cocard.new_card_manual_warning') %>
     </div>

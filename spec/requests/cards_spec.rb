@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "/cards", type: :request do
   let(:ct) { FactoryBot.create(:card_terminal) }
+  let(:ops) { FactoryBot.create(:operational_state, name: "roquefort") }
+  let(:location) { FactoryBot.create(:location, lid: "AXXC") }
   let(:valid_attributes) {
     FactoryBot.attributes_for(:card)
   }
@@ -85,6 +87,12 @@ RSpec.describe "/cards", type: :request do
         card_holder_name: "Meister Quant",
         card_type: "HBA",
         slotid: 2222,
+        operational_state_id: ops.id,
+        location_id: location.id,
+        lanr: "999777333",
+        bsnr: "222444666",
+        telematikid: "1-2-3-456",
+        fachrichtung: "Innere Medizin"
       }}
 
       it "updates the requested card" do
@@ -98,6 +106,12 @@ RSpec.describe "/cards", type: :request do
         expect(card.card_holder_name).to eq("Meister Quant")
         expect(card.card_type).to eq("HBA")
         expect(card.slotid).to eq(2222)
+        expect(card.operational_state).to eq(ops)
+        expect(card.location).to eq(location)
+        expect(card.lanr).to eq("999777333")
+        expect(card.bsnr).to eq("222444666")
+        expect(card.telematikid).to eq("1-2-3-456")
+        expect(card.fachrichtung).to eq("Innere Medizin")
       end
 
       it "redirects to the card" do

@@ -25,6 +25,12 @@ RSpec.describe "cards/edit", type: :view do
       assert_select "input[name=?]", "card[iccsn]" do |input|
         assert input.attr("disabled").present?
       end
+      assert_select "select[name=?]", "card[location_id]"
+      assert_select "select[name=?]", "card[operational_state_id]"
+      assert_select "input[name=?]", "card[lanr]"
+      assert_select "input[name=?]", "card[bsnr]"
+      assert_select "input[name=?]", "card[telematikid]"
+      assert_select "input[name=?]", "card[fachrichtung]"
     end
   end
 end

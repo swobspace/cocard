@@ -16,48 +16,127 @@
   </div>
 
   <div class="card-body">
-    <table class="table table-sm table-borderless">
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.card_terminal')%>:</th>
-        <td><%= @card.card_terminal.to_s %></td>
-      </tr>
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.name')%>:</th>
-        <td><%= @card.name %></td>
-      </tr>
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.description')%>:</th>
-        <td><%= @card.description %></td>
-      </tr>
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.card_handle')%>:</th>
-        <td><%= @card.card_handle %></td>
-      </tr>
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.card_type')%>:</th>
-        <td><%= @card.card_type %></td>
-      </tr>
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.iccsn')%>:</th>
-        <td><%= @card.iccsn %></td>
-      </tr>
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.slotid')%>:</th>
-        <td><%= @card.slotid %></td>
-      </tr>
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.insert_time')%>:</th>
-        <td><%= @card.insert_time %></td>
-      </tr>
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.card_holder_name')%>:</th>
-        <td><%= @card.card_holder_name %></td>
-      </tr>
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.expiration_date')%>:</th>
-        <td><%= @card.expiration_date %></td>
-      </tr>
-    </table>
+    <div class="row">
+      <div class="col-6">
+        <table class="table table-sm table-borderless">
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.connector')%>:</th>
+            <td><%= link_to(@card.card_terminal&.connector, 
+                            connector_path(@card.card_terminal&.connector)
+                           ) if @card.card_terminal&.connector %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.card_terminal')%>:</th>
+            <td><%= link_to(@card.card_terminal.to_s, 
+                            card_terminal_path(@card.card_terminal)
+                           ) if @card.card_terminal %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.name')%>:</th>
+            <td><%= @card.name %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.description')%>:</th>
+            <td><%= @card.description %></td>
+          </tr>
+        </table>
+
+        <div class="card-title border-bottom bg-light pt-2">
+          <h6><%= t('cocard.card_data')%></h6>
+        </div>
+        <table class="table table-sm table-borderless">
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.card_handle')%>:</th>
+            <td><%= @card.card_handle %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.card_type')%>:</th>
+            <td><%= @card.card_type %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.iccsn')%>:</th>
+            <td><%= @card.iccsn %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.slotid')%>:</th>
+            <td><%= @card.slotid %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.insert_time')%>:</th>
+            <td><%= @card.insert_time %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.card_holder_name')%>:</th>
+            <td><%= @card.card_holder_name %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.expiration_date')%>:</th>
+            <td><%= @card.expiration_date %></td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-6">
+        <div class="card-title border-bottom bg-light pt-2">
+          <h6><%= t('cocard.administrativa')%></h6>
+        </div>
+        <table class="table table-sm table-borderless">
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.location')%>:</th>
+            <td><%= link_to(@card.location, polymorphic_path(@card.location)) if @card.location %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.operational_state')%>:</th>
+            <td><%= @card.operational_state %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.bsnr')%>:</th>
+            <td><%= @card.bsnr %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.lanr')%>:</th>
+            <td><%= @card.lanr %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.fachrichtung')%>:</th>
+            <td><%= @card.fachrichtung %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.telematikid')%>:</th>
+            <td><%= @card.telematikid %></td>
+          </tr>
+        </table>
+
+        <div class="card-title border-bottom bg-light pt-2">
+          <h6><%= t('cocard.certificate_data')%></h6>
+        </div>
+        <table class="table table-sm table-borderless">
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.cert_subject_title')%>:</th>
+            <td><%= @card.cert_subject_title %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.cert_subject_sn')%>:</th>
+            <td><%= @card.cert_subject_sn %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.cert_subject_givenname')%>:</th>
+            <td><%= @card.cert_subject_givenname %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.cert_subject_street')%>:</th>
+            <td><%= @card.cert_subject_street %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.cert_subject_postalcode')%>:</th>
+            <td><%= @card.cert_subject_postalcode %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.cert_subject_l')%>:</th>
+            <td><%= @card.cert_subject_l %></td>
+          </tr>
+        </table>
+      </div>
+    </div>
   </div>
 </div>
 

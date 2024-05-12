@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "cards/show", type: :view do
   let(:ct) { FactoryBot.create(:card_terminal, ct_id: 'CT_ID_0176') }
+  let(:ops) { FactoryBot.create(:operational_state, name: 'im Schrank') }
+  let(:location) { FactoryBot.create(:location, lid: 'AXXC') }
   let(:ts) { Time.current }
   before(:each) do
     assign(:card, Card.create!(
@@ -11,10 +13,22 @@ RSpec.describe "cards/show", type: :view do
       card_handle: "7fb65ede-0a37-11ef-8f85-c025a5b36994",
       card_type: "SMB-C",
       iccsn: "8027612345678",
-      slotid: 1,
       insert_time: ts,
       card_holder_name: "Doctor Who's Universe",
-      expiration_date: 1.year.after(Date.current)
+      expiration_date: 1.year.after(Date.current),
+      slotid: 22232,
+      operational_state_id: ops.id,
+      location_id: location.id,
+      lanr: "999777333",
+      bsnr: "222444666",
+      telematikid: "1-2-3-456",
+      fachrichtung: "Innere Medizin",
+      cert_subject_title: "Dr. med.",
+      cert_subject_sn: "Mustermann",
+      cert_subject_givenname: "Gottfried",
+      cert_subject_street: "Holzweg 14",
+      cert_subject_postalcode: "99979",
+      cert_subject_l: "Nirgendwo"
     ))
   end
 
@@ -26,9 +40,21 @@ RSpec.describe "cards/show", type: :view do
     expect(rendered).to match(/7fb65ede-0a37-11ef-8f85-c025a5b36994/)
     expect(rendered).to match(/SMB-C/)
     expect(rendered).to match(/8027612345678/)
-    expect(rendered).to match(/1/)
+    expect(rendered).to match(/22232/)
     expect(rendered).to match(/#{ts.to_s}/)
     expect(rendered).to match(/Doctor Who&#39;s Universe/)
     expect(rendered).to match(/#{1.year.after(Date.current)}/)
+    expect(rendered).to match(/999777333/)
+    expect(rendered).to match(/222444666/)
+    expect(rendered).to match(/AXXC/)
+    expect(rendered).to match(/im Schrank/)
+    expect(rendered).to match(/1-2-3-456/)
+    expect(rendered).to match(/Innere Medizin/)
+    expect(rendered).to match(/Dr. med./)
+    expect(rendered).to match(/Mustermann/)
+    expect(rendered).to match(/Gottfried/)
+    expect(rendered).to match(/Holzweg 14/)
+    expect(rendered).to match(/99979/)
+    expect(rendered).to match(/Nirgendwo/)
   end
 end

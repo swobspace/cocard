@@ -25,6 +25,9 @@ de:
       2: CRITICAL
       3: UNKNOWN
     assigned_contexts: Zugewiesene Kontexte
+    administrativa: Administrativa
+    card_data: Kartendaten
+    certificate_data: Daten des Zertfikats
 
   activerecord:
     models:
@@ -34,15 +37,24 @@ de:
       connector: Konnektor
       connector_context: Konnektor Kontext
       location: Standort
+      operational_state: Betriebszustand
       user: User
 
   attributes:
     action: Aktion
+    bsnr: BSNR
     card: Karte
     card_handle: CardHandle
     card_holder_name: CardHolder
     card_terminal: Kartenterminal
     card_type: Kartentyp
+    certificate: Zertifikat
+    cert_subject_title: Titel
+    cert_subject_sn: Name
+    cert_subject_givenname: Vorname
+    cert_subject_street: Straße
+    cert_subject_postalcode: PLZ
+    cert_subject_l: Ort
     client: Mandant
     clients: Mandanten
     client_ids: Mandanten
@@ -57,10 +69,12 @@ de:
     description: Beschreibung
     displayname: Anzeigename
     expiration_date: Ablaufdatum
+    fachrichtung: Fachrichtung
     givenname: Vorname
     iccsn: ICCSN
     insert_time: eingesteckt seit
     ip: IP-Adresse
+    lanr: LANR
     lid: Standort-Kürzel
     location: Standort
     location_id: Standort
@@ -68,11 +82,13 @@ de:
     location_ids: Standorte
     manual_update: manuelles Update
     name: Name
+    operational_state: Betriebszustand
     plugged_in: Netzwerk/Dose/Switch
     room: Raum
     sds_url: SDS-Url
     slotid: Schachtnummer
     sn: Nachname
+    telematikid: Telematik-ID
     username: Username
     workplace: Arbeitsplatz
     workplaces: Arbeitsplätze
