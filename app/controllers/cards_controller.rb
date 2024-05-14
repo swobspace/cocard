@@ -55,6 +55,6 @@ class CardsController < ApplicationController
             .permit(:name, :description, :iccsn, :slotid, :card_type, 
                     :card_holder_name, :card_terminal_id, :location_id,
                     :operational_state_id, :lanr, :bsnr, :telematikid,
-                    :fachrichtung)
+                    :fachrichtung, :context_id)
     end
 end

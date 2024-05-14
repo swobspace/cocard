@@ -4,10 +4,18 @@ RSpec.describe "cards/show", type: :view do
   let(:ct) { FactoryBot.create(:card_terminal, ct_id: 'CT_ID_0176') }
   let(:ops) { FactoryBot.create(:operational_state, name: 'im Schrank') }
   let(:location) { FactoryBot.create(:location, lid: 'AXXC') }
+  let(:context) do
+     FactoryBot.create(:context,
+       mandant: "CDEFAB",
+       client_system: "MySoft",
+       workplace: "Evergreen"
+     )
+  end
   let(:ts) { Time.current }
   before(:each) do
     assign(:card, Card.create!(
       card_terminal_id: ct.id,
+      context_id: context.id,
       name: "GemaCard",
       description: "some other text",
       card_handle: "7fb65ede-0a37-11ef-8f85-c025a5b36994",
@@ -60,5 +68,6 @@ RSpec.describe "cards/show", type: :view do
     expect(rendered).to match(/99979/)
     expect(rendered).to match(/Nirgendwo/)
     expect(rendered).to match(/987654/)
+    expect(rendered).to match(/CDEFAB - MySoft - Evergreen/)
   end
 end

@@ -123,6 +123,7 @@ bin/rails g scaffold Card \
   bsnr:string \
   fachrichtung:string \
   telematikid:string \
+  context:belongs_to \
     --no-stylesheets --no-javascripts --no-helper
 
 bin/rails g migration AddInternalToCard \

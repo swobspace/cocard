@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_14_154803) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_14_162754) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -102,7 +102,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_14_154803) do
     t.string "cert_subject_l", default: ""
     t.string "cert_subject_cn", default: ""
     t.string "cert_subject_o", default: ""
+    t.bigint "context_id"
     t.index ["card_terminal_id"], name: "index_cards_on_card_terminal_id"
+    t.index ["context_id"], name: "index_cards_on_context_id"
     t.index ["iccsn"], name: "index_cards_on_iccsn", unique: true
     t.index ["location_id"], name: "index_cards_on_location_id"
     t.index ["operational_state_id"], name: "index_cards_on_operational_state_id"

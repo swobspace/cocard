@@ -66,6 +66,7 @@ class Card {
   fachrichtung: string
   bsnr: string
   telematikid: string
+  context_id
   --
   properties: jsonb
   card_handle: string
@@ -106,11 +107,12 @@ Class OperationalState {
 Location "*" -- "*" Connector
 Context "*" -- "*" Connector
 Connector "0..1" - "*" CardTerminal
-Location "0..1" - "*" CardTerminal
-(Connector, Context) .. ConnectorContext
+Location "0..1" -- "*" CardTerminal
+(Connector, Context) . ConnectorContext
 CardTerminal "0..1" - "*" Card
 CardTerminal "*" -- "*" Workplace
 (CardTerminal, Workplace) .. TerminalWorkplaces
 Location "0..1" -- "*" Card
 OperationalState "1" -- "*" Card
+Context "1" -- "*" Card
 @enduml

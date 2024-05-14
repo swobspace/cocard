@@ -8,6 +8,7 @@ RSpec.describe Card, type: :model do
   end
 
   it { is_expected.to belong_to(:card_terminal).optional }
+  it { is_expected.to belong_to(:context).optional }
   it { is_expected.to belong_to(:location).optional }
   it { is_expected.to belong_to(:operational_state).optional }
   it { is_expected.to validate_presence_of(:iccsn) }
