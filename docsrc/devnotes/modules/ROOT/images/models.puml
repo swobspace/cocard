@@ -78,12 +78,14 @@ class Card {
   card_terminal_id
   --
   certificate:text
+  cert_subject_cn: string
   cert_subject_title: string
   cert_subject_sn: string
   cert_subject_givenname: string
   cert_subject_street: string
   cert_subject_postalcode: string
   cert_subject_l: string
+  cert_subject_o: string
 }
 
 class Workplace {
