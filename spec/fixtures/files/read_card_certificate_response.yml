@@ -1,0 +1,33 @@
+---
+:read_card_certificate_response:
+  :status:
+    :result: !ruby/string:Nori::StringWithAttributes
+      str: OK
+      attributes: {}
+  :x509_data_info_list:
+    :x509_data_info:
+      :cert_ref: !ruby/string:Nori::StringWithAttributes
+        str: C.ENC
+        attributes: {}
+      :x509_data:
+        :x509_issuer_serial:
+          :x509_issuer_name: !ruby/string:Nori::StringWithAttributes
+            str: C=DE,O=D-TRUST GmbH,OU=Institution des Gesundheitswesens-CA der Telematikinfrastruktur,CN=D-Trust.SMCB-CA3
+            attributes: {}
+          :x509_serial_number: !ruby/string:Nori::StringWithAttributes
+            str: '4613339'
+            attributes: {}
+        :x509_subject_name: !ruby/string:Nori::StringWithAttributes
+          str: Institutsambulanz - Dr. Lepping
+          attributes: {}
+        :x509_certificate: !ruby/string:Nori::StringWithAttributes
+          str: MIIFgTCCBGmgAwIBAgIDRmTbMA0GCSqGSIb3DQEBCwUAMIGJMQswCQYDVQQGEwJERTEVMBMGA1UECgwMRC1UUlVTVCBHbWJIMUgwRgYDVQQLDD9JbnN0aXR1dGlvbiBkZXMgR2VzdW5kaGVpdHN3ZXNlbnMtQ0EgZGVyIFRlbGVtYXRpa2luZnJhc3RydWt0dXIxGTAXBgNVBAMMEEQtVHJ1c3QuU01DQi1DQTMwHhcNMjIwMTE5MDgyNTUwWhcNMjYwODE1MDcyOTMxWjCBwjELMAkGA1UEBhMCREUxDzANBgNVBAcMBkFkZW5hdTEOMAwGA1UEEQwFNTM1MTgxHjAcBgNVBAkMFU3DvGhsZW5zdHJhw59lICAzMS0zNTESMBAGA1UECgwJNDc3NDEyMTAwMRAwDgYDVQQEDAdMZXBwaW5nMQ8wDQYDVQQqDAZUaG9tYXMxETAPBgNVBAwMCERyLiBtZWQuMSgwJgYDVQQDDB9JbnN0aXR1dHNhbWJ1bGFueiAtIERyLiBMZXBwaW5nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnOsctMXOOwGZaMX8GRK+O2JxwBZLDQESG4AnOViaA8JYSPnpRZXAKxXANuLhWNs9EZANwIeCqWw0LnYglgdN0re/eydWVNVzcWxkihyeOxQJ4Pk0Mt1R5F9JQ7CAtT+CMA5146mreV/oRVqS3tApD/+b8AdgLTSPl+j7Uskf/7PsqXwLicjSsNxl/OepMgtjLMSYI/qr+lxoKOvX8DOGF+JCz8wrBjJMo1af15GaQpW7qzRPn3WVoNIfJL5oljR3v1+ght7ioV9XpkoQzD5H0+3yQfDKhfrAc/KKGMm+34JFHLGXWikTzGGPS/eGlyoYME958TFl3YmBq3BAAr4AxwIDAQABo4IBtTCCAbEwHwYDVR0jBBgwFoAUxk6YSKNeL3M/yJih5vVHqDXIhTowRQYFKyQIAwMEPDA6MDgwNjA0MDIwFgwUQmV0cmllYnNzdMOkdHRlIEFyenQwCQYHKoIUAEwEMhMNMS0yMDQ3NzQxMjEwMDBEBggrBgEFBQcBAQQ4MDYwNAYIKwYBBQUHMAGGKGh0dHA6Ly9ELVRSVVNULVNNQ0ItQ0EzLm9jc3AuZC10cnVzdC5uZXQwUQYDVR0gBEowSDA7BggqghQATASBIzAvMC0GCCsGAQUFBwIBFiFodHRwOi8vd3d3LmdlbWF0aWsuZGUvZ28vcG9saWNpZXMwCQYHKoIUAEwETDBxBgNVHR8EajBoMGagZKBihmBsZGFwOi8vZGlyZWN0b3J5LmQtdHJ1c3QubmV0L0NOPUQtVHJ1c3QuU01DQi1DQTMsTz1ELVRSVVNUJTIwR21iSCxDPURFP2NlcnRpZmljYXRlcmV2b2NhdGlvbmxpc3QwHQYDVR0OBBYEFKPRn6K87Za7DJf7EWc8s/w+xiRKMA4GA1UdDwEB/wQEAwIEMDAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQBHmT+e+HeZnwlAIotFjEw6WOhqauUspLn1vXRKTD7T/Yvn87gQeVju6AbpxIqHB7Cka8+dXQjxe6zcwTDhnNAjQx/Tl11qSgCznDWlO5PSTyOflDoVShV91LtVToALbju2YzGhwJkEgvHCJNksga7krAm+CHJ8ib3kEf5eJ/GYp4Q73pHsAwPr3vzCNp5aYFbalfxWS6NTvy27JugY8q/xhF9XkrxA2zYJyMsoBk8QPOIj5p4BNMaPyYPg5sanEX6s2+huKVd5Qdf5r95QC4/cYbqNMtFydy2RRoxCLybzyZXe1dBC8HtZAFYYx4AWvnDY0bhcUq1u1OwapvUHaIEM
+          attributes: {}
+  :@xmlns:ns2: http://ws.gematik.de/conn/ConnectorCommon/v5.0
+  :@xmlns:ns3: http://ws.gematik.de/tel/error/v2.0
+  :@xmlns:ns4: urn:oasis:names:tc:dss:1.0:core:schema
+  :@xmlns:ns5: http://www.w3.org/2000/09/xmldsig#
+  :@xmlns:ns6: http://ws.gematik.de/conn/CertificateService/v6.0
+  :@xmlns:ns7: http://ws.gematik.de/conn/ConnectorContext/v2.0
+  :@xmlns:ns8: http://ws.gematik.de/conn/CertificateServiceCommon/v2.0
+  :@xmlns:ns9: urn:oasis:names:tc:SAML:1.0:assertion
