@@ -54,12 +54,14 @@ de:
     card_terminal: Kartenterminal
     card_type: Kartentyp
     certificate: Zertifikat
+    cert_subject_cn: (CN)
     cert_subject_title: Titel
     cert_subject_sn: Name
     cert_subject_givenname: Vorname
     cert_subject_street: Straße
     cert_subject_postalcode: PLZ
     cert_subject_l: Ort
+    cert_subject_o: (O)
     client: Mandant
     clients: Mandanten
     client_ids: Mandanten

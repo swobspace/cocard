@@ -23,12 +23,14 @@ RSpec.describe "cards/show", type: :view do
       bsnr: "222444666",
       telematikid: "1-2-3-456",
       fachrichtung: "Innere Medizin",
+      cert_subject_cn: "Card Gema",
       cert_subject_title: "Dr. med.",
       cert_subject_sn: "Mustermann",
       cert_subject_givenname: "Gottfried",
       cert_subject_street: "Holzweg 14",
       cert_subject_postalcode: "99979",
-      cert_subject_l: "Nirgendwo"
+      cert_subject_l: "Nirgendwo",
+      cert_subject_o: "987654"
     ))
   end
 
@@ -36,6 +38,7 @@ RSpec.describe "cards/show", type: :view do
     render
     expect(rendered).to match(/CT_ID_0176/)
     expect(rendered).to match(/GemaCard/)
+    expect(rendered).to match(/Card Gema/)
     expect(rendered).to match(/some other text/)
     expect(rendered).to match(/7fb65ede-0a37-11ef-8f85-c025a5b36994/)
     expect(rendered).to match(/SMB-C/)
@@ -56,5 +59,6 @@ RSpec.describe "cards/show", type: :view do
     expect(rendered).to match(/Holzweg 14/)
     expect(rendered).to match(/99979/)
     expect(rendered).to match(/Nirgendwo/)
+    expect(rendered).to match(/987654/)
   end
 end

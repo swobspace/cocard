@@ -23,15 +23,17 @@ RSpec.describe "cards/index", type: :view do
         operational_state_id: ops.id,
         location_id: location.id,
         lanr: "999777333",
-        bsnr: "222444666",
+        bsnr: "222444667",
         telematikid: "1-2-3-456",
         fachrichtung: "Innere Medizin",
+        cert_subject_cn: "Card Gema",
         cert_subject_title: "Dr. med.",
         cert_subject_sn: "Mustermann",
         cert_subject_givenname: "Gottfried",
         cert_subject_street: "Holzweg 14",
         cert_subject_postalcode: "99979",
-        cert_subject_l: "Nirgendwo"
+        cert_subject_l: "Nirgendwo",
+        cert_subject_o: "22244466688"
       ),
       Card.create!(
         name: "GemaCard",
@@ -45,15 +47,17 @@ RSpec.describe "cards/index", type: :view do
         operational_state_id: ops.id,
         location_id: location.id,
         lanr: "999777333",
-        bsnr: "222444666",
+        bsnr: "222444667",
         telematikid: "1-2-3-456",
         fachrichtung: "Innere Medizin",
+        cert_subject_cn: "Card Gema",
         cert_subject_title: "Dr. med.",
         cert_subject_sn: "Mustermann",
         cert_subject_givenname: "Gottfried",
         cert_subject_street: "Holzweg 14",
         cert_subject_postalcode: "99979",
-        cert_subject_l: "Nirgendwo"
+        cert_subject_l: "Nirgendwo",
+        cert_subject_o: "22244466688"
       )
     ])
   end
@@ -64,6 +68,7 @@ RSpec.describe "cards/index", type: :view do
     assert_select cell_selector, text: Regexp.new("TIK-XXX-39"), count: 1
     assert_select cell_selector, text: Regexp.new(ct.ct_id), count: 1
     assert_select cell_selector, text: Regexp.new("GemaCard".to_s), count: 2
+    assert_select cell_selector, text: Regexp.new("Card Gema".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("7fb65ede-0a37-11ef-8f85-c025a5b36994".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("SMC-KT".to_s), count: 1
     assert_select cell_selector, text: Regexp.new("SMC-B".to_s), count: 1
@@ -76,7 +81,7 @@ RSpec.describe "cards/index", type: :view do
     assert_select cell_selector, text: Regexp.new("im Schrank".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("AXXC".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("999777333".to_s), count: 2
-    assert_select cell_selector, text: Regexp.new("222444666".to_s), count: 2
+    assert_select cell_selector, text: Regexp.new("222444667".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("1-2-3-456".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("Innere Medizin".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("Dr. med.".to_s), count: 2
@@ -85,5 +90,6 @@ RSpec.describe "cards/index", type: :view do
     assert_select cell_selector, text: Regexp.new("Holzweg 14".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("99979".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("Nirgendwo".to_s), count: 2
+    assert_select cell_selector, text: Regexp.new("22244466688".to_s), count: 2
   end
 end

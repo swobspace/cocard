@@ -28,17 +28,21 @@
         <th><%= t('attributes.bsnr') %></th>
         <th><%= t('attributes.telematikid') %></th>
         <th><%= t('attributes.fachrichtung') %></th>
+        <th><%= t('attributes.cert_subject_cn') %></th>
         <th><%= t('attributes.cert_subject_title') %></th>
         <th><%= t('attributes.cert_subject_sn') %></th>
         <th><%= t('attributes.cert_subject_givenname') %></th>
         <th><%= t('attributes.cert_subject_street') %></th>
         <th><%= t('attributes.cert_subject_postalcode') %></th>
         <th><%= t('attributes.cert_subject_l') %></th>
+        <th><%= t('attributes.cert_subject_o') %></th>
         <th class="nosort"><%= t('cocard.action') %></th>
       </tr>
     </thead>
     <tfoot class="search">
       <tr>
+        <th></th>
+        <th></th>
         <th></th>
         <th></th>
         <th></th>
@@ -87,12 +91,14 @@
           <td><%= card.bsnr %></td>
           <td><%= card.telematikid %></td>
           <td><%= card.fachrichtung %></td>
+          <td><%= card.cert_subject_cn %></td>
           <td><%= card.cert_subject_title %></td>
           <td><%= card.cert_subject_sn %></td>
           <td><%= card.cert_subject_givenname %></td>
           <td><%= card.cert_subject_street %></td>
           <td><%= card.cert_subject_postalcode %></td>
           <td><%= card.cert_subject_l %></td>
+          <td><%= card.cert_subject_o %></td>
           <td class="text-nowrap">
             <%= show_link card %>
             <%= edit_link card %>

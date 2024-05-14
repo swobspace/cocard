@@ -116,6 +116,10 @@
         </div>
         <table class="table table-sm table-borderless">
           <tr>
+            <th class="w-10 pe-3"><%= t('attributes.cert_subject_cn')%>:</th>
+            <td><%= @card.cert_subject_cn %></td>
+          </tr>
+          <tr>
             <th class="w-10 pe-3"><%= t('attributes.cert_subject_title')%>:</th>
             <td><%= @card.cert_subject_title %></td>
           </tr>
@@ -138,6 +142,10 @@
           <tr>
             <th class="w-10 pe-3"><%= t('attributes.cert_subject_l')%>:</th>
             <td><%= @card.cert_subject_l %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.cert_subject_o')%>:</th>
+            <td><%= @card.cert_subject_o %></td>
           </tr>
         </table>
       </div>
