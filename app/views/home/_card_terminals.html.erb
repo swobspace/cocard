@@ -6,8 +6,9 @@
     <thead>
       <tr class="">
             <th class="text-center"><%= t('attributes.condition') %></th>
-            <th><%= t('attributes.name') %></th>
             <th><%= t('attributes.location') %></th>
+            <th><%= t('attributes.name') %></th>
+            <th><%= t('attributes.connector') %></th>
             <th><%= t('attributes.condition_message') %></th>
             <th class="text-center"><%= t('attributes.updated_at') %></th>
       </tr>
@@ -18,11 +19,15 @@
           <td class="text-center">
             <%= render ConditionIconComponent.new(item: card_terminal, small: true) %>
           </td>
+          <td><%= card_terminal.location&.lid %></td>
           <td><%= link_to(
                     card_terminal.name, 
                     card_terminal_path(card_terminal), 
                     class: "primary-link") %></td>
-          <td><%= card_terminal.location&.lid %></td>
+          <td><%= link_to(
+                    card_terminal.connector&.name, 
+                    connector_path(card_terminal.connector), 
+                    class: "primary-link") unless card_terminal.connector.nil? %></td>
           <td><%= card_terminal.condition_message %></td>
           <td><%= card_terminal.updated_at&.localtime %></td>
         <% end %>
