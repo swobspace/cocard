@@ -110,13 +110,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_14_162754) do
     t.index ["operational_state_id"], name: "index_cards_on_operational_state_id"
   end
 
-  create_table "clients", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "description", default: ""
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "clients_connectors", id: false, force: :cascade do |t|
     t.bigint "client_id", null: false
     t.bigint "connector_id", null: false
