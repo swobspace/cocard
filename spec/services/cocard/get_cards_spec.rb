@@ -29,12 +29,9 @@ module Cocard
     end
 
     let(:context) { FactoryBot.create(:context) }
-    let(:connector_context) do
-      ConnectorContext.create!(connector: connector, context: context)
-    end
 
     subject do
-      Cocard::GetCards.new(connector_context: connector_context)
+      Cocard::GetCards.new(connector: connector, context: context)
     end
 
     it "does not raise an NotImplementedError" do

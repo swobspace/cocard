@@ -16,25 +16,32 @@ module Cocard
     #
     def initialize(options = {})
       options.symbolize_keys
-      @connector_context = options.fetch(:connector_context)
-      @connector     = @connector_context.connector
-      @mandant       = @connector_context.context.mandant
-      @client_system = @connector_context.context.client_system
-      @workplace     = @connector_context.context.workplace
       @card          = options.fetch(:card)
+      @context       = options.fetch(:context)
+      @connector     = @card.card_terminal&.connector
+      @mandant       = @context.mandant
+      @client_system = @context.client_system
+      @workplace     = @context.workplace
     end
 
     # service.call()
     # do all the work here ;-)
     def call
       error_messages = []
+      if @card.card_handle.blank?
+        error_messages << "No Card Handle available!"
+      end
+      if @connector.blank?
+        error_messages << "No Connector assigned!"
+      end
+
       result = Cocard::SOAP::ReadCardCertificate.new(
                  card_handle: card.card_handle,
                  connector: connector,
                  mandant: mandant,
                  client_system: client_system,
                  workplace: workplace).call
-      if result.success?
+      if error_messages.blank? and result.success?
         rawcert = result.response[:read_card_certificate_response][:x509_data_info_list][:x509_data_info][:x509_data][:x509_certificate]
         cert = Cocard::Certificate.new(rawcert)
         card.name = cert.cn if card.name.blank?

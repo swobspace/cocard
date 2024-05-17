@@ -19,7 +19,8 @@ module Cocard
 
         connector.connector_contexts.each do |con_ctx|
           result = Cocard::GetCardTerminals.new(
-                     connector_context: con_ctx
+                     connector: connector,
+                     context: con_ctx.context
                    ).call
           if result.success?
             msg = "DEBUG:: #{connector.name} - #{con_ctx.context}: " +

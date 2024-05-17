@@ -22,7 +22,8 @@ module Cocard
            Rails.logger.debug("DEBUG:: #{connector.name}: no connector_context available")
         else
           result = Cocard::GetResourceInformation.new(
-                     connector_context: connector_context
+                     connector: connector,
+                     context: connector_context.context
                    ).call
 
           if result.success?

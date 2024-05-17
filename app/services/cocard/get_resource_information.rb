@@ -15,11 +15,11 @@ module Cocard
     #
     def initialize(options = {})
       options.symbolize_keys
-      @connector_context = options.fetch(:connector_context)
-      @connector = @connector_context.connector
-      @mandant   = @connector_context.context.mandant
-      @client_system  = @connector_context.context.client_system
-      @workplace = @connector_context.context.workplace
+      @connector = options.fetch(:connector)
+      @context = options.fetch(:context)
+      @mandant   = @context.mandant
+      @client_system  = @context.client_system
+      @workplace = @context.workplace
     end
 
     # service.call()

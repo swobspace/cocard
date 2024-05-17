@@ -29,19 +29,26 @@ module Cocard
     end
 
     let(:context) { FactoryBot.create(:context) }
-    let(:connector_context) do
-      ConnectorContext.create!(connector: connector, context: context)
+
+    #
+    # card terminal
+    #
+    let(:ct) do
+      FactoryBot.create(:card_terminal, connector: connector)
     end
 
     #
     # card
     #
     let(:card) do
-      FactoryBot.create(:card, card_handle: 'ee676b27-5b40-4a40-9c65-979cc3113a1e')
+      FactoryBot.create(:card, 
+        card_terminal: ct,
+        card_handle: 'ee676b27-5b40-4a40-9c65-979cc3113a1e'
+      )
     end
 
     subject do
-      Cocard::GetCertificate.new(connector_context: connector_context, card: card)
+      Cocard::GetCertificate.new(context: context, card: card)
     end
 
     it "does not raise an NotImplementedError" do
