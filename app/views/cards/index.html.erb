@@ -80,7 +80,7 @@
           <td><%= card.name %></td>
           <td><%= card.card_handle %></td>
           <td><%= card.card_type %></td>
-          <td><%= card.iccsn %></td>
+          <td><%= link_to card.iccsn, card_path(card) %></td>
           <td class="text-center"><%= card.slotid %></td>
           <td><%= card.insert_time %></td>
           <td><%= card.card_holder_name %></td>

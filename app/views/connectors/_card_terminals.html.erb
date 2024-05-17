@@ -1,10 +1,9 @@
-
-<h1><%= t('controller.card_terminals') %></h1>
+<%= render 'shared/turbo-cache-control' %>
 
 <div data-controller="datatables">
   <%= content_tag :table, role: :datatable,
         id: "card_terminals_table",
-        class: "table table-bordered table-responsive-xl",
+        class: "table table-sm table-responsive-xl",
         data: {
           'datatables-target': 'datatable',
           order: [[0, 'asc']].to_json
@@ -14,17 +13,12 @@
             <th class="text-center"><%= t('attributes.condition') %></th>
             <th><%= t('attributes.displayname') %></th>
             <th><%= t('attributes.ct_id') %></th>
-            <th><%= t('attributes.connector') %></th>
-            <th><%= t('attributes.name') %></th>
             <th><%= t('attributes.mac') %></th>
             <th><%= t('attributes.ip') %></th>
             <th><%= t('attributes.connected') %></th>
             <th><%= t('attributes.location') %></th>
             <th><%= t('attributes.room') %></th>
-            <th><%= t('attributes.contact') %></th>
             <th><%= t('attributes.plugged_in') %></th>
-            <th><%= t('attributes.updated_at') %></th>
-            <th class="nosort"><%= t('cocard.action') %></th>
       </tr>
     </thead>
     <tfoot class="search">
@@ -38,15 +32,10 @@
             <th></th>
             <th></th>
             <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th class="nosearch"></th>
       </tr>
     </tfoot>
     <tbody>
-      <% @card_terminals.each do |card_terminal| %>
+      <% card_terminals.each do |card_terminal| %>
         <%= content_tag(:tr, id: dom_id(card_terminal), class: dom_class(card_terminal)) do %>
           <td class="text-center">
             <%= render ConditionIconComponent.new(item: card_terminal, small: true) %>
@@ -54,29 +43,14 @@
           </td>
           <td><%= card_terminal.displayname %></td>
           <td><%= link_to card_terminal.ct_id, card_terminal_path(card_terminal) %></td>
-          <td><%= link_to(card_terminal.connector,
-                          connector_path(card_terminal.connector)
-                         ) if card_terminal.connector %></td>
-          <td><%= card_terminal.name %></td>
           <td><%= card_terminal.mac %></td>
           <td><%= card_terminal.ip %></td>
           <td><%= card_terminal.connected %></td>
-          <td><%= card_terminal.location %></td>
+          <td><%= card_terminal.location&.lid %></td>
           <td><%= card_terminal.room %></td>
-          <td><%= card_terminal.contact %></td>
           <td><%= card_terminal.plugged_in %></td>
-          <td><%= card_terminal.updated_at.localtime %></td>
-          <td class="text-nowrap">
-            <%= show_link card_terminal %>
-            <%= edit_link card_terminal %>
-            <%= delete_link card_terminal %>
-          </td>
         <% end %>
       <% end %>
     </tbody>
   <% end %>
 </div>
-
-<br />
-
-<%= back_link %>
