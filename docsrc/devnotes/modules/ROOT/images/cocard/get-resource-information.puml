@@ -1,0 +1,42 @@
+@startuml
+top to bottom direction
+
+!theme cocard from ..
+
+class soap_gri as "Cocard::SOAP::\nGetResourceInformation" {
+  connector: object
+  mandant: string
+  client_system: string
+  workplace: string
+  call()
+}
+
+note left of soap_gri::call
+**Result:**
+  success?: Boolean
+  error_messages: Array
+  response: Hash
+end note
+
+class gri as "Cocard::\nGetResourceInformation"  {
+  connector: object
+  context: object
+  call()
+}
+
+note left of gri::call #gold
+**Result:**
+  success?: Boolean
+  error_messages: Array
+  resource_information: Object
+**Create or Update:**
+  Connector
+end note
+
+class gri_job as "Cocard::\nGetResourceInformationJob" {
+  perform()
+}
+
+soap_gri -- gri
+gri -- gri_job
+@enduml

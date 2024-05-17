@@ -1,0 +1,47 @@
+@startuml
+top to bottom direction
+
+!theme cocard from ..
+
+class soap_gct as "Cocard::SOAP::\nGetCardTerminals" {
+  connector: object
+  mandant: string
+  client_system: string
+  workplace: string
+  call()
+}
+
+note left of soap_gct::call
+**Result:**
+  success?: Boolean
+  error_messages: Array
+  response: Hash
+end note
+
+class gct as "Cocard::\nGetCardTerminals"  {
+  connector: object
+  context: object
+  call()
+}
+
+note left of gct::call
+**Result:**
+  success?: Boolean
+  error_messages: Array
+  card_terminals: Array
+end note
+
+class gct_job as "Cocard::\nGetCardTerminalsJob" {
+  perform()
+}
+
+
+note left of gct_job::perform #gold
+**Create or Update:**
+  CardTerminal
+end note
+
+
+soap_gct -- gct
+gct -- gct_job
+@enduml

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Developer Notes :: Cocard</title>
+    <title>Cocard::Services :: Cocard</title>
     <meta name="generator" content="Antora 3.1.0">
     <link rel="stylesheet" href="../_/css/site.css">
     <script>var uiRootPath = '../_'</script>
@@ -39,13 +39,13 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="index.html">Developer Notes</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="modeling.html">Modeling cocard</a>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <a class="nav-link" href="cocard-services.html">Cocard::Services</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -93,7 +93,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">DevNotes</a></li>
-    <li><a href="index.html">Developer Notes</a></li>
+    <li><a href="cocard-services.html">Cocard::Services</a></li>
   </ul>
 </nav>
 </div>
@@ -102,8 +102,86 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Developer Notes</h1>
-
+<h1 class="page">Cocard::Services</h1>
+<div class="sect1">
+<h2 id="_getresourceinformation"><a class="anchor" href="#_getresourceinformation"></a>GetResourceInformation</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="_images/cocard/get-resource-information.svg" alt="get resource information">
+</div>
+</div>
+<div class="ulist">
+<div class="title">Intended use</div>
+<ul>
+<li>
+<p>periodische Abfrage aller Connectoren über Job (z.B. 2min)</p>
+</li>
+<li>
+<p>Überwachung</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_getcardterminals"><a class="anchor" href="#_getcardterminals"></a>GetCardTerminals</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="_images/cocard/get-card-terminals.svg" alt="get card terminals">
+</div>
+</div>
+<div class="ulist">
+<div class="title">Intended use</div>
+<ul>
+<li>
+<p>periodische Abfrage aller Card Terminals über Job (z.B. 2min)</p>
+</li>
+<li>
+<p>Überwachung</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_getcards"><a class="anchor" href="#_getcards"></a>GetCards</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="_images/cocard/get-cards.svg" alt="get cards">
+</div>
+</div>
+<div class="ulist">
+<div class="title">Intended use</div>
+<ul>
+<li>
+<p>periodische Abfrage aller Cards - meist SMC-B in
+größeren Abständen, (z.B. 1d)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_readcardcertificate"><a class="anchor" href="#_readcardcertificate"></a>ReadCardCertificate</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="_images/cocard/read-card-certificate.svg" alt="read card certificate">
+</div>
+</div>
+<div class="ulist">
+<div class="title">Intended use</div>
+<ul>
+<li>
+<p>Single Shot bei der Inbetriebnahme von neuen SMC-B Karten</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
 </article>
   </div>
 </main>

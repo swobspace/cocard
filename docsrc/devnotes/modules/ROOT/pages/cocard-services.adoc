@@ -1,0 +1,31 @@
+= Cocard::Services
+:author: Wolfgang Barth
+:imagesdir: ../images
+
+== GetResourceInformation
+image::cocard/get-resource-information.svg[]
+
+.Intended use
+* periodische Abfrage aller Connectoren über Job (z.B. 2min)
+* Überwachung
+
+== GetCardTerminals
+image::cocard/get-card-terminals.svg[]
+
+.Intended use
+* periodische Abfrage aller Card Terminals über Job (z.B. 2min)
+* Überwachung
+
+== GetCards
+image::cocard/get-cards.svg[]
+
+.Intended use
+* periodische Abfrage aller Cards - meist SMC-B in 
+  größeren Abständen, (z.B. 1d)
+
+== ReadCardCertificate
+image::cocard/read-card-certificate.svg[]
+
+.Intended use
+* Single Shot bei der Inbetriebnahme von neuen SMC-B Karten
+

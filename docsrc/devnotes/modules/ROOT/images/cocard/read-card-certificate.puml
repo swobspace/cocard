@@ -1,0 +1,50 @@
+@startuml
+top to bottom direction
+
+!theme cocard from ..
+
+class soap_rcert as "Cocard::SOAP::\nReadCardCertificate" {
+  connector: object
+  mandant: string
+  client_system: string
+  workplace: string
+  card_handle: string
+  call()
+}
+
+note left of soap_rcert::call
+**Result:**
+  success?: Boolean
+  error_messages: Array
+  response: Hash
+end note
+
+class rcert as "Cocard::\nGetCertificate"  {
+  card: object
+  context: object
+  call()
+}
+
+note left of rcert::call #gold
+**Result:**
+  success?: Boolean
+  error_messages: Array
+  certificate: Cocard::Certificate
+**Create or Update:**
+  Card
+end note
+
+/'
+class rcert_job as "Cocard::\nReadCardCertificateJob" {
+  perform()
+}
+
+note left of rcert_job::perform #gold
+**Create or Update:**
+  Card
+end note
+'/
+
+soap_rcert -- rcert
+'rcert -- rcert_job
+@enduml
