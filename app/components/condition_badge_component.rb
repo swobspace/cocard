@@ -39,7 +39,7 @@ class ConditionBadgeComponent < ViewComponent::Base
         @button_class = "#{size} #{btn}-success"
         @icon  = "fa-solid fa-circle-check"
       else
-        @button_class = "#{size} btn-secondary"
+        @button_class = "#{size} #{btn}-secondary"
         @icon  = "fa-solid fa-circle-question"
     end
   end
