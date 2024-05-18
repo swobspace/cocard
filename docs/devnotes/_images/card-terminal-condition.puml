@@ -4,7 +4,7 @@ state OK #lightgreen
 
 OK: CardTerminal online
 
-state WARNING #LightYellow
+state WARNING #Yellow
 
 WARNING: CardTerminal nicht verbunden
 
@@ -12,7 +12,7 @@ state CRITICAL #orangered
 
 CRITICAL: CardTerminal nicht erreichbar
 
-state UNKNOWN #Orange
+state UNKNOWN #LightSkyBlue
 UNKNOWN: not yet implemented
 
 state NOTHING #LightGrey

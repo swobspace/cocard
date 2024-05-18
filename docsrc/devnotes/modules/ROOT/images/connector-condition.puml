@@ -6,7 +6,7 @@ OK: Connector erreichbar
 OK: fetch SDS ok
 OK: VPNTI-Status "Online"
 
-state WARNING #LightYellow
+state WARNING #Yellow
 
 WARNING: Connector erreichbar
 WARNING: fetch SDS ok
@@ -16,7 +16,8 @@ state CRITICAL #orangered
 
 CRITICAL: Connector nicht erreichbar
 
-state UNKNOWN #Orange
+state UNKNOWN #LightSkyBlue
+
 UNKNOWN: Connector erreichbar
 UNKNOWN: fetch SDS failed or 
 UNKNOWN: GetResourceInformation failed
