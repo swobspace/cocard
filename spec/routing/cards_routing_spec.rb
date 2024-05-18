@@ -31,6 +31,11 @@ RSpec.describe CardsController, type: :routing do
       expect(patch: "/cards/1").to route_to("cards#update", id: "1")
     end
 
+    it "routes to #fetch_certificate via POST" do
+      expect(post: "/cards/1/get_certificate").to route_to("cards#get_certificate", id: "1")
+    end
+
+
     it "routes to #destroy" do
       expect(delete: "/cards/1").to route_to("cards#destroy", id: "1")
     end

@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   resources :operational_states
-  resources :cards
+  resources :cards do
+    member do
+      post :get_certificate
+    end
+  end
   resources :card_terminals do
     member do
       get :ping

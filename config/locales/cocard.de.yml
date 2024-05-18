@@ -33,6 +33,7 @@ de:
     get_resource_information: Abfrage Konnektor
     get_cards_terminal: Abfrage Kartenterminals
     get_cards: Abfrage Karten
+    get_certificate: Zertifikat lesen
 
   activerecord:
     models:
