@@ -34,7 +34,9 @@ class Card < ApplicationRecord
   end
   
   def update_condition
-    if card_terminal&.connector.nil?
+    if !operational_state&.operational
+      self[:condition] = Cocard::States::NOTHING
+    elsif card_terminal&.connector.nil?
       self[:condition] = Cocard::States::NOTHING
     elsif expiration_date.nil?
       self[:condition] = Cocard::States::NOTHING

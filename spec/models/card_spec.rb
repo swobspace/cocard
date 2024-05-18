@@ -4,6 +4,7 @@ RSpec.describe Card, type: :model do
   let(:connector) { FactoryBot.create(:connector) }
   let(:ct) { FactoryBot.create(:card_terminal, connector: connector) }
   let(:ctx) { FactoryBot.create(:context) }
+  let(:opsta) { FactoryBot.create(:operational_state, operational: true) }
   let(:card) do
     FactoryBot.create(:card, 
       card_holder_name: "Doctor Who's Universe",
@@ -11,7 +12,8 @@ RSpec.describe Card, type: :model do
       context: ctx,
       expiration_date: 2.years.after(Date.current),
       pin_status: 'VERIFIED',
-      updated_at: Time.current
+      updated_at: Time.current,
+      operational_state: opsta
     )
   end
 
@@ -35,6 +37,17 @@ RSpec.describe Card, type: :model do
 
   describe "#update_condition" do
     # it { expect(card.condition).to eq(Cocard::States::NOTHING) }
+
+    describe "wit operational_state == not operational" do
+      it "-> NOTHING" do
+        card.update(condition: Cocard::States::OK)
+        card.reload
+        expect(card).to receive_message_chain(:operational_state, :operational).and_return(nil)
+        expect {
+          card.update_condition
+        }.to change(card, :condition).to(Cocard::States::NOTHING)
+      end
+    end
 
     describe "without card_terminal" do
       it "-> NOTHING" do
