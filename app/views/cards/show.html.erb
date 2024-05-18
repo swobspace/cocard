@@ -6,12 +6,12 @@
           <%= t('activerecord.models.card') %>: 
           #<%= @card.id %>
         </span>
-        <h4 class="title"><%= @card %></h4>
+        <h4 class="title"><%= @card.card_type %>: <%= @card %></h4>
       </div>
       <div role="toolbar" class="pt-3">
         <%= button_to(t('cocard.get_certificate'),
                       get_certificate_card_path(@card),
-                      class: 'btn btn-warning me-1') if can? :manage, @card
+                      class: 'btn btn-warning me-1') if (@card.card_type == 'SMC-B') and (can? :manage, @card)
          %>
         <%= edit_link(@card) %>
         <%= delete_link(@card) %>
@@ -51,39 +51,6 @@
       </div>
       <div class="col-6">
         <div class="card-title border-bottom bg-light pt-2 ps-2">
-          <h6><%= t('cocard.administrativa')%></h6>
-        </div>
-        <table class="table table-sm table-borderless">
-          <tr>
-            <th class="w-10 pe-3"><%= t('attributes.location')%>:</th>
-            <td><%= link_to(@card.location, polymorphic_path(@card.location)) if @card.location %></td>
-          </tr>
-          <tr>
-            <th class="w-10 pe-3"><%= t('attributes.operational_state')%>:</th>
-            <td><%= @card.operational_state %></td>
-          </tr>
-          <tr>
-            <th class="w-10 pe-3"><%= t('attributes.bsnr')%>:</th>
-            <td><%= @card.bsnr %></td>
-          </tr>
-          <tr>
-            <th class="w-10 pe-3"><%= t('attributes.lanr')%>:</th>
-            <td><%= @card.lanr %></td>
-          </tr>
-          <tr>
-            <th class="w-10 pe-3"><%= t('attributes.fachrichtung')%>:</th>
-            <td><%= @card.fachrichtung %></td>
-          </tr>
-          <tr>
-            <th class="w-10 pe-3"><%= t('attributes.telematikid')%>:</th>
-            <td><%= @card.telematikid %></td>
-          </tr>
-        </table>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-6">
-        <div class="card-title border-bottom bg-light pt-2 ps-2">
           <h6><%= t('cocard.card_data')%></h6>
         </div>
         <table class="table table-sm table-borderless">
@@ -117,8 +84,42 @@
           </tr>
         </table>
       </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <div class="card-title border-bottom bg-light pt-2 ps-2">
+          <h6><%= t('cocard.administrativa')%></h6>
+        </div>
+        <table class="table table-sm table-borderless">
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.location')%>:</th>
+            <td><%= link_to(@card.location, polymorphic_path(@card.location)) if @card.location %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.operational_state')%>:</th>
+            <td><%= @card.operational_state %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.bsnr')%>:</th>
+            <td><%= @card.bsnr %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.lanr')%>:</th>
+            <td><%= @card.lanr %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.fachrichtung')%>:</th>
+            <td><%= @card.fachrichtung %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.telematikid')%>:</th>
+            <td><%= @card.telematikid %></td>
+          </tr>
+        </table>
+      </div>
 
       <div class="col-6">
+       <% if @card.card_type == 'SMC-B' %>
         <div class="card-title border-bottom bg-light pt-2 ps-2">
           <h6><%= t('cocard.certificate_data')%></h6>
         </div>
@@ -156,6 +157,7 @@
             <td><%= @card.cert_subject_o %></td>
           </tr>
         </table>
+       <% end %>
       </div>
     </div>
   </div>
