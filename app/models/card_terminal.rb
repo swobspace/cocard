@@ -42,14 +42,14 @@ class CardTerminal < ApplicationRecord
   end
 
   def update_condition
-    unless up?
+    if connector.nil?
+      self[:condition] = Cocard::States::NOTHING
+    elsif !up?
       self[:condition] = Cocard::States::CRITICAL
-    else
-      if !connected
+    elsif !connected
         self[:condition] = Cocard::States::WARNING
-      else
-        self[:condition] = Cocard::States::OK
-      end
+    else
+      self[:condition] = Cocard::States::OK
     end
   end
 

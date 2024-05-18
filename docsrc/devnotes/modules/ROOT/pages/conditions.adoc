@@ -6,3 +6,7 @@
 == Konnektor
 
 image::connector-condition.svg[]
+
+== CardTerminal
+
+image::card-terminal-condition.svg[]

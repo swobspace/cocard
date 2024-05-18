@@ -21,9 +21,18 @@ UNKNOWN: Connector erreichbar
 UNKNOWN: fetch SDS failed or 
 UNKNOWN: GetResourceInformation failed
 
-note bottom of CRITICAL
+state NOTHING #LightGrey
+
+NOTHING: Configuration may be not complete
+
+note right of CRITICAL
 Connector erreichbar:
   soap_request ok
   OR Ping ok
 end note
+
+NOTHING --> OK
+OK --> WARNING
+WARNING --> CRITICAL
+CRITICAL --> UNKNOWN
 @enduml

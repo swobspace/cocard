@@ -1,0 +1,26 @@
+@startuml
+
+state OK #lightgreen
+
+OK: CardTerminal online
+
+state WARNING #LightYellow
+
+WARNING: CardTerminal nicht verbunden
+
+state CRITICAL #orangered
+
+CRITICAL: CardTerminal nicht erreichbar
+
+state UNKNOWN #Orange
+UNKNOWN: not yet implemented
+
+state NOTHING #LightGrey
+NOTHING: Configuration may be not complete
+NOTHING: Kein Connector eingetragen
+
+NOTHING --> OK
+OK --> WARNING
+WARNING --> CRITICAL
+CRITICAL --> UNKNOWN
+@enduml

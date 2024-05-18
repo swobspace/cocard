@@ -2,8 +2,10 @@ require 'rails_helper'
 
 RSpec.describe CardTerminal, type: :model do
   let(:location) { FactoryBot.create(:location, lid: 'ACX') }
+  let(:connector) { FactoryBot.create(:connector) }
   let(:ct) do
     FactoryBot.create(:card_terminal,
+      connector: connector,
       name: 'ACME Term',
       ct_id: 'CT_ID_0123',
       location: location,
@@ -61,6 +63,17 @@ RSpec.describe CardTerminal, type: :model do
 
   describe "#update_condition" do
     it { expect(ct.condition).to eq(Cocard::States::NOTHING) }
+
+    describe "without connector" do
+      it "-> NOTHING" do
+        ct.update(condition: Cocard::States::OK)
+        ct.reload
+        expect(ct).to receive(:connector).and_return(nil)
+        expect {
+          ct.update_condition
+        }.to change(ct, :condition).to(Cocard::States::NOTHING)
+      end
+    end
 
     describe "with ping failed" do
       it "-> CRITICAL" do
