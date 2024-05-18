@@ -48,7 +48,7 @@ class Card < ApplicationRecord
       self[:condition] = Cocard::States::WARNING
     elsif card_type == 'SMC-B' and certificate.blank?
       self[:condition] = Cocard::States::UNKNOWN
-    elsif updated_at <= 15.minutes.before(Time.current)
+    elsif updated_at <= 2.days.before(Time.current)
       self[:condition] = Cocard::States::UNKNOWN
     elsif
       self[:condition] = Cocard::States::OK

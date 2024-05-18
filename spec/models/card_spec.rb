@@ -109,7 +109,7 @@ RSpec.describe Card, type: :model do
       it "-> UNKNOWN" do
         card.update(condition: Cocard::States::OK)
         card.reload
-        expect(card).to receive(:updated_at).at_least(:once).and_return(1.hour.before(Time.current))
+        expect(card).to receive(:updated_at).at_least(:once).and_return(49.hour.before(Time.current))
         expect {
           card.update_condition
         }.to change(card, :condition).to(Cocard::States::UNKNOWN)
