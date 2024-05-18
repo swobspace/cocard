@@ -71,6 +71,18 @@ module Cocard
          it { expect(subject.call.success?).to be_falsey }
       end
 
+      describe "with empty context" do
+        let(:context) { nil }
+
+        it "does not raise an error" do
+          expect {
+            subject.call
+          }.not_to raise_error
+        end
+        it { expect(subject.call.success?).to be_falsey }
+        it { expect(subject.call.error_messages).to include("No Context assigned!") }
+      end
+
       describe "successful call" do
         before(:each) do
           expect(Cocard::SOAP::ReadCardCertificate).to receive(:new).and_return(soap)

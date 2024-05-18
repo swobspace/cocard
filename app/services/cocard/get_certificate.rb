@@ -17,11 +17,8 @@ module Cocard
     def initialize(options = {})
       options.symbolize_keys
       @card          = options.fetch(:card)
-      @context       = options.fetch(:context)
+      @context       = options.fetch(:context) { @card.context }
       @connector     = @card.card_terminal&.connector
-      @mandant       = @context.mandant
-      @client_system = @context.client_system
-      @workplace     = @context.workplace
     end
 
     # service.call()
@@ -34,13 +31,20 @@ module Cocard
       if @connector.blank?
         error_messages << "No Connector assigned!"
       end
+      if @context.blank?
+        error_messages << "No Context assigned!"
+      end
+      if error_messages.any?
+        return Result.new(success?: false, error_messages: error_messages, 
+                          certificate: nil)
+      end
 
       result = Cocard::SOAP::ReadCardCertificate.new(
                  card_handle: card.card_handle,
                  connector: connector,
-                 mandant: mandant,
-                 client_system: client_system,
-                 workplace: workplace).call
+                 mandant: context.mandant,
+                 client_system: context.client_system,
+                 workplace: context.workplace).call
       if error_messages.blank? and result.success?
         rawcert = result.response[:read_card_certificate_response][:x509_data_info_list][:x509_data_info][:x509_data][:x509_certificate]
         cert = Cocard::Certificate.new(rawcert)
@@ -69,6 +73,6 @@ module Cocard
     end
 
   private
-    attr_reader :connector, :context, :workplace, :mandant, :client_system, :card
+    attr_reader :connector, :context, :card
   end
 end
