@@ -135,6 +135,8 @@ bin/rails g migration AddInternalToCard \
   insert_time:timestamp \
   card_holder_name:string \
   expiration_date:date \
+  condition:integer \
+  pin_status:string \
   card_terminal:belongs_to
 
 bin/rails g migration AddCertificateToCard \

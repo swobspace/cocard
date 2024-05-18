@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_14_162754) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_18_110719) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -69,6 +69,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_14_162754) do
     t.string "room", default: ""
     t.string "contact", default: ""
     t.string "plugged_in", default: ""
+    t.index ["condition"], name: "index_card_terminals_on_condition"
     t.index ["connector_id"], name: "index_card_terminals_on_connector_id"
     t.index ["location_id"], name: "index_card_terminals_on_location_id"
     t.index ["mac"], name: "index_card_terminals_on_mac", unique: true
@@ -103,11 +104,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_14_162754) do
     t.string "cert_subject_cn", default: ""
     t.string "cert_subject_o", default: ""
     t.bigint "context_id"
+    t.integer "condition", default: -1
+    t.string "pin_status", default: ""
     t.index ["card_terminal_id"], name: "index_cards_on_card_terminal_id"
+    t.index ["condition"], name: "index_cards_on_condition"
     t.index ["context_id"], name: "index_cards_on_context_id"
     t.index ["iccsn"], name: "index_cards_on_iccsn", unique: true
     t.index ["location_id"], name: "index_cards_on_location_id"
     t.index ["operational_state_id"], name: "index_cards_on_operational_state_id"
+    t.index ["pin_status"], name: "index_cards_on_pin_status"
+  end
+
+  create_table "clients", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description", default: ""
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "clients_connectors", id: false, force: :cascade do |t|

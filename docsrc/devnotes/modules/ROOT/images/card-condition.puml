@@ -1,0 +1,29 @@
+@startuml
+
+state OK #lightgreen
+
+OK: Card online
+OK: SMC-B PIN verified
+OK: Zertifikat gültig > 3 Monate
+
+state WARNING #Yellow
+
+WARNING: Zertifikat gültig, <= 3 Monate
+
+state CRITICAL #orangered
+
+CRITICAL: Zertifikat abgelaufen
+CRITICAL: SMC-B PIN not verified
+
+state UNKNOWN #LightSkyBlue
+UNKNOWN: SMC-B: Zertifikat nicht eingelesen
+
+state NOTHING #LightGrey
+NOTHING: Connector nicht zugewiesen
+NOTHING: SMC-B Context nicht zugewiesen
+
+NOTHING --> OK
+OK --> WARNING
+WARNING --> CRITICAL
+CRITICAL --> UNKNOWN
+@enduml

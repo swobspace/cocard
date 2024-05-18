@@ -76,6 +76,8 @@ class Card {
   insert_time: timestamp
   card_holder_name: string
   expiration_date: date
+  condition: integer
+  pin_status: string
   card_terminal_id
   --
   certificate:text
