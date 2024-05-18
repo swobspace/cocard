@@ -51,6 +51,6 @@ class OperationalStatesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def operational_state_params
-      params.require(:operational_state).permit(:name, :description)
+      params.require(:operational_state).permit(:name, :description, :operational)
     end
 end

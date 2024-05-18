@@ -17,10 +17,12 @@ CRITICAL: SMC-B PIN not verified
 
 state UNKNOWN #LightSkyBlue
 UNKNOWN: SMC-B: Zertifikat nicht eingelesen
+UNKNOWN: kein Update seit 2 Tagen bei "Karte in Betrieb"
 
 state NOTHING #LightGrey
 NOTHING: Connector nicht zugewiesen
 NOTHING: SMC-B Context nicht zugewiesen
+NOTHING: Karte nicht in Betrieb
 
 NOTHING --> OK
 OK --> WARNING

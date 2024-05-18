@@ -20,6 +20,7 @@ RSpec.describe "operational_states/edit", type: :view do
       assert_select "input[name=?]", "operational_state[name]"
 
       assert_select "input[name=?]", "operational_state[description]"
+      assert_select "input[name=?]", "operational_state[operational]"
     end
   end
 end

@@ -104,6 +104,7 @@ Class TerminalWorkplaces {
 Class OperationalState {
   name: string
   description: string
+  operational: boolean
 }
 
 Location "*" -- "*" Connector

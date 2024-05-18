@@ -79,7 +79,8 @@ RSpec.describe "/operational_states", type: :request do
     context "with valid parameters" do
       let(:new_attributes) {{
         name: "roquefort",
-        description: "dont knoff"
+        description: "dont knoff",
+        operational: true
       }}
 
       it "updates the requested operational_state" do
@@ -88,6 +89,7 @@ RSpec.describe "/operational_states", type: :request do
         operational_state.reload
         expect(operational_state.name).to eq('roquefort')
         expect(operational_state.description).to eq('dont knoff')
+        expect(operational_state.operational).to be_truthy
       end
 
       it "redirects to the operational_state" do

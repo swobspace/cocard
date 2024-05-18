@@ -4,7 +4,8 @@ RSpec.describe "operational_states/show", type: :view do
   before(:each) do
     assign(:operational_state, OperationalState.create!(
       name: "Name",
-      description: "Description"
+      description: "Description",
+      operational: true
     ))
   end
 
@@ -12,5 +13,6 @@ RSpec.describe "operational_states/show", type: :view do
     render
     expect(rendered).to match(/Name/)
     expect(rendered).to match(/Description/)
+    expect(rendered).to match(/true/)
   end
 end

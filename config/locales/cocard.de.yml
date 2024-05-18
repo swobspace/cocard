@@ -90,6 +90,7 @@ de:
     location_ids: Standorte
     manual_update: manuelles Update
     name: Name
+    operational: in Betrieb
     operational_state: Betriebszustand
     plugged_in: Netzwerk/Dose/Switch
     room: Raum

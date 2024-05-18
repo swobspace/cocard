@@ -166,6 +166,7 @@ end
 bin/rails g scaffold OperationalState \
   name:string \
   description:string \
+  operational:boolean:index \
   --no-stylesheets --no-javascripts --no-helper
 ----
 

@@ -14,11 +14,13 @@
       <tr>
             <th><%= t('attributes.name') %></th>
             <th><%= t('attributes.description') %></th>
+            <th><%= t('attributes.operational') %></th>
             <th class="nosort"><%= t('cocard.action') %></th>
       </tr>
     </thead>
     <tfoot class="search">
       <tr>
+            <th></th>
             <th></th>
             <th></th>
             <th class="nosearch"></th>
@@ -29,6 +31,7 @@
         <%= content_tag(:tr, id: dom_id(operational_state), class: dom_class(operational_state)) do %>
                 <td><%= operational_state.name %></td>
                 <td><%= operational_state.description %></td>
+                <td><%= operational_state.operational %></td>
                 <td class="text-nowrap">
             <%= show_link operational_state %>
             <%= edit_link operational_state %>
