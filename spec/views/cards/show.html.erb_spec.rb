@@ -13,6 +13,11 @@ RSpec.describe "cards/show", type: :view do
   end
   let(:ts) { Time.current }
   before(:each) do
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    allow(controller).to receive(:current_ability) { @ability }
+    allow(controller).to receive(:controller_name) { 'cards' }
+    allow(controller).to receive(:action_name) { 'show' }
     assign(:card, Card.create!(
       card_terminal_id: ct.id,
       context_id: context.id,

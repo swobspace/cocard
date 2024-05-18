@@ -8,6 +8,11 @@ RSpec.describe "cards/index", type: :view do
 
   let(:ts) { Time.current }
   before(:each) do
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    allow(controller).to receive(:current_ability) { @ability }
+    allow(controller).to receive(:controller_name) { 'cards' }
+    allow(controller).to receive(:action_name) { 'index' }
     assign(:cards, [
       Card.create!(
         card_terminal_id: ct.id,
