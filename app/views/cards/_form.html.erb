@@ -16,7 +16,8 @@
        %>
     <%= form.association :operational_state
        %>
-    <%= form.association :context
+    <%= form.association :context,
+        hint: t('hint_context', scope: 'form.card')
        %>
     <%= form.input :lanr
      %>

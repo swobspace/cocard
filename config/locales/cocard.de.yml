@@ -115,3 +115,7 @@ de:
 
   contexts:
     add: Kontext hinzufügen
+
+  form:
+    card:
+      hint_context: Nur erforderlich für SMC-B (Abfrage Zertifikat, PIN-Status)
