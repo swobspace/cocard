@@ -59,8 +59,12 @@ module Cards
       end
 
       context 'with an existing card' do
+        let(:ctx) { FactoryBot.create(:context) }
         let!(:card) do
-          FactoryBot.create(:card, iccsn: '80276002711000000000')
+          FactoryBot.create(:card, 
+            iccsn: '80276002711000000000',
+            context: ctx
+          )
         end
         before(:each) { card.reload }
         it 'does not create a card' do
@@ -87,7 +91,7 @@ module Cards
           it { expect(card.card_holder_name).to eq("Doctor Who's Universe") }
           it { expect(card.expiration_date).to eq(1.year.after(Date.current)) }
           it { expect(card.operational_state.operational).to be_truthy }
-          it { expect(card.condition).to eq(Cocard::States::OK) }
+          it { expect(card.condition).to eq(Cocard::States::CRITICAL) }
         end
       end
     end
