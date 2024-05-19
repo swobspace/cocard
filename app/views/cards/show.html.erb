@@ -1,6 +1,6 @@
 <div class="card mb-3">
   <div class="card-header">
-    <div class="d-flex w-100 justify-content-between">
+    <div class="d-flex w-100">
       <div>
         <span class="subtitle">
           <%= t('activerecord.models.card') %>: 
@@ -8,7 +8,10 @@
         </span>
         <h4 class="title"><%= @card.card_type %>: <%= @card %></h4>
       </div>
-      <div role="toolbar" class="pt-3">
+      <div class="ms-3 pt-3">
+        <%= render ConditionIconComponent.new(item: @card) %>
+      </div>
+      <div role="toolbar" class="ms-auto pt-3">
         <%= button_to(t('cocard.get_certificate'),
                       get_certificate_card_path(@card),
                       class: 'btn btn-warning me-1') if (@card.card_type == 'SMC-B') and (can? :manage, @card)
