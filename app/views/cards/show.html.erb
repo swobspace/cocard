@@ -50,6 +50,16 @@
             <th class="w-10 pe-3"><%= t('attributes.context')%>:</th>
             <td><%= @card.context %></td>
           </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.condition')%>:</th>
+            <td><%= @card.condition_message %></td>
+          </tr>
+          <% if @card.card_type == 'SMC-B' %>
+            <tr>
+              <th class="w-10 pe-3"><%= t('attributes.pin_status')%>:</th>
+              <td><%= render Card::PinStatusComponent.new(card: @card) %></td>
+            </tr>
+          <% end %>
         </table>
       </div>
       <div class="col-6">
