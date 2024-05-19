@@ -62,7 +62,7 @@ private
 
 
   def ensure_update_condition
-    if pin_status_changed? or expiration_date_changed?
+    if pin_status_changed? or expiration_date_changed? or card_handle_changed?
       update_condition
     end
   end
