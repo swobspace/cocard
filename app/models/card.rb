@@ -22,9 +22,15 @@ class Card < ApplicationRecord
     shortcut = Cocard::States::flag(condition)
     case condition
       when Cocard::States::CRITICAL
-        shortcut + " CRITICAL - Certificate expired; PIN not verified(SMC-B only)"
+        if expiration_date.blank? 
+          shortcut + " CRITICAL - ???"
+        elsif expiration_date < Date.current
+          shortcut + " CRITICAL - Certificate expired"
+        else
+          shortcut + " CRITICAL - PIN not verified (SMC-B only)"
+        end
       when Cocard::States::UNKNOWN
-        shortcut + " UNKNOWN - old data; certificate not read (SMC-B only)"
+        shortcut + " UNKNOWN - no current data available or certificate not read (SMC-B only)"
       when Cocard::States::WARNING 
         shortcut + " WARNING - Certificate expires in less than 3 month"
       when Cocard::States::OK
@@ -35,24 +41,23 @@ class Card < ApplicationRecord
   end
   
   def update_condition
-    if !operational_state&.operational
+    if !operational_state&.operational or
+       card_terminal&.connector.nil? or
+       expiration_date.nil? or
+       (card_type == 'SMC-B' and context.nil?)
       self[:condition] = Cocard::States::NOTHING
-    elsif card_terminal&.connector.nil?
-      self[:condition] = Cocard::States::NOTHING
-    elsif expiration_date.nil?
-      self[:condition] = Cocard::States::NOTHING
-    elsif card_type == 'SMC-B' and context.nil?
-      self[:condition] = Cocard::States::NOTHING
-    elsif expiration_date <= Date.current
+
+    elsif (expiration_date <= Date.current) or
+          (card_type == 'SMC-B' and pin_status != 'VERIFIED')
       self[:condition] = Cocard::States::CRITICAL
-    elsif card_type == 'SMC-B' and pin_status != 'VERIFIED'
-      self[:condition] = Cocard::States::CRITICAL
+
     elsif expiration_date <= 3.month.after(Date.current)
       self[:condition] = Cocard::States::WARNING
-    elsif card_type == 'SMC-B' and certificate.blank?
+
+    elsif (card_type == 'SMC-B' and certificate.blank?) or
+          updated_at <= 15.minutes.before(Time.current)
       self[:condition] = Cocard::States::UNKNOWN
-    elsif updated_at <= 2.days.before(Time.current)
-      self[:condition] = Cocard::States::UNKNOWN
+
     elsif
       self[:condition] = Cocard::States::OK
     else

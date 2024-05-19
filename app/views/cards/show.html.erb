@@ -60,6 +60,10 @@
               <td><%= render Card::PinStatusComponent.new(card: @card) %></td>
             </tr>
           <% end %>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.updated_at')%>:</th>
+            <td><%= render UpdatedAtComponent.new(item: @card, period: 15.minutes) %></td>
+          </tr>
         </table>
       </div>
       <div class="col-6">
