@@ -24,7 +24,7 @@ RSpec.describe "cards/show", type: :view do
       name: "GemaCard",
       description: "some other text",
       card_handle: "7fb65ede-0a37-11ef-8f85-c025a5b36994",
-      card_type: "SMB-C",
+      card_type: "SMC-B",
       iccsn: "8027612345678",
       insert_time: ts,
       card_holder_name: "Doctor Who's Universe",
@@ -54,7 +54,7 @@ RSpec.describe "cards/show", type: :view do
     expect(rendered).to match(/Card Gema/)
     expect(rendered).to match(/some other text/)
     expect(rendered).to match(/7fb65ede-0a37-11ef-8f85-c025a5b36994/)
-    expect(rendered).to match(/SMB-C/)
+    expect(rendered).to match(/SMC-B/)
     expect(rendered).to match(/8027612345678/)
     expect(rendered).to match(/22232/)
     expect(rendered).to match(/#{ts.to_s}/)
