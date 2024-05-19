@@ -5,7 +5,7 @@ module Cards
   # Create or update Card
   #
   class Creator
-    attr_reader :channel
+    attr_reader :card
 
     # creator = Card::Creator(options)
     #
@@ -46,6 +46,10 @@ module Cards
           @card.send("#{attr}=", cc.send(attr))
         end
         @card.card_terminal = ct
+        # -- card seen by connector, so must be operational
+        @card.operational_state = OperationalState.operational.first
+        # -- update condition
+        @card.update_condition
       end
 
       if @card.save

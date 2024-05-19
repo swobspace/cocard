@@ -3,6 +3,8 @@
 require 'rails_helper'
 module Cards
   RSpec.describe Creator do
+    let!(:opsta) { FactoryBot.create(:operational_state, operational: true) }
+    # fixtures :operational_states
     let(:connector) { FactoryBot.create(:connector) }
     let!(:ct) do
       FactoryBot.create(:card_terminal, 
@@ -84,6 +86,8 @@ module Cards
           it { expect(card.insert_time.floor).to eq(ts.floor) }
           it { expect(card.card_holder_name).to eq("Doctor Who's Universe") }
           it { expect(card.expiration_date).to eq(1.year.after(Date.current)) }
+          it { expect(card.operational_state.operational).to be_truthy }
+          it { expect(card.condition).to eq(Cocard::States::OK) }
         end
       end
     end
