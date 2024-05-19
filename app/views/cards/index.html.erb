@@ -90,7 +90,7 @@
           <td><%= card.card_handle %></td>
           <td><%= card.insert_time %></td>
           <td><%= card.card_holder_name %></td>
-          <td><%= card.expiration_date %></td>
+          <td><%= render Card::ExpirationDateComponent.new(card: card) %></td>
           <td><%= card.operational_state %></td>
           <td><%= card.location %></td>
           <td><%= card.lanr %></td>
