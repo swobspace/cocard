@@ -8,6 +8,8 @@ class OperationalState < ApplicationRecord
                    uniqueness: { case_sensitive: false, allow_blank: false }
 
   # -- common methods
+  scope :operational, -> { where(operational: true) }
+
   def to_s
     "#{name}"
   end
