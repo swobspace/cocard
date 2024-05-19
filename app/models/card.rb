@@ -19,17 +19,18 @@ class Card < ApplicationRecord
 
 
   def condition_message
+    shortcut = Cocard::States::flag(condition)
     case condition
       when Cocard::States::CRITICAL
-        "CRITICAL - Certificate expired; PIN not verified(SMC-B only)"
+        shortcut + " CRITICAL - Certificate expired; PIN not verified(SMC-B only)"
       when Cocard::States::UNKNOWN
-        "UNKNOWN - old data; certificate not read (SMC-B only)"
+        shortcut + " UNKNOWN - old data; certificate not read (SMC-B only)"
       when Cocard::States::WARNING 
-        "WARNING - Certificate expires in less than 3 month"
+        shortcut + " WARNING - Certificate expires in less than 3 month"
       when Cocard::States::OK
-        "OK - Certificate valid (>= 3 month); PIN verified (SMC-B only)"
+        shortcut + " OK - Certificate valid (>= 3 month); PIN verified (SMC-B only)"
       when Cocard::States::NOTHING
-        "UNUSED - Missing connector or no context assigned (SMC-B only)"
+        shortcut + " UNUSED - Missing connector or no context assigned (SMC-B only)"
     end
   end
   
