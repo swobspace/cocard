@@ -26,8 +26,11 @@ module Cocard
             msg = "DEBUG:: #{connector.name} - #{con_ctx.context}: " +
                   "fetching card successful"
             Rails.logger.debug(msg)
-            result.cards.each do |card|
-              Cards::Creator.new(connector: connector, cc: card).save
+            result.cards.each do |cc|
+              creator = Cards::Creator.new(connector: connector, cc: cc)
+              if creator.save
+                process_card(creator.card)
+              end
             end
           else
             msg = "WARN:: #{connector.name}: get cards failed\n" +
@@ -42,5 +45,26 @@ module Cocard
       0
     end
 
+  private
+
+    def process_card(card)
+      return unless card.card_type == 'SMC-B'
+
+      if card.certificate.blank?
+        result = Cocard::GetCertificate.new(card: card).call
+        unless result.success?
+           msg = "WARN:: #{card}: get certificate failed\n" +
+                  result.error_messages.join("\n")
+          Rails.logger.warn(msg)
+        end
+      end
+
+      result = Cocard::GetPinStatus.new(card: card).call
+      unless result.success?
+         msg = "WARN:: #{card}: get pin status failed\n" +
+                result.error_messages.join("\n")
+        Rails.logger.warn(msg)
+      end
+    end
   end
 end
