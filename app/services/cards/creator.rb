@@ -16,7 +16,8 @@ module Cards
     def initialize(options = {})
       options.symbolize_keys
       @connector = options.fetch(:connector)
-      @cc       = options.fetch(:cc)
+      @cc        = options.fetch(:cc)
+      @card      = nil
     end
 
     # rubocop:disable Metrics/AbcSize, Rails/SkipsModelValidations

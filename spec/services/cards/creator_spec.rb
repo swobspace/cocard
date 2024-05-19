@@ -55,6 +55,7 @@ module Cards
           expect do
             subject.save
           end.to change(Card, :count).by(1)
+          expect(subject.card).to be_kind_of(Card)
         end
       end
 
@@ -73,6 +74,8 @@ module Cards
           expect {
             subject.save
           }.to change(Card, :count).by(0)
+          expect(subject.card).to be_kind_of(Card)
+          expect(subject.card).to eq(card)
         end
 
         it { expect(subject.save).to be_truthy }
