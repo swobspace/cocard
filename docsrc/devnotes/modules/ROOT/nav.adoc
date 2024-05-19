@@ -2,4 +2,5 @@
 * xref:modeling.adoc[]
 * xref:cocard-services.adoc[]
 * xref:conditions.adoc[]
+* xref:healthcheck.adoc[]
 * xref:todo.adoc[]

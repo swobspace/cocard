@@ -1,0 +1,15 @@
+= Healthchecks
+:author: Wolfgang Barth
+:revdate: 2024-05-19
+:imagesdir: ../images
+
+== GoodJob
+
+.Jobs, die fehlerhaft beendet wurden und nicht wiederholt werden
+[source,ruby]
+----
+GoodJob::Job.discarded
+GoodJob::Job.discarded
+            .where('finished_at > ?', 2.days.before(Date.current))
+            .pluck(:finished_at)
+----
