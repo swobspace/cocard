@@ -115,13 +115,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_18_163654) do
     t.index ["pin_status"], name: "index_cards_on_pin_status"
   end
 
-  create_table "clients_connectors", id: false, force: :cascade do |t|
-    t.bigint "client_id", null: false
-    t.bigint "connector_id", null: false
-    t.index ["client_id", "connector_id"], name: "index_clients_connectors_on_client_id_and_connector_id", unique: true
-    t.index ["connector_id", "client_id"], name: "index_clients_connectors_on_connector_id_and_client_id", unique: true
-  end
-
   create_table "connector_contexts", force: :cascade do |t|
     t.bigint "connector_id", null: false
     t.bigint "context_id", null: false
