@@ -58,6 +58,8 @@ module Cards
         end
       end
 
+      it { expect(subject.save).to be_truthy }
+
       context 'with an existing card' do
         let(:ctx) { FactoryBot.create(:context) }
         let!(:card) do
