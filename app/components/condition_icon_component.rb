@@ -34,7 +34,7 @@ class ConditionIconComponent < ViewComponent::Base
         @icon  = "fa-solid fa-circle-check"
       else
         @button_class = "#{size} btn-secondary"
-        @icon  = "fa-solid fa-circle-question"
+        @icon  = "fa-solid fa-circle-xmark"
     end
   end
 
