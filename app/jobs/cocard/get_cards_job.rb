@@ -1,4 +1,5 @@
 module Cocard
+  include Cocard::ProcessCard
   # 
   # Fetch SDS info from connectors
   #
@@ -29,7 +30,7 @@ module Cocard
             result.cards.each do |cc|
               creator = Cards::Creator.new(connector: connector, cc: cc)
               if creator.save
-                process_card(creator.card)
+                ProcessCard.process_card(creator.card)
               end
             end
           else
@@ -47,24 +48,5 @@ module Cocard
 
   private
 
-    def process_card(card)
-      return unless card.card_type == 'SMC-B'
-
-      if card.certificate.blank?
-        result = Cocard::GetCertificate.new(card: card).call
-        unless result.success?
-           msg = "WARN:: #{card}: get certificate failed\n" +
-                  result.error_messages.join("\n")
-          Rails.logger.warn(msg)
-        end
-      end
-
-      result = Cocard::GetPinStatus.new(card: card).call
-      unless result.success?
-         msg = "WARN:: #{card}: get pin status failed\n" +
-                result.error_messages.join("\n")
-        Rails.logger.warn(msg)
-      end
-    end
   end
 end
