@@ -12,6 +12,8 @@ module Cocard::SOAP
     # * :mandant - string
     # * :client_system - string
     # * :workplace - string
+    # optional:
+    # * :iccsn - string
     #
     # returns:
     # Result.new(:success? (Boolean), :error_messages (Array), :response (Hash))
@@ -20,10 +22,8 @@ module Cocard::SOAP
       options.symbolize_keys
       # test for soap operation
       opera = soap_operation
-      @connector        = options.fetch(:connector)
-      @mandant          = options.fetch(:mandant)
-      @client_system = options.fetch(:client_system)
-      @workplace     = options.fetch(:workplace)
+      @connector     = options.fetch(:connector)
+      @options       = options
       @savon_client = init_savon_client
     end
 
@@ -34,12 +34,8 @@ module Cocard::SOAP
       begin
         response = @savon_client
                    .call(soap_operation,
-                         :attributes => soap_operation_attributes,
-                         message: {
-                           "CCTX:Context" => {
-                           "CONN:MandantId"      => @mandant,
-                           "CONN:ClientSystemId" => @client_system,
-                           "CONN:WorkplaceId"    => @workplace  }})
+                         attributes: soap_operation_attributes,
+                         message: soap_message(@options))
       rescue Savon::Error => error
         fault = error.to_hash[:fault]
         error_messages = [fault[:faultcode], fault[:faultstring]]
@@ -56,6 +52,20 @@ module Cocard::SOAP
 
     def soap_operation_attributes
       {}
+    end
+
+  protected
+
+    def soap_message(options)
+      @mandant       = options.fetch(:mandant)
+      @client_system = options.fetch(:client_system)
+      @workplace     = options.fetch(:workplace)
+      { 
+        "CCTX:Context" => {
+          "CONN:MandantId"      => @mandant,
+          "CONN:ClientSystemId" => @client_system,
+          "CONN:WorkplaceId"    => @workplace  }
+      }
     end
 
   private
@@ -93,7 +103,7 @@ module Cocard::SOAP
       {
         # "xmlns:CCTX" => "http://ws.gematik.de/conn/ConnectorContext/v2.0",
         "xmlns:CONN" => "http://ws.gematik.de/conn/ConnectorCommon/v5.0",
-        # "xmlns:m2" => "http://ws.gematik.de/conn/CardServiceCommon/v2.0",
+        "xmlns:CARDCMN" => "http://ws.gematik.de/conn/CardServiceCommon/v2.0",
        }
     end
   end
