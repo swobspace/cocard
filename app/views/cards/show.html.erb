@@ -62,7 +62,7 @@
           <% end %>
           <tr>
             <th class="w-10 pe-3"><%= t('attributes.updated_at')%>:</th>
-            <td><%= render UpdatedAtComponent.new(item: @card, period: 15.minutes) %></td>
+            <td><%= render UpdatedAtComponent.new(item: @card) %></td>
           </tr>
         </table>
       </div>
