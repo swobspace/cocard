@@ -33,6 +33,7 @@ de:
     get_resource_information: Abfrage Konnektor
     get_cards_terminal: Abfrage Kartenterminals
     get_cards: Abfrage Karten
+    get_card: Karte aktualisieren
     get_certificate: Zertifikat lesen
 
   activerecord:

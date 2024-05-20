@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :cards do
     member do
       post :get_certificate
+      post :get_card
     end
   end
   resources :card_terminals do

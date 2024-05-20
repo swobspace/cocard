@@ -47,6 +47,16 @@ class CardsController < ApplicationController
     respond_with(@card, action: :show)
   end
 
+  def get_card
+      result = Cocard::GetCard.new(card: @card).call
+    unless result.success?
+      @card.errors.add(:base, :invalid)
+      @card.errors.add(:base, result.error_messages.join("; "))
+      flash[:alert] = result.error_messages.join(', ')
+    end
+    respond_with(@card, action: :show)
+  end
+
   # DELETE /cards/1
   def destroy
     @card.destroy!

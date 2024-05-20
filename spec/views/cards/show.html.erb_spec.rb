@@ -15,6 +15,7 @@ RSpec.describe "cards/show", type: :view do
   before(:each) do
     @ability = Object.new
     @ability.extend(CanCan::Ability)
+    @ability.can :manage, Card
     allow(controller).to receive(:current_ability) { @ability }
     allow(controller).to receive(:controller_name) { 'cards' }
     allow(controller).to receive(:action_name) { 'show' }
