@@ -1,4 +1,5 @@
 class Card < ApplicationRecord
+  include CardConcerns
   # -- associations
   belongs_to :card_terminal, optional: true
   belongs_to :context, optional: true

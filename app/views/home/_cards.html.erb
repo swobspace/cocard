@@ -1,0 +1,38 @@
+<div id="failed_cards">
+ <% if cards.size > 0 %>
+  <%= content_tag :table,
+        id: "cards_table",
+        class: "table tablesm mb-0" do %>
+    <thead>
+      <tr class="">
+        <th class="text-center"><%= t('attributes.condition') %></th>
+        <th><%= t('attributes.card_type') %></th>
+        <th><%= t('attributes.name') %></th>
+        <th><%= t('attributes.condition_message') %></th>
+        <th><%= t('attributes.iccsn') %></th>
+        <th><%= t('attributes.connector') %></th>
+        <th><%= t('attributes.card_terminal') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% cards.each do |card| %>
+        <%= content_tag(:tr, id: dom_id(card)) do %>
+          <td class="text-center">
+            <%= render ConditionIconComponent.new(item: card, small: true) %>
+          </td>
+          <td><%= card.card_type %></td>
+          <td><%= card.name %></td>
+          <td><%= card.condition_message %></td>
+          <td><%= link_to card.iccsn, card_path(card) %></td>
+          <td><%= link_to(card.card_terminal&.connector,
+                          connector_path(card.card_terminal&.connector)
+                         ) if card.card_terminal&.connector %></td>
+          <td><%= link_to(card.card_terminal&.ct_id,
+                          card_terminal_path(card.card_terminal)
+                         ) if card.card_terminal %></td>
+        <% end %>
+      <% end %>
+    </tbody>
+  <% end %>
+ <% end %>
+</div>
