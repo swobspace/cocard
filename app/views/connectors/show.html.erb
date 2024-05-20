@@ -63,7 +63,10 @@
 
           <tr>
             <th class="w-10 pe-3"><%= t('attributes.manual_update')%>:</th>
-            <td><%= @connector.manual_update %></td>
+            <td>
+              <%= Cocard::States::flag(Cocard::States::WARNING) if @connector.manual_update %>
+              <%= @connector.manual_update %>
+            </td>
           </tr>
           <tr>
             <th class="w-10 pe-3"><%= t('attributes.locations')%>:</th>
@@ -75,11 +78,15 @@
           </tr>
           <tr>
             <th class="w-10 pe-3"><%= t('attributes.last_check')%>:</th>
-            <td><%= @connector.last_check&.localtime %></td>
+            <td>
+              <%= render IsCurrentComponent.new(item: @connector, attr: :last_check) %>
+            </td>
           </tr>
           <tr>
             <th class="w-10 pe-3"><%= t('attributes.last_check_ok')%>:</th>
-            <td><%= @connector.last_check_ok&.localtime %></td>
+            <td>
+              <%= render IsCurrentComponent.new(item: @connector, attr: :last_check_ok) %>
+            </td>
           </tr>
           <tr>
             <th class="w-10 pe-3"><%= t('attributes.condition')%>:</th>

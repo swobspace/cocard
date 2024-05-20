@@ -48,8 +48,8 @@
                 <td><%= connector.manual_update %></td>
                 <td><%= connector.locations.map(&:lid).join('; ') %></td>
                 <td><%= connector.firmware_version %></td>
-                <td><%= connector.last_check&.localtime %></td>
-                <td><%= connector.last_check_ok&.localtime %></td>
+                <td><%= render IsCurrentComponent.new(item: connector, attr: :last_check) %></td>
+                <td><%= render IsCurrentComponent.new(item: connector, attr: :last_check_ok) %></td>
                 <td class="text-nowrap">
             <%= show_link connector %>
             <%= edit_link connector %>
