@@ -30,7 +30,7 @@ class Card < ApplicationRecord
           shortcut + " CRITICAL - PIN not verified (SMC-B only)"
         end
       when Cocard::States::UNKNOWN
-        shortcut + " UNKNOWN - no current data available or certificate not read (SMC-B only)"
+        shortcut + " UNKNOWN - card not found or certificate not read (SMC-B only)"
       when Cocard::States::WARNING 
         shortcut + " WARNING - Certificate expires in less than 3 month"
       when Cocard::States::OK
@@ -54,8 +54,7 @@ class Card < ApplicationRecord
     elsif expiration_date <= 3.month.after(Date.current)
       self[:condition] = Cocard::States::WARNING
 
-    elsif (card_type == 'SMC-B' and certificate.blank?) or
-          updated_at <= 15.minutes.before(Time.current)
+    elsif (card_type == 'SMC-B' and certificate.blank?)
       self[:condition] = Cocard::States::UNKNOWN
 
     elsif
