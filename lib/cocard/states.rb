@@ -13,7 +13,7 @@ module Cocard
       case state
       when UNKNOWN then "\u2753"
       when CRITICAL then "\u274C"
-      when WARNING then "\u26A1"
+      when WARNING then "\u26A0"
       when OK then "\u2705"
       else
         ""
