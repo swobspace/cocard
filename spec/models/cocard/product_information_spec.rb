@@ -20,6 +20,10 @@ module Cocard
           expect { Cocard::ProductInformation.new(nil) }.not_to raise_error
         end
       end
+
+      describe "#firmware_version" do
+        it { expect(subject.firmware_version).to eq('5.1.8') }
+      end
      
       describe "#to_s" do
         it "shows product information summary" do
@@ -61,6 +65,10 @@ module Cocard
          :product_miscellaneous=>{:product_vendor_name=>nil, :product_name=>nil}}
       end
       subject { Cocard::ProductInformation.new(prod_info_hash) }
+
+      describe "#firmware_version" do
+        it { expect(subject.firmware_version).to eq('3.8.2') }
+      end
 
       describe "#to_s" do
         it "shows product information summary" do
