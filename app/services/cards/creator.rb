@@ -48,7 +48,9 @@ module Cards
         end
         @card.card_terminal = ct
         # -- card seen by connector, so must be operational
-        @card.operational_state = OperationalState.operational.first
+        unless @card.operational_state&.operational
+          @card.operational_state = OperationalState.operational.first
+        end
         # -- update condition
         @card.update_condition
       end
