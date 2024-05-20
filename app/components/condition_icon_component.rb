@@ -43,16 +43,16 @@ class ConditionIconComponent < ViewComponent::Base
 private
   attr_reader :item, :button_class, :icon, :period
 
-  def active?
-    item.updated_at >= period.before(Time.current)
+  def outdated?
+    item.updated_at < period.before(Time.current)
   end
 
   def btn
-    ( active? ) ? "btn" : "btn-outline"
+    ( outdated? ) ? "btn-outline" : "btn"
   end
 
   def textcolor
-    ( active? ) ? "text-white" : ""
+    ( outdated? ) ? "" : "text-white"
   end
 
 end

@@ -2,3 +2,8 @@
         title="<%= item.condition_message %>">
   <i class="<%= icon %>"></i>
 </button>
+<% if outdated? %>
+  <span title="Data may be outdated, no recent updates">
+    <%= Cocard::States::flag(Cocard::States::WARNING) %>
+  </span>
+<% end %>
