@@ -5,11 +5,12 @@
 # item must respond_to :condition, :condition_text
 #
 class ConditionIconComponent < ViewComponent::Base
-  def initialize(item:, small: false)
+  def initialize(item:, small: false, period: Cocard::grace_period)
     @item = item
     @button_class = ""
     @icon  = ""
     @small = small
+    @period = period
     set_variant
   end
 
@@ -19,25 +20,39 @@ class ConditionIconComponent < ViewComponent::Base
     else
       size = "btn"
     end
+
     case item.condition
      when Cocard::States::CRITICAL
-        @button_class = "#{size} btn-danger"
+        @button_class = "#{size} #{btn}-danger"
         @icon  = "fa-solid fa-circle-exclamation"
       when Cocard::States::UNKNOWN
-        @button_class = "#{size} btn-info"
-        @icon  = "fa-solid fa-circle-question text-white"
+        @button_class = "#{size} #{btn}-info"
+        @icon  = "fa-solid fa-circle-question #{textcolor}"
       when Cocard::States::WARNING
-        @button_class = "#{size} btn-warning"
-        @icon  = "fa-solid fa-triangle-exclamation text-white"
+        @button_class = "#{size} #{btn}-warning"
+        @icon  = "fa-solid fa-triangle-exclamation #{textcolor}"
       when Cocard::States::OK
-        @button_class = "#{size} btn-success"
+        @button_class = "#{size} #{btn}-success"
         @icon  = "fa-solid fa-circle-check"
       else
-        @button_class = "#{size} btn-secondary"
+        @button_class = "#{size} #{btn}-secondary"
         @icon  = "fa-solid fa-circle-xmark"
     end
   end
 
 private
-  attr_reader :item, :button_class, :icon
+  attr_reader :item, :button_class, :icon, :period
+
+  def active?
+    item.updated_at >= period.before(Time.current)
+  end
+
+  def btn
+    ( active? ) ? "btn" : "btn-outline"
+  end
+
+  def textcolor
+    ( active? ) ? "text-white" : ""
+  end
+
 end
