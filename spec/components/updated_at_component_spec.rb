@@ -3,13 +3,22 @@
 require "rails_helper"
 
 RSpec.describe UpdatedAtComponent, type: :component do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:card) { FactoryBot.create(:card) }
 
-  # it "renders something useful" do
-  #   expect(
-  #     render_inline(described_class.new(attr: "value")) { "Hello, components!" }.css("p").to_html
-  #   ).to include(
-  #     "Hello, components!"
-  #   )
-  # end
+  describe "with updated_at is current" do
+    it "shows green ok utf char" do
+      expect(card).to receive(:updated_at).and_return(Time.current)
+      render_inline(described_class.new(item: card))
+      expect(page).to have_content(Cocard::States.flag(Cocard::States::OK))
+    end
+  end
+
+  describe "with updated_at to old" do
+    it "shows yellow warning utf char" do
+      expect(card).to receive(:updated_at).at_least(:once).and_return(1.day.before(Time.current))
+      render_inline(described_class.new(item: card))
+      expect(page).to have_content(Cocard::States.flag(Cocard::States::WARNING))
+    end
+  end
+
 end

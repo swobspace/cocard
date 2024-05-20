@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
 class UpdatedAtComponent < ViewComponent::Base
-  def initialize(item:, period:)
+  def initialize(item:, period: Cocard::grace_period)
     @item = item
     @period = period
   end
 
   def message
-    updated_at = item.updated_at.localtime
-    if item.updated_at.blank? or (item.updated_at < period.after(Time.current))
-      Cocard::States.flag(Cocard::States::CRITICAL) + " #{updated_at}"
+    updated_at = item.updated_at
+    if updated_at.blank? or (updated_at < period.before(Time.current))
+      Cocard::States.flag(Cocard::States::WARNING) + " #{updated_at.localtime}"
     else
-      Cocard::States.flag(Cocard::States::OK) + " #{updated_at}"
+      Cocard::States.flag(Cocard::States::OK) + " #{updated_at.localtime}"
     end
   end
 
