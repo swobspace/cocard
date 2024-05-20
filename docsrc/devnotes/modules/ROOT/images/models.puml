@@ -18,6 +18,7 @@ class Connector  {
   condition: integer
   soap_request_success: boolean
   vpnti_online: boolean
+  firmware_version: string
 }
 
 class CardTerminal {

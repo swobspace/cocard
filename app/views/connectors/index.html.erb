@@ -18,6 +18,7 @@
             <th><%= t('attributes.sds_url') %></th>
             <th class="notvisible"><%= t('attributes.manual_update') %></th>
             <th><%= t('attributes.locations') %></th>
+            <th><%= t('attributes.firmware_version') %></th>
             <th><%= t('attributes.last_check') %></th>
             <th><%= t('attributes.last_check_ok') %></th>
             <th class="nosort"><%= t('cocard.action') %></th>
@@ -25,6 +26,7 @@
     </thead>
     <tfoot class="search">
       <tr>
+            <th></th>
             <th></th>
             <th></th>
             <th></th>
@@ -45,6 +47,7 @@
                 <td><%= connector.sds_url %></td>
                 <td><%= connector.manual_update %></td>
                 <td><%= connector.locations.map(&:lid).join('; ') %></td>
+                <td><%= connector.firmware_version %></td>
                 <td><%= connector.last_check&.localtime %></td>
                 <td><%= connector.last_check_ok&.localtime %></td>
                 <td class="text-nowrap">

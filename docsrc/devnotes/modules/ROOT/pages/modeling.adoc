@@ -61,7 +61,8 @@ bin/rails g migration AddReadonlyToConnector \
   last_check:timestamp last_check_ok:timestamp \
   condition:integer:index \
   soap_request_success:boolean \
-  vpnti_online:boolean
+  vpnti_online:boolean \
+  firmware_version:string
 ----
 
 .Install ActionText

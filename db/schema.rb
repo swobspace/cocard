@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_18_163654) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_20_155808) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -143,6 +143,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_18_163654) do
     t.boolean "soap_request_success", default: false
     t.boolean "vpnti_online", default: false
     t.datetime "sds_updated_at", precision: nil
+    t.string "firmware_version", default: ""
     t.index ["condition"], name: "index_connectors_on_condition"
   end
 

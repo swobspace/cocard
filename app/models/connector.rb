@@ -55,17 +55,18 @@ class Connector < ApplicationRecord
   end
 
   def condition_message
+    shortcut = Cocard::States::flag(condition)
     case condition
       when Cocard::States::CRITICAL
-        "CRITICAL - Connector unreachable"
+        shortcut + " CRITICAL - Connector unreachable"
       when Cocard::States::UNKNOWN
-        "UNKNOWN - soap request failed, may be a configuration problem"
+        shortcut + " UNKNOWN - soap request failed, may be a configuration problem"
       when Cocard::States::WARNING
-        "WARNING - Connector reachable but TI offline!"
+        shortcut + " WARNING - Connector reachable but TI offline!"
       when Cocard::States::OK
-        "OK - Connector TI online"
+        shortcut + " OK - Connector TI online"
       when Cocard::States::NOTHING
-        "UNUSED - Configuration may not be complete yet"
+        shortcut + " UNUSED - Configuration may not be complete yet"
     end
   end
 

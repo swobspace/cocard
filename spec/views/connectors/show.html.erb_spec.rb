@@ -16,7 +16,8 @@ RSpec.describe "connectors/show", type: :view do
       manual_update: false,
       description: "some text",
       last_check: current,
-      last_check_ok: current
+      last_check_ok: current,
+      firmware_version: "123.456"
     ))
   end
 
@@ -28,5 +29,6 @@ RSpec.describe "connectors/show", type: :view do
     expect(rendered).to match(/false/)
     expect(rendered).to match(/some text/)
     expect(rendered).to match(/#{current.localtime.to_s.gsub('+', '.')}/)
+    expect(rendered).to match(/123.456/)
   end
 end

@@ -19,7 +19,8 @@ RSpec.describe "connectors/index", type: :view do
         manual_update: false,
         location_ids: [location.id],
         last_check: current,
-        last_check_ok: current
+        last_check_ok: current,
+        firmware_version: "123.456"
       ),
       Connector.create!(
         name: "Name",
@@ -28,7 +29,8 @@ RSpec.describe "connectors/index", type: :view do
         manual_update: false,
         location_ids: [location.id],
         last_check: current,
-        last_check_ok: current
+        last_check_ok: current,
+        firmware_version: "123.456"
       )
     ])
   end
@@ -43,6 +45,7 @@ RSpec.describe "connectors/index", type: :view do
     assert_select cell_selector, text: Regexp.new(false.to_s), count: 2
     assert_select cell_selector, text: Regexp.new("AAC".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("#{current.localtime.to_s.gsub('+', '.')}"), count: 4
+    assert_select cell_selector, text: Regexp.new("123.456".to_s), count: 2
 
   end
 end
