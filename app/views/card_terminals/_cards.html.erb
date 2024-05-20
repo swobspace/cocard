@@ -34,8 +34,8 @@
       <% cards.each do |card| %>
         <%= content_tag(:tr, id: dom_id(card)) do %>
           <td class="text-center">
-            <%# render ConditionIconComponent.new(item: card, small: true) %>
-            <span style="visibility:hidden;"><%# card.condition %></span>
+            <%= render ConditionIconComponent.new(item: card, small: true) %>
+            <span style="visibility:hidden;"><% card.condition %></span>
           </td>
           <td><%= card.name %></td>
           <td><%= card.card_type %></td>
