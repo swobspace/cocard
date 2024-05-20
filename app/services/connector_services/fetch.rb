@@ -52,9 +52,11 @@ module ConnectorServices
         return Result.new(success?: false, error_messages: error_messages, sds: nil)
       end
 
-      connector.update(connector_services: sds.connector_services,
-                       sds_updated_at: Time.current)
-      Result.new(success?: true, error_messages: error_messages, sds: sds.connector_services)
+      connector.connector_services = sds.connector_services
+      connector.sds_updated_at     = Time.current
+      connector.firmware_version   = connector.product_information&.firmware_version
+      final = connector.save
+      Result.new(success?: final, error_messages: error_messages, sds: sds.connector_services)
     end
   end
 end
