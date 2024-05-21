@@ -74,7 +74,7 @@
           <td><%= card_terminal.supplier %></td>
           <td><%= card_terminal.firmware_version %></td>
           <td><%= card_terminal.plugged_in %></td>
-          <td><%= card_terminal.updated_at.localtime %></td>
+          <td><%= render UpdatedAtComponent.new(item: card_terminal) %></td>
           <td class="text-nowrap">
             <%= show_link card_terminal %>
             <%= edit_link card_terminal %>

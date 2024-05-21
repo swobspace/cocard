@@ -25,6 +25,13 @@
       <div class="col-6">
         <table class="table table-sm table-borderless">
           <tr>
+            <th class="w-10 pe-3"><%= t('attributes.connector')%>:</th>
+            <td><%= link_to(@card_terminal.connector,
+                            connector_path(@card_terminal.connector)
+                           ) if @card_terminal.connector %></td>
+          </tr>
+
+          <tr>
             <th class="w-10 pe-3"><%= t('attributes.displayname')%>:</th>
             <td><%= @card_terminal.displayname %></td>
           </tr>
@@ -45,6 +52,11 @@
           </tr>
 
           <tr>
+            <th class="w-10 pe-3"><%= t('attributes.plugged_in')%>:</th>
+            <td><%= @card_terminal.plugged_in %></td>
+          </tr>
+
+          <tr>
             <th class="w-10 pe-3"><%= t('attributes.delivery_date')%>:</th>
             <td><%= @card_terminal.delivery_date %></td>
           </tr>
@@ -55,13 +67,35 @@
           </tr>
 
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.firmware_version')%>:</th>
-            <td><%= @card_terminal.firmware_version %></td>
+            <th class="w-10 pe-3"><%= t('attributes.description')%>:</th>
+            <td><%= @card_terminal.description %></td>
           </tr>
 
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.plugged_in')%>:</th>
-            <td><%= @card_terminal.plugged_in %></td>
+            <th class="w-10 pe-3"><%= t('attributes.connected')%>:</th>
+            <td><%= render CardTerminal::ConnectedComponent.new(card_terminal: @card_terminal) %></td>
+          </tr>
+
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.condition')%>:</th>
+            <td><%= @card_terminal.condition_message %></td>
+          </tr>
+
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.updated_at')%>:</th>
+            <td><%= render UpdatedAtComponent.new(item: @card_terminal) %></td>
+          </tr>
+        </table>
+
+      </div>
+      <div class="col-6">
+        <div class="card-title border-bottom bg-light pt-2 ps-2">
+          <h6><%= t('cocard.card_terminal_data')%></h6>
+        </div>
+        <table>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.firmware_version')%>:</th>
+            <td><%= @card_terminal.firmware_version %></td>
           </tr>
 
           <tr>
@@ -89,31 +123,11 @@
             <td><%= @card_terminal.slots %></td>
           </tr>
 
-          <tr>
-            <th class="w-10 pe-3"><%= t('attributes.connected')%>:</th>
-            <td><%= @card_terminal.connected %></td>
-          </tr>
-
-          <tr>
-            <th class="w-10 pe-3"><%= t('attributes.condition')%>:</th>
-            <td><%= @card_terminal.condition_message %></td>
-          </tr>
-
-          <tr>
-            <th class="w-10 pe-3"><%= t('attributes.connector')%>:</th>
-            <td><%= link_to(@card_terminal.connector,
-                            connector_path(@card_terminal.connector)
-                           ) if @card_terminal.connector %></td>
-          </tr>
-
-          <tr>
-            <th class="w-10 pe-3"><%= t('attributes.description')%>:</th>
-            <td><%= @card_terminal.description %></td>
-          </tr>
         </table>
-      </div>
-      <div class="col-6">
-        <b>ProductInformation:</b>
+
+        <div class="card-title border-bottom bg-light mt-2 pt-2 ps-2">
+          <h6><%= t('attributes.product_information')%></h6>
+        </div>
         <pre>
 <%= @card_terminal.product_information&.to_s %>
         </pre>
@@ -131,7 +145,7 @@
 <%= back_link %>
 
 
-<div class="card mx-3">
+<div class="card my-3">
   <div class="card-header">
     <div class="d-flex w-100">
       <div >

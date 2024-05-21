@@ -27,17 +27,18 @@ class CardTerminal < ApplicationRecord
   end
 
   def condition_message
+    shortcut = Cocard::States::flag(condition)
     case condition
       when Cocard::States::CRITICAL
-        "CRITICAL - CardTerminal unreachable"
+        shortcut + " CRITICAL - CardTerminal unreachable"
       when Cocard::States::UNKNOWN
-        "UNKNOWN - not yet implemented"
+        shortcut + " UNKNOWN - not yet implemented"
       when Cocard::States::WARNING
-        "WARNING - CardTerminal not connected"
+        shortcut + " WARNING - CardTerminal not connected"
       when Cocard::States::OK
-        "OK - CardTerminal online"
+        shortcut + " OK - CardTerminal online"
       when Cocard::States::NOTHING
-        "UNUSED - Configuration may not be complete yet"
+        shortcut + " UNUSED - Configuration may not be complete yet"
     end
   end
 

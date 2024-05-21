@@ -28,6 +28,7 @@ de:
     assigned_contexts: Zugewiesene Kontexte
     administrativa: Administrativa
     card_data: Kartendaten
+    card_terminal_data: Daten des Kartenterminals
     certificate_data: Daten des Zertfikats
     fetch_sds: Abfrage SDS
     get_resource_information: Abfrage Konnektor
@@ -69,6 +70,7 @@ de:
     client_ids: Mandanten
     condition: Zustand
     configuration: Konfiguration
+    connected: online
     connector: Konnektor
     connector_context: Konnektor Kontext
     contact: Ansprechpartner
@@ -95,12 +97,14 @@ de:
     operational: in Betrieb
     operational_state: Betriebszustand
     plugged_in: Netzwerk/Dose/Switch
+    product_information: Produktinformation
     room: Raum
     sds_url: SDS-Url
     slotid: Schachtnummer
     sn: Nachname
     supplier: Lieferant
     telematikid: Telematik-ID
+    updated_at: zuletzt aktualisiert
     username: Username
     workplace: Arbeitsplatz
     workplaces: Arbeitsplätze
