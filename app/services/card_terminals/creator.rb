@@ -37,6 +37,8 @@ module CardTerminals
         @card_terminal.update_condition
       end
 
+      @card_terminal.firmware_version = @card_terminal.product_information&.firmware_version
+
       if @card_terminal.save
         @card_terminal.touch
       else
