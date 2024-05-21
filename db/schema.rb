@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_20_155808) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_21_064033) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -144,6 +144,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_20_155808) do
     t.boolean "vpnti_online", default: false
     t.datetime "sds_updated_at", precision: nil
     t.string "firmware_version", default: ""
+    t.string "admin_url", default: ""
     t.index ["condition"], name: "index_connectors_on_condition"
   end
 

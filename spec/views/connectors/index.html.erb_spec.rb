@@ -15,6 +15,7 @@ RSpec.describe "connectors/index", type: :view do
       Connector.create!(
         name: "Name",
         ip: "192.0.2.1",
+        admin_url: "Admin Url",
         sds_url: "Sds Url",
         manual_update: false,
         location_ids: [location.id],
@@ -25,6 +26,7 @@ RSpec.describe "connectors/index", type: :view do
       Connector.create!(
         name: "Name",
         ip: "192.0.2.2",
+        admin_url: "Admin Url",
         sds_url: "Sds Url",
         manual_update: false,
         location_ids: [location.id],
@@ -41,6 +43,7 @@ RSpec.describe "connectors/index", type: :view do
     assert_select cell_selector, text: Regexp.new("Name".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("192.0.2.1".to_s), count: 1
     assert_select cell_selector, text: Regexp.new("192.0.2.2".to_s), count: 1
+    assert_select cell_selector, text: Regexp.new("Admin Url".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("Sds Url".to_s), count: 2
     assert_select cell_selector, text: Regexp.new(false.to_s), count: 2
     assert_select cell_selector, text: Regexp.new("AAC".to_s), count: 2

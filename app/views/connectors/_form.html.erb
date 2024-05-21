@@ -7,8 +7,11 @@
        %>
     <%= form.input :ip, as: :string
        %>
+    <%= form.input :admin_url,
+        placeholder: "Default: #{Cocard::admin_url}"
+       %>
     <%= form.input :sds_url,
-        placeholder: "Default: http://<ip-adresse>/connector.sds"
+        placeholder: "Default: #{Cocard::sds_url}"
        %>
     <%= form.input :description, as: :rich_text_area
        %>

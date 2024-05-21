@@ -6,7 +6,7 @@ RSpec.describe Connector, type: :model do
   end
   let(:connector) do 
     FactoryBot.create(:connector, 
-      ip: '127.0.0.1',
+      ip: '127.0.0.9',
       connector_services: YAML.load_file(yaml)
     )
   end
@@ -24,7 +24,7 @@ RSpec.describe Connector, type: :model do
   end
 
   describe "#to_s" do
-    it { expect(connector.to_s).to match('- / 127.0.0.1') }
+    it { expect(connector.to_s).to match('- / 127.0.0.9') }
   end
 
   describe "#product_information" do
@@ -99,6 +99,24 @@ RSpec.describe Connector, type: :model do
           expect {
             connector.save
           }.to change(connector, :last_check_ok)
+        end
+      end
+
+      describe "with empty sds_url" do
+        let(:connector) { FactoryBot.build(:connector, ip: '127.0.0.42') }
+        it "updates sds_url with default" do
+          expect {
+            connector.save
+          }.to change(connector, :sds_url).to('http://127.0.0.42/connector.sds')
+        end
+      end
+
+      describe "with empty admin_url" do
+        let(:connector) { FactoryBot.build(:connector, ip: '127.0.0.42') }
+        it "updates admin_url with default" do
+          expect {
+            connector.save
+          }.to change(connector, :admin_url).to('https://127.0.0.42:9443')
         end
       end
     end

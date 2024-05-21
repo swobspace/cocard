@@ -17,6 +17,7 @@ class Connector < ApplicationRecord
   # -- validations and callbacks
   before_save :ensure_update_condition
   before_save :ensure_sds_url
+  before_save :ensure_admin_url
   validates :ip, presence: true, uniqueness: true
 
   # -- common methods
@@ -82,8 +83,16 @@ private
   end
 
   def ensure_sds_url
-    if sds_url.blank?
-      self[:sds_url] = "http://#{ip.to_s}/connector.sds"
+    if sds_url.blank? and Cocard::sds_url.present?
+      template = Liquid::Template.parse(Cocard::sds_url)
+      self[:sds_url] = template.render('ip' => ip.to_s)
+    end
+  end
+
+  def ensure_admin_url
+    if admin_url.blank? and Cocard::admin_url.present?
+      template = Liquid::Template.parse(Cocard::admin_url)
+      self[:admin_url] = template.render('ip' => ip.to_s)
     end
   end
 

@@ -50,6 +50,7 @@ i.e. `ORBIS`, `Ein1`. Used as `Mandant_id` in SOAP requests.
 bin/rails g scaffold Connector \
   name:string \
   ip:inet \
+  admin_url:string \
   sds_url:string \
   manual_update:boolean \
     --no-stylesheets --no-javascripts --no-helper

@@ -212,6 +212,7 @@ GEM
     launchy (3.0.0)
       addressable (~> 2.8)
       childprocess (~> 5.0)
+    liquid (5.5.0)
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -452,6 +453,7 @@ DEPENDENCIES
   immutable_struct (~> 1.2)
   jsbundling-rails
   launchy
+  liquid (~> 5.5)
   net-ping (~> 2.0)
   nori (~> 2.7)
   pg (~> 1.1)

@@ -7,6 +7,7 @@ class Connector  {
   name: string
   description: rich_text
   ip: inet
+  admin_url: string
   sds_url: string
   manual_update: boolean
   --

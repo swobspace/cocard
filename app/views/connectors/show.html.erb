@@ -52,6 +52,11 @@
           </tr>
 
           <tr>
+            <th class="w-10 pe-3"><%= t('attributes.admin_url')%>:</th>
+            <td><%= link_to nil, @connector.admin_url %></td>
+          </tr>
+
+          <tr>
             <th class="w-10 pe-3"><%= t('attributes.sds_url')%>:</th>
             <td><%= @connector.sds_url %></td>
           </tr>
