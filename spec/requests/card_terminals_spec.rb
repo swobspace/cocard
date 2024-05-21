@@ -87,7 +87,9 @@ RSpec.describe "/card_terminals", type: :request do
         contact: "Der Hausmeister",
         plugged_in: "Dose P17/4, Patchfeld 5",
         ip: '1.2.3.4',
-        slots: 3993
+        slots: 3993,
+        delivery_date: '2023-12-14',
+        supplier: 'ACME Ltd'
       }}
 
       it "updates the requested card_terminal" do
@@ -102,6 +104,8 @@ RSpec.describe "/card_terminals", type: :request do
         expect(card_terminal.plugged_in).to eq('Dose P17/4, Patchfeld 5')
         expect(card_terminal.slots).to eq(3993)
         expect(card_terminal.ip).to eq('1.2.3.4')
+        expect(card_terminal.delivery_date.to_s).to eq('2023-12-14')
+        expect(card_terminal.supplier).to eq('ACME Ltd')
       end
 
       it "redirects to the card_terminal" do

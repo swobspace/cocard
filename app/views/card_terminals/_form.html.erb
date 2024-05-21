@@ -12,6 +12,10 @@
        %>
     <%= form.input :plugged_in
        %>
+    <%= form.input :delivery_date, as: :string, wrapper: :horizontal_date
+       %>
+    <%= form.input :supplier
+       %>
     <%= form.input :description, as: :rich_text_area
        %>
 

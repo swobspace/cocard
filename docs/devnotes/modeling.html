@@ -215,7 +215,9 @@ end</code></pre>
   room:string \
   contact:string \
   plugged_in:string \
-  --no-stylesheets --no-javascripts --no-helper
+  delivery_date:date \
+  supplier:string \
+    --no-stylesheets --no-javascripts --no-helper
 
 bin/rails g migration AddInternalToCardTerminal \
   properties:jsonb \
@@ -226,7 +228,8 @@ bin/rails g migration AddInternalToCardTerminal \
   slots:integer \
   connected:boolean \
   condition:integer \
-  connector:belongs_to</code></pre>
+  connector:belongs_to \
+  firmware_version:string</code></pre>
 </div>
 </div>
 <div class="listingblock">

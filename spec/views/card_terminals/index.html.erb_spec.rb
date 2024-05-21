@@ -25,6 +25,9 @@ RSpec.describe "card_terminals/index", type: :view do
         room: "Raum U.16",
         contact: "Der Hausmeister",
         plugged_in: "Dose 17/4, Patchfeld 5",
+        supplier: 'ACME Ltd',
+        delivery_date: '2023-12-14',
+        firmware_version: '3.1.9',
         condition: Cocard::States::UNKNOWN
       ),
       CardTerminal.create!(
@@ -40,6 +43,9 @@ RSpec.describe "card_terminals/index", type: :view do
         room: "Raum U.16",
         contact: "Der Hausmeister",
         plugged_in: "Dose 17/4, Patchfeld 5",
+        supplier: 'ACME Ltd',
+        delivery_date: '2023-12-14',
+        firmware_version: '3.1.9',
         condition: Cocard::States::UNKNOWN
       )
     ]
@@ -63,5 +69,8 @@ RSpec.describe "card_terminals/index", type: :view do
     assert_select cell_selector, text: Regexp.new('Raum U.16'.to_s), count: 2
     assert_select cell_selector, text: Regexp.new('Der Hausmeister'.to_s), count: 2
     assert_select cell_selector, text: Regexp.new('Dose 17/4, Patchfeld 5'.to_s), count: 2
+    assert_select cell_selector, text: Regexp.new('ACME Ltd'.to_s), count: 2
+    assert_select cell_selector, text: Regexp.new('2023-12-14'.to_s), count: 2
+    assert_select cell_selector, text: Regexp.new('3.1.9'.to_s), count: 2
   end
 end

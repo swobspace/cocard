@@ -35,6 +35,8 @@ RSpec.describe "card_terminals/edit", type: :view do
       end
       assert_select "input[name=?]", "card_terminal[ip]"
       assert_select "input[name=?]", "card_terminal[slots]"
+      assert_select "input[name=?]", "card_terminal[delivery_date]"
+      assert_select "input[name=?]", "card_terminal[supplier]"
     end
   end
 end

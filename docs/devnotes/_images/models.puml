@@ -28,6 +28,8 @@ class CardTerminal {
   room: string
   contact: string
   plugged_in: string
+  delivery_date: date
+  supplier: string
   location_id
   --
   properties: jsonb
@@ -38,6 +40,7 @@ class CardTerminal {
   slots: integer
   connected: boolean
   condition: integer
+  firmware_version: string
   connector_id
 }
 

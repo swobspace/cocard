@@ -75,6 +75,7 @@ de:
     context: Kontext
     contexts: Kontexte
     context_ids: Kontexte
+    delivery_date: Lieferdatum
     description: Beschreibung
     displayname: Anzeigename
     expiration_date: Ablaufdatum
@@ -98,6 +99,7 @@ de:
     sds_url: SDS-Url
     slotid: Schachtnummer
     sn: Nachname
+    supplier: Lieferant
     telematikid: Telematik-ID
     username: Username
     workplace: Arbeitsplatz

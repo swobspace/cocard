@@ -18,7 +18,7 @@ Rails.application.configure do
         class: "ConnectorServices::FetchJob",
         description: "Fetch current SDS info from all connectors"
       },
-      get_resource_information: {
+      get_connectors: {
         cron: '*/3 * * * *',
         class: "Cocard::GetResourceInformationJob",
         description: "Get resource information from connector"
@@ -26,12 +26,12 @@ Rails.application.configure do
       get_card_terminals: {
         cron: '*/5 * * * *',
         class: "Cocard::GetCardTerminalsJob",
-        description: "Get configured card terminals from connector"
+        description: "Get card terminals from connector"
       },
       get_cards: {
         cron: '*/7 * * * *',
         class: "Cocard::GetCardsJob",
-        description: "Get cards from connector"
+        description: "Get cards from connector; SMC-B only: check PIN status"
       }
     }
   }

@@ -22,6 +22,9 @@
             <th><%= t('attributes.location') %></th>
             <th><%= t('attributes.room') %></th>
             <th><%= t('attributes.contact') %></th>
+            <th><%= t('attributes.delivery_date') %></th>
+            <th><%= t('attributes.supplier') %></th>
+            <th><%= t('attributes.firmware_version') %></th>
             <th><%= t('attributes.plugged_in') %></th>
             <th><%= t('attributes.updated_at') %></th>
             <th class="nosort"><%= t('cocard.action') %></th>
@@ -29,6 +32,9 @@
     </thead>
     <tfoot class="search">
       <tr>
+            <th></th>
+            <th></th>
+            <th></th>
             <th></th>
             <th></th>
             <th></th>
@@ -64,6 +70,9 @@
           <td><%= card_terminal.location %></td>
           <td><%= card_terminal.room %></td>
           <td><%= card_terminal.contact %></td>
+          <td><%= card_terminal.delivery_date %></td>
+          <td><%= card_terminal.supplier %></td>
+          <td><%= card_terminal.firmware_version %></td>
           <td><%= card_terminal.plugged_in %></td>
           <td><%= card_terminal.updated_at.localtime %></td>
           <td class="text-nowrap">

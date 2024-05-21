@@ -37,6 +37,9 @@ RSpec.describe "card_terminals/show", type: :view do
       condition: Cocard::States::UNKNOWN,
       room: "Raum U.16",
       contact: "Der Hausmeister",
+      supplier: 'ACME Ltd',
+      delivery_date: '2023-12-14',
+      firmware_version: '3.1.9',
       plugged_in: "Dose 17/4, Patchfeld 5"
     )
   end
@@ -62,6 +65,9 @@ RSpec.describe "card_terminals/show", type: :view do
     expect(rendered).to match(/Raum U.16/)
     expect(rendered).to match(/Der Hausmeister/)
     expect(rendered).to match(/Dose 17\/4, Patchfeld 5/)
+    expect(rendered).to match(/2023-12-14/)
+    expect(rendered).to match(/ACME Ltd/)
+    expect(rendered).to match(/3.1.9/)
 
   end
 end
