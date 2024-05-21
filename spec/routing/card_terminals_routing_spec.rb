@@ -6,6 +6,10 @@ RSpec.describe CardTerminalsController, type: :routing do
       expect(get: "/card_terminals").to route_to("card_terminals#index")
     end
 
+    it "routes to #sindex" do
+      expect(get: "/card_terminals/sindex").to route_to("card_terminals#sindex")
+    end
+
     it "routes to #new" do
       expect(get: "/card_terminals/new").to route_to("card_terminals#new")
     end

@@ -6,6 +6,10 @@ RSpec.describe ConnectorsController, type: :routing do
       expect(get: "/connectors").to route_to("connectors#index")
     end
 
+    it "routes to #sindex" do
+      expect(get: "/connectors/sindex").to route_to("connectors#sindex")
+    end
+
     it "routes to #new" do
       expect(get: "/connectors/new").to route_to("connectors#new")
     end

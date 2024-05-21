@@ -8,6 +8,23 @@ class ConnectorsController < ApplicationController
     respond_with(@connectors)
   end
 
+  def sindex
+    if params[:filter] == 'OK'
+      @connectors = Connector.ok
+    elsif params[:filter] == 'WARNING'
+      @connectors = Connector.warning
+    elsif params[:filter] == 'CRITICAL'
+      @connectors = Connector.critical
+    elsif params[:filter] == 'UNKNOWN'
+      @connectors = Connector.unknown
+    elsif params[:filter] == 'NOTHING'
+      @connectors = Connector.nothing
+    else
+      @connectors = Connector.failed
+    end
+    respond_with(@connectors)
+  end
+
   # GET /connectors/1
   def show
     respond_with(@connector)

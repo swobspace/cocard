@@ -1,4 +1,3 @@
-<%= turbo_stream_from :home_index %>
 <div class="container-xl">
 
   <div class="card mt-3">
@@ -13,7 +12,7 @@
       </div>
     </div>
     <div>
-      <%= render 'connectors', connectors: @connectors %>
+      <%= turbo_frame_tag("connectors", src: sindex_connectors_path) %>
     </div>
   </div>
 

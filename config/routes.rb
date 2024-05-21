@@ -1,18 +1,27 @@
 Rails.application.routes.draw do
   resources :operational_states
   resources :cards do
+    collection do
+      get :sindex
+    end
     member do
       post :get_certificate
       post :get_card
     end
   end
   resources :card_terminals do
+    collection do
+      get :sindex
+    end
     member do
       get :ping
     end
   end
   resources :contexts
   resources :connectors do
+    collection do
+      get :sindex
+    end
     member do
       post :fetch_sds
       post :get_resource_information

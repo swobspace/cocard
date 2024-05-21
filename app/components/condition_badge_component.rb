@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 class ConditionBadgeComponent < ViewComponent::Base
-  def initialize(state:, count:, small: false)
+  def initialize(state:, count:, small: false, link: nil, myframe: nil)
     @state = state
     @count = count
+    @link = link
+    @myframe = myframe
     @button_class = ""
     @icon  = ""
     # @small = small
@@ -45,5 +47,5 @@ class ConditionBadgeComponent < ViewComponent::Base
   end
 
 private
-  attr_reader :state, :button_class, :icon, :count
+  attr_reader :state, :button_class, :icon, :count, :link, :myframe
 end
