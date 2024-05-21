@@ -133,33 +133,33 @@ RSpec.describe Card, type: :model do
   describe "#condition_message" do
     describe "with condition = CRITICAL" do
       before(:each) do
-        expect(ct).to receive(:condition).and_return(Cocard::States::CRITICAL)
+        expect(card).to receive(:condition).at_least(:once).and_return(Cocard::States::CRITICAL)
       end
-      it { expect(ct.condition_message).to match(/CRITICAL/) }
+      it { expect(card.condition_message).to match(/CRITICAL/) }
     end
     describe "with condition = UNKNOWN" do
       before(:each) do
-        expect(ct).to receive(:condition).and_return(Cocard::States::UNKNOWN)
+        expect(card).to receive(:condition).at_least(:once).and_return(Cocard::States::UNKNOWN)
       end
-      it { expect(ct.condition_message).to match(/UNKNOWN/) }
+      it { expect(card.condition_message).to match(/UNKNOWN/) }
     end
     describe "with condition = WARNING" do
       before(:each) do
-        expect(ct).to receive(:condition).and_return(Cocard::States::WARNING)
+        expect(card).to receive(:condition).at_least(:once).and_return(Cocard::States::WARNING)
       end
-      it { expect(ct.condition_message).to match(/WARNING/) }
+      it { expect(card.condition_message).to match(/WARNING/) }
     end
     describe "with condition = OK" do
       before(:each) do
-        expect(ct).to receive(:condition).and_return(Cocard::States::OK)
+        expect(card).to receive(:condition).at_least(:once).and_return(Cocard::States::OK)
       end
-      it { expect(ct.condition_message).to match(/OK/) }
+      it { expect(card.condition_message).to match(/OK/) }
     end
     describe "with condition = NOTHING" do
       before(:each) do
-        expect(ct).to receive(:condition).and_return(Cocard::States::NOTHING)
+        expect(card).to receive(:condition).at_least(:once).and_return(Cocard::States::NOTHING)
       end
-      it { expect(ct.condition_message).to match(/UNUSED/) }
+      it { expect(card.condition_message).to match(/UNUSED/) }
     end
   end
 end
