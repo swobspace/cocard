@@ -9,19 +9,12 @@ class ConnectorsController < ApplicationController
   end
 
   def sindex
-    if params[:filter] == 'OK'
-      @connectors = Connector.ok
-    elsif params[:filter] == 'WARNING'
-      @connectors = Connector.warning
-    elsif params[:filter] == 'CRITICAL'
-      @connectors = Connector.critical
-    elsif params[:filter] == 'UNKNOWN'
-      @connectors = Connector.unknown
-    elsif params[:filter] == 'NOTHING'
-      @connectors = Connector.nothing
+    if params[:condition]
+      @connectors = Connector.condition(params[:condition])
     else
       @connectors = Connector.failed
     end
+    @pagy, @connectors = pagy(@connectors)
     respond_with(@connectors)
   end
 

@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   # -- breadcrumbs
+  include Pagy::Backend
   include Wobapphelpers::Breadcrumbs
   # before_action :add_breadcrumb_index, only: [:index]
   before_action :add_breadcrumb_index,

@@ -8,6 +8,16 @@ class CardTerminalsController < ApplicationController
     respond_with(@card_terminals)
   end
 
+  def sindex
+    if params[:condition]
+      @card_terminals = CardTerminal.condition(params[:condition])
+    else
+      @card_terminals = CardTerminal.failed
+    end
+    @pagy, @card_terminals = pagy(@card_terminals)
+    respond_with(@card_terminals)
+  end
+
   # GET /card_terminals/1
   def show
     respond_with(@card_terminal)

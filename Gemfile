@@ -103,3 +103,5 @@ gem "good_job", "~> 3.28"
 gem "acts_as_list", "~> 1.1"
 
 gem "liquid", "~> 5.5"
+
+gem "pagy", "~> 8.4"

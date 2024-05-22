@@ -8,6 +8,16 @@ class CardsController < ApplicationController
     respond_with(@cards)
   end
 
+  def sindex
+    if params[:condition]
+      @cards = Card.condition(params[:condition])
+    else
+      @cards = Card.failed
+    end
+    @pagy, @cards = pagy(@cards)
+    respond_with(@cards)
+  end
+
   # GET /cards/1
   def show
     respond_with(@card)

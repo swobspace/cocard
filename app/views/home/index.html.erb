@@ -28,7 +28,7 @@
       </div>
     </div>
     <div>
-      <%= render 'card_terminals', card_terminals: @card_terminals %>
+      <%= turbo_frame_tag("card_terminals", src: sindex_card_terminals_path) %>
     </div>
   </div>
 
@@ -44,7 +44,7 @@
       </div>
     </div>
     <div>
-      <%= render 'cards', cards: @cards %>
+      <%= turbo_frame_tag("cards", src: sindex_cards_path) %>
     </div>
   </div>
 </div>

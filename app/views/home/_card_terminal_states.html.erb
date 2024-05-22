@@ -1,20 +1,35 @@
 <div class="me-2">
-  <%= render ConditionBadgeComponent.new(state: Cocard::States::OK,
-                                         count: CardTerminal.ok.count) %>
+  <%= render ConditionBadgeComponent
+             .new(state: Cocard::States::OK,
+                  count: CardTerminal.ok.count,
+                  link:  sindex_card_terminals_path(condition: Cocard::States::OK),
+                  myframe: 'card_terminals') %>
 </div>
 <div class="me-2">
-  <%= render ConditionBadgeComponent.new(state: Cocard::States::WARNING,
-                                         count: CardTerminal.warning.count) %>
+  <%= render ConditionBadgeComponent
+             .new(state: Cocard::States::WARNING,
+                  count: CardTerminal.warning.count,
+                  link:  sindex_card_terminals_path(condition: Cocard::States::WARNING),
+                  myframe: 'card_terminals') %>
 </div>
 <div class="me-2">
-  <%= render ConditionBadgeComponent.new(state: Cocard::States::CRITICAL,
-                                         count: CardTerminal.critical.count) %>
+  <%= render ConditionBadgeComponent
+             .new(state: Cocard::States::CRITICAL,
+                  count: CardTerminal.critical.count,
+                  link:  sindex_card_terminals_path(condition: Cocard::States::CRITICAL),
+                  myframe: 'card_terminals') %>
 </div>
 <div class="me-2">
-  <%= render ConditionBadgeComponent.new(state: Cocard::States::UNKNOWN,
-                                         count: CardTerminal.unknown.count) %>
+  <%= render ConditionBadgeComponent
+             .new(state: Cocard::States::UNKNOWN,
+                  count: CardTerminal.unknown.count,
+                  link:  sindex_card_terminals_path(condition: Cocard::States::UNKNOWN),
+                  myframe: 'card_terminals') %>
 </div>
 <div class="me-2">
-  <%= render ConditionBadgeComponent.new(state: Cocard::States::NOTHING,
-                                         count: CardTerminal.nothing.count) %>
+  <%= render ConditionBadgeComponent
+             .new(state: Cocard::States::NOTHING,
+                  count: CardTerminal.nothing.count,
+                  link:  sindex_card_terminals_path(condition: Cocard::States::NOTHING),
+                  myframe: 'card_terminals') %>
 </div>

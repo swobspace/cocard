@@ -2,6 +2,7 @@ module CardTerminalConcerns
   extend ActiveSupport::Concern
 
   included do
+    scope :condition, -> (state) { where('card_terminals.condition = ?', state) }
     scope :ok, -> { where(condition: Cocard::States::OK) }
     scope :warning, -> { where(condition: Cocard::States::WARNING) }
     scope :critical, -> { where(condition: Cocard::States::CRITICAL) }
