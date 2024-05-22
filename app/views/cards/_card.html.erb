@@ -1,7 +1,17 @@
-<div id="<%= dom_id card %>">
-  <p>
-    <strong>Name:</strong>
-    <%= card.name %>
-  </p>
+<%= link_to card_path(card), class: 'list-group-item' do %>
+  <div>
+    <span class="subtitle">
+      <%= t('activerecord.models.card') %>:
+      #<%= card.id %>
+    </span>
+  </div>
+  <div  class="row">
+    <div class="col-1"><%= card.card_type %></div>
+    <div class="col-2"><%= card.name %></div>
+    <div class="col-3"><%= card.condition_message %></div>
+    <div class="col-2"><%= card.iccsn %></div>
+    <div class="col-2"><%= card.operational_state %></div>
+    <div class="col-2"><%= card.card_terminal %></div>
+  </div>
+<% end %>
 
-</div>

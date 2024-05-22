@@ -36,6 +36,8 @@ de:
     get_cards: Abfrage Karten
     get_card: Karte aktualisieren
     get_certificate: Zertifikat lesen
+    search_result: Suchergebnis
+    to_much_results: "Zu viele Treffer, bitte schränken Sie die Suche ein"
 
   activerecord:
     models:
@@ -100,6 +102,7 @@ de:
     product_information: Produktinformation
     room: Raum
     sds_url: SDS-Url
+    search: Suche
     slotid: Schachtnummer
     sn: Nachname
     supplier: Lieferant
@@ -117,6 +120,7 @@ de:
     home: Home
     locations: Standorte
     operational_states: Betriebszustände
+    searches: Suche
     users: Benutzer
     workplaces: Arbeitsplätze
 
@@ -126,3 +130,5 @@ de:
   form:
     card:
       hint_context: Nur erforderlich für SMC-B (Abfrage Zertifikat, PIN-Status)
+    search:
+      placeholder: Suche

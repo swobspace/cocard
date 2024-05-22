@@ -1,0 +1,13 @@
+<h1><%= t('cocard.search_result') %></h1>
+
+<% if @info %>
+  <div class="alert alert-warning" role="alert">
+    <%= @info %>
+  </div>
+<% end %>
+
+<ul class="list-group mt-3">
+  <% @results.each do |result| %>
+    <%= render result %>
+  <% end %>
+</ul>

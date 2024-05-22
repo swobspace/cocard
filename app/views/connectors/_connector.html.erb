@@ -1,22 +1,14 @@
-<div id="<%= dom_id connector %>">
-  <p>
-    <strong>Name:</strong>
-    <%= connector.name %>
-  </p>
+<%= link_to connector_path(connector), class: 'list-group-item' do %>
+  <div>
+    <span class="subtitle">
+      <%= t('activerecord.models.connector') %>:
+      #<%= connector.id %>
+    </span>
+  </div>
+  <div  class="row">
+    <div class="col-3"><%= connector.name %></div>
+    <div class="col-3"><%= connector.ip %></div>
+    <div class="col-6"><%= connector.condition_message %></div>
+  </div>
+<% end %>
 
-  <p>
-    <strong>Ip:</strong>
-    <%= connector.ip %>
-  </p>
-
-  <p>
-    <strong>Sds url:</strong>
-    <%= connector.sds_url %>
-  </p>
-
-  <p>
-    <strong>Manual update:</strong>
-    <%= connector.manual_update %>
-  </p>
-
-</div>
