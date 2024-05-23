@@ -14,6 +14,7 @@ class Connector < ApplicationRecord
     allow_destroy: true,
     reject_if: proc { |att| att['context_id'].blank? }
 
+
   # -- validations and callbacks
   before_save :ensure_update_condition
   before_save :ensure_sds_url

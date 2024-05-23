@@ -65,17 +65,26 @@ module Connectors
           query = query.where("CAST(connectors.#{key} AS VARCHAR) ILIKE ?", "%#{value}%")
         when *id_fields
           query = query.where(key.to_sym => value)
+        when :lid
+          query = query.joins(:locations).where("locations.lid ILIKE ?", "%#{value}%")
+        when :description
+          query = query.with_description_containing(value)
+        when :condition
+          query = query.where(condition: value.to_i)
         when :manual_update
           query = query.where(manual_update: to_boolean(value))
-        when :soap_request
-          query = query.where(soap_request: to_boolean(value))
+        when :soap_request_success
+          query = query.where(soap_request_success: to_boolean(value))
         when :vpnti_online
           query = query.where(vpnti_online: to_boolean(value))
         when :limit
           @limit = value.to_i
         when :search
           string_fields.each do |term|
-            search_string << "connectors.#{term} LIKE :search"
+            search_string << "connectors.#{term} ILIKE :search"
+          end
+          cast_fields.each do |key|
+            search_string << "CAST(connectors.#{key} AS VARCHAR) ILIKE :search" 
           end
         else
           raise ArgumentError, "unknown search option #{key}"
@@ -99,7 +108,7 @@ module Connectors
     end
 
     def string_fields
-      [ :name, :description, :admin_url, :sds_url, :firmware_version]
+      [ :name, :admin_url, :sds_url, :firmware_version]
     end
 
     def id_fields

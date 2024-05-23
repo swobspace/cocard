@@ -9,6 +9,10 @@ module ConnectorConcerns
     scope :unknown, -> { where(condition: Cocard::States::UNKNOWN) }
     scope :nothing, -> { where(condition: Cocard::States::NOTHING) }
     scope :failed, -> { where("connectors.condition <> ?", Cocard::States::OK) }
-  end
 
+    scope :with_description_containing, ->(query) { joins(:rich_text_description).merge(ActionText::RichText.where <<~SQL, "%" + query + "%") }
+    body ILIKE ?
+   SQL
+
+  end
 end
