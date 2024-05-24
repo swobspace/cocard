@@ -55,7 +55,9 @@ module CardTerminals
 
       context 'with an existing card_terminal' do
         let!(:ct) do
-          FactoryBot.create(:card_terminal, mac: '00-0D-F8-0C-86-52')
+          FactoryBot.create(:card_terminal, 
+            mac: '00-0D-F8-0C-86-52', 
+          )
         end
         before(:each) { ct.reload }
         it 'does not create a card terminal' do
@@ -65,6 +67,13 @@ module CardTerminals
         end
 
         it { expect(subject.save).to be_truthy }
+
+        context "with existing ct not connected from other connector" do
+          it "don't save data" do
+            expect(cct).to receive(:connected).and_return(false)
+            expect(subject.save).to be_falsey
+          end
+        end
 
         context 'update attributes' do
           before(:each) do

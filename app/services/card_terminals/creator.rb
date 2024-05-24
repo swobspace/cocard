@@ -30,6 +30,16 @@ module CardTerminals
                        end
 
       if @card_terminal.persisted?
+        #
+        # Connector may deliver old data from info model, so
+        # avoid clash with data from the current real connector
+        #
+        if !cct.connected && @card_terminal.connector_id != connector.id
+          return false
+        end
+        #
+        # Update attributes
+        #
         Cocard::CardTerminal::ATTRIBUTES.each do |attr|
           next if attr == :mac
           @card_terminal.send("#{attr}=", cct.send(attr))
