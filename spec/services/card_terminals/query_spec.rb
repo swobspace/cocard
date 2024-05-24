@@ -277,6 +277,11 @@ module CardTerminals
           expect(search.all).to contain_exactly(ct2)
         end
 
+        it "searches for mac without :" do
+          search = Query.new(card_terminals, {search: '223344'})
+          expect(search.all).to contain_exactly(ct2)
+        end
+
         it "searches for firmware_version" do
           search = Query.new(card_terminals, {search: '4.9.'})
           expect(search.all).to contain_exactly(ct2, ct3)

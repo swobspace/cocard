@@ -78,6 +78,7 @@ module CardTerminals
           cast_fields.each do |key|
             search_string << "CAST(card_terminals.#{key} AS VARCHAR) ILIKE :search" 
           end
+          search_string << "replace(card_terminals.mac::varchar, ':', '') ILIKE :search"
         else
           raise ArgumentError, "unknown search option #{key}"
         end
