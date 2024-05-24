@@ -12,15 +12,15 @@ class SearchesController < ApplicationController
 private
 
   def connectors
-    Connector.where("name ILIKE :query or CAST(ip AS VARCHAR) ILIKE :query", query: query)
+    Connectors::Query.new(Connector.all, search: params[:query]).all
   end
 
   def card_terminals
-    CardTerminal.where("displayname ILIKE :query or CAST(mac AS VARCHAR) ILIKE :query or CAST(ip AS VARCHAR) ILIKE :query", query: query)
+    CardTerminals::Query.new(CardTerminal.all, search: params[:query]).all
   end
 
   def cards
-    Card.where("name ILIKE :query OR iccsn LIKE :query or card_holder_name ILIKE :query", query: query)
+    Cards::Query.new(Card.all, search: params[:query]).all
   end
 
   def query
