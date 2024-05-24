@@ -179,6 +179,15 @@ module Connectors
       it_behaves_like "a connectors query"
     end
 
+    context "with :firmware_version" do
+      subject { Query.new(connectors, {firmware_version: '4.9'}) }
+      before(:each) do
+        @matching = [conn2, conn3]
+        @nonmatching = [conn1]
+      end
+      it_behaves_like "a connectors query"
+    end
+
     describe "#all" do
       context "using :search'" do
         it "searches for name" do
@@ -194,6 +203,11 @@ module Connectors
         it "searches for ip" do
           search = Query.new(connectors, {search: '203.0.113.'})
           expect(search.all).to contain_exactly(conn2)
+        end
+
+        it "searches for firmware_version" do
+          search = Query.new(connectors, {search: '4.9.'})
+          expect(search.all).to contain_exactly(conn2, conn3)
         end
 
 
