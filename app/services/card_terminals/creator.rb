@@ -44,6 +44,7 @@ module CardTerminals
           next if attr == :mac
           @card_terminal.send("#{attr}=", cct.send(attr))
         end
+        @card_terminal.connector_id = connector.id
         @card_terminal.update_condition
       end
 
