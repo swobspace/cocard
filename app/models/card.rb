@@ -37,14 +37,14 @@ class Card < ApplicationRecord
       when Cocard::States::OK
         shortcut + " OK - Certificate valid (>= 3 month); PIN verified (SMC-B only)"
       when Cocard::States::NOTHING
-        shortcut + " UNUSED - Missing connector or no context assigned (SMC-B only)"
+        shortcut + " UNUSED - Missing connector or expiration date; SMC-B only: no context or operational state assigned"
     end
   end
   
   def update_condition
-    if !operational_state&.operational or
-       card_terminal&.connector.nil? or
+    if card_terminal&.connector.nil? or
        expiration_date.nil? or
+       (card_type == 'SMC-B' and !operational_state&.operational) or
        (card_type == 'SMC-B' and context.nil?)
       self[:condition] = Cocard::States::NOTHING
 
