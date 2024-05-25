@@ -37,7 +37,7 @@ class Card < ApplicationRecord
       when Cocard::States::OK
         shortcut + " OK - Certificate valid (>= 3 month); PIN verified (SMC-B only)"
       when Cocard::States::NOTHING
-        shortcut + " UNUSED - Missing connector or expiration date; SMC-B only: no context or operational state assigned"
+        shortcut + " UNUSED - Missing card_terminal or expiration_date; SMC-B only: no context or operational state assigned"
     end
   end
   
