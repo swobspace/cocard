@@ -71,6 +71,7 @@ de:
     clients: Mandanten
     client_ids: Mandanten
     condition: Zustand
+    condition_message: Zustandsinfo
     configuration: Konfiguration
     connected: online
     connector: Konnektor
