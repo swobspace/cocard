@@ -19,7 +19,8 @@
           input_html: { multiple: true }
        %>
 
-    <%= form.input :manual_update
+    <%= form.input :manual_update, input_html: { role: 'switch' },
+                   wrapper_html: {class: 'form-check form-switch'}
        %>
 
     <%= render 'nested_connector_contexts_form', f: form %>

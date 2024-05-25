@@ -6,7 +6,8 @@
        %>
     <%= form.input :description
        %>
-    <%= form.input :operational
+    <%= form.input :operational, input_html: { role: 'switch' },
+                   wrapper_html: {class: 'form-check form-switch'}
        %>
 
     <%= form.button :submit, class: 'btn btn-primary' %>
