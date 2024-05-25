@@ -23,10 +23,12 @@
           <td><%= link_to(
                     card_terminal.name, 
                     card_terminal_path(card_terminal), 
+                    data: { "turbo-frame" => "_top" },
                     class: "primary-link") %></td>
           <td><%= link_to(
                     card_terminal.connector&.name, 
                     connector_path(card_terminal.connector), 
+                    data: { "turbo-frame" => "_top" },
                     class: "primary-link") unless card_terminal.connector.nil? %></td>
           <td><%= card_terminal.condition_message %></td>
           <td><%= card_terminal.updated_at&.localtime %></td>
