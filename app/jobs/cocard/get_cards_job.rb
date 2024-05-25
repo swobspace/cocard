@@ -28,7 +28,8 @@ module Cocard
                   "fetching card successful"
             Rails.logger.debug(msg)
             result.cards.each do |cc|
-              creator = Cards::Creator.new(connector: connector, cc: cc)
+              creator = Cards::Creator.new(connector: connector, cc: cc, 
+                                           context: con_ctx.context)
               if creator.save
                 ProcessCard.process_card(creator.card)
               end

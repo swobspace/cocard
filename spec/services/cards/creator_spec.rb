@@ -3,6 +3,7 @@
 require 'rails_helper'
 module Cards
   RSpec.describe Creator do
+    let(:ctx) { FactoryBot.create(:context) }
     let!(:opsta) { FactoryBot.create(:operational_state, operational: true) }
     # fixtures :operational_states
     let(:connector) { FactoryBot.create(:connector) }
@@ -31,7 +32,7 @@ module Cards
 
     let(:cc) { Cocard::Card.new(card_hash) }
 
-    subject { Cards::Creator.new(connector: connector, cc: cc) }
+    subject { Cards::Creator.new(connector: connector, cc: cc, context: ctx) }
 
     # check for instance methods
     describe 'check if instance methods exists' do
@@ -51,18 +52,32 @@ module Cards
 
     describe '#save' do
       context 'new card' do
+        let(:card) { subject.save; subject.card }
         it 'create a new card' do
           expect do
             subject.save
           end.to change(Card, :count).by(1)
           expect(subject.card).to be_kind_of(Card)
         end
+
+        it { expect(card.card_terminal).to eq(ct) }
+        it { expect(card.name).to eq("") }
+        it { expect(card.description.to_plain_text).to eq("") }
+        it { expect(card.card_handle).to eq("ee676b27-5b40-4a40-9c65-979cc3113a1e") }
+        it { expect(card.card_type).to eq("SMC-B") }
+        it { expect(card.iccsn).to eq("80276002711000000000") }
+        it { expect(card.slotid).to eq(1) }
+        it { expect(card.insert_time.floor).to eq(ts.floor) }
+        it { expect(card.card_holder_name).to eq("Doctor Who's Universe") }
+        it { expect(card.expiration_date).to eq(1.year.after(Date.current)) }
+        it { expect(card.operational_state.operational).to be_truthy }
+        it { expect(card.condition).to eq(Cocard::States::CRITICAL) }
+
       end
 
       it { expect(subject.save).to be_truthy }
 
       context 'with an existing card' do
-        let(:ctx) { FactoryBot.create(:context) }
         let!(:card) do
           FactoryBot.create(:card, 
             iccsn: '80276002711000000000',

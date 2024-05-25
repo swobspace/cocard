@@ -17,6 +17,7 @@ module Cards
       options.symbolize_keys
       @connector = options.fetch(:connector)
       @cc        = options.fetch(:cc)
+      @ctx       = options.fetch(:context) { nil }
       @card      = nil
     end
 
@@ -38,18 +39,31 @@ module Cards
                            next if attr == :iccsn
                            card.send("#{attr}=", cc.send(attr))
                          end
-                         card.card_terminal_id = ct.id
                        end
+
+      #
+      # update connector
+      #
+      @card.card_terminal = ct
+
+      #
+      # card seen by connector, so must be operational
+      #
+      unless @card.operational_state&.operational
+        @card.operational_state = OperationalState.operational.first
+      end
+
+      #
+      # set context if card.context.nil?
+      #
+      if @card.context.nil?
+        @card.context = ctx
+      end
 
       if @card.persisted?
         Cocard::Card::ATTRIBUTES.each do |attr|
           next if attr == :mac
           @card.send("#{attr}=", cc.send(attr))
-        end
-        @card.card_terminal = ct
-        # -- card seen by connector, so must be operational
-        unless @card.operational_state&.operational
-          @card.operational_state = OperationalState.operational.first
         end
         # -- update condition
         @card.update_condition
@@ -67,7 +81,7 @@ module Cards
 
     private
 
-    attr_reader :cc, :connector
+    attr_reader :cc, :connector, :ctx
 
   end
 end
