@@ -34,15 +34,21 @@ module Cocard
                  workplace: workplace).call
       if result.success?
         resource_information = Cocard::ResourceInformation.new(result.response[:get_resource_information_response])
-        connector.update(soap_request_success: true,
-                         last_check_ok: Time.current,
-                         vpnti_online: resource_information.vpnti_online)
-
-        Result.new(success?: true, error_messages: error_messages, 
-                   resource_information: resource_information)
+        connector.soap_request_success = true
+        connector.last_check_ok = Time.current
+        connector.vpnti_online = resource_information.vpnti_online
+        connector.update_condition
+        if connector.save
+          Result.new(success?: true, error_messages: error_messages,
+                     resource_information: resource_information)
+        else
+          error_messages = connector.errors&.full_messages
+          Result.new(success?: false, error_messages: error_messages,
+                     resource_information: resource_information)
+      end
       else
         connector.update(soap_request_success: false)
-        Result.new(success?: false, error_messages: result.error_messages, 
+        Result.new(success?: false, error_messages: result.error_messages,
                    resource_information: nil)
       end
     end
