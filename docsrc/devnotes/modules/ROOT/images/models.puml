@@ -112,6 +112,13 @@ Class OperationalState {
   operational: boolean
 }
 
+Class Log {
+  loggable: polymorphic
+  when: timestamp
+  level: string
+  message: text
+}
+
 Location "*" -- "*" Connector
 Context "*" -- "*" Connector
 Connector "0..1" - "*" CardTerminal
@@ -123,4 +130,8 @@ CardTerminal "*" -- "*" Workplace
 Location "0..1" -- "*" Card
 OperationalState "1" -- "*" Card
 Context "1" -- "*" Card
+
+Connector "1" -- "*" Log
+CardTerminal "1" -- "*" Log
+Card "1" -- "*" Log
 @enduml

@@ -175,6 +175,18 @@ bin/rails g scaffold OperationalState \
   --no-stylesheets --no-javascripts --no-helper
 ----
 
+== model Log
+
+[source,sh]
+----
+bin/rails g scaffold Log \
+  loggable:references{polymorphic} \
+  when:timestamp \
+  level:string:index \
+  message:text \
+  --no-stylesheets --no-javascripts --no-helper
+----
+
 == HABTM Tables
 
 .Join Tables for HABTM
