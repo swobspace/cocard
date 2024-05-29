@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :logs
   get "search", to: 'searches#index'
   resources :operational_states
   resources :cards do

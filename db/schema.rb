@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_21_080324) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_29_145026) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -252,6 +252,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_21_080324) do
     t.string "description", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "logs", force: :cascade do |t|
+    t.string "loggable_type", null: false
+    t.bigint "loggable_id", null: false
+    t.string "action", default: ""
+    t.datetime "when", precision: nil
+    t.string "level", default: ""
+    t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["level"], name: "index_logs_on_level"
+    t.index ["loggable_type", "loggable_id"], name: "index_logs_on_loggable"
   end
 
   create_table "operational_states", force: :cascade do |t|

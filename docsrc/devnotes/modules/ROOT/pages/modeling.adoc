@@ -181,6 +181,7 @@ bin/rails g scaffold OperationalState \
 ----
 bin/rails g scaffold Log \
   loggable:references{polymorphic} \
+  action:string \
   when:timestamp \
   level:string:index \
   message:text \
