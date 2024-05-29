@@ -14,7 +14,7 @@
       <tr>
             <th><%= t('attributes.loggable') %></th>
             <th><%= t('attributes.action') %></th>
-            <th><%= t('attributes.when') %></th>
+            <th><%= t('attributes.last_seen') %></th>
             <th><%= t('attributes.level') %></th>
             <th><%= t('attributes.message') %></th>
             <th class="nosort"><%= t('cocard.action') %></th>
@@ -35,7 +35,7 @@
         <%= content_tag(:tr, id: dom_id(log), class: dom_class(log)) do %>
                 <td><%= log.loggable %></td>
                 <td><%= log.action %></td>
-                <td><%= log.when %></td>
+                <td><%= log.last_seen %></td>
                 <td><%= log.level %></td>
                 <td><%= log.message %></td>
                 <td class="text-nowrap">

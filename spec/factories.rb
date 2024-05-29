@@ -51,6 +51,22 @@ FactoryBot.define do
     lid { generate(:lid) }
   end
 
+  factory :log do
+    action { "Doit" }
+    last_seen { Time.current }
+    level { "INFO" }
+    message { "Some informational message" }
+    trait :with_connector do
+      association :loggable, factory: :connector
+    end
+    trait :with_card_terminal do
+      association :loggable, factory: :card_terminal
+    end
+    trait :with_card do
+      association :loggable, factory: :card
+    end
+  end
+
   factory :operational_state do
     name { generate(:aname) }
   end

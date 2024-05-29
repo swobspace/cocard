@@ -115,7 +115,7 @@ Class OperationalState {
 Class Log {
   loggable: polymorphic
   action: string
-  when: timestamp
+  last_seen: timestamp
   level: string
   message: text
 }

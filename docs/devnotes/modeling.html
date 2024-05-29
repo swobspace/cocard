@@ -315,7 +315,7 @@ end</code></pre>
 <pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g scaffold Log \
   loggable:references{polymorphic} \
   action:string \
-  when:timestamp \
+  last_seen:timestamp \
   level:string:index \
   message:text \
   --no-stylesheets --no-javascripts --no-helper</code></pre>

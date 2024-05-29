@@ -47,6 +47,7 @@ de:
       connector: Konnektor
       connector_context: Konnektor Kontext
       location: Standort
+      log: Log
       operational_state: Betriebszustand
       user: User
 
@@ -91,11 +92,15 @@ de:
     ip: IP-Adresse
     lanr: LANR
     lid: Standort-Kürzel
+    last_seen: zuletzt gesehen
+    level: Level
     location: Standort
     location_id: Standort
     locations: Standorte
     location_ids: Standorte
+    loggable: Log für
     manual_update: manuelles Update
+    message: Nachricht
     name: Name
     operational: in Betrieb
     operational_state: Betriebszustand
@@ -120,6 +125,7 @@ de:
     contexts: Kontexte
     home: Home
     locations: Standorte
+    logs: Logs
     operational_states: Betriebszustände
     searches: Suche
     users: Benutzer
