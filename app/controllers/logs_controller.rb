@@ -1,5 +1,5 @@
 class LogsController < ApplicationController
-  before_action :set_log, only: [:show, :edit, :update, :destroy]
+  before_action :set_log, only: [:show, :destroy]
   before_action :add_breadcrumb_show, only: [:show]
 
   # GET /logs
@@ -13,30 +13,30 @@ class LogsController < ApplicationController
     respond_with(@log)
   end
 
-  # GET /logs/new
-  def new
-    @log = Log.new
-    respond_with(@log)
-  end
-
-  # GET /logs/1/edit
-  def edit
-  end
-
-  # POST /logs
-  def create
-    @log = Log.new(log_params)
-
-    @log.save
-    respond_with(@log)
-  end
-
-  # PATCH/PUT /logs/1
-  def update
-    @log.update(log_params)
-    respond_with(@log)
-  end
-
+#  # GET /logs/new
+#  def new
+#    @log = Log.new
+#    respond_with(@log)
+#  end
+#
+#  # GET /logs/1/edit
+#  def edit
+#  end
+#
+#  # POST /logs
+#  def create
+#    @log = Log.new(log_params)
+#
+#    @log.save
+#    respond_with(@log)
+#  end
+#
+#  # PATCH/PUT /logs/1
+#  def update
+#    @log.update(log_params)
+#    respond_with(@log)
+#  end
+#
   # DELETE /logs/1
   def destroy
     @log.destroy!
