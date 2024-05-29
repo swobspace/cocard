@@ -29,7 +29,7 @@
 
       <tr>
         <th class="w-10 pe-3"><%= t('attributes.last_seen')%>:</th>
-        <td><%= @log.last_seen %></td>
+        <td><%= @log.last_seen&.localtime&.to_s %></td>
       </tr>
 
       <tr>

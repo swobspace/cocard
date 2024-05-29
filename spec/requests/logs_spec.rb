@@ -17,8 +17,6 @@ RSpec.describe "/logs", type: :request do
  
   describe "GET /index" do
     it "renders a successful response" do
-      puts valid_attributes.inspect
-      puts conn.class.name
       Log.create! valid_attributes
       get logs_url
       expect(response).to be_successful

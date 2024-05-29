@@ -35,7 +35,7 @@
         <%= content_tag(:tr, id: dom_id(log), class: dom_class(log)) do %>
                 <td><%= log.loggable %></td>
                 <td><%= log.action %></td>
-                <td><%= log.last_seen %></td>
+                <td><%= log.last_seen&.localtime&.to_s %></td>
                 <td><%= log.level %></td>
                 <td><%= log.message %></td>
                 <td class="text-nowrap">
