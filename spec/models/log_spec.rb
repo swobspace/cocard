@@ -26,7 +26,7 @@ RSpec.describe Log, type: :model do
   end
 
   describe "#to_s" do
-    it { expect(log.to_s).to match("WARN:: #{ts.localtime.to_s} TK-AXC-04 - A warning message") }
+    it { expect(log.to_s).to match("#{ts.localtime.to_s} WARN:: TK-AXC-04: GetCard - A warning message") }
   end
 
 end
