@@ -43,12 +43,16 @@ module ConnectorServices
         error_messages << e.message
         error_messages.compact!
         connector.update(condition: Cocard::States::CRITICAL)
+        Logs::Creator.new(loggable: connector, level: 'ERROR', action: 'Fetch SDS',
+                          message: error_messages)
         return Result.new(success?: false, error_messages: error_messages, sds: nil)
       end
 
       sds = Cocard::SDS.new(response.body)
       if sds.nil?
         error_messages << "No SDS retrieved"
+        Logs::Creator.new(loggable: connector, level: 'ERROR', action: 'Fetch SDS',
+                          message: "SDS is empty")
         return Result.new(success?: false, error_messages: error_messages, sds: nil)
       end
 

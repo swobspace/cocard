@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get "search", to: 'searches#index'
   resources :operational_states
   resources :cards do
+    resources :logs, only: [:index], module: :cards
     collection do
       get :sindex
     end
@@ -12,6 +13,7 @@ Rails.application.routes.draw do
     end
   end
   resources :card_terminals do
+    resources :logs, only: [:index], module: :card_terminals
     collection do
       get :sindex
     end
@@ -21,6 +23,7 @@ Rails.application.routes.draw do
   end
   resources :contexts
   resources :connectors do
+    resources :logs, only: [:index], module: :connectors
     collection do
       get :sindex
     end

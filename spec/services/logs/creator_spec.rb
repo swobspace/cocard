@@ -86,5 +86,21 @@ module Logs
         end
       end
     end
+
+    describe "with array as message" do
+      subject do 
+        Logs::Creator.new(
+          loggable: conn,
+          action: "GetResource",
+          level: "WARN",
+          last_seen: ts,
+          message: %w( some array of messages )
+        )
+      end
+      it "concats message to one string" do
+        subject.save
+        expect(subject.log.message).to eq("some; array; of; messages")
+      end
+    end
   end
 end

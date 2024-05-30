@@ -11,6 +11,7 @@ RSpec.describe CardTerminal, type: :model do
       location: location,
     )
   end
+  it { is_expected.to have_many(:logs) }
   it { is_expected.to belong_to(:connector).optional }
   it { is_expected.to belong_to(:location).optional }
   it { is_expected.to have_many(:cards).dependent(:destroy) }

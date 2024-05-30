@@ -2,52 +2,54 @@
 
 <h1><%= t('controller.logs') %></h1>
 
-<div data-controller="datatables">
-  <%= content_tag :table, role: :datatable,
-        id: "logs_table",
-        class: "table table-bordered table-responsive-xl",
-        data: {
-          'datatables-target': 'datatable',
-          order: [[0, 'asc']].to_json
-        } do %>
-    <thead>
-      <tr>
-            <th><%= t('attributes.loggable') %></th>
-            <th><%= t('attributes.action') %></th>
-            <th><%= t('attributes.last_seen') %></th>
-            <th><%= t('attributes.level') %></th>
-            <th><%= t('attributes.message') %></th>
-            <th class="nosort"><%= t('cocard.action') %></th>
-      </tr>
-    </thead>
-    <tfoot class="search">
-      <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th class="nosearch"></th>
-      </tr>
-    </tfoot>
-    <tbody>
-      <% @logs.each do |log| %>
-        <%= content_tag(:tr, id: dom_id(log), class: dom_class(log)) do %>
-                <td><%= log.loggable %></td>
-                <td><%= log.action %></td>
-                <td><%= log.last_seen&.localtime&.to_s %></td>
-                <td><%= log.level %></td>
-                <td><%= log.message %></td>
-                <td class="text-nowrap">
-            <%= show_link log %>
-            <%= delete_link log %>
-          </td>
+<%= turbo_frame_tag('logs') do %>
+  <div data-controller="datatables">
+    <%= content_tag :table, role: :datatable,
+          id: "logs_table",
+          class: "table table-bordered table-responsive-xl",
+          data: {
+            'datatables-target': 'datatable',
+            order: [[0, 'asc']].to_json
+          } do %>
+      <thead>
+        <tr>
+              <th><%= t('attributes.loggable') %></th>
+              <th><%= t('attributes.action') %></th>
+              <th><%= t('attributes.last_seen') %></th>
+              <th><%= t('attributes.level') %></th>
+              <th><%= t('attributes.message') %></th>
+              <th class="nosort"><%= t('cocard.action') %></th>
+        </tr>
+      </thead>
+      <tfoot class="search">
+        <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th class="nosearch"></th>
+        </tr>
+      </tfoot>
+      <tbody>
+        <% @logs.each do |log| %>
+          <%= content_tag(:tr, id: dom_id(log), class: dom_class(log)) do %>
+                  <td><%= log.loggable %></td>
+                  <td><%= log.action %></td>
+                  <td><%= log.last_seen&.localtime&.to_s %></td>
+                  <td><%= log.level %></td>
+                  <td><%= log.message %></td>
+                  <td class="text-nowrap">
+              <%= show_link log %>
+              <%= delete_link log %>
+            </td>
+          <% end %>
         <% end %>
-      <% end %>
-    </tbody>
-  <% end %>
-</div>
+      </tbody>
+    <% end %>
+  </div>
+<% end %>
 
-<br />
+  <br />
 
-<%= back_link %>
+  <%= back_link %>

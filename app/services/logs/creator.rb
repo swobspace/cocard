@@ -13,16 +13,18 @@ module Logs
     # * :loggable  - object
     # * :action    - string
     # * :level     - string
+    # * :message   - text or array of strings
+    #
+    # optional options:
     # * :last_seen - timestamp
-    # * :message   - text
     #
     def initialize(options = {})
       options.symbolize_keys
       @loggable  = options.fetch(:loggable)
       @action    = options.fetch(:action)
       @level     = options.fetch(:level)
-      @last_seen = options.fetch(:last_seen)
-      @message   = options.fetch(:message)
+      @last_seen = options.fetch(:last_seen) { Time.current }
+      @message   = Array(options.fetch(:message)).join("; ")
     end
 
     # rubocop:disable Metrics/AbcSize, Rails/SkipsModelValidations

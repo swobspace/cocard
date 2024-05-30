@@ -1,0 +1,10 @@
+<%= tag.tr id: dom_id(log), class: dom_class(log) do %>
+  <td><%= log.last_seen&.localtime&.to_s %></td>
+  <td><%= log.level %></td>
+  <td><%= log.action %></td>
+  <td><%= truncate(log.message, length: 200) %></td>
+  <td class="text-end">
+    <%= show_link log, data: { "turbo-frame" => "_top" } %>
+  </td>
+<% end %>
+

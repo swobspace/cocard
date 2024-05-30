@@ -2,6 +2,7 @@ class CardTerminal < ApplicationRecord
   include PingConcerns
   include CardTerminalConcerns
   # -- associations
+  has_many :logs, as: :loggable, dependent: :destroy
   belongs_to :location, optional: true
   belongs_to :connector, optional: true
   has_many :cards, dependent: :destroy

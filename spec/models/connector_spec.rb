@@ -10,6 +10,7 @@ RSpec.describe Connector, type: :model do
       connector_services: YAML.load_file(yaml)
     )
   end
+  it { is_expected.to have_many(:logs) }
   it { is_expected.to have_many(:contexts).through(:connector_contexts) }
   it { is_expected.to have_many(:card_terminals).dependent(:restrict_with_error) }
   it { is_expected.to have_and_belong_to_many(:locations) }

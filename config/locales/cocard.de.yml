@@ -120,8 +120,11 @@ de:
 
   controller:
     cards: Karten
+    cards/logs: Karten/Logs
     card_terminals: Kartenterminals
+    card_terminals/logs: Kartenterminals/Logs
     connectors: Konnektoren
+    connectors/logs: Konnektoren/Logs
     contexts: Kontexte
     home: Home
     locations: Standorte

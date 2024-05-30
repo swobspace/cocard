@@ -4,13 +4,24 @@ class LogsController < ApplicationController
 
   # GET /logs
   def index
-    @logs = Log.all
+    if @loggable
+      @logs = @loggable.logs
+    else
+      @logs = Log.all
+    end
+    @pagy, @logs = pagy(@logs)
     respond_with(@logs)
   end
 
   # GET /logs/1
   def show
     respond_with(@log)
+  end
+
+  def sindex
+    @logs = @loggable.logs
+    @pagy, @logs = pagy(@logs)
+    respond_with(@logs)
   end
 
 #  # GET /logs/new

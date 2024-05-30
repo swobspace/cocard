@@ -1,6 +1,7 @@
 class Card < ApplicationRecord
   include CardConcerns
   # -- associations
+  has_many :logs, as: :loggable, dependent: :destroy
   belongs_to :card_terminal, optional: true
   belongs_to :context, optional: true
   belongs_to :location, optional: true
