@@ -8,7 +8,7 @@ class Log < ApplicationRecord
 
   # -- common methods
   def to_s
-    "#{last_seen.localtime.to_s} #{level}:: #{loggable.name}: #{action} - #{message}"
+    "#{level} - #{loggable.name} >> #{action}: #{message}"
   end
 
 
