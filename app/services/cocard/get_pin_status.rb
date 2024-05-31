@@ -35,6 +35,7 @@ module Cocard
         error_messages << "No Context assigned!"
       end
       if error_messages.any?
+        log_error(error_messages)
         return Result.new(success?: false, error_messages: error_messages, 
                           certificate: nil)
       end
@@ -42,9 +43,9 @@ module Cocard
       result = Cocard::SOAP::GetPinStatus.new(
                  card_handle: card.card_handle,
                  connector: connector,
-                 mandant: context.mandant,
-                 client_system: context.client_system,
-                 workplace: context.workplace).call
+                 mandant: context&.mandant,
+                 client_system: context&.client_system,
+                 workplace: context&.workplace).call
       if error_messages.blank? and result.success?
         hash = result.response[:get_pin_status_response]
         pin_status = Cocard::PinStatus.new(hash)
@@ -57,11 +58,22 @@ module Cocard
           error_messages << card.errors&.full_messages
         end
       end
+      log_error(result.error_messages)
       Result.new(success?: false, error_messages: result.error_messages, 
                  certificate: nil)
     end
 
   private
     attr_reader :connector, :context, :card
+
+    def log_error(message)
+      logger = Logs::Creator.new(loggable: card, level: 'ERROR',
+                                 action: 'GetPinStatus', message: message)
+      unless logger.save
+        message = Array(message).join('; ')
+        Rails.logger.error("could not create log entry: GetPinStatus - #{message}")
+      end
+    end
+
   end
 end

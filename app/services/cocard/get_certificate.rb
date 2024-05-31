@@ -42,9 +42,9 @@ module Cocard
       result = Cocard::SOAP::ReadCardCertificate.new(
                  card_handle: card.card_handle,
                  connector: connector,
-                 mandant: context.mandant,
-                 client_system: context.client_system,
-                 workplace: context.workplace).call
+                 mandant: context&.mandant,
+                 client_system: context&.client_system,
+                 workplace: context&.workplace).call
       if error_messages.blank? and result.success?
         rawcert = result.response[:read_card_certificate_response][:x509_data_info_list][:x509_data_info][:x509_data][:x509_certificate]
         cert = Cocard::Certificate.new(rawcert)
@@ -68,11 +68,22 @@ module Cocard
           error_messages << card.errors&.full_messages
         end
       end
+      log_error(error_messages)
       Result.new(success?: false, error_messages: result.error_messages, 
                  certificate: nil)
     end
 
   private
     attr_reader :connector, :context, :card
+
+    def log_error(message)
+      logger = Logs::Creator.new(loggable: card, level: 'ERROR',
+                                 action: 'GetCertificate', message: message)
+      unless logger.save
+        message = Array(message).join('; ')
+        Rails.logger.error("could not create log entry: GetCertificate - #{message}")
+      end
+    end
+
   end
 end

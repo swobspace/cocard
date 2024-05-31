@@ -34,6 +34,7 @@ module ConnectorServices
           error_messages << response.status
           error_messages << response.body
           connector.update(condition: Cocard::States::UNKNOWN)
+          log_error(error_messages)
           return Result.new(success?: false, error_messages: error_messages, sds: nil)
         end
       rescue Faraday::Error => e
@@ -43,16 +44,14 @@ module ConnectorServices
         error_messages << e.message
         error_messages.compact!
         connector.update(condition: Cocard::States::CRITICAL)
-        Logs::Creator.new(loggable: connector, level: 'ERROR', action: 'Fetch SDS',
-                          message: error_messages)
+        log_error(error_messages)
         return Result.new(success?: false, error_messages: error_messages, sds: nil)
       end
 
       sds = Cocard::SDS.new(response.body)
       if sds.nil?
         error_messages << "No SDS retrieved"
-        Logs::Creator.new(loggable: connector, level: 'ERROR', action: 'Fetch SDS',
-                          message: "SDS is empty")
+        log_errors("SDS is empty")
         return Result.new(success?: false, error_messages: error_messages, sds: nil)
       end
 
@@ -61,6 +60,15 @@ module ConnectorServices
       connector.firmware_version   = connector.product_information&.firmware_version
       final = connector.save
       Result.new(success?: final, error_messages: error_messages, sds: sds.connector_services)
+    end
+  private
+    def log_error(message)
+      logger = Logs::Creator.new(loggable: connector, level: 'ERROR', 
+                                 action: 'FetchSDS', message: message)
+      unless logger.save
+        message = Array(message).join('; ')
+        Rails.logger.error("could not create log entry: Fetch SDS - #{message}")
+      end
     end
   end
 end

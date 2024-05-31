@@ -50,6 +50,7 @@ module Cocard
                    cards: cards)
       else
         connector.update(soap_request_success: false)
+        log_error(result.error_messages)
         Result.new(success?: false, error_messages: result.error_messages, 
                    cards: nil)
       end
@@ -57,5 +58,14 @@ module Cocard
 
   private
     attr_reader :connector, :context, :workplace, :mandant, :client_system
+
+    def log_error(message)
+      logger = Logs::Creator.new(loggable: connector, level: 'ERROR',
+                                 action: 'GetCards', message: message)
+      unless logger.save
+        message = Array(message).join('; ')
+        Rails.logger.error("could not create log entry: GetCards - #{message}")
+      end
+    end
   end
 end

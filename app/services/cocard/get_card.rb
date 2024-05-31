@@ -26,11 +26,26 @@ module Cocard
     # do all the work here ;-)
     def call
       error_messages = []
+      if @card.iccsn.blank?
+        error_messages << "No ICCSN available!"
+      end
+      if @connector.blank?
+        error_messages << "No Connector assigned!"
+      end
+      if @context.blank?
+        error_messages << "No Context assigned!"
+      end
+      if error_messages.any?
+        log_error(error_messages)
+        return Result.new(success?: false, error_messages: error_messages,
+                          card: nil)
+      end
+
       result = Cocard::SOAP::GetCard.new(
                  connector: connector,
-                 mandant: context.mandant,
-                 client_system: context.client_system,
-                 workplace: context.workplace,
+                 mandant: context&.mandant,
+                 client_system: context&.client_system,
+                 workplace: context&.workplace,
                  iccsn: card.iccsn).call
       if result.success?
         entry = result.response[:get_resource_information_response][:card]
@@ -43,6 +58,7 @@ module Cocard
         Result.new(success?: true, error_messages: error_messages, 
                    card: creator.card)
       else
+        log_error(result.error_messages)
         Result.new(success?: false, error_messages: result.error_messages, 
                    card: nil)
       end
@@ -50,5 +66,15 @@ module Cocard
 
   private
     attr_reader :connector, :card, :context
+
+    def log_error(message)
+      logger = Logs::Creator.new(loggable: card, level: 'ERROR',
+                                 action: 'GetCard', message: message)
+      unless logger.save
+        message = Array(message).join('; ')
+        Rails.logger.error("could not create log entry: GetCard - #{message}")
+      end
+    end
+
   end
 end
