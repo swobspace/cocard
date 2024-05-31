@@ -126,6 +126,7 @@ de:
     connectors: Konnektoren
     connectors/logs: Konnektoren/Logs
     contexts: Kontexte
+    events: Ereignisse
     home: Home
     locations: Standorte
     logs: Logs
