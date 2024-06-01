@@ -21,7 +21,7 @@
             <%= render ConditionIconComponent.new(item: card, small: true) %>
           </td>
           <td><%= card.card_type %></td>
-          <td><%= card.name %></td>
+          <td><%= card.name_or_cardholder %></td>
           <td><%= card.condition_message %></td>
           <td><%= link_to(card.iccsn, card_path(card),
                     data: { "turbo-frame" => "_top" },

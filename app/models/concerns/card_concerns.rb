@@ -15,4 +15,8 @@ module CardConcerns
    SQL
   end
 
+  def name_or_cardholder
+    ( name.blank? ) ? card_holder_name : name
+  end
+
 end
