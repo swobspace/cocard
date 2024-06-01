@@ -27,6 +27,7 @@ module Cards
       # don't store egk and kvk
       #
       return false if cc.iccsn.blank?
+      return false if cc.card_type =~ /(EGK|KVK)/ 
 
       #
       # get card_terminal

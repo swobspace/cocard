@@ -115,5 +115,11 @@ module Cards
         end
       end
     end
+    describe "with card_type 'EGK'" do
+      before(:each) do
+        card_hash.merge!({card_type: 'EGK'})
+      end
+      it { expect(subject.save).to be_falsey }
+    end
   end
 end
