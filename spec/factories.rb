@@ -67,6 +67,10 @@ FactoryBot.define do
     end
   end
 
+  factory :network do
+    location
+  end
+
   factory :operational_state do
     name { generate(:aname) }
   end
