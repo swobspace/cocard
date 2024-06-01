@@ -15,4 +15,13 @@ module CardTerminalConcerns
    SQL
   end
 
+  def update_location_by_ip
+    return if ip.blank?
+    nets = Network.best_match(ip)
+    loc = nets.first&.location
+    unless loc.nil?
+      self[:location_id] = loc.id
+    end
+  end
+
 end
