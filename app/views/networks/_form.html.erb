@@ -1,0 +1,15 @@
+<%= simple_form_for(@network) do |form| %>
+<%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
+
+  <div class="form-input">
+    <%= form.input :netzwerk
+       %>
+    <%= form.input :description
+       %>
+    <%= form.association :location
+       %>
+
+    <%= form.button :submit, class: 'btn btn-primary' %>
+    <%= cancel_button %>
+  </div>
+<% end %>

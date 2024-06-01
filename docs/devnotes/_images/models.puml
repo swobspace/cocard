@@ -120,6 +120,13 @@ Class Log {
   message: text
 }
 
+Class Network {
+  netzwerk: cidr
+  description: rich_text
+  location_id
+}
+
+Network "*" - "1" Location
 Location "*" -- "*" Connector
 Context "*" -- "*" Connector
 Connector "0..1" - "*" CardTerminal

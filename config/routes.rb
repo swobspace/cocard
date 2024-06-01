@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :networks
   resources :logs, only: [:show, :index, :destroy]
   get "search", to: 'searches#index'
   resources :operational_states

@@ -188,6 +188,17 @@ bin/rails g scaffold Log \
   --no-stylesheets --no-javascripts --no-helper
 ----
 
+== model Network
+
+[source,sh]
+----
+bin/rails g scaffold Network \
+  netzwerk:cidr \
+  description:rich_text \
+  location:belongs_to \
+  --no-stylesheets --no-javascripts --no-helper
+----
+
 == HABTM Tables
 
 .Join Tables for HABTM

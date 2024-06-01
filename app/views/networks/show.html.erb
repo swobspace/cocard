@@ -1,0 +1,40 @@
+<div class="card mb-2">
+  <div class="card-header">
+    <div class="d-flex w-100 justify-content-between">
+      <div>
+        <span class="subtitle">
+          <%= t('activerecord.models.network') %>: 
+          #<%= @network.id %>
+        </span>
+        <h4 class="title"><%= @network %></h4>
+      </div>
+      <div role="toolbar" class="pt-3">
+        <%= edit_link(@network) %>
+        <%= delete_link(@network) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <table class="table table-sm table-borderless">
+    
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.netzwerk')%>:</th>
+        <td><%= @network.netzwerk %></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.description')%>:</th>
+        <td><%= @network.description %></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.location')%>:</th>
+        <td><%= @network.location %></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<%= back_link %>
+<%= new_link Network %>

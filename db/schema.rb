@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_29_151226) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_01_091551) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -267,6 +267,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_151226) do
     t.index ["loggable_type", "loggable_id"], name: "index_logs_on_loggable"
   end
 
+  create_table "networks", force: :cascade do |t|
+    t.cidr "netzwerk"
+    t.bigint "location_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_networks_on_location_id"
+  end
+
   create_table "operational_states", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "description", default: ""
@@ -349,4 +357,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_151226) do
   add_foreign_key "card_terminals", "locations"
   add_foreign_key "connector_contexts", "connectors"
   add_foreign_key "connector_contexts", "contexts"
+  add_foreign_key "networks", "locations"
 end
