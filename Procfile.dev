@@ -1,4 +1,4 @@
 web: env RUBY_DEBUG_OPEN=true bin/rails server
 js: yarn build --watch
 css: yarn watch:css
-worker: bundle exec good_job start --max-threads=4
+# worker: bundle exec good_job start --max-threads=4
