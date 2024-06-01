@@ -48,8 +48,19 @@ module CardTerminals
         @card_terminal.update_condition
       end
 
+      # 
+      # Update firmware version from product info
+      #
       @card_terminal.firmware_version = @card_terminal.product_information&.firmware_version
 
+      #
+      # update location via ip->network if possible
+      #
+      @card_terminal.update_location_by_ip
+
+      #
+      # final save
+      #
       if @card_terminal.save
         @card_terminal.touch
       else

@@ -3,6 +3,13 @@
 require 'rails_helper'
 module CardTerminals
   RSpec.describe Creator do
+    let!(:location) { FactoryBot.create(:location, lid: 'GNA') }
+    let!(:net) do
+      FactoryBot.create(:network, 
+        netzwerk: '10.200.149.0/24',
+        location: location
+      )
+    end
     let(:connector) { FactoryBot.create(:connector) }
     let!(:ts) { 1.day.before(Time.current) }
     let(:card_terminal_hash) do
@@ -100,6 +107,7 @@ module CardTerminals
           it { expect(ct.name).to eq("ORGA6100-0241000000B692")}
           it { expect(ct.mac).to eq("00:0d:f8:0c:86:52")}
           it { expect(ct.ip).to eq("10.200.149.235")}
+          it { expect(ct.location_id).to eq(location.id)}
           it { expect(ct.slots).to eq(4)}
           # it { expect(ct.is_physical).to be_truthy }
           it { expect(ct.connected).to be_truthy }
