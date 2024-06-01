@@ -18,6 +18,7 @@ de:
     new_context: Neuer Kontext
     new_connector: Neuer Konnektor
     new_location: Neuer Standort
+    new_network: Neues Netzwerk
     new_operational_state: Neuer Betriebszustand
     condition:
       -1: '-'
@@ -48,6 +49,7 @@ de:
       connector_context: Konnektor Kontext
       location: Standort
       log: Log
+      network: Netzwerk
       operational_state: Betriebszustand
       user: User
 
@@ -102,6 +104,8 @@ de:
     manual_update: manuelles Update
     message: Nachricht
     name: Name
+    network: Netzwerk
+    netzwerk: Netzwerk
     operational: in Betrieb
     operational_state: Betriebszustand
     plugged_in: Netzwerk/Dose/Switch
@@ -130,6 +134,7 @@ de:
     home: Home
     locations: Standorte
     logs: Logs
+    networks: Netzwerke
     operational_states: Betriebszustände
     searches: Suche
     users: Benutzer

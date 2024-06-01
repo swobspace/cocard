@@ -13,8 +13,8 @@
     <thead>
       <tr>
             <th><%= t('attributes.netzwerk') %></th>
-            <th><%= t('attributes.description') %></th>
             <th><%= t('attributes.location') %></th>
+            <th><%= t('attributes.description') %></th>
             <th class="nosort"><%= t('cocard.action') %></th>
       </tr>
     </thead>
@@ -29,9 +29,9 @@
     <tbody>
       <% @networks.each do |network| %>
         <%= content_tag(:tr, id: dom_id(network), class: dom_class(network)) do %>
-                <td><%= network.netzwerk %></td>
-                <td><%= network.description %></td>
+                <td><%= network.to_cidr_s %></td>
                 <td><%= network.location %></td>
+                <td><%= network.description %></td>
                 <td class="text-nowrap">
             <%= show_link network %>
             <%= edit_link network %>

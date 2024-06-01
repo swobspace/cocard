@@ -2,11 +2,9 @@ require 'rails_helper'
 
 RSpec.describe "networks/new", type: :view do
   before(:each) do
-    assign(:network, Network.new(
-      netzwerk: "",
-      description: nil,
-      location: nil
-    ))
+    assign(:network, 
+      FactoryBot.build(:network, netzwerk: '198.51.100.96/29')
+    )
   end
 
   it "renders new network form" do
@@ -18,7 +16,7 @@ RSpec.describe "networks/new", type: :view do
 
       assert_select "input[name=?]", "network[description]"
 
-      assert_select "input[name=?]", "network[location_id]"
+      assert_select "select[name=?]", "network[location_id]"
     end
   end
 end

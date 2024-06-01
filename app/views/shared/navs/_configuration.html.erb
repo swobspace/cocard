@@ -14,6 +14,15 @@
                     main_app.new_location_path, class: "dropdown-item" %>
       <% end %>
       <div class="dropdown-divider"></div>
+      <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
+                       t('controller.networks')), 
+                  main_app.networks_path, class: "dropdown-item" %>
+      <% if can? :create, Location %>
+        <%= link_to raw( '<span class="fas fa-fw fa-plus" aria-hidden="true"></span> ' +
+                         t('cocard.new_network')), 
+                    main_app.new_network_path, class: "dropdown-item" %>
+      <% end %>
+      <div class="dropdown-divider"></div>
         <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
                          t('controller.contexts')), 
                     main_app.contexts_path, class: "dropdown-item" %>
