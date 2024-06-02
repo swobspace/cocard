@@ -1,0 +1,30 @@
+<div class="card mb-2">
+  <div class="card-header">
+    <div class="d-flex w-100 justify-content-between">
+      <div>
+        <span class="subtitle">
+          <%= t('activerecord.models.workplace') %>: 
+          #<%= @workplace.id %>
+        </span>
+        <h4 class="title"><%= @workplace %></h4>
+      </div>
+      <div role="toolbar" class="pt-3">
+        <%= edit_link(@workplace) %>
+        <%= delete_link(@workplace) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <table class="table table-sm table-borderless">
+    
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.description')%>:</th>
+        <td><%= @workplace.description %></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<%= back_link %>
+<%= new_link Workplace %>

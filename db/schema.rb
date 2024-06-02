@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_01_091551) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_02_084131) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -284,6 +284,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_01_091551) do
     t.index ["operational"], name: "index_operational_states_on_operational"
   end
 
+  create_table "terminal_workplaces", force: :cascade do |t|
+    t.bigint "card_terminal_id", null: false
+    t.bigint "workplace_id", null: false
+    t.string "mandant", default: ""
+    t.string "client_system", default: ""
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_terminal_id", "mandant", "client_system", "workplace_id"], name: "idx_on_card_terminal_id_mandant_client_system_workp_6aee375d98", unique: true
+    t.index ["card_terminal_id", "workplace_id"], name: "index_terminal_workplaces_on_card_terminal_id_and_workplace_id"
+    t.index ["card_terminal_id"], name: "index_terminal_workplaces_on_card_terminal_id"
+    t.index ["client_system"], name: "index_terminal_workplaces_on_client_system"
+    t.index ["mandant"], name: "index_terminal_workplaces_on_mandant"
+    t.index ["workplace_id", "card_terminal_id"], name: "index_terminal_workplaces_on_workplace_id_and_card_terminal_id"
+    t.index ["workplace_id"], name: "index_terminal_workplaces_on_workplace_id"
+  end
+
   create_table "wobauth_authorities", force: :cascade do |t|
     t.bigint "authorizable_id"
     t.string "authorizable_type"
@@ -351,6 +367,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_01_091551) do
     t.index ["username"], name: "index_wobauth_users_on_username", unique: true
   end
 
+  create_table "workplaces", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name", default: ""
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "card_terminals", "connectors"
@@ -358,4 +380,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_01_091551) do
   add_foreign_key "connector_contexts", "connectors"
   add_foreign_key "connector_contexts", "contexts"
   add_foreign_key "networks", "locations"
+  add_foreign_key "terminal_workplaces", "card_terminals"
+  add_foreign_key "terminal_workplaces", "workplaces"
 end

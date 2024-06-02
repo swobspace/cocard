@@ -1,0 +1,43 @@
+<%= render 'shared/turbo-cache-control' %>
+
+<h1><%= t('controller.workplaces') %></h1>
+
+<div data-controller="datatables">
+  <%= content_tag :table, role: :datatable,
+        id: "workplaces_table",
+        class: "table table-bordered table-responsive-xl",
+        data: {
+          'datatables-target': 'datatable',
+          order: [[0, 'asc']].to_json
+        } do %>
+    <thead>
+      <tr>
+            <th><%= t('attributes.description') %></th>
+            <th class="nosort"><%= t('cocard.action') %></th>
+      </tr>
+    </thead>
+    <tfoot class="search">
+      <tr>
+            <th></th>
+            <th class="nosearch"></th>
+      </tr>
+    </tfoot>
+    <tbody>
+      <% @workplaces.each do |workplace| %>
+        <%= content_tag(:tr, id: dom_id(workplace), class: dom_class(workplace)) do %>
+                <td><%= workplace.description %></td>
+                <td class="text-nowrap">
+            <%= show_link workplace %>
+            <%= edit_link workplace %>
+            <%= delete_link workplace %>
+          </td>
+        <% end %>
+      <% end %>
+    </tbody>
+  <% end %>
+</div>
+
+<br />
+
+<%= back_link %>
+<%= new_link Workplace %>

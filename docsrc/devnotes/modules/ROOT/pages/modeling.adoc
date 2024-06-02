@@ -261,8 +261,8 @@ HABTM for Terminals and Workplaces with additional attributes
 [source,sh]
 ----
 bin/rails g model TerminalWorkplaces \
-  card_terminal_id:belongs_to \
-  workplace_id:belongs_to \
+  card_terminal:belongs_to \
+  workplace:belongs_to \
   mandant:string:index \
   client_system:string:index \
   --no-stylesheets --no-javascripts --no-helper

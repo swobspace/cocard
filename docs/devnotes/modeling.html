@@ -412,8 +412,8 @@ t.index [:context_id, :connector_id], unique: true</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g model TerminalWorkplaces \
-  card_terminal_id:belongs_to \
-  workplace_id:belongs_to \
+  card_terminal:belongs_to \
+  workplace:belongs_to \
   mandant:string:index \
   client_system:string:index \
   --no-stylesheets --no-javascripts --no-helper</code></pre>
