@@ -27,7 +27,15 @@ module Cocard
                   "fetching card terminals successful"
             Rails.logger.debug(msg)
             result.card_terminals.each do |cct|
-              CardTerminals::Creator.new(connector: connector, cct: cct).save
+              creator = CardTerminals::Creator.new(connector: connector, cct: cct)
+              if creator.save
+                TerminalWorkplaces::Crupdator.new(
+                  card_terminal: creator.card_terminal,
+                  mandant: con_ctx.context&.mandant,
+                  client_system: con_ctx.context&.client_system,
+                  workplaces: cct.workplaces
+                ).call
+              end
             end
           else
             msg = "WARN:: #{connector.name}: fetch connector sds failed\n" +
