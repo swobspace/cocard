@@ -52,6 +52,8 @@ de:
       network: Netzwerk
       operational_state: Betriebszustand
       user: User
+      terminal_workplaces: Zugeordnete Arbeitsplätze
+      workplace: Arbeitsplatz
 
   attributes:
     action: Aktion

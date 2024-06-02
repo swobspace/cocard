@@ -75,5 +75,16 @@ FactoryBot.define do
     name { generate(:aname) }
   end
 
+  factory :workplace do
+    name { generate(:aname) }
+  end
+
+  factory :terminal_workplace do
+    workplace
+    card_terminal
+    mandant { generate(:aname) }
+    client_system { generate(:aname) }
+  end
+
 end
 

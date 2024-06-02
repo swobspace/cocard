@@ -14,22 +14,22 @@ class WorkplacesController < ApplicationController
   end
 
   # GET /workplaces/new
-  def new
-    @workplace = Workplace.new
-    respond_with(@workplace)
-  end
+#  def new
+#    @workplace = Workplace.new
+#    respond_with(@workplace)
+#  end
 
   # GET /workplaces/1/edit
   def edit
   end
 
   # POST /workplaces
-  def create
-    @workplace = Workplace.new(workplace_params)
-
-    @workplace.save
-    respond_with(@workplace)
-  end
+#  def create
+#    @workplace = Workplace.new(workplace_params)
+#
+#    @workplace.save
+#    respond_with(@workplace)
+#  end
 
   # PATCH/PUT /workplaces/1
   def update
