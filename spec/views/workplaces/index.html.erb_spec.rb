@@ -4,17 +4,21 @@ RSpec.describe "workplaces/index", type: :view do
   before(:each) do
     assign(:workplaces, [
       Workplace.create!(
-        description: nil
+        name: 'NB-AXC-0004',
+        description: "some more information"
       ),
       Workplace.create!(
-        description: nil
+        name: 'NB-AXC-0005',
+        description: "some more information"
       )
     ])
   end
 
   it "renders a list of workplaces" do
     render
-    cell_selector = Rails::VERSION::STRING >= '7' ? 'div>p' : 'tr>td'
-    assert_select cell_selector, text: Regexp.new(nil.to_s), count: 2
+    cell_selector = 'tr>td'
+    assert_select cell_selector, text: Regexp.new("NB-AXC-0004".to_s), count: 1
+    assert_select cell_selector, text: Regexp.new("NB-AXC-0005".to_s), count: 1
+    assert_select cell_selector, text: Regexp.new("some more information".to_s), count: 2
   end
 end

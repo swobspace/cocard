@@ -12,21 +12,24 @@
         } do %>
     <thead>
       <tr>
-            <th><%= t('attributes.description') %></th>
-            <th class="nosort"><%= t('cocard.action') %></th>
+        <th><%= t('attributes.name') %></th>
+        <th><%= t('attributes.description') %></th>
+        <th class="nosort text-end"><%= t('cocard.action') %></th>
       </tr>
     </thead>
     <tfoot class="search">
       <tr>
-            <th></th>
-            <th class="nosearch"></th>
+        <th></th>
+        <th></th>
+        <th class="nosearch"></th>
       </tr>
     </tfoot>
     <tbody>
       <% @workplaces.each do |workplace| %>
         <%= content_tag(:tr, id: dom_id(workplace), class: dom_class(workplace)) do %>
-                <td><%= workplace.description %></td>
-                <td class="text-nowrap">
+          <td><%= link_to workplace.name, workplace, class: 'primary-link' %></td>
+          <td><%= truncate(workplace.description.to_plain_text, length: 300) %></td>
+          <td class="text-end">
             <%= show_link workplace %>
             <%= edit_link workplace %>
             <%= delete_link workplace %>
@@ -40,4 +43,3 @@
 <br />
 
 <%= back_link %>
-<%= new_link Workplace %>
