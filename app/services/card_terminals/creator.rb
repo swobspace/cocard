@@ -5,7 +5,7 @@ module CardTerminals
   # Create or update CardTerminal
   #
   class Creator
-    attr_reader :channel
+    attr_reader :card_terminal
 
     # creator = CardTerminal::Creator(options)
     #
