@@ -27,3 +27,19 @@
 </div>
 
 <%= back_link %>
+
+<div class="card my-3">
+  <div class="card-header">
+    <div class="d-flex w-100">
+      <div >
+        <h4 class="title"> 
+          <%= t('controller.card_terminals') %>
+        </h4>
+      </div>
+    </div>
+  </div>
+  <div class="m-2">
+    <%= render 'terminal_workplaces', terminal_workplaces: @workplace.terminal_workplaces %>
+  </div>
+</div>  
+

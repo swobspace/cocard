@@ -1,0 +1,22 @@
+<%= content_tag :table, role: :datatable,
+      id: "cards_table",
+      class: "table table-sm table-responsive-xl" do %>
+  <thead>
+    <tr>
+      <th><%= t('attributes.card_terminal') %></th>
+      <th><%= t('attributes.mandant') %></th>
+      <th><%= t('attributes.client_system') %></th>
+    </tr>
+  </thead>
+  </tfoot>
+  <tbody>
+    <% terminal_workplaces.each do |twp| %>
+      <%= content_tag(:tr, id: dom_id(twp)) do %>
+        <td><%= link_to twp.card_terminal, twp.card_terminal, 
+                        class: 'primary-link' %></td>
+        <td><%= twp.mandant %></td>
+        <td><%= twp.client_system %></td>
+      <% end %>
+    <% end %>
+  </tbody>
+<% end %>
