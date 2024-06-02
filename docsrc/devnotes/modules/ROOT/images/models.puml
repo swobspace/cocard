@@ -104,6 +104,8 @@ class Workplace {
 Class TerminalWorkplaces {
   card_terminal_id
   workplace_id
+  mandant: string
+  client_system: string
   updated_at
 }
 Class OperationalState {
@@ -134,7 +136,7 @@ Location "0..1" -- "*" CardTerminal
 (Connector, Context) . ConnectorContext
 CardTerminal "0..1" - "*" Card
 CardTerminal "*" -- "*" Workplace
-(CardTerminal, Workplace) .. TerminalWorkplaces
+TerminalWorkplaces . (CardTerminal, Workplace) 
 Location "0..1" -- "*" Card
 OperationalState "1" -- "*" Card
 Context "1" -- "*" Card

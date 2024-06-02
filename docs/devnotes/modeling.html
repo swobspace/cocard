@@ -338,6 +338,21 @@ end</code></pre>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_model_workplace"><a class="anchor" href="#_model_workplace"></a>model Workplace</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g scaffold Workplace \
+  description:rich_text
+  --no-stylesheets --no-javascripts --no-helper
+
+bin/rails g migration AddNameToWorkplace \
+  name:string</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_habtm_tables"><a class="anchor" href="#_habtm_tables"></a>HABTM Tables</h2>
 <div class="sectionbody">
 <div class="listingblock">
@@ -384,6 +399,33 @@ end</code></pre>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">t.index [:connector_id, :context_id], unique: true
 t.index [:context_id, :connector_id], unique: true</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_habtm_terminalworkplaces_through_terminalworkplaces"><a class="anchor" href="#_habtm_terminalworkplaces_through_terminalworkplaces"></a>HABTM Terminal&#8201;&#8212;&#8201;Workplaces through TerminalWorkplaces</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>HABTM for Terminals and Workplaces with additional attributes</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g model TerminalWorkplaces \
+  card_terminal_id:belongs_to \
+  workplace_id:belongs_to \
+  mandant:string:index \
+  client_system:string:index \
+  --no-stylesheets --no-javascripts --no-helper</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Unique Index for TerminalWorkplaces</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">t.index [:card_terminal_id, :mandant,\
+         :client_system, :workplace_id], unique: true
+t.index [:workplace_id, :card_terminal_id]
+t.index [:card_terminal_id, :workplace_id]</code></pre>
 </div>
 </div>
 </div>

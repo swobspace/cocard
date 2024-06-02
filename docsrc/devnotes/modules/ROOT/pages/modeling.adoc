@@ -199,6 +199,18 @@ bin/rails g scaffold Network \
   --no-stylesheets --no-javascripts --no-helper
 ----
 
+== model Workplace
+
+[source,sh]
+----
+bin/rails g scaffold Workplace \
+  description:rich_text
+  --no-stylesheets --no-javascripts --no-helper
+
+bin/rails g migration AddNameToWorkplace \
+  name:string
+----
+
 == HABTM Tables
 
 .Join Tables for HABTM
@@ -240,4 +252,27 @@ bin/rails g model ConnectorContext \
 ----
 t.index [:connector_id, :context_id], unique: true
 t.index [:context_id, :connector_id], unique: true
+----
+
+== HABTM Terminal -- Workplaces through TerminalWorkplaces
+
+HABTM for Terminals and Workplaces with additional attributes
+
+[source,sh]
+----
+bin/rails g model TerminalWorkplaces \
+  card_terminal_id:belongs_to \
+  workplace_id:belongs_to \
+  mandant:string:index \
+  client_system:string:index \
+  --no-stylesheets --no-javascripts --no-helper
+----
+
+.Unique Index for TerminalWorkplaces
+[source,ruby]
+----
+t.index [:card_terminal_id, :mandant,\
+         :client_system, :workplace_id], unique: true
+t.index [:workplace_id, :card_terminal_id]
+t.index [:card_terminal_id, :workplace_id]
 ----
