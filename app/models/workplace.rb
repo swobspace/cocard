@@ -1,4 +1,5 @@
 class Workplace < ApplicationRecord
+  include WorkplaceConcerns
   # -- associations
   has_many :terminal_workplaces, dependent: :destroy
   has_many :card_terminals, through: :terminal_workplaces
