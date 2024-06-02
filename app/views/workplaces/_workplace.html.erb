@@ -1,7 +1,13 @@
-<div id="<%= dom_id workplace %>">
-  <p>
-    <strong>Description:</strong>
-    <%= workplace.description %>
-  </p>
+<%= link_to workplace_path(workplace), class: 'list-group-item' do %>
+  <div>
+    <span class="subtitle">
+      <%= t('activerecord.models.workplace') %>:
+      #<%= workplace.id %>
+    </span>
+  </div>
+  <div  class="row">
+    <div class="col-2"><%= workplace.name %></div>
+    <div class="col-10"><%= truncate(workplace.description.to_plain_text, length: 300) %></div>
+  </div>
+<% end %>
 
-</div>

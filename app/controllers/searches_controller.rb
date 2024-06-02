@@ -1,6 +1,6 @@
 class SearchesController < ApplicationController
   def index
-    @results = (connectors + card_terminals + cards)
+    @results = (connectors + card_terminals + cards + workplaces)
     if @results.count > 20
       @results = @results.first(20)
       @info = I18n.t('cocard.to_much_results')
@@ -21,6 +21,10 @@ private
 
   def cards
     Cards::Query.new(Card.all, search: params[:query]).all
+  end
+
+  def workplaces
+    Workplace.where("workplaces.name ILIKE ?", query).all
   end
 
   def query
