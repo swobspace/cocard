@@ -3,6 +3,8 @@ class CardTerminal < ApplicationRecord
   include CardTerminalConcerns
   # -- associations
   has_many :logs, as: :loggable, dependent: :destroy
+  has_many :terminal_workplaces, dependent: :destroy
+  has_many :workplaces, through: :terminal_workplaces
   belongs_to :location, optional: true
   belongs_to :connector, optional: true
   has_many :cards, dependent: :destroy

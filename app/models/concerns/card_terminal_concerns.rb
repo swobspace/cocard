@@ -24,4 +24,8 @@ module CardTerminalConcerns
     end
   end
 
+  def scoped_workplaces(mandant, client_system)
+    workplaces
+    .where(terminal_workplaces: {mandant: mandant, client_system: client_system})
+  end
 end

@@ -36,4 +36,36 @@ RSpec.describe CardTerminalConcerns, type: :model do
     end
   end
 
+  describe "scope :scoped_workplaces" do
+    let!(:wps) { FactoryBot.create_list(:workplace, 3) }
+    let!(:twp1) do 
+      FactoryBot.create(:terminal_workplace,
+        card_terminal: ct,
+        mandant: 'Mandy',
+        client_system: 'SlowMed',
+        workplace: wps[0]
+      )
+    end
+    let!(:twp2) do 
+      FactoryBot.create(:terminal_workplace,
+        card_terminal: ct,
+        mandant: 'Mandy',
+        client_system: 'FastMed',
+        workplace: wps[1]
+      )
+    end
+    let!(:twp3) do 
+      FactoryBot.create(:terminal_workplace,
+        card_terminal: ct,
+        mandant: 'Other',
+        client_system: 'SlowMed',
+        workplace: wps[2]
+      )
+    end
+
+    it { expect(ct.scoped_workplaces('Mandy', 'SlowMed')).to contain_exactly(wps[0]) }
+    it { expect(ct.scoped_workplaces('Mandy', 'FastMed')).to contain_exactly(wps[1]) }
+    it { expect(ct.scoped_workplaces('Other', 'SlowMed')).to contain_exactly(wps[2]) }
+  end
+
 end
