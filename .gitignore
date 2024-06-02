@@ -42,3 +42,5 @@
 .*.swp
 /test
 yarn-error.log
+
+/local
