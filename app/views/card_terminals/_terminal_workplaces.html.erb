@@ -1,0 +1,37 @@
+<div data-controller="datatables">
+  <%= content_tag :table, role: :datatable,
+        id: "cards_table",
+        class: "table table-sm table-responsive-xl",
+        data: {
+          'datatables-target': 'datatable',
+          order: [[0, 'asc']].to_json
+        } do %>
+    <thead>
+      <tr>
+        <th><%= t('attributes.workplace') %></th>
+        <th><%= t('attributes.description') %></th>
+        <th><%= t('attributes.mandant') %></th>
+        <th><%= t('attributes.client_system') %></th>
+      </tr>
+    </thead>
+    <tfoot class="search">
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </tfoot>
+    <tbody>
+      <% terminal_workplaces.each do |twp| %>
+        <%= content_tag(:tr, id: dom_id(twp)) do %>
+          <td><%= link_to twp.workplace, twp.workplace, 
+                          class: 'primary-link' %></td>
+          <td><%= truncate(twp.workplace.description.to_plain_text, length: 300) %></td>
+          <td><%= twp.mandant %></td>
+          <td><%= twp.client_system %></td>
+        <% end %>
+      <% end %>
+    </tbody>
+  <% end %>
+</div>
