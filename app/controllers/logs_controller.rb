@@ -6,10 +6,10 @@ class LogsController < ApplicationController
   def index
     if @loggable
       @logs = @loggable.logs
+      @pagy, @logs = pagy(@logs)
     else
       @logs = Log.all
     end
-    @pagy, @logs = pagy(@logs)
     respond_with(@logs)
   end
 

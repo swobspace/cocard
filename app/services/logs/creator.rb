@@ -43,7 +43,7 @@ module Logs
         else
           @log.destroy
         end
-      elsif @log.save
+      elsif (!destroy) and @log.save
         true
       else
         Rails.logger.warn("WARN:: could not update timestamp: " +
