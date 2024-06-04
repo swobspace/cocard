@@ -24,7 +24,21 @@ module Cocard
       !!(vpnti_connection_status == "Online")
     end
 
+    def operating_state
+      connector[:operating_state] || {}
+    end
+
+    def error_states
+      @error_states ||= [].tap do |es|
+        errs = (operating_state[:error_state].nil?) ? [] : operating_state[:error_state]
+        errs.each do |e|
+          es << Cocard::ErrorState.new(e)
+        end
+      end
+    end
+
   private
     attr_reader :hash
   end
+
 end

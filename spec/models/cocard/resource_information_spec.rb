@@ -40,5 +40,22 @@ module Cocard
       it { expect(subject.vpnti_connection_timestamp).to eq(ts)}
       it { expect(subject.vpnti_online).to be_truthy }
     end
+
+# [{:error_condition=>"EC_No_VPN_TI_Connection",
+# :severity=>"Error",
+# :type=>"Operation",
+# :value=>false,
+# :valid_from=>1.month.before(ts)}]}
+
+    describe "#error_states" do
+      let(:error_states) { subject.error_states }
+      it { expect(error_states).to be_kind_of(Array) }
+      it { expect(error_states.count).to eq(1) }
+      it { expect(error_states[0].error_condition).to eq('EC_No_VPN_TI_Connection') }
+      it { expect(error_states[0].severity).to eq('Error') }
+      it { expect(error_states[0].type).to eq('Operation') }
+      it { expect(error_states[0].value).to be_falsey }
+      it { expect(error_states[0].valid?).to be_falsey }
+    end
   end
 end
