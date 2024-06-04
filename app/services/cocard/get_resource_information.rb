@@ -67,14 +67,21 @@ module Cocard
         Rails.logger.error("could not create log entry: GetResourceInformation - #{message}")
       end
     end
+
     def log_error_states(error_states)
       error_states.each do |es|
+        next if filter_error_states(es)
         logger = Logs::Creator.new(loggable: connector,
                                    level: es.severity,
-                                   action: "OPERATIONAL_STATE/#{es.type}",
+                                   action: "OPERATIONAL_STATE",
                                    message: es.error_condition)
         logger.call(!es.valid?)
       end
+    end
+
+    def filter_error_states(es)
+      regex = Regexp.new(/EC_CardTerminal/)
+      !!(regex =~ es.error_condition)
     end
   end
 end
