@@ -38,6 +38,7 @@ module Cocard
         connector.last_check_ok = Time.current
         connector.vpnti_online = resource_information.vpnti_online
         connector.update_condition
+        log_error_states(resource_information.error_states)
         if connector.save
           Result.new(success?: true, error_messages: error_messages,
                      resource_information: resource_information)
@@ -61,9 +62,18 @@ module Cocard
     def log_error(message)
       logger = Logs::Creator.new(loggable: connector, level: 'ERROR',
                                  action: 'GetResourceInformation', message: message)
-      unless logger.save
+      unless logger.call
         message = Array(message).join('; ')
         Rails.logger.error("could not create log entry: GetResourceInformation - #{message}")
+      end
+    end
+    def log_error_states(error_states)
+      error_states.each do |es|
+        logger = Logs::Creator.new(loggable: connector,
+                                   level: es.severity,
+                                   action: "OPERATIONAL_STATE/#{es.type}",
+                                   message: es.error_condition)
+        logger.call(!es.valid?)
       end
     end
   end

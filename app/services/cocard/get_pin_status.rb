@@ -69,7 +69,7 @@ module Cocard
     def log_error(message)
       logger = Logs::Creator.new(loggable: card, level: 'ERROR',
                                  action: 'GetPinStatus', message: message)
-      unless logger.save
+      unless logger.call
         message = Array(message).join('; ')
         Rails.logger.error("could not create log entry: GetPinStatus - #{message}")
       end

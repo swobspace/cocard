@@ -6,7 +6,7 @@ module Logs
     let!(:ts)   { Time.current }
     let(:conn) { FactoryBot.create(:connector) }
 
-    subject do 
+    subject do
       Logs::Creator.new(
         loggable: conn,
         action: "GetResource",
@@ -19,7 +19,7 @@ module Logs
     # check for instance methods
     describe 'check if instance methods exists' do
       it { expect(subject).to be_kind_of(Logs::Creator) }
-      it { expect(subject.respond_to?(:save)).to be_truthy }
+      it { expect(subject.respond_to?(:call)).to be_truthy }
     end
 
     describe '#new' do
@@ -32,12 +32,12 @@ module Logs
       end
     end
 
-    describe '#save' do
+    describe '#call' do
       context 'new log' do
-        let(:log) { subject.save; subject.log }
+        let(:log) { subject.call; subject.log }
         it 'create a new log entry' do
           expect do
-            subject.save
+            subject.call
           end.to change(Log, :count).by(1)
           expect(subject.log).to be_kind_of(Log)
         end
@@ -50,11 +50,11 @@ module Logs
 
       end
 
-      it { expect(subject.save).to be_truthy }
+      it { expect(subject.call).to be_truthy }
 
       context 'with an existing log' do
         let!(:log) do
-          FactoryBot.create(:log, 
+          FactoryBot.create(:log,
             loggable: conn,
             action: "GetResource",
             level: "WARN",
@@ -65,17 +65,23 @@ module Logs
         before(:each) { log.reload }
         it 'does not create a log' do
           expect {
-            subject.save
+            subject.call
           }.to change(Log, :count).by(0)
           expect(subject.log).to be_kind_of(Log)
           expect(subject.log).to eq(log)
         end
 
-        it { expect(subject.save).to be_truthy }
+        it 'deletes log with call(true)' do
+          expect {
+            subject.call(true)
+          }.to change(Log, :count).by(-1)
+        end
 
-        context 'update attributes' do
+        it { expect(subject.call).to be_truthy }
+
+        context 'updates last_seen' do
           before(:each) do
-            subject.save
+            subject.call
             log.reload
           end
           it { expect(log.loggable).to eq(conn) }
@@ -88,7 +94,7 @@ module Logs
     end
 
     describe "with array as message" do
-      subject do 
+      subject do
         Logs::Creator.new(
           loggable: conn,
           action: "GetResource",
@@ -98,7 +104,7 @@ module Logs
         )
       end
       it "concats message to one string" do
-        subject.save
+        subject.call
         expect(subject.log.message).to eq("some; array; of; messages")
       end
     end

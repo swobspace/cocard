@@ -28,7 +28,7 @@ module Logs
     end
 
     # rubocop:disable Metrics/AbcSize, Rails/SkipsModelValidations
-    def save
+    def call(destroy = false)
       @log = Log.create_with(last_seen: @last_seen)
                 .find_or_initialize_by(
                    loggable: @loggable,
@@ -38,9 +38,13 @@ module Logs
                  )
 
       if @log.persisted?
-        @log.update(last_seen: @last_seen)
+        if destroy == false
+          @log.update(last_seen: @last_seen)
+        else
+          @log.destroy
+        end
       elsif @log.save
-        true 
+        true
       else
         Rails.logger.warn("WARN:: could not update timestamp: " +
           @log.errors.full_messages.join('; '))
