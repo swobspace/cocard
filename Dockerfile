@@ -1,10 +1,10 @@
 # syntax = docker/dockerfile:1
 
 # Github Containers
-LABEL "org.opencontainers.image.source"="https://github.com/swobspace/cocard"
-LABEL "org.opencontainers.image.description"="Cocard"
-LABEL "org.opencontainers.image.licenses"="MIT"
-LABEL "org.opencontainers.image.documentation"="https://swobspace.github.io/cocard/cocard/index.html"
+LABEL org.opencontainers.image.source=https://github.com/swobspace/cocard
+LABEL org.opencontainers.image.description="Cocard"
+LABEL org.opencontainers.image.licenses=MIT
+LABEL org.opencontainers.image.documentation="https://swobspace.github.io/cocard/cocard/index.html"
 
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
