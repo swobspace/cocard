@@ -18,11 +18,13 @@
               <th><%= t('attributes.loggable') %></th>
               <th><%= t('attributes.action') %></th>
               <th><%= t('attributes.message') %></th>
+              <th class="notvisible"><%= t('attributes.created_at') %></th>
               <th class="nosort"><%= t('cocard.action') %></th>
         </tr>
       </thead>
       <tfoot class="search">
         <tr>
+              <th></th>
               <th></th>
               <th></th>
               <th></th>
@@ -35,7 +37,7 @@
         <% @logs.each do |log| %>
           <%= content_tag(:tr, id: dom_id(log), class: dom_class(log)) do %>
                   <td><%= log.last_seen&.localtime&.to_s %></td>
-                  <td><%= log.level %></td>
+                  <td><%= render ErrorLevelBadgeComponent.new(level: log.level) %></td>
                   <td>
                     <%= link_to log.loggable, 
                           polymorphic_path(log.loggable, anchor: 'logs'),
@@ -45,6 +47,7 @@
                   </td>
                   <td><%= log.action %></td>
                   <td><%= log.message %></td>
+                  <td><%= log.created_at.localtime.to_s %></td>
                   <td class="text-nowrap">
               <%= show_link log %>
               <%= delete_link log %>

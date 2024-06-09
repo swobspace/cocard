@@ -1,6 +1,6 @@
 <%= tag.tr id: dom_id(log), class: dom_class(log) do %>
   <td><%= log.last_seen&.localtime&.to_s %></td>
-  <td><%= log.level %></td>
+  <td><%= render ErrorLevelBadgeComponent.new(level: log.level) %></td>
   <td><%= log.action %></td>
   <td><%= truncate(log.message, length: 200) %></td>
   <td class="text-end">
