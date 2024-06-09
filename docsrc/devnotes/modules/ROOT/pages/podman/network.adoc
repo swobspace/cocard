@@ -1,0 +1,16 @@
+= Network
+
+== Subnets and Pools
+
+Override the default subnet and default subnet pools.
+
+./etc/containers/container.conf
+[source,toml]
+----
+[network]
+default_subnet = "192.168.249.0/24"
+
+default_subnet_pools = [
+  {"base" = "192.168.241.0/24", "size" = 28},
+]
+----

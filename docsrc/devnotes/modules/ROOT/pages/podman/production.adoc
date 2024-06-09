@@ -1,0 +1,62 @@
+= Production
+
+Just a memo for todos and code snippets ...
+
+== Handling Images
+
+=== Build Image
+
+.Build
+[source,sh]
+----
+podman build -t cocard .
+----
+
+.Inspect image
+[source,sh]
+----
+podman run --rm -it cocard /bin/bash
+----
+
+=== Tag Image
+
+.Tag image
+[source,sh]
+----
+podman tag cocard ghcr.io/swobspace/cocard:0.1.0
+podman tag cocard ghcr.io/swobspace/cocard:latest
+----
+
+=== Push Image
+
+.Push image
+[source,sh]
+----
+export CR_PAT=YOUR_TOKEN
+echo $CR_PAT | docker login ghcr.io -u swobspace --password-stdin
+docker push ghcr.io/swobspace/cocard:0.1.0
+docker push ghcr.io/swobspace/cocard:latest
+----
+
+=== ghcr.io
+
+https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry
+
+== Variables
+
+.env.production.example
+[source,cfg]
+----
+include::example$podman/env.production.example[]
+----
+
+.Some Hints
+[cols="2,3"]
+|===
+|Hint | Description
+
+|===
+
+
+
+

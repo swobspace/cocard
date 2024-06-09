@@ -1,0 +1,20 @@
+= Dockerfile for Production
+
+.Dockerfile
+[source,dockerfile]
+----
+include::example$podman/Dockerfile.prod[]
+----
+
+.Some Hints
+[cols="2,3"]
+|===
+|Hint | Description
+
+m|apt install -y iputils-ping
+|Cocard uses `Net::Ping::External` which makes use of `/usr/bin/ping`
+
+m|setcap cap_net_raw+p `which ping`
+|Ping always needs `CAP_RAW`. Using an Ubuntu image on a Fedora host with `podman` ping doesn't work out of the box.
+
+|===

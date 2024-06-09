@@ -1,0 +1,20 @@
+= Podman
+
+Just a memo for todos and code snippets ...
+
+IMPORTANT: I'm using podman only for production now, 
+not in development and test environment  (classic style)
+
+== Environments
+
+===  Production
+
+* xref:podman/production.adoc[]
+* xref:podman/dockerfile-prod.adoc[]
+
+== Networking
+
+Some Hints for podman globally
+
+* xref:podman/network.adoc[]
+
