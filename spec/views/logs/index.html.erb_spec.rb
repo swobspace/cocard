@@ -29,6 +29,6 @@ RSpec.describe "logs/index", type: :view do
     assert_select cell_selector, text: Regexp.new("Action".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("Level".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("MyText".to_s), count: 2
-    assert_select cell_selector, text: Regexp.new(ts.localtime.to_s.gsub(/\+.*/, '')), count: 2
+    assert_select cell_selector, text: Regexp.new(ts.localtime.to_s.gsub(/\+.*/, '')), count: 4
   end
 end
