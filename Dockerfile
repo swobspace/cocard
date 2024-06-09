@@ -8,7 +8,7 @@ LABEL "org.opencontainers.image.documentation"="https://swobspace.github.io/coca
 
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
-ARG RUBY_VERSION=3.2.2
+ARG RUBY_VERSION=3.2.4
 FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
 
 # Rails app lives here
@@ -63,10 +63,8 @@ FROM base
 # Install packages needed for deployment
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y \
-                      curl libvips postgresql-client && \
-                      iputils-ping uuid && \
+                      curl libvips postgresql-client iputils-ping uuid && \
     setcap cap_net_raw+p `which ping` && \
-
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Copy built artifacts: gems, application
