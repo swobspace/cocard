@@ -64,7 +64,7 @@ FROM base
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y \
                       curl libvips postgresql-client iputils-ping uuid && \
-    setcap cap_net_raw+p `which ping` && \
+    setcap cap_net_raw+ep `which ping` && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Copy built artifacts: gems, application
