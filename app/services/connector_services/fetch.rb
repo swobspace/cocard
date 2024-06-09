@@ -30,7 +30,7 @@ module ConnectorServices
         response = conn.get(uri.path)
 
         unless response.success?
-          error_messages << response.headers.join(' ')
+          # error_messages << response.headers.join(' ')
           error_messages << response.status
           error_messages << response.body
           connector.update(condition: Cocard::States::UNKNOWN)
