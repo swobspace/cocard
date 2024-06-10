@@ -1,5 +1,5 @@
 <div class="container-xl">
-
+ <% if @current_user.present? %>
   <div class="card mt-3">
     <div class="card-header">
       <div class="row">
@@ -12,7 +12,7 @@
       </div>
     </div>
     <div>
-      <%= turbo_frame_tag("connectors", src: sindex_connectors_path) if @current_user %>
+      <%= turbo_frame_tag("connectors", src: sindex_connectors_path) %>
     </div>
   </div>
 
@@ -28,7 +28,7 @@
       </div>
     </div>
     <div>
-      <%= turbo_frame_tag("card_terminals", src: sindex_card_terminals_path) if @current_user %>
+      <%= turbo_frame_tag("card_terminals", src: sindex_card_terminals_path) %>
     </div>
   </div>
 
@@ -44,7 +44,13 @@
       </div>
     </div>
     <div>
-      <%= turbo_frame_tag("cards", src: sindex_cards_path) if @current_user %>
+      <%= turbo_frame_tag("cards", src: sindex_cards_path) %>
     </div>
   </div>
+ <% else %>
+ <p>
+   Sie sind nicht eingeloggt.
+   <%= link_to "Bitte loggen Sie sich ein", wobauth.new_user_session_path %>
+ </p>
+ <% end %>
 </div>
