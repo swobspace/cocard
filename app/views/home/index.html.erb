@@ -12,7 +12,7 @@
       </div>
     </div>
     <div>
-      <%= turbo_frame_tag("connectors", src: sindex_connectors_path) %>
+      <%= turbo_frame_tag("connectors", src: sindex_connectors_path) if @current_user %>
     </div>
   </div>
 
@@ -28,7 +28,7 @@
       </div>
     </div>
     <div>
-      <%= turbo_frame_tag("card_terminals", src: sindex_card_terminals_path) %>
+      <%= turbo_frame_tag("card_terminals", src: sindex_card_terminals_path) if @current_user %>
     </div>
   </div>
 
@@ -44,7 +44,7 @@
       </div>
     </div>
     <div>
-      <%= turbo_frame_tag("cards", src: sindex_cards_path) %>
+      <%= turbo_frame_tag("cards", src: sindex_cards_path) if @current_user %>
     </div>
   </div>
 </div>
