@@ -5,7 +5,11 @@ class Wobauth::User < ActiveRecord::Base
 
   # devise *cocard.devise_modules
   # or ... basic usage:
-  devise :database_authenticatable
+  devise :database_authenticatable,
+         :registerable,
+         :recoverable,
+         :rememberable,
+         :trackable
 
   validates :password, confirmation: true
 end
