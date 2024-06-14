@@ -37,4 +37,19 @@ RSpec.describe ErrorLevelBadgeComponent, type: :component do
       expect(page).to have_css('span[class="badge text-bg-light"]')
     end
   end
+
+  describe "with level = Fatal" do
+    it "shows alert badge" do
+      render_inline(described_class.new(level: "Fatal"))
+      expect(page).to have_css('span[class="badge bg-alert"]')
+    end
+  end
+
+  describe "with level = jibbetnich" do
+    it "shows secondary badge" do
+      render_inline(described_class.new(level: "jibbetnich"))
+      expect(page).to have_css('span[class="badge text-bg-secondary"]')
+    end
+  end
+
 end
