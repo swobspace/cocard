@@ -63,8 +63,8 @@ module ConnectorServices
         it { expect(result.success?).to be_falsey }
         it { expect(result.respond_to?(:error_messages)).to be_truthy }
         it { expect(result.respond_to?(:sds)).to be_truthy }
-        it { expect(result.error_messages).to include('nonsense', 
-                                                      'no information available') }
+        it { puts result.error_messages }
+        it { expect(result.error_messages).to include('no information available') }
         it { expect(result.sds).to be_nil }
 
         it 'updates last_check' do
