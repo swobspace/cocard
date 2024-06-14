@@ -3,12 +3,12 @@ module CardConcerns
 
   included do
     scope :condition, -> (state) { where('cards.condition = ?', state) }
-    scope :ok, -> { where(condition: Cocard::States::OK) }
-    scope :warning, -> { where(condition: Cocard::States::WARNING) }
-    scope :critical, -> { where(condition: Cocard::States::CRITICAL) }
-    scope :unknown, -> { where(condition: Cocard::States::UNKNOWN) }
-    scope :nothing, -> { where(condition: Cocard::States::NOTHING) }
-    scope :failed, -> { where("cards.condition <> ?", Cocard::States::OK) }
+    scope :ok, -> { condition(Cocard::States::OK) }
+    scope :warning, -> { condition(Cocard::States::WARNING) }
+    scope :critical, -> { condition(Cocard::States::CRITICAL) }
+    scope :unknown, -> { condition(Cocard::States::UNKNOWN) }
+    scope :nothing, -> { condition(Cocard::States::NOTHING) }
+    scope :failed, -> { where("cards.condition > ?", Cocard::States::OK) }
 
     scope :with_description_containing, ->(query) { joins(:rich_text_description).merge(ActionText::RichText.where <<~SQL, "%" + query + "%") }
     body ILIKE ?
