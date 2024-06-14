@@ -5,6 +5,7 @@
     <tr>
       <th class="text-center"><%= t('attributes.condition') %></th>
       <th><%= t('attributes.card_terminal') %></th>
+      <th><%= t('attributes.connector') %></th>
       <th><%= t('attributes.mandant') %></th>
       <th><%= t('attributes.client_system') %></th>
     </tr>
@@ -19,6 +20,11 @@
         </td>
         <td><%= link_to twp.card_terminal, twp.card_terminal, 
                         class: 'primary-link' %></td>
+        <td><%= link_to(twp.card_terminal&.connector, 
+                        twp.card_terminal&.connector,
+                        class: 'primary-link') if twp.card_terminal&.connector.present?
+             %>
+       </td>
         <td><%= twp.mandant %></td>
         <td><%= twp.client_system %></td>
       <% end %>
