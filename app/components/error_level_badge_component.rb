@@ -7,6 +7,8 @@ class ErrorLevelBadgeComponent < ViewComponent::Base
 
   def color
     case level.downcase
+    when "fatal"
+      "bg-alert"
     when "error", "critical"
         "text-bg-danger"
     when "warn", "warning"
@@ -15,7 +17,7 @@ class ErrorLevelBadgeComponent < ViewComponent::Base
         "text-bg-light"
     when "unknown"
         "text-bg-info"
-    default
+    else
       "text-bg-secondary"
     end
   end
