@@ -12,15 +12,18 @@ export default class extends Controller {
   }
 
   connect() {
+    let _this = this
     let dtOptions = {}
     this.compileOptions(dtOptions)
-    if (!this.simpleValue) {
-      this.setInputFields()
-    }
-    const table = $(this.element.querySelector('table'))
 
+    const table = $(this.element.querySelector('table'))
+    console.log(table[0].id)
     // prepare options, optional add remote processing (not yet implemented)
     let dtable = $(table).DataTable(dtOptions)
+
+    if (!this.simpleValue) {
+      this.setInputFields(dtable.state())
+    }
 
     // process search input
     dtable.columns().eq(0).each((colIdx) => {
@@ -31,23 +34,29 @@ export default class extends Controller {
   } // connect
 
   // search fields for each column
-  setInputFields() {
+  setInputFields(state) {
+    // console.log(dtable.tables(0).columns)
     this.element.querySelectorAll("table tfoot th:not([class='nosearch'])")
         .forEach((th, idx) => {
-          th.insertAdjacentHTML('afterbegin', this.searchField(idx))
+          let col = th.getAttribute("data-dt-column")
+          th.insertAdjacentHTML('afterbegin', this.searchField(col, state.columns[col].search.search))
         })
   }
 
   // single search input field
-  searchField(idx) {
-    return `<input type="text" placeholder="search" name="idx${idx}" />`
+  searchField(idx, text) {
+    return `<input type="text" placeholder="search" name="idx${idx}" value="${text}"/>`
   }
 
   // datatables options
   compileOptions(options) {
     // common options
     options.pagingType = "full_numbers"
-    options.stateSave = false
+    options.stateSave = true
+    // save state but don't save search filter
+    options.stateSaveParams = function(settings, data) {
+                                 data.search.search = '';
+                               }
     options.lengthMenu = [ [10, 25, 100, 250, 1000], [10, 25, 100, 250, 1000] ]
     options.columnDefs = [ { "targets": "nosort", "orderable": false },
                            { "targets": "notvisible", "visible": false },
@@ -83,7 +92,13 @@ export default class extends Controller {
           className: 'btn btn-outline-secondary btn-sm'
         }
       },
-      buttons: [ { "extend": 'excel',
+      buttons: [ 
+                 { "text": 'Reset',
+                    "action": function(e, dt, node, config) {
+                                dt.state.clear();
+                                window.location.reload();
+                              }},
+                 { "extend": 'excel',
 	           "exportOptions": { "search": ':applied' } },
                  { "extend": 'pdf',
 	           "orientation": 'landscape',
@@ -91,7 +106,8 @@ export default class extends Controller {
 	           "exportOptions": { "columns": ':visible',
 	                              "search": ':applied' } },
                  { "extend": 'print'},
-                 { "extend": 'colvis', "columns": ':gt(0)' } ]
+                 { "extend": 'colvis', "columns": ':gt(0)' }
+               ]
     }
   }
 
