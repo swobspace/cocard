@@ -79,7 +79,7 @@ RSpec.describe "cards/index", type: :view do
     assert_select cell_selector, text: Regexp.new("SMC-B".to_s), count: 1
     assert_select cell_selector, text: Regexp.new("8027612345678".to_s), count: 1
     assert_select cell_selector, text: Regexp.new("8027612345699".to_s), count: 1
-    assert_select cell_selector, text: Regexp.new("22888".to_s), count: 1
+    assert_select cell_selector, text: Regexp.new("22888".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("22999".to_s), count: 1
     assert_select cell_selector, text: Regexp.new(ts.to_s), count: 2
     assert_select cell_selector, text: Regexp.new(1.year.after(Date.current).to_s), count: 2

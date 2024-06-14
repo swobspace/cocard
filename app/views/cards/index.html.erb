@@ -18,8 +18,10 @@
         <th><%= t('attributes.iccsn') %></th>
         <th><%= t('attributes.connector') %></th>
         <th><%= t('attributes.card_terminal') %></th>
-        <th class="text-center"><%= t('attributes.slotid') %></th>
+        <th><%= t('attributes.mac') %></th>
+        <th class="text-center notvisible"><%= t('attributes.slotid') %></th>
         <th class="notvisible"><%= t('attributes.card_handle') %></th>
+        <th class="notvisible"><%= t('attributes.description') %></th>
         <th><%= t('attributes.insert_time') %></th>
         <th><%= t('attributes.card_holder_name') %></th>
         <th><%= t('attributes.expiration_date') %></th>
@@ -67,6 +69,8 @@
         <th></th>
         <th></th>
         <th></th>
+        <th></th>
+        <th></th>
         <th class="nosearch"></th>
       </tr>
     </tfoot>
@@ -79,15 +83,21 @@
           </td>
           <td><%= card.card_type %></td>
           <td><%= card.name %></td>
-          <td><%= link_to card.iccsn, card_path(card) %></td>
+          <td><%= link_to card.iccsn, card_path(card), class: 'primary-link' %></td>
           <td><%= link_to(card.card_terminal&.connector, 
-                          connector_path(card.card_terminal&.connector)
+                          connector_path(card.card_terminal&.connector),
+                          class: 'primary-link'
                          ) if card.card_terminal&.connector %></td>
-          <td><%= link_to(card.card_terminal&.ct_id, 
-                          card_terminal_path(card.card_terminal)
+          <td><%= link_to( "#{card.card_terminal&.ct_id}/" + 
+                           "#{card.slotid}" +
+                           " #{card.card_terminal&.name}", 
+                           card_terminal_path(card.card_terminal),
+                           class: 'primary-link'
                          ) if card.card_terminal %></td>
+          <td class="text-center"><%= card.card_terminal&.mac&.gsub(/:/, '') %></td>
           <td class="text-center"><%= card.slotid %></td>
           <td><%= card.card_handle %></td>
+          <td><%= card.description %></td>
           <td><%= card.insert_time %></td>
           <td><%= card.card_holder_name %></td>
           <td><%= render Card::ExpirationDateComponent.new(card: card) %></td>

@@ -103,6 +103,7 @@ de:
     locations: Standorte
     location_ids: Standorte
     loggable: Log für
+    mac: MAC
     manual_update: manuelles Update
     message: Nachricht
     name: Name
