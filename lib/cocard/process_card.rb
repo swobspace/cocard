@@ -2,7 +2,7 @@ module Cocard
   module ProcessCard
   private
     def self.process_card(card)
-      return unless card.card_type == 'SMC-B'
+      return unless card.card_type =~ /(SMC-B|HBA)/
 
       if card.certificate.blank?
         result = Cocard::GetCertificate.new(card: card).call
@@ -12,6 +12,11 @@ module Cocard
           Rails.logger.warn(msg)
         end
       end
+
+      #
+      # get pin status only from SMC-B
+      #
+      return unless card.card_type =~ /SMC-B/
 
       result = Cocard::GetPinStatus.new(card: card).call
       unless result.success?
