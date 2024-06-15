@@ -18,6 +18,7 @@
         <th><%= t('attributes.iccsn') %></th>
         <th><%= t('attributes.connector') %></th>
         <th><%= t('attributes.card_terminal') %></th>
+        <th><%= t('attributes.card_terminal') %></th>
         <th><%= t('attributes.mac') %></th>
         <th class="text-center notvisible"><%= t('attributes.slotid') %></th>
         <th class="notvisible"><%= t('attributes.card_handle') %></th>
@@ -71,6 +72,7 @@
         <th></th>
         <th></th>
         <th></th>
+        <th></th>
         <th class="nosearch"></th>
       </tr>
     </tfoot>
@@ -89,11 +91,11 @@
                           class: 'primary-link'
                          ) if card.card_terminal&.connector %></td>
           <td><%= link_to( "#{card.card_terminal&.ct_id}/" + 
-                           "#{card.slotid}" +
-                           " #{card.card_terminal&.name}", 
+                           "#{card.slotid}",
                            card_terminal_path(card.card_terminal),
                            class: 'primary-link'
                          ) if card.card_terminal %></td>
+          <td><%= card.card_terminal&.name %></td>
           <td class="text-center"><%= card.card_terminal&.mac&.gsub(/:/, '') %></td>
           <td class="text-center"><%= card.slotid %></td>
           <td><%= card.card_handle %></td>
