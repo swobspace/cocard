@@ -99,7 +99,8 @@ export default class extends Controller {
                                 window.location.reload();
                               }},
                  { "extend": 'excel',
-	           "exportOptions": { "search": ':applied' } },
+	           "exportOptions": { "columns": ':visible',
+                                      "search": ':applied' } },
                  { "extend": 'pdf',
 	           "orientation": 'landscape',
 	           "pageSize": 'A4',
