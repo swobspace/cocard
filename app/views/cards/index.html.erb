@@ -84,7 +84,7 @@
           <td><%= card.card_type %></td>
           <td><%= card.name %></td>
           <td><%= link_to card.iccsn, card_path(card), class: 'primary-link' %></td>
-          <td><%= link_to(card.card_terminal&.connector, 
+          <td><%= link_to(card.card_terminal&.connector&.name, 
                           connector_path(card.card_terminal&.connector),
                           class: 'primary-link'
                          ) if card.card_terminal&.connector %></td>
