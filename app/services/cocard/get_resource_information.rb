@@ -80,7 +80,7 @@ module Cocard
     end
 
     def filter_error_states(es)
-      regex = Regexp.new(/EC_(CardTerminal|OTHER|CRYPTO)/)
+      regex = Regexp.new(/EC_(CardTerminal|OTHER|CRYPTO|LOG_OVERFLOW)/)
       !!(regex =~ es.error_condition)
     end
   end
