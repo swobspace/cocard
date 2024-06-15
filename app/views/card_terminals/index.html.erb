@@ -55,7 +55,7 @@
       <% @card_terminals.each do |card_terminal| %>
         <%= content_tag(:tr, id: dom_id(card_terminal), class: dom_class(card_terminal)) do %>
           <td class="text-center">
-            <%= render ConditionIconComponent.new(item: card_terminal, small: true) %>
+            <%= render ConditionIconComponent.new(item: card_terminal, small: true, as_text: true) %>
             <span style="visibility:hidden;"><%= card_terminal.condition %></span>
           </td>
           <td><%= card_terminal.displayname %></td>

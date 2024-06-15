@@ -1,11 +1,11 @@
-<button type="button" class="<%= button_class %>" 
-        title="<%= item.condition_message %>">
-  <% if as_text %>
-    <small><%= text %></small>
-  <% else %>
-    <i class="<%= icon %>"></i>
-  <% end %>
-</button>
+<% if as_text %>
+  <span class="badge text-bg-<%= color %>"><%= text %></span>
+<% else %>
+  <button type="button" class="<%= size %> <%= btn %>-<%= color %>" 
+          title="<%= item.condition_message %>">
+      <i class="<%= icon %>"></i>
+  </button>
+<% end %>
 
 <% if outdated? %>
   <span title="Data may be outdated, no recent updates">
