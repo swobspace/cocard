@@ -68,4 +68,9 @@ RSpec.describe CardTerminalConcerns, type: :model do
     it { expect(ct.scoped_workplaces('Other', 'SlowMed')).to contain_exactly(wps[2]) }
   end
 
+  describe "#smcb" do
+    let(:c1) { FactoryBot.create(:card, card_terminal: ct, card_type: 'SMC-KT') }
+    let(:c2) { FactoryBot.create(:card, card_terminal: ct, card_type: 'SMC-B') }
+    it { expect(ct.smcb).to contain_exactly(c2) }
+  end
 end

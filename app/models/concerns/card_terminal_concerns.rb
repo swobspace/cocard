@@ -32,4 +32,8 @@ module CardTerminalConcerns
     workplaces
     .where(terminal_workplaces: {mandant: mandant, client_system: client_system})
   end
+
+  def smcb
+    cards.where(card_type: 'SMC-B')
+  end
 end
