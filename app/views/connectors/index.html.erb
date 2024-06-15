@@ -49,7 +49,7 @@
                 <td><%= link_to nil, connector.admin_url %></td>
                 <td><%= connector.sds_url %></td>
                 <td><%= connector.manual_update %></td>
-                <td><%= connector.locations.map(&:lid).join('; ') %></td>
+                <td><%= connector.locations.order(:lid).map(&:lid).join('; ') %></td>
                 <td><%= connector.firmware_version %></td>
                 <td><%= render IsCurrentComponent.new(item: connector, attr: :last_check) %></td>
                 <td><%= render IsCurrentComponent.new(item: connector, attr: :last_check_ok) %></td>
