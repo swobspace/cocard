@@ -19,7 +19,8 @@
             <th class="notvisible"><%= t('attributes.sds_url') %></th>
             <th class="notvisible"><%= t('attributes.manual_update') %></th>
             <th><%= t('attributes.locations') %></th>
-            <th><%= t('attributes.firmware_version') %></th>
+            <th class="text-center"><%= t('attributes.firmware_version') %></th>
+            <th class="notvisible"><%= t('attributes.description') %></th>
             <th><%= t('attributes.last_check') %></th>
             <th><%= t('attributes.last_check_ok') %></th>
             <th class="nosort"><%= t('cocard.action') %></th>
@@ -37,6 +38,7 @@
             <th></th>
             <th></th>
             <th></th>
+            <th></th>
             <th class="nosearch"></th>
       </tr>
     </tfoot>
@@ -44,13 +46,16 @@
       <% @connectors.each do |connector| %>
         <%= content_tag(:tr, id: dom_id(connector), class: dom_class(connector)) do %>
           <td class="text-center"><%= render ConditionIconComponent.new(item: connector, small: true) %>
-                <td><%= link_to connector.name, connector_path(connector) %></td>
-                <td><%= link_to connector.ip, connector.admin_url %></td>
+                <td><%= link_to connector.name, connector_path(connector),
+                                class: 'primary-link' %></td>
+                <td><%= link_to connector.ip, connector.admin_url,
+                                class: 'primary-link' %></td>
                 <td><%= link_to nil, connector.admin_url %></td>
                 <td><%= connector.sds_url %></td>
                 <td><%= connector.manual_update %></td>
                 <td><%= connector.locations.order(:lid).map(&:lid).join('; ') %></td>
-                <td><%= connector.firmware_version %></td>
+                <td class="text-center"><%= connector.firmware_version %></td>
+                <td><%= connector.description %></td>
                 <td><%= render IsCurrentComponent.new(item: connector, attr: :last_check) %></td>
                 <td><%= render IsCurrentComponent.new(item: connector, attr: :last_check_ok) %></td>
                 <td class="text-nowrap">
