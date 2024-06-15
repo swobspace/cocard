@@ -45,7 +45,7 @@
     <tbody>
       <% @connectors.each do |connector| %>
         <%= content_tag(:tr, id: dom_id(connector), class: dom_class(connector)) do %>
-          <td class="text-center"><%= render ConditionIconComponent.new(item: connector, small: true) %>
+          <td class="text-center"><%= render ConditionIconComponent.new(item: connector, small: true, as_text: true) %>
                 <td><%= link_to connector.name, connector_path(connector),
                                 class: 'primary-link' %></td>
                 <td><%= link_to connector.ip, connector.admin_url,
