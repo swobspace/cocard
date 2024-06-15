@@ -59,9 +59,11 @@
             <span style="visibility:hidden;"><%= card_terminal.condition %></span>
           </td>
           <td><%= card_terminal.displayname %></td>
-          <td><%= link_to card_terminal.ct_id, card_terminal_path(card_terminal) %></td>
-          <td><%= link_to(card_terminal.connector,
-                          connector_path(card_terminal.connector)
+          <td><%= link_to card_terminal.ct_id, card_terminal_path(card_terminal),
+                          class: 'primary-link'  %></td>
+          <td><%= link_to(card_terminal.connector&.name,
+                          connector_path(card_terminal.connector),
+                          class: 'primary-link'
                          ) if card_terminal.connector %></td>
           <td><%= card_terminal.name %></td>
           <td><%= card_terminal.mac %></td>
