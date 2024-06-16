@@ -53,6 +53,7 @@ export default class extends Controller {
     // common options
     options.pagingType = "full_numbers"
     options.stateSave = true
+    options.stateDuration = 60 * 60 * 24
     // save state but don't save search filter
     options.stateSaveParams = function(settings, data) {
                                  data.search.search = '';
