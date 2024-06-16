@@ -105,3 +105,5 @@ gem "acts_as_list", "~> 1.1"
 gem "liquid", "~> 5.5"
 
 gem "pagy", "~> 8.4"
+
+gem "highline", "~> 3.0", require: false

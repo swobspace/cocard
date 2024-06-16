@@ -191,6 +191,7 @@ GEM
     gyoku (1.4.0)
       builder (>= 2.1.2)
       rexml (~> 3.0)
+    highline (3.0.1)
     httpi (4.0.1)
       base64
       mutex_m
@@ -450,6 +451,7 @@ DEPENDENCIES
   good_job (~> 3.28)
   guard
   guard-rspec
+  highline (~> 3.0)
   image_processing (~> 1.2)
   immutable_struct (~> 1.2)
   jsbundling-rails
