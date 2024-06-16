@@ -1,3 +1,4 @@
+<%= render 'shared/turbo-cache-control' %>
 
 <h1><%= t('controller.card_terminals') %></h1>
 
@@ -26,12 +27,14 @@
             <th><%= t('attributes.supplier') %></th>
             <th><%= t('attributes.firmware_version') %></th>
             <th><%= t('attributes.plugged_in') %></th>
+            <th class="notvisible"><%= t('attributes.description') %></th>
             <th><%= t('attributes.updated_at') %></th>
             <th class="nosort"><%= t('cocard.action') %></th>
       </tr>
     </thead>
     <tfoot class="search">
       <tr>
+            <th></th>
             <th></th>
             <th></th>
             <th></th>
@@ -76,6 +79,7 @@
           <td><%= card_terminal.supplier %></td>
           <td><%= card_terminal.firmware_version %></td>
           <td><%= card_terminal.plugged_in %></td>
+          <td><%= card_terminal.description %></td>
           <td><%= render UpdatedAtComponent.new(item: card_terminal) %></td>
           <td class="text-nowrap">
             <%= show_link card_terminal %>
