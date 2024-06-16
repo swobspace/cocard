@@ -92,7 +92,7 @@ bin/rails g scaffold CardTerminal \
   plugged_in:string \
   delivery_date:date \
   supplier:string \
-    --no-stylesheets --no-javascripts --no-helper
+  --no-stylesheets --no-javascripts --no-helper
 
 bin/rails g migration AddInternalToCardTerminal \
   properties:jsonb \
@@ -129,6 +129,7 @@ bin/rails g scaffold Card \
   fachrichtung:string \
   telematikid:string \
   context:belongs_to \
+  private_information:rich_text \
     --no-stylesheets --no-javascripts --no-helper
 
 bin/rails g migration AddInternalToCard \

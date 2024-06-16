@@ -9,6 +9,7 @@ class Card < ApplicationRecord
 
   # -- configuration
   has_rich_text :description
+  has_rich_text :private_information
 
   # -- validations and callbacks
   before_save :ensure_update_condition

@@ -112,6 +112,7 @@ de:
     operational: in Betrieb
     operational_state: Betriebszustand
     plugged_in: Netzwerk/Dose/Switch
+    private_information: Geschützte Information
     product_information: Produktinformation
     room: Raum
     sds_url: SDS-Url

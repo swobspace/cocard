@@ -132,10 +132,10 @@
 <pre class="highlightjs highlight"><code class="language-dockerfile hljs" data-lang="dockerfile"># syntax = docker/dockerfile:1
 
 # Github Containers
-LABEL "org.opencontainers.image.source"="https://github.com/swobspace/cocard"
-LABEL "org.opencontainers.image.description"="Cocard"
-LABEL "org.opencontainers.image.licenses"="MIT"
-LABEL "org.opencontainers.image.documentation"="https://swobspace.github.io/cocard/cocard/index.html"
+LABEL org.opencontainers.image.source=https://github.com/swobspace/cocard
+LABEL org.opencontainers.image.description="Cocard"
+LABEL org.opencontainers.image.licenses=MIT
+LABEL org.opencontainers.image.documentation="https://swobspace.github.io/cocard/cocard/index.html"
 
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
@@ -195,7 +195,7 @@ FROM base
 RUN apt-get update -qq &amp;&amp; \
     apt-get install --no-install-recommends -y \
                       curl libvips postgresql-client iputils-ping uuid &amp;&amp; \
-    setcap cap_net_raw+p `which ping` &amp;&amp; \
+    setcap cap_net_raw+ep `which ping` &amp;&amp; \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Copy built artifacts: gems, application

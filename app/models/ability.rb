@@ -8,12 +8,10 @@ class Ability
     alias_action :sindex, :to => :read
 
     @user = user
-    if @user.nil?
-      can :read, Home
-    elsif @user.is_admin?
+    if @user.present? and @user.is_admin?
       can :manage, :all
       cannot %i[update destroy], :roles, ro: true
-    elsif @user.role?(:reader)
+    else
       can [:read, :navigate], :all
     end
   end

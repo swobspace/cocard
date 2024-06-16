@@ -46,6 +46,12 @@
             <th class="w-10 pe-3"><%= t('attributes.description')%>:</th>
             <td><%= @card.description %></td>
           </tr>
+          <% if @current_user and @current_user.is_admin? %>
+            <tr>
+              <th class="w-10 pe-3"><%= t('attributes.private_information')%>:</th>
+              <td><%= @card.private_information %></td>
+            </tr>
+          <% end %>
           <tr>
             <th class="w-10 pe-3"><%= t('attributes.context')%>:</th>
             <td><%= @card.context %></td>

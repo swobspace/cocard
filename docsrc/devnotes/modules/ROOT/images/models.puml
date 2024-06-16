@@ -71,6 +71,7 @@ class Card {
   fachrichtung: string
   bsnr: string
   telematikid: string
+  private_information: rich_text
   context_id
   --
   properties: jsonb
