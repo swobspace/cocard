@@ -9,6 +9,7 @@
 # Ignore all environment files (except templates).
 /.env*
 !/.env*.erb
+!/.env*.example
 
 # Ignore all default key files.
 /config/master.key
@@ -35,3 +36,5 @@
 /app/assets/builds/*
 !/app/assets/builds/.keep
 /public/assets
+
+/local
