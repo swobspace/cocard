@@ -40,8 +40,7 @@
       <%= t('cocard.new_card_manual_warning') %>
     </div>
 
-    <%= form.input :iccsn,
-          input_html: { disabled: @card.persisted? }
+    <%= form.input :iccsn
        %>
     <%= form.input :card_type
        %>

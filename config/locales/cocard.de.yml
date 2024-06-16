@@ -6,8 +6,10 @@ de:
       Die folgenden Felder sind nur für die Neuanlage von Karten
       gedacht, die in keinem Kartenterminal verwendet werden. Die Felder werden
       später nach der Inbetriebnahme im Kartenterminal regelmäßig überschrieben!
-      Die Identifikation der Karte erfolgt über die ICCSN. Diese kann nur bei 
-      einer Neuanlage bearbeitet und später nicht mehr geändert werden.
+      Die Identifikation der Karte erfolgt über die ICCSN. Wenn die ICCSN nicht bekannt
+      ist, muss VOR dem ersten Einsatz der Karte die ICCSN im Datensatz korrekt 
+      eingetragen werden, andernfalls wird beim ersten Einsatz die Karte ein weiteres
+      Mal angelegt.
     new_card_terminal: Neues Kartenterminal
     new_card_terminal_manual_warning: |
       Die folgenden Felder sind nur für die Neuanlage von Kartenterminals
