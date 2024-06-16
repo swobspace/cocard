@@ -13,12 +13,12 @@
           } do %>
       <thead>
         <tr>
-              <th><%= t('attributes.last_seen') %></th>
+              <th class=""><%= t('attributes.since') %></th>
               <th><%= t('attributes.level') %></th>
               <th><%= t('attributes.loggable') %></th>
               <th><%= t('attributes.action') %></th>
               <th><%= t('attributes.message') %></th>
-              <th class="notvisible"><%= t('attributes.created_at') %></th>
+              <th><%= t('attributes.last_seen') %></th>
               <th class="nosort"><%= t('cocard.action') %></th>
         </tr>
       </thead>
@@ -36,7 +36,7 @@
       <tbody>
         <% @logs.each do |log| %>
           <%= content_tag(:tr, id: dom_id(log), class: dom_class(log)) do %>
-                  <td><%= log.last_seen&.localtime&.to_s %></td>
+                  <td><%= log.created_at.localtime.to_s %></td>
                   <td><%= render ErrorLevelBadgeComponent.new(level: log.level) %></td>
                   <td>
                     <%= link_to log.loggable, 
@@ -47,7 +47,7 @@
                   </td>
                   <td><%= log.action %></td>
                   <td><%= log.message %></td>
-                  <td><%= log.created_at.localtime.to_s %></td>
+                  <td><%= log.last_seen&.localtime&.to_s %></td>
                   <td class="text-nowrap">
               <%= show_link log %>
               <%= delete_link log %>
