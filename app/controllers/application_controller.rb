@@ -29,14 +29,22 @@ class ApplicationController < ActionController::Base
   
   protected
 
+  def after_sign_in_path_for(resource_or_scope)
+    root_path
+  end
+
   def access_denied(exception)
-    flash.now[:error] = 'Keine Berechtigung für diese Aktion!'
-    Rails.logger.debug "Access denied on #{exception.action} #{exception.subject.inspect}" if Rails.env.development?
-    respond_to do |format|
-      format.js   { render 'errors/access_denied' }
-      format.html do
-        add_breadcrumb('Fehlerseite', '#')
-        render 'errors/show_error', status: :unauthorized
+    if @current_user.nil?
+      redirect_to wobauth.login_path
+    else
+      flash.now[:error] = 'Keine Berechtigung für diese Aktion!'
+      Rails.logger.debug "Access denied on #{exception.action} #{exception.subject.inspect}" if Rails.env.development?
+      respond_to do |format|
+        format.js   { render 'errors/access_denied' }
+        format.html do
+          add_breadcrumb('Fehlerseite', '#')
+          render 'errors/show_error', status: :unauthorized
+        end
       end
     end
   end
