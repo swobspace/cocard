@@ -14,5 +14,5 @@ Wobapphelpers.setup do |config|
   # * :cancan2 : for cancan '~>2.0.0', untested
   #
   # default:
-  # config.cancan = :none
+  config.cancan = :cancan1
 end
