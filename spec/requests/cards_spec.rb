@@ -115,7 +115,7 @@ RSpec.describe "/cards", type: :request do
         expect(card.bsnr).to eq("222444666")
         expect(card.telematikid).to eq("1-2-3-456")
         expect(card.fachrichtung).to eq("Innere Medizin")
-        expect(card.private_information).to eq("some private information")
+        expect(card.private_information.to_plain_text).to eq("some private information")
         expect(card.context).to eq(context)
       end
 

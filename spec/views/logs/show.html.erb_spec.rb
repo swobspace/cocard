@@ -4,6 +4,12 @@ RSpec.describe "logs/show", type: :view do
   let(:conn) { FactoryBot.create(:connector, name: 'TK-AXC-04') }
   let(:ts)   { Time.current }
   before(:each) do
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    allow(controller).to receive(:current_ability) { @ability }
+    allow(controller).to receive(:controller_name) { 'logs' }
+    allow(controller).to receive(:action_name) { 'show' }
+
     assign(:log, Log.create!(
       loggable: conn,
       action: "Action",

@@ -2,6 +2,12 @@ require 'rails_helper'
 
 RSpec.describe "workplaces/index", type: :view do
   before(:each) do
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    allow(controller).to receive(:current_ability) { @ability }
+    allow(controller).to receive(:controller_name) { 'workplaces' }
+    allow(controller).to receive(:action_name) { 'index' }
+
     assign(:workplaces, [
       Workplace.create!(
         name: 'NB-AXC-0004',
