@@ -70,8 +70,10 @@ module Cards
         @card.update_condition
       end
 
+      @card.updated_at = Time.current
+
       if @card.save
-        @card.touch
+        true
       else
         Rails.logger.warn("WARN:: could not create or save card #{@card.mac}: " +
           @card.errors.full_messages.join('; '))
