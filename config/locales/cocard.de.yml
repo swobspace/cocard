@@ -94,6 +94,7 @@ de:
     fachrichtung: Fachrichtung
     givenname: Vorname
     iccsn: ICCSN
+    id_product: Modellbezeichnung
     insert_time: eingesteckt seit
     ip: IP-Adresse
     lanr: LANR
@@ -119,6 +120,7 @@ de:
     room: Raum
     sds_url: SDS-Url
     search: Suche
+    serial: Seriennummer
     since: seit
     slotid: Schachtnummer
     sn: Nachname

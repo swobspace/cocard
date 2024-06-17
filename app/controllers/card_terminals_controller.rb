@@ -71,6 +71,6 @@ class CardTerminalsController < ApplicationController
       params.require(:card_terminal)
             .permit(:displayname, :location_id, :description, :room,
                     :contact, :plugged_in, :mac, :ip, :slots,
-                    :delivery_date, :supplier)
+                    :delivery_date, :supplier, :id_product, :serial)
     end
 end

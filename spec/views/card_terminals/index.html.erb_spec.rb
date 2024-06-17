@@ -28,6 +28,8 @@ RSpec.describe "card_terminals/index", type: :view do
         supplier: 'ACME Ltd',
         delivery_date: '2023-12-14',
         firmware_version: '3.1.9',
+        serial: '11122277634',
+        id_product: 'ORGA61411',
         condition: Cocard::States::UNKNOWN
       ),
       CardTerminal.create!(
@@ -46,6 +48,8 @@ RSpec.describe "card_terminals/index", type: :view do
         supplier: 'ACME Ltd',
         delivery_date: '2023-12-14',
         firmware_version: '3.1.9',
+        serial: '11122277634',
+        id_product: 'ORGA61411',
         condition: Cocard::States::UNKNOWN
       )
     ]
@@ -72,5 +76,7 @@ RSpec.describe "card_terminals/index", type: :view do
     assert_select cell_selector, text: Regexp.new('ACME Ltd'.to_s), count: 2
     assert_select cell_selector, text: Regexp.new('2023-12-14'.to_s), count: 2
     assert_select cell_selector, text: Regexp.new('3.1.9'.to_s), count: 2
+    assert_select cell_selector, text: Regexp.new('11122277634'.to_s), count: 2
+    assert_select cell_selector, text: Regexp.new('ORGA6141'.to_s), count: 2
   end
 end

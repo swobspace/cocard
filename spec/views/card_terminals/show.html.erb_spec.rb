@@ -40,7 +40,9 @@ RSpec.describe "card_terminals/show", type: :view do
       supplier: 'ACME Ltd',
       delivery_date: '2023-12-14',
       firmware_version: '3.1.9',
-      plugged_in: "Dose 17/4, Patchfeld 5"
+      plugged_in: "Dose 17/4, Patchfeld 5",
+      serial: '11122277634',
+      id_product: 'ORGA61411'
     )
   end
 
@@ -68,6 +70,8 @@ RSpec.describe "card_terminals/show", type: :view do
     expect(rendered).to match(/2023-12-14/)
     expect(rendered).to match(/ACME Ltd/)
     expect(rendered).to match(/3.1.9/)
+    expect(rendered).to match(/ORGA6141/)
+    expect(rendered).to match(/11122277634/)
 
   end
 end
