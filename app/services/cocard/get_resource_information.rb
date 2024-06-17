@@ -43,7 +43,7 @@ module Cocard
           Result.new(success?: true, error_messages: error_messages,
                      resource_information: resource_information)
         else
-          error_messages = connector.errors&.full_messages
+          error_messages = err_prefix(1) + connector.errors&.full_messages
           log_error(error_messages)
           Result.new(success?: false, error_messages: error_messages,
                      resource_information: resource_information)
@@ -51,7 +51,7 @@ module Cocard
       else
         connector.update(soap_request_success: false)
         log_error(result.error_messages)
-        Result.new(success?: false, error_messages: result.error_messages,
+        Result.new(success?: false, error_messages: err_prefix(2) + result.error_messages,
                    resource_information: nil)
       end
     end
@@ -82,6 +82,10 @@ module Cocard
     def filter_error_states(es)
       regex = Regexp.new(/EC_(CardTerminal|OTHER|CRYPTO|LOG_OVERFLOW)/)
       !!(regex =~ es.error_condition)
+    end
+
+    def err_prefix(step)
+      ["Cocard::GetResourceInformation: /#{connector}/ #{context}: "]
     end
   end
 end
