@@ -2,7 +2,7 @@ module Cocard
   module ProcessCard
   private
     def self.process_card(card)
-      return unless card.card_type =~ /(SMC-B|HBA)/
+      return unless card.card_type =~ /SMC-B/
 
       if card.certificate.blank?
         result = Cocard::GetCertificate.new(card: card).call
