@@ -19,6 +19,9 @@ RSpec.describe "cards/show", type: :view do
     allow(controller).to receive(:current_ability) { @ability }
     allow(controller).to receive(:controller_name) { 'cards' }
     allow(controller).to receive(:action_name) { 'show' }
+    @current_user = FactoryBot.create(:user, sn: 'Mustermann', givenname: 'Max')
+    allow(@current_user).to receive(:is_admin?).and_return(true)
+
     assign(:card, Card.create!(
       card_terminal_id: ct.id,
       context_id: context.id,
@@ -44,7 +47,8 @@ RSpec.describe "cards/show", type: :view do
       cert_subject_street: "Holzweg 14",
       cert_subject_postalcode: "99979",
       cert_subject_l: "Nirgendwo",
-      cert_subject_o: "987654"
+      cert_subject_o: "987654",
+      private_information: "StrengGeheim"
     ))
   end
 
@@ -75,5 +79,6 @@ RSpec.describe "cards/show", type: :view do
     expect(rendered).to match(/Nirgendwo/)
     expect(rendered).to match(/987654/)
     expect(rendered).to match(/CDEFAB - MySoft - Evergreen/)
+    expect(rendered).to match(/StrengGeheim/)
   end
 end

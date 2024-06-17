@@ -38,7 +38,8 @@ RSpec.describe "cards/index", type: :view do
         cert_subject_street: "Holzweg 14",
         cert_subject_postalcode: "99979",
         cert_subject_l: "Nirgendwo",
-        cert_subject_o: "22244466688"
+        cert_subject_o: "22244466688",
+        private_information: "StrengGeheim"
       ),
       Card.create!(
         name: "GemaCard",
@@ -62,7 +63,8 @@ RSpec.describe "cards/index", type: :view do
         cert_subject_street: "Holzweg 14",
         cert_subject_postalcode: "99979",
         cert_subject_l: "Nirgendwo",
-        cert_subject_o: "22244466688"
+        cert_subject_o: "22244466688",
+        private_information: "StrengGeheim"
       )
     ])
   end
@@ -96,5 +98,6 @@ RSpec.describe "cards/index", type: :view do
     assert_select cell_selector, text: Regexp.new("99979".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("Nirgendwo".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("22244466688".to_s), count: 2
+    assert_select cell_selector, text: Regexp.new("StrengGeheim".to_s), count: 0
   end
 end
