@@ -30,6 +30,8 @@ class CardTerminal {
   plugged_in: string
   delivery_date: date
   supplier: string
+  serial: string
+  id_product: string
   location_id
   --
   properties: jsonb

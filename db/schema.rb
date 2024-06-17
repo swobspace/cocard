@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_02_084131) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_17_152953) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -72,6 +72,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_02_084131) do
     t.date "delivery_date"
     t.string "supplier", default: ""
     t.string "firmware_version", default: ""
+    t.string "serial", default: ""
+    t.string "id_product", default: ""
     t.index ["condition"], name: "index_card_terminals_on_condition"
     t.index ["connector_id"], name: "index_card_terminals_on_connector_id"
     t.index ["location_id"], name: "index_card_terminals_on_location_id"
