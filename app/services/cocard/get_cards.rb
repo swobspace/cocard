@@ -34,7 +34,7 @@ module Cocard
                  client_system: client_system,
                  workplace: workplace).call
       if result.success?
-        entry = result.response[:get_cards_response][:cards][:card]
+        entry = result.response.dig(:get_cards_response, :cards, :card) || []
         cts = (entry.kind_of? Hash) ? [entry] : entry
         cts.each do |ct|
           card = Cocard::Card.new(ct)
