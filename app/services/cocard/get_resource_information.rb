@@ -44,7 +44,7 @@ module Cocard
                      resource_information: resource_information)
         else
           error_messages = connector.errors&.full_messages
-          logg_error(error_messages)
+          log_error(error_messages)
           Result.new(success?: false, error_messages: error_messages,
                      resource_information: resource_information)
       end
