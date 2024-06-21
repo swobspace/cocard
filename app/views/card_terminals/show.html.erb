@@ -104,8 +104,8 @@
         </div>
         <table>
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.firmware_version')%>:</th>
-            <td><%= @card_terminal.firmware_version %></td>
+            <th class="w-10 pe-3"><%= t('attributes.connector')%>:</th>
+            <td><%= @card_terminal.connector %></td>
           </tr>
 
           <tr>
@@ -131,6 +131,11 @@
           <tr>
             <th class="w-10 pe-3"><%= t('attributes.slots')%>:</th>
             <td><%= @card_terminal.slots %></td>
+          </tr>
+
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.firmware_version')%>:</th>
+            <td><%= @card_terminal.firmware_version %></td>
           </tr>
 
         </table>
