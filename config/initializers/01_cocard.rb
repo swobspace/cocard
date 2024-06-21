@@ -24,4 +24,10 @@ module Cocard
   def self.sds_url
     "http://{{ ip }}/connector.sds"
   end
+
+  Rails.application.routes.default_url_options = {
+    host: (ENV['URL_HOST'] || 'localhost'),
+    port: (ENV['URL_PORT'] || '3000'),
+    protocol: (ENV['URL_PROTOCOL'] || 'http'),
+  }
 end
