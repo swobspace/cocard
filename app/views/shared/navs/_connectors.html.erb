@@ -1,6 +1,8 @@
 <% if can? :navigate, :connectors %>
-  <li class="nav-item dropdown <%= active_class('connectors') %>">
-    <a class="nav-link dropdown-toggle" href="#" id="navbarConnectorDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle <%= active_class('connectors') %>" 
+       href="#" id="navbarConnectorDropdown" data-bs-toggle="dropdown" 
+       aria-haspopup="true" aria-expanded="false" >
 
       <%= t('controller.connectors') %>
     </a>

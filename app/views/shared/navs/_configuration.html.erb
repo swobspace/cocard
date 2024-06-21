@@ -1,6 +1,8 @@
 <% if can? :navigate, :configuration %>
   <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="navbarConfigurationDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <a class="nav-link dropdown-toggle <%= configuration_active_class %>"
+       href="#" id="navbarConfigurationDropdown" data-bs-toggle="dropdown" 
+       aria-haspopup="true" aria-expanded="false">
 
       <%= t('attributes.configuration') %>
     </a>

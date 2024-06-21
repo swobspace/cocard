@@ -1,6 +1,8 @@
 <% if can? :navigate, :events %>
   <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="navbarEventsDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <a class="nav-link dropdown-toggle <%= active_class('logs') %>"
+       href="#" id="navbarEventsDropdown" data-bs-toggle="dropdown" 
+       aria-haspopup="true" aria-expanded="false">
 
       <%= t('controller.events') %>
     </a>
