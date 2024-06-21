@@ -65,7 +65,8 @@
             <%= render ConditionIconComponent.new(item: card_terminal, small: true, as_text: true) %>
             <span style="visibility:hidden;"><%= card_terminal.condition %></span>
           </td>
-          <td><%= card_terminal.displayname %></td>
+          <td><%= link_to card_terminal.displayname, card_terminal_path(card_terminal),
+                          class: 'primary-link'  %></td>
           <td><%= link_to card_terminal.ct_id, card_terminal_path(card_terminal),
                           class: 'primary-link'  %></td>
           <td><%= link_to(card_terminal.connector&.name,
