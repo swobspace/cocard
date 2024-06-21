@@ -4,7 +4,10 @@
   <thead>
     <tr>
       <th class="text-center"><%= t('attributes.condition') %></th>
-      <th><%= t('attributes.card_terminal') %></th>
+      <th><%= t('attributes.displayname') %></th>
+      <th><%= t('attributes.ct_id') %></th>
+      <th><%= t('attributes.mac') %></th>
+      <th><%= t('attributes.serial') %></th>
       <th><%= t('attributes.connector') %></th>
       <th><%= t('attributes.mandant') %></th>
       <th><%= t('attributes.client_system') %></th>
@@ -18,8 +21,12 @@
           <%= render ConditionIconComponent.new(item: twp.card_terminal, small: true) %>
           <span style="visibility:hidden;"><%= twp.card_terminal&.condition %></span>
         </td>
-        <td><%= link_to twp.card_terminal, twp.card_terminal, 
+        <td><%= link_to twp.card_terminal.displayname, twp.card_terminal, 
                         class: 'primary-link' %></td>
+        <td><%= link_to twp.card_terminal.ct_id, card_terminal_path(twp.card_terminal),
+                        class: 'primary-link'  %></td>
+        <td><%= twp.card_terminal.mac %></td>
+        <td><%= twp.card_terminal.serial %></td>
         <td><%= link_to(twp.card_terminal&.connector, 
                         twp.card_terminal&.connector,
                         class: 'primary-link') if twp.card_terminal&.connector.present?
