@@ -105,7 +105,7 @@ module CardTerminals
           it { expect(ct.ct_id).to eq("CT_ID_0176")}
           # it { expect(ct.workplaces).to contain_exactly("Konnektor", "GUSbox03")}
           it { expect(ct.name).to eq("ORGA6100-0241000000B692")}
-          it { expect(ct.mac).to eq("00:0d:f8:0c:86:52")}
+          it { expect(ct.mac).to eq("000DF80C8652")}
           it { expect(ct.ip).to eq("10.200.149.235")}
           it { expect(ct.location_id).to eq(location.id)}
           it { expect(ct.slots).to eq(4)}

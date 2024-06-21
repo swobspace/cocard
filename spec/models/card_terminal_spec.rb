@@ -8,6 +8,7 @@ RSpec.describe CardTerminal, type: :model do
       connector: connector,
       name: 'ACME Term',
       ct_id: 'CT_ID_0123',
+      mac: '11:22:33:44:88:dd',
       location: location,
     )
   end
@@ -150,7 +151,9 @@ RSpec.describe CardTerminal, type: :model do
         it { expect(ct.condition_message).to match(/UNUSED/) }
       end
     end
+  end
 
-      
+  describe "#mac" do
+    it { expect(ct.mac).to eq ('1122334488DD') }
   end
 end

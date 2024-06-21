@@ -65,8 +65,8 @@ RSpec.describe "card_terminals/index", type: :view do
     assert_select cell_selector, text: Regexp.new('ORGA-DINGDONG00.'.to_s), count: 2
     assert_select cell_selector, text: Regexp.new('CT_ID_0815'.to_s), count: 1
     assert_select cell_selector, text: Regexp.new('CT_ID_0817'.to_s), count: 1
-    assert_select cell_selector, text: Regexp.new('00:0d:f8:07:2c:67'.to_s), count: 1
-    assert_select cell_selector, text: Regexp.new('00:0d:f8:07:2c:68'.to_s), count: 1
+    assert_select cell_selector, text: Regexp.new('000DF8072C67'.to_s), count: 1
+    assert_select cell_selector, text: Regexp.new('000DF8072C68'.to_s), count: 1
     assert_select cell_selector, text: Regexp.new('127.0.0.5'.to_s), count: 1
     assert_select cell_selector, text: Regexp.new('127.0.0.6'.to_s), count: 1
     assert_select cell_selector, text: Regexp.new('true'.to_s), count: 2

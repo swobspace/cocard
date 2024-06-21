@@ -25,6 +25,10 @@ class CardTerminal < ApplicationRecord
     "#{name} - #{ct_id} (#{location&.lid})"
   end
 
+  def mac
+    self[:mac].gsub(/:/, '').upcase unless self[:mac].nil?
+  end
+
   def product_information
     return nil if properties.blank?
     Cocard::ProductInformation.new(properties['product_information'])
