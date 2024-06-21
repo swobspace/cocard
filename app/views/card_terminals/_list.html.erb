@@ -2,7 +2,7 @@
 
 <div data-controller="datatables">
   <%= content_tag :table, role: :datatable,
-        id: "card_terminals_table",
+        id: "card_terminals_list",
         class: "table table-sm table-responsive-xl",
         data: {
           'datatables-target': 'datatable',
@@ -14,6 +14,7 @@
             <th><%= t('attributes.displayname') %></th>
             <th><%= t('attributes.ct_id') %></th>
             <th><%= t('attributes.mac') %></th>
+            <th><%= t('attributes.serial') %></th>
             <th><%= t('attributes.ip') %></th>
             <th><%= t('attributes.connected') %></th>
             <th><%= t('attributes.location') %></th>
@@ -23,6 +24,7 @@
     </thead>
     <tfoot class="search">
       <tr>
+            <th></th>
             <th></th>
             <th></th>
             <th></th>
@@ -44,6 +46,7 @@
           <td><%= card_terminal.displayname %></td>
           <td><%= link_to card_terminal.ct_id, card_terminal_path(card_terminal) %></td>
           <td><%= card_terminal.mac %></td>
+          <td><%= card_terminal.serial %></td>
           <td><%= card_terminal.ip %></td>
           <td><%= card_terminal.connected %></td>
           <td><%= card_terminal.location&.lid %></td>

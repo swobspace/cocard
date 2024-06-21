@@ -39,7 +39,9 @@
     </div>
   </div>
   <div class="m-2">
-    <%= render 'terminal_workplaces', terminal_workplaces: @workplace.terminal_workplaces %>
+    <%# render 'terminal_workplaces', terminal_workplaces: @workplace.terminal_workplaces %>
+    <%= render 'card_terminals/list', 
+        card_terminals: @workplace.terminal_workplaces.map{|twp| twp.card_terminal } %>
   </div>
 </div>  
 
