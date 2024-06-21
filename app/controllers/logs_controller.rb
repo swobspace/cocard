@@ -13,15 +13,20 @@ class LogsController < ApplicationController
     respond_with(@logs)
   end
 
+  def sindex
+    if params[:condition]
+      @logs = Log.condition(params[:condition])
+    else
+      @logs = Log.all
+    end
+    @pagy, @logs = pagy(@logs)
+    respond_with(@logs)
+  end
+
+
   # GET /logs/1
   def show
     respond_with(@log)
-  end
-
-  def sindex
-    @logs = @loggable.logs
-    @pagy, @logs = pagy(@logs)
-    respond_with(@logs)
   end
 
 #  # GET /logs/new

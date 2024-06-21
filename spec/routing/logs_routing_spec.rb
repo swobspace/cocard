@@ -6,6 +6,10 @@ RSpec.describe LogsController, type: :routing do
       expect(get: "/logs").to route_to("logs#index")
     end
 
+    it "routes to #sindex" do
+      expect(get: "/logs/sindex").to route_to("logs#sindex")
+    end
+
     it "routes to #new" do
       skip "test does not work"
       # expect(get: "/logs/new").to route_to("logs#new")

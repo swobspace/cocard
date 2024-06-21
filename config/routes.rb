@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   resources :workplaces, except: [:new, :create]
   resources :networks
-  resources :logs, only: [:show, :index, :destroy]
+  resources :logs, only: [:show, :index, :destroy] do
+    collection do
+      get :sindex
+    end
+  end
   get "search", to: 'searches#index'
   resources :operational_states
   resources :cards do

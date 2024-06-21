@@ -1,0 +1,48 @@
+<%= turbo_frame_tag('logs') do %>
+  <% if @logs.size > 0 %>
+    <%= content_tag :table, role: :datatable,
+          id: "logs_table",
+          class: "table tablesm mb-0" do %>
+      <thead>
+        <tr>
+              <th class=""><%= t('attributes.since') %></th>
+              <th><%= t('attributes.level') %></th>
+              <th><%= t('attributes.loggable_type') %></th>
+              <th><%= t('attributes.loggable') %></th>
+              <th><%= t('attributes.action') %></th>
+              <th><%= t('attributes.message') %></th>
+              <th><%= t('attributes.last_seen') %></th>
+              <th class="nosort"><%= t('cocard.action') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @logs.each do |log| %>
+          <%= content_tag(:tr, id: dom_id(log), class: dom_class(log)) do %>
+            <td><%= log.created_at.localtime.to_s %></td>
+            <td><%= render ErrorLevelBadgeComponent.new(level: log.level) %></td>
+            <td><%= log.loggable_type %></td>
+            <td>
+              <%= link_to log.loggable, 
+                          polymorphic_path(log.loggable, anchor: 'logs'),
+                          class: 'primary-link',
+                          data: { 'turbo-frame' => '_top' }
+               %>
+            </td>
+            <td><%= log.action %></td>
+            <td><%= log.message %></td>
+            <td><%= log.last_seen&.localtime&.to_s %></td>
+            <td class="text-nowrap">
+              <%= show_link log, class: 'btn btn-sm btn-outline-secondary',
+                                 data: { "turbo-frame" => "_top" } %>
+            </td>
+          <% end %>
+        <% end %>
+      </tbody>
+    <% end %>
+    <% if @pagy.pages > 1 %>
+      <div class="mt-3 ms-3">
+        <%== pagy_bootstrap_nav(@pagy) %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

@@ -106,6 +106,7 @@ de:
     locations: Standorte
     location_ids: Standorte
     loggable: Log für
+    loggable_type: Typ
     mac: MAC
     manual_update: manuelles Update
     message: Nachricht

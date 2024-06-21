@@ -15,6 +15,7 @@
         <tr>
               <th class=""><%= t('attributes.since') %></th>
               <th><%= t('attributes.level') %></th>
+              <th><%= t('attributes.loggable_type') %></th>
               <th><%= t('attributes.loggable') %></th>
               <th><%= t('attributes.action') %></th>
               <th><%= t('attributes.message') %></th>
@@ -30,6 +31,7 @@
               <th></th>
               <th></th>
               <th></th>
+              <th></th>
               <th class="nosearch"></th>
         </tr>
       </tfoot>
@@ -38,6 +40,7 @@
           <%= content_tag(:tr, id: dom_id(log), class: dom_class(log)) do %>
                   <td><%= log.created_at.localtime.to_s %></td>
                   <td><%= render ErrorLevelBadgeComponent.new(level: log.level) %></td>
+                  <td><%= log.loggable_type %></td>
                   <td>
                     <%= link_to log.loggable, 
                           polymorphic_path(log.loggable, anchor: 'logs'),
