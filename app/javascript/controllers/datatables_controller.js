@@ -99,6 +99,9 @@ export default class extends Controller {
                                 dt.state.clear();
                                 window.location.reload();
                               }},
+                 { "extend": 'csv',
+	           "exportOptions": { "columns": ':visible',
+                                      "search": ':applied' } },
                  { "extend": 'excel',
 	           "exportOptions": { "columns": ':visible',
                                       "search": ':applied' } },
