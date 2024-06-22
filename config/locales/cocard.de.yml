@@ -1,4 +1,6 @@
 de:
+  true: Ja
+  false: Nein
   cocard:
     action: Aktion
     new_card: Neue Karte
@@ -97,6 +99,7 @@ de:
     id_product: Modellbezeichnung
     insert_time: eingesteckt seit
     ip: IP-Adresse
+    is_valid: gültig?
     lanr: LANR
     lid: Standort-Kürzel
     last_seen: zuletzt gesehen

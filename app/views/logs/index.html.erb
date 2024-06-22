@@ -19,7 +19,7 @@
               <th><%= t('attributes.loggable') %></th>
               <th><%= t('attributes.action') %></th>
               <th><%= t('attributes.message') %></th>
-              <th><%= t('attributes.is_valid') %></th>
+              <th class="text-center"><%= t('attributes.is_valid') %></th>
               <th class="notvisible"><%= t('attributes.condition') %></th>
               <th><%= t('attributes.last_seen') %></th>
               <th class="nosort"><%= t('cocard.action') %></th>
@@ -54,7 +54,7 @@
             </td>
             <td><%= log.action %></td>
             <td><%= log.message %></td>
-            <td><%= log.is_valid %></td>
+            <td class="text-center"><%= render BooleanComponent.new(value: log.is_valid, text: :unicode) %></td>
             <td><%= render ConditionIconComponent.new(item: log,
                                       small: true, as_text: true ) %></td>
             <td><%= log.last_seen&.localtime&.to_s %></td>
