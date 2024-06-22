@@ -7,10 +7,11 @@ class Log < ApplicationRecord
   # -- validations and callbacks
   validates :action, :last_seen, :level, :message, presence: true
 
+
+  scope :valid, -> { where(is_valid: true) }
   # -- common methods
   def to_s
     "#{level} - #{loggable.name} >> #{action}: #{message}"
   end
-
 
 end

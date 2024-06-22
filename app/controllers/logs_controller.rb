@@ -15,9 +15,9 @@ class LogsController < ApplicationController
 
   def sindex
     if params[:condition]
-      @logs = Log.condition(params[:condition])
+      @logs = Log.condition(params[:condition]).valid
     else
-      @logs = Log.all
+      @logs = Log.valid
     end
     @pagy, @logs = pagy(@logs)
     respond_with(@logs)
