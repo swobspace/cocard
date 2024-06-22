@@ -203,3 +203,7 @@ form.button_to {
 }
 
 .w-10 { width: 10%; }
+
+tr.invalid td {
+  background-color: #ddd !important;
+}

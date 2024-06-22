@@ -15,6 +15,8 @@ RSpec.describe "logs/show", type: :view do
       action: "Action",
       level: "Level",
       message: "MyText",
+      is_valid: true,
+      condition: 3,
       last_seen: ts
     ))
   end
@@ -25,6 +27,8 @@ RSpec.describe "logs/show", type: :view do
     expect(rendered).to match(/Action/)
     expect(rendered).to match(/Level/)
     expect(rendered).to match(/MyText/)
+    expect(rendered).to match(/true/)
+    expect(rendered).to match(/UNKNOWN/)
     expect(rendered).to match("#{ts.localtime.to_s.gsub(/\+.*/, '')}")
   end
 end

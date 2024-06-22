@@ -28,6 +28,18 @@
       </tr>
 
       <tr>
+        <th class="w-10 pe-3"><%= t('attributes.is_valid')%>:</th>
+        <td><%= @log.is_valid %></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.condition')%>:</th>
+        <td><%= render ConditionIconComponent.new(item: @log,
+                                 small: true, as_text: true ) %></td>
+
+      </tr>
+
+      <tr>
         <th class="w-10 pe-3"><%= t('attributes.last_seen')%>:</th>
         <td><%= @log.last_seen&.localtime&.to_s %></td>
       </tr>
