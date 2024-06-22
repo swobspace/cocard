@@ -43,12 +43,17 @@ module Logs
         else
           @log.destroy
         end
-      elsif (!destroy) and @log.save
-        true
+      elsif (!destroy) 
+        if @log.save
+          true
+        else
+          Rails.logger.warn("WARN:: Logs::Creator: could not update timestamp: " +
+            @log.errors.full_messages.join('; '))
+          false
+        end
       else
-        Rails.logger.warn("WARN:: could not update timestamp: " +
-          @log.errors.full_messages.join('; '))
-        false
+         # not persistent, nothin to delete
+        true
       end
     end
     # rubocop:enable Metrics/AbcSize, Rails/SkipsModelValidations
