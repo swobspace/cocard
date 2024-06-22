@@ -42,24 +42,25 @@
       <tbody>
         <% @logs.each do |log| %>
           <%= content_tag(:tr, id: dom_id(log), class: "#{'invalid' unless log.is_valid}") do %>
-                  <td><%= log.created_at.localtime.to_s %></td>
-                  <td><%= render ErrorLevelBadgeComponent.new(level: log.level) %></td>
-                  <td><%= log.loggable_type %></td>
-                  <td>
-                    <%= link_to log.loggable, 
+            <td><%= log.created_at.localtime.to_s %></td>
+            <td><%= render ErrorLevelBadgeComponent.new(level: log.level) %></td>
+            <td><%= log.loggable_type %></td>
+            <td>
+              <%= link_to log.loggable, 
                           polymorphic_path(log.loggable, anchor: 'logs'),
                           class: 'primary-link',
                           data: { 'turbo-frame' => '_top' }
-                     %>
-                  </td>
-                  <td><%= log.action %></td>
-                  <td><%= log.message %></td>
-                  <td><%= log.is_valid %></td>
-                  <td><%= render ConditionIconComponent.new(item: log,
-                                 small: true, as_text: true ) %></td>
-                  <td><%= log.last_seen&.localtime&.to_s %></td>
-                  <td class="text-nowrap">
-              <%= show_link log %>
+               %>
+            </td>
+            <td><%= log.action %></td>
+            <td><%= log.message %></td>
+            <td><%= log.is_valid %></td>
+            <td><%= render ConditionIconComponent.new(item: log,
+                                      small: true, as_text: true ) %></td>
+            <td><%= log.last_seen&.localtime&.to_s %></td>
+            <td class="text-nowrap">
+              <%= show_link log, class: 'btn btn-secondary',
+                                 data: { "turbo-frame" => "_top" } %>
               <%= delete_link log %>
             </td>
           <% end %>
@@ -69,6 +70,6 @@
   </div>
 <% end %>
 
-  <br />
+<br />
 
-  <%= back_link %>
+<%= back_link %>
