@@ -123,6 +123,8 @@ Class Log {
   last_seen: timestamp
   level: string
   message: text
+  is_valid: boolean
+  condition: integer
 }
 
 Class Network {

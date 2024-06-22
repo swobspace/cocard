@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_17_152953) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_22_133955) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -265,6 +265,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_17_152953) do
     t.text "message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_valid", default: false
+    t.integer "condition", default: -1
+    t.index ["is_valid"], name: "index_logs_on_is_valid"
     t.index ["level"], name: "index_logs_on_level"
     t.index ["loggable_type", "loggable_id"], name: "index_logs_on_loggable"
   end
