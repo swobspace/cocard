@@ -39,7 +39,7 @@ module Logs
 
       if @log.persisted?
         if destroy == false
-          @log.update(last_seen: @last_seen, message: @message)
+          @log.update(last_seen: @last_seen, message: @message, is_valid: true)
         else
           @log.update(is_valid: false)
         end
