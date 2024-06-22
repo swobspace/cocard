@@ -47,8 +47,9 @@ module Logs
         if @log.save
           true
         else
-          Rails.logger.warn("WARN:: Logs::Creator: could not update timestamp: " +
-            @log.errors.full_messages.join('; '))
+          Rails.logger.warn("WARN:: Logs::Creator: could not create log entry: " +
+                            @log.inspect + "; " +
+                            @log.errors.full_messages.join('; '))
           false
         end
       else
