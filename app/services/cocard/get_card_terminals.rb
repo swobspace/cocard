@@ -46,6 +46,7 @@ module Cocard
         connector.update(soap_request_success: true,
                          last_check_ok: Time.current)
 
+        log_error(nil)
         Result.new(success?: true, error_messages: error_messages, 
                    card_terminals: card_terminals)
       else
@@ -62,7 +63,7 @@ module Cocard
     def log_error(message)
       logger = Logs::Creator.new(loggable: connector, level: 'ERROR',
                                  action: 'GetCardTerminals', message: message)
-      unless logger.call
+      unless logger.call(message.blank?)
         message = Array(message).join('; ')
         Rails.logger.error("could not create log entry: GetCardTerminals - #{message}")
       end

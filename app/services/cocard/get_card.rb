@@ -55,6 +55,7 @@ module Cocard
           ProcessCard.process_card(creator.card)
         end
 
+        log_error(nil)
         Result.new(success?: true, error_messages: error_messages, 
                    card: creator.card)
       else
@@ -70,7 +71,7 @@ module Cocard
     def log_error(message)
       logger = Logs::Creator.new(loggable: card, level: 'ERROR',
                                  action: 'GetCard', message: message)
-      unless logger.call
+      unless logger.call(message.blank?)
         message = Array(message).join('; ')
         Rails.logger.error("could not create log entry: GetCard - #{message}")
       end

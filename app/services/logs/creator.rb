@@ -29,17 +29,16 @@ module Logs
 
     # rubocop:disable Metrics/AbcSize, Rails/SkipsModelValidations
     def call(destroy = false)
-      @log = Log.create_with(last_seen: @last_seen)
+      @log = Log.create_with(last_seen: @last_seen, message: @message)
                 .find_or_initialize_by(
                    loggable: @loggable,
                    action:   @action,
-                   level:    @level,
-                   message:  @message
+                   level:    @level
                  )
 
       if @log.persisted?
         if destroy == false
-          @log.update(last_seen: @last_seen)
+          @log.update(last_seen: @last_seen, message: @message)
         else
           @log.destroy
         end

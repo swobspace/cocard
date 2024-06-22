@@ -40,6 +40,7 @@ module Cocard
         connector.update_condition
         log_error_states(resource_information.error_states)
         if connector.save
+          log_error(nil)
           Result.new(success?: true, error_messages: error_messages,
                      resource_information: resource_information)
         else
@@ -62,7 +63,7 @@ module Cocard
     def log_error(message)
       logger = Logs::Creator.new(loggable: connector, level: 'ERROR',
                                  action: 'GetResourceInformation', message: message)
-      unless logger.call
+      unless logger.call(message.blank?)
         message = Array(message).join('; ')
         Rails.logger.error("could not create log entry: GetResourceInformation - #{message}")
       end
@@ -73,7 +74,7 @@ module Cocard
         next if filter_error_states(es)
         logger = Logs::Creator.new(loggable: connector,
                                    level: es.severity,
-                                   action: "OPERATIONAL_STATE",
+                                   action: "OPERATIONAL_STATE/#{es.error_condition}",
                                    message: es.error_condition)
         logger.call(!es.valid?)
       end

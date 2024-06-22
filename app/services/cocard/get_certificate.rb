@@ -62,6 +62,7 @@ module Cocard
         card.certificate = rawcert
 
         if card.save
+          log_error(nil)
           return Result.new(success?: true, error_messages: error_messages, 
                             certificate: cert)
         else
@@ -82,7 +83,7 @@ module Cocard
     def log_error(message)
       logger = Logs::Creator.new(loggable: card, level: 'ERROR',
                                  action: 'GetCertificate', message: message)
-      unless logger.call
+      unless logger.call(message.blank?)
         message = Array(message).join('; ')
         Rails.logger.error("could not create log entry: GetCertificate - #{message}")
       end

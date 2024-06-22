@@ -52,6 +52,7 @@ module Cocard
         card.pin_status = pin_status.pin_status
 
         if card.save
+          log_error(nil)
           return Result.new(success?: true, error_messages: error_messages, 
                             pin_status: pin_status)
         else
@@ -72,7 +73,7 @@ module Cocard
     def log_error(message)
       logger = Logs::Creator.new(loggable: card, level: 'ERROR',
                                  action: 'GetPinStatus', message: message)
-      unless logger.call
+      unless logger.call(message.blank?)
         message = Array(message).join('; ')
         Rails.logger.error("could not create log entry: GetPinStatus - #{message}")
       end
