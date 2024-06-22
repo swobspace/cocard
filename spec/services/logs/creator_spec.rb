@@ -58,6 +58,7 @@ module Logs
             loggable: conn,
             action: "GetResource",
             level: "WARN",
+            is_valid: true,
             last_seen: 1.day.before(Time.current),
             message: "hier klappt was nicht"
           )
@@ -74,7 +75,13 @@ module Logs
         it 'deletes log with call(true)' do
           expect {
             subject.call(true)
-          }.to change(Log, :count).by(-1)
+          }.not_to change(Log, :count)
+        end
+
+        it 'marks entry as invalid' do
+          subject.call(true)
+          log.reload
+          expect(log.is_valid).to be_falsey
         end
 
         it { expect(subject.call).to be_truthy }
