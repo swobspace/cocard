@@ -47,7 +47,7 @@ module Cocard
           log_error(error_messages)
           Result.new(success?: false, error_messages: error_messages,
                      resource_information: resource_information)
-      end
+        end
       else
         connector.update(soap_request_success: false)
         log_error(result.error_messages)
