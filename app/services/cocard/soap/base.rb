@@ -40,6 +40,8 @@ module Cocard::SOAP
         fault = error.to_hash[:fault]
         error_messages = [fault[:faultcode], fault[:faultstring]]
         return Result.new(success?: false, error_messages: error_messages, response: nil)
+      rescue Timeout::Error => error
+        return Result.new(success?: false, error_messages: Array(error.message), response: nil)
       end
 
       Result.new(success?: true, error_messages: error_messages, response: response.body)
