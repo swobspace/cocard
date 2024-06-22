@@ -37,7 +37,7 @@ module Cocard
       if error_messages.any?
         log_error(error_messages)
         return Result.new(success?: false, error_messages: error_messages, 
-                          certificate: nil)
+                          pin_steatus: nil)
       end
 
       result = Cocard::SOAP::GetPinStatus.new(
@@ -46,7 +46,7 @@ module Cocard
                  mandant: context&.mandant,
                  client_system: context&.client_system,
                  workplace: context&.workplace).call
-      if error_messages.blank? and result.success?
+      if result.error_messages.blank? and result.success?
         hash = result.response[:get_pin_status_response]
         pin_status = Cocard::PinStatus.new(hash)
         card.pin_status = pin_status.pin_status
@@ -57,10 +57,13 @@ module Cocard
         else
           error_messages << card.errors&.full_messages
         end
+      else
+        error_messages = result.error_messages
       end
+
       log_error(result.error_messages)
       Result.new(success?: false, error_messages: result.error_messages, 
-                 certificate: nil)
+                 pin_status: nil)
     end
 
   private

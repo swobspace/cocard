@@ -45,7 +45,7 @@ module Cocard
                  mandant: context&.mandant,
                  client_system: context&.client_system,
                  workplace: context&.workplace).call
-      if error_messages.blank? and result.success?
+      if result.error_messages.blank? and result.success?
         rawcert = result.response[:read_card_certificate_response][:x509_data_info_list][:x509_data_info][:x509_data][:x509_certificate]
         cert = Cocard::Certificate.new(rawcert)
         card.name = cert.cn if card.name.blank?
@@ -67,7 +67,10 @@ module Cocard
         else
           error_messages << card.errors&.full_messages
         end
+      else
+        error_messages = result.error_messages
       end
+
       log_error(error_messages)
       Result.new(success?: false, error_messages: result.error_messages, 
                  certificate: nil)
