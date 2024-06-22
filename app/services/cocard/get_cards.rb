@@ -61,7 +61,6 @@ module Cocard
     attr_reader :connector, :context, :workplace, :mandant, :client_system
 
     def log_error(message)
-      message = "No message" if message.blank?
       logger = Logs::Creator.new(loggable: connector, level: 'ERROR',
                                  action: 'GetCards', message: message)
       unless logger.call(message.blank?)
