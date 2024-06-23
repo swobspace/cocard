@@ -216,7 +216,23 @@ bin/rails g migration AddNameToWorkplace \
   name:string
 ----
 
+== model ClientCertificate
+
+[source,sh]
+----
+bin/rails g scaffold ClientCertificate \
+  name:string \
+  description:rich_text \
+  cert:text \
+  pkey:text \
+  passphrase:string \
+  --no-stylesheets --no-javascripts --no-helper
+----
+
+
 == HABTM Tables
+
+=== ConnectorLocation
 
 .Join Tables for HABTM
 [source,sh]
@@ -238,6 +254,31 @@ class CreateJoinTableConnectorLocation < ActiveRecord::Migration[7.1]
   end
 end
 ----
+
+=== ConnectorClientCertificate
+
+.Join Tables for HABTM
+[source,sh]
+----
+bin/rails g migration CreateJoinTableConnectorClientCertificate \
+  connector client_certificate
+----
+
+Add index and set index to unique:
+
+[source,ruby]
+----
+class CreateJoinTableConnectorClientCertificate < ActiveRecord::Migration[7.1]
+  def change
+    create_join_table :connectors, :client_certificates do |t|
+      t.index [:client_certificate_id, :connector_id], unique: true
+      t.index [:connector_id, :client_certificate_id], unique: true
+    end
+  end
+end
+----
+
+
 
 == HABTM Connector -- Context through ConnectorContext
 

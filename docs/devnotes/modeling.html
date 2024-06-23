@@ -376,8 +376,26 @@ bin/rails g migration AddNameToWorkplace \
 </div>
 </div>
 <div class="sect1">
+<h2 id="_model_clientcertificate"><a class="anchor" href="#_model_clientcertificate"></a>model ClientCertificate</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g scaffold ClientCertificate \
+  name:string \
+  description:rich_text \
+  cert:text \
+  pkey:text \
+  passphrase:string \
+  --no-stylesheets --no-javascripts --no-helper</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_habtm_tables"><a class="anchor" href="#_habtm_tables"></a>HABTM Tables</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_connectorlocation"><a class="anchor" href="#_connectorlocation"></a>ConnectorLocation</h3>
 <div class="listingblock">
 <div class="title">Join Tables for HABTM</div>
 <div class="content">
@@ -398,6 +416,32 @@ bin/rails g migration AddNameToWorkplace \
     end
   end
 end</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_connectorclientcertificate"><a class="anchor" href="#_connectorclientcertificate"></a>ConnectorClientCertificate</h3>
+<div class="listingblock">
+<div class="title">Join Tables for HABTM</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g migration CreateJoinTableConnectorClientCertificate \
+  connector client_certificate</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Add index and set index to unique:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">class CreateJoinTableConnectorClientCertificate &lt; ActiveRecord::Migration[7.1]
+  def change
+    create_join_table :connectors, :client_certificates do |t|
+      t.index [:client_certificate_id, :connector_id], unique: true
+      t.index [:connector_id, :client_certificate_id], unique: true
+    end
+  end
+end</code></pre>
+</div>
 </div>
 </div>
 </div>

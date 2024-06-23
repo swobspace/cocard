@@ -133,6 +133,15 @@ Class Network {
   location_id
 }
 
+Class ClientCertificate {
+  name: string
+  description: rich_text
+  cert: text
+  pkey: text
+  passphrase: string
+  client()
+}
+
 Network "*" - "1" Location
 Location "*" -- "*" Connector
 Context "*" -- "*" Connector
@@ -149,4 +158,6 @@ Context "1" -- "*" Card
 Connector "1" -- "*" Log
 CardTerminal "1" -- "*" Log
 Card "1" -- "*" Log
+
+Connector "*" -- "*" ClientCertificate
 @enduml
