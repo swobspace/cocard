@@ -12,6 +12,15 @@ module Cocard::SOAP
       )
     end
 
+    let(:clientcert) do
+      FactoryBot.create(:client_certificate,
+        name: 'myname',
+        cert: File.read(ENV['CLIENT_CERT_FILE']),
+        pkey: File.read(ENV['CLIENT_PKEY_FILE']),
+        passphrase: ENV['CLIENT_CERT_PASSPHRASE']
+      )
+    end
+
     subject do
       Cocard::SOAP::GetResourceInformation.new(
         connector: connector,
@@ -19,6 +28,10 @@ module Cocard::SOAP
         client_system: ENV['CONN_CLIENT_SYSTEM_ID'],
         workplace: ENV['CONN_WORKPLACE_ID']
       )
+    end
+    before(:each) do
+      connector.client_certificates << clientcert
+      connector.reload
     end
 
     it "does not raise an NotImplementedError" do

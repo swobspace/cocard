@@ -22,8 +22,11 @@ module Cocard::SOAP
       options.symbolize_keys
       # test for soap operation
       opera = soap_operation
-      @connector     = options.fetch(:connector)
       @options       = options
+      @connector     = options.fetch(:connector)
+      @mandant       = options.fetch(:mandant)
+      @client_system = options.fetch(:client_system)
+      @workplace     = options.fetch(:workplace)
       @savon_client = init_savon_client
     end
 
@@ -59,9 +62,6 @@ module Cocard::SOAP
   protected
 
     def soap_message(options)
-      @mandant       = options.fetch(:mandant)
-      @client_system = options.fetch(:client_system)
-      @workplace     = options.fetch(:workplace)
       { 
         "CCTX:Context" => {
           "CONN:MandantId"      => @mandant,
@@ -72,14 +72,32 @@ module Cocard::SOAP
 
   private
     def init_savon_client
-      client = Savon.client(
-           wsdl: wsdl_content,
-           endpoint: endpoint,
-           env_namespace: :soapenv,
-           namespace: namespace,
-           namespaces: namespaces,
-           convert_request_keys_to: :camelcase
-        )
+      globals = savon_globals
+      if use_tls && use_auth
+        globals = globals.merge(savon_tls_globals)
+      end
+      client = Savon.client(globals)
+    end
+
+    def savon_globals
+      { 
+        open_timeout: 5,
+        wsdl: wsdl_content,
+        endpoint: endpoint,
+        env_namespace: :soapenv,
+        namespace: namespace,
+        namespaces: namespaces,
+        convert_request_keys_to: :camelcase
+      }
+    end
+
+    def savon_tls_globals
+      { 
+        endpoint: endpoint_tls,
+        ssl_verify_mode: :none,
+        ssl_cert: auth_cert,
+        ssl_cert_key: auth_pkey,
+      }
     end
 
     def wsdl_content
@@ -90,6 +108,12 @@ module Cocard::SOAP
       # "http://#{connector_ip}/service/systeminformationservice"
       return nil unless @connector.kind_of? Connector
       @connector.service("EventService")&.endpoint_location(Cocard::EventServiceVersion)
+    end
+
+    def endpoint_tls
+      # "http://#{connector_ip}/service/systeminformationservice"
+      return nil unless @connector.kind_of? Connector
+      @connector.service("EventService")&.endpoint_tls_location(Cocard::EventServiceVersion)
     end
 
     def namespace
@@ -107,6 +131,26 @@ module Cocard::SOAP
         "xmlns:CONN" => "http://ws.gematik.de/conn/ConnectorCommon/v5.0",
         "xmlns:CARDCMN" => "http://ws.gematik.de/conn/CardServiceCommon/v2.0",
        }
+    end
+
+    def client_certificate
+      @connector.client_certificates.select{|c| c.client == @client_system.to_s}.first
+    end
+
+    def use_tls
+      client_certificate.present?
+    end
+
+    def use_auth
+      client_certificate.present?
+    end
+
+    def auth_cert
+      client_certificate.certificate
+    end
+
+    def auth_pkey
+      client_certificate.private_key
     end
   end
 end
