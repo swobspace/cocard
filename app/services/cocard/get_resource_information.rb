@@ -74,8 +74,8 @@ module Cocard
         next if filter_error_states(es)
         logger = Logs::Creator.new(loggable: connector,
                                    level: es.severity,
-                                   action: "OPERATIONAL_STATE/#{es.error_condition}",
-                                   message: es.error_condition)
+                                   action: es.error_condition,
+                                   message: "OPERATIONAL_STATE / #{es.error_condition}")
         logger.call(!es.valid?)
       end
     end
