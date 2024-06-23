@@ -32,6 +32,12 @@ FactoryBot.define do
     mac   { generate(:macaddress) }
   end
 
+  factory :client_certificate do
+    name { generate(:aname) }
+    cert { 'nonsense'}
+    pkey { 'nonsense'}
+  end
+
   factory :connector do
     ip { Faker::Internet.ip_v4_address }
   end

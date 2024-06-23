@@ -4,6 +4,7 @@ class Connector < ApplicationRecord
   # -- associations
   has_many :logs, as: :loggable, dependent: :destroy
   has_and_belongs_to_many :locations
+  has_and_belongs_to_many :client_certificates
   has_many :card_terminals, dependent: :restrict_with_error
   has_many :connector_contexts, -> { order(position: :asc) }, dependent: :destroy
   has_many :contexts, through: :connector_contexts

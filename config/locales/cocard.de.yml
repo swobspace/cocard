@@ -19,6 +19,7 @@ de:
       später bei Kopplung mit einem Konnektor regelmäßig überschrieben!
       Die Identifikation des Kartenterminals erfolgt über die MAC-Adresse. Diese
       kann nur bei einer Neuanlage bearbeitet und später nicht mehr geändert werden.
+    new_client_certificate: Neues Clientzertifikat
     new_context: Neuer Kontext
     new_connector: Neuer Konnektor
     new_location: Neuer Standort
@@ -48,6 +49,7 @@ de:
     models:
       card: Karte
       card_terminal: Kartenterminal
+      client_certificate: Clientzertifikat
       context: Kontext
       connector: Konnektor
       connector_context: Konnektor Kontext
@@ -68,6 +70,7 @@ de:
     card_terminal: Kartenterminal
     card_type: Kartentyp
     certificate: Zertifikat
+    cert: Zertifikat (PEM)
     cert_subject_cn: (CN)
     cert_subject_title: Titel
     cert_subject_sn: Name
@@ -79,6 +82,8 @@ de:
     client: Mandant
     clients: Mandanten
     client_ids: Mandanten
+    client_certificate: Clientzertifikat
+    client_certificate_ids: Clientzertifikate
     condition: Zustand
     condition_message: Zustandsinfo
     configuration: Konfiguration
@@ -118,6 +123,8 @@ de:
     netzwerk: Netzwerk
     operational: in Betrieb
     operational_state: Betriebszustand
+    passphrase: Passphrase
+    pkey: Private Key (PEM)
     plugged_in: Netzwerk/Dose/Switch
     private_information: Geschützte Information
     product_information: Produktinformation
@@ -140,6 +147,7 @@ de:
     cards/logs: Karten/Logs
     card_terminals: Kartenterminals
     card_terminals/logs: Kartenterminals/Logs
+    client_certificates: Clientzertifikate
     connectors: Konnektoren
     connectors/logs: Konnektoren/Logs
     contexts: Kontexte
