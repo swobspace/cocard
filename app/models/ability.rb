@@ -15,6 +15,7 @@ class Ability
       cannot %i[update destroy], :roles, ro: true
     else
       can [:read, :navigate], :all
+      cannot [:read, :navigate], ClientCertificate
     end
   end
 end
