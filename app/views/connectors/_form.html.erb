@@ -23,6 +23,11 @@
                    wrapper_html: {class: 'form-check form-switch'}
        %>
 
+    <%= form.input :client_certificate_ids, as: :select, 
+                   collection: ClientCertificate.all,
+                   input_html: { multiple: true }
+       %>
+
     <%= render 'nested_connector_contexts_form', f: form %>
 
     <%= form.button :submit, class: 'btn btn-primary' %>

@@ -92,6 +92,7 @@ class ConnectorsController < ApplicationController
             .permit(:name, :ip, :sds_url, :manual_update, :description,
                     :admin_url,
                     location_ids: [],
+                    client_certificate_ids: [],
                     connector_contexts_attributes: [
                       :id, :context_id, :_destroy
                     ])

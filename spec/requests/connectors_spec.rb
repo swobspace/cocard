@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "/connectors", type: :request do
   let(:location) { FactoryBot.create(:location) }
+  let(:clientcert) { FactoryBot.create(:client_certificate) }
   
   let(:valid_attributes) {
     FactoryBot.attributes_for(:connector)
@@ -84,6 +85,7 @@ RSpec.describe "/connectors", type: :request do
         sds_url: 'http://192.0.2.99',
         manual_update: true,
         location_ids: [location.id],
+        client_certificate_ids: [clientcert.id],
       }}
 
       it "updates the requested connector" do
@@ -94,6 +96,7 @@ RSpec.describe "/connectors", type: :request do
         expect(connector.admin_url).to eq('http://1.2.3.4:5678')
         expect(connector.sds_url).to eq('http://192.0.2.99')
         expect(connector.locations).to contain_exactly(location)
+        expect(connector.client_certificates).to contain_exactly(clientcert)
       end
 
       it "redirects to the connector" do
