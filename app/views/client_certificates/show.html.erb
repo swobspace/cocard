@@ -24,23 +24,33 @@
       </tr>
 
       <tr>
+        <th class="w-10 pe-3"><%= t('attributes.client')%>:</th>
+        <td><%= @client_certificate.client %></td>
+      </tr>
+
+      <tr>
         <th class="w-10 pe-3"><%= t('attributes.description')%>:</th>
         <td><%= @client_certificate.description %></td>
       </tr>
 
       <tr>
         <th class="w-10 pe-3"><%= t('attributes.cert')%>:</th>
-        <td><%= @client_certificate.cert %></td>
+        <td><pre><%= @client_certificate.cert %></pre></td>
       </tr>
 
       <tr>
         <th class="w-10 pe-3"><%= t('attributes.pkey')%>:</th>
-        <td><%= @client_certificate.pkey %></td>
+        <td><pre><%= @client_certificate.pkey %></pre></td>
       </tr>
 
       <tr>
         <th class="w-10 pe-3"><%= t('attributes.passphrase')%>:</th>
-        <td><%= @client_certificate.passphrase %></td>
+        <td><%=(@client_certificate.passphrase.present? ? '************' : 'no passphrase')%></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.valid_until')%>:</th>
+        <td><%= @client_certificate.valid_until.localtime %></td>
       </tr>
     </table>
   </div>

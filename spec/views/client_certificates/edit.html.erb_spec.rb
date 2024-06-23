@@ -12,6 +12,12 @@ RSpec.describe "client_certificates/edit", type: :view do
   }
 
   before(:each) do
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    allow(controller).to receive(:current_ability) { @ability }
+    allow(controller).to receive(:controller_name) { 'client_certificates' }
+    allow(controller).to receive(:action_name) { 'edit' }
+
     assign(:client_certificate, client_certificate)
   end
 

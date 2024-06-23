@@ -51,6 +51,8 @@ class ClientCertificatesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def client_certificate_params
-      params.require(:client_certificate).permit(:name, :description, :cert, :pkey, :passphrase)
+      params.require(:client_certificate)
+            .permit(:name, :description, :cert, :pkey, :passphrase)
+            .reject { |k, v| k == 'passphrase' && v.blank? }
     end
 end

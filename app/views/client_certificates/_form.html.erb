@@ -4,13 +4,14 @@
   <div class="form-input">
     <%= form.input :name
        %>
-    <%= form.input :description
+    <%= form.input :description, as: :rich_text_area
        %>
-    <%= form.input :cert
+    <%= form.input :cert, input_html: { rows: 8 }
        %>
-    <%= form.input :pkey
+    <%= form.input :pkey, input_html: { rows: 8 }
        %>
-    <%= form.input :passphrase
+    <%= form.input :passphrase, as: :password,
+                   placeholder: '************'
        %>
 
     <%= form.button :submit, class: 'btn btn-primary' %>
