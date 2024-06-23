@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_22_133955) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_23_090122) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -118,6 +118,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_22_133955) do
     t.index ["location_id"], name: "index_cards_on_location_id"
     t.index ["operational_state_id"], name: "index_cards_on_operational_state_id"
     t.index ["pin_status"], name: "index_cards_on_pin_status"
+  end
+
+  create_table "client_certificates", force: :cascade do |t|
+    t.string "name", default: ""
+    t.text "cert"
+    t.text "pkey"
+    t.string "passphrase", default: ""
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "client_certificates_connectors", id: false, force: :cascade do |t|
+    t.bigint "connector_id", null: false
+    t.bigint "client_certificate_id", null: false
+    t.index ["client_certificate_id", "connector_id"], name: "idx_on_client_certificate_id_connector_id_892ac5cf15", unique: true
+    t.index ["connector_id", "client_certificate_id"], name: "idx_on_connector_id_client_certificate_id_7f6bd688da", unique: true
   end
 
   create_table "connector_contexts", force: :cascade do |t|

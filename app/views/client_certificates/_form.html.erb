@@ -1,0 +1,19 @@
+<%= simple_form_for(@client_certificate) do |form| %>
+<%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
+
+  <div class="form-input">
+    <%= form.input :name
+       %>
+    <%= form.input :description
+       %>
+    <%= form.input :cert
+       %>
+    <%= form.input :pkey
+       %>
+    <%= form.input :passphrase
+       %>
+
+    <%= form.button :submit, class: 'btn btn-primary' %>
+    <%= cancel_button %>
+  </div>
+<% end %>

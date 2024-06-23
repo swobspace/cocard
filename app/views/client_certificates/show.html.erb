@@ -1,0 +1,50 @@
+<div class="card mb-2">
+  <div class="card-header">
+    <div class="d-flex w-100 justify-content-between">
+      <div>
+        <span class="subtitle">
+          <%= t('activerecord.models.client_certificate') %>: 
+          #<%= @client_certificate.id %>
+        </span>
+        <h4 class="title"><%= @client_certificate %></h4>
+      </div>
+      <div role="toolbar" class="pt-3">
+        <%= edit_link(@client_certificate) %>
+        <%= delete_link(@client_certificate) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <table class="table table-sm table-borderless">
+    
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.name')%>:</th>
+        <td><%= @client_certificate.name %></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.description')%>:</th>
+        <td><%= @client_certificate.description %></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.cert')%>:</th>
+        <td><%= @client_certificate.cert %></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.pkey')%>:</th>
+        <td><%= @client_certificate.pkey %></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.passphrase')%>:</th>
+        <td><%= @client_certificate.passphrase %></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<%= back_link %>
+<%= new_link ClientCertificate %>

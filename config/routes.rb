@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :client_certificates
   resources :workplaces, except: [:new, :create]
   resources :networks
   resources :logs, only: [:show, :index, :destroy] do
