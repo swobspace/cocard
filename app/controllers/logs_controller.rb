@@ -14,8 +14,8 @@ class LogsController < ApplicationController
   end
 
   def sindex
-    if params[:condition]
-      @logs = Log.condition(params[:condition]).valid
+    if params[:type]
+      @logs = Log.where(loggable_type: params[:type]).valid
     else
       @logs = Log.valid
     end

@@ -1,0 +1,32 @@
+<div class="me-2">
+  <%= link_to sindex_logs_path(type: 'Connector'),
+              class: 'btn btn-outline-secondary',
+              "data-turbo-frame": 'logs' do %>
+    Connectors
+    <span class="badge text-bg-secondary">
+      <%= Log.valid.where(loggable_type: 'Connector').count %>
+    </span>
+  <% end %>
+</div>
+
+<div class="me-2">
+  <%= link_to sindex_logs_path(type: 'CardTerminal'),
+              class: 'btn btn-outline-secondary',
+              "data-turbo-frame": 'logs' do %>
+    Card Terminals
+    <span class="badge text-bg-secondary">
+      <%= Log.valid.where(loggable_type: 'CardTerminal').count %>
+    </span>
+  <% end %>
+</div>
+
+<div class="me-2">
+  <%= link_to sindex_logs_path(type: 'Card'),
+              class: 'btn btn-outline-secondary',
+              "data-turbo-frame": 'logs' do %>
+    Cards
+    <span class="badge text-bg-secondary">
+      <%= Log.valid.where(loggable_type: 'Card').count %>
+    </span>
+  <% end %>
+</div>
