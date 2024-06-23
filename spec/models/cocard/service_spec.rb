@@ -33,6 +33,11 @@ module Cocard
                   "http://10.200.149.3:80/service/fm/nfdm/nfdservice") }
     end
 
+    describe "#endpoint_tls_location" do
+      it { expect(subject.endpoint_tls_location('1.0.0')).to eq(
+                  "https://10.200.149.3:443/service/fm/nfdm/nfdservice") }
+    end
+
     describe "#target_namespace" do
       it { expect(subject.target_namespace('1.0.0')).to eq(
                   "http://ws.gematik.de/conn/nfds/NFDService/WSDL/v1.0") }

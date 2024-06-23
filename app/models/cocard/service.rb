@@ -38,6 +38,10 @@ module Cocard
       version(ver)['endpoint']['@Location']
     end
 
+    def endpoint_tls_location(ver)
+      version(ver)['endpoint_tls']['@Location']
+    end
+
     def target_namespace(ver)
       version(ver)['target_namespace']
     end
