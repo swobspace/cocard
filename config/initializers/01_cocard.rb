@@ -5,6 +5,7 @@ module Cocard
     'workplaces',
     'contexts',
     'operational_states',
+    'client_certificates',
   ].freeze
 
   EventServiceVersion = "7.2.0".freeze
