@@ -53,6 +53,8 @@ bin/rails g scaffold Connector \
   admin_url:string \
   sds_url:string \
   manual_update:boolean \
+  id_contract:string \
+  serial:string \
     --no-stylesheets --no-javascripts --no-helper
 
 bin/rails g migration AddReadonlyToConnector \

@@ -104,6 +104,7 @@ de:
     fachrichtung: Fachrichtung
     givenname: Vorname
     iccsn: ICCSN
+    id_contract: Vertragsnummer
     id_product: Modellbezeichnung
     insert_time: eingesteckt seit
     ip: IP-Adresse
