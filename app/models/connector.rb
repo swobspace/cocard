@@ -12,6 +12,8 @@ class Connector < ApplicationRecord
   # -- configuration
   has_rich_text :description
 
+  enum authentication: { noauth: 0, clientcert: 1 }
+
   accepts_nested_attributes_for :connector_contexts,
     allow_destroy: true,
     reject_if: proc { |att| att['context_id'].blank? }
@@ -22,6 +24,7 @@ class Connector < ApplicationRecord
   before_save :ensure_sds_url
   before_save :ensure_admin_url
   validates :ip, presence: true, uniqueness: true
+  validates :authentication, inclusion: { in: authentications.keys }
 
   # -- common methods
   def to_s

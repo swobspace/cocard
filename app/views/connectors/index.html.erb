@@ -24,6 +24,8 @@
             <th><%= t('attributes.vpnti_online') %></th>
             <th><%= t('attributes.last_check') %></th>
             <th><%= t('attributes.last_check_ok') %></th>
+            <th class="notvisible"><%= t('attributes.use_tls') %></th>
+            <th class="notvisible"><%= t('attributes.authentication') %></th>
             <th class="notvisible"><%= t('attributes.id_contract') %></th>
             <th class="notvisible"><%= t('attributes.serial') %></th>
             <th class="noexport nosort"><%= t('cocard.action') %></th>
@@ -31,6 +33,8 @@
     </thead>
     <tfoot class="search">
       <tr>
+            <th></th>
+            <th></th>
             <th></th>
             <th></th>
             <th></th>
@@ -69,6 +73,9 @@
                 </td>
                 <td><%= render IsCurrentComponent.new(item: connector, attr: :last_check) %></td>
                 <td><%= render IsCurrentComponent.new(item: connector, attr: :last_check_ok) %></td>
+                <td><%= render BooleanComponent.new(value: connector.use_tls,
+                                                    text: :text) %></td>
+                <td><%= t(connector.authentication, scope: :authentications) %></td>
                 <td><%= connector.id_contract if @current_user.is_admin? %></td>
                 <td><%= connector.serial %></td>
                 <td class="text-nowrap">

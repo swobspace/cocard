@@ -90,7 +90,7 @@ class ConnectorsController < ApplicationController
     def connector_params
       params.require(:connector)
             .permit(:name, :ip, :sds_url, :manual_update, :description,
-                    :admin_url, :id_contract, :serial,
+                    :admin_url, :id_contract, :serial, :use_tls, :authentication,
                     location_ids: [],
                     client_certificate_ids: [],
                     connector_contexts_attributes: [

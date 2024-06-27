@@ -30,6 +30,16 @@
     <%= form.input :serial
        %>
 
+    <%= form.input :use_tls, input_html: { role: 'switch' },
+                   wrapper_html: {class: 'form-check form-switch'}
+       %>
+
+    <%= form.input :authentication, 
+          collection: Connector.authentications
+                              .collect {|c| [t(c[0], scope: 'authentications'), c[0]]},
+          include_blank: false
+       %>
+
     <%= form.input :client_certificate_ids, as: :select, 
                    collection: ClientCertificate.all,
                    input_html: { multiple: true }

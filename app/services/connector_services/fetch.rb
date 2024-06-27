@@ -64,7 +64,9 @@ module ConnectorServices
       end
       Result.new(success?: final, error_messages: error_messages, sds: sds.connector_services)
     end
+
   private
+
     def log_error(message)
       logger = Logs::Creator.new(loggable: connector, level: 'ERROR', 
                                  action: 'FetchSDS', message: message)
@@ -73,5 +75,6 @@ module ConnectorServices
         Rails.logger.error("could not create log entry: Fetch SDS - #{message}")
       end
     end
+
   end
 end
