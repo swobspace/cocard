@@ -1,6 +1,6 @@
 module ConnectorServices
   #
-  # Service fetching connector.sds from connector 
+  # Service fetching connector.sds from connector
   # and write parsed xml as hash to Connector#properties
   #
   class Fetch
@@ -24,10 +24,12 @@ module ConnectorServices
       error_messages = []
       connector.touch(:last_check)
       begin
-        uri = URI(connector.sds_url)
-        conn = Faraday.new("#{uri.scheme}://#{uri.host}", 
-                           request: { open_timeout: 5, timeout: 10 })
-        response = conn.get(uri.path)
+        conn_options = faraday_options
+        if use_tls && use_cert
+          conn_options = conn_options.merge(tls_options)
+        end
+        conn = Faraday.new(conn_options)
+        response = conn.get
 
         unless response.success?
           # error_messages << response.headers.join(' ')
@@ -68,7 +70,7 @@ module ConnectorServices
   private
 
     def log_error(message)
-      logger = Logs::Creator.new(loggable: connector, level: 'ERROR', 
+      logger = Logs::Creator.new(loggable: connector, level: 'ERROR',
                                  action: 'FetchSDS', message: message)
       unless logger.call(message.blank?)
         message = Array(message).join('; ')
@@ -76,5 +78,46 @@ module ConnectorServices
       end
     end
 
+    def faraday_options
+      {
+        url: url,
+        request: { open_timeout: 5, timeout: 10 }
+      }
+    end
+
+    def url
+      uri = URI(connector.sds_url)
+      "#{uri.scheme}://#{uri.host}"
+    end
+
+    def tls_options
+      {
+        ssl: {
+          client_cert: auth_cert,
+          client_key: auth_pkey,
+          verify: false
+        }
+      }
+    end
+
+    def client_certificate
+      @connector.client_certificates.first
+    end
+
+    def use_tls
+      @connector.use_tls
+    end
+
+    def use_cert
+      @connector.authentication == 'clientcert'
+    end
+
+    def auth_cert
+      client_certificate.certificate
+    end
+
+    def auth_pkey
+      client_certificate.private_key
+    end
   end
 end
