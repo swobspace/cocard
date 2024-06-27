@@ -79,8 +79,12 @@ module Cocard::SOAP
     def init_savon_client
       globals = savon_globals
       if use_tls && use_cert
-        globals = globals.merge(savon_tls_globals)
+        globals  = globals.merge(savon_tls_globals)
+        endpoint = endpoint_tls_location
+      else
+        endpoint = endpoint_location
       end
+      globals = globals.merge(endpoint: endpoint)
       client = Savon.client(globals)
     end
 
@@ -88,7 +92,6 @@ module Cocard::SOAP
       { 
         open_timeout: 5,
         wsdl: wsdl_content,
-        endpoint: endpoint,
         env_namespace: :soapenv,
         namespace: namespace,
         namespaces: namespaces,
@@ -98,7 +101,6 @@ module Cocard::SOAP
 
     def savon_tls_globals
       { 
-        endpoint: endpoint_tls,
         ssl_verify_mode: :none,
         ssl_cert: auth_cert,
         ssl_cert_key: auth_pkey,
@@ -109,13 +111,13 @@ module Cocard::SOAP
       content = File.join(Rails.root, 'shared', 'wdsl', "EventService.wsdl")
     end
     
-    def endpoint
+    def endpoint_location
       # "http://#{connector_ip}/service/systeminformationservice"
       return nil unless @connector.kind_of? Connector
       @connector.service("EventService")&.endpoint_location(Cocard::EventServiceVersion)
     end
 
-    def endpoint_tls
+    def endpoint_tls_location
       # "http://#{connector_ip}/service/systeminformationservice"
       return nil unless @connector.kind_of? Connector
       @connector.service("EventService")&.endpoint_tls_location(Cocard::EventServiceVersion)

@@ -28,8 +28,11 @@ module ConnectorServices
         if use_tls && use_cert
           conn_options = conn_options.merge(tls_options)
         end
+        pp conn_options
+        pp uri_base
+        pp uri_path
         conn = Faraday.new(conn_options)
-        response = conn.get
+        response = conn.get(uri_path)
 
         unless response.success?
           # error_messages << response.headers.join(' ')
@@ -80,14 +83,22 @@ module ConnectorServices
 
     def faraday_options
       {
-        url: url,
-        request: { open_timeout: 5, timeout: 10 }
+        request: { open_timeout: 5, timeout: 10 },
+        url: uri_base
       }
     end
 
-    def url
+    def uri
       uri = URI(connector.sds_url)
-      "#{uri.scheme}://#{uri.host}"
+    end
+
+    def uri_base
+      scheme = ( connector.use_tls ) ? 'https' : 'http'
+      "#{scheme}://#{uri.host}"
+    end
+
+    def uri_path
+      "#{uri.path}"
     end
 
     def tls_options
