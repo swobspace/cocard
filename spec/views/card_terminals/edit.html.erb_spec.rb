@@ -30,15 +30,14 @@ RSpec.describe "card_terminals/edit", type: :view do
       assert_select "input[name=?]", "card_terminal[room]"
       assert_select "input[name=?]", "card_terminal[contact]"
       assert_select "input[name=?]", "card_terminal[plugged_in]"
-      assert_select "input[name=?]", "card_terminal[mac]" do |input|
-        assert input.attr("disabled").present?
-      end
+      assert_select "input[name=?]", "card_terminal[mac]"
       assert_select "input[name=?]", "card_terminal[ip]"
       assert_select "input[name=?]", "card_terminal[slots]"
       assert_select "input[name=?]", "card_terminal[delivery_date]"
       assert_select "input[name=?]", "card_terminal[supplier]"
       assert_select "input[name=?]", "card_terminal[serial]"
       assert_select "input[name=?]", "card_terminal[id_product]"
+      assert_select "select[name=?]", "card_terminal[connector_id]"
     end
   end
 end

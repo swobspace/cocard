@@ -92,6 +92,7 @@ RSpec.describe "/card_terminals", type: :request do
         supplier: 'ACME Ltd',
         id_product: 'ORGA6141',
         serial: 'S11122277635',
+        connector_id: connector.id
       }}
 
       it "updates the requested card_terminal" do
@@ -110,6 +111,7 @@ RSpec.describe "/card_terminals", type: :request do
         expect(card_terminal.supplier).to eq('ACME Ltd')
         expect(card_terminal.id_product).to eq('ORGA6141')
         expect(card_terminal.serial).to eq('S11122277635')
+        expect(card_terminal.connector_id).to eq(connector.id)
       end
 
       it "redirects to the card_terminal" do

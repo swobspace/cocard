@@ -70,7 +70,7 @@ class CardTerminalsController < ApplicationController
     def card_terminal_params
       params.require(:card_terminal)
             .permit(:displayname, :location_id, :description, :room,
-                    :contact, :plugged_in, :mac, :ip, :slots,
+                    :contact, :plugged_in, :mac, :ip, :slots, :connector_id,
                     :delivery_date, :supplier, :id_product, :serial)
     end
 end
