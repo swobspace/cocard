@@ -8,8 +8,19 @@ module Cocard::SOAP
     let(:connector) do
       FactoryBot.create(:connector,
         ip: ENV['SDS_IP'],
+        use_tls: ENV['USE_TLS'] || false,
+        authentication: ENV['AUTHENTICATION'] || 'noauth',
         connector_services: YAML.load_file(yaml)
       )
+    end
+
+    let(:clientcert) do
+      FactoryBot.create(:client_certificate,
+        name: 'myname',
+        cert: File.read(ENV['CLIENT_CERT_FILE']),
+        pkey: File.read(ENV['CLIENT_PKEY_FILE']),
+        passphrase: ENV['CLIENT_CERT_PASSPHRASE']
+      ) 
     end
 
     subject do
@@ -20,6 +31,11 @@ module Cocard::SOAP
         workplace: ENV['CONN_WORKPLACE_ID'],
         iccsn: ENV['CARD_ICCSN']
       )
+    end
+
+    before(:each) do
+      connector.client_certificates << clientcert
+      connector.reload
     end
 
     it "does not raise an NotImplementedError" do
@@ -44,8 +60,14 @@ module Cocard::SOAP
           ).call
         end
         it { expect(result.success?).to be_falsey }
-        it { expect(result.error_messages).to contain_exactly(
-               "S:Server", "Ungültige Mandanten-ID")}
+
+        if ENV['USE_TLS']
+          it { expect(result.error_messages.first).to match(/tls alert bad certificate/) }
+        else
+          it { expect(result.error_messages).to contain_exactly(
+                 "S:Server", "Ungültige Mandanten-ID")}
+        end
+
       end
 
       describe "return error with nonexisting card" do

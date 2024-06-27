@@ -113,11 +113,11 @@ module ConnectorServices
     end
 
     def auth_cert
-      client_certificate.certificate
+      client_certificate&.certificate
     end
 
     def auth_pkey
-      client_certificate.private_key
+      client_certificate&.private_key
     end
   end
 end

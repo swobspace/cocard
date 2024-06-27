@@ -8,6 +8,8 @@ module Cocard::SOAP
     let(:connector) do
       FactoryBot.create(:connector,
         ip: ENV['SDS_IP'],
+        use_tls: ENV['USE_TLS'] || false,
+        authentication: ENV['AUTHENTICATION'] || 'noauth',
         connector_services: YAML.load_file(yaml)
       )
     end
@@ -45,7 +47,7 @@ module Cocard::SOAP
 
     # must be explicit called with rspec --tag soap
     describe '#call', :soap => true do
-      describe "return error if not successfull" do
+      describe "return error if not successful" do
         let(:result) do
           Cocard::SOAP::GetResourceInformation.new(
             connector: connector,
@@ -54,9 +56,15 @@ module Cocard::SOAP
             workplace: 'dontexist'
           ).call
         end
+        it { puts connector.use_tls }
+        it { puts connector.client_certificates.first }
         it { expect(result.success?).to be_falsey }
-        it { expect(result.error_messages).to contain_exactly(
-               "S:Server", "Ungültige Mandanten-ID")}
+        if ENV['USE_TLS']
+          it { expect(result.error_messages.first).to match(/tls alert bad certificate/) }
+        else
+          it { expect(result.error_messages).to contain_exactly(
+                 "S:Server", "Ungültige Mandanten-ID")}
+        end
       end
 
       describe "successful call" do

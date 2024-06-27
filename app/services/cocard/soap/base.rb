@@ -24,9 +24,7 @@ module Cocard::SOAP
       opera = soap_operation
       @options       = options
       @connector     = options.fetch(:connector)
-      @mandant       = options.fetch(:mandant)
-      @client_system = options.fetch(:client_system)
-      @workplace     = options.fetch(:workplace)
+      fetch_specific_options(options)
       @savon_client = init_savon_client
     end
 
@@ -38,11 +36,13 @@ module Cocard::SOAP
         response = @savon_client
                    .call(soap_operation,
                          attributes: soap_operation_attributes,
-                         message: soap_message(@options))
+                         message: soap_message)
       rescue Savon::Error => error
         fault = error.to_hash[:fault]
         error_messages = [fault[:faultcode], fault[:faultstring]]
         return Result.new(success?: false, error_messages: error_messages, response: nil)
+      rescue HTTPI::SSLError => error
+        return Result.new(success?: false, error_messages: Array(error.message), response: nil)
       rescue Timeout::Error => error
         return Result.new(success?: false, error_messages: Array(error.message), response: nil)
       end
@@ -61,7 +61,13 @@ module Cocard::SOAP
 
   protected
 
-    def soap_message(options)
+    def fetch_specific_options(options)
+      @mandant       = options.fetch(:mandant)
+      @client_system = options.fetch(:client_system)
+      @workplace     = options.fetch(:workplace)
+    end
+
+    def soap_message
       { 
         "CCTX:Context" => {
           "CONN:MandantId"      => @mandant,
@@ -70,10 +76,9 @@ module Cocard::SOAP
       }
     end
 
-  private
     def init_savon_client
       globals = savon_globals
-      if use_tls && use_auth
+      if use_tls && use_cert
         globals = globals.merge(savon_tls_globals)
       end
       client = Savon.client(globals)
@@ -138,19 +143,19 @@ module Cocard::SOAP
     end
 
     def use_tls
-      client_certificate.present?
+      @connector.use_tls
     end
 
-    def use_auth
-      client_certificate.present?
+    def use_cert
+      @connector.authentication == 'clientcert'
     end
 
     def auth_cert
-      client_certificate.certificate
+      client_certificate&.certificate
     end
 
     def auth_pkey
-      client_certificate.private_key
+      client_certificate&.private_key
     end
   end
 end

@@ -4,11 +4,14 @@ module Cocard::SOAP
       :get_resource_information
     end
 
-    def soap_message(options)
+    def fetch_specific_options(options)
       @mandant       = options.fetch(:mandant)
       @client_system = options.fetch(:client_system)
       @workplace     = options.fetch(:workplace)
       @iccsn         = options.fetch(:iccsn)
+    end
+
+    def soap_message
       { 
         "CCTX:Context" => {
           "CONN:MandantId"      => @mandant,
