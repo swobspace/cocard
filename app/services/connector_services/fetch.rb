@@ -51,7 +51,7 @@ module ConnectorServices
       sds = Cocard::SDS.new(response.body)
       if sds.nil?
         error_messages << "No SDS retrieved"
-        log_errors("SDS is empty")
+        log_error("SDS is empty")
         return Result.new(success?: false, error_messages: error_messages, sds: nil)
       end
 
@@ -59,6 +59,9 @@ module ConnectorServices
       connector.sds_updated_at     = Time.current
       connector.firmware_version   = connector.product_information&.firmware_version
       final = connector.save
+      if final
+        log_error(nil)
+      end
       Result.new(success?: final, error_messages: error_messages, sds: sds.connector_services)
     end
   private
