@@ -25,9 +25,11 @@ RSpec.describe CardTerminal, type: :model do
 
   it 'should get plain factory working' do
     f = FactoryBot.create(:card_terminal, :with_mac)
-    g = FactoryBot.create(:card_terminal, :with_mac)
+    g = FactoryBot.create(:card_terminal, :with_sn)
+    h = FactoryBot.build(:card_terminal)
     expect(f).to be_valid
     expect(g).to be_valid
+    expect(h).not_to be_valid
     expect(f).to validate_uniqueness_of(:ct_id).scoped_to(:connector_id)
   end
 
