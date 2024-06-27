@@ -29,7 +29,14 @@ FactoryBot.define do
 
   factory :card_terminal do
     ct_id { generate(:aname) }
-    mac   { generate(:macaddress) }
+
+    trait :with_mac do
+      mac { generate(:macaddress) }
+    end
+
+    trait :with_sn do
+      serial { generate(:aname) }
+    end
   end
 
   factory :client_certificate do
@@ -87,7 +94,7 @@ FactoryBot.define do
 
   factory :terminal_workplace do
     workplace
-    card_terminal
+    association :card_terminal, :with_mac
     mandant { generate(:aname) }
     client_system { generate(:aname) }
   end

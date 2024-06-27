@@ -5,7 +5,7 @@ RSpec.describe "/card_terminals", type: :request do
   let(:location) { FactoryBot.create(:location, lid: 'AXC') }
   
   let(:valid_attributes) {
-    FactoryBot.attributes_for(:card_terminal)
+    FactoryBot.attributes_for(:card_terminal, :with_mac)
   }
 
   let(:invalid_attributes) {
