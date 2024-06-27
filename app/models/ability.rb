@@ -5,7 +5,7 @@ class Ability
 
   def initialize(user)
     alias_action :search, :search_form, :query, :to => :read
-    alias_action :sindex, :to => :read
+    alias_action :sindex, :ping, :to => :read
 
     @user = user
     if @user.nil? 
