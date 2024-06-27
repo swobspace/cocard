@@ -17,8 +17,11 @@ de:
       Die folgenden Felder sind nur für die Neuanlage von Kartenterminals
       gedacht, die noch keinem Konnektor zugewiesen wurden. Die Felder werden
       später bei Kopplung mit einem Konnektor regelmäßig überschrieben!
-      Die Identifikation des Kartenterminals erfolgt über die MAC-Adresse. Diese
-      kann nur bei einer Neuanlage bearbeitet und später nicht mehr geändert werden.
+      Die Identifikation des Kartenterminals erfolgt über die MAC-Adresse. Für nicht
+      angeschlossene oder mobile Geräte kann die MAC leer bleiben, wenn die Seriennummer
+      gepflegt ist. Die MAC sollte aber immer eingetragen werden, bevor das Kartenterminal
+      ans Netzwerk angeschlossen wird, andernfalls legt Cocard das Kartenterminal erneut 
+      an und alle manuell gepflegten Daten müssen händisch nachgetragen werden.
     new_client_certificate: Neues Clientzertifikat
     new_context: Neuer Kontext
     new_connector: Neuer Konnektor
@@ -101,6 +104,7 @@ de:
     fachrichtung: Fachrichtung
     givenname: Vorname
     iccsn: ICCSN
+    id_contract: Vertragsnummer
     id_product: Modellbezeichnung
     insert_time: eingesteckt seit
     ip: IP-Adresse

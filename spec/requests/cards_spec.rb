@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "/cards", type: :request do
-  let(:ct) { FactoryBot.create(:card_terminal) }
+  let(:ct) { FactoryBot.create(:card_terminal, :with_mac) }
   let(:context) { FactoryBot.create(:context) }
   let(:ops) { FactoryBot.create(:operational_state, name: "roquefort") }
   let(:location) { FactoryBot.create(:location, lid: "AXXC") }

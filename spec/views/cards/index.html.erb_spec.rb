@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "cards/index", type: :view do
   let(:conn) { FactoryBot.create(:connector, name: 'TIK-XXX-39') }
-  let(:ct) { FactoryBot.create(:card_terminal, connector: conn, ct_id: 'CT_ID_0176') }
+  let(:ct) { FactoryBot.create(:card_terminal, :with_mac, connector: conn, ct_id: 'CT_ID_0176') }
   let(:ops) { FactoryBot.create(:operational_state, name: 'im Schrank') }
   let(:location) { FactoryBot.create(:location, lid: 'AXXC') }
 

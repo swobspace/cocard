@@ -34,7 +34,7 @@ module Cocard
     # card terminal
     #
     let(:ct) do
-      FactoryBot.create(:card_terminal, connector: connector)
+      FactoryBot.create(:card_terminal, :with_mac, connector: connector)
     end
 
     #

@@ -23,6 +23,13 @@
                    wrapper_html: {class: 'form-check form-switch'}
        %>
 
+    <%= form.input :id_contract,
+                   input_html: { class: 'bg-protected' }
+       %>
+
+    <%= form.input :serial
+       %>
+
     <%= form.input :client_certificate_ids, as: :select, 
                    collection: ClientCertificate.all,
                    input_html: { multiple: true }

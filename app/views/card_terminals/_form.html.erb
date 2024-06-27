@@ -27,12 +27,14 @@
       <%= t('cocard.new_card_terminal_manual_warning') %>
     </div>
 
-    <%= form.input :mac, as: :string,
-          input_html: { disabled: @card_terminal.persisted? }
+    <%= form.input :mac, as: :string, 
+          input_html: { value: @card_terminal.rawmac }
      %>
     <%= form.input :ip, as: :string
        %>
     <%= form.input :slots
+       %>
+    <%= form.association :connector
        %>
 
     <%= form.button :submit, class: 'btn btn-primary' %>

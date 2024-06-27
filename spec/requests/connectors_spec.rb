@@ -86,6 +86,8 @@ RSpec.describe "/connectors", type: :request do
         manual_update: true,
         location_ids: [location.id],
         client_certificate_ids: [clientcert.id],
+        id_contract: '919ZKK43',
+        serial: 'S12344321',
       }}
 
       it "updates the requested connector" do
@@ -97,6 +99,8 @@ RSpec.describe "/connectors", type: :request do
         expect(connector.sds_url).to eq('http://192.0.2.99')
         expect(connector.locations).to contain_exactly(location)
         expect(connector.client_certificates).to contain_exactly(clientcert)
+        expect(connector.serial).to eq('S12344321')
+        expect(connector.id_contract).to eq('919ZKK43')
       end
 
       it "redirects to the connector" do

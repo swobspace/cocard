@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "cards/show", type: :view do
-  let(:ct) { FactoryBot.create(:card_terminal, ct_id: 'CT_ID_0176') }
+  let(:ct) { FactoryBot.create(:card_terminal, :with_mac, ct_id: 'CT_ID_0176') }
   let(:ops) { FactoryBot.create(:operational_state, name: 'im Schrank') }
   let(:location) { FactoryBot.create(:location, lid: 'AXXC') }
   let(:context) do

@@ -4,7 +4,7 @@ require 'rails_helper'
 module TerminalWorkplaces
   RSpec.describe Crupdator do
     # let!(:ts) { Time.current }
-    let(:ct)  { FactoryBot.create(:card_terminal) }
+    let(:ct)  { FactoryBot.create(:card_terminal, :with_mac) }
 
     subject do 
       TerminalWorkplaces::Crupdator.new(

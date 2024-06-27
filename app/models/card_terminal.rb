@@ -15,9 +15,16 @@ class CardTerminal < ApplicationRecord
   # -- validations and callbacks
   before_save :ensure_displayname
   before_save :ensure_update_condition
-  validates_uniqueness_of :ct_id, scope: [:connector_id], 
+  validates_uniqueness_of :ct_id, scope: [:connector_id],
                           allow_nil: true, allow_blank: true
-  validates :mac, presence: true
+  validates :mac, presence: {
+                    message: "Entweder MAC oder Seriennummer müssen vorhanden sein"
+                  },
+                  unless: -> { serial.present? }
+  validates :serial, presence: {
+                    message: "Entweder MAC oder Seriennummer müssen vorhanden sein"
+                  },
+                  unless: -> { mac.present? }
 
 
   # -- common methods
@@ -27,6 +34,10 @@ class CardTerminal < ApplicationRecord
 
   def mac
     self[:mac].gsub(/:/, '').upcase unless self[:mac].nil?
+  end
+
+  def rawmac
+    self[:mac]
   end
 
   def product_information

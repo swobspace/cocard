@@ -82,6 +82,20 @@
             <td><%= @connector.description %></td>
           </tr>
           <tr>
+            <th class="w-10 pe-3"><%= t('attributes.firmware_version')%>:</th>
+            <td><%= @connector.firmware_version %></td>
+          </tr>
+          <% if @current_user and @current_user.is_admin? %>
+            <tr>
+              <th class="w-10 pe-3"><%= t('attributes.id_contract')%>:</th>
+              <td><%= @connector.id_contract %></td>
+            </tr>
+          <% end %>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.serial')%>:</th>
+            <td><%= @connector.serial %></td>
+          </tr>
+          <tr>
             <th class="w-10 pe-3"><%= t('attributes.last_check')%>:</th>
             <td>
               <%= render IsCurrentComponent.new(item: @connector, attr: :last_check) %>
@@ -94,13 +108,20 @@
             </td>
           </tr>
           <tr>
+            <th class="w-10 pe-3"><%= t('attributes.vpnti_online')%>:</th>
+            <td><%= render BooleanComponent.new(value: @connector.vpnti_online,
+                                                text: :unicode) %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.soap_request_success')%>:</th>
+            <td><%= render BooleanComponent.new(value: @connector.soap_request_success,
+                                                text: :unicode) %></td>
+          </tr>
+          <tr>
             <th class="w-10 pe-3"><%= t('attributes.condition')%>:</th>
             <td><%= @connector.condition_message %></td>
           </tr>
-          <tr>
-            <th class="w-10 pe-3"><%= t('attributes.firmware_version')%>:</th>
-            <td><%= @connector.firmware_version %></td>
-          </tr>
+
         </table>
       </div>
       <div class="col-6">

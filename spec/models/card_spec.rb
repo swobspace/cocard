@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Card, type: :model do
   let(:connector) { FactoryBot.create(:connector) }
-  let(:ct) { FactoryBot.create(:card_terminal, connector: connector) }
+  let(:ct) { FactoryBot.create(:card_terminal, :with_mac, connector: connector) }
   let(:ctx) { FactoryBot.create(:context) }
   let(:opsta) { FactoryBot.create(:operational_state, operational: true) }
   let(:card) do

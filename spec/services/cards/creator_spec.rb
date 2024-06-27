@@ -8,7 +8,7 @@ module Cards
     # fixtures :operational_states
     let(:connector) { FactoryBot.create(:connector) }
     let!(:ct) do
-      FactoryBot.create(:card_terminal, 
+      FactoryBot.create(:card_terminal, :with_mac,
         connector_id: connector.id,
         ct_id: 'CT_ID_0176'
       )

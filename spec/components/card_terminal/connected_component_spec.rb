@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe CardTerminal::ConnectedComponent, type: :component do
-  let(:ct) { FactoryBot.create(:card_terminal) }
+  let(:ct) { FactoryBot.create(:card_terminal, :with_mac) }
 
   describe "with status connected " do
     it "shows green ok utf char" do

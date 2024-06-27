@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe CardTerminalConcerns, type: :model do
   let(:ct) do
-    FactoryBot.create(:card_terminal,
+    FactoryBot.create(:card_terminal, :with_mac,
       ip: '198.51.100.17'
     )
   end

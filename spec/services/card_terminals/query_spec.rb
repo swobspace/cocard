@@ -29,7 +29,7 @@ module CardTerminals
   RSpec.describe Query do
     let(:ber) { FactoryBot.create(:location, lid: 'BER') }
     let!(:ct1) do
-      FactoryBot.create(:card_terminal,
+      FactoryBot.create(:card_terminal, :with_mac,
         displayname: 'QUORA - test',
         name: 'KLG-AXC-17',
         description: "some more infos",
@@ -55,7 +55,7 @@ module CardTerminals
     end
 
     let!(:ct3) do
-      FactoryBot.create(:card_terminal,
+      FactoryBot.create(:card_terminal, :with_mac,
         name: 'KLG-CWZ-05',
         ip: '198.50.100.5',
         condition: 3,

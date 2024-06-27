@@ -32,7 +32,7 @@ module Cocard
     let(:context) { FactoryBot.create(:context) }
 
     let!(:ct) do
-       FactoryBot.create(:card_terminal, 
+       FactoryBot.create(:card_terminal, :with_mac,
          connector: connector,
          ct_id: 'CT_ID_0176'
        )

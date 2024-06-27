@@ -9,7 +9,9 @@ RSpec.describe "connectors/index", type: :view do
     @ability.extend(CanCan::Ability)
     allow(controller).to receive(:current_ability) { @ability }
     allow(controller).to receive(:controller_name) { 'connectors' }
-    allow(controller).to receive(:action_name) { 'edit' }
+    allow(controller).to receive(:action_name) { 'index' }
+    @current_user = FactoryBot.create(:user, sn: 'Mustermann', givenname: 'Max')
+    allow(@current_user).to receive(:is_admin?).and_return(true)
 
     assign(:connectors, [
       Connector.create!(
@@ -21,7 +23,10 @@ RSpec.describe "connectors/index", type: :view do
         location_ids: [location.id],
         last_check: current,
         last_check_ok: current,
-        firmware_version: "123.456"
+        firmware_version: "123.456",
+        id_contract: '919XaWZ3',
+        serial: 'S12344321',
+        vpnti_online: true
       ),
       Connector.create!(
         name: "Name",
@@ -32,7 +37,10 @@ RSpec.describe "connectors/index", type: :view do
         location_ids: [location.id],
         last_check: current,
         last_check_ok: current,
-        firmware_version: "123.456"
+        firmware_version: "123.456",
+        id_contract: '919XaWZ3',
+        serial: 'S12344321',
+        vpnti_online: false
       )
     ])
   end
@@ -49,6 +57,9 @@ RSpec.describe "connectors/index", type: :view do
     assert_select cell_selector, text: Regexp.new("AAC".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("#{current.localtime.to_s.gsub('+', '.')}"), count: 4
     assert_select cell_selector, text: Regexp.new("123.456".to_s), count: 2
-
+    assert_select cell_selector, text: Regexp.new("919XaWZ3".to_s), count: 2
+    assert_select cell_selector, text: Regexp.new("S12344321".to_s), count: 2
+    assert_select cell_selector, text: Regexp.new("\u2705".to_s), count: 5
+    assert_select cell_selector, text: Regexp.new("\u274C".to_s), count: 1
   end
 end

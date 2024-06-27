@@ -8,6 +8,8 @@ RSpec.describe "connectors/show", type: :view do
     allow(controller).to receive(:current_ability) { @ability }
     allow(controller).to receive(:controller_name) { 'connectors' }
     allow(controller).to receive(:action_name) { 'show' }
+    @current_user = FactoryBot.create(:user, sn: 'Mustermann', givenname: 'Max')
+    allow(@current_user).to receive(:is_admin?).and_return(true)
 
     assign(:connector, Connector.create!(
       name: "Name",
@@ -18,7 +20,9 @@ RSpec.describe "connectors/show", type: :view do
       description: "some text",
       last_check: current,
       last_check_ok: current,
-      firmware_version: "123.456"
+      firmware_version: "123.456",
+      id_contract: '919XaWZ3',
+      serial: 'S12344321'
     ))
   end
 
@@ -32,5 +36,7 @@ RSpec.describe "connectors/show", type: :view do
     expect(rendered).to match(/some text/)
     expect(rendered).to match(/#{current.localtime.to_s.gsub('+', '.')}/)
     expect(rendered).to match(/123.456/)
+    expect(rendered).to match(/919XaWZ3/)
+    expect(rendered).to match(/S12344321/)
   end
 end
