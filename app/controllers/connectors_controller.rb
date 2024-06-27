@@ -63,15 +63,15 @@ class ConnectorsController < ApplicationController
   end
 
   def get_resource_information
-    Cocard::GetResourceInformationJob.perform_later(connector: @connector)
+    Cocard::GetResourceInformationJob.perform_now(connector: @connector)
   end
 
   def get_card_terminals
-    Cocard::GetCardTerminalsJob.perform_later(connector: @connector)
+    Cocard::GetCardTerminalsJob.perform_now(connector: @connector)
   end
 
   def get_cards
-    Cocard::GetCardsJob.perform_later(connector: @connector)
+    Cocard::GetCardsJob.perform_now(connector: @connector)
   end
 
   # DELETE /connectors/1
