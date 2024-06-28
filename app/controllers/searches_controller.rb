@@ -32,6 +32,6 @@ private
   end
 
   def searchstring
-    params[:query].strip
+    params[:query]&.strip
   end
 end
