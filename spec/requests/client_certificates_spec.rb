@@ -84,7 +84,6 @@ RSpec.describe "/client_certificates", type: :request do
     context "with valid parameters" do
       let(:new_attributes) {{
         name: "newname",
-        passphrase: "some passphrase",
         description: "more information"
       }}
 
@@ -94,7 +93,6 @@ RSpec.describe "/client_certificates", type: :request do
         client_certificate.reload
         expect(client_certificate.name).to eq("newname")
         expect(client_certificate.description.to_plain_text).to eq("more information")
-        expect(client_certificate.passphrase).to eq("some passphrase")
       end
 
       it "redirects to the client_certificate" do
