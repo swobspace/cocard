@@ -1,8 +1,12 @@
-<%= tag.tr id: dom_id(log), class: dom_class(log) do %>
-  <td><%= log.last_seen&.localtime&.to_s %></td>
+<%= tag.tr id: dom_id(log), class: "#{'invalid' unless log.is_valid}" do %>
+  <td><%= log.created_at.localtime.to_s %></td>
   <td><%= render ErrorLevelBadgeComponent.new(level: log.level) %></td>
   <td><%= log.action %></td>
   <td><%= truncate(log.message, length: 200) %></td>
+  <td class="text-center">
+    <%= render BooleanComponent.new(value: log.is_valid, text: :unicode) %>
+  </td>
+  <td class="text-end"><%= log.last_seen&.localtime&.to_s %></td>
   <td class="text-end">
     <%= show_link log, data: { "turbo-frame" => "_top" } %>
   </td>
