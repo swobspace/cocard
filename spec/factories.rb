@@ -41,8 +41,9 @@ FactoryBot.define do
 
   factory :client_certificate do
     name { generate(:aname) }
-    cert { 'nonsense'}
-    pkey { 'nonsense'}
+    cert { File.read(File.join(Rails.root, 'spec/fixtures/files', 'demo-cert.pem')) }
+    pkey { File.read(File.join(Rails.root, 'spec/fixtures/files', 'demo-pkey.pem')) }
+    passphrase { 'justfortesting' }
   end
 
   factory :connector do

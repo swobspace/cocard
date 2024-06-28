@@ -13,7 +13,7 @@ class Connector  {
   id_contract: string
   serial: string
   use_tls: boolean
-  authentication: string
+  authentication: integer
   --
   sds_xml: text
   sds_updated_at: timestamp
@@ -139,11 +139,12 @@ Class Network {
 
 Class ClientCertificate {
   name: string
+  client_system: string
   description: rich_text
   cert: text
   pkey: text
   passphrase: string
-  client()
+  cn()
 }
 
 Network "*" - "1" Location

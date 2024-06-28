@@ -196,7 +196,7 @@
   id_contract:string \
   serial:string \
   use_tls:boolean \
-  authentication:string \
+  authentication:integer \
     --no-stylesheets --no-javascripts --no-helper
 
 bin/rails g migration AddReadonlyToConnector \
@@ -386,6 +386,7 @@ bin/rails g migration AddNameToWorkplace \
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g scaffold ClientCertificate \
   name:string \
+  client_system:string \
   description:rich_text \
   cert:text \
   pkey:text \

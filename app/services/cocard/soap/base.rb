@@ -155,7 +155,7 @@ module Cocard::SOAP
     end
 
     def client_certificate
-      @connector.client_certificates.select{|c| c.client == @client_system.to_s}.first
+      @connector.client_certificates.where(client_system: @client_system).first
     end
 
     def use_tls

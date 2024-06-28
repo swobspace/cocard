@@ -226,6 +226,7 @@ bin/rails g migration AddNameToWorkplace \
 ----
 bin/rails g scaffold ClientCertificate \
   name:string \
+  client_system:string \
   description:rich_text \
   cert:text \
   pkey:text \
