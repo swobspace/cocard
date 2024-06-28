@@ -9,6 +9,7 @@
   <td class="text-end"><%= log.last_seen&.localtime&.to_s %></td>
   <td class="text-end">
     <%= show_link log, data: { "turbo-frame" => "_top" } %>
+    <%= delete_link [log.loggable, log] %>
   </td>
 <% end %>
 
