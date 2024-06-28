@@ -33,7 +33,7 @@ module Cocard::SOAP
     def call
       error_messages = []
       unless check_auth
-        error_messages << "matching client cert missing for client_system: #{@client_system}"
+        error_messages << "Missing matching client certificate for client_system: #{@client_system}"
         return Result.new(success?: false, error_messages: error_messages, response: nil)
       end
 

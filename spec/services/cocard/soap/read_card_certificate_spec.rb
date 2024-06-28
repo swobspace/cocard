@@ -61,7 +61,7 @@ module Cocard::SOAP
         end
         it { expect(result.success?).to be_falsey }
         if ENV['USE_TLS']
-          it { expect(result.error_messages.first).to match(/matching client cert missing for client_system: dontexist/) }
+          it { expect(result.error_messages.first).to match(/Missing matching client certificate for client_system: dontexist/) }
         else
           it { expect(result.error_messages).to contain_exactly(
                  "S:Server", "Karten-Handle ungültig")}
