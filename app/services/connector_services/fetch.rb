@@ -28,9 +28,6 @@ module ConnectorServices
         if use_tls && use_cert
           conn_options = conn_options.merge(tls_options)
         end
-        pp conn_options
-        pp uri_base
-        pp uri_path
         conn = Faraday.new(conn_options)
         response = conn.get(uri_path)
 
