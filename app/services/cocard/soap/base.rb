@@ -32,6 +32,11 @@ module Cocard::SOAP
     # do all the work here ;-)
     def call
       error_messages = []
+      unless check_auth
+        error_messages << "matching client cert missing for client_system: #{@client_system}"
+        return Result.new(success?: false, error_messages: error_messages, response: nil)
+      end
+
       begin
         response = @savon_client
                    .call(soap_operation,
@@ -138,6 +143,15 @@ module Cocard::SOAP
         "xmlns:CONN" => "http://ws.gematik.de/conn/ConnectorCommon/v5.0",
         "xmlns:CARDCMN" => "http://ws.gematik.de/conn/CardServiceCommon/v2.0",
        }
+    end
+
+    #
+    # if authentication == clientcert : a clientcert for the use client_system
+    # must be present, otherwise the soap request will be denied
+    #
+    def check_auth
+      return true unless use_cert
+      client_certificate.present?
     end
 
     def client_certificate
