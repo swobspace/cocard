@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   end
   resources :contexts
   resources :connectors do
-    resources :logs, only: [:index], module: :connectors
+    resources :logs, only: [:index, :show, :destroy], module: :connectors
     collection do
       get :sindex
     end

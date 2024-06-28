@@ -12,15 +12,15 @@ class SearchesController < ApplicationController
 private
 
   def connectors
-    Connectors::Query.new(Connector.all, search: params[:query]).all
+    Connectors::Query.new(Connector.all, search: searchstring).all
   end
 
   def card_terminals
-    CardTerminals::Query.new(CardTerminal.all, search: params[:query]).all
+    CardTerminals::Query.new(CardTerminal.all, search: searchstring).all
   end
 
   def cards
-    Cards::Query.new(Card.all, search: params[:query]).all
+    Cards::Query.new(Card.all, search: searchstring).all
   end
 
   def workplaces
@@ -28,6 +28,10 @@ private
   end
 
   def query
-    "%#{params[:query]}%"
+    "%#{searchstring}%"
+  end
+
+  def searchstring
+    params[:query]&.strip
   end
 end

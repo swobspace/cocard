@@ -22,7 +22,9 @@ RSpec.describe "connectors/show", type: :view do
       last_check_ok: current,
       firmware_version: "123.456",
       id_contract: '919XaWZ3',
-      serial: 'S12344321'
+      serial: 'S12344321',
+      use_tls: false,
+      authentication: :noauth
     ))
   end
 
@@ -38,5 +40,7 @@ RSpec.describe "connectors/show", type: :view do
     expect(rendered).to match(/123.456/)
     expect(rendered).to match(/919XaWZ3/)
     expect(rendered).to match(/S12344321/)
+    expect(rendered).to match(/Keine/)
+    expect(rendered).to match(/Nein/)
   end
 end

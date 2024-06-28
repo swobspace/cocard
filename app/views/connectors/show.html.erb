@@ -95,6 +95,18 @@
             <th class="w-10 pe-3"><%= t('attributes.serial')%>:</th>
             <td><%= @connector.serial %></td>
           </tr>
+
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.authentication')%>:</th>
+            <td><%= t(@connector.authentication, scope: :authentications) %></td>
+          </tr>
+
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.use_tls')%>:</th>
+            <td><%= render BooleanComponent.new(value: @connector.use_tls,
+                                                text: :text) %></td>
+          </tr>
+
           <tr>
             <th class="w-10 pe-3"><%= t('attributes.last_check')%>:</th>
             <td>
@@ -117,6 +129,7 @@
             <td><%= render BooleanComponent.new(value: @connector.soap_request_success,
                                                 text: :unicode) %></td>
           </tr>
+
           <tr>
             <th class="w-10 pe-3"><%= t('attributes.condition')%>:</th>
             <td><%= @connector.condition_message %></td>

@@ -26,6 +26,8 @@ RSpec.describe "connectors/index", type: :view do
         firmware_version: "123.456",
         id_contract: '919XaWZ3',
         serial: 'S12344321',
+        authentication: :clientcert,
+        use_tls: true,
         vpnti_online: true
       ),
       Connector.create!(
@@ -40,6 +42,8 @@ RSpec.describe "connectors/index", type: :view do
         firmware_version: "123.456",
         id_contract: '919XaWZ3',
         serial: 'S12344321',
+        authentication: :noauth,
+        use_tls: false,
         vpnti_online: false
       )
     ])
@@ -61,5 +65,9 @@ RSpec.describe "connectors/index", type: :view do
     assert_select cell_selector, text: Regexp.new("S12344321".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("\u2705".to_s), count: 5
     assert_select cell_selector, text: Regexp.new("\u274C".to_s), count: 1
+    assert_select cell_selector, text: Regexp.new("Ja".to_s), count: 2
+    assert_select cell_selector, text: Regexp.new("Nein".to_s), count: 2
+    assert_select cell_selector, text: Regexp.new("Client-Zertifikat".to_s), count: 1
+    assert_select cell_selector, text: Regexp.new("Keine".to_s), count: 1
   end
 end

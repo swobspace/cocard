@@ -2,13 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "client_certificates/edit", type: :view do
   let(:client_certificate) {
-    ClientCertificate.create!(
-      name: "MyString",
-      description: nil,
-      cert: "MyText",
-      pkey: "MyText",
-      passphrase: "MyString"
-    )
+    FactoryBot.create(:client_certificate)
   }
 
   before(:each) do

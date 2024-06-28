@@ -25,8 +25,8 @@ RSpec.describe ClientCertificate, type: :model do
     it { expect(client_certificate.to_s).to match('myname') }
   end
 
-  describe "#client" do
-    it { expect(client_certificate.client).to match('intern') }
+  describe "#client_system" do
+    it { expect(client_certificate.client_system).to match('intern') }
   end
 
   describe "#certificate" do

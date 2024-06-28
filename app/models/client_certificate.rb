@@ -7,14 +7,12 @@ class ClientCertificate < ApplicationRecord
 
   # -- validations and callbacks
   validates :name, :cert, :pkey, presence: true
+  validate :must_be_valid_cert_and_pkey
+  before_save :update_client_system
 
   # -- common methods
   def to_s
     "#{name}"
-  end
-
-  def client
-    cn
   end
 
   def cn
@@ -22,11 +20,19 @@ class ClientCertificate < ApplicationRecord
   end
 
   def certificate
-    OpenSSL::X509::Certificate.new(cert)
+    begin
+      OpenSSL::X509::Certificate.new(cert)
+    rescue
+      nil
+    end
   end
 
   def private_key
-    OpenSSL::PKey.read(pkey, passphrase)
+    begin
+      OpenSSL::PKey.read(pkey, passphrase)
+    rescue
+      nil
+    end
   end
 
   def valid_until
@@ -41,5 +47,15 @@ private
     entry = certificate.subject.to_a.select{|a| a[0] == attr}.first
     ( entry.nil? ) ? "" : entry[1].force_encoding('UTF-8')
   end
+
+  def update_client_system
+    self[:client_system] = cn
+  end
+
+  def must_be_valid_cert_and_pkey
+    errors.add(:cert, 'Kein Zertifikat (PEM)') unless certificate.present?
+    errors.add(:pkey, 'Kein Private Key (PEM) oder falsche Passphase') unless private_key.present?
+  end
+
 
 end

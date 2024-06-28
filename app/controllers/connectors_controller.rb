@@ -63,15 +63,15 @@ class ConnectorsController < ApplicationController
   end
 
   def get_resource_information
-    Cocard::GetResourceInformationJob.perform_later(connector: @connector)
+    Cocard::GetResourceInformationJob.perform_now(connector: @connector)
   end
 
   def get_card_terminals
-    Cocard::GetCardTerminalsJob.perform_later(connector: @connector)
+    Cocard::GetCardTerminalsJob.perform_now(connector: @connector)
   end
 
   def get_cards
-    Cocard::GetCardsJob.perform_later(connector: @connector)
+    Cocard::GetCardsJob.perform_now(connector: @connector)
   end
 
   # DELETE /connectors/1
@@ -90,7 +90,7 @@ class ConnectorsController < ApplicationController
     def connector_params
       params.require(:connector)
             .permit(:name, :ip, :sds_url, :manual_update, :description,
-                    :admin_url, :id_contract, :serial,
+                    :admin_url, :id_contract, :serial, :use_tls, :authentication,
                     location_ids: [],
                     client_certificate_ids: [],
                     connector_contexts_attributes: [

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_27_104714) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_28_160005) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -127,6 +127,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_27_104714) do
     t.string "passphrase", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "client_system", default: ""
   end
 
   create_table "client_certificates_connectors", id: false, force: :cascade do |t|
@@ -168,6 +169,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_27_104714) do
     t.string "admin_url", default: ""
     t.string "id_contract", default: ""
     t.string "serial", default: ""
+    t.boolean "use_tls", default: false
+    t.integer "authentication", default: 0
     t.index ["condition"], name: "index_connectors_on_condition"
   end
 

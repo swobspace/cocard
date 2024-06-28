@@ -16,6 +16,7 @@ RSpec.describe Connector, type: :model do
   it { is_expected.to have_and_belong_to_many(:locations) }
   it { is_expected.to have_and_belong_to_many(:client_certificates) }
   it { is_expected.to validate_presence_of(:ip) }
+  # it { is_expected.to validate_inclusion_of(:authentication).in_array(Connector.authentications.keys) }
 
   it 'should get plain factory working' do
     f = FactoryBot.create(:connector)

@@ -66,6 +66,7 @@ de:
 
   attributes:
     action: Aktion
+    authentication: Authentifikation
     bsnr: BSNR
     card: Karte
     card_handle: CardHandle
@@ -143,6 +144,7 @@ de:
     telematikid: Telematik-ID
     updated_at: zuletzt aktualisiert
     username: Username
+    use_tls: TLS verwenden
     workplace: Arbeitsplatz
     workplaces: Arbeitsplätze
 
@@ -167,6 +169,10 @@ de:
 
   contexts:
     add: Kontext hinzufügen
+
+  authentications:
+    noauth: 'Keine'
+    clientcert: 'Client-Zertifikat'
 
   form:
     card:

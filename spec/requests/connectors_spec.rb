@@ -88,6 +88,8 @@ RSpec.describe "/connectors", type: :request do
         client_certificate_ids: [clientcert.id],
         id_contract: '919ZKK43',
         serial: 'S12344321',
+        use_tls: true,
+        authentication: :clientcert
       }}
 
       it "updates the requested connector" do
@@ -101,6 +103,8 @@ RSpec.describe "/connectors", type: :request do
         expect(connector.client_certificates).to contain_exactly(clientcert)
         expect(connector.serial).to eq('S12344321')
         expect(connector.id_contract).to eq('919ZKK43')
+        expect(connector.use_tls).to eq(true)
+        expect(connector.authentication).to eq('clientcert')
       end
 
       it "redirects to the connector" do

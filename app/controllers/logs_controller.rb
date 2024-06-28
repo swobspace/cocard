@@ -56,7 +56,7 @@ class LogsController < ApplicationController
   # DELETE /logs/1
   def destroy
     @log.destroy!
-    respond_with(@log)
+    respond_with(@log, location: polymorphic_path([@loggable, :logs]))
   end
 
   private
