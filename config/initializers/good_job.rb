@@ -14,7 +14,7 @@ Rails.application.configure do
 
     cron: {
       fetch_sds: {
-        cron: '0 4 * * *',
+        cron: '30 23 * * *',
         class: "ConnectorServices::FetchJob",
         description: "Fetch current SDS info from all connectors"
       },
