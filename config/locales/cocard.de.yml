@@ -34,6 +34,7 @@ de:
       1: WARNING
       2: CRITICAL
       3: UNKNOWN
+    assigned_certificates: Zugewiesene Zertifikate
     assigned_contexts: Zugewiesene Kontexte
     administrativa: Administrativa
     card_data: Kartendaten
