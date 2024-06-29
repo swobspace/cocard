@@ -8,7 +8,11 @@ class LogsController < ApplicationController
       @logs = @loggable.logs
       @pagy, @logs = pagy(@logs)
     else
-      @logs = Log.all
+      if params[:valid]
+        @logs = Log.valid
+      else
+        @logs = Log.all
+      end
     end
     respond_with(@logs)
   end

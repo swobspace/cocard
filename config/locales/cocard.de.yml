@@ -48,6 +48,8 @@ de:
     get_certificate: Zertifikat lesen
     search_result: Suchergebnis
     to_much_results: "Zu viele Treffer, bitte schränken Sie die Suche ein"
+    current_logs: Aktuelle Logs
+    all_logs: Alle Logs
 
   activerecord:
     models:
