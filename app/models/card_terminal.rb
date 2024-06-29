@@ -1,6 +1,8 @@
 class CardTerminal < ApplicationRecord
   include PingConcerns
   include CardTerminalConcerns
+  include Cocard::Condition
+
   # -- associations
   has_many :logs, as: :loggable, dependent: :destroy
   has_many :terminal_workplaces, dependent: :destroy
@@ -45,31 +47,20 @@ class CardTerminal < ApplicationRecord
     Cocard::ProductInformation.new(properties['product_information'])
   end
 
-  def condition_message
-    shortcut = Cocard::States::flag(condition)
-    case condition
-      when Cocard::States::CRITICAL
-        shortcut + " CRITICAL - CardTerminal unreachable"
-      when Cocard::States::UNKNOWN
-        shortcut + " UNKNOWN - not yet implemented"
-      when Cocard::States::WARNING
-        shortcut + " WARNING - CardTerminal not connected"
-      when Cocard::States::OK
-        shortcut + " OK - CardTerminal online"
-      when Cocard::States::NOTHING
-        shortcut + " UNUSED - Configuration may not be complete yet"
-    end
-  end
-
   def update_condition
     if connector.nil?
-      self[:condition] = Cocard::States::NOTHING
+      set_condition( Cocard::States::NOTHING,
+                     "No connector assigned" )
+
     elsif !up?
-      self[:condition] = Cocard::States::CRITICAL
+      set_condition( Cocard::States::CRITICAL,
+                     "CardTerminal unreachable - ping failed" ) 
     elsif !connected
-        self[:condition] = Cocard::States::WARNING
+      set_condition( Cocard::States::WARNING,
+                     "CardTerminal reachable, but not connected" )
     else
-      self[:condition] = Cocard::States::OK
+      set_condition( Cocard::States::OK,
+                     "CardTerminal online" )
     end
   end
 
