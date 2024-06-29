@@ -57,6 +57,7 @@
       <div class="card-title">
         <h6><%= t('cocard.certificate_data') %></h6>
       </div>
+      <%= form.input :expiration_date, html5: true, wrapper: :horizontal_date %>
       <%= form.input :cert_subject_title %>
       <%= form.input :cert_subject_sn %>
       <%= form.input :cert_subject_givenname %>

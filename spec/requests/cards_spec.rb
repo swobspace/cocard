@@ -104,6 +104,7 @@ RSpec.describe "/cards", type: :request do
         cert_subject_l: 'CERT l',
         cert_subject_o: 'CERT o',
         cert_subject_cn: 'CERT cn',
+        expiration_date: '2024-12-31',
       }}
 
       it "updates the requested card" do
@@ -133,6 +134,7 @@ RSpec.describe "/cards", type: :request do
         expect(card.cert_subject_l).to eq('CERT l')
         expect(card.cert_subject_cn).to eq('CERT cn')
         expect(card.cert_subject_o).to eq('CERT o')
+        expect(card.expiration_date.to_s).to eq('2024-12-31')
       end
 
       it "redirects to the card" do

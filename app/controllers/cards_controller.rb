@@ -112,7 +112,7 @@ class CardsController < ApplicationController
                     :fachrichtung, :context_id, :private_information,
                     :cert_subject_title, :cert_subject_sn, :cert_subject_givenname,
                     :cert_subject_street, :cert_subject_postalcode, :cert_subject_l,
-                    :cert_subject_o, :cert_subject_cn
+                    :cert_subject_o, :cert_subject_cn, :expiration_date
                    )
     end
 end
