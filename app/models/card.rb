@@ -24,18 +24,18 @@ class Card < ApplicationRecord
 
   def update_condition
     # -- NOTHING
-    if card_terminal&.connector.nil?
+    if (card_type == 'SMC-B' and !operational_state&.operational)
       set_condition( Cocard::States::NOTHING,
-                     "Missing CardTerminal - UNUSED" )
+                     "Karte nicht in Betrieb" )
+    elsif card_terminal&.connector.nil?
+      set_condition( Cocard::States::NOTHING,
+                     "CardTerminal fehlt - UNUSED" )
     elsif expiration_date.nil?
       set_condition( Cocard::States::NOTHING,
-                     "Missing expiration_date - UNUSED" )
-    elsif (card_type == 'SMC-B' and !operational_state&.operational)
-      set_condition( Cocard::States::NOTHING,
-                     "Nicht in Betrieb" )
+                     "Kein Ablaufdatum - UNUSED" )
     elsif (card_type == 'SMC-B' and context.nil?)
       set_condition( Cocard::States::NOTHING,
-                     "Missing Context" )
+                     "Kein Context konfiguriert" )
 
     # -- CRITICAL
     elsif (expiration_date <= Date.current)
