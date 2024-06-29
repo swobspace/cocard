@@ -7,9 +7,9 @@
     <%= render BooleanComponent.new(value: log.is_valid, text: :unicode) %>
   </td>
   <td class="text-end"><%= log.last_seen&.localtime&.to_s %></td>
-  <td class="text-end">
-    <%= show_link log, data: { "turbo-frame" => "_top" } %>
-    <%= delete_link [log.loggable, log] %>
+  <td class="text-end text-nowrap">
+    <%= show_link log, class: 'btn btn-sm btn-secondary', data: { "turbo-frame" => "_top" } %>
+    <%= delete_link [log.loggable, log], class: 'btn btn-sm btn-danger' %>
   </td>
 <% end %>
 
