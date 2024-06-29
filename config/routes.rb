@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     end
     member do
       post :get_certificate
+      post :get_pin_status
       post :get_card
     end
   end

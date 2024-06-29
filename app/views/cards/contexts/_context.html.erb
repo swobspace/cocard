@@ -1,8 +1,15 @@
 <div id="<%= dom_id context %>"
-     class="list-group-item"
->
+     class="list-group-item" >
   <div class="row">
     <div class="col handle"><%= context %></div>
+    <% if @card.card_type == 'SMC-B' %>
+      <div class="col-sm-3 text-muted text-end">
+        <%= button_to(raw(%Q[<i class="fa-solid fa-thumbtack"></i>]),
+                      get_pin_status_card_path(@card, context_id: context.id),
+                      title: t('cocard.get_pin_status'),
+                      class: 'btn btn-sm btn-warning me-1')
+         %>
+      </div>
+    <% end %>
   </div>
-
 </div>

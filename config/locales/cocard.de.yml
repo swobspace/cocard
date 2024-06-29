@@ -46,6 +46,7 @@ de:
     get_cards: Abfrage Karten
     get_card: Karte aktualisieren
     get_certificate: Zertifikat lesen
+    get_pin_status: PIN Status prüfen
     search_result: Suchergebnis
     to_much_results: "Zu viele Treffer, bitte schränken Sie die Suche ein"
     current_logs: Aktuelle Logs

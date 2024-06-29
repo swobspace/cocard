@@ -61,6 +61,18 @@ class CardsController < ApplicationController
     respond_with(@card, action: :show)
   end
 
+  def get_pin_status
+      result = Cocard::GetPinStatus.new(card: @card, context: set_context).call
+    unless result.success?
+      @card.errors.add(:base, :invalid)
+      @card.errors.add(:base, result.error_messages.join("; "))
+      flash[:alert] = result.error_messages.join(', ')
+    else
+      flash[:notice] = "Kontext: #{@context}, PIN-Status: #{result.pin_status}"
+    end
+    respond_with(@card, action: :show)
+  end
+
   def get_card
       result = Cocard::GetCard.new(card: @card).call
     unless result.success?
@@ -81,6 +93,14 @@ class CardsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_card
       @card = Card.find(params[:id])
+    end
+
+    def set_context
+      if params[:context_id]
+        @context = Context.find(params[:context_id])
+      else
+        @context = @card.context
+      end
     end
 
     # Only allow a trusted parameter "white list" through.

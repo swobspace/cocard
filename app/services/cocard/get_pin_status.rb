@@ -12,7 +12,7 @@ module Cocard
     # * :card    - object
     #
     # returns:
-    # Result.new(:success? (Boolean), :error_messages (Array), :cards (Array))
+    # Result.new(:success? (Boolean), :error_messages (Array), :pin_status (String))
     #
     def initialize(options = {})
       options.symbolize_keys
