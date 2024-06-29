@@ -52,26 +52,9 @@
               <td><%= @card.private_information %></td>
             </tr>
           <% end %>
-          <tr>
-            <th class="w-10 pe-3"><%= t('attributes.context')%>:</th>
-            <td><%= @card.context %></td>
-          </tr>
-          <tr>
-            <th class="w-10 pe-3"><%= t('attributes.condition')%>:</th>
-            <td><%= @card.condition_message %></td>
-          </tr>
-          <% if @card.card_type == 'SMC-B' %>
-            <tr>
-              <th class="w-10 pe-3"><%= t('attributes.pin_status')%>:</th>
-              <td><%= render Card::PinStatusComponent.new(card: @card) %></td>
-            </tr>
-          <% end %>
-          <tr>
-            <th class="w-10 pe-3"><%= t('attributes.updated_at')%>:</th>
-            <td><%= render UpdatedAtComponent.new(item: @card) %></td>
-          </tr>
         </table>
       </div>
+
       <div class="col-6">
         <div class="card-title border-bottom bg-light pt-2 ps-2">
           <h6><%= t('cocard.card_data')%></h6>
@@ -108,6 +91,41 @@
         </table>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-6">
+        <div class="card-title border-bottom bg-light pt-2 ps-2">
+          <h6><%= t('attributes.status')%></h6>
+        </div>
+        <table class="table table-sm table-borderless">
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.condition')%>:</th>
+            <td><%= @card.condition_message %></td>
+          </tr>
+          <% if @card.card_type == 'SMC-B' %>
+            <tr>
+              <th class="w-10 pe-3"><%= t('attributes.pin_status')%>:</th>
+              <td><%= render Card::PinStatusComponent.new(card: @card) %></td>
+            </tr>
+          <% end %>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.updated_at')%>:</th>
+            <td><%= render UpdatedAtComponent.new(item: @card) %></td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="col-6">
+        <div class="card-title border-bottom bg-light pt-2 ps-2">
+          <h6><%= t('cocard.assigned_contexts')%></h6>
+        </div>
+        <div id="list_contexts">
+          <%= render partial: 'cards/contexts/list',
+                     locals: { card: @card }%>
+        </div>
+      </div>
+    </div>
+
     <div class="row">
       <div class="col-6">
         <div class="card-title border-bottom bg-light pt-2 ps-2">

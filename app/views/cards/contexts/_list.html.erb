@@ -1,0 +1,5 @@
+<div class="list-group mb-3">
+  <%# render partial: 'cards/contexts/context', 
+             collection: card.contexts, as: :context %>
+  <%= render partial: 'cards/contexts/context', locals: { context: card.context } %>
+</div>

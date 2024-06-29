@@ -42,106 +42,128 @@
         <table class="table table-sm table-borderless">
 
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.name')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.name')%>:</th>
             <td><%= @connector.name %></td>
           </tr>
 
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.ip')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.ip')%>:</th>
             <td><%= @connector.ip %></td>
           </tr>
 
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.admin_url')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.admin_url')%>:</th>
             <td><%= link_to nil, @connector.admin_url %></td>
           </tr>
 
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.sds_url')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.sds_url')%>:</th>
             <td><%= @connector.sds_url %></td>
           </tr>
 
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.sds_updated_at')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.sds_updated_at')%>:</th>
             <td><%= @connector.sds_updated_at&.localtime %></td>
           </tr>
 
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.manual_update')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.manual_update')%>:</th>
             <td>
               <%= Cocard::States::flag(Cocard::States::WARNING) if @connector.manual_update %>
               <%= @connector.manual_update %>
             </td>
           </tr>
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.locations')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.locations')%>:</th>
             <td><%= @connector.locations.map(&:to_s).join('; ') %></td>
           </tr>
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.description')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.description')%>:</th>
             <td><%= @connector.description %></td>
           </tr>
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.firmware_version')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.firmware_version')%>:</th>
             <td><%= @connector.firmware_version %></td>
           </tr>
           <% if @current_user and @current_user.is_admin? %>
             <tr>
-              <th class="w-10 pe-3"><%= t('attributes.id_contract')%>:</th>
+              <th class="w-25 pe-3"><%= t('attributes.id_contract')%>:</th>
               <td><%= @connector.id_contract %></td>
             </tr>
           <% end %>
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.serial')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.serial')%>:</th>
             <td><%= @connector.serial %></td>
           </tr>
 
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.authentication')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.authentication')%>:</th>
             <td><%= t(@connector.authentication, scope: :authentications) %></td>
           </tr>
 
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.use_tls')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.use_tls')%>:</th>
             <td><%= render BooleanComponent.new(value: @connector.use_tls,
                                                 text: :text) %></td>
           </tr>
+        </table>
+      </div>
 
+      <div class="col-6">
+        <div class="card-title border-bottom bg-light mt-2 pt-2 ps-2">
+          <h6><%= t('attributes.product_information')%></h6>
+        </div>
+        <pre>
+<%= @connector.product_information&.to_s %>
+        </pre>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <div class="card-title border-bottom bg-light pt-2 ps-2">
+          <h6><%= t('attributes.status')%></h6>
+        </div>
+        <table class="table table-sm table-borderless">
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.last_check')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.last_check')%>:</th>
             <td>
               <%= render IsCurrentComponent.new(item: @connector, attr: :last_check) %>
             </td>
           </tr>
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.last_check_ok')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.last_check_ok')%>:</th>
             <td>
               <%= render IsCurrentComponent.new(item: @connector, attr: :last_check_ok) %>
             </td>
           </tr>
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.vpnti_online')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.vpnti_online')%>:</th>
             <td><%= render BooleanComponent.new(value: @connector.vpnti_online,
                                                 text: :unicode) %></td>
           </tr>
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.soap_request_success')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.soap_request_success')%>:</th>
             <td><%= render BooleanComponent.new(value: @connector.soap_request_success,
                                                 text: :unicode) %></td>
           </tr>
 
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.condition')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.condition')%>:</th>
             <td><%= @connector.condition_message %></td>
           </tr>
 
         </table>
       </div>
+
       <div class="col-6">
-        <b>ProductInformation:</b>
-        <pre>
-<%= @connector.product_information&.to_s %>
-        </pre>
+        <div class="card-title border-bottom bg-light pt-2 ps-2">
+          <h6><%= t('cocard.assigned_contexts')%></h6>
+        </div>
+        <div id="list_contexts">
+          <%= render partial: 'connector_contexts/list',
+                     locals: { connector: @connector }%>
+        </div>
       </div>
     </div>
     <div>
@@ -149,11 +171,6 @@
                           src: ping_connector_path(@connector) do %>
         <%= image_tag 'process-working.png' %>
       <% end %>
-    </div>
-    <h5 class="card-title"><%= t('cocard.assigned_contexts') %>:</h5>
-    <div id="list_contexts">
-      <%= render partial: 'connector_contexts/list',
-                 locals: { connector: @connector }%>
     </div>
   </div>
 </div>

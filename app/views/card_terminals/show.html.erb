@@ -25,74 +25,79 @@
       <div class="col-6">
         <table class="table table-sm table-borderless">
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.connector')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.connector')%>:</th>
             <td><%= link_to(@card_terminal.connector,
                             connector_path(@card_terminal.connector)
                            ) if @card_terminal.connector %></td>
           </tr>
 
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.displayname')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.displayname')%>:</th>
             <td><%= @card_terminal.displayname %></td>
           </tr>
 
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.location')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.location')%>:</th>
             <td><%= @card_terminal.location %></td>
           </tr>
 
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.room')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.room')%>:</th>
             <td><%= @card_terminal.room %></td>
           </tr>
 
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.plugged_in')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.plugged_in')%>:</th>
             <td><%= @card_terminal.plugged_in %></td>
           </tr>
 
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.contact')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.contact')%>:</th>
             <td><%= @card_terminal.contact %></td>
           </tr>
 
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.delivery_date')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.delivery_date')%>:</th>
             <td><%= @card_terminal.delivery_date %></td>
           </tr>
 
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.supplier')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.supplier')%>:</th>
             <td><%= @card_terminal.supplier %></td>
           </tr>
 
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.serial')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.serial')%>:</th>
             <td><%= @card_terminal.serial %></td>
           </tr>
 
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.id_product')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.id_product')%>:</th>
             <td><%= @card_terminal.id_product %></td>
           </tr>
 
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.description')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.description')%>:</th>
             <td><%= @card_terminal.description %></td>
           </tr>
+        </table>
 
+        <div class="card-title border-bottom bg-light pt-2 ps-2">
+          <h6><%= t('attributes.status')%></h6>
+        </div>
+        <table class="table table-sm table-borderless">
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.connected')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.connected')%>:</th>
             <td><%= render CardTerminal::ConnectedComponent.new(card_terminal: @card_terminal) %></td>
           </tr>
 
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.condition')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.condition')%>:</th>
             <td><%= @card_terminal.condition_message %></td>
           </tr>
 
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.updated_at')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.updated_at')%>:</th>
             <td><%= render UpdatedAtComponent.new(item: @card_terminal) %></td>
           </tr>
         </table>
@@ -102,39 +107,39 @@
         <div class="card-title border-bottom bg-light pt-2 ps-2">
           <h6><%= t('cocard.card_terminal_data')%></h6>
         </div>
-        <table>
+        <table class="table table-sm table-borderless">
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.connector')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.connector')%>:</th>
             <td><%= @card_terminal.connector %></td>
           </tr>
 
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.name')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.name')%>:</th>
             <td><%= @card_terminal.name %></td>
           </tr>
 
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.ct_id')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.ct_id')%>:</th>
             <td><%= @card_terminal.ct_id %></td>
           </tr>
 
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.mac')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.mac')%>:</th>
             <td><%= @card_terminal.mac %></td>
           </tr>
 
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.ip')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.ip')%>:</th>
             <td><%= @card_terminal.ip %></td>
           </tr>
 
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.slots')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.slots')%>:</th>
             <td><%= @card_terminal.slots %></td>
           </tr>
 
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.firmware_version')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.firmware_version')%>:</th>
             <td><%= @card_terminal.firmware_version %></td>
           </tr>
 

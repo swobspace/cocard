@@ -130,7 +130,7 @@ de:
     operational_state: Betriebszustand
     passphrase: Passphrase
     pkey: Private Key (PEM)
-    plugged_in: Netzwerk/Dose/Switch
+    plugged_in: Netzwerk, Dose, Switch
     private_information: Geschützte Information
     product_information: Produktinformation
     room: Raum
@@ -140,6 +140,7 @@ de:
     since: seit
     slotid: Schachtnummer
     sn: Nachname
+    status: Status
     supplier: Lieferant
     telematikid: Telematik-ID
     updated_at: zuletzt aktualisiert
