@@ -4,7 +4,11 @@ class CardsController < ApplicationController
 
   # GET /cards
   def index
-    @cards = Card.all
+    if params[:card_type]
+      @cards = Card.where(card_type: params[:card_type])
+    else
+      @cards = Card.all
+    end
     respond_with(@cards)
   end
 
