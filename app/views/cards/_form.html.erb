@@ -52,6 +52,23 @@
     <%= form.input :slotid
        %>
 
+    <% if !@card.persisted? or (@card.certificate.blank? and @card.card_type == "SMC-B") %>
+      <hr/>
+      <div class="card-title">
+        <h6><%= t('cocard.certificate_data') %></h6>
+      </div>
+      <%= form.input :cert_subject_title %>
+      <%= form.input :cert_subject_sn %>
+      <%= form.input :cert_subject_givenname %>
+      <%= form.input :cert_subject_street %>
+      <%= form.input :cert_subject_postalcode %>
+      <%= form.input :cert_subject_l %>
+      <%= form.input :cert_subject_cn %>
+      <%= form.input :cert_subject_o %>
+ 
+    <% end %>
+
+    <hr/>
     <%= form.button :submit, class: 'btn btn-primary' %>
     <%= cancel_button %>
   </div>

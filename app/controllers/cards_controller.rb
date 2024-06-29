@@ -109,6 +109,10 @@ class CardsController < ApplicationController
             .permit(:name, :description, :iccsn, :slotid, :card_type, 
                     :card_holder_name, :card_terminal_id, :location_id,
                     :operational_state_id, :lanr, :bsnr, :telematikid,
-                    :fachrichtung, :context_id, :private_information)
+                    :fachrichtung, :context_id, :private_information,
+                    :cert_subject_title, :cert_subject_sn, :cert_subject_givenname,
+                    :cert_subject_street, :cert_subject_postalcode, :cert_subject_l,
+                    :cert_subject_o, :cert_subject_cn
+                   )
     end
 end

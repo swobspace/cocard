@@ -38,6 +38,14 @@ RSpec.describe "cards/new", type: :view do
       assert_select "input[name=?]", "card[fachrichtung]"
       assert_select "select[name=?]", "card[context_id]"
       assert_select "input[name=?]", "card[private_information]"
+      assert_select "input[name=?]", "card[cert_subject_title]"
+      assert_select "input[name=?]", "card[cert_subject_sn]"
+      assert_select "input[name=?]", "card[cert_subject_givenname]"
+      assert_select "input[name=?]", "card[cert_subject_street]"
+      assert_select "input[name=?]", "card[cert_subject_postalcode]"
+      assert_select "input[name=?]", "card[cert_subject_l]"
+      assert_select "input[name=?]", "card[cert_subject_cn]"
+      assert_select "input[name=?]", "card[cert_subject_o]"
     end
   end
 end

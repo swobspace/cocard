@@ -95,7 +95,15 @@ RSpec.describe "/cards", type: :request do
         telematikid: "1-2-3-456",
         fachrichtung: "Innere Medizin",
         private_information: "some private information",
-        context_id: context.id
+        context_id: context.id,
+        cert_subject_title: 'CERT title',
+        cert_subject_sn: 'CERT sn',
+        cert_subject_givenname: 'CERT givenname',
+        cert_subject_street: 'CERT street',
+        cert_subject_postalcode: 'CERT postalcode',
+        cert_subject_l: 'CERT l',
+        cert_subject_o: 'CERT o',
+        cert_subject_cn: 'CERT cn',
       }}
 
       it "updates the requested card" do
@@ -117,6 +125,14 @@ RSpec.describe "/cards", type: :request do
         expect(card.fachrichtung).to eq("Innere Medizin")
         expect(card.private_information.to_plain_text).to eq("some private information")
         expect(card.context).to eq(context)
+        expect(card.cert_subject_title).to eq('CERT title')
+        expect(card.cert_subject_sn).to eq('CERT sn')
+        expect(card.cert_subject_givenname).to eq('CERT givenname')
+        expect(card.cert_subject_street).to eq('CERT street')
+        expect(card.cert_subject_postalcode).to eq('CERT postalcode')
+        expect(card.cert_subject_l).to eq('CERT l')
+        expect(card.cert_subject_cn).to eq('CERT cn')
+        expect(card.cert_subject_o).to eq('CERT o')
       end
 
       it "redirects to the card" do
