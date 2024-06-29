@@ -15,6 +15,7 @@ module Cocard
       when CRITICAL then "\u274C"
       when WARNING then "\u26A0"
       when OK then "\u2705"
+      when NOTHING then "\xF0\x9F\x92\xA4"
       else
         ""
       end
