@@ -1,5 +1,7 @@
 class Card < ApplicationRecord
   include CardConcerns
+  include Cocard::Condition
+
   # -- associations
   has_many :logs, as: :loggable, dependent: :destroy
   belongs_to :card_terminal, optional: true
@@ -20,49 +22,42 @@ class Card < ApplicationRecord
     "#{iccsn} - #{card_holder_name}"
   end
 
-
-  def condition_message
-    shortcut = Cocard::States::flag(condition)
-    case condition
-      when Cocard::States::CRITICAL
-        if expiration_date.blank? 
-          shortcut + " CRITICAL - ???"
-        elsif expiration_date < Date.current
-          shortcut + " CRITICAL - Certificate expired"
-        else
-          shortcut + " CRITICAL - PIN not verified (SMC-B only)"
-        end
-      when Cocard::States::UNKNOWN
-        shortcut + " UNKNOWN - card not found or certificate not read (SMC-B only)"
-      when Cocard::States::WARNING 
-        shortcut + " WARNING - Certificate expires in less than 3 month"
-      when Cocard::States::OK
-        shortcut + " OK - Certificate valid (>= 3 month); PIN verified (SMC-B only)"
-      when Cocard::States::NOTHING
-        shortcut + " UNUSED - Missing card_terminal or expiration_date; SMC-B only: no context or operational state assigned"
-    end
-  end
-  
   def update_condition
-    if card_terminal&.connector.nil? or
-       expiration_date.nil? or
-       (card_type == 'SMC-B' and !operational_state&.operational) or
-       (card_type == 'SMC-B' and context.nil?)
-      self[:condition] = Cocard::States::NOTHING
+    # -- NOTHING
+    if (card_type == 'SMC-B' and !operational_state&.operational)
+      set_condition( Cocard::States::NOTHING,
+                     "Karte nicht in Betrieb" )
+    elsif card_terminal&.connector.nil?
+      set_condition( Cocard::States::NOTHING,
+                     "CardTerminal fehlt - UNUSED" )
+    elsif expiration_date.nil?
+      set_condition( Cocard::States::NOTHING,
+                     "Kein Ablaufdatum - UNUSED" )
+    elsif (card_type == 'SMC-B' and context.nil?)
+      set_condition( Cocard::States::NOTHING,
+                     "Kein Context konfiguriert" )
 
-    elsif (expiration_date <= Date.current) or
-          (card_type == 'SMC-B' and pin_status != 'VERIFIED')
-      self[:condition] = Cocard::States::CRITICAL
+    # -- CRITICAL
+    elsif (expiration_date <= Date.current)
+      set_condition( Cocard::States::CRITICAL,
+                     "Card expired!" )
+    elsif (card_type == 'SMC-B' and pin_status != 'VERIFIED')
+      set_condition( Cocard::States::CRITICAL,
+                     "PIN not verified" )
 
+    # -- WARNING
     elsif expiration_date <= 3.month.after(Date.current)
-      self[:condition] = Cocard::States::WARNING
+      set_condition( Cocard::States::WARNING,
+                     "Card expires at #{expiration_date.to_s} (<= 3 month)" )
 
+    # -- UNKNOWN
     elsif (card_type == 'SMC-B' and certificate.blank?)
-      self[:condition] = Cocard::States::UNKNOWN
+      set_condition( Cocard::States::UNKNOWN,
+                     "SMB-C: no certificate available, please check configuration" )
 
-    elsif
-      self[:condition] = Cocard::States::OK
+    # -- OK
     else
+      set_condition( Cocard::States::OK, nil )
     end
   end
 

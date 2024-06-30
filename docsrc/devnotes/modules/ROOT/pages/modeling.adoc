@@ -65,6 +65,7 @@ bin/rails g migration AddReadonlyToConnector \
   connector_services:jsonb \
   last_check:timestamp last_check_ok:timestamp \
   condition:integer:index \
+  condition_message:string  \
   soap_request_success:boolean \
   vpnti_online:boolean \
   firmware_version:string
@@ -109,6 +110,7 @@ bin/rails g migration AddInternalToCardTerminal \
   slots:integer \
   connected:boolean \
   condition:integer \
+  condition_message:string  \
   connector:belongs_to \
   firmware_version:string
 ----
@@ -148,6 +150,7 @@ bin/rails g migration AddInternalToCard \
   card_holder_name:string \
   expiration_date:date \
   condition:integer \
+  condition_message:string  \
   pin_status:string \
   card_terminal:belongs_to
 

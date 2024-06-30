@@ -21,6 +21,7 @@ class Connector  {
   last_check: timestamp
   last_check_ok: timestamp
   condition: integer
+  condition_message: string
   soap_request_success: boolean
   vpnti_online: boolean
   firmware_version: string
@@ -45,6 +46,7 @@ class CardTerminal {
   ip: inet
   slots: integer
   connected: boolean
+  condition_message: string
   condition: integer
   firmware_version: string
   connector_id
@@ -89,6 +91,7 @@ class Card {
   card_holder_name: string
   expiration_date: date
   condition: integer
+  condition_message: string
   pin_status: string
   card_terminal_id
   --

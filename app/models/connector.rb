@@ -1,6 +1,8 @@
 class Connector < ApplicationRecord
   include PingConcerns
   include ConnectorConcerns
+  include Cocard::Condition
+
   # -- associations
   has_many :logs, as: :loggable, dependent: :destroy
   has_and_belongs_to_many :locations
@@ -49,38 +51,26 @@ class Connector < ApplicationRecord
 
   def update_condition
     unless up?
-      self[:condition] = Cocard::States::CRITICAL
+      set_condition(Cocard::States::CRITICAL, 
+                    "Connector unreachable, ping failed")
     else 
       if !soap_request_success
-        self[:condition] = Cocard::States::UNKNOWN
+        set_condition(Cocard::States::UNKNOWN, 
+                      "soap request failed, may be a configuration problem")
       elsif !vpnti_online
-        self[:condition] = Cocard::States::WARNING
+        set_condition(Cocard::States::CRITICAL,
+                      "Connector reachable but TI offline!")
       else
-        self[:condition] = Cocard::States::OK
+        set_condition(Cocard::States::OK,
+                      "Connector TI online")
       end
-    end
-  end
-
-  def condition_message
-    shortcut = Cocard::States::flag(condition)
-    case condition
-      when Cocard::States::CRITICAL
-        shortcut + " CRITICAL - Connector unreachable"
-      when Cocard::States::UNKNOWN
-        shortcut + " UNKNOWN - soap request failed, may be a configuration problem"
-      when Cocard::States::WARNING
-        shortcut + " WARNING - Connector reachable but TI offline!"
-      when Cocard::States::OK
-        shortcut + " OK - Connector TI online"
-      when Cocard::States::NOTHING
-        shortcut + " UNUSED - Configuration may not be complete yet"
     end
   end
 
 private
 
   def ensure_update_condition
-    if soap_request_success_changed? or vpnti_online_changed?
+    if !condition_changed? and (soap_request_success_changed? or vpnti_online_changed?)
       update_condition
     end
     if condition_changed? and condition == Cocard::States::OK
@@ -109,4 +99,5 @@ private
       name
     end
   end
+
 end

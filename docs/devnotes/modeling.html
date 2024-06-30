@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Modeling cocard :: Cocard</title>
-    <meta name="generator" content="Antora 3.1.0">
+    <meta name="generator" content="Antora 3.1.8">
     <link rel="stylesheet" href="../_/css/site.css">
     <script>var uiRootPath = '../_'</script>
   </head>
@@ -205,6 +205,7 @@ bin/rails g migration AddReadonlyToConnector \
   connector_services:jsonb \
   last_check:timestamp last_check_ok:timestamp \
   condition:integer:index \
+  condition_message:string  \
   soap_request_success:boolean \
   vpnti_online:boolean \
   firmware_version:string</code></pre>
@@ -252,6 +253,7 @@ bin/rails g migration AddInternalToCardTerminal \
   slots:integer \
   connected:boolean \
   condition:integer \
+  condition_message:string  \
   connector:belongs_to \
   firmware_version:string</code></pre>
 </div>
@@ -293,6 +295,7 @@ bin/rails g migration AddInternalToCard \
   card_holder_name:string \
   expiration_date:date \
   condition:integer \
+  condition_message:string  \
   pin_status:string \
   card_terminal:belongs_to
 
