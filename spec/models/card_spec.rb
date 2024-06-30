@@ -44,7 +44,6 @@ RSpec.describe Card, type: :model do
         card.update(condition: Cocard::States::OK)
         card.reload
         expect(card).to receive_message_chain(:operational_state, :operational).and_return(nil)
-        expect(card).to receive(:card_type).at_least(:once).and_return('SMC-B')
         expect {
           card.update_condition
         }.to change(card, :condition).to(Cocard::States::NOTHING)

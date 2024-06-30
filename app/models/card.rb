@@ -24,7 +24,7 @@ class Card < ApplicationRecord
 
   def update_condition
     # -- NOTHING
-    if (card_type == 'SMC-B' and !operational_state&.operational)
+    if (!operational_state&.operational)
       set_condition( Cocard::States::NOTHING,
                      "Karte nicht in Betrieb" )
     elsif card_terminal&.connector.nil?
