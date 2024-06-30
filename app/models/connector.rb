@@ -50,20 +50,21 @@ class Connector < ApplicationRecord
   end
 
   def update_condition
-    unless up?
+    if manual_update
+      set_condition(Cocard::States::NOTHING, 
+                    "Manual update enabled")
+    elsif !up?
       set_condition(Cocard::States::CRITICAL, 
                     "Connector unreachable, ping failed")
-    else 
-      if !soap_request_success
-        set_condition(Cocard::States::UNKNOWN, 
-                      "soap request failed, may be a configuration problem")
-      elsif !vpnti_online
-        set_condition(Cocard::States::CRITICAL,
-                      "Connector reachable but TI offline!")
-      else
-        set_condition(Cocard::States::OK,
-                      "Connector TI online")
-      end
+    elsif !soap_request_success
+      set_condition(Cocard::States::UNKNOWN, 
+                    "soap request failed, may be a configuration problem")
+    elsif !vpnti_online
+      set_condition(Cocard::States::CRITICAL,
+                    "Connector reachable but TI offline!")
+    else
+      set_condition(Cocard::States::OK,
+                    "Connector TI online")
     end
   end
 

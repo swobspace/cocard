@@ -46,6 +46,15 @@ RSpec.describe Connector, type: :model do
   describe "#update_condition" do
     it { expect(connector.condition).to eq(Cocard::States::NOTHING) }
 
+    describe "with manual check enabled" do
+      it "-> NOTHING" do
+        expect(connector).to receive(:manual_update).and_return(true)
+        expect {
+          connector.update_condition
+        }.not_to change(connector, :condition)
+      end
+    end
+
     describe "with ping failed" do
       it "-> CRITICAL" do
         expect(connector).to receive(:up?).and_return(false)
