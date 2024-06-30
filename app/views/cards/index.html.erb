@@ -13,6 +13,7 @@
     <thead>
       <tr>
         <th><%= t('attributes.condition') %></th>
+        <th class="notvisible"><%= t('attributes.condition_message') %></th>
         <th><%= t('attributes.card_type') %></th>
         <th><%= t('attributes.name') %></th>
         <th><%= t('attributes.iccsn') %></th>
@@ -73,6 +74,7 @@
         <th></th>
         <th></th>
         <th></th>
+        <th></th>
         <th class="nosearch"></th>
       </tr>
     </tfoot>
@@ -83,6 +85,7 @@
             <%= render ConditionIconComponent.new(item: card, small: true, as_text: true) %>
             <span style="visibility:hidden;"><%= card.condition %></span>
           </td>
+          <td><%= card.condition_message %></td>
           <td><%= card.card_type %></td>
           <td><%= card.name %></td>
           <td><%= link_to card.iccsn, card_path(card), class: 'primary-link' %></td>

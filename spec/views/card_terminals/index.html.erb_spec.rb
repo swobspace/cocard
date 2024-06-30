@@ -30,7 +30,6 @@ RSpec.describe "card_terminals/index", type: :view do
         firmware_version: '3.1.9',
         serial: '11122277634',
         id_product: 'ORGA61411',
-        condition: Cocard::States::UNKNOWN
       ),
       CardTerminal.create!(
         connector_id: connector.id,
@@ -50,7 +49,6 @@ RSpec.describe "card_terminals/index", type: :view do
         firmware_version: '3.1.9',
         serial: '11122277634',
         id_product: 'ORGA61411',
-        condition: Cocard::States::UNKNOWN
       )
     ]
   end
@@ -78,5 +76,6 @@ RSpec.describe "card_terminals/index", type: :view do
     assert_select cell_selector, text: Regexp.new('3.1.9'.to_s), count: 2
     assert_select cell_selector, text: Regexp.new('11122277634'.to_s), count: 2
     assert_select cell_selector, text: Regexp.new('ORGA6141'.to_s), count: 2
+    assert_select cell_selector, text: Regexp.new('CardTerminal online'.to_s), count: 2
   end
 end

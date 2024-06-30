@@ -28,7 +28,8 @@ RSpec.describe "connectors/index", type: :view do
         serial: 'S12344321',
         authentication: :clientcert,
         use_tls: true,
-        vpnti_online: true
+        vpnti_online: true,
+        condition_message: "Quark"
       ),
       Connector.create!(
         name: "Name",
@@ -44,7 +45,8 @@ RSpec.describe "connectors/index", type: :view do
         serial: 'S12344321',
         authentication: :noauth,
         use_tls: false,
-        vpnti_online: false
+        vpnti_online: false,
+        condition_message: "Quark"
       )
     ])
   end
@@ -64,10 +66,12 @@ RSpec.describe "connectors/index", type: :view do
     assert_select cell_selector, text: Regexp.new("919XaWZ3".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("S12344321".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("\u2705".to_s), count: 5
-    assert_select cell_selector, text: Regexp.new("\u274C".to_s), count: 1
+    assert_select cell_selector, text: Regexp.new("\u274C".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("Ja".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("Nein".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("Client-Zertifikat".to_s), count: 1
     assert_select cell_selector, text: Regexp.new("Keine".to_s), count: 1
+    assert_select cell_selector, text: Regexp.new("Quark".to_s), count: 1
+    assert_select cell_selector, text: Regexp.new("Connector unreachable, ping failed".to_s), count: 1
   end
 end
