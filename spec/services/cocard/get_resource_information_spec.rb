@@ -24,7 +24,8 @@ module Cocard
     let(:connector) do
       FactoryBot.create(:connector,
         ip: ENV['SDS_IP'],
-        connector_services: YAML.load_file(connector_yml)
+        connector_services: YAML.load_file(connector_yml),
+        vpnti_online: true
       )
     end
 
