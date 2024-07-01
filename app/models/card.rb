@@ -14,7 +14,7 @@ class Card < ApplicationRecord
   has_rich_text :private_information
 
   # -- validations and callbacks
-  before_save :ensure_update_condition
+  before_save :update_condition
   validates :iccsn, presence: true, uniqueness: { case_sensitive: false }
 
   # -- common methods
@@ -62,12 +62,5 @@ class Card < ApplicationRecord
   end
 
 private
-
-
-  def ensure_update_condition
-    if pin_status_changed? or expiration_date_changed? or card_handle_changed?
-      update_condition
-    end
-  end
 
 end

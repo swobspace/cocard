@@ -22,7 +22,7 @@ class Connector < ApplicationRecord
 
 
   # -- validations and callbacks
-  before_save :ensure_update_condition
+  before_save :update_condition_and_ok_timestamp
   before_save :ensure_sds_url
   before_save :ensure_admin_url
   validates :ip, presence: true, uniqueness: true
@@ -70,10 +70,8 @@ class Connector < ApplicationRecord
 
 private
 
-  def ensure_update_condition
-    if !condition_changed? and (soap_request_success_changed? or vpnti_online_changed?)
-      update_condition
-    end
+  def update_condition_and_ok_timestamp
+    update_condition
     if condition_changed? and condition == Cocard::States::OK
       self[:last_check_ok] = Time.current
     end

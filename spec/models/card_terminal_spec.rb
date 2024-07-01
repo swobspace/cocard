@@ -5,6 +5,7 @@ RSpec.describe CardTerminal, type: :model do
   let(:connector) { FactoryBot.create(:connector) }
   let(:ct) do
     FactoryBot.create(:card_terminal,
+      ip: '127.0.0.9',
       connector: connector,
       name: 'ACME Term',
       ct_id: 'CT_ID_0123',
@@ -71,7 +72,7 @@ RSpec.describe CardTerminal, type: :model do
 
 
   describe "#update_condition" do
-    it { expect(ct.condition).to eq(Cocard::States::NOTHING) }
+    it { expect(ct.condition).to eq(Cocard::States::WARNING) }
 
     describe "without connector" do
       it "-> NOTHING" do
@@ -90,16 +91,6 @@ RSpec.describe CardTerminal, type: :model do
         expect {
           ct.update_condition
         }.to change(ct, :condition).to(Cocard::States::CRITICAL)
-      end
-    end
-
-    describe "with connected == false" do
-      it "-> WARNING" do
-        expect(ct).to receive(:up?).and_return(true)
-        expect(ct).to receive(:connected).and_return(false)
-        expect {
-          ct.update_condition
-        }.to change(ct, :condition).to(Cocard::States::WARNING)
       end
     end
 

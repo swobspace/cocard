@@ -44,14 +44,14 @@ RSpec.describe Connector, type: :model do
   end
 
   describe "#update_condition" do
-    it { expect(connector.condition).to eq(Cocard::States::NOTHING) }
+    it { expect(connector.condition).to eq(Cocard::States::UNKNOWN) }
 
     describe "with manual check enabled" do
       it "-> NOTHING" do
         expect(connector).to receive(:manual_update).and_return(true)
         expect {
           connector.update_condition
-        }.not_to change(connector, :condition)
+        }.to change(connector, :condition).to(Cocard::States::NOTHING)
       end
     end
 
@@ -70,7 +70,7 @@ RSpec.describe Connector, type: :model do
         expect(connector).to receive(:soap_request_success).and_return(false)
         expect {
           connector.update_condition
-        }.to change(connector, :condition).to(Cocard::States::UNKNOWN)
+        }.not_to change(connector, :condition)
       end
     end
 
