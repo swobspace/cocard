@@ -175,7 +175,7 @@
     </div>
   </div>
   <div class="m-2">
-    <%= render 'cards', cards: @card_terminal.cards %>
+    <%= render 'cards', cards: @card_terminal.cards.order(:slotid) %>
   </div>
 </div>
 
