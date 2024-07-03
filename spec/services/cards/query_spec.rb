@@ -28,22 +28,24 @@ module Cards
 
   RSpec.describe Query do
     let(:ber) { FactoryBot.create(:location, lid: 'BER') }
-    let(:opsta) { FactoryBot.create(:operational_state, name: 'in Betrieb') }
+    let(:conn) { FactoryBot.create(:connector) }
+    let(:ct)  { FactoryBot.create(:card_terminal, :with_mac, connector: conn) }
+    let(:opsta) { FactoryBot.create(:operational_state, name: 'in Betrieb', operational: true) }
     let!(:card1) do
       FactoryBot.create(:card,
         name: 'SMC-B 0001',
         description: "some more infos",
-        condition: 0,
         location: ber,
         iccsn: '9990001',
-        operational_state: opsta
+        operational_state: opsta,
+        card_terminal: ct,
+        expiration_date: 1.day.before(Date.current)
       )
     end
 
     let!(:card2) do
       FactoryBot.create(:card,
         name: 'SMC-KT 0002',
-        condition: 2,
         iccsn: '9980002',
       )
     end
@@ -51,9 +53,8 @@ module Cards
     let!(:card3) do
       FactoryBot.create(:card,
         name: 'SMC-KT 0003',
-        condition: 3,
         iccsn: '9980003',
-     
+        operational_state: opsta
       )
     end
 
@@ -124,8 +125,8 @@ module Cards
     context "with :condition" do
       subject { Query.new(cards, {condition: 2}) }
       before(:each) do
-        @matching = [card2]
-        @nonmatching = [card1, card3]
+        @matching = [card1]
+        @nonmatching = [card2, card3]
       end
       it_behaves_like "a card query"
     end
@@ -142,8 +143,8 @@ module Cards
     context "with :operational_state" do
       subject { Query.new(cards, {operational_state: "in betrieb"}) }
       before(:each) do
-        @matching = [card1]
-        @nonmatching = [card2, card3]
+        @matching = [card1, card3]
+        @nonmatching = [card2]
       end
       it_behaves_like "a card query"
     end

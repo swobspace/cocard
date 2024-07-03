@@ -32,8 +32,7 @@ module Connectors
       FactoryBot.create(:connector,
         name: 'TIK-AXC-17',
         description: "some more infos",
-        ip: '198.51.100.17',
-        condition: 0,
+        ip: '127.51.100.17',
         firmware_version: '5.3.4',
         locations: [ber]
       )
@@ -42,11 +41,10 @@ module Connectors
     let!(:conn2) do
       FactoryBot.create(:connector,
         name: 'TIK-CWZ-04',
-        ip: '203.0.113.4',
-        admin_url: 'https://192.0.2.4:9443',
-        sds_url: 'http://192.0.2.4/connector.sds',
+        ip: '127.203.113.4',
+        admin_url: 'https://127.192.2.4:9443',
+        sds_url: 'http://127.192.2.4/connector.sds',
         manual_update: true,
-        condition: 2,
         firmware_version: '4.9.3',
       )
     end
@@ -54,9 +52,8 @@ module Connectors
     let!(:conn3) do
       FactoryBot.create(:connector,
         name: 'TIK-CWZ-05',
-        ip: '198.50.100.5',
+        ip: '127.50.100.5',
         manual_update: true,
-        condition: 3,
         firmware_version: '4.9.3',
       )
     end
@@ -117,7 +114,7 @@ module Connectors
     end
 
     context "with :ip" do
-      subject { Query.new(connectors, {ip: '203.0.113.'}) }
+      subject { Query.new(connectors, {ip: '127.203.113.'}) }
       before(:each) do
         @matching = [conn2]
         @nonmatching = [conn1, conn3]
@@ -126,7 +123,7 @@ module Connectors
     end
 
     context "with :admin_url" do
-      subject { Query.new(connectors, {admin_url: '192.0.2.4'}) }
+      subject { Query.new(connectors, {admin_url: '127.192.2.4'}) }
       before(:each) do
         @matching = [conn2]
         @nonmatching = [conn1, conn3]
@@ -135,7 +132,7 @@ module Connectors
     end
 
     context "with :sds_url" do
-      subject { Query.new(connectors, {sds_url: '192.0.2.4'}) }
+      subject { Query.new(connectors, {sds_url: '127.192.2.4'}) }
       before(:each) do
         @matching = [conn2]
         @nonmatching = [conn1, conn3]
@@ -144,10 +141,10 @@ module Connectors
     end
 
     context "with :condition" do
-      subject { Query.new(connectors, {condition: 2}) }
+      subject { Query.new(connectors, {condition: 3}) }
       before(:each) do
-        @matching = [conn2]
-        @nonmatching = [conn1, conn3]
+        @matching = [conn1]
+        @nonmatching = [conn2, conn3]
       end
       it_behaves_like "a connectors query"
     end
@@ -196,12 +193,12 @@ module Connectors
         end
 
         it "searches for admin_url" do
-          search = Query.new(connectors, {search: '192.0.2.'})
+          search = Query.new(connectors, {search: '127.192.2.'})
           expect(search.all).to contain_exactly(conn2)
         end
 
         it "searches for ip" do
-          search = Query.new(connectors, {search: '203.0.113.'})
+          search = Query.new(connectors, {search: '127.203.113.'})
           expect(search.all).to contain_exactly(conn2)
         end
 

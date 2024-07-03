@@ -9,7 +9,7 @@ RSpec.describe "/card_terminals", type: :request do
   }
 
   let(:invalid_attributes) {
-    { mac: nil }
+    { mac: nil, serial: nil }
   }
 
   before(:each) do
@@ -86,7 +86,7 @@ RSpec.describe "/card_terminals", type: :request do
         room: "Raum U.16",
         contact: "Der Hausmeister",
         plugged_in: "Dose P17/4, Patchfeld 5",
-        ip: '1.2.3.4',
+        ip: '127.3.4.5',
         slots: 3993,
         delivery_date: '2023-12-14',
         supplier: 'ACME Ltd',
@@ -106,7 +106,7 @@ RSpec.describe "/card_terminals", type: :request do
         expect(card_terminal.contact).to eq('Der Hausmeister')
         expect(card_terminal.plugged_in).to eq('Dose P17/4, Patchfeld 5')
         expect(card_terminal.slots).to eq(3993)
-        expect(card_terminal.ip).to eq('1.2.3.4')
+        expect(card_terminal.ip).to eq('127.3.4.5')
         expect(card_terminal.delivery_date.to_s).to eq('2023-12-14')
         expect(card_terminal.supplier).to eq('ACME Ltd')
         expect(card_terminal.id_product).to eq('ORGA6141')
@@ -124,7 +124,7 @@ RSpec.describe "/card_terminals", type: :request do
 
     context "with invalid parameters" do
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        card_terminal = CardTerminal.create! valid_attributes
+        card_terminal = CardTerminal.create!(mac: nil, serial: '12345678')
         patch card_terminal_url(card_terminal), params: { card_terminal: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
