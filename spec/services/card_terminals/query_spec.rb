@@ -28,12 +28,13 @@ module CardTerminals
 
   RSpec.describe Query do
     let(:ber) { FactoryBot.create(:location, lid: 'BER') }
+    let(:conn) { FactoryBot.create(:connector) }
     let!(:ct1) do
       FactoryBot.create(:card_terminal, :with_mac,
         displayname: 'QUORA - test',
         name: 'KLG-AXC-17',
         description: "some more infos",
-        ip: '198.51.100.17',
+        ip: '127.51.100.17',
         condition: 0,
         connected: true,
         firmware_version: '5.3.4',
@@ -45,19 +46,20 @@ module CardTerminals
     let!(:ct2) do
       FactoryBot.create(:card_terminal,
         name: 'KLG-CWZ-04',
-        ip: '203.0.113.4',
+        ip: '127.203.113.4',
         ct_id: 'CT_ID_0124',
         condition: 2,
         firmware_version: '4.9.3',
         mac: '11:22:33:44:55:66',
         supplier: 'ACME Ltd. International',
+        connector: conn,
       )
     end
 
     let!(:ct3) do
       FactoryBot.create(:card_terminal, :with_mac,
         name: 'KLG-CWZ-05',
-        ip: '198.50.100.5',
+        ip: '127.50.100.5',
         condition: 3,
         firmware_version: '4.9.3',
         room: 'U.16',
@@ -186,7 +188,7 @@ module CardTerminals
     end
 
     context "with :ip" do
-      subject { Query.new(card_terminals, {ip: '203.0.113.'}) }
+      subject { Query.new(card_terminals, {ip: '127.203.113.'}) }
       before(:each) do
         @matching = [ct2]
         @nonmatching = [ct1, ct3]
@@ -204,7 +206,7 @@ module CardTerminals
     end
 
     context "with :condition" do
-      subject { Query.new(card_terminals, {condition: 2}) }
+      subject { Query.new(card_terminals, {condition: 1}) }
       before(:each) do
         @matching = [ct2]
         @nonmatching = [ct1, ct3]
@@ -268,7 +270,7 @@ module CardTerminals
         end
 
         it "searches for ip" do
-          search = Query.new(card_terminals, {search: '203.0.113.'})
+          search = Query.new(card_terminals, {search: '127.203.113.'})
           expect(search.all).to contain_exactly(ct2)
         end
 
