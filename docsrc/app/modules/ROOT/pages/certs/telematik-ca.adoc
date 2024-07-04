@@ -1,0 +1,73 @@
+= Certificate Authority für Clientsysteme
+:author: Wolfgang Barth
+:navtitle: CA für Clientsysteme
+:revdate: 2024-07-04
+
+* Referenz: https://openssl-ca.readthedocs.io/en/latest
+
+== CA aufsetzen
+
+----
+mkdir /etc/ssl/telematik
+cd /etc/ssl/telematik
+mkdir certs crl newcerts private reqs
+chmod 700 private
+touch index.txt
+echo 1000 > serial
+----
+
+----
+cp /etc/ssl/openssl.cnf /etc/ssl/telematik/.
+----
+
+... bearbeiten
+
+IMPORTANT: KoCoBox in der Version 5 unterstützt RSA nur bis 2048 bit!
+
+
+.CA-Key
+----
+openssl genrsa -aes256 -out private/cakey.pem 2048
+chmod 400 private/cakey.pem
+----
+
+.CA-Zertifikat
+----
+openssl req -config openssl.cnf -key private/cakey.pem \
+    -new -x509 -days 7300 -sha256 -extensions v3_ca \
+    -out certs/cacert.pem
+chmod 4444 certs/cacert.pem    
+openssl x509 -noout -text -in certs/cacert.pem
+----
+
+== Zertifikat für Client-System
+
+.PKey
+----
+openssl genrsa -aes256 -out private/intern.key.pem 2048
+chmod 400 private/intern.key.pem
+----
+
+.Request
+----
+openssl req -config openssl.cnf \
+    -key private/intern.key.pem \
+    -new -sha256 -out reqs/intern.req.pem 
+----
+
+.Zertifikat für Client-System
+----
+openssl ca -config openssl.cnf -days 1825 \
+  -in reqs/intern.req.pem \
+  -out certs/intern.cert.pem
+chmod 444 certs/intern.cert.pem
+openssl x509 -noout -text -in certs/intern.cert.pem
+----
+
+.Export als PKCS12
+----
+openssl pkcs12 -export -out certs/intern.p12 \
+    -inkey private/intern.key.pem \
+    -in certs/intern.cert.pem \
+    -certfile certs/cacert.pem
+----
