@@ -45,7 +45,7 @@ module CardTerminals
           @card_terminal.send("#{attr}=", cct.send(attr))
         end
         @card_terminal.connector_id = connector.id
-        @card_terminal.update_condition
+        # @card_terminal.update_condition
       end
 
       # 

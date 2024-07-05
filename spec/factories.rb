@@ -11,6 +11,12 @@ FactoryBot.define do
     sprintf("%012x", n)
   end
 
+  sequence :local_ip do |n|
+    a = [n].pack("N").unpack("CCCC")
+    a[0] = "127" 
+    a.join(".")
+  end
+
   sequence :lid do |n|
     "L#{n}"
   end
@@ -47,7 +53,8 @@ FactoryBot.define do
   end
 
   factory :connector do
-    ip { Faker::Internet.ip_v4_address }
+    # ip { Faker::Internet.ip_v4_address }
+    ip { generate(:local_ip) }
   end
 
   factory :connector_context do

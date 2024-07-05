@@ -67,7 +67,7 @@ module Cards
           @card.send("#{attr}=", cc.send(attr))
         end
         # -- update condition
-        @card.update_condition
+        # @card.update_condition
       end
 
       @card.updated_at = Time.current

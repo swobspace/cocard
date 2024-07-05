@@ -16,7 +16,7 @@ RSpec.describe "connectors/index", type: :view do
     assign(:connectors, [
       Connector.create!(
         name: "Name",
-        ip: "192.0.2.1",
+        ip: "127.0.2.1",
         admin_url: "Admin Url",
         sds_url: "Sds Url",
         manual_update: false,
@@ -29,11 +29,12 @@ RSpec.describe "connectors/index", type: :view do
         authentication: :clientcert,
         use_tls: true,
         vpnti_online: true,
+        soap_request_success: true,
         condition_message: "Quark"
       ),
       Connector.create!(
         name: "Name",
-        ip: "192.0.2.2",
+        ip: "127.0.2.2",
         admin_url: "Admin Url",
         sds_url: "Sds Url",
         manual_update: false,
@@ -55,8 +56,8 @@ RSpec.describe "connectors/index", type: :view do
     render
     cell_selector = 'tr>td'
     assert_select cell_selector, text: Regexp.new("Name".to_s), count: 2
-    assert_select cell_selector, text: Regexp.new("192.0.2.1".to_s), count: 1
-    assert_select cell_selector, text: Regexp.new("192.0.2.2".to_s), count: 1
+    assert_select cell_selector, text: Regexp.new("127.0.2.1".to_s), count: 1
+    assert_select cell_selector, text: Regexp.new("127.0.2.2".to_s), count: 1
     assert_select cell_selector, text: Regexp.new("Admin Url".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("Sds Url".to_s), count: 2
     assert_select cell_selector, text: Regexp.new(false.to_s), count: 2
@@ -65,13 +66,14 @@ RSpec.describe "connectors/index", type: :view do
     assert_select cell_selector, text: Regexp.new("123.456".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("919XaWZ3".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("S12344321".to_s), count: 2
-    assert_select cell_selector, text: Regexp.new("\u2705".to_s), count: 5
-    assert_select cell_selector, text: Regexp.new("\u274C".to_s), count: 2
+    assert_select cell_selector, text: Regexp.new("\u2705".to_s), count: 6
+    assert_select cell_selector, text: Regexp.new("\u274C".to_s), count: 1
     assert_select cell_selector, text: Regexp.new("Ja".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("Nein".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("Client-Zertifikat".to_s), count: 1
     assert_select cell_selector, text: Regexp.new("Keine".to_s), count: 1
-    assert_select cell_selector, text: Regexp.new("Quark".to_s), count: 1
-    assert_select cell_selector, text: Regexp.new("Connector unreachable, ping failed".to_s), count: 1
+    assert_select cell_selector, text: Regexp.new("UNKNOWN".to_s), count: 2
+    assert_select cell_selector, text: Regexp.new("OK Connector TI online".to_s), count: 1
+    assert_select cell_selector, text: Regexp.new("soap request failed".to_s), count: 1
   end
 end

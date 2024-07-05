@@ -10,7 +10,7 @@ RSpec.describe "connectors/new", type: :view do
 
     assign(:connector, Connector.new(
       name: "MyString",
-      ip: "192.0.2.1",
+      ip: "127.0.2.1",
       sds_url: "MyString",
       manual_update: false
     ))

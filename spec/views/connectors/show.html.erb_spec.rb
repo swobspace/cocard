@@ -13,7 +13,7 @@ RSpec.describe "connectors/show", type: :view do
 
     assign(:connector, Connector.create!(
       name: "Name",
-      ip: "192.0.2.1",
+      ip: "127.0.2.1",
       admin_url: "Admin Url",
       sds_url: "Sds Url",
       manual_update: false,
@@ -31,7 +31,7 @@ RSpec.describe "connectors/show", type: :view do
   it "renders attributes in <p>" do
     render
     expect(rendered).to match(/Name/)
-    expect(rendered).to match(/192.0.2.1/)
+    expect(rendered).to match(/127.0.2.1/)
     expect(rendered).to match(/Admin Url/)
     expect(rendered).to match(/Sds Url/)
     expect(rendered).to match(/false/)

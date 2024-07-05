@@ -16,7 +16,7 @@ class CardTerminal < ApplicationRecord
 
   # -- validations and callbacks
   before_save :ensure_displayname
-  before_save :ensure_update_condition
+  before_save :update_condition
   validates_uniqueness_of :ct_id, scope: [:connector_id],
                           allow_nil: true, allow_blank: true
   validates :mac, presence: {
@@ -69,12 +69,6 @@ private
   def ensure_displayname
     if displayname.blank? and name.present?
       self[:displayname] = name
-    end
-  end
-
-  def ensure_update_condition
-    if connected_changed?
-      update_condition
     end
   end
 
