@@ -17,7 +17,8 @@ RSpec.describe "logs/show", type: :view do
       message: "MyText",
       is_valid: true,
       condition: 3,
-      last_seen: ts
+      last_seen: ts,
+      since: 1.day.before(ts)
     ))
   end
 
@@ -30,5 +31,6 @@ RSpec.describe "logs/show", type: :view do
     expect(rendered).to match(/true/)
     expect(rendered).to match(/UNKNOWN/)
     expect(rendered).to match("#{ts.localtime.to_s.gsub(/\+.*/, '')}")
+    expect(rendered).to match("#{1.day.before(ts).localtime.to_s.gsub(/\+.*/, '')}")
   end
 end

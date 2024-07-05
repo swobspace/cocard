@@ -47,6 +47,7 @@ module Logs
         it { expect(log.level).to eq('WARN') }
         it { expect(log.message).to eq('hier klappt was nicht') }
         it { expect(log.last_seen).to eq(ts) }
+        it { expect(log.since.to_s).to eq(ts.to_s) }
 
       end
 
@@ -60,7 +61,8 @@ module Logs
             level: "WARN",
             is_valid: true,
             last_seen: 1.day.before(Time.current),
-            message: "hier klappt was nicht"
+            message: "hier klappt was nicht",
+            since: 1.day.before(ts)
           )
         end
         before(:each) { log.reload }
@@ -86,7 +88,7 @@ module Logs
 
         it { expect(subject.call).to be_truthy }
 
-        context 'updates last_seen' do
+        context 'updates last_seen but not since' do
           before(:each) do
             subject.call
             log.reload
@@ -96,6 +98,22 @@ module Logs
           it { expect(log.level).to eq('WARN') }
           it { expect(log.message).to eq('hier klappt was nicht') }
           it { expect(log.last_seen.to_s).to eq(ts.to_s) }
+          it { expect(log.since.to_s).to eq(1.day.before(ts).to_s) }
+        end
+
+        context 'updates last_seen and since if existing log is invalid' do
+          before(:each) do
+            log.update(is_valid: false)
+            log.reload
+            subject.call
+            log.reload
+          end
+          it { expect(log.loggable).to eq(conn) }
+          it { expect(log.action).to eq('GetResource') }
+          it { expect(log.level).to eq('WARN') }
+          it { expect(log.message).to eq('hier klappt was nicht') }
+          it { expect(log.last_seen.to_s).to eq(ts.to_s) }
+          it { expect(log.since.to_s).to eq(ts.to_s) }
         end
       end
     end

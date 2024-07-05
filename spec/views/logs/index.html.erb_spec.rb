@@ -18,7 +18,8 @@ RSpec.describe "logs/index", type: :view do
         message: "MyText",
         is_valid: true,
         condition: 3,
-        last_seen: ts
+        last_seen: ts,
+        since: 1.day.before(ts)
       ),
       Log.create!(
         loggable: conn,
@@ -27,7 +28,8 @@ RSpec.describe "logs/index", type: :view do
         message: "MyText",
         is_valid: true,
         condition: 3,
-        last_seen: ts
+        last_seen: ts,
+        since: 1.day.before(ts)
       )
     ])
   end
@@ -41,6 +43,7 @@ RSpec.describe "logs/index", type: :view do
     assert_select cell_selector, text: Regexp.new("MyText".to_s), count: 2
     assert_select cell_selector, text: Regexp.new(I18n.t(true).to_s), count: 2
     assert_select cell_selector, text: Regexp.new("UNKNOWN".to_s), count: 2
-    assert_select cell_selector, text: Regexp.new(ts.localtime.to_s.gsub(/\+.*/, '')), count: 4
+    assert_select cell_selector, text: Regexp.new(ts.localtime.to_s.gsub(/\+.*/, '')), count: 2
+    assert_select cell_selector, text: Regexp.new(1.day.before(ts).localtime.to_s.gsub(/\+.*/, '')), count: 2
   end
 end

@@ -42,7 +42,7 @@
       <tbody>
         <% @logs.each do |log| %>
           <%= content_tag(:tr, id: dom_id(log), class: "#{'invalid' unless log.is_valid}") do %>
-            <td><%= log.created_at.localtime.to_s %></td>
+            <td><%= log.since&.localtime.to_s %></td>
             <td><%= render ErrorLevelBadgeComponent.new(level: log.level) %></td>
             <td><%= log.loggable_type %></td>
             <td>

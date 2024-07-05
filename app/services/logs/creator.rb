@@ -24,23 +24,35 @@ module Logs
       @action    = options.fetch(:action)
       @level     = options.fetch(:level)
       @last_seen = options.fetch(:last_seen) { Time.current }
+      @since     = options.fetch(:since) { Time.current }
       @message   = Array(options.fetch(:message)).join("; ")
       @is_valid  = options.fetch(:is_valid) { true }
     end
 
     # rubocop:disable Metrics/AbcSize, Rails/SkipsModelValidations
     def call(destroy = false)
-      @log = Log.create_with(last_seen: @last_seen, message: @message, is_valid: @is_valid)
-                .find_or_initialize_by(
-                   loggable: @loggable,
-                   action:   @action,
-                   level:    @level
-                 )
+      @log = Log.find_or_initialize_by(loggable: @loggable, 
+                                       action: @action,
+                                       level: @level) do |l|
+                l.last_seen = @last_seen
+                l.since     = @since
+                l.message   = @message 
+                l.is_valid  = @is_valid
+              end
 
       if @log.persisted?
         if destroy == false
-          @log.update(last_seen: @last_seen, message: @message, is_valid: true)
+          if @log.is_valid
+            # update, don't touch :since or :is_valid
+            attrs = { last_seen: @last_seen, message: @message }
+          else
+            # switch from invalid to valid => update :since
+            attrs = { last_seen: @last_seen, message: @message, 
+                      is_valid: true, since: @since }
+          end
+          @log.update(attrs)
         else
+          # mark as invalid instead of destroy
           @log.update(is_valid: false)
         end
       elsif (!destroy) 
