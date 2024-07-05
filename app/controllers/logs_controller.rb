@@ -6,6 +6,7 @@ class LogsController < ApplicationController
   def index
     if @loggable
       @logs = @loggable.logs
+      @logs = @logs.valid if params[:valid].present?
       @pagy, @logs = pagy(@logs)
     else
       if params[:valid]
