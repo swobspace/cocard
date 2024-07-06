@@ -4,7 +4,11 @@ class ConnectorsController < ApplicationController
 
   # GET /connectors
   def index
-    @connectors = Connector.all
+    if @locatable
+      @connectors = @locatable.connectors
+    else
+      @connectors = Connector.all
+    end
     respond_with(@connectors)
   end
 
@@ -77,7 +81,7 @@ class ConnectorsController < ApplicationController
   # DELETE /connectors/1
   def destroy
     @connector.destroy!
-    respond_with(@connector)
+    respond_with(@connector, location: polymorphic_path([@loggable, :card_terminals]))
   end
 
   private
@@ -96,6 +100,6 @@ class ConnectorsController < ApplicationController
                     connector_contexts_attributes: [
                       :id, :context_id, :_destroy
                     ])
- 
+
     end
 end

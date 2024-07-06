@@ -4,10 +4,14 @@ class CardsController < ApplicationController
 
   # GET /cards
   def index
-    if params[:card_type]
-      @cards = Card.where(card_type: params[:card_type])
+    if @locatable
+      @cards = @locatable.cards
     else
       @cards = Card.all
+    end
+
+    if params[:card_type]
+      @cards = @cards.where(card_type: params[:card_type])
     end
     respond_with(@cards)
   end
@@ -86,7 +90,7 @@ class CardsController < ApplicationController
   # DELETE /cards/1
   def destroy
     @card.destroy!
-    respond_with(@card)
+    respond_with(@card, location: polymorphic_path([@loggable, :cards]))
   end
 
   private

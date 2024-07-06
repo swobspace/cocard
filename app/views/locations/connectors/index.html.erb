@@ -1,0 +1,98 @@
+<%= turbo_frame_tag 'connectors' do %>
+  <div data-controller="datatables">
+    <%= content_tag :table, role: :datatable,
+          id: "location_connectors_table",
+          class: "table table-bordered table-responsive-xl",
+          data: {
+            'datatables-target': 'datatable',
+            order: [[1, 'asc']].to_json
+          } do %>
+      <thead>
+        <tr>
+              <th><%= t('attributes.condition') %></th>
+              <th class="notvisible"><%= t('attributes.condition_message') %></th>
+              <th><%= t('attributes.name') %></th>
+              <th><%= t('attributes.ip') %></th>
+              <th class="notvisible"><%= t('attributes.admin_url') %></th>
+              <th class="notvisible"><%= t('attributes.sds_url') %></th>
+              <th class="notvisible"><%= t('attributes.manual_update') %></th>
+              <th><%= t('attributes.locations') %></th>
+              <th class="text-center"><%= t('attributes.firmware_version') %></th>
+              <th class="notvisible"><%= t('attributes.description') %></th>
+              <th><%= t('attributes.vpnti_online') %></th>
+              <th><%= t('attributes.last_check') %></th>
+              <th><%= t('attributes.last_check_ok') %></th>
+              <th class="notvisible"><%= t('attributes.use_tls') %></th>
+              <th class="notvisible"><%= t('attributes.authentication') %></th>
+              <th class="notvisible"><%= t('attributes.id_contract') %></th>
+              <th class="notvisible"><%= t('attributes.serial') %></th>
+              <th class="noexport nosort"><%= t('cocard.action') %></th>
+        </tr>
+      </thead>
+      <tfoot class="search">
+        <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th class="nosearch"></th>
+        </tr>
+      </tfoot>
+      <tbody>
+        <% @connectors.each do |connector| %>
+          <%= content_tag(:tr, id: dom_id(connector), class: dom_class(connector)) do %>
+            <td class="text-center"><%= render ConditionIconComponent.new(item: connector, small: true, as_text: true) %>
+            <td><%= connector.condition_message %></td>
+            <td><%= link_to connector.name, connector_path(connector),
+                            data: { "turbo-frame" => "_top" },
+                            class: 'primary-link' %></td>
+            <td><%= link_to connector.ip, connector.admin_url,
+                            data: { "turbo-frame" => "_top" },
+                            class: 'primary-link' %></td>
+            <td><%= link_to nil, connector.admin_url, 
+                            data: { "turbo-frame" => "_top" }
+                 %></td>
+            <td><%= connector.sds_url %></td>
+            <td><%= connector.manual_update %></td>
+            <td><%= connector.locations.order(:lid).map(&:lid).join('; ') %></td>
+            <td class="text-center"><%= connector.firmware_version %></td>
+            <td><%= connector.description %></td>
+            <td class="text-center">
+              <%= render BooleanComponent.new(value: connector.vpnti_online,
+                                              text: :unicode ) 
+               %>
+            </td>
+            <td><%= render IsCurrentComponent.new(item: connector, attr: :last_check) %></td>
+            <td><%= render IsCurrentComponent.new(item: connector, attr: :last_check_ok) %></td>
+            <td><%= render BooleanComponent.new(value: connector.use_tls,
+                                                text: :text) %></td>
+            <td><%= t(connector.authentication, scope: :authentications) %></td>
+            <td><%= connector.id_contract if @current_user.is_admin? %></td>
+            <td><%= connector.serial %></td>
+            <td class="text-nowrap">
+              <%= show_link connector, 
+                            class: 'btn btn-sm btn-secondary', 
+                            data: { "turbo-frame" => "_top" } 
+               %>
+              <%= delete_link [@locatable, connector], 
+                              class: 'btn btn-sm btn-danger' %>
+            </td>
+          <% end %>
+        <% end %>
+      </tbody>
+    <% end %>
+  </div>
+<% end %>

@@ -1,9 +1,11 @@
+<%= render 'shared/turbo-cache-control' %>
+
 <div class="card mb-2">
   <div class="card-header">
     <div class="d-flex w-100 justify-content-between">
       <div>
         <span class="subtitle">
-          <%= t('activerecord.models.location') %>: 
+          <%= t('activerecord.models.location') %>:
           #<%= @location.id %>
         </span>
         <h4 class="title"><%= @location %></h4>
@@ -17,7 +19,7 @@
 
   <div class="card-body">
     <table class="table table-sm table-borderless">
-    
+
       <tr>
         <th class="w-10 pe-3"><%= t('attributes.lid')%>:</th>
         <td><%= @location.lid %></td>
@@ -33,3 +35,49 @@
 
 <%= back_link %>
 <%= new_link Location %>
+
+<div class="card my-3">
+  <div class="card-header">
+    <div class="d-flex w-100">
+      <div >
+        <h4 class="title">
+          <%= t('controller.card_terminals') %>
+        </h4>
+      </div>
+    </div>
+  </div>
+  <div class="m-2">
+    <%= turbo_frame_tag("card_terminals", src: location_card_terminals_path(@location)) %>
+  </div>
+</div>
+
+<div class="card my-3">
+  <div class="card-header">
+    <div class="d-flex w-100">
+      <div >
+        <h4 class="title">
+          <%= t('controller.cards') %>
+        </h4>
+      </div>
+    </div>
+  </div>
+  <div class="m-2">
+    <%= turbo_frame_tag("cards", src: location_cards_path(@location)) %>
+  </div>
+</div>
+
+<div class="card my-3">
+  <div class="card-header">
+    <div class="d-flex w-100">
+      <div >
+        <h4 class="title">
+          <%= t('controller.connectors') %>
+        </h4>
+      </div>
+    </div>
+  </div>
+  <div class="m-2">
+    <%= turbo_frame_tag("connectors", src: location_connectors_path(@location)) %>
+  </div>
+</div>
+

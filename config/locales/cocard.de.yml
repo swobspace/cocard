@@ -165,6 +165,9 @@ de:
     events: Ereignisse
     home: Home
     locations: Standorte
+    locations/cards: Karten
+    locations/card_terminals: Kartenterminals
+    locations/connectors: Konnektoren
     logs: Logs
     networks: Netzwerke
     operational_states: Betriebszustände

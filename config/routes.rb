@@ -43,7 +43,11 @@ Rails.application.routes.draw do
       get :ping
     end
   end
-  resources :locations
+  resources :locations do
+    resources :connectors, only: [:index, :show, :destroy], module: :locations
+    resources :card_terminals, only: [:index, :show, :destroy], module: :locations
+    resources :cards, only: [:index, :show, :destroy], module: :locations
+  end
   root to: 'home#index'
   get 'home/index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

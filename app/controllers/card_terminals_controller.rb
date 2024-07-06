@@ -4,7 +4,11 @@ class CardTerminalsController < ApplicationController
 
   # GET /card_terminals
   def index
-    @card_terminals = CardTerminal.all
+    if @locatable
+      @card_terminals = @locatable.card_terminals
+    else
+      @card_terminals = CardTerminal.all
+    end
     respond_with(@card_terminals)
   end
 
@@ -57,7 +61,7 @@ class CardTerminalsController < ApplicationController
   # DELETE /card_terminals/1
   def destroy
     @card_terminal.destroy!
-    respond_with(@card_terminal)
+    respond_with(@card_terminal, location: polymorphic_path([@loggable, :card_terminals]))
   end
 
   private
