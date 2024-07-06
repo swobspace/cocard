@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "/workplaces", type: :request do
+  let(:csvfile) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'workplace.csv') }
   
   let(:valid_attributes) {
     FactoryBot.attributes_for(:workplace)
@@ -37,6 +38,13 @@ RSpec.describe "/workplaces", type: :request do
      end
    end
 
+   describe "GET /new_import" do
+     it "renders a successful response" do
+       get new_import_workplaces_url
+       expect(response).to be_successful
+     end
+   end
+
   describe "GET /edit" do
     it "renders a successful response" do
       workplace = Workplace.create! valid_attributes
@@ -45,6 +53,36 @@ RSpec.describe "/workplaces", type: :request do
     end
   end
 
+  describe "POST /import" do
+    context "with valid import parameters" do
+      let(:import_attributes) {{file: csvfile, update_only: false, force_update: false}}
+      it "creates a new Workplace" do
+        expect {
+          post import_workplaces_url, params: import_attributes
+        }.to change(Workplace, :count).by(1)
+      end
+
+      it "redirects to the created workplace" do
+        post import_workplaces_url, params: import_attributes
+        expect(response).to redirect_to(workplaces_url)
+      end
+    end
+
+    context "with invalid parameters" do
+      it "does not create a new Workplace" do
+        expect {
+          post workplaces_url, params: { workplace: invalid_attributes }
+        }.to change(Workplace, :count).by(0)
+      end
+
+    
+      it "renders a response with 422 status (i.e. to display the 'new' template)" do
+        post workplaces_url, params: { workplace: invalid_attributes }
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+    
+    end
+  end
   describe "POST /create" do
     context "with valid parameters" do
       it "creates a new Workplace" do

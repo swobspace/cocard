@@ -50,7 +50,8 @@ class WorkplacesController < ApplicationController
     result = Workplaces::ImportCSV.new(import_params).call
 
     if result.success?
-      flash[:success] = "Import successful"
+      count = result.workplaces.count
+      flash[:success] = "Import successful: #{count} records imported"
       redirect_to workplaces_path
     else
       flash[:error] = result.error_messages.join(", ")

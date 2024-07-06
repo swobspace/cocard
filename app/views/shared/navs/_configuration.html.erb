@@ -19,7 +19,7 @@
       <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
                        t('controller.networks')),
                   main_app.networks_path, class: "dropdown-item" %>
-      <% if can? :create, Location %>
+      <% if can? :create, Network %>
         <%= link_to raw( '<span class="fas fa-fw fa-plus" aria-hidden="true"></span> ' +
                          t('cocard.new_network')),
                     main_app.new_network_path, class: "dropdown-item" %>
@@ -27,7 +27,23 @@
       <div class="dropdown-divider"></div>
         <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
                          t('controller.workplaces')),
-                    main_app.workplaces_path, class: "dropdown-item" %>
+                    main_app.workplaces_path, class: "dropdown-item",
+                    "data-turbo-prefetch": false
+         %>
+        <% if can? :import, Workplace %>
+          <%= link_to raw('<span class="fa-solid fa-fw fa-upload" aria-hidden="true"></span> ' +
+                           t('cocard.import_csv')),
+                      main_app.new_import_workplaces_path, class: "dropdown-item",
+                      "data-turbo": false
+            %>
+        <% end %>
+        <% if can? :create, Workplace %>
+          <%= link_to raw('<span class="fa-solid fa-fw fa-plus" aria-hidden="true"></span> ' +
+                           t('cocard.new_workplace')),
+                      main_app.new_workplace_path, class: "dropdown-item",
+                      "data-turbo": false
+            %>
+        <% end %>
       <div class="dropdown-divider"></div>
         <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
                          t('controller.contexts')),
@@ -41,7 +57,7 @@
         <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
                          t('controller.operational_states')),
                     main_app.operational_states_path, class: "dropdown-item" %>
-      <% if can? :create, Context %>
+      <% if can? :create, OperationalState %>
         <%= link_to raw( '<span class="fas fa-fw fa-plus" aria-hidden="true"></span> ' +
                          t('cocard.new_operational_state')),
                     main_app.new_operational_state_path, class: "dropdown-item" %>

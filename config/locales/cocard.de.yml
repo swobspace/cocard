@@ -28,6 +28,9 @@ de:
     new_location: Neuer Standort
     new_network: Neues Netzwerk
     new_operational_state: Neuer Betriebszustand
+    new_workplace: Neuer Arbeitsplatz
+    import_options: Import-Optionen
+    import_csv: CSV-Datei importieren
     condition:
       -1: '-'
       0: OK
@@ -51,6 +54,8 @@ de:
     to_much_results: "Zu viele Treffer, bitte schränken Sie die Suche ein"
     current_logs: Aktuelle Logs
     all_logs: Alle Logs
+    update_only: Nur aktualisieren, keine neuen Datensätze anlegen
+    force_update: Update erzwingen (Beschreibungsfeld wird überschrieben)
 
   activerecord:
     models:

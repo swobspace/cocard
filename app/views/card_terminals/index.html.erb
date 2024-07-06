@@ -2,108 +2,106 @@
 
 <h1><%= t('controller.card_terminals') %></h1>
 
-<%= turbo_frame_tag('card_terminals') do %>
-  <div data-controller="datatables">
-    <%= content_tag :table, role: :datatable,
-          id: "card_terminals_table",
-          class: "table table-bordered table-responsive-xl",
-          data: {
-            'datatables-target': 'datatable',
-            order: [[0, 'asc']].to_json
-          } do %>
-      <thead>
-        <tr>
-              <th class="text-center"><%= t('attributes.condition') %></th>
-              <th class="notvisible"><%= t('attributes.condition_message') %></th>
-              <th><%= t('attributes.displayname') %></th>
-              <th><%= t('attributes.ct_id') %></th>
-              <th><%= t('attributes.connector') %></th>
-              <th class="notvisible"><%= t('attributes.name') %></th>
-              <th><%= t('attributes.mac') %></th>
-              <th><%= t('attributes.ip') %></th>
-              <th><%= t('attributes.connected') %></th>
-              <th><%= t('attributes.location') %></th>
-              <th><%= t('attributes.room') %></th>
-              <th><%= t('attributes.plugged_in') %></th>
-              <th><%= t('attributes.contact') %></th>
-              <th><%= t('attributes.delivery_date') %></th>
-              <th><%= t('attributes.supplier') %></th>
-              <th><%= t('attributes.serial') %></th>
-              <th><%= t('attributes.id_product') %></th>
-              <th><%= t('attributes.firmware_version') %></th>
-              <th class="notvisible"><%= t('attributes.description') %></th>
-              <th><%= t('attributes.updated_at') %></th>
-              <th class="nosort"><%= t('cocard.action') %></th>
-        </tr>
-      </thead>
-      <tfoot class="search">
-        <tr>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th class="nosearch"></th>
-        </tr>
-      </tfoot>
-      <tbody>
-        <% @card_terminals.each do |card_terminal| %>
-          <%= content_tag(:tr, id: dom_id(card_terminal), class: dom_class(card_terminal)) do %>
-            <td class="text-center">
-              <%= render ConditionIconComponent.new(item: card_terminal, small: true, as_text: true) %>
-              <span style="visibility:hidden;"><%= card_terminal.condition %></span>
-            </td>
-            <td><%= card_terminal.condition_message %></td>
-            <td><%= link_to card_terminal.displayname, card_terminal_path(card_terminal),
-                            class: 'primary-link'  %></td>
-            <td><%= link_to card_terminal.ct_id, card_terminal_path(card_terminal),
-                            class: 'primary-link'  %></td>
-            <td><%= link_to(card_terminal.connector&.name,
-                            connector_path(card_terminal.connector),
-                            class: 'primary-link'
-                           ) if card_terminal.connector %></td>
-            <td><%= card_terminal.name %></td>
-            <td><%= card_terminal.mac %></td>
-            <td><%= card_terminal.ip %></td>
-            <td><%= card_terminal.connected %></td>
-            <td><%= card_terminal.location %></td>
-            <td><%= card_terminal.room %></td>
-            <td><%= card_terminal.plugged_in %></td>
-            <td><%= card_terminal.contact %></td>
-            <td><%= card_terminal.delivery_date %></td>
-            <td><%= card_terminal.supplier %></td>
-            <td><%= card_terminal.serial %></td>
-            <td><%= card_terminal.id_product %></td>
-            <td><%= card_terminal.firmware_version %></td>
-            <td><%= card_terminal.description %></td>
-            <td><%= render UpdatedAtComponent.new(item: card_terminal) %></td>
-            <td class="text-nowrap">
-              <%= show_link card_terminal %>
-              <%= edit_link card_terminal %>
-              <%= delete_link card_terminal %>
-            </td>
-          <% end %>
+<div data-controller="datatables">
+  <%= content_tag :table, role: :datatable,
+        id: "card_terminals_table",
+        class: "table table-bordered table-responsive-xl",
+        data: {
+          'datatables-target': 'datatable',
+          order: [[0, 'asc']].to_json
+        } do %>
+    <thead>
+      <tr>
+            <th class="text-center"><%= t('attributes.condition') %></th>
+            <th class="notvisible"><%= t('attributes.condition_message') %></th>
+            <th><%= t('attributes.displayname') %></th>
+            <th><%= t('attributes.ct_id') %></th>
+            <th><%= t('attributes.connector') %></th>
+            <th class="notvisible"><%= t('attributes.name') %></th>
+            <th><%= t('attributes.mac') %></th>
+            <th><%= t('attributes.ip') %></th>
+            <th><%= t('attributes.connected') %></th>
+            <th><%= t('attributes.location') %></th>
+            <th><%= t('attributes.room') %></th>
+            <th><%= t('attributes.plugged_in') %></th>
+            <th><%= t('attributes.contact') %></th>
+            <th><%= t('attributes.delivery_date') %></th>
+            <th><%= t('attributes.supplier') %></th>
+            <th><%= t('attributes.serial') %></th>
+            <th><%= t('attributes.id_product') %></th>
+            <th><%= t('attributes.firmware_version') %></th>
+            <th class="notvisible"><%= t('attributes.description') %></th>
+            <th><%= t('attributes.updated_at') %></th>
+            <th class="nosort"><%= t('cocard.action') %></th>
+      </tr>
+    </thead>
+    <tfoot class="search">
+      <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th class="nosearch"></th>
+      </tr>
+    </tfoot>
+    <tbody>
+      <% @card_terminals.each do |card_terminal| %>
+        <%= content_tag(:tr, id: dom_id(card_terminal), class: dom_class(card_terminal)) do %>
+          <td class="text-center">
+            <%= render ConditionIconComponent.new(item: card_terminal, small: true, as_text: true) %>
+            <span style="visibility:hidden;"><%= card_terminal.condition %></span>
+          </td>
+          <td><%= card_terminal.condition_message %></td>
+          <td><%= link_to card_terminal.displayname, card_terminal_path(card_terminal),
+                          class: 'primary-link'  %></td>
+          <td><%= link_to card_terminal.ct_id, card_terminal_path(card_terminal),
+                          class: 'primary-link'  %></td>
+          <td><%= link_to(card_terminal.connector&.name,
+                          connector_path(card_terminal.connector),
+                          class: 'primary-link'
+                         ) if card_terminal.connector %></td>
+          <td><%= card_terminal.name %></td>
+          <td><%= card_terminal.mac %></td>
+          <td><%= card_terminal.ip %></td>
+          <td><%= card_terminal.connected %></td>
+          <td><%= card_terminal.location %></td>
+          <td><%= card_terminal.room %></td>
+          <td><%= card_terminal.plugged_in %></td>
+          <td><%= card_terminal.contact %></td>
+          <td><%= card_terminal.delivery_date %></td>
+          <td><%= card_terminal.supplier %></td>
+          <td><%= card_terminal.serial %></td>
+          <td><%= card_terminal.id_product %></td>
+          <td><%= card_terminal.firmware_version %></td>
+          <td><%= card_terminal.description %></td>
+          <td><%= render UpdatedAtComponent.new(item: card_terminal) %></td>
+          <td class="text-nowrap">
+            <%= show_link card_terminal %>
+            <%= edit_link card_terminal %>
+            <%= delete_link card_terminal %>
+          </td>
         <% end %>
-      </tbody>
-    <% end %>
-  </div>
-<% end %>
+      <% end %>
+    </tbody>
+  <% end %>
+</div>
 
-  <br />
+<br />
 
-  <%= back_link %>
+<%= back_link %>

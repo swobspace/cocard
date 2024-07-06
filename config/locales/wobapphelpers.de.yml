@@ -4,11 +4,12 @@ de:
       back: Zurück
       cancel: Abbrechen
     actions:
-      new:  "%{model} erstellen"
-      create:  "%{model} erstellen"
-      show:  "%{model} anzeigen"
-      edit:  "%{model} bearbeiten"
-      copy:  "%{model} kopieren"
-      update:  "%{model} bearbeiten"
-      destroy:  "%{model} löschen"
-      destroy_confirm:  "Der Datensatz kann nicht wieder hergestellt werden!"
+      new: "%{model} erstellen"
+      new_import: "%{model} importieren"
+      create: "%{model} erstellen"
+      show: "%{model} anzeigen"
+      edit: "%{model} bearbeiten"
+      copy: "%{model} kopieren"
+      update: "%{model} bearbeiten"
+      destroy: "%{model} löschen"
+      destroy_confirm: "Der Datensatz kann nicht wieder hergestellt werden!"

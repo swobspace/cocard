@@ -1,0 +1,44 @@
+<%= form_tag(import_workplaces_path, role: "form", multipart: true,
+             data: { turbo: false } ) do %>
+   <div class="row mb-3">
+      <label for="file" class="col-sm-2 col-form-label">
+        <%= t('attributes.file') %>
+      </label>
+      <div class="col-sm-9">
+        <input type="file" class="form-control" id="file" name="file">
+      </div>
+    </div>
+
+    <fieldset class="row mb-3">
+      <legend class="col-form-label col-sm-2 pt-0">
+        <%= t('cocard.import_options') %>
+      </legend>
+
+      <div class="col-sm-9">
+        <div class="form-check form-switch">
+          <%= hidden_field_tag :update_only, 0  %>
+          <%= check_box_tag :update_only, 1, true, class: "form-check-input" %>
+          <%= label_tag :update_only, t('cocard.update_only'),
+                         class: "form-check-label" %>
+        </div>
+
+        <div class="form-check form-switch">
+          <%= hidden_field_tag :force_update, 0  %>
+          <%= check_box_tag :force_update, 1, false, class: "form-check-input" %>
+          <%= label_tag :force_update, t('cocard.force_update'),
+                         class: "form-check-label" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="offset-sm-2 col-sm-9">
+        <%= button_to import_workplaces_path, class: "btn btn-primary me-2" do %>
+          <%= t('actions.upload') %>
+        <% end %>
+        <%= cancel_button %>
+      </div>
+    </div>
+  </div>
+
+<% end %>

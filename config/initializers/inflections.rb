@@ -14,5 +14,5 @@
 ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.acronym "SDS"
   inflect.acronym "SOAP"
-  inflect.acronym "ImportCSV"
+  inflect.acronym "CSV"
 end
