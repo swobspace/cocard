@@ -7,7 +7,7 @@ RSpec.describe "/workplaces", type: :request do
   }
 
   let(:invalid_attributes) {
-    skip("no invalid attributes currently possible")
+    { name: nil }
   }
 
   before(:each) do
@@ -30,12 +30,12 @@ RSpec.describe "/workplaces", type: :request do
     end
   end
 
-#   describe "GET /new" do
-#     it "renders a successful response" do
-#       get new_workplace_url
-#       expect(response).to be_successful
-#     end
-#   end
+   describe "GET /new" do
+     it "renders a successful response" do
+       get new_workplace_url
+       expect(response).to be_successful
+     end
+   end
 
   describe "GET /edit" do
     it "renders a successful response" do
@@ -45,46 +45,47 @@ RSpec.describe "/workplaces", type: :request do
     end
   end
 
-#  describe "POST /create" do
-#    context "with valid parameters" do
-#      it "creates a new Workplace" do
-#        expect {
-#          post workplaces_url, params: { workplace: valid_attributes }
-#        }.to change(Workplace, :count).by(1)
-#      end
-#
-#      it "redirects to the created workplace" do
-#        post workplaces_url, params: { workplace: valid_attributes }
-#        expect(response).to redirect_to(workplace_url(Workplace.last))
-#      end
-#    end
-#
-#    context "with invalid parameters" do
-#      it "does not create a new Workplace" do
-#        expect {
-#          post workplaces_url, params: { workplace: invalid_attributes }
-#        }.to change(Workplace, :count).by(0)
-#      end
-#
-#    
-#      it "renders a response with 422 status (i.e. to display the 'new' template)" do
-#        post workplaces_url, params: { workplace: invalid_attributes }
-#        expect(response).to have_http_status(:unprocessable_entity)
-#      end
-#    
-#    end
-#  end
+  describe "POST /create" do
+    context "with valid parameters" do
+      it "creates a new Workplace" do
+        expect {
+          post workplaces_url, params: { workplace: valid_attributes }
+        }.to change(Workplace, :count).by(1)
+      end
+
+      it "redirects to the created workplace" do
+        post workplaces_url, params: { workplace: valid_attributes }
+        expect(response).to redirect_to(workplace_url(Workplace.last))
+      end
+    end
+
+    context "with invalid parameters" do
+      it "does not create a new Workplace" do
+        expect {
+          post workplaces_url, params: { workplace: invalid_attributes }
+        }.to change(Workplace, :count).by(0)
+      end
+
+    
+      it "renders a response with 422 status (i.e. to display the 'new' template)" do
+        post workplaces_url, params: { workplace: invalid_attributes }
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+    
+    end
+  end
 
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        { description: "some more textinfo" }
+        { name: 'New Name', description: "some more textinfo" }
       }
 
       it "updates the requested workplace" do
         workplace = Workplace.create! valid_attributes
         patch workplace_url(workplace), params: { workplace: new_attributes }
         workplace.reload
+        expect(workplace.name).to eq("New Name")
         expect(workplace.description.to_plain_text).to eq("some more textinfo")
       end
 

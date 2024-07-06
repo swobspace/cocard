@@ -14,22 +14,22 @@ class WorkplacesController < ApplicationController
   end
 
   # GET /workplaces/new
-#  def new
-#    @workplace = Workplace.new
-#    respond_with(@workplace)
-#  end
+  def new
+    @workplace = Workplace.new
+    respond_with(@workplace)
+  end
 
   # GET /workplaces/1/edit
   def edit
   end
 
   # POST /workplaces
-#  def create
-#    @workplace = Workplace.new(workplace_params)
-#
-#    @workplace.save
-#    respond_with(@workplace)
-#  end
+  def create
+    @workplace = Workplace.new(workplace_params)
+
+    @workplace.save
+    respond_with(@workplace)
+  end
 
   # PATCH/PUT /workplaces/1
   def update
@@ -43,6 +43,23 @@ class WorkplacesController < ApplicationController
     respond_with(@workplace)
   end
 
+  def new_import     
+  end                
+      
+  def import
+    result = Workplaces::ImportCSV.new(import_params).call
+
+    if result.success?
+      flash[:success] = "Import successful"
+      redirect_to workplaces_path
+    else
+      flash[:error] = result.error_messages.join(", ")
+      redirect_to workplaces_path
+    end
+  end
+
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_workplace
@@ -51,6 +68,10 @@ class WorkplacesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def workplace_params
-      params.require(:workplace).permit(:description)
+      params.require(:workplace).permit(:name, :description)
+    end
+
+    def import_params
+      params.permit(:utf8, :authenticity_token, :file, :update_only, :force_update).to_hash
     end
 end

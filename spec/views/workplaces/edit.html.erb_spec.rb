@@ -16,9 +16,7 @@ RSpec.describe "workplaces/edit", type: :view do
     render
 
     assert_select "form[action=?][method=?]", workplace_path(workplace), "post" do
-      assert_select "input[name=?]", "workplace[name]" do |input|
-        assert input.attr("disabled").present?
-      end
+      assert_select "input[name=?]", "workplace[name]"
       assert_select "input[name=?]", "workplace[description]"
     end
   end

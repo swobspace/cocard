@@ -2,7 +2,7 @@
 <%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
 
   <div class="form-input">
-    <%= form.input :name, disabled: true
+    <%= form.input :name
      %>
     <%= form.input :description, as: :rich_text_area
        %>

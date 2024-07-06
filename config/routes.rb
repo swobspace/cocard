@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   resources :client_certificates
-  resources :workplaces, except: [:new, :create]
+  resources :workplaces do
+    collection do
+      get :new_import
+      post :import
+    end
+  end
   resources :networks
   resources :logs, only: [:show, :index, :destroy] do
     collection do
