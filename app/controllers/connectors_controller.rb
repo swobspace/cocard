@@ -81,7 +81,7 @@ class ConnectorsController < ApplicationController
   # DELETE /connectors/1
   def destroy
     @connector.destroy!
-    respond_with(@connector, location: polymorphic_path([@loggable, :card_terminals]))
+    respond_with(@connector, location: polymorphic_path([@loggable, :connectors]))
   end
 
   private
