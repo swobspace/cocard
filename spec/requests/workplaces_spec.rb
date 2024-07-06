@@ -67,22 +67,8 @@ RSpec.describe "/workplaces", type: :request do
         expect(response).to redirect_to(workplaces_url)
       end
     end
-
-    context "with invalid parameters" do
-      it "does not create a new Workplace" do
-        expect {
-          post workplaces_url, params: { workplace: invalid_attributes }
-        }.to change(Workplace, :count).by(0)
-      end
-
-    
-      it "renders a response with 422 status (i.e. to display the 'new' template)" do
-        post workplaces_url, params: { workplace: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
-    
-    end
   end
+
   describe "POST /create" do
     context "with valid parameters" do
       it "creates a new Workplace" do
