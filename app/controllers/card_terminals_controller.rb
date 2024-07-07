@@ -15,10 +15,10 @@ class CardTerminalsController < ApplicationController
   def sindex
     if params[:condition]
       @card_terminals = CardTerminal.condition(params[:condition])
-                                    .order('updated_at desc')
+                                    .order('last_ok desc')
     else
       @card_terminals = CardTerminal.failed
-                                    .order('updated_at desc')
+                                    .order('last_ok desc')
     end
     @pagy, @card_terminals = pagy(@card_terminals)
     respond_with(@card_terminals)

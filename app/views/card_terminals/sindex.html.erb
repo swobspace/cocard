@@ -10,7 +10,7 @@
             <th><%= t('attributes.displayname') %></th>
             <th><%= t('attributes.connector') %></th>
             <th><%= t('attributes.condition_message') %></th>
-            <th class="text-center"><%= t('attributes.updated_at') %></th>
+            <th class="text-center"><%= t('attributes.last_ok') %></th>
       </tr>
     </thead>
     <tbody>
@@ -31,7 +31,7 @@
                     data: { "turbo-frame" => "_top" },
                     class: "primary-link") unless card_terminal.connector.nil? %></td>
           <td><%= card_terminal.condition_message %></td>
-          <td><%= card_terminal.updated_at&.localtime %></td>
+          <td><%= card_terminal.last_ok&.localtime %></td>
         <% end %>
       <% end %>
     </tbody>
