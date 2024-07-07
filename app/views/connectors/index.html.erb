@@ -24,7 +24,7 @@
             <th class="notvisible"><%= t('attributes.description') %></th>
             <th><%= t('attributes.vpnti_online') %></th>
             <th><%= t('attributes.last_check') %></th>
-            <th><%= t('attributes.last_check_ok') %></th>
+            <th><%= t('attributes.last_ok') %></th>
             <th class="notvisible"><%= t('attributes.use_tls') %></th>
             <th class="notvisible"><%= t('attributes.authentication') %></th>
             <th class="notvisible"><%= t('attributes.id_contract') %></th>
@@ -75,7 +75,7 @@
              %>
           </td>
           <td><%= render IsCurrentComponent.new(item: connector, attr: :last_check) %></td>
-          <td><%= render IsCurrentComponent.new(item: connector, attr: :last_check_ok) %></td>
+          <td><%= render IsCurrentComponent.new(item: connector, attr: :last_ok) %></td>
           <td><%= render BooleanComponent.new(value: connector.use_tls,
                                               text: :text) %></td>
           <td><%= t(connector.authentication, scope: :authentications) %></td>

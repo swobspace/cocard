@@ -105,12 +105,12 @@ RSpec.describe Connector, type: :model do
           }.to change(connector, :condition)
         end
 
-        it 'updates last_check_ok' do
+        it 'updates last_ok' do
           connector.soap_request_success = true
           connector.vpnti_online = true
           expect {
             connector.save
-          }.to change(connector, :last_check_ok)
+          }.to change(connector, :last_ok)
         end
       end
 

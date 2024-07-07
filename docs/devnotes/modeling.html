@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Modeling cocard :: Cocard</title>
-    <meta name="generator" content="Antora 3.1.8">
+    <meta name="generator" content="Antora 3.1.9">
     <link rel="stylesheet" href="../_/css/site.css">
     <script>var uiRootPath = '../_'</script>
   </head>
@@ -203,7 +203,7 @@ bin/rails g migration AddReadonlyToConnector \
   sds_xml:text \
   sds_updated_at: \
   connector_services:jsonb \
-  last_check:timestamp last_check_ok:timestamp \
+  last_check:timestamp last_ok:timestamp \
   condition:integer:index \
   condition_message:string  \
   soap_request_success:boolean \
@@ -254,6 +254,7 @@ bin/rails g migration AddInternalToCardTerminal \
   connected:boolean \
   condition:integer \
   condition_message:string  \
+  last_ok:timestamp \
   connector:belongs_to \
   firmware_version:string</code></pre>
 </div>

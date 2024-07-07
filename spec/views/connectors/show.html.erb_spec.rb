@@ -19,7 +19,7 @@ RSpec.describe "connectors/show", type: :view do
       manual_update: false,
       description: "some text",
       last_check: current,
-      last_check_ok: current,
+      last_ok: current,
       firmware_version: "123.456",
       id_contract: '919XaWZ3',
       serial: 'S12344321',

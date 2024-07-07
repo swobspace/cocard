@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_06_162070) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_07_083532) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -75,6 +75,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_06_162070) do
     t.string "serial", default: ""
     t.string "id_product", default: ""
     t.string "condition_message", default: "-"
+    t.datetime "last_ok", precision: nil
     t.index ["condition"], name: "index_card_terminals_on_condition"
     t.index ["connector_id"], name: "index_card_terminals_on_connector_id"
     t.index ["location_id"], name: "index_card_terminals_on_location_id"
@@ -162,7 +163,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_06_162070) do
     t.text "sds_xml"
     t.jsonb "connector_services"
     t.datetime "last_check", precision: nil
-    t.datetime "last_check_ok", precision: nil
+    t.datetime "last_ok", precision: nil
     t.integer "condition", default: -1
     t.boolean "soap_request_success", default: false
     t.boolean "vpnti_online", default: false

@@ -9,7 +9,7 @@
             <th><%= t('attributes.name') %></th>
             <th><%= t('attributes.condition_message') %></th>
             <th class="text-center"><%= t('attributes.last_check') %></th>
-            <th class="text-center"><%= t('attributes.last_check_ok') %></th>
+            <th class="text-center"><%= t('attributes.last_ok') %></th>
       </tr>
     </thead>
     <tbody>
@@ -25,7 +25,7 @@
                     class: "primary-link") %></td>
           <td><%= connector.condition_message %></td>
           <td><%= connector.last_check&.localtime %></td>
-          <td><%= connector.last_check_ok&.localtime %></td>
+          <td><%= connector.last_ok&.localtime %></td>
         <% end %>
       <% end %>
     </tbody>

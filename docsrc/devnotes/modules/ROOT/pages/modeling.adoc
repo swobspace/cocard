@@ -63,7 +63,7 @@ bin/rails g migration AddReadonlyToConnector \
   sds_xml:text \
   sds_updated_at: \
   connector_services:jsonb \
-  last_check:timestamp last_check_ok:timestamp \
+  last_check:timestamp last_ok:timestamp \
   condition:integer:index \
   condition_message:string  \
   soap_request_success:boolean \
@@ -111,6 +111,7 @@ bin/rails g migration AddInternalToCardTerminal \
   connected:boolean \
   condition:integer \
   condition_message:string  \
+  last_ok:timestamp \
   connector:belongs_to \
   firmware_version:string
 ----

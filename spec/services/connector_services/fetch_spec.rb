@@ -76,7 +76,7 @@ module ConnectorServices
         it 'does not update last_check' do
           expect do
             subject.call
-          end.not_to change(connector, :last_check_ok)
+          end.not_to change(connector, :last_ok)
         end
 
 
