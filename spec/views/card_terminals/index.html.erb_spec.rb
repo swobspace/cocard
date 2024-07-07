@@ -77,5 +77,6 @@ RSpec.describe "card_terminals/index", type: :view do
     assert_select cell_selector, text: Regexp.new('11122277634'.to_s), count: 2
     assert_select cell_selector, text: Regexp.new('ORGA6141'.to_s), count: 2
     assert_select cell_selector, text: Regexp.new('CardTerminal online'.to_s), count: 2
+    assert_select cell_selector, text: Regexp.new(Time.current.localtime.to_s.gsub(/\+.*/, '')), count: 4
   end
 end

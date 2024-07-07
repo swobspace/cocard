@@ -97,6 +97,7 @@ de:
     client_ids: Mandanten
     client_certificate: Clientzertifikat
     client_certificate_ids: Clientzertifikate
+    client_system: Clientsystem
     condition: Zustand
     condition_message: Zustandsinfo
     configuration: Konfiguration
@@ -131,6 +132,7 @@ de:
     loggable: Log für
     loggable_type: Typ
     mac: MAC
+    mandant: Mandant
     manual_update: manuelles Update
     message: Nachricht
     name: Name

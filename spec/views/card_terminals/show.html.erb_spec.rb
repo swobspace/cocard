@@ -42,7 +42,8 @@ RSpec.describe "card_terminals/show", type: :view do
       firmware_version: '3.1.9',
       plugged_in: "Dose 17/4, Patchfeld 5",
       serial: '11122277634',
-      id_product: 'ORGA61411'
+      id_product: 'ORGA61411',
+      last_ok: 1.day.before(ts)
     )
   end
 
@@ -72,6 +73,8 @@ RSpec.describe "card_terminals/show", type: :view do
     expect(rendered).to match(/3.1.9/)
     expect(rendered).to match(/ORGA6141/)
     expect(rendered).to match(/11122277634/)
+    expect(rendered).to match(/11122277634/)
+    expect(rendered).to match("#{ts.localtime.to_s.gsub(/\+.*/, '')}")
 
   end
 end

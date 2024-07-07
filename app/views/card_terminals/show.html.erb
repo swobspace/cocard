@@ -100,6 +100,11 @@
             <th class="w-25 pe-3"><%= t('attributes.updated_at')%>:</th>
             <td><%= render UpdatedAtComponent.new(item: @card_terminal) %></td>
           </tr>
+
+          <tr>
+            <th class="w-25 pe-3"><%= t('attributes.last_ok')%>:</th>
+            <td><%= render IsCurrentComponent.new(item: @card_terminal, attr: :last_ok) %></td>
+          </tr>
         </table>
 
       </div>
