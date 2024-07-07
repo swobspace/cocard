@@ -3,9 +3,21 @@
                              scope: 'controller'))) do %>
   <%= render 'import_form' %>
 
-  <div class="mt-3 p-2 bg-light">
-    <p>Die CSV-Datei muss genau zwei Spalten haben mit folgendem Header:</p>
-    <pre>name;description</pre>
-    <p>Trennzeichen ist das Semikolon, der Text darf nicht Anführungszeichen eingeschlossen sein</p>
-  </div>
+  <dl class="mt-3 p-2 bg-light">
+    <dt class="col-2">File</dt>
+    <dd class="col">Die CSV-Datei muss genau zwei Spalten haben mit folgendem Header:
+        <tt>name;description</tt> . Trennzeichen ist das Semikolon,
+        der Text darf nicht Anführungszeichen eingeschlossen sein
+     </dd>
+
+    <dt class="col-2">Nur aktualisieren</dt>
+    <dd class="col">
+      Neue Datensätze werden nur angelegt, wenn dieser Schalter nicht aktiv ist.
+    </dd>
+
+    <dt class="col-2">Update erzwingen</dt>
+    <dd class="col">
+      Das Beschreibungsfeld wird mit den Daten aus der Import-Datei überschrieben.
+    </dd>
+  </dl>
 <% end %>
