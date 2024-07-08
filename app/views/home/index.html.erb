@@ -36,6 +36,22 @@
       <div class="card-header">
         <div class="row">
           <div class="col-xs-5 col-md-4 col-ml-3">
+            <h4 class="me-4 pt-1">Card Status</h4>
+          </div>
+          <div class="d-flex col-xs-7 col-md-8 col-ml-9">
+            <%= render 'card_states' %>
+          </div>
+        </div>
+      </div>
+      <div>
+        <%= turbo_frame_tag("cards", src: sindex_cards_path) %>
+      </div>
+    </div>
+
+    <div class="card mt-3">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-xs-5 col-md-4 col-ml-3">
             <h4 class="me-4 pt-1">Card Terminal Status</h4>
           </div>
           <div class="d-flex col-xs-7 col-md-8 col-ml-9">
@@ -48,21 +64,6 @@
       </div>
     </div>
 
-    <div class="card mt-3">
-      <div class="card-header">
-        <div class="row">
-          <div class="col-xs-5 col-md-4 col-ml-3">
-            <h4 class="me-4 pt-1">Card Status</h4>
-          </div>
-          <div class="d-flex col-xs-7 col-md-8 col-ml-9">
-            <%= render 'card_states' %>
-          </div>
-        </div>
-      </div>
-      <div>
-        <%= turbo_frame_tag("cards", src: sindex_cards_path) %>
-      </div>
-    </div>
   </div>
 <% else %>
   <p>
