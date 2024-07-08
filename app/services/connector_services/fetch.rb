@@ -80,7 +80,7 @@ module ConnectorServices
 
     def faraday_options
       {
-        request: { open_timeout: 5, timeout: 10 },
+        request: { open_timeout: 15, timeout: 30 },
         url: uri_base
       }
     end
