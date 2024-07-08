@@ -95,7 +95,8 @@ module Cocard::SOAP
 
     def savon_globals
       { 
-        open_timeout: 5,
+        open_timeout: 15,
+        read_timeout: 30,
         wsdl: wsdl_content,
         env_namespace: :soapenv,
         namespace: namespace,
