@@ -282,9 +282,8 @@ end</code></pre>
   bsnr:string \
   fachrichtung:string \
   telematikid:string \
-  context:belongs_to \
   private_information:rich_text \
-    --no-stylesheets --no-javascripts --no-helper
+  --no-stylesheets --no-javascripts --no-helper
 
 bin/rails g migration AddInternalToCard \
   properties:jsonb \
@@ -297,7 +296,6 @@ bin/rails g migration AddInternalToCard \
   expiration_date:date \
   condition:integer \
   condition_message:string  \
-  pin_status:string \
   card_terminal:belongs_to
 
 bin/rails g migration AddCertificateToCard \
@@ -457,7 +455,7 @@ end</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_habtm_connectorcontext_through_connectorcontext"><a class="anchor" href="#_habtm_connectorcontext_through_connectorcontext"></a>HABTM Connector&#8201;&#8212;&#8201;Context through ConnectorContext</h2>
+<h2 id="_habtm_connectorcontext_through_connectorcontext"><a class="anchor" href="#_habtm_connectorcontext_through_connectorcontext"></a>HABTM Connector&#8212;&#8203;Context through ConnectorContext</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>HABTM for Connector and Context with additional attributes</p>
@@ -481,7 +479,33 @@ t.index [:context_id, :connector_id], unique: true</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_habtm_terminalworkplaces_through_terminalworkplaces"><a class="anchor" href="#_habtm_terminalworkplaces_through_terminalworkplaces"></a>HABTM Terminal&#8201;&#8212;&#8201;Workplaces through TerminalWorkplaces</h2>
+<h2 id="_habtm_cardcontext_through_connectorcontext"><a class="anchor" href="#_habtm_cardcontext_through_connectorcontext"></a>HABTM Card&#8212;&#8203;Context through ConnectorContext</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>HABTM for Card and Context with additional attributes</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g model CardContext \
+  card:belongs_to \
+  context:belongs_to \
+  position:integer:index \
+  pin_status:string:index \
+  left_tries:integer \
+  --no-stylesheets --no-javascripts --no-helper</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Unique Index for CardContext</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">t.index [:card_id, :context_id], unique: true
+t.index [:context_id, :card_id], unique: true</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_habtm_terminalworkplaces_through_terminalworkplaces"><a class="anchor" href="#_habtm_terminalworkplaces_through_terminalworkplaces"></a>HABTM Terminal&#8212;&#8203;Workplaces through TerminalWorkplaces</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>HABTM for Terminals and Workplaces with additional attributes</p>

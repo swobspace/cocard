@@ -71,6 +71,14 @@ class ConnectorContext {
   position: integer
 }
 
+class CardContext {
+  card_id
+  context_id
+  position: integer
+  pin_status: string
+  left_tries: integer
+}
+
 class Card {
   name: string
   description: rich_text
@@ -81,7 +89,6 @@ class Card {
   bsnr: string
   telematikid: string
   private_information: rich_text
-  context_id
   --
   properties: jsonb
   card_handle: string
@@ -93,7 +100,6 @@ class Card {
   expiration_date: date
   condition: integer
   condition_message: string
-  pin_status: string
   card_terminal_id
   --
   certificate:text
@@ -158,12 +164,12 @@ Context "*" -- "*" Connector
 Connector "0..1" - "*" CardTerminal
 Location "0..1" -- "*" CardTerminal
 (Connector, Context) . ConnectorContext
+CardContext . (Card, Context)
 CardTerminal "0..1" - "*" Card
 CardTerminal "*" -- "*" Workplace
 TerminalWorkplaces . (CardTerminal, Workplace) 
 Location "0..1" -- "*" Card
 OperationalState "1" -- "*" Card
-Context "1" -- "*" Card
 
 Connector "1" -- "*" Log
 CardTerminal "1" -- "*" Log

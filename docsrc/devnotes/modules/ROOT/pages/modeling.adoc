@@ -137,9 +137,8 @@ bin/rails g scaffold Card \
   bsnr:string \
   fachrichtung:string \
   telematikid:string \
-  context:belongs_to \
   private_information:rich_text \
-    --no-stylesheets --no-javascripts --no-helper
+  --no-stylesheets --no-javascripts --no-helper
 
 bin/rails g migration AddInternalToCard \
   properties:jsonb \
@@ -152,7 +151,6 @@ bin/rails g migration AddInternalToCard \
   expiration_date:date \
   condition:integer \
   condition_message:string  \
-  pin_status:string \
   card_terminal:belongs_to
 
 bin/rails g migration AddCertificateToCard \
@@ -288,9 +286,7 @@ class CreateJoinTableConnectorClientCertificate < ActiveRecord::Migration[7.1]
 end
 ----
 
-
-
-== HABTM Connector -- Context through ConnectorContext
+== HABTM Connector--Context through ConnectorContext
 
 HABTM for Connector and Context with additional attributes
 
@@ -310,7 +306,30 @@ t.index [:connector_id, :context_id], unique: true
 t.index [:context_id, :connector_id], unique: true
 ----
 
-== HABTM Terminal -- Workplaces through TerminalWorkplaces
+== HABTM Card--Context through ConnectorContext
+
+HABTM for Card and Context with additional attributes
+
+[source,sh]
+----
+bin/rails g model CardContext \
+  card:belongs_to \
+  context:belongs_to \
+  position:integer:index \
+  pin_status:string:index \
+  left_tries:integer \
+  --no-stylesheets --no-javascripts --no-helper
+----
+
+.Unique Index for CardContext
+[source,ruby]
+----
+t.index [:card_id, :context_id], unique: true
+t.index [:context_id, :card_id], unique: true
+----
+
+
+== HABTM Terminal--Workplaces through TerminalWorkplaces
 
 HABTM for Terminals and Workplaces with additional attributes
 
