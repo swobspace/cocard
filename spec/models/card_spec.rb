@@ -9,7 +9,7 @@ RSpec.describe Card, type: :model do
     FactoryBot.create(:card, 
       card_holder_name: "Doctor Who's Universe",
       card_terminal: ct,
-      context: ctx,
+      contexts: [ctx],
       expiration_date: 2.years.after(Date.current),
       pin_status: 'VERIFIED',
       updated_at: Time.current,
@@ -19,7 +19,8 @@ RSpec.describe Card, type: :model do
 
   it { is_expected.to have_many(:logs) }
   it { is_expected.to belong_to(:card_terminal).optional }
-  it { is_expected.to belong_to(:context).optional }
+  it { is_expected.to have_many(:card_contexts).dependent(:destroy) }
+  it { is_expected.to have_many(:contexts).through(:card_contexts) }
   it { is_expected.to belong_to(:location).optional }
   it { is_expected.to belong_to(:operational_state).optional }
   it { is_expected.to validate_presence_of(:iccsn) }
@@ -65,7 +66,7 @@ RSpec.describe Card, type: :model do
       it "-> NOTHING" do
         card.update(condition: Cocard::States::OK)
         card.reload
-        expect(card).to receive(:context).and_return(nil)
+        expect(card).to receive(:contexts).and_return([])
         expect(card).to receive(:card_type).at_least(:once).and_return('SMC-B')
         expect {
           card.update_condition

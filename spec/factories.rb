@@ -33,6 +33,11 @@ FactoryBot.define do
     iccsn { generate(:iccsn) }
   end
 
+  factory :card_context do
+    card
+    context
+  end
+
   factory :card_terminal do
     ct_id { generate(:aname) }
 

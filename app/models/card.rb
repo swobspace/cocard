@@ -5,7 +5,8 @@ class Card < ApplicationRecord
   # -- associations
   has_many :logs, as: :loggable, dependent: :destroy
   belongs_to :card_terminal, optional: true
-  belongs_to :context, optional: true
+  has_many :card_contexts, dependent: :destroy
+  has_many :contexts, through: :card_contexts
   belongs_to :location, optional: true
   belongs_to :operational_state, optional: true
 
@@ -33,7 +34,7 @@ class Card < ApplicationRecord
     elsif expiration_date.nil?
       set_condition( Cocard::States::NOTHING,
                      "Kein Ablaufdatum - UNUSED" )
-    elsif (card_type == 'SMC-B' and context.nil?)
+    elsif (card_type == 'SMC-B' and contexts.empty?)
       set_condition( Cocard::States::NOTHING,
                      "Kein Context konfiguriert" )
 
