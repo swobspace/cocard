@@ -19,7 +19,7 @@ module Cocard
       options.symbolize_keys
       @card      = options.fetch(:card)
       @connector = @card.card_terminal&.connector
-      @context   = options.fetch(:context) { @card.context }
+      @context   = options.fetch(:context) { @card.contexts.first }
     end
 
     # service.call()

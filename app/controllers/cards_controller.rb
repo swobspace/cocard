@@ -66,13 +66,18 @@ class CardsController < ApplicationController
   end
 
   def get_pin_status
+    if set_context
       result = Cocard::GetPinStatus.new(card: @card, context: set_context).call
-    unless result.success?
-      @card.errors.add(:base, :invalid)
-      @card.errors.add(:base, result.error_messages.join("; "))
-      flash[:alert] = result.error_messages.join(', ')
+      unless result.success?
+        @card.errors.add(:base, :invalid)
+        @card.errors.add(:base, result.error_messages.join("; "))
+        flash[:alert] = "Kontext: #{@context} / ERROR:: " + result.error_messages.join(', ')
+      else
+        flash[:notice] = "Kontext: #{@context}, PIN-Status: #{result.pin_status}, left_tries: #{}"
+      end
     else
-      flash[:notice] = "Kontext: #{@context}, PIN-Status: #{result.pin_status}"
+      @card.errors.add(:base, :invalid)
+      flash[:alert] = "No context assigned or context not found!"
     end
     respond_with(@card, action: :show)
   end
@@ -100,11 +105,11 @@ class CardsController < ApplicationController
     end
 
     def set_context
-      if params[:context_id]
-        @context = Context.find(params[:context_id])
-      else
-        @context = @card.context
-      end
+      @context ||= if params[:context_id]
+                     Context.find(params[:context_id])
+                   else
+                     nil
+                   end
     end
 
     # Only allow a trusted parameter "white list" through.
@@ -116,7 +121,9 @@ class CardsController < ApplicationController
                     :fachrichtung, :context_id, :private_information,
                     :cert_subject_title, :cert_subject_sn, :cert_subject_givenname,
                     :cert_subject_street, :cert_subject_postalcode, :cert_subject_l,
-                    :cert_subject_o, :cert_subject_cn, :expiration_date
-                   )
+                    :cert_subject_o, :cert_subject_cn, :expiration_date,
+                    card_contexts_attributes: [
+                      :id, :context_id, :_destroy
+                    ])
     end
 end

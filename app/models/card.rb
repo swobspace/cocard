@@ -14,6 +14,10 @@ class Card < ApplicationRecord
   has_rich_text :description
   has_rich_text :private_information
 
+  accepts_nested_attributes_for :card_contexts,
+    allow_destroy: true,
+    reject_if: proc { |att| att['context_id'].blank? }
+
   # -- validations and callbacks
   before_save :update_condition
   validates :iccsn, presence: true, uniqueness: { case_sensitive: false }

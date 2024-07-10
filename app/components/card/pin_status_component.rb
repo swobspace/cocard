@@ -5,12 +5,16 @@ class Card::PinStatusComponent < ViewComponent::Base
     @card = card
   end
 
-  def message
-    if card.pin_status == 'VERIFIED'
-      Cocard::States.flag(Cocard::States::OK) + " VERIFIED"
-    else
-      Cocard::States.flag(Cocard::States::CRITICAL) + " #{card.pin_status}"
+  def messages
+    msg = []
+    card.card_contexts.each do |cx|
+      if cx.pin_status == 'VERIFIED'
+        msg << Cocard::States.flag(Cocard::States::OK) + " #{cx.context} VERIFIED"
+      else
+        msg << Cocard::States.flag(Cocard::States::CRITICAL) + " #{cx.context} #{cx.pin_status}"
+      end
     end
+    msg
   end
 
 private

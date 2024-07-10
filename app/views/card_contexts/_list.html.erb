@@ -1,0 +1,6 @@
+<div data-controller="sortable" 
+     data-sortable-handle-value=".handle"
+     class="list-group mb-3">
+  <%= render partial: 'card_contexts/card_context',
+             collection: card.card_contexts, as: :card_context %>
+</div>

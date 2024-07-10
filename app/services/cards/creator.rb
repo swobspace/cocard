@@ -57,8 +57,8 @@ module Cards
       #
       # set context if card.context.nil?
       #
-      if @card.context.nil?
-        @card.context = ctx
+      if @card.contexts.empty?
+        @card.contexts << ctx
       end
 
       if @card.persisted?
