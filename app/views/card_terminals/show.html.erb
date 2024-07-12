@@ -159,7 +159,7 @@
         </pre>
       </div>
     </div>
-    <div>
+    <div data-turbo-permanent>
       <%= turbo_frame_tag "card_terminal_#{@card_terminal.id}_ping",
                           src: ping_card_terminal_path(@card_terminal),
                           refresh: "morph" do %>
