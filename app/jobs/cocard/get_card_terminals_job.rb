@@ -43,6 +43,7 @@ module Cocard
             Rails.logger.warn(msg)
           end
         end
+        Turbo::StreamsChannel.broadcast_refresh_later_to(:home)
       end
     end
 

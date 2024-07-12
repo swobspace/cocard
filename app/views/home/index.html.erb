@@ -1,3 +1,5 @@
+<%= turbo_stream_from :home %>
+
 <% if @current_user.present? %>
   <div class="container-xxl">
     <div class="card mt-3">
@@ -12,7 +14,7 @@
         </div>
       </div>
       <div>
-        <%= turbo_frame_tag("connectors", src: sindex_connectors_path) %>
+        <%= turbo_frame_tag("connectors", src: sindex_connectors_path, refresh: "morph") %>
       </div>
     </div>
 
@@ -28,7 +30,7 @@
         </div>
       </div>
       <div>
-        <%= turbo_frame_tag("logs", src: sindex_logs_path) %>
+        <%= turbo_frame_tag("logs", src: sindex_logs_path, refresh: "morph") %>
       </div>
     </div>
 
@@ -44,7 +46,7 @@
         </div>
       </div>
       <div>
-        <%= turbo_frame_tag("cards", src: sindex_cards_path) %>
+        <%= turbo_frame_tag("cards", src: sindex_cards_path, refresh: "morph") %>
       </div>
     </div>
 
@@ -60,7 +62,7 @@
         </div>
       </div>
       <div>
-        <%= turbo_frame_tag("card_terminals", src: sindex_card_terminals_path) %>
+        <%= turbo_frame_tag("card_terminals", src: sindex_card_terminals_path, refresh: "morph") %>
       </div>
     </div>
 
