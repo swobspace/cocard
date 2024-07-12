@@ -12,6 +12,8 @@ class CardTerminal < ApplicationRecord
   has_many :cards, dependent: :destroy
 
   # -- configuration
+  broadcasts_refreshes
+
   has_rich_text :description
 
   # -- validations and callbacks

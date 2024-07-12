@@ -47,7 +47,8 @@
     </div>
   </div>
   <div class="m-2">
-    <%= turbo_frame_tag("card_terminals", src: location_card_terminals_path(@location)) %>
+    <%= turbo_frame_tag("card_terminals", src: location_card_terminals_path(@location),
+                                          refresh: "morph") %>
   </div>
 </div>
 
@@ -62,7 +63,8 @@
     </div>
   </div>
   <div class="m-2">
-    <%= turbo_frame_tag("cards", src: location_cards_path(@location)) %>
+    <%= turbo_frame_tag("cards", src: location_cards_path(@location),
+                                 refresh: "morph") %>
   </div>
 </div>
 
@@ -77,7 +79,8 @@
     </div>
   </div>
   <div class="m-2">
-    <%= turbo_frame_tag("connectors", src: location_connectors_path(@location)) %>
+    <%= turbo_frame_tag("connectors", src: location_connectors_path(@location),
+                                      refresh: "morph") %>
   </div>
 </div>
 
