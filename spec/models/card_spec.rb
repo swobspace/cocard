@@ -160,6 +160,15 @@ RSpec.describe Card, type: :model do
       it { puts card2.card_contexts }
       it { expect(card2.pin_status).to eq(Cocard::States::WARNING) }
     end
+
+    describe "with single context" do
+      before(:each) do
+        cctx1.update(pin_status: 'VERIFIED'); cctx1.reload
+      end
+
+      it { expect(card.pin_status(cctx1.context_id)).to eq(Cocard::States::OK) }
+      it { expect(card.pin_status(cctx2.context_id)).to eq(Cocard::States::CRITICAL) }
     
+    end
   end
 end

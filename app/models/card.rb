@@ -68,8 +68,11 @@ class Card < ApplicationRecord
     end
   end
 
-  def pin_status
-    if card_contexts.empty?
+  def pin_status(ctx_id = nil)
+    if ctx_id.present?
+      pinstatus = card_contexts.where(context_id: ctx_id).first.pin_status
+      ( pinstatus == 'VERIFIED' ) ? Cocard::States::OK : Cocard::States::CRITICAL
+    elsif card_contexts.empty?
       Cocard::States::WARNING
     elsif card_contexts.where("pin_status <> ?", 'VERIFIED').any?
       Cocard::States::CRITICAL
