@@ -49,3 +49,6 @@
 <br />
 
 <%= back_link %>
+<%= if can? :create, Context
+    link_to t('cocard.new_context'), new_context_path, class: 'btn btn-primary'
+  end %>
