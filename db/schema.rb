@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_13_155023) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_13_163104) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -90,7 +90,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_13_155023) do
     t.string "firmware_version", default: ""
     t.string "serial", default: ""
     t.string "id_product", default: ""
-    t.string "condition_message", default: "-"
+    t.string "condition_message", default: ""
     t.datetime "last_ok", precision: nil
     t.index ["condition"], name: "index_card_terminals_on_condition"
     t.index ["connector_id"], name: "index_card_terminals_on_connector_id"
@@ -126,17 +126,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_13_155023) do
     t.string "cert_subject_l", default: ""
     t.string "cert_subject_cn", default: ""
     t.string "cert_subject_o", default: ""
-    t.bigint "context_id"
+    t.bigint "old_context_id"
     t.integer "condition", default: -1
-    t.string "pin_status", default: ""
-    t.string "condition_message", default: "-"
+    t.string "old_pin_status", default: ""
+    t.string "condition_message", default: ""
     t.index ["card_terminal_id"], name: "index_cards_on_card_terminal_id"
     t.index ["condition"], name: "index_cards_on_condition"
-    t.index ["context_id"], name: "index_cards_on_context_id"
     t.index ["iccsn"], name: "index_cards_on_iccsn", unique: true
     t.index ["location_id"], name: "index_cards_on_location_id"
+    t.index ["old_context_id"], name: "index_cards_on_old_context_id"
+    t.index ["old_pin_status"], name: "index_cards_on_old_pin_status"
     t.index ["operational_state_id"], name: "index_cards_on_operational_state_id"
-    t.index ["pin_status"], name: "index_cards_on_pin_status"
   end
 
   create_table "client_certificates", force: :cascade do |t|
@@ -190,7 +190,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_13_155023) do
     t.string "serial", default: ""
     t.boolean "use_tls", default: false
     t.integer "authentication", default: 0
-    t.string "condition_message", default: "-"
+    t.string "condition_message", default: ""
     t.index ["condition"], name: "index_connectors_on_condition"
   end
 
