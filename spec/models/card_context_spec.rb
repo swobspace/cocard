@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe CardContext, type: :model do
-  it { is_expected.to belong_to(:card) }
+  it { is_expected.to belong_to(:card).optional }
   it { is_expected.to belong_to(:context) }
 
   it { is_expected.to validate_presence_of(:card_id) }

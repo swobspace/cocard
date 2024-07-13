@@ -1,7 +1,7 @@
 module Cocard
   module ProcessCard
   private
-    def self.process_card(card)
+    def self.process_card(card, context)
       return unless card.card_type =~ /SMC-B/
 
       if card.certificate.blank?
@@ -18,7 +18,7 @@ module Cocard
       #
       return unless card.card_type =~ /SMC-B/
 
-      result = Cocard::GetPinStatus.new(card: card).call
+      result = Cocard::GetPinStatus.new(card: card, context: context).call
       unless result.success?
          msg = "WARN:: #{card}: get pin status failed\n" +
                 result.error_messages.join("\n")

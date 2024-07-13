@@ -1,6 +1,6 @@
 class CardContext < ApplicationRecord
   # -- associations
-  belongs_to :card, optional: false, inverse_of: :card_contexts
+  belongs_to :card, optional: true, inverse_of: :card_contexts
   belongs_to :context, optional: false, inverse_of: :card_contexts
 
   # -- configuration

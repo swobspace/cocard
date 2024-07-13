@@ -19,7 +19,7 @@ module Cocard
       options.symbolize_keys
       @card      = options.fetch(:card)
       @connector = @card.card_terminal&.connector
-      @context   = options.fetch(:context) { @card.contexts.first }
+      @context   = options.fetch(:context)
     end
 
     # service.call()
@@ -52,7 +52,7 @@ module Cocard
         cc = Cocard::Card.new(entry)
         creator = Cards::Creator.new(connector: connector, cc: cc)
         if creator.save
-          ProcessCard.process_card(creator.card)
+          ProcessCard.process_card(creator.card, context)
         end
 
         log_error(nil)

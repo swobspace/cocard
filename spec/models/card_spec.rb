@@ -3,18 +3,20 @@ require 'rails_helper'
 RSpec.describe Card, type: :model do
   let(:connector) { FactoryBot.create(:connector) }
   let(:ct) { FactoryBot.create(:card_terminal, :with_mac, connector: connector) }
-  let(:ctx) { FactoryBot.create(:context) }
+  let(:context) { FactoryBot.create(:context) }
   let(:opsta) { FactoryBot.create(:operational_state, operational: true) }
   let(:card) do
     FactoryBot.create(:card, 
       card_holder_name: "Doctor Who's Universe",
       card_terminal: ct,
-      contexts: [ctx],
       expiration_date: 2.years.after(Date.current),
       pin_status: 'VERIFIED',
       updated_at: Time.current,
       operational_state: opsta
     )
+  end
+  before(:each) do
+    card.contexts << context
   end
 
   it { is_expected.to have_many(:logs) }

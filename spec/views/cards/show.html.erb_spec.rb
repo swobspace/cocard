@@ -22,9 +22,8 @@ RSpec.describe "cards/show", type: :view do
     @current_user = FactoryBot.create(:user, sn: 'Mustermann', givenname: 'Max')
     allow(@current_user).to receive(:is_admin?).and_return(true)
 
-    assign(:card, Card.create!(
+    @card = Card.create!(
       card_terminal_id: ct.id,
-      context_id: context.id,
       name: "GemaCard",
       description: "some other text",
       card_handle: "7fb65ede-0a37-11ef-8f85-c025a5b36994",
@@ -49,7 +48,8 @@ RSpec.describe "cards/show", type: :view do
       cert_subject_l: "Nirgendwo",
       cert_subject_o: "987654",
       private_information: "StrengGeheim"
-    ))
+    )
+    @card.contexts << context
   end
 
   it "renders attributes in <p>" do

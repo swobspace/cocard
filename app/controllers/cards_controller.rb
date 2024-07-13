@@ -73,7 +73,9 @@ class CardsController < ApplicationController
         @card.errors.add(:base, result.error_messages.join("; "))
         flash[:alert] = "Kontext: #{@context} / ERROR:: " + result.error_messages.join(', ')
       else
-        flash[:notice] = "Kontext: #{@context}, PIN-Status: #{result.pin_status}, left_tries: #{}"
+        flash[:notice] = "Kontext: #{@context}, " +
+                         "PIN-Status: #{result.pin_status.pin_status}, " +
+                         "left_tries: #{result.pin_status.left_tries}"
       end
     else
       @card.errors.add(:base, :invalid)

@@ -19,6 +19,8 @@ module Cocard
                               YAML.unsafe_load(card_yml)) }
     let(:fake_err) { Fake.new(false, ['something is wrong'], nil) }
 
+    let(:pin_ok) { Fake.new(true, nil, nil) }
+
     #
     # connector and context
     #
@@ -41,9 +43,12 @@ module Cocard
     let(:mycard) do
       FactoryBot.create(:card,
         card_terminal: ct,
-        context: context,
         iccsn: ENV['CARD_ICCSN']
       )
+    end
+
+    before(:each) do
+      mycard.contexts << context
     end
 
     subject do
@@ -61,6 +66,7 @@ module Cocard
 
     describe '#call' do
       let(:soap) { instance_double(Cocard::SOAP::GetCard) }
+      let(:pinstatus) { double(Cocard::GetPinStatus) }
       describe "return error if not successful" do
         before(:each) do
           expect(Cocard::SOAP::GetCard).to receive(:new).and_return(soap)
@@ -74,7 +80,9 @@ module Cocard
       describe "successful call" do
         before(:each) do
           expect(Cocard::SOAP::GetCard).to receive(:new).and_return(soap)
+          expect(Cocard::GetPinStatus).to receive(:new).and_return(pinstatus)
           expect(soap).to receive(:call).and_return(fake_ok)
+          expect(pinstatus).to receive(:call).and_return(pin_ok)
         end
         it { expect(subject.call.success?).to be_truthy }
         it { expect(subject.call.card).to be_kind_of(::Card) }

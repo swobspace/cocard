@@ -18,7 +18,7 @@ module Cocard
       options.symbolize_keys
       @card          = options.fetch(:card)
       @context       = options.fetch(:context)
-      @card_context  = CardContext.where(context_id: @context.id, card_id: @card.id).first
+      @card_context  = CardContext.where(context_id: @context&.id, card_id: @card.id).first
       @connector     = @card.card_terminal&.connector
     end
 
