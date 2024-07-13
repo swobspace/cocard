@@ -11,7 +11,7 @@ Rails.application.configure do
     preserve_job_records: true,
     # cleanup_interval_jobs: 100,
     cleanup_interval_seconds: 3600,
-
+    cleanup_preserved_jobs_before_seconds_ago: 172800,
     cron: {
       fetch_sds: {
         cron: '30 23 * * *',

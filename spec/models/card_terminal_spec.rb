@@ -82,15 +82,38 @@ RSpec.describe CardTerminal, type: :model do
         expect {
           ct.update_condition
         }.to change(ct, :condition).to(Cocard::States::NOTHING)
+        expect(ct.condition_message).to match(/No connector assigned/)
       end
     end
 
-    describe "with ping failed" do
+    describe "with ping failed, not connected" do
       it "-> CRITICAL" do
+        expect(ct).to receive(:connected).and_return(false)
         expect(ct).to receive(:up?).and_return(false)
         expect {
           ct.update_condition
         }.to change(ct, :condition).to(Cocard::States::CRITICAL)
+        expect(ct.condition_message).to match(/CardTerminal unreachable - ping failed and not connected/)
+      end
+    end
+
+    describe "with ping ok, but not connected" do
+      it "-> WARNING" do
+        expect(ct).to receive(:connected).and_return(false)
+        expect(ct).to receive(:up?).and_return(true)
+        ct.update_condition
+        expect(ct.condition).to eq(Cocard::States::WARNING)
+        expect(ct.condition_message).to match(/CardTerminal reachable, but not connected/)
+      end
+    end
+
+    describe "with ping failed, but connected" do
+      it "-> WARNING" do
+        expect(ct).to receive(:connected).at_least(:once).and_return(true)
+        expect(ct).to receive(:up?).and_return(false)
+        ct.update_condition
+        expect(ct.condition).to eq(Cocard::States::WARNING)
+        expect(ct.condition_message).to match(/CardTerminal is connected, but ping failed/)
       end
     end
 
@@ -101,6 +124,7 @@ RSpec.describe CardTerminal, type: :model do
         expect {
           ct.update_condition
         }.to change(ct, :condition).to(Cocard::States::OK)
+        expect(ct.condition_message).to match(/CardTerminal online/)
       end
     end
 

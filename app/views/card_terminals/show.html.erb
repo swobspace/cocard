@@ -1,6 +1,7 @@
 <%= render 'shared/turbo-cache-control' %>
 
-<div class="card mb-3">
+<%= turbo_stream_from @card_terminal %>
+<div class="card mb-3" id="<%= dom_id(@card_terminal) %>">
   <div class="card-header">
     <div class="d-flex w-100">
       <div>
@@ -158,9 +159,10 @@
         </pre>
       </div>
     </div>
-    <div>
+    <div data-turbo-permanent>
       <%= turbo_frame_tag "card_terminal_#{@card_terminal.id}_ping",
-                          src: ping_card_terminal_path(@card_terminal) do %>
+                          src: ping_card_terminal_path(@card_terminal),
+                          refresh: "morph" do %>
         <%= image_tag 'process-working.png' %>
       <% end %>
     </div>
@@ -194,10 +196,11 @@
       </div>
     </div>
   </div>
-  <div class="m-2">
+  <div class="m-2" data-turbo-permanent>
     <%= render 'terminal_workplaces', terminal_workplaces: @card_terminal.terminal_workplaces %>
   </div>
 </div>
 
-<%= turbo_frame_tag("logs", src: card_terminal_logs_path(@card_terminal, valid: 1)) %>
+<%= turbo_frame_tag("logs", src: card_terminal_logs_path(@card_terminal, valid: 1),
+                            refresh: "morph") %>
 

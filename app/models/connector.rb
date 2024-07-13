@@ -12,6 +12,7 @@ class Connector < ApplicationRecord
   has_many :contexts, through: :connector_contexts
 
   # -- configuration
+  broadcasts_refreshes
   has_rich_text :description
 
   enum authentication: { noauth: 0, clientcert: 1 }

@@ -1,4 +1,5 @@
-<div class="card mb-3">
+<%= turbo_stream_from @connector %>
+<div class="card mb-3" id="<%= dom_id(@connector) %>">
   <div class="card-header">
     <div class="d-flex w-100">
       <div >
@@ -172,9 +173,10 @@
         <% end %>
       </div>
     </div>
-    <div>
+    <div data-turbo-permanent>
       <%= turbo_frame_tag "connector_#{@connector.id}_ping", 
-                          src: ping_connector_path(@connector) do %>
+                          src: ping_connector_path(@connector),
+                          refresh: "morph" do %>
         <%= image_tag 'process-working.png' %>
       <% end %>
     </div>
@@ -195,10 +197,11 @@
       </div>
     </div>
   </div>
-  <div class="m-2">
+  <div class="m-2" data-turbo-permanent>
     <%= render 'card_terminals/list', card_terminals: @connector.card_terminals %>
   </div>
 </div>
 
-<%= turbo_frame_tag("logs", src: connector_logs_path(@connector, valid: 1)) %>
+<%= turbo_frame_tag("logs", src: connector_logs_path(@connector, valid: 1),
+                            refresh: "morph") %>
 

@@ -68,14 +68,17 @@ class ConnectorsController < ApplicationController
 
   def get_resource_information
     Cocard::GetResourceInformationJob.perform_now(connector: @connector)
+    respond_with(@connector, action: :show)
   end
 
   def get_card_terminals
     Cocard::GetCardTerminalsJob.perform_now(connector: @connector)
+    respond_with(@connector, action: :show)
   end
 
   def get_cards
     Cocard::GetCardsJob.perform_now(connector: @connector)
+    respond_with(@connector, action: :show)
   end
 
   # DELETE /connectors/1
