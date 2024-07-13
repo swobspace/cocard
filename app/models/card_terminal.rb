@@ -50,14 +50,18 @@ class CardTerminal < ApplicationRecord
   end
 
   def update_condition
+    is_up = up?
     if connector.nil?
       set_condition( Cocard::States::NOTHING,
                      "No connector assigned" )
 
-    elsif !up?
+    elsif !is_up and !connected
       set_condition( Cocard::States::CRITICAL,
-                     "CardTerminal unreachable - ping failed" ) 
-    elsif !connected
+                     "CardTerminal unreachable - ping failed and not connected" ) 
+    elsif !is_up and connected
+      set_condition( Cocard::States::WARNING,
+                     "CardTerminal is connected, but ping failed" )
+    elsif is_up and !connected
       set_condition( Cocard::States::WARNING,
                      "CardTerminal reachable, but not connected" )
     else
