@@ -81,10 +81,12 @@ module Cards
       context 'with an existing card' do
         let!(:card) do
           FactoryBot.create(:card, 
-            iccsn: '80276002711000000000'
+            iccsn: '80276002711000000000',
+            certificate: 'some string'
           )
         end
         before(:each) { card.contexts << ctx; card.reload }
+
         it 'does not create a card' do
           expect {
             subject.save
