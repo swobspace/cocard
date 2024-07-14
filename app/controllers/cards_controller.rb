@@ -85,11 +85,13 @@ class CardsController < ApplicationController
   end
 
   def get_card
-      result = Cocard::GetCard.new(card: @card).call
-    unless result.success?
-      @card.errors.add(:base, :invalid)
-      @card.errors.add(:base, result.error_messages.join("; "))
-      flash[:alert] = result.error_messages.join(', ')
+      result = Cocard::GetCard.new(card: @card, context: set_context).call
+      unless result.success?
+        @card.errors.add(:base, :invalid)
+        @card.errors.add(:base, result.error_messages.join("; "))
+        flash[:alert] = "Kontext: #{@context} / ERROR:: " + result.error_messages.join(', ')
+      else
+        flash[:notice] = "Karte im Kontext: #{@context} aktualisiert"
     end
     respond_with(@card, action: :show)
   end

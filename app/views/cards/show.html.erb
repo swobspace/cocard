@@ -15,7 +15,6 @@
       <div role="toolbar" class="ms-auto pt-3">
         <% if can?(:manage, @card) %>
           <%= render Card::GetCertificateButtonComponent.new(card: @card) %>
-          <%= render Card::GetCardButtonComponent.new(card: @card) %>
         <% end %>
         <%= edit_link(@card) %>
         <%= delete_link(@card) %>
