@@ -1,26 +1,27 @@
 @startuml
 
 state OK #lightgreen
-
 OK: CardTerminal online
 
 state WARNING #Yellow
-
-WARNING: CardTerminal nicht verbunden
+WARNING: CardTerminal nicht verbunden, oder
+WARNING: verbunden, aber kein Ping
 
 state CRITICAL #orangered
-
 CRITICAL: CardTerminal nicht erreichbar
 
-state UNKNOWN #LightSkyBlue
-UNKNOWN: not yet implemented
+note right of CRITICAL
+Erreichbar ==
+Ping oder "connected"
+endnote
+
+'state UNKNOWN #LightSkyBlue
+'UNKNOWN: not yet implemented
 
 state NOTHING #LightGrey
-NOTHING: Configuration may be not complete
 NOTHING: Kein Connector eingetragen
 
-NOTHING --> OK
-OK --> WARNING
-WARNING --> CRITICAL
-CRITICAL --> UNKNOWN
+NOTHING --> CRITICAL
+CRITICAL --> WARNING
+WARNING --> OK
 @enduml
