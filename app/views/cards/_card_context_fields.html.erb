@@ -1,0 +1,10 @@
+<div class="nested-fields border mb-3 p-3">
+  <h5 class="card-title"><%= t('attributes.card_context') %></h5>
+    <%= f.hidden_field :_destroy %>
+
+    <%= render partial: 'card_contexts/fields', locals: { f: f } %>
+
+    <%= link_to icon_delete, "#",
+                             class: 'btn btn-danger btn-xs mb-3',
+                             data: { action: "click->nested-form#remove_association" } %>
+</div>

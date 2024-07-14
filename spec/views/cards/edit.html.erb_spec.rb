@@ -35,7 +35,6 @@ RSpec.describe "cards/edit", type: :view do
       assert_select "input[name=?]", "card[bsnr]"
       assert_select "input[name=?]", "card[telematikid]"
       assert_select "input[name=?]", "card[fachrichtung]"
-      assert_select "select[name=?]", "card[context_id]"
       assert_select "input[name=?]", "card[private_information]"
       assert_select "input[name=?]", "card[expiration_date]"
       assert_select "input[name=?]", "card[cert_subject_title]"

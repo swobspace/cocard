@@ -1,0 +1,20 @@
+<div id="card_contexts_list" data-controller="nested-form" class="offset-3">
+  <template data-nested-form-target='template'>
+    <%= f.simple_fields_for :card_contexts, ConnectorContext.new,
+                             child_index: 'TEMPLATE_RECORD' do |builder| %>
+      <%= render 'card_context_fields', f: builder %>
+    <% end %>
+  </template>
+
+  <%= f.simple_fields_for :card_contexts do |builder| %>
+    <%= render 'card_context_fields', f: builder %>
+  <% end %>
+
+  <div data-nested-form-target="add_item">
+    <%= link_to t('contexts.add'), "#",
+              data: { action: "nested-form#add_association" },
+              class: 'btn btn-outline-secondary float-end'
+     %>
+  </div>
+
+</div>

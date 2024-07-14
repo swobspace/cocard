@@ -1,7 +1,8 @@
 class Context < ApplicationRecord
   # -- associations
-  has_many :connector_contexts
-  has_many :cards, dependent: :restrict_with_error
+  has_many :card_contexts, dependent: :destroy
+  has_many :connector_contexts, dependent: :destroy
+  has_many :cards, through: :card_contexts
   has_many :connectors, through: :connector_contexts
 
   # -- configuration
@@ -18,7 +19,12 @@ class Context < ApplicationRecord
 
   # -- common methods
   def to_s
-    "#{mandant} - #{client_system} - #{workplace}"
+    str = "#{mandant} - #{client_system} - #{workplace}"
+    if description.present?
+      str + " - #{description}"
+    else
+      str
+    end
   end
 
 end

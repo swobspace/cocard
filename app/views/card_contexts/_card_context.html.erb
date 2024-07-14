@@ -1,0 +1,13 @@
+<div id="<%= dom_id card_context %>"
+     class="list-group-item"
+     data-sortable-target="item"
+     data-url="<%# card_context_path(card_context) %>"
+>
+  <div class="row">
+    <div class="col handle"><%= card_context.context %></div>
+    <div class="col-sm-3 text-muted text-end">
+      <%=card_context.position %>
+    </div>
+  </div>
+
+</div>

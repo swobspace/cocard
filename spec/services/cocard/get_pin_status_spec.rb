@@ -74,7 +74,6 @@ module Cocard
 
       describe "with empty context" do
         let(:context) { nil }
-
         it "does not raise an error" do
           expect {
             subject.call
@@ -86,6 +85,7 @@ module Cocard
 
       describe "successful call" do
         before(:each) do
+          card.contexts << context
           expect(Cocard::SOAP::GetPinStatus).to receive(:new).and_return(soap)
           expect(soap).to receive(:call).and_return(fake_ok)
         end
@@ -97,7 +97,8 @@ module Cocard
             subject.call
           end
           it { expect(card.card_handle).to eq('ee676b27-5b40-4a40-9c65-979cc3113a1e') }
-          it { expect(card.pin_status).to eq("VERIFIABLE") }
+          it { expect(card.card_contexts.first.pin_status).to eq("VERIFIABLE") }
+          it { expect(card.card_contexts.first.left_tries).to eq(3) }
         end
       end
     end

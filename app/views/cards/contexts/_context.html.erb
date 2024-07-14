@@ -1,14 +1,15 @@
 <div id="<%= dom_id context %>"
-     class="list-group-item" >
+     class="list-group-item " >
   <div class="row">
-    <div class="col handle"><%= context %></div>
+    <div class="col handle pt-1">
+      <%= link_to context.to_s, context, class: 'primary-link' %>
+    </div>
     <% if @card.card_type == 'SMC-B' %>
       <div class="col-sm-3 text-muted text-end">
-        <%= button_to(raw(%Q[<i class="fa-solid fa-thumbtack"></i>]),
-                      get_pin_status_card_path(@card, context_id: context.id),
-                      title: t('cocard.get_pin_status'),
-                      class: 'btn btn-sm btn-warning me-1')
-         %>
+        <% if can? :manage, @card %>
+          <%= render Card::GetCardButtonComponent.new(card: @card, context: context, force: true) %>
+        <% end %>
+        <%= render Card::GetPinStatusComponent.new(card: @card, context: context) %>
       </div>
     <% end %>
   </div>

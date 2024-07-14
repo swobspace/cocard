@@ -55,15 +55,15 @@ module Cards
       end
 
       #
+      # Disable this function
       # set context if card.context.nil?
       #
-      if @card.context.nil?
-        @card.context = ctx
-      end
+      # if @card.contexts.empty?
+      #   @card.card_contexts.build(context_id: ctx.id)
+      # end
 
       if @card.persisted?
         Cocard::Card::ATTRIBUTES.each do |attr|
-          next if attr == :mac
           @card.send("#{attr}=", cc.send(attr))
         end
         # -- update condition
@@ -75,7 +75,7 @@ module Cards
       if @card.save
         true
       else
-        Rails.logger.warn("WARN:: could not create or save card #{@card.mac}: " +
+        Rails.logger.warn("WARN:: could not create or save card #{@card.iccsn}: " +
           @card.errors.full_messages.join('; '))
         false
       end

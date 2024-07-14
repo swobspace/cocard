@@ -71,7 +71,8 @@ module Cards
         it { expect(card.card_holder_name).to eq("Doctor Who's Universe") }
         it { expect(card.expiration_date).to eq(1.year.after(Date.current)) }
         it { expect(card.operational_state.operational).to be_truthy }
-        it { expect(card.condition).to eq(Cocard::States::CRITICAL) }
+        it { expect(card.condition_message).to match(/Kein Context konfiguriert/) }
+        it { expect(card.condition).to eq(Cocard::States::NOTHING) }
 
       end
 
@@ -81,10 +82,11 @@ module Cards
         let!(:card) do
           FactoryBot.create(:card, 
             iccsn: '80276002711000000000',
-            context: ctx
+            certificate: 'some string'
           )
         end
-        before(:each) { card.reload }
+        before(:each) { card.contexts << ctx; card.reload }
+
         it 'does not create a card' do
           expect {
             subject.save

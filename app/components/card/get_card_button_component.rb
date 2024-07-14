@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class Card::GetCardButtonComponent < ViewComponent::Base
-  def initialize(card:, force: false)
+  def initialize(card:, context:, force: false)
     @card = card
+    @context = context
     @force = force
   end
 
@@ -12,7 +13,7 @@ class Card::GetCardButtonComponent < ViewComponent::Base
   end
 
 private
-  attr_reader :card, :force
+  attr_reader :card, :force, :context
 
 
 end

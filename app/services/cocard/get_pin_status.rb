@@ -17,7 +17,8 @@ module Cocard
     def initialize(options = {})
       options.symbolize_keys
       @card          = options.fetch(:card)
-      @context       = options.fetch(:context) { @card.context }
+      @context       = options.fetch(:context)
+      @card_context  = CardContext.where(context_id: @context&.id, card_id: @card.id).first
       @connector     = @card.card_terminal&.connector
     end
 
@@ -49,7 +50,8 @@ module Cocard
       if result.error_messages.blank? and result.success?
         hash = result.response[:get_pin_status_response]
         pin_status = Cocard::PinStatus.new(hash)
-        card.pin_status = pin_status.pin_status
+        card_context.update(pin_status: pin_status.pin_status,
+                            left_tries: pin_status.left_tries)
 
         if card.save
           log_error(nil)
@@ -68,11 +70,11 @@ module Cocard
     end
 
   private
-    attr_reader :connector, :context, :card
+    attr_reader :connector, :context, :card, :card_context
 
     def log_error(message)
       logger = Logs::Creator.new(loggable: card, level: 'ERROR',
-                                 action: 'GetPinStatus', message: message)
+                                 action: "GetPinStatus / #{@context}", message: message)
       unless logger.call(message.blank?)
         message = Array(message).join('; ')
         Rails.logger.error("could not create log entry: GetPinStatus - #{message}")

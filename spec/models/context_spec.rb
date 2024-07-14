@@ -5,11 +5,14 @@ RSpec.describe Context, type: :model do
     FactoryBot.create(:context, 
       mandant: 'ACME', 
       client_system: 'KIS',
-      workplace: 'Konnektor'
+      workplace: 'Konnektor',
+      description: "Doctor Who's Universe"
     )
   end
   it { is_expected.to have_many(:connectors).through(:connector_contexts) }
-  it { is_expected.to have_many(:cards).dependent(:restrict_with_error) }
+  it { is_expected.to have_many(:card_contexts).dependent(:destroy) }
+  it { is_expected.to have_many(:connector_contexts).dependent(:destroy) }
+  it { is_expected.to have_many(:cards).through(:card_contexts) }
   it { is_expected.to validate_presence_of(:mandant) }
   it { is_expected.to validate_presence_of(:client_system) }
   it { is_expected.to validate_presence_of(:workplace) }
@@ -25,6 +28,6 @@ RSpec.describe Context, type: :model do
   end
 
   describe "#to_s" do
-    it { expect(context.to_s).to match('ACME - KIS - Konnektor') }
+    it { expect(context.to_s).to match("ACME - KIS - Konnektor - Doctor Who's Universe") }
   end
 end

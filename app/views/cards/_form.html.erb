@@ -19,7 +19,7 @@
        %>
     <%= form.association :operational_state
        %>
-    <%= form.association :context,
+    <%# form.association :context,
         hint: t('hint_context', scope: 'form.card')
        %>
     <%= form.input :lanr
@@ -30,6 +30,7 @@
        %>
     <%= form.input :telematikid
        %>
+    <%= render 'nested_card_contexts_form', f: form %>
 
     <hr/>
     <div class="card-title">

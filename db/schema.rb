@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_07_083532) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_13_163104) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,6 +50,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_07_083532) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "card_contexts", force: :cascade do |t|
+    t.bigint "card_id", null: false
+    t.bigint "context_id", null: false
+    t.integer "position", default: 0
+    t.string "pin_status", default: ""
+    t.integer "left_tries"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id", "context_id"], name: "index_card_contexts_on_card_id_and_context_id", unique: true
+    t.index ["card_id"], name: "index_card_contexts_on_card_id"
+    t.index ["context_id", "card_id"], name: "index_card_contexts_on_context_id_and_card_id", unique: true
+    t.index ["context_id"], name: "index_card_contexts_on_context_id"
+    t.index ["pin_status"], name: "index_card_contexts_on_pin_status"
+    t.index ["position"], name: "index_card_contexts_on_position"
   end
 
   create_table "card_terminals", force: :cascade do |t|
@@ -110,17 +126,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_07_083532) do
     t.string "cert_subject_l", default: ""
     t.string "cert_subject_cn", default: ""
     t.string "cert_subject_o", default: ""
-    t.bigint "context_id"
+    t.bigint "old_context_id"
     t.integer "condition", default: -1
-    t.string "pin_status", default: ""
+    t.string "old_pin_status", default: ""
     t.string "condition_message", default: ""
     t.index ["card_terminal_id"], name: "index_cards_on_card_terminal_id"
     t.index ["condition"], name: "index_cards_on_condition"
-    t.index ["context_id"], name: "index_cards_on_context_id"
     t.index ["iccsn"], name: "index_cards_on_iccsn", unique: true
     t.index ["location_id"], name: "index_cards_on_location_id"
+    t.index ["old_context_id"], name: "index_cards_on_old_context_id"
+    t.index ["old_pin_status"], name: "index_cards_on_old_pin_status"
     t.index ["operational_state_id"], name: "index_cards_on_operational_state_id"
-    t.index ["pin_status"], name: "index_cards_on_pin_status"
   end
 
   create_table "client_certificates", force: :cascade do |t|
@@ -414,6 +430,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_07_083532) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "card_contexts", "cards"
+  add_foreign_key "card_contexts", "contexts"
   add_foreign_key "card_terminals", "connectors"
   add_foreign_key "card_terminals", "locations"
   add_foreign_key "connector_contexts", "connectors"

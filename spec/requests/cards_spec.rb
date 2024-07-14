@@ -95,7 +95,7 @@ RSpec.describe "/cards", type: :request do
         telematikid: "1-2-3-456",
         fachrichtung: "Innere Medizin",
         private_information: "some private information",
-        context_id: context.id,
+        context_ids: [context.id],
         cert_subject_title: 'CERT title',
         cert_subject_sn: 'CERT sn',
         cert_subject_givenname: 'CERT givenname',
@@ -105,6 +105,10 @@ RSpec.describe "/cards", type: :request do
         cert_subject_o: 'CERT o',
         cert_subject_cn: 'CERT cn',
         expiration_date: '2024-12-31',
+        card_contexts_attributes: [
+          context_id: context.id,
+        ]
+
       }}
 
       it "updates the requested card" do
@@ -125,7 +129,7 @@ RSpec.describe "/cards", type: :request do
         expect(card.telematikid).to eq("1-2-3-456")
         expect(card.fachrichtung).to eq("Innere Medizin")
         expect(card.private_information.to_plain_text).to eq("some private information")
-        expect(card.context).to eq(context)
+        expect(card.contexts).to contain_exactly(context)
         expect(card.cert_subject_title).to eq('CERT title')
         expect(card.cert_subject_sn).to eq('CERT sn')
         expect(card.cert_subject_givenname).to eq('CERT givenname')

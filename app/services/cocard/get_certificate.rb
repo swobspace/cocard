@@ -17,7 +17,7 @@ module Cocard
     def initialize(options = {})
       options.symbolize_keys
       @card          = options.fetch(:card)
-      @context       = options.fetch(:context) { @card.context }
+      @context       = options.fetch(:context) { @card.contexts.first }
       @connector     = @card.card_terminal&.connector
     end
 
