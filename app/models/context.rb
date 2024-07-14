@@ -19,7 +19,12 @@ class Context < ApplicationRecord
 
   # -- common methods
   def to_s
-    "#{mandant} - #{client_system} - #{workplace}"
+    str = "#{mandant} - #{client_system} - #{workplace}"
+    if description.present?
+      str + " - #{description}"
+    else
+      str
+    end
   end
 
 end

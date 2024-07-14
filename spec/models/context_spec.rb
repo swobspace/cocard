@@ -5,7 +5,8 @@ RSpec.describe Context, type: :model do
     FactoryBot.create(:context, 
       mandant: 'ACME', 
       client_system: 'KIS',
-      workplace: 'Konnektor'
+      workplace: 'Konnektor',
+      description: "Doctor Who's Universe"
     )
   end
   it { is_expected.to have_many(:connectors).through(:connector_contexts) }
@@ -27,6 +28,6 @@ RSpec.describe Context, type: :model do
   end
 
   describe "#to_s" do
-    it { expect(context.to_s).to match('ACME - KIS - Konnektor') }
+    it { expect(context.to_s).to match("ACME - KIS - Konnektor - Doctor Who's Universe") }
   end
 end
