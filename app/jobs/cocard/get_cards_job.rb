@@ -31,7 +31,9 @@ module Cocard
               creator = Cards::Creator.new(connector: connector, cc: cc, 
                                            context: con_ctx.context)
               if creator.save
-                ProcessCard.process_card(creator.card)
+                creator.card.contexts.each do |ctx|
+                  ProcessCard.process_card(creator.card, ctx)
+                end
               end
             end
           else
