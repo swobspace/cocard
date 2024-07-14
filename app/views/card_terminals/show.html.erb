@@ -43,7 +43,7 @@
             <td><%= link_to(@card_terminal.location,
                             location_path(@card_terminal.location),
                             class: 'primary-link'
-                           ) %></td>
+                           ) if @card_terminal.location %></td>
           </tr>
 
           <tr>
