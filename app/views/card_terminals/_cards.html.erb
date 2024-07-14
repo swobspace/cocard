@@ -21,7 +21,7 @@
         </td>
         <td><%= card.name %></td>
         <td><%= card.card_type %></td>
-        <td><%= link_to card.iccsn, card_path(card) %></td>
+        <td><%= link_to card.iccsn, card_path(card), class: 'primary-link' %></td>
         <td class="text-center"><%= card.slotid %></td>
         <td><%= card.insert_time %></td>
         <td><%= card.expiration_date %></td>

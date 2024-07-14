@@ -44,7 +44,8 @@
             <span style="visibility:hidden;"><%= card_terminal.condition %></span>
           </td>
           <td><%= card_terminal.displayname %></td>
-          <td><%= link_to card_terminal.ct_id, card_terminal_path(card_terminal) %></td>
+          <td><%= link_to card_terminal.ct_id, card_terminal_path(card_terminal),
+                          class: 'primary-link' %></td>
           <td><%= card_terminal.mac %></td>
           <td><%= card_terminal.serial %></td>
           <td><%= card_terminal.ip %></td>

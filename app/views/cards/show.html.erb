@@ -29,13 +29,15 @@
           <tr>
             <th class="w-10 pe-3"><%= t('attributes.connector')%>:</th>
             <td><%= link_to(@card.card_terminal&.connector, 
-                            connector_path(@card.card_terminal&.connector)
+                            connector_path(@card.card_terminal&.connector),
+                            class: 'primary-link'
                            ) if @card.card_terminal&.connector %></td>
           </tr>
           <tr>
             <th class="w-10 pe-3"><%= t('attributes.card_terminal')%>:</th>
             <td><%= link_to(@card.card_terminal.to_s, 
-                            card_terminal_path(@card.card_terminal)
+                            card_terminal_path(@card.card_terminal),
+                            class: 'primary-link'
                            ) if @card.card_terminal %></td>
           </tr>
           <tr>
@@ -134,7 +136,9 @@
         <table class="table table-sm table-borderless">
           <tr>
             <th class="w-10 pe-3"><%= t('attributes.location')%>:</th>
-            <td><%= link_to(@card.location, polymorphic_path(@card.location)) if @card.location %></td>
+            <td><%= link_to(@card.location, polymorphic_path(@card.location),
+                                            class: 'primary-link'
+                            ) if @card.location %></td>
           </tr>
           <tr>
             <th class="w-10 pe-3"><%= t('attributes.operational_state')%>:</th>

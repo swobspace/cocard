@@ -28,7 +28,8 @@
           <tr>
             <th class="w-25 pe-3"><%= t('attributes.connector')%>:</th>
             <td><%= link_to(@card_terminal.connector,
-                            connector_path(@card_terminal.connector)
+                            connector_path(@card_terminal.connector),
+                            class: 'primary-link'
                            ) if @card_terminal.connector %></td>
           </tr>
 
@@ -39,7 +40,10 @@
 
           <tr>
             <th class="w-25 pe-3"><%= t('attributes.location')%>:</th>
-            <td><%= @card_terminal.location %></td>
+            <td><%= link_to(@card_terminal.location,
+                            location_path(@card_terminal.location),
+                            class: 'primary-link'
+                           ) %></td>
           </tr>
 
           <tr>

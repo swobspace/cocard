@@ -2,7 +2,7 @@
      class="list-group-item " >
   <div class="row">
     <div class="col handle pt-1">
-      <%= context %>
+      <%= link_to context.to_s, context, class: 'primary-link' %>
     </div>
     <% if @card.card_type == 'SMC-B' %>
       <div class="col-sm-3 text-muted text-end">
