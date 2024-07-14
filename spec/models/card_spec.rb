@@ -10,7 +10,6 @@ RSpec.describe Card, type: :model do
       card_holder_name: "Doctor Who's Universe",
       card_terminal: ct,
       expiration_date: 2.years.after(Date.current),
-      pin_status: 'VERIFIED',
       updated_at: Time.current,
       operational_state: opsta,
       certificate: "some string"
