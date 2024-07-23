@@ -154,6 +154,11 @@
             <td><%= @connector.condition_message %></td>
           </tr>
 
+          <tr>
+            <th class="w-25 pe-3"><%= t('cocard.card_terminals_count')%>:</th>
+            <td><%= @connector.card_terminals.count %></td>
+          </tr>
+
         </table>
       </div>
 
