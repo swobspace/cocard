@@ -2,6 +2,8 @@ module CardConcerns
   extend ActiveSupport::Concern
 
   included do
+    scope :card_type, -> (card_type) { where('cards.card_type = ?', card_type) }
+    scope :smcb, -> { card_type('SMC-B') }
     scope :condition, -> (state) { where('cards.condition = ?', state) }
     scope :ok, -> { condition(Cocard::States::OK) }
     scope :warning, -> { condition(Cocard::States::WARNING) }

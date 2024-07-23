@@ -57,6 +57,8 @@ de:
     update_only: Nur aktualisieren, keine neuen Datensätze anlegen
     force_update: Update erzwingen (Beschreibungsfeld wird überschrieben)
     card_terminals_count: Anzahl Terminals
+    cards_count: Anzahl Karten
+    connectors_count: Anzahl Konnektoren
 
   activerecord:
     models:

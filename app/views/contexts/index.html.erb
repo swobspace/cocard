@@ -16,11 +16,15 @@
             <th><%= t('attributes.client_system') %></th>
             <th><%= t('attributes.workplace') %></th>
             <th><%= t('attributes.description') %></th>
+            <th><%= t('cocard.cards_count') %></th>
+            <th><%= t('cocard.connectors_count') %></th>
             <th class="nosort"><%= t('cocard.action') %></th>
       </tr>
     </thead>
     <tfoot class="search">
       <tr>
+            <th></th>
+            <th></th>
             <th></th>
             <th></th>
             <th></th>
@@ -35,6 +39,8 @@
                 <td><%= context.client_system %></td>
                 <td><%= context.workplace %></td>
                 <td><%= context.description %></td>
+                <td><%= context.cards.count %></td>
+                <td><%= context.connectors.count %></td>
                 <td class="text-nowrap">
             <%= show_link context %>
             <%= edit_link context %>

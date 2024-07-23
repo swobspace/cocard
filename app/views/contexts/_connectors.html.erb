@@ -1,0 +1,30 @@
+<%= content_tag :table, id: "context_connectors_table",
+      class: "table table-sm table-responsive-xl" do %>
+  <thead>
+    <tr>
+          <th><%= t('attributes.condition') %></th>
+          <th class="notvisible"><%= t('attributes.condition_message') %></th>
+          <th><%= t('attributes.name') %></th>
+          <th><%= t('attributes.locations') %></th>
+          <th><%= t('attributes.last_check') %></th>
+          <th><%= t('attributes.last_ok') %></th>
+          <th class="notvisible"><%= t('cocard.card_terminals_count') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @connectors.each do |connector| %>
+      <%= content_tag(:tr, id: dom_id(connector), class: dom_class(connector)) do %>
+        <td class="text-center"><%= render ConditionIconComponent.new(item: connector, small: true, as_text: true) %>
+        <td><%= connector.condition_message %></td>
+        <td><%= link_to(connector,
+                        connector_path(connector),
+                        class: 'primary-link')
+            %></td>
+        <td><%= connector.locations.order(:lid).map(&:lid).join('; ') %></td>
+        <td><%= render IsCurrentComponent.new(item: connector, attr: :last_check) %></td>
+        <td><%= render IsCurrentComponent.new(item: connector, attr: :last_ok) %></td>
+        <td><%= connector.card_terminals.count %></td>
+      <% end %>
+    <% end %>
+  </tbody>
+<% end %>

@@ -1,0 +1,32 @@
+<%= content_tag :table, id: "context_cards_table",
+      class: "table table-sm table-responsive-xl" do %>
+  <thead>
+    <tr>
+      <th class="text-center"><%= t('attributes.condition') %></th>
+      <th><%= t('attributes.name') %></th>
+      <th><%= t('attributes.card_type') %></th>
+      <th><%= t('attributes.iccsn') %></th>
+      <th class="text-center"><%= t('attributes.slotid') %></th>
+      <th><%= t('attributes.insert_time') %></th>
+      <th><%= t('attributes.expiration_date') %></th>
+      <th><%= t('attributes.operational_state') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% cards.each do |card| %>
+      <%= content_tag(:tr, id: dom_id(card)) do %>
+        <td class="text-center">
+          <%= render ConditionIconComponent.new(item: card, small: true) %>
+          <span style="visibility:hidden;"><% card.condition %></span>
+        </td>
+        <td><%= card.name %></td>
+        <td><%= card.card_type %></td>
+        <td><%= link_to card.iccsn, card_path(card), class: 'primary-link' %></td>
+        <td class="text-center"><%= card.slotid %></td>
+        <td><%= card.insert_time %></td>
+        <td><%= card.expiration_date %></td>
+        <td><%= card.operational_state %></td>
+      <% end %>
+    <% end %>
+  </tbody>
+<% end %>
