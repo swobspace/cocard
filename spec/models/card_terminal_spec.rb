@@ -11,6 +11,7 @@ RSpec.describe CardTerminal, type: :model do
       ct_id: 'CT_ID_0123',
       mac: '11:22:33:44:88:dd',
       location: location,
+      last_ok: Time.current
     )
   end
   it { is_expected.to have_many(:logs) }
@@ -83,6 +84,16 @@ RSpec.describe CardTerminal, type: :model do
           ct.update_condition
         }.to change(ct, :condition).to(Cocard::States::NOTHING)
         expect(ct.condition_message).to match(/No connector assigned/)
+      end
+    end
+
+    describe "with last_ok.blank?" do
+      it "-> CRITICAL" do
+        expect(ct).to receive(:last_ok).and_return(nil)
+        expect {
+          ct.update_condition
+        }.to change(ct, :condition).to(Cocard::States::NOTHING)
+        expect(ct.condition_message).to match(/CardTerminal noch nicht in Betrieb/)
       end
     end
 

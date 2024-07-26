@@ -55,6 +55,9 @@ class CardTerminal < ApplicationRecord
       set_condition( Cocard::States::NOTHING,
                      "No connector assigned" )
 
+    elsif last_ok.blank?
+      set_condition( Cocard::States::NOTHING,
+                     "CardTerminal noch nicht in Betrieb" )
     elsif !is_up and !connected
       set_condition( Cocard::States::CRITICAL,
                      "CardTerminal unreachable - ping failed and not connected" ) 
