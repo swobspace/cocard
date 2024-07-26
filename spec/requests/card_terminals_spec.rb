@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "/card_terminals", type: :request do
+  let(:ts) { Time.current }
   let(:connector) { FactoryBot.create(:connector) }
   let(:location) { FactoryBot.create(:location, lid: 'AXC') }
   
@@ -92,7 +93,8 @@ RSpec.describe "/card_terminals", type: :request do
         supplier: 'ACME Ltd',
         id_product: 'ORGA6141',
         serial: 'S11122277635',
-        connector_id: connector.id
+        connector_id: connector.id,
+        last_ok: 1.day.before(ts)
       }}
 
       it "updates the requested card_terminal" do
@@ -112,6 +114,7 @@ RSpec.describe "/card_terminals", type: :request do
         expect(card_terminal.id_product).to eq('ORGA6141')
         expect(card_terminal.serial).to eq('S11122277635')
         expect(card_terminal.connector_id).to eq(connector.id)
+        expect(card_terminal.last_ok).to eq(1.day.before(ts).to_s)
       end
 
       it "redirects to the card_terminal" do

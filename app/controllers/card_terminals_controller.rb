@@ -75,6 +75,7 @@ class CardTerminalsController < ApplicationController
       params.require(:card_terminal)
             .permit(:displayname, :location_id, :description, :room,
                     :contact, :plugged_in, :mac, :ip, :slots, :connector_id,
+                    :last_ok,
                     :delivery_date, :supplier, :id_product, :serial)
             .reject { |k, v| k == 'mac' && v.blank? }
 
