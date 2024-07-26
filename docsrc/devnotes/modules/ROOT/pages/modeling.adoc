@@ -208,7 +208,12 @@ bin/rails g scaffold Network \
   netzwerk:cidr \
   description:rich_text \
   location:belongs_to \
+  accessibility:integer \
   --no-stylesheets --no-javascripts --no-helper
+----
+
+----
+enum accessibility: { none: -1, ping: 0 }
 ----
 
 == model Workplace

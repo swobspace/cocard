@@ -6,6 +6,8 @@ class Network < ApplicationRecord
   # -- configuration
   has_rich_text :description
 
+  enum accessibility: { nothing: -1, ping: 0 }
+
   # -- validations and callbacks
   validates :netzwerk, presence: true, uniqueness: true
 

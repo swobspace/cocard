@@ -145,6 +145,7 @@ Class Log {
 Class Network {
   netzwerk: cidr
   description: rich_text
+  accessibility: integer
   location_id
 }
 
