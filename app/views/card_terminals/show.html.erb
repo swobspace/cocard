@@ -108,7 +108,16 @@
 
           <tr>
             <th class="w-25 pe-3"><%= t('attributes.last_ok')%>:</th>
-            <td><%= render IsCurrentComponent.new(item: @card_terminal, attr: :last_ok) %></td>
+            <td>
+              <%= render IsCurrentComponent.new(item: @card_terminal, attr: :last_ok) %>
+              <% if can? :update, @card_terminal %>
+                <%= button_to "Reset", @card_terminal,
+                      method: 'patch',
+                      class: 'btn btn-sm btn-warning ms-3',
+                      params: {card_terminal: { last_ok: ''}}
+                 %>
+              <% end %>
+            </td>
           </tr>
         </table>
 
