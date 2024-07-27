@@ -27,6 +27,7 @@ module CardTerminals
   end
 
   RSpec.describe Query do
+    let(:ts)  { Time.current }
     let(:ber) { FactoryBot.create(:location, lid: 'BER') }
     let(:conn) { FactoryBot.create(:connector) }
     let!(:ct1) do
@@ -40,6 +41,7 @@ module CardTerminals
         firmware_version: '5.3.4',
         location: ber,
         supplier: 'ACME Ltd. International',
+        last_ok: ts,
       )
     end
 
@@ -53,6 +55,7 @@ module CardTerminals
         mac: '11:22:33:44:55:66',
         supplier: 'ACME Ltd. International',
         connector: conn,
+        last_ok: ts,
       )
     end
 
@@ -66,6 +69,7 @@ module CardTerminals
         contact: 'Dr.Who',
         plugged_in: 'Switch 17/4',
         supplier: 'ACME Ltd. International',
+        last_ok: ts,
       )
     end
 

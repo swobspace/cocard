@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "card_terminals/index", type: :view do
+  let(:ts)        { Time.current }
   let(:location)  { FactoryBot.create(:location, lid: 'AXC') }
   let(:connector) { FactoryBot.create(:connector, name: 'TIK-XXX-39' ) }
 
@@ -30,6 +31,7 @@ RSpec.describe "card_terminals/index", type: :view do
         firmware_version: '3.1.9',
         serial: '11122277634',
         id_product: 'ORGA61411',
+        last_ok: ts,
       ),
       CardTerminal.create!(
         connector_id: connector.id,
@@ -49,6 +51,7 @@ RSpec.describe "card_terminals/index", type: :view do
         firmware_version: '3.1.9',
         serial: '11122277634',
         id_product: 'ORGA61411',
+        last_ok: ts,
       )
     ]
   end
