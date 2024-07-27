@@ -29,6 +29,9 @@ image::dashboard-condition-summary.png[]
 
 Buttons, die nur umrandet sind haben keine Einträge zum jeweiligen Status.
 
+Der Abschnitt Event Log zeigt die ausgewählte aktuelle 
+Betriebszustandsmeldungen des Konnektors (`OPERATIONAL_STATE`) und SOAP-Fehlermeldungen, die bei der Abfrage entstehen (z.B. _Kartenterminal ist dem Mandanten nicht zugeordnet_, _Für den Mandanten ist der Arbeitsplatz nicht dem Clientsystem zugeordnet_). 
+
 == Integration in CheckMK
 
 Cocard verfügt über eine einfache Integration in https://docs.checkmk.com/latest/de/[CheckMK]: über einen sogenannten https://docs.checkmk.com/latest/de/localchecks.html[Local Check] lassen sich Konnektoren, Kartenterminals und Karten sehr einfach in CheckMK einbinden. Hier ein Beispiel für SMC-B-Karten:
