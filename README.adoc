@@ -1,0 +1,1 @@
+include::docsrc/app/modules/ROOT/pages/index.adoc[]
