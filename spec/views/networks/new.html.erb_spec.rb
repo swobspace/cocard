@@ -11,12 +11,10 @@ RSpec.describe "networks/new", type: :view do
     render
 
     assert_select "form[action=?][method=?]", networks_path, "post" do
-
       assert_select "input[name=?]", "network[netzwerk]"
-
       assert_select "input[name=?]", "network[description]"
-
       assert_select "select[name=?]", "network[location_id]"
+      assert_select "select[name=?]", "network[accessibility]"
     end
   end
 end

@@ -21,5 +21,6 @@ RSpec.describe "networks/show", type: :view do
     expect(rendered).to match(/198.51.100.128\/29/)
     expect(rendered).to match(/AXC/)
     expect(rendered).to match(/some more information/)
+    expect(rendered).to match(/Ping/)
   end
 end

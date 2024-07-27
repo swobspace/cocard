@@ -15,11 +15,13 @@
             <th><%= t('attributes.netzwerk') %></th>
             <th><%= t('attributes.location') %></th>
             <th><%= t('attributes.description') %></th>
+            <th><%= t('attributes.accessibility') %></th>
             <th class="nosort"><%= t('cocard.action') %></th>
       </tr>
     </thead>
     <tfoot class="search">
       <tr>
+            <th></th>
             <th></th>
             <th></th>
             <th></th>
@@ -32,6 +34,7 @@
                 <td><%= network.to_cidr_s %></td>
                 <td><%= network.location %></td>
                 <td><%= network.description %></td>
+                <td><%= t(network.accessibility, scope: :accessibility) %></td>
                 <td class="text-nowrap">
             <%= show_link network %>
             <%= edit_link network %>

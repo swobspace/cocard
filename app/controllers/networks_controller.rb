@@ -51,6 +51,6 @@ class NetworksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def network_params
-      params.require(:network).permit(:netzwerk, :description, :location_id)
+      params.require(:network).permit(:netzwerk, :description, :location_id, :accessibility)
     end
 end

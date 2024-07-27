@@ -77,15 +77,17 @@ RSpec.describe "/networks", type: :request do
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      let(:new_attributes) {
-        { description: 'some more information' }
-      }
+      let(:new_attributes) {{
+        description: 'some more information',
+        accessibility: :nothing
+      }}
 
       it "updates the requested network" do
         network = Network.create! valid_attributes
         patch network_url(network), params: { network: new_attributes }
         network.reload
         expect(network.description.to_plain_text).to eq("some more information")
+        expect(network.accessibility).to eq('nothing')
       end
 
       it "redirects to the network" do

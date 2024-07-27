@@ -24,5 +24,6 @@ RSpec.describe "networks/index", type: :view do
     assert_select cell_selector, text: Regexp.new("198.51.100.136/29".to_s), count: 1
     assert_select cell_selector, text: Regexp.new("some more information".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("AXC".to_s), count: 2
+    assert_select cell_selector, text: Regexp.new("Ping".to_s), count: 2
   end
 end

@@ -77,6 +77,7 @@ de:
       workplace: Arbeitsplatz
 
   attributes:
+    accessibility: Test Erreichbarkeit
     action: Aktion
     authentication: Authentifikation
     bsnr: BSNR
@@ -192,6 +193,10 @@ de:
   authentications:
     noauth: 'Keine'
     clientcert: 'Client-Zertifikat'
+
+  accessibilities:
+    nothing: None
+    ping: Ping
 
   form:
     card:

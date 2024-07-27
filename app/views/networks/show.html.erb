@@ -22,15 +22,17 @@
         <th class="w-10 pe-3"><%= t('attributes.netzwerk')%>:</th>
         <td><%= @network.netzwerk %></td>
       </tr>
-
       <tr>
         <th class="w-10 pe-3"><%= t('attributes.description')%>:</th>
         <td><%= @network.description %></td>
       </tr>
-
       <tr>
         <th class="w-10 pe-3"><%= t('attributes.location')%>:</th>
         <td><%= @network.location %></td>
+      </tr>
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.accessibility')%>:</th>
+        <td><%= t(@network.accessibility, scope: :accessibility) %></td>
       </tr>
     </table>
   </div>

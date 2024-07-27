@@ -9,6 +9,13 @@
     <%= form.association :location
        %>
 
+    <%= form.input :accessibility,
+          collection: Network.accessibilities
+                        .collect {|c| [t(c[0], scope: 'accessibilities'), c[0]]},
+          include_blank: false
+       %>
+
+
     <%= form.button :submit, class: 'btn btn-primary' %>
     <%= cancel_button %>
   </div>
