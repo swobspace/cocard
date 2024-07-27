@@ -18,7 +18,8 @@
       <tbody>
         <% @logs.each do |log| %>
           <%= content_tag(:tr, id: dom_id(log), class: dom_class(log)) do %>
-            <td><%= log.since&.localtime.to_s %></td>
+            <td><%= render IsCurrentComponent.new(item: log, attr: :since,
+                                                  relative: true, icon: false)%></td>
             <td><%= render ErrorLevelBadgeComponent.new(level: log.level) %></td>
             <td><%= log.loggable_type %></td>
             <td>
@@ -30,7 +31,9 @@
             </td>
             <td><%= log.action %></td>
             <td><%= log.message %></td>
-            <td><%= log.last_seen&.localtime&.to_s %></td>
+            <td><%= render IsCurrentComponent.new(item: log, attr: :last_seen,
+                                                  relative: true)%></td>
+
             <td class="text-nowrap">
               <%= show_link log, class: 'btn btn-sm btn-outline-secondary',
                                  data: { "turbo-frame" => "_top" } %>

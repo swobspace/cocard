@@ -24,8 +24,10 @@
                     data: { "turbo-frame" => "_top" },
                     class: "primary-link") %></td>
           <td><%= connector.condition_message %></td>
-          <td><%= connector.last_check&.localtime %></td>
-          <td><%= connector.last_ok&.localtime %></td>
+          <td><%= render IsCurrentComponent.new(item:connector, attr: :last_check,
+                                                relative: true)%></td>
+          <td><%= render IsCurrentComponent.new(item:connector, attr: :last_ok,
+                                                relative: true)%></td>
         <% end %>
       <% end %>
     </tbody>

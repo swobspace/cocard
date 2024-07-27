@@ -31,7 +31,8 @@
                     data: { "turbo-frame" => "_top" },
                     class: "primary-link") unless card_terminal.connector.nil? %></td>
           <td><%= card_terminal.condition_message %></td>
-          <td><%= card_terminal.last_ok&.localtime %></td>
+          <td><%= render IsCurrentComponent.new(item: card_terminal, attr: :last_ok,
+                                                relative: true)%></td>
         <% end %>
       <% end %>
     </tbody>
