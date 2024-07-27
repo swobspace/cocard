@@ -115,7 +115,7 @@ RSpec.describe CardTerminal, type: :model do
       describe "with ping failed, not connected" do
         it "-> CRITICAL" do
           expect(ct).to receive(:connected).and_return(false)
-          expect(ct).to receive(:up?).and_return(false)
+          expect(ct).to receive(:up?).at_least(:once).and_return(false)
           expect {
             ct.update_condition
           }.to change(ct, :condition).to(Cocard::States::CRITICAL)
@@ -125,8 +125,8 @@ RSpec.describe CardTerminal, type: :model do
 
       describe "with ping ok, but not connected" do
         it "-> WARNING" do
-          expect(ct).to receive(:connected).and_return(false)
-          expect(ct).to receive(:up?).and_return(true)
+          expect(ct).to receive(:connected).at_least(:once).and_return(false)
+          expect(ct).to receive(:up?).at_least(:once).and_return(true)
           ct.update_condition
           expect(ct.condition).to eq(Cocard::States::WARNING)
           expect(ct.condition_message).to match(/CardTerminal reachable, but not connected/)
@@ -136,7 +136,7 @@ RSpec.describe CardTerminal, type: :model do
       describe "with ping failed, but connected" do
         it "-> WARNING" do
           expect(ct).to receive(:connected).at_least(:once).and_return(true)
-          expect(ct).to receive(:up?).and_return(false)
+          expect(ct).to receive(:up?).at_least(:once).and_return(false)
           ct.update_condition
           expect(ct.condition).to eq(Cocard::States::WARNING)
           expect(ct.condition_message).to match(/CardTerminal is connected, but ping failed/)
@@ -208,5 +208,42 @@ RSpec.describe CardTerminal, type: :model do
 
   describe "#mac" do
     it { expect(ct.mac).to eq ('1122334488DD') }
+  end
+
+  describe "#online?" do
+    context "is accessible" do
+      before(:each) do
+        expect(ct).to receive(:is_accessible?).and_return(true)
+      end
+      it "ping and connected: online == true" do
+        expect(ct).to receive(:up?).and_return(true)
+        expect(ct).to receive(:connected).and_return(true)
+        expect(ct.online?).to be_truthy
+      end
+      it "no ping == false" do
+        expect(ct).to receive(:up?).and_return(false)
+        allow(ct).to receive(:connected).and_return(true)
+        expect(ct.online?).to be_falsey
+      end
+      it "not connected: online == false" do
+        expect(ct).to receive(:up?).and_return(true)
+        expect(ct).to receive(:connected).and_return(false)
+        expect(ct.online?).to be_falsey
+      end
+    end
+
+    context "is not accessible" do
+      before(:each) do
+        expect(ct).to receive(:is_accessible?).and_return(false)
+      end
+      it "connected: online == true" do
+        expect(ct).to receive(:connected).and_return(true)
+        expect(ct.online?).to be_truthy
+      end
+      it "not connected: online == false" do
+        expect(ct).to receive(:connected).and_return(false)
+        expect(ct.online?).to be_falsey
+      end
+    end
   end
 end

@@ -53,43 +53,49 @@ class CardTerminal < ApplicationRecord
 
   def update_condition
     if connector.nil?
-      set_condition( Cocard::States::NOTHING,
+      return set_condition( Cocard::States::NOTHING,
                      "No connector assigned" )
-      return
+    end
+    if online?
+      return set_condition( Cocard::States::OK,
+                     "CardTerminal online" )
     end
     if last_ok.blank?
-      set_condition( Cocard::States::NOTHING,
+      return set_condition( Cocard::States::NOTHING,
                      "CardTerminal noch nicht in Betrieb" )
-      return
     end
     if is_accessible?
       is_up = up?
       if !is_up and !connected
-        set_condition( Cocard::States::CRITICAL,
+        return set_condition( Cocard::States::CRITICAL,
                        "CardTerminal unreachable - ping failed and not connected" ) 
-        return
       elsif !is_up and connected
-        set_condition( Cocard::States::WARNING,
+        return set_condition( Cocard::States::WARNING,
                        "CardTerminal is connected, but ping failed" )
-        return
       elsif is_up and !connected
-        set_condition( Cocard::States::WARNING,
+        return set_condition( Cocard::States::WARNING,
                        "CardTerminal reachable, but not connected" )
-        return
       end
     else
       if !connected
-        set_condition( Cocard::States::CRITICAL,
+        return set_condition( Cocard::States::CRITICAL,
                        "CardTerminal unreachable - not connected" ) 
-        return
       end
     end
-    set_condition( Cocard::States::OK,
-                   "CardTerminal online" )
+    set_condition( Cocard::States::UNKNOWN,
+                   "CardTerminal unknown state, should not occur" ) 
   end
 
   def is_accessible?
     !!(network&.ping?)
+  end
+
+  def online?
+    if is_accessible?
+      up? && connected
+    else
+      connected
+    end
   end
 
 private
