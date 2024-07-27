@@ -15,7 +15,6 @@ weitestgehend automatisiert. Im einfachsten Falle (ohne Client-Authentifikation 
 
 Das Ergebnis stellt Cocard in einem Dashboard zusammen:
 
-//image::docsrc/app/modules/ROOT/images/cocard-dashboard.png[]
 image::cocard-dashboard.png[]
 
 In den Abschnitten Connector, Card und Card Terminal werden alle Einträge mit WARNING (gelb) und CRITICAL (rot) angezeigt. Cocard folgt hier der der Klassifikation von Nagios, ergänzt um einen Zustand für nicht Betrieb/nicht konfiguriert: 
@@ -28,7 +27,7 @@ In den Abschnitten Connector, Card und Card Terminal werden alle Einträge mit W
 
 Ein Klick auf einen der Buttons ändert die Ansicht im jeweiligen Abschnitt und zeigt dann die Einträge mit dem gewählten Status an:
 
-image::docsrc/app/modules/ROOT/images/dashboard-condition-summary.png[]
+image::dashboard-condition-summary.png[]
 
 Buttons, die nur umrandet sind haben keine Einträge zum jeweiligen Status.
 
@@ -36,8 +35,4 @@ Buttons, die nur umrandet sind haben keine Einträge zum jeweiligen Status.
 
 Cocard verfügt über eine einfache Integration in https://docs.checkmk.com/latest/de/[CheckMK]: über einen sogenannten https://docs.checkmk.com/latest/de/localchecks.html[Local Check] lassen sich Konnektoren, Kartenterminals und Karten sehr einfach in CheckMK einbinden. Hier ein Beispiel für SMC-B-Karten:
 
-image::docsrc/app/modules/ROOT/images/cocard-checkmk-embedded.png[]
-
-== Installation
-
-Cocard ist 
+image::cocard-checkmk-embedded.png[]
