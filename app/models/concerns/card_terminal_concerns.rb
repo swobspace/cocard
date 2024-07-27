@@ -22,9 +22,12 @@ module CardTerminalConcerns
   def update_location_by_ip
     return if ip.blank?
     nets = Network.best_match(ip)
-    loc = nets.first&.location
-    unless loc.nil?
-      self[:location_id] = loc.id
+    net = nets.first
+    unless net.nil?
+      self[:network_id] = net.id
+      unless net.location_id.nil?
+        self[:location_id] = net.location_id
+      end
     end
   end
 

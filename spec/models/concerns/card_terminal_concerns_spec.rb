@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe CardTerminalConcerns, type: :model do
   let(:ct) do
     FactoryBot.create(:card_terminal, :with_mac,
-      ip: '198.51.100.17'
+      ip: '127.51.100.17'
     )
   end
 
@@ -14,24 +14,43 @@ RSpec.describe CardTerminalConcerns, type: :model do
           ct.update_location_by_ip
         }.not_to change(ct, :location_id)
       end
+
+      it "doesn't update network_id" do
+        expect {
+          ct.update_location_by_ip
+        }.not_to change(ct, :network_id)
+      end
     end
 
     context "with matching network" do
-      let!(:net) { FactoryBot.create(:network, netzwerk: '198.51.100.16/29') }
+      let!(:net) { FactoryBot.create(:network, netzwerk: '127.51.100.16/29') }
       it "updates location_id" do
         expect {
           ct.update_location_by_ip
         }.to change(ct, :location_id)
        expect(ct.location_id).to eq(net.location_id)
       end
+
+      it "updates networkd_id" do
+        expect {
+          ct.update_location_by_ip
+        }.to change(ct, :network_id)
+       expect(ct.network_id).to eq(net.id)
+      end
     end
 
     context "with non matching network" do
-      let!(:net) { FactoryBot.create(:network, netzwerk: '198.51.100.0/29') }
+      let!(:net) { FactoryBot.create(:network, netzwerk: '127.51.100.0/29') }
       it "doesn't update location_id" do
         expect {
           ct.update_location_by_ip
         }.not_to change(ct, :location_id)
+      end
+
+      it "doesn't update network_id" do
+        expect {
+          ct.update_location_by_ip
+        }.not_to change(ct, :network_id)
       end
     end
   end
