@@ -46,9 +46,7 @@ Betriebszustandsmeldungen des Konnektors (`OPERATIONAL_STATE`) und SOAP-Fehlerme
 
 == Integration in CheckMK
 
-Cocard verfügt über eine einfache Integration in https://docs.checkmk.com/
-latest/de/[CheckMK]: über einen sogenannten https://docs.checkmk.com/latest/de/
-localchecks.html[Local Check] lassen sich Konnektoren, Kartenterminals und 
+Cocard verfügt über eine einfache Integration in https://docs.checkmk.com/latest/de/[CheckMK]: über einen sogenannten https://docs.checkmk.com/latest/de/localchecks.html[Local Check] lassen sich Konnektoren, Kartenterminals und 
 Karten sehr einfach in CheckMK einbinden. Hier ein Beispiel für SMC-B-Karten:
 
 image::docsrc/app/modules/ROOT/images/cocard-checkmk-embedded.png[]
@@ -72,8 +70,7 @@ SMC-B-Karte.
 
 == Installation
 
-Cocard steht als https://github.com/swobspace/cocard/pkgs/container/cocard
-[Container] für die Nutzung mit Docker/Podman bereit - optimiert für den 
+Cocard steht als https://github.com/swobspace/cocard/pkgs/container/cocard[Container] für die Nutzung mit Docker/Podman bereit - optimiert für den 
 Einsatz mit Podman und Quadlets. Neben dem Cocard-Container wird noch 
 PostgreSQL und Redis benötigt (ebenfalls als Container).
 
