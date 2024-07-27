@@ -90,7 +90,75 @@
 </aside>
 <article class="doc">
 <h1 class="page">Cocard</h1>
-
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Cocard - ein Akronym für <em>Connectors and Cards</em> - dient der Überwachung und
+Administration der lokalen Telematik-Infrastruktur. In größeren Umgebungen wie einem Verbund von mehreren Kliniken sind oft viele hundert Kartenterminals im Einsatz, die ausgerollt und überwacht werden müssen. Und manchmal scheitert der Einsatz der Telematik einfach nur daran, dass die Steckdosenleiste belegt war, ein Kollege das Netzteil das Kartenterminals gezogen und nach dem Laden des Smartphones oder Tablets das Netzteil nicht wieder eingesteckt hat.</p>
+</div>
+<div class="paragraph">
+<p>Für die Identifikation der Betriebsstätte sind Zertifikate notwendig (SMC-B), die ein Ablaufdatum haben. Jedes Kartenterminal hat ebenfalls ein Zertifikat für die Absicherung der Kommunikation (SMC-KT). Das sind in den oben genannten Klinikverbünden hunderte von Ablaufdaten, die man im Auge behalten muss.</p>
+</div>
+<div class="paragraph">
+<p>Cocard inventarisiert und überwacht Kartenterminals und Karten (SMC-B, SMC-KT)
+weitestgehend automatisiert. Im einfachsten Falle (ohne Client-Authentifikation am Konnektor; ein einheitlicher Kontext, mit dem man alle Systeme abfragen kann) genügt die Konfiguration des Konnektors mit IP-Adresse und einem Standard-Kontext. Den Rest erledigt Cocard.</p>
+</div>
+<div class="paragraph">
+<p>Das Ergebnis stellt Cocard in einem Dashboard zusammen:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/cocard-dashboard.png" alt="cocard dashboard">
+</div>
+</div>
+<div class="paragraph">
+<p>In den Abschnitten Connector, Card und Card Terminal werden alle Einträge mit WARNING (gelb) und CRITICAL (rot) angezeigt. Cocard folgt hier der der Klassifikation von Nagios, ergänzt um einen Zustand für nicht Betrieb/nicht konfiguriert:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>0 == OK (grün)</p>
+</li>
+<li>
+<p>1 == WARNING (gelb)</p>
+</li>
+<li>
+<p>2 == CRITICAL (rot)</p>
+</li>
+<li>
+<p>3 == UNKNOWN (helblau, in der Regel Konfigurationsfehler)</p>
+</li>
+<li>
+<p>-1 = NOTHING (nicht in Betrieb oder nicht vollständig konfiguriert)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Ein Klick auf einen der Buttons ändert die Ansicht im jeweiligen Abschnitt und zeigt dann die Einträge mit dem gewählten Status an:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/dashboard-condition-summary.png" alt="dashboard condition summary">
+</div>
+</div>
+<div class="paragraph">
+<p>Buttons, die nur umrandet sind haben keine Einträge zum jeweiligen Status.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_integration_in_checkmk"><a class="anchor" href="#_integration_in_checkmk"></a>Integration in CheckMK</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Cocard verfügt über eine einfache Integration in <a href="https://docs.checkmk.com/latest/de/">CheckMK</a>: über einen sogenannten <a href="https://docs.checkmk.com/latest/de/localchecks.html">Local Check</a> lassen sich Konnektoren, Kartenterminals und Karten sehr einfach in CheckMK einbinden. Hier ein Beispiel für SMC-B-Karten:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/cocard-checkmk-embedded.png" alt="cocard checkmk embedded">
+</div>
+</div>
+</div>
+</div>
 </article>
   </div>
 </main>

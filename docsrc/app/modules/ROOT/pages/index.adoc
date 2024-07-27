@@ -3,8 +3,6 @@
 :revdate: 2024-07-27
 :imagesdir: ../images
 
-= Cocard
-
 Cocard - ein Akronym für _Connectors and Cards_ - dient der Überwachung und
 Administration der lokalen Telematik-Infrastruktur. In größeren Umgebungen wie einem Verbund von mehreren Kliniken sind oft viele hundert Kartenterminals im Einsatz, die ausgerollt und überwacht werden müssen. Und manchmal scheitert der Einsatz der Telematik einfach nur daran, dass die Steckdosenleiste belegt war, ein Kollege das Netzteil das Kartenterminals gezogen und nach dem Laden des Smartphones oder Tablets das Netzteil nicht wieder eingesteckt hat.
 
