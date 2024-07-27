@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "card_terminals/show", type: :view do
   let(:ts)        { Time.current }
+  let(:network)   { FactoryBot.create(:network, netzwerk: '127.0.0.0/8') }
   let(:location)  { FactoryBot.create(:location, lid: 'AXC') }
   let(:connector) { FactoryBot.create(:connector) }
   let(:prodinfo)  {{ product_information:
@@ -43,7 +44,8 @@ RSpec.describe "card_terminals/show", type: :view do
       plugged_in: "Dose 17/4, Patchfeld 5",
       serial: '11122277634',
       id_product: 'ORGA61411',
-      last_ok: 1.day.before(ts)
+      last_ok: 1.day.before(ts),
+      network: network
     )
   end
 
@@ -74,6 +76,7 @@ RSpec.describe "card_terminals/show", type: :view do
     expect(rendered).to match(/ORGA6141/)
     expect(rendered).to match(/11122277634/)
     expect(rendered).to match(/11122277634/)
+    expect(rendered).to match("127.0.0.0/8")
     expect(rendered).to match("#{ts.localtime.to_s.gsub(/\+.*/, '')}")
 
   end

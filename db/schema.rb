@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_26_161218) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_27_111128) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -92,10 +92,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_26_161218) do
     t.string "id_product", default: ""
     t.string "condition_message", default: ""
     t.datetime "last_ok", precision: nil
+    t.bigint "network_id"
     t.index ["condition"], name: "index_card_terminals_on_condition"
     t.index ["connector_id"], name: "index_card_terminals_on_connector_id"
     t.index ["location_id"], name: "index_card_terminals_on_location_id"
     t.index ["mac"], name: "index_card_terminals_on_mac", unique: true
+    t.index ["network_id"], name: "index_card_terminals_on_network_id"
   end
 
   create_table "cards", force: :cascade do |t|

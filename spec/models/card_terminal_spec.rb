@@ -19,6 +19,7 @@ RSpec.describe CardTerminal, type: :model do
   it { is_expected.to have_many(:workplaces).through(:terminal_workplaces) }
   it { is_expected.to belong_to(:connector).optional }
   it { is_expected.to belong_to(:location).optional }
+  it { is_expected.to belong_to(:network).optional }
   it { is_expected.to have_many(:cards).dependent(:destroy) }
   # it { is_expected.to validate_presence_of(:mac) }
 

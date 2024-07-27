@@ -51,6 +51,7 @@ class CardTerminal {
   last_ok: timestamp
   firmware_version: string
   connector_id
+  network_id
 }
 
 class Location {

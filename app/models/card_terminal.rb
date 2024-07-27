@@ -9,6 +9,7 @@ class CardTerminal < ApplicationRecord
   has_many :workplaces, through: :terminal_workplaces
   belongs_to :location, optional: true
   belongs_to :connector, optional: true
+  belongs_to :network, optional: true
   has_many :cards, dependent: :destroy
 
   # -- configuration
