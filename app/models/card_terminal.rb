@@ -16,6 +16,7 @@ class CardTerminal < ApplicationRecord
   broadcasts_refreshes
 
   has_rich_text :description
+  delegate :accessibility, to: :network, allow_nil: true
 
   # -- validations and callbacks
   before_save :ensure_displayname
@@ -51,27 +52,44 @@ class CardTerminal < ApplicationRecord
   end
 
   def update_condition
-    is_up = up?
     if connector.nil?
       set_condition( Cocard::States::NOTHING,
                      "No connector assigned" )
-
-    elsif last_ok.blank?
+      return
+    end
+    if last_ok.blank?
       set_condition( Cocard::States::NOTHING,
                      "CardTerminal noch nicht in Betrieb" )
-    elsif !is_up and !connected
-      set_condition( Cocard::States::CRITICAL,
-                     "CardTerminal unreachable - ping failed and not connected" ) 
-    elsif !is_up and connected
-      set_condition( Cocard::States::WARNING,
-                     "CardTerminal is connected, but ping failed" )
-    elsif is_up and !connected
-      set_condition( Cocard::States::WARNING,
-                     "CardTerminal reachable, but not connected" )
-    else
-      set_condition( Cocard::States::OK,
-                     "CardTerminal online" )
+      return
     end
+    if is_accessible?
+      is_up = up?
+      if !is_up and !connected
+        set_condition( Cocard::States::CRITICAL,
+                       "CardTerminal unreachable - ping failed and not connected" ) 
+        return
+      elsif !is_up and connected
+        set_condition( Cocard::States::WARNING,
+                       "CardTerminal is connected, but ping failed" )
+        return
+      elsif is_up and !connected
+        set_condition( Cocard::States::WARNING,
+                       "CardTerminal reachable, but not connected" )
+        return
+      end
+    else
+      if !connected
+        set_condition( Cocard::States::CRITICAL,
+                       "CardTerminal unreachable - not connected" ) 
+        return
+      end
+    end
+    set_condition( Cocard::States::OK,
+                   "CardTerminal online" )
+  end
+
+  def is_accessible?
+    !!(network&.ping?)
   end
 
 private

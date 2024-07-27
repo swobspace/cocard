@@ -27,6 +27,7 @@ module CardTerminals
   end
 
   RSpec.describe Query do
+    let(:network) { FactoryBot.create(:network, netzwerk: '127.0.0.0/8') }
     let(:ts)  { Time.current }
     let(:ber) { FactoryBot.create(:location, lid: 'BER') }
     let(:conn) { FactoryBot.create(:connector) }
@@ -42,6 +43,7 @@ module CardTerminals
         location: ber,
         supplier: 'ACME Ltd. International',
         last_ok: ts,
+        network: network,
       )
     end
 
@@ -56,6 +58,7 @@ module CardTerminals
         supplier: 'ACME Ltd. International',
         connector: conn,
         last_ok: ts,
+        network: network,
       )
     end
 
@@ -70,6 +73,7 @@ module CardTerminals
         plugged_in: 'Switch 17/4',
         supplier: 'ACME Ltd. International',
         last_ok: ts,
+        network: network,
       )
     end
 

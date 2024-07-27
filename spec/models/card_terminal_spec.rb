@@ -1,7 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe CardTerminal, type: :model do
-  let(:location) { FactoryBot.create(:location, lid: 'ACX') }
+  let!(:location) { FactoryBot.create(:location, lid: 'ACX') }
+  let!(:network) do 
+    FactoryBot.create(:network, 
+      netzwerk: '127.0.0.0/8', 
+      location_id: location.id,
+      accessibility: 'ping'
+    )
+  end
   let(:connector) { FactoryBot.create(:connector) }
   let(:ct) do
     FactoryBot.create(:card_terminal,
@@ -11,9 +18,12 @@ RSpec.describe CardTerminal, type: :model do
       ct_id: 'CT_ID_0123',
       mac: '11:22:33:44:88:dd',
       location: location,
+      network: network,
+      connected: false,
       last_ok: Time.current
     )
   end
+
   it { is_expected.to have_many(:logs) }
   it { is_expected.to have_many(:terminal_workplaces).dependent(:destroy) }
   it { is_expected.to have_many(:workplaces).through(:terminal_workplaces) }
@@ -74,79 +84,123 @@ RSpec.describe CardTerminal, type: :model do
 
 
   describe "#update_condition" do
-    it { expect(ct.condition).to eq(Cocard::States::WARNING) }
-
-    describe "without connector" do
-      it "-> NOTHING" do
-        ct.update(condition: Cocard::States::OK)
-        ct.reload
-        expect(ct).to receive(:connector).and_return(nil)
-        expect {
-          ct.update_condition
-        }.to change(ct, :condition).to(Cocard::States::NOTHING)
-        expect(ct.condition_message).to match(/No connector assigned/)
-      end
+    before(:each) do
     end
 
-    describe "with last_ok.blank?" do
-      it "-> CRITICAL" do
-        expect(ct).to receive(:last_ok).and_return(nil)
-        expect {
-          ct.update_condition
-        }.to change(ct, :condition).to(Cocard::States::NOTHING)
-        expect(ct.condition_message).to match(/CardTerminal noch nicht in Betrieb/)
-      end
-    end
+    describe "accessibility: ping" do
+      it { expect(ct.condition).to eq(Cocard::States::WARNING) }
 
-    describe "with ping failed, not connected" do
-      it "-> CRITICAL" do
-        expect(ct).to receive(:connected).and_return(false)
-        expect(ct).to receive(:up?).and_return(false)
-        expect {
-          ct.update_condition
-        }.to change(ct, :condition).to(Cocard::States::CRITICAL)
-        expect(ct.condition_message).to match(/CardTerminal unreachable - ping failed and not connected/)
-      end
-    end
-
-    describe "with ping ok, but not connected" do
-      it "-> WARNING" do
-        expect(ct).to receive(:connected).and_return(false)
-        expect(ct).to receive(:up?).and_return(true)
-        ct.update_condition
-        expect(ct.condition).to eq(Cocard::States::WARNING)
-        expect(ct.condition_message).to match(/CardTerminal reachable, but not connected/)
-      end
-    end
-
-    describe "with ping failed, but connected" do
-      it "-> WARNING" do
-        expect(ct).to receive(:connected).at_least(:once).and_return(true)
-        expect(ct).to receive(:up?).and_return(false)
-        ct.update_condition
-        expect(ct.condition).to eq(Cocard::States::WARNING)
-        expect(ct.condition_message).to match(/CardTerminal is connected, but ping failed/)
-      end
-    end
-
-    describe "with connected online" do
-      it "-> OK" do
-        expect(ct).to receive(:up?).and_return(true)
-        expect(ct).to receive(:connected).and_return(true)
-        expect {
-          ct.update_condition
-        }.to change(ct, :condition).to(Cocard::States::OK)
-        expect(ct.condition_message).to match(/CardTerminal online/)
-      end
-    end
-
-    describe "#save" do
-      describe "with changed connected" do
-        it "updates condition" do
-          ct.connected = true
+      describe "without connector" do
+        it "-> NOTHING" do
+          ct.update(condition: Cocard::States::OK)
+          ct.reload
+          expect(ct).to receive(:connector).and_return(nil)
           expect {
-            ct.save
-          }.to change(ct, :condition)
+            ct.update_condition
+          }.to change(ct, :condition).to(Cocard::States::NOTHING)
+          expect(ct.condition_message).to match(/No connector assigned/)
+        end
+      end
+
+      describe "with last_ok.blank?" do
+        it "-> CRITICAL" do
+          expect(ct).to receive(:last_ok).and_return(nil)
+          expect {
+            ct.update_condition
+          }.to change(ct, :condition).to(Cocard::States::NOTHING)
+          expect(ct.condition_message).to match(/CardTerminal noch nicht in Betrieb/)
+        end
+      end
+
+      describe "with ping failed, not connected" do
+        it "-> CRITICAL" do
+          expect(ct).to receive(:connected).and_return(false)
+          expect(ct).to receive(:up?).and_return(false)
+          expect {
+            ct.update_condition
+          }.to change(ct, :condition).to(Cocard::States::CRITICAL)
+          expect(ct.condition_message).to match(/CardTerminal unreachable - ping failed and not connected/)
+        end
+      end
+
+      describe "with ping ok, but not connected" do
+        it "-> WARNING" do
+          expect(ct).to receive(:connected).and_return(false)
+          expect(ct).to receive(:up?).and_return(true)
+          ct.update_condition
+          expect(ct.condition).to eq(Cocard::States::WARNING)
+          expect(ct.condition_message).to match(/CardTerminal reachable, but not connected/)
+        end
+      end
+
+      describe "with ping failed, but connected" do
+        it "-> WARNING" do
+          expect(ct).to receive(:connected).at_least(:once).and_return(true)
+          expect(ct).to receive(:up?).and_return(false)
+          ct.update_condition
+          expect(ct.condition).to eq(Cocard::States::WARNING)
+          expect(ct.condition_message).to match(/CardTerminal is connected, but ping failed/)
+        end
+      end
+
+      describe "with connected online" do
+        it "-> OK" do
+          expect(ct).to receive(:up?).and_return(true)
+          expect(ct).to receive(:connected).and_return(true)
+          expect {
+            ct.update_condition
+          }.to change(ct, :condition).to(Cocard::States::OK)
+          expect(ct.condition_message).to match(/CardTerminal online/)
+        end
+      end
+
+      describe "#save" do
+        describe "with changed connected" do
+          it "updates condition" do
+            ct.connected = true
+            expect {
+              ct.save
+            }.to change(ct, :condition)
+          end
+        end
+      end
+    end
+
+    describe "accessibility: nothing" do
+      before(:each) do
+        ct.update(network_id: nil)
+      end
+      it { expect(ct.condition).to eq(Cocard::States::CRITICAL) }
+
+      describe "without connector" do
+        it "-> NOTHING" do
+          ct.update(condition: Cocard::States::OK)
+          ct.reload
+          expect(ct).to receive(:connector).and_return(nil)
+          expect {
+            ct.update_condition
+          }.to change(ct, :condition).to(Cocard::States::NOTHING)
+          expect(ct.condition_message).to match(/No connector assigned/)
+        end
+      end
+
+      describe "with last_ok.blank?" do
+        it "-> CRITICAL" do
+          expect(ct).to receive(:last_ok).and_return(nil)
+          expect {
+            ct.update_condition
+          }.to change(ct, :condition).to(Cocard::States::NOTHING)
+          expect(ct.condition_message).to match(/CardTerminal noch nicht in Betrieb/)
+        end
+      end
+
+      describe "with connected online" do
+        it "-> OK" do
+          expect(ct).to receive(:connected).and_return(true)
+          expect {
+            ct.update_condition
+          }.to change(ct, :condition).to(Cocard::States::OK)
+          expect(ct.condition_message).to match(/CardTerminal online/)
         end
       end
     end
