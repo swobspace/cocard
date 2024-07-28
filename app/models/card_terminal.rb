@@ -68,22 +68,26 @@ class CardTerminal < ApplicationRecord
       is_up = up?
       if !is_up and !connected
         return set_condition( Cocard::States::CRITICAL,
-                       "CardTerminal unreachable - ping failed and not connected" ) 
+                              "CardTerminal unreachable - ping failed and not connected" )
       elsif !is_up and connected
         return set_condition( Cocard::States::WARNING,
-                       "CardTerminal is connected, but ping failed" )
+                              "CardTerminal is connected, but ping failed" )
       elsif is_up and !connected
         return set_condition( Cocard::States::WARNING,
-                       "CardTerminal reachable, but not connected" )
+                              "CardTerminal reachable, but not connected" )
+      else
+        return set_condition( Cocard::States::OK,
+                              "CardTerminal online - Ping not reliable" )
       end
     else
       if !connected
         return set_condition( Cocard::States::CRITICAL,
-                       "CardTerminal unreachable - not connected" ) 
+                       "CardTerminal not connected" ) 
+      else
+        return set_condition( Cocard::States::UNKNOWN,
+                   "CardTerminal unknown state, should not occur" ) 
       end
     end
-    set_condition( Cocard::States::UNKNOWN,
-                   "CardTerminal unknown state, should not occur" ) 
   end
 
   def is_accessible?
@@ -92,7 +96,7 @@ class CardTerminal < ApplicationRecord
 
   def online?
     if is_accessible?
-      up? && connected
+      !!(up? && connected)
     else
       connected
     end
