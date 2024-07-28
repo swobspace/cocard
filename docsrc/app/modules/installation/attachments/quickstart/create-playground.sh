@@ -36,5 +36,5 @@ podman create --pod play-cocard --name play-cocard-worker \
   --env="FORCE_SSL=false" \
   --restart=on-failure \
   --volume=play-cocard-storage:/rails/storage \
-  ghcr.io/swobspace/cocard:latest good_job start
+  ghcr.io/swobspace/cocard:latest bundle exec good_job start --max-threads=4
 
