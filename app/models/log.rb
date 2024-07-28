@@ -1,7 +1,7 @@
 class Log < ApplicationRecord
   # -- associations
   belongs_to :loggable, polymorphic: true
-  default_scope { order('created_at desc') }
+  default_scope { order('since desc NULLS LAST') }
 
   # -- configuration
   # -- validations and callbacks
