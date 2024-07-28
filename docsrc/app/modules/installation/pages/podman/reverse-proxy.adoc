@@ -1,0 +1,68 @@
+= Using a reverse proxy to secure Cocard
+:navtitle: Reverse Proxy
+:revdate: 2023-12-24
+:imagesdir: ../../images
+
+A common approach to secure access to container applications is to use a reverse proxy. The reverse proxy terminates the HTTPS connection for one or more containers on the same host.
+
+image::podman/reverse-proxy.svg[]
+
+Cocard uses websockets, so there is a second connection that needs to be forwarded in addition to the http/s connection.
+
+
+== Traefik
+
+.Traefik: directory and files
+[subs="+macros"]
+----
+/etc/containers/systemd/users/1001/traefik
+├── xref:attachment$podman/quadlet/traefik.yaml[traefik.yml]
+├── xref:attachment$podman/quadlet/traefik.container[traefik.container]
+├── xref:attachment$podman/quadlet/traefik.network[traefik.network]
+----
+
+Traefik opens port 8443. To redirect http(s) requests to Cocard, simply add a few lines to `cocard.container`:
+
+[source,toml]
+----
+Network=traefik.network
+Label=traefik.enable=true
+Label=traefik.http.routers.cocard.rule=Host(`cocard.example.com`)
+Label=traefik.http.routers.cocard.entrypoints=websecure
+Label=traefik.http.routers.cocard.tls=true
+Label=traefik.http.routers.cocard.service=svc-cocard
+Label=traefik.http.services.svc-cocard.loadbalancer.server.port=3001
+----
+
+The entries starting with `Label` are configuring traefik. The entry `Network` makes Cocard accessible from traefik. Only the Cocard container itself needs to be connected to traefik.
+
+
+== Apache 2.4
+
+NOTE: I don't use this setup anymore, so it may or may not work.
+
+[source,apache]
+----
+<VirtualHost *:443>
+...
+  <Location "/">
+    ProxyPass http://127.0.0.1:4001/
+    ProxyPassReverse http://127.0.0.1:4001/
+  </Location>
+
+  <Location /cable>
+    ProxyPass ws://127.0.0.1:4001/cable
+    ProxyPassReverse ws://127.0.0.1:4001/cable
+  </Location>
+
+  <Proxy *>
+    Order deny,allow
+    Allow from all
+  </Proxy>
+
+  SSLEngine On
+  SSLCertificateKeyFile ....
+  SSLCertificateFile ...
+  ...
+</VirtualHost>
+----

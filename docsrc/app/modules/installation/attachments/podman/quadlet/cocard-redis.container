@@ -1,0 +1,17 @@
+[Unit]
+Description=Redis for Cocard (production)
+
+[Container]
+Image=docker.io/library/redis:latest
+ContainerName=cocard-redis
+Volume=cocard-redis.volume:/data
+Network=cocard.network
+Label=traefik.enable=false
+
+[Service]
+Restart=always
+# pulling an image may exceed the default timeout
+TimeoutStartSec=900
+
+[Install]
+WantedBy=multi-user.target default.target

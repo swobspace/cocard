@@ -1,0 +1,25 @@
+[Unit]
+Description=PostgreSQL for Cocard (production)
+
+[Container]
+Image=docker.io/postgres:16.3
+ContainerName=cocard-postgres
+Volume=cocard-postgres.volume:/var/lib/postgresql/data
+Network=cocard.network
+EnvironmentFile=env.production
+Label=traefik.enable=false
+
+# healthcheck
+HealthCmd=/usr/bin/pg_isready -q -d postgres -U cocard
+HealthInterval=120s
+HealthTimeout=45s
+HealthRetries=10
+
+[Service]
+Restart=always
+
+# pulling an image may exceed the default timeout
+TimeoutStartSec=900
+
+[Install]
+WantedBy=multi-user.target default.target

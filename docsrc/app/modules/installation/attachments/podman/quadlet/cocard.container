@@ -1,0 +1,32 @@
+[Unit]
+Description=Cocard - Monitoring Connector, Cards and Terminals 
+Requires=cocard-redis.service
+After=cocard-redis.service
+Requires=cocard-postgres.service
+After=cocard-postgres.service
+
+[Container]
+Image=ghcr.io/swobspace/cocard:latest
+ContainerName=cocard
+Volume=cocard-storage.volume:/rails/storage
+Volume=cocard-tmp.volume:/rails/tmp
+Network=cocard.network
+Network=traefik.network
+EnvironmentFile=env.production
+Environment=FORCE_SSL=false
+AddCapability=CAP_NET_RAW
+Label=traefik.enable=true
+Label=traefik.http.routers.cocard.rule=Host(`cocard.example.com`)
+Label=traefik.http.routers.cocard.entrypoints=websecure
+Label=traefik.http.routers.cocard.tls=true
+Label=traefik.http.routers.cocard.service=svc-cocard
+Label=traefik.http.services.svc-cocard.loadbalancer.server.port=3000
+
+[Service]
+Restart=always
+# pulling an image may exceed the default timeout
+TimeoutStartSec=900
+
+[Install]
+WantedBy=multi-user.target default.target
+

@@ -1,0 +1,37 @@
+= Quick start
+:revdate: 2023-12-24
+:repo: https://github.com/swobspace/cocard
+
+== Installation and start
+
+Setup directory and configuration::
+Copy the content from {repo}/podman/playground to a local directory.
+
+Check configuration::
+Check the contents of the files in `./playground/cocard/.` For the first run you can use the files unchanged.
+
+Create the pod::
+----
+bash create-playground.sh
+----
+The script creates a pod with the name `play-cocard`.
+
+Start the pod::
+----
+podman pod start play-cocard
+----
+
+Access cocard via browser::
+* `http://localhost:3001`
+* login: `admin`
+* password: `admin9999`
+
+Don't forget to change your admin password.
+
+Connect to your first mirth connect system::
+See admin manual (coming soon).
+
+
+== Unresolved issues
+
+* You need to start the pod twice the first time. The postgresql setup takes too much time - so stop and start your pod a second time.

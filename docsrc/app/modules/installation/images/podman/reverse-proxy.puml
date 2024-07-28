@@ -1,0 +1,20 @@
+@startuml
+!theme cocard from ../../../../..
+
+agent client [
+  Client  
+]
+
+rectangle proxy [
+    Reverse Proxy
+]
+
+rectangle cocard #lightgreen [
+  Cocard
+]
+
+client --> "https://myhost.example.com\nwss://myhost.example.com/cable" proxy
+
+proxy --> "http://localhost:3000\nws://localhost:3000/cable" cocard
+
+@enduml

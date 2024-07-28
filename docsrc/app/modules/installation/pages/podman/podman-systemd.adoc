@@ -1,0 +1,109 @@
+= Podman in production using systemd and quadlets
+:navtitle: production: systemd + quadlets
+:author: Wolfgang Barth
+:revdate: 2024-07-16
+:imagesdir: ../../images
+
+== Requirements
+
+* podman Version >= 4.4, better 4.6 or higher.
+
+If something doesn't work have a look at https://docs.podman.io/en/stable/markdown/podman-systemd.unit.5.html and select your podman version (right bottom corner).
+
+.Podman Version in some linux distributions
+[cols="2,2,3"]
+|===
+|Distro | Version | usable?
+
+|Fedora 38    |4.7.2 |ok
+|Fedora 39    |4.8.1 |ok
+|Fedora 40    |5.1.1 |ok
+|Ubuntu 23.10 |4.3.1 |doesn't work
+|Ubuntu 24.04 |4.7.2 |ok
+|===
+
+== Overview
+
+image::podman/cocard-quadlets.svg[]
+
+NOTE: To run rootless containers, first create a special user. Say our user is 
+`poddy` and has uid 1001.
+
+.Rootless setup: directories and files
+[subs="+macros"]
+----
+/etc/containers/systemd/users/1001/cocard
+├── xref:attachment$podman/quadlet/env.production[env.production]
+├── xref:attachment$podman/quadlet/cocard.yml[cocard.yml]
+├── xref:attachment$podman/quadlet/cocard.container[cocard.container]
+├── xref:attachment$podman/quadlet/cocard.network[cocard.network]
+├── xref:attachment$podman/quadlet/cocard-postgres.container[cocard-postgres.container]
+├── xref:attachment$podman/quadlet/cocard-postgres.volume[cocard-postgres.volume]
+├── xref:attachment$podman/quadlet/cocard-redis.container[cocard-redis.container]
+├── xref:attachment$podman/quadlet/cocard-redis.volume[cocard-redis.volume]
+├── xref:attachment$podman/quadlet/cocard-storage.volume[cocard-storage.volume]
+├── xref:attachment$podman/quadlet/cocard-tmp.volume[cocard-tmp.volume]
+└── xref:attachment$podman/quadlet/cocard-worker-container[cocard-worker.container]
+----
+
+== How to run rootless containers with podman
+
+You need to enable linger, otherwise your containers will stop running after you log out.
+
+.Enable linger for poddy
+[source,sh]
+----
+loginctl enable-linger poddy
+----
+If you use sudo or su to become poddy, two environment variables should be 
+checked/set after becoming `poddy`:
+
+.Set environment variables
+[source,sh]
+----
+export XDG_RUNTIME_DIR="/run/user/1001"
+export DBUS_SESSION_BUS_ADDRESS="unix:path=${XDG_RUNTIME_DIR}/bus"
+----
+
+.Create the neccessary systemd directory
+[source,sh]
+----
+mkdir -p /etc/containers/systemd/users/1001/cocard
+chown -R poddy:poddy /etc/containers/systemd/users/1001
+chmod 700 -R /etc/containers/systemd/users/1001
+----
+
+Now copy all the files from above to 
+`/etc/containers/systemd/users/1001/cocard`.
+
+IMPORTANT: Now is a good time to create your own credentials and update env.production!
+
+.(user poddy) Reload systemd
+[source,sh]
+----
+systemctl --user daemon-reload
+----
+
+.(user poddy) Start postgresql first - wait - start the rest
+[source,sh]
+----
+systemctl --user start cocard-postgres
+...
+systemctl --user start cocard
+----
+
+.(user poddy) Check logs
+----
+# complete output
+journalctl --user -f
+...
+# specific to one container
+journalctl --user -u cocard -f
+----
+
+== Resources
+
+* https://www.redhat.com/sysadmin/quadlet-podman
+* https://www.redhat.com/sysadmin/multi-container-application-podman-quadlet
+* https://docs.podman.io/en/stable/markdown/podman-systemd.unit.5.html
+* https://github.com/swobspace/ansible-role-podman

@@ -1,0 +1,24 @@
+= Installation
+:revdate: 2023-12-24
+
+NOTE: I'm rewriting the documentation for installing `cocard` with container. It is much easier to install and a lot of fun. However, the documentation may not be complete yet. If you miss something or find a bug, please open an issue on github.
+
+== Podman
+
+I'm using `podman`, not `docker`. The installation instructions won't work with `docker` without modification. If you still want to use `docker`, create your own docker-compose file from the xref:attachment$quickstart/create-playground.sh[create script] provided with the quickstart.
+
+All installation instructions are for rootless containers.
+
+== xref:podman/quickstart.adoc[]
+
+The quick start guide uses `podman pod`. They're not intended for production use, but provide a quick way to get a simple setup for playing around with `cocard`.
+
+== xref:podman/podman-systemd.adoc[]
+
+Quadlets are the perfect integration for `podman` containers with `systemd`. You need at least `podman` 4.4. The quadlet way is described in this guide.
+
+If you are using an older version of podman, you can use https://docs.podman.io/en/v3.4.1/markdown/podman-generate-systemd.1.html[podman generate systemd] (select your podman version in the bottom right hand corner to get the correct manpage). First create a `pod' (see xref:podman/quickstart.adoc[]) and then run `podman generate systemd'. There are a few more steps to get `cocard` running, please read the full manpage.
+
+== xref:podman/reverse-proxy.adoc[]
+
+Cocard containers are intended to run behind a reverse proxy. Choose a reverse proxy such as Apache, Nginx or Traefik and adapt the examples to your needs.

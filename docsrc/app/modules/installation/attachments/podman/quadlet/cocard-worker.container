@@ -1,0 +1,25 @@
+[Unit]
+Description=Worker for Cocard (good_job)
+Requires=cocard-redis.service
+After=cocard-redis.service
+Requires=cocard-postgres.service
+After=cocard-postgres.service
+
+[Container]
+Image=ghcr.io/swobspace/cocard:latest
+ContainerName=cocard-worker
+Volume=cocard-storage.volume:/rails/storage
+Network=cocard.network
+EnvironmentFile=env.production
+Environment=FORCE_SSL=false
+Exec=bundle exec good_job start --max-threads=4
+AddCapability=CAP_NET_RAW
+Label=traefik.enable=false
+
+[Service]
+Restart=always
+# pulling an image may exceed the default timeout
+TimeoutStartSec=900
+
+[Install]
+WantedBy=multi-user.target default.target
