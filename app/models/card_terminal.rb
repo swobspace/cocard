@@ -62,7 +62,7 @@ class CardTerminal < ApplicationRecord
     end
     if last_ok.blank?
       return set_condition( Cocard::States::NOTHING,
-                     "CardTerminal noch nicht in Betrieb" )
+                     "CardTerminal nicht in Betrieb" )
     end
     if is_accessible?
       is_up = up?

@@ -108,7 +108,7 @@ RSpec.describe CardTerminal, type: :model do
           expect {
             ct.update_condition
           }.to change(ct, :condition).to(Cocard::States::NOTHING)
-          expect(ct.condition_message).to match(/CardTerminal noch nicht in Betrieb/)
+          expect(ct.condition_message).to match(/CardTerminal nicht in Betrieb/)
         end
       end
 
@@ -190,7 +190,7 @@ RSpec.describe CardTerminal, type: :model do
           expect {
             ct.update_condition
           }.to change(ct, :condition).to(Cocard::States::NOTHING)
-          expect(ct.condition_message).to match(/CardTerminal noch nicht in Betrieb/)
+          expect(ct.condition_message).to match(/CardTerminal nicht in Betrieb/)
         end
       end
 
