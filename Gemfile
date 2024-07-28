@@ -98,12 +98,12 @@ gem "immutable_struct", "~> 1.2"
 
 gem "net-ping", "~> 2.0"
 
-gem "good_job", "~> 4.0.3"
+gem "good_job", "~> 4.1.0"
 
 gem "acts_as_list", "~> 1.1"
 
 gem "liquid", "~> 5.5"
 
-gem "pagy", "~> 8.4"
+gem "pagy", "~> 9.0"
 
 gem "highline", "~> 3.0", require: false
