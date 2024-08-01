@@ -96,7 +96,8 @@ module Cocard::SOAP
     def savon_globals
       { 
         open_timeout: 15,
-        read_timeout: 30,
+        # PIN actions may have timeouts > 45 sec.
+        read_timeout: 60,
         wsdl: wsdl_content,
         env_namespace: :soapenv,
         namespace: namespace,
