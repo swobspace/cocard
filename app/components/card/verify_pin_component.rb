@@ -9,7 +9,7 @@ class Card::VerifyPinComponent < ViewComponent::Base
   end
 
   def render?
-    force || card_context.pin_status == 'VERIFIABLE'
+    force || (card_context.pin_status == 'VERIFIABLE' && card_context.left_tries > 1)
   end
 
 private
