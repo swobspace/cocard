@@ -71,8 +71,8 @@ module Cocard::SOAP
 
       describe "successful call, but no PIN entered" do
         let(:result) { subject.call }
-        it { pp  result.response }
-        it { pp  result.error_messages }
+        it { pp result.response }
+        # it { File.write(File.join(Rails.root, 'spec/fixtures/files', 'verify_pin_result2.yml'), result.to_yaml) }
 
         it { expect(result.success?).to be_truthy }
         it { expect(result.response.keys).to contain_exactly(:verify_pin_response) }
