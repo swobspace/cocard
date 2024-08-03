@@ -43,6 +43,10 @@ RSpec.describe CardsController, type: :routing do
       expect(post: "/cards/1/get_pin_status").to route_to("cards#get_pin_status", id: "1")
     end
 
+    it "routes to #verify_pin via POST" do
+      expect(post: "/cards/1/verify_pin").to route_to("cards#verify_pin", id: "1")
+    end
+
     it "routes to #get_card via POST" do
       expect(post: "/cards/1/get_card").to route_to("cards#get_card", id: "1")
     end

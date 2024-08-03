@@ -7,6 +7,7 @@
     <% if @card.card_type == 'SMC-B' %>
       <div class="col-sm-3 text-muted text-end">
         <% if can? :manage, @card %>
+          <%= render Card::VerifyPinComponent.new(card: @card, context: context) %>
           <%= render Card::GetCardButtonComponent.new(card: @card, context: context, force: true) %>
         <% end %>
         <%= render Card::GetPinStatusComponent.new(card: @card, context: context) %>

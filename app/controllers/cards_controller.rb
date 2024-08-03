@@ -84,6 +84,25 @@ class CardsController < ApplicationController
     respond_with(@card, action: :show)
   end
 
+  def verify_pin
+    if set_context
+      result = Cocard::VerifyPin.new(card: @card, context: set_context).call
+      unless result.success?
+        @card.errors.add(:base, :invalid)
+        @card.errors.add(:base, result.error_messages.join("; "))
+        flash[:alert] = "Kontext: #{@context} / ERROR:: " + result.error_messages.join(', ')
+      else
+        flash[:notice] = "Kontext: #{@context}, " +
+                         "Verify PIN: #{result.verify_pin.pin_result}"
+      end
+    else
+      @card.errors.add(:base, :invalid)
+      flash[:alert] = "No context assigned or context not found!"
+    end
+    @card.save
+    respond_with(@card, action: :show)
+  end
+
   def get_card
       result = Cocard::GetCard.new(card: @card, context: set_context).call
       unless result.success?
