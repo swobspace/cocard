@@ -36,6 +36,9 @@
        <% unless controller.action_name =~ /(new|edit)/ %>
          <%= render_breadcrumbs %>
        <% end %>
+      <div id="toaster" class="toast-container position-fixed top-0 end-0" 
+                        style="padding-top: 60px;">
+      </div>
       <div id="flash">
         <%= render "shared/flash_alert" %>
       </div>
