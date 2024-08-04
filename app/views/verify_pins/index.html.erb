@@ -11,7 +11,7 @@
           <div class="row mb-3">
             <div class="col-3">
               <div>
-                <%= link_to raw(%Q[<i class="fa-regular fa-keyboard"></i> #{ct.name}]),
+                <%= link_to raw(%Q[<i class="fa-regular fa-keyboard"></i> #{ct} #{ct.mac}]),
                             card_terminal_path(ct),
                             class: 'primary-link',
                             data: { 'turbo-frame' => '_top' }
