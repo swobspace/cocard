@@ -10,10 +10,11 @@
       <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
             t('controller.cards')), main_app.cards_path, class: "dropdown-item" %>
 
+      <% if @current_user&.is_admin? %>
       <div class="dropdown-divider"></div>
       <%= link_to raw( '<span class="fa-solid fa-fw fa-rotate-right" aria-hidden="true"></span> ' +
             t('controller.verify_pins')), main_app.verify_pins_path, class: "dropdown-item" %>
-
+      <% end %>
       <div class="dropdown-divider"></div>
       <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
             'SMC-B'), main_app.cards_path(card_type: 'SMC-B'), class: "dropdown-item" %>

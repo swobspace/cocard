@@ -1,3 +1,5 @@
+<%= turbo_stream_from :verify_pins %>
+
 <div class="container-fluid">
   <% @connectors.each do |conn| %>
     <div class="card mb-3">
@@ -16,7 +18,8 @@
                  %>
               </div>
               <div>
-                <%= link_to "#", class: "btn btn-warning" do %>
+                <%= button_to verify_pins_path(card_terminal_id: ct.id), 
+                              class: "btn btn-warning" do %>
                   <i class="fa-solid fa-arrows-rotate"></i>
                 <% end %>
               </div>
