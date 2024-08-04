@@ -12,9 +12,9 @@ class VerifyPinsController < ApplicationController
                   .where("card_contexts.pin_status = 'VERIFIABLE'")
                   .distinct.each do |card|
       card.contexts.where("card_contexts.pin_status = 'VERIFIABLE'").each do |cctx|
-        result = Cocard::VerifyPin.new(card: card, context: cctx).call
         # just for debugging
-        # result = Cocard::GetPinStatus.new(card: card, context: cctx).call
+        result = Cocard::GetPinStatus.new(card: card, context: cctx).call
+        # result = Cocard::VerifyPin.new(card: card, context: cctx).call
 
         if result.success?
           status  = :success
@@ -30,12 +30,15 @@ class VerifyPinsController < ApplicationController
           'verify_pins',
           target: 'toaster',
           partial: "shared/turbo_toast",
-          locals: {status: status, message: message}
-        )
+          locals: {status: status, message: message})
       end
     end
-
-
+    Turbo::StreamsChannel.broadcast_prepend_to(
+      'verify_pins',
+      target: 'toaster',
+      partial: "shared/turbo_toast",
+      locals: {status: :info, message: "VERIFY PIN für Terminal #{@card_terminal} abgeschlossen"})
+    Turbo::StreamsChannel.broadcast_refresh_to(:verify_pins)
   end
 
   private
