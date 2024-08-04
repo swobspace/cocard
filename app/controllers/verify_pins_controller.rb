@@ -6,12 +6,18 @@ class VerifyPinsController < ApplicationController
                  .where("card_contexts.pin_status = 'VERIFIABLE'")
                  .where("operational_states.operational = ?", true)
                  .distinct
-    @card_terminals = CardTerminal.joins(cards: :card_contexts).where("card_contexts.pin_status = 'VERIFIABLE'").distinct
-    @connectors = Connector.joins(card_terminals: {cards: :card_contexts}).where("card_contexts.pin_status = 'VERIFIABLE'").distinct
+    @card_terminals = CardTerminal.joins(cards: [:card_contexts, :operational_state])
+                                  .where("card_contexts.pin_status = 'VERIFIABLE'")
+                                  .where("operational_states.operational = ?", true)
+                                  .distinct
+    @connectors = Connector.joins(card_terminals: {cards: [:card_contexts, :operational_state]})
+                           .where("card_contexts.pin_status = 'VERIFIABLE'")
+                           .where("operational_states.operational = ?", true)
+                           .distinct
   end
 
   def verify
-    @card_terminal.cards.joins(:card_contexts)
+    @card_terminal.cards.joins(:card_contexts, :operational_state)
                   .where("card_contexts.pin_status = 'VERIFIABLE'")
                   .where("operational_states.operational = ?", true)
                   .distinct.each do |card|
