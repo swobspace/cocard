@@ -83,8 +83,8 @@ class CardsController < ApplicationController
       @card.errors.add(:base, :invalid)
       flash[:alert] = "No context assigned or context not found!"
     end
-    respond_with(@card, action: :show)
-    # render turbo_stream: turbo_stream.prepend("flash", partial: "shared/flash_toast")
+    # respond_with(@card, action: :show)
+    render turbo_stream: turbo_stream.prepend("toaster", partial: "shared/flash_toast")
   end
 
   def verify_pin
@@ -105,7 +105,7 @@ class CardsController < ApplicationController
       flash.now[:alert] = "No context assigned or context not found!"
     end
     @card.save
-    render turbo_stream: turbo_stream.prepend("flash", partial: "shared/flash_toast")
+    render turbo_stream: turbo_stream.prepend("toaster", partial: "shared/flash_toast")
   end
 
   def get_card
