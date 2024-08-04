@@ -2,7 +2,10 @@ class VerifyPinsController < ApplicationController
   before_action :set_card_terminal, only: [:verify]
 
   def index
-    @cards = Card.joins(:card_contexts).where("card_contexts.pin_status = 'VERIFIABLE'").distinct
+    @cards = Card.joins(:card_contexts, :operational_state)
+                 .where("card_contexts.pin_status = 'VERIFIABLE'")
+                 .where("operational_states.operational = ?", true)
+                 .distinct
     @card_terminals = CardTerminal.joins(cards: :card_contexts).where("card_contexts.pin_status = 'VERIFIABLE'").distinct
     @connectors = Connector.joins(card_terminals: {cards: :card_contexts}).where("card_contexts.pin_status = 'VERIFIABLE'").distinct
   end
@@ -10,6 +13,7 @@ class VerifyPinsController < ApplicationController
   def verify
     @card_terminal.cards.joins(:card_contexts)
                   .where("card_contexts.pin_status = 'VERIFIABLE'")
+                  .where("operational_states.operational = ?", true)
                   .distinct.each do |card|
       card.contexts.where("card_contexts.pin_status = 'VERIFIABLE'").each do |cctx|
         # just for debugging
