@@ -71,7 +71,9 @@ class CardsController < ApplicationController
       unless result.success?
         @card.errors.add(:base, :invalid)
         @card.errors.add(:base, result.error_messages.join("; "))
-        flash[:alert] = "Kontext: #{@context} / ERROR:: " + result.error_messages.join(', ')
+        flash[:alert] = (@card.to_s + "<br/>" +
+                            "Kontext: #{@context}<br/>ERROR:: " + 
+                            result.error_messages.join(', ')).html_safe
       else
         flash[:notice] = "Kontext: #{@context}, " +
                          "PIN-Status: #{result.pin_status.pin_status}, " +
@@ -82,6 +84,7 @@ class CardsController < ApplicationController
       flash[:alert] = "No context assigned or context not found!"
     end
     respond_with(@card, action: :show)
+    # render turbo_stream: turbo_stream.prepend("flash", partial: "shared/flash_toast")
   end
 
   def verify_pin
@@ -90,17 +93,19 @@ class CardsController < ApplicationController
       unless result.success?
         @card.errors.add(:base, :invalid)
         @card.errors.add(:base, result.error_messages.join("; "))
-        flash[:alert] = "Kontext: #{@context} / ERROR:: " + result.error_messages.join(', ')
+        flash.now[:alert] = (@card.to_s + "<br/>" +
+                            "Kontext: #{@context}<br/>ERROR:: " + 
+                            result.error_messages.join(', ')).html_safe
       else
-        flash[:notice] = "Kontext: #{@context}, " +
+        flash.now[:notice] = "Kontext: #{@context}, " +
                          "Verify PIN: #{result.verify_pin.pin_result}"
       end
     else
       @card.errors.add(:base, :invalid)
-      flash[:alert] = "No context assigned or context not found!"
+      flash.now[:alert] = "No context assigned or context not found!"
     end
     @card.save
-    respond_with(@card, action: :show)
+    render turbo_stream: turbo_stream.prepend("flash", partial: "shared/flash_toast")
   end
 
   def get_card
