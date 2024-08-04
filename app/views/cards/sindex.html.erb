@@ -9,9 +9,6 @@
         <th><%= t('attributes.card_type') %></th>
         <th><%= t('attributes.name') %></th>
         <th><%= t('attributes.condition_message') %></th>
-        <% if @current_user.is_admin? %>
-          <th></th>
-        <% end %>
         <th><%= t('attributes.iccsn') %></th>
         <th><%= t('attributes.connector') %></th>
         <th><%= t('attributes.card_terminal') %></th>
@@ -26,14 +23,6 @@
           <td><%= card.card_type %></td>
           <td><%= card.name_or_cardholder %></td>
           <td><%= card.condition_message %></td>
-          <% if @current_user.is_admin? %>
-            <td>
-              <% card.card_contexts.where(pin_status: 'VERIFIABLE').each do |cctx| %>
-                <%= render Card::VerifyPinComponent.new(card: card, context: cctx.context) %>
-
-              <% end %>
-            </td>
-          <% end %>
           <td><%= link_to(card.iccsn, card_path(card),
                     data: { "turbo-frame" => "_top" },
                     class: "primary-link") %></td>

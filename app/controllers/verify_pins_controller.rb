@@ -13,8 +13,8 @@ class VerifyPinsController < ApplicationController
                   .distinct.each do |card|
       card.contexts.where("card_contexts.pin_status = 'VERIFIABLE'").each do |cctx|
         # just for debugging
-        result = Cocard::GetPinStatus.new(card: card, context: cctx).call
-        # result = Cocard::VerifyPin.new(card: card, context: cctx).call
+        # result = Cocard::GetPinStatus.new(card: card, context: cctx).call
+        result = Cocard::VerifyPin.new(card: card, context: cctx).call
 
         if result.success?
           status  = :success
