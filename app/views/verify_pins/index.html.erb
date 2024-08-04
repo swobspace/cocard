@@ -8,14 +8,22 @@
         <% (conn.card_terminals & @card_terminals).each do |ct| %>
           <div class="row mb-3">
             <div class="col-3">
-              <%= ct.name %>
+              <%= link_to raw(%Q[<i class="fa-regular fa-keyboard"></i> #{ct.name}]),
+                          card_terminal_path(ct),
+                          class: 'primary-link',
+                          data: { 'turbo-frame' => '_top' }
+               %>
             </div>
             <div class="col list-group">
               <% (ct.cards & @cards).each do |card| %>
                 <div class="list-group-item">
                  <div class="row mb-3 p-2">
                   <div class="col-4">
-                    <%= card.to_s %>
+                    <%= link_to raw(%Q[<i class="fa-solid fa-sim-card"></i> #{card}]),
+                          card_path(card),
+                          class: 'primary-link',
+                          data: { 'turbo-frame' => '_top' }
+                     %>
                   </div>
                   <div class="col">
                     <div id="list_contexts">
