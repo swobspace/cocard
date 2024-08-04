@@ -42,6 +42,14 @@
           </div>
           <div class="d-flex col-xs-7 col-md-8 col-ml-9">
             <%= render 'card_states' %>
+            <% if @current_user&.is_admin? %>
+              <div class="ms-auto">
+                <%= link_to t('controller.verify_pins'), verify_pins_path,
+                            class: 'btn btn-outline-secondary' ,
+                            data: { 'turbo-frame' => '_top' }
+                 %>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>
