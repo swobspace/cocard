@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'verify_pins', to: 'verify_pins#index'
   resources :client_certificates
   resources :workplaces do
     collection do

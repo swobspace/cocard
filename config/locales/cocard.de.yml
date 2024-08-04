@@ -186,6 +186,7 @@ de:
     operational_states: Betriebszustände
     searches: Suche
     users: Benutzer
+    verify_pins: PIN-Verifizierung
     workplaces: Arbeitsplätze
 
   contexts:

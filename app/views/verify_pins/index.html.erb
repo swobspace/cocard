@@ -1,0 +1,35 @@
+<div class="container-fluid">
+  <% @connectors.each do |conn| %>
+    <div class="card mb-3">
+      <div class="card-header">
+        <h5 class="card-title"><%= conn.name %></h5>
+      </div>
+      <div class="card-body">
+        <% (conn.card_terminals & @card_terminals).each do |ct| %>
+          <div class="row mb-3">
+            <div class="col-3">
+              <%= ct.name %>
+            </div>
+            <div class="col list-group">
+              <% (ct.cards & @cards).each do |card| %>
+                <div class="list-group-item">
+                 <div class="row mb-3 p-2">
+                  <div class="col-4">
+                    <%= card.to_s %>
+                  </div>
+                  <div class="col">
+                    <div id="list_contexts">
+                      <%= render partial: 'cards/contexts/list',
+                                 locals: { card: card }%>
+                    </div>
+                  </div>
+                 </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
