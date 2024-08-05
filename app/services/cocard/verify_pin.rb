@@ -55,6 +55,7 @@ module Cocard
         if pin_verify.pin_result == 'OK'
           success = true
           log_error(nil)
+          card_context.update(pin_status: 'VERIFIED')
           return Result.new(success?: true, error_messages: error_messages, 
                             pin_verify: pin_verify)
         else
