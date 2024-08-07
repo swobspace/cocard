@@ -52,6 +52,7 @@ export default class extends Controller {
   compileOptions(options) {
     // common options
     options.pagingType = "full_numbers"
+    options.responsive = true
     options.stateSave = true
     options.stateDuration = 60 * 60 * 24
     // save state but don't save search filter

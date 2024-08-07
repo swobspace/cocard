@@ -1,4 +1,5 @@
 <%= turbo_frame_tag("connectors") do %>
+ <div class="table-responsive-xl">
  <% if @connectors.size > 0 %>
   <%= content_tag :table,
         id: "connectors_table",
@@ -39,4 +40,5 @@
     </div>
   <% end %>
  <% end %>
+ </div>
 <% end %>

@@ -1,4 +1,5 @@
 <%= turbo_frame_tag('logs') do %>
+ <div class="table-responsive-xl">
   <% if @logs.size > 0 %>
     <%= content_tag :table, role: :datatable,
           id: "logs_table",
@@ -48,4 +49,5 @@
       </div>
     <% end %>
   <% end %>
+ </div>
 <% end %>

@@ -1,4 +1,5 @@
 <%= turbo_frame_tag "card_terminals" do %>
+ <div class="table-responsive-xl">
  <% if @card_terminals.size > 0 %>
   <%= content_tag :table,
         id: "card_terminals_table",
@@ -44,4 +45,5 @@
     </div>
   <% end %>
  <% end %>
+ </div>
 <% end %>
