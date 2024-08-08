@@ -9,33 +9,33 @@
       <div class="card-body">
         <% (conn.card_terminals & @card_terminals).each do |ct| %>
           <div class="row mb-3">
-            <div class="col-3">
+            <div class="col-4 col-lg-3">
               <div>
                 <%= raw(%Q[<i class="fa-regular fa-keyboard"></i> #{ct} #{ct.mac}])
                  %>
               </div>
               <div>
-                <%= button_to verify_pins_path(card_terminal_id: ct.id), 
+                <%= button_to verify_pins_path(card_terminal_id: ct.id),
                               class: "btn btn-lg btn-warning" do %>
                   <i class="fa-solid fa-arrows-rotate"></i>
                 <% end %>
               </div>
             </div>
-            <div class="col list-group">
+            <div class="col-8 col-lg-9 list-group">
               <% (ct.cards & @cards).each do |card| %>
                 <div class="list-group-item pb-0">
                  <div class="row mb-0 px-2 pt-2">
-                  <div class="col-4">
+                  <div class="col-12 col-lg-4">
                     <%= link_to raw(%Q[<i class="fa-solid fa-sim-card"></i> #{card}]),
                           card_path(card),
                           class: 'primary-link',
                           data: { 'turbo-frame' => '_top' }
                      %>
                   </div>
-                  <div class="col">
+                  <div class="col-12 col-lg-8">
                     <div id="list_contexts">
                       <div class="list-group mb-3">
-                        <%= render partial: 'cards/contexts/context', 
+                        <%= render partial: 'cards/contexts/context',
                                    collection: card.contexts.where("card_contexts.pin_status = 'VERIFIABLE'"), as: :context,
                                    locals: {card: card} %>
                       </div>

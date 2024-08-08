@@ -1,11 +1,11 @@
 <div id="<%= dom_id context %>"
      class="list-group-item " >
   <div class="row">
-    <div class="col handle pt-1">
+    <div class="col-12 col-lg-8 handle pt-1">
       <%= link_to context.to_s, context, class: 'primary-link' %>
     </div>
     <% if card.card_type == 'SMC-B' %>
-      <div class="col-sm-4 text-muted text-end">
+      <div class="col-12 col-lg-4 text-muted text-end">
         <% if can? :manage, card %>
           <%= render Card::VerifyPinComponent.new(card: card, context: context) %>
           <%= render Card::GetCardButtonComponent.new(card: card, context: context, force: true) %>
