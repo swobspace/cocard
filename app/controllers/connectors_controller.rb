@@ -46,7 +46,9 @@ class ConnectorsController < ApplicationController
   def create
     @connector = Connector.new(connector_params)
 
-    @connector.save
+    unless @connector.save
+      flash[:alert] = @connector.errors.full_messages.join("; ")
+    end
     respond_with(@connector)
   end
 
