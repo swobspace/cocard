@@ -1,7 +1,10 @@
-= Using a reverse proxy to secure Cocard
+= Reverse Proxy zur Absicherung von Cocard
 :navtitle: Reverse Proxy
-:revdate: 2023-12-24
+:author: Wolfgang Barth
+:revdate: 2024-08-09
 :imagesdir: ../../images
+
+#FIXME#
 
 A common approach to secure access to container applications is to use a reverse proxy. The reverse proxy terminates the HTTPS connection for one or more containers on the same host.
 

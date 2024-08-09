@@ -1,16 +1,18 @@
-= Podman in production using systemd and quadlets
-:navtitle: production: systemd + quadlets
+= Podman mit Systemd und Quadlets für Produktiv-Umgebungen
+:navtitle: Systemd und Quadlets
 :author: Wolfgang Barth
-:revdate: 2024-07-16
+:revdate: 2024-08-09
 :imagesdir: ../../images
 
-== Requirements
 
-* podman Version >= 4.4, better 4.6 or higher.
+Manpage zu Podman Quadlets: https://docs.podman.io/en/stable/markdown/podman-systemd.unit.5.html
 
-If something doesn't work have a look at https://docs.podman.io/en/stable/markdown/podman-systemd.unit.5.html and select your podman version (right bottom corner).
+== Voraussetzungen
 
-.Podman Version in some linux distributions
+* podman Version >= 4.4, besser 4.6 oder höher.
+
+
+.Podman Version einiger Linux-Distributionen
 [cols="2,2,3"]
 |===
 |Distro | Version | usable?
@@ -22,19 +24,17 @@ If something doesn't work have a look at https://docs.podman.io/en/stable/markdo
 |Ubuntu 24.04 |4.7.2 |ok
 |===
 
-== Overview
+== Überblick
 
 image::podman/cocard-quadlets.svg[]
 
-NOTE: To run rootless containers, first create a special user. Say our user is 
-`poddy` and has uid 1001.
+Für den Einsatz von Rootless-Containern nutzt man idealerweise einen eigenen Benutzer. Unser Benutzer heißt `poddy` und hat die UID 1001. Die sogenannten Quadlets werden im Verzeichnis `/etc/containers/systemd/users/$UID` oder einem Unterverzeichnis (hier: `cocard`) abgelegt.
 
-.Rootless setup: directories and files
+.Rootless Setup: Verzeichnis und Dateien (Alle Dateien: xref:attachment$podman/quadlet/quadlets.zip[quadlets.zip])
 [subs="+macros"]
 ----
 /etc/containers/systemd/users/1001/cocard
 ├── xref:attachment$podman/quadlet/env.production[env.production]
-├── xref:attachment$podman/quadlet/cocard.yml[cocard.yml]
 ├── xref:attachment$podman/quadlet/cocard.container[cocard.container]
 ├── xref:attachment$podman/quadlet/cocard.network[cocard.network]
 ├── xref:attachment$podman/quadlet/cocard-postgres.container[cocard-postgres.container]
@@ -46,17 +46,18 @@ NOTE: To run rootless containers, first create a special user. Say our user is
 └── xref:attachment$podman/quadlet/cocard-worker-container[cocard-worker.container]
 ----
 
-== How to run rootless containers with podman
 
-You need to enable linger, otherwise your containers will stop running after you log out.
+== Rootless Container Handling
+
+Normalerweise sind Systemd-Prozesse eines Users an die Session gebunden. Loggt sich der User aus, werden die Prozesse beendet. Für den unbeaufsichtigten Dauereinsatz ist das unterwünscht, daher muss man explizit konfigurieren, dass Sessions eines Users auch einen Logout oder Reboot überleben mit `enable-linger`:
 
 .Enable linger for poddy
 [source,sh]
 ----
 loginctl enable-linger poddy
 ----
-If you use sudo or su to become poddy, two environment variables should be 
-checked/set after becoming `poddy`:
+
+Wer sich nicht direkt als User `poddy` einloggt, sondern `sudo` und/oder `su` benutzt, muss noch einige Variablen explizit korrigieren:
 
 .Set environment variables
 [source,sh]
@@ -65,7 +66,9 @@ export XDG_RUNTIME_DIR="/run/user/1001"
 export DBUS_SESSION_BUS_ADDRESS="unix:path=${XDG_RUNTIME_DIR}/bus"
 ----
 
-.Create the neccessary systemd directory
+TIP: Setze die Variablen in .`bashrc` von User `poddy`.
+
+.Erforderliche Verzeichnisse für systemd anlegen
 [source,sh]
 ----
 mkdir -p /etc/containers/systemd/users/1001/cocard
@@ -73,18 +76,20 @@ chown -R poddy:poddy /etc/containers/systemd/users/1001
 chmod 700 -R /etc/containers/systemd/users/1001
 ----
 
-Now copy all the files from above to 
-`/etc/containers/systemd/users/1001/cocard`.
+Kopiere jetzt alle Dateien aus xref:attachment$podman/quadlet/quadlets.zip[quadlets.zip] in das Verzeichnis `/etc/containers/systemd/users/1001/cocard`.
 
-IMPORTANT: Now is a good time to create your own credentials and update env.production!
+IMPORTANT: Bitte die Secrets in `env.production` ändern. die Datei enhält Anweisungen dazu.
 
-.(user poddy) Reload systemd
+
+Nach Änderungen an den Quadlets muss `systemd` die Quadlets neu laden:
+
+.(User poddy) Reload Systemd
 [source,sh]
 ----
 systemctl --user daemon-reload
 ----
 
-.(user poddy) Start postgresql first - wait - start the rest
+.(User poddy) PostgreSQL zuerst starten - warten - dann den Rest starten
 [source,sh]
 ----
 systemctl --user start cocard-postgres
@@ -92,13 +97,15 @@ systemctl --user start cocard-postgres
 systemctl --user start cocard
 ----
 
-.(user poddy) Check logs
+.(User poddy) Logausgaben anzeigen
 ----
-# complete output
+# Vollständiger Output des Users poddy
 journalctl --user -f
 ...
-# specific to one container
+# Ein ausgewählter Container
 journalctl --user -u cocard -f
+journalctl --user -u cocard-worker -f
+journalctl --user -u cocard-postgres -f
 ----
 
 == Resources

@@ -1,37 +1,88 @@
-= Quick start
-:revdate: 2023-12-24
+= Quickstart
+:revdate: 2024-08-09
+:author: Wolfgang Barth 
 :repo: https://github.com/swobspace/cocard
+:experimental: true
+:imagesdir: ../images
 
-== Installation and start
+== Installation und Start
 
-Setup directory and configuration::
-Copy the content from {repo}/podman/playground to a local directory.
+Kopiere folgende Dateien in ein lokales Verzeichnis::
 
-Check configuration::
-Check the contents of the files in `./playground/cocard/.` For the first run you can use the files unchanged.
+  * xref:attachment$quickstart/create-playground.sh[create-playground.sh]
+  * xref:attachment$quickstart/env.playground[env.playground]
 
-Create the pod::
+NOTE: `env.playground` enthält 2 Secrets, die man vor dem Einsatz ändern sollte. Die Datei enthält eine kurze Anweisung dazu. 
+
+
+Pod erzeugen::
 ----
 bash create-playground.sh
 ----
-The script creates a pod with the name `play-cocard`.
+Das Skript erzeugt einen Pod mit dem Namen `play-cocard`.
 
-Start the pod::
+Pod starten::
 ----
 podman pod start play-cocard
 ----
 
-Access cocard via browser::
-* `http://localhost:3001`
+
+== Webzugriff
+
+* `http://localhost:3000`
 * login: `admin`
 * password: `admin9999`
 
-Don't forget to change your admin password.
+IMPORTANT: Passwort für `admin` beim ersten Login ändern!
 
-Connect to your first mirth connect system::
-See admin manual (coming soon).
+=== xref:ROOT:first-steps.adoc[]
+
+== Podman pod: nützliche Kommandos
+
+.Pod anzeigen
+----
+podman pod ls 
+----
+
+.Pod stoppen
+----
+podman pod stop play-cocard
+----
+
+.Welche Container laufen
+----
+podman ps
+----
+
+.Pod löschen
+----
+podman pod stop play-cocard
+podman pod rm play-cocard
+----
+
+NOTE: `podman pod rm` löscht nicht die Volumes. Diese müssen separat gelöscht werden. Die Volumes aus dem Create-Skript beginnen alle mit `play`:
+
+----
+local       play-cocard-postgres
+local       play-cocard-redis
+local       play-cocard-storage
+----
+
+Gelöscht wird ein Volumen mit `podman rm <volume>`. 
 
 
-== Unresolved issues
+== Ressourcen
 
-* You need to start the pod twice the first time. The postgresql setup takes too much time - so stop and start your pod a second time.
+.Integrierte Hilfe
+----
+podman pod --help
+podman --help
+----
+
+.Links
+* https://podman.io/docs[Podman Dokumentation]
+* https://kubernetes.io/de/docs/concepts/workloads/pods/[Was ist ein Pod (Kubernetes)]
+
+== Current Issues
+
+* Beim ersten Start muss man ggf. den Pod zweimal starten, da PostgreSQL beim Setup manchmal zu lange braucht. Solange das Volume dazu nicht gelöscht wird, tritt das Problem später nicht wieder auf.

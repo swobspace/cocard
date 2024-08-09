@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Podman mit Systemd und Quadlets für Produktiv-Umgebungen :: Cocard</title>
+    <meta name="generator" content="Antora 3.1.9">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../..">Cocard</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="abstand">
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+          <div class="navbar-item dark">Cocard</div>
+           <a class="navbar-item" href="../../../devnotes/index.html">DevNotes</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="cocard" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../../index.html">Cocard</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Installation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="quickstart.html">Quickstart</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../first-steps.html">Erste Schritte</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="podman-systemd.html">Systemd und Quadlets</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="reverse-proxy.html">Reverse Proxy</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../configuration.html">Configuration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../index.html">Cocard</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Cocard</span>
+    <span class="version">default</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../../index.html">Cocard</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../../devnotes/index.html">DevNotes</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../devnotes/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">Cocard</a></li>
+    <li><a href="../index.html">Installation</a></li>
+    <li><a href="podman-systemd.html">Systemd und Quadlets</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Podman mit Systemd und Quadlets für Produktiv-Umgebungen</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Manpage zu Podman Quadlets: <a href="https://docs.podman.io/en/stable/markdown/podman-systemd.unit.5.html" class="bare">https://docs.podman.io/en/stable/markdown/podman-systemd.unit.5.html</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_voraussetzungen"><a class="anchor" href="#_voraussetzungen"></a>Voraussetzungen</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>podman Version &gt;= 4.4, besser 4.6 oder höher.</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Podman Version einiger Linux-Distributionen</caption>
+<colgroup>
+<col style="width: 28.5714%;">
+<col style="width: 28.5714%;">
+<col style="width: 42.8572%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Distro</th>
+<th class="tableblock halign-left valign-top">Version</th>
+<th class="tableblock halign-left valign-top">usable?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fedora 38</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4.7.2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ok</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fedora 39</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4.8.1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ok</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fedora 40</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5.1.1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ok</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ubuntu 23.10</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4.3.1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">doesn&#8217;t work</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ubuntu 24.04</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4.7.2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ok</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_überblick"><a class="anchor" href="#_überblick"></a>Überblick</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/podman/cocard-quadlets.svg" alt="cocard quadlets">
+</div>
+</div>
+<div class="paragraph">
+<p>Für den Einsatz von Rootless-Containern nutzt man idealerweise einen eigenen Benutzer. Unser Benutzer heißt <code>poddy</code> und hat die UID 1001. Die sogenannten Quadlets werden im Verzeichnis <code>/etc/containers/systemd/users/$UID</code> oder einem Unterverzeichnis (hier: <code>cocard</code>) abgelegt.</p>
+</div>
+<div class="listingblock">
+<div class="title">Rootless Setup: Verzeichnis und Dateien (Alle Dateien: <a href="../_attachments/podman/quadlet/quadlets.zip" class="xref attachment">quadlets.zip</a>)</div>
+<div class="content">
+<pre>/etc/containers/systemd/users/1001/cocard
+├── <a href="../_attachments/podman/quadlet/env.production" class="xref attachment">env.production</a>
+├── <a href="../_attachments/podman/quadlet/cocard.container" class="xref attachment">cocard.container</a>
+├── <a href="../_attachments/podman/quadlet/cocard.network" class="xref attachment">cocard.network</a>
+├── <a href="../_attachments/podman/quadlet/cocard-postgres.container" class="xref attachment">cocard-postgres.container</a>
+├── <a href="../_attachments/podman/quadlet/cocard-postgres.volume" class="xref attachment">cocard-postgres.volume</a>
+├── <a href="../_attachments/podman/quadlet/cocard-redis.container" class="xref attachment">cocard-redis.container</a>
+├── <a href="../_attachments/podman/quadlet/cocard-redis.volume" class="xref attachment">cocard-redis.volume</a>
+├── <a href="../_attachments/podman/quadlet/cocard-storage.volume" class="xref attachment">cocard-storage.volume</a>
+├── <a href="../_attachments/podman/quadlet/cocard-tmp.volume" class="xref attachment">cocard-tmp.volume</a>
+└── <a href="#attachment$podman/quadlet/cocard-worker-container">cocard-worker.container</a></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rootless_container_handling"><a class="anchor" href="#_rootless_container_handling"></a>Rootless Container Handling</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Normalerweise sind Systemd-Prozesse eines Users an die Session gebunden. Loggt sich der User aus, werden die Prozesse beendet. Für den unbeaufsichtigten Dauereinsatz ist das unterwünscht, daher muss man explizit konfigurieren, dass Sessions eines Users auch einen Logout oder Reboot überleben mit <code>enable-linger</code>:</p>
+</div>
+<div class="listingblock">
+<div class="title">Enable linger for poddy</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">loginctl enable-linger poddy</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Wer sich nicht direkt als User <code>poddy</code> einloggt, sondern <code>sudo</code> und/oder <code>su</code> benutzt, muss noch einige Variablen explizit korrigieren:</p>
+</div>
+<div class="listingblock">
+<div class="title">Set environment variables</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">export XDG_RUNTIME_DIR="/run/user/1001"
+export DBUS_SESSION_BUS_ADDRESS="unix:path=${XDG_RUNTIME_DIR}/bus"</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Setze die Variablen in .<code>bashrc</code> von User <code>poddy</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Erforderliche Verzeichnisse für systemd anlegen</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">mkdir -p /etc/containers/systemd/users/1001/cocard
+chown -R poddy:poddy /etc/containers/systemd/users/1001
+chmod 700 -R /etc/containers/systemd/users/1001</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Kopiere jetzt alle Dateien aus <a href="../_attachments/podman/quadlet/quadlets.zip" class="xref attachment">quadlets.zip</a> in das Verzeichnis <code>/etc/containers/systemd/users/1001/cocard</code>.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Bitte die Secrets in <code>env.production</code> ändern. die Datei enhält Anweisungen dazu.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Nach Änderungen an den Quadlets muss <code>systemd</code> die Quadlets neu laden:</p>
+</div>
+<div class="listingblock">
+<div class="title">(User poddy) Reload Systemd</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">systemctl --user daemon-reload</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">(User poddy) PostgreSQL zuerst starten - warten - dann den Rest starten</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">systemctl --user start cocard-postgres
+...
+systemctl --user start cocard</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">(User poddy) Logausgaben anzeigen</div>
+<div class="content">
+<pre># Vollständiger Output des Users poddy
+journalctl --user -f
+...
+# Ein ausgewählter Container
+journalctl --user -u cocard -f
+journalctl --user -u cocard-worker -f
+journalctl --user -u cocard-postgres -f</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_resources"><a class="anchor" href="#_resources"></a>Resources</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.redhat.com/sysadmin/quadlet-podman" class="bare">https://www.redhat.com/sysadmin/quadlet-podman</a></p>
+</li>
+<li>
+<p><a href="https://www.redhat.com/sysadmin/multi-container-application-podman-quadlet" class="bare">https://www.redhat.com/sysadmin/multi-container-application-podman-quadlet</a></p>
+</li>
+<li>
+<p><a href="https://docs.podman.io/en/stable/markdown/podman-systemd.unit.5.html" class="bare">https://docs.podman.io/en/stable/markdown/podman-systemd.unit.5.html</a></p>
+</li>
+<li>
+<p><a href="https://github.com/swobspace/ansible-role-podman" class="bare">https://github.com/swobspace/ansible-role-podman</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <span>Wolfgang Barth (C) 2024</span>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script src="../../../_/js/vendor/medium-zoom.min.js"></script>
+<script>mediumZoom('img:not(.copy-icon');</script>
+  </body>
+</html>

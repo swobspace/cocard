@@ -1,0 +1,36 @@
+= Erste Schritte
+:revdate: 2024-08-09
+:author: Wolfgang Barth 
+:repo: https://github.com/swobspace/cocard
+:experimental: true
+:imagesdir: ../images
+
+== Webzugriff
+
+* `http://localhost:3000`
+* login: `admin`
+* password: `admin9999`
+
+IMPORTANT: Passwort für `admin` beim ersten Login ändern!
+
+== Konnektorzugriff einrichten (ohne Authentifikation)
+
+* Kontext anlegen: menu:Konfiguration[Neuer Kontext]. Dieser Kontext muss am Konnektor vorhanden sein.
+* Konnektor anlegen: menu:Konnektoren[Neuer Konnektor]. Benötigt wird im Prinzip nur die IP-Adresse.
+
+image:ROOT:connector-new.png[]
+
+* Nach dem Speichern nochmal Konnektor bearbeiten und jetzt den Kontext zuweisen.
+
+image:ROOT:connector-new-context.png[]
+
+* Konnektor auf manuelles Update einstellen
+* Auf der Konnektorseite den Button _Abfrage SDS_ klicken. Das SDS wird für die SOAP-Abfragen gebraucht, außerdem ist die Abfrage auch ein erster Test für die Erreichbarkeit des Konnektors.
+* War die SDS-Abfrage erfolgreich, kann man nacheinander Konnektor, Kartenterminals und Karten über die zugehörigen Buttons abfragen.
+* Für den Dauerbetrieb manuelles Update deaktivieren. Der Konnektor wird alle 3min, die Kartenterminals alle 5min und die Karten alle 7min abgefragt.
+
+
+== Konnektorzugriff einrichten (mit Client-Zertifikat)
+#FIXME#
+
+NOTE: Obige Kurzanleitung geht davon aus, dass der Zugriff auf den Konnektor ohne Authentifikation möglich ist. Für einen authentifizierten Zugriff via Client-Zertifikat muss zuerst das Client-Zertifikat in Cocard hinterlegt werden. Eine Authentifikation via User/Passwort ist mit Cocard derzeit nicht möglich.

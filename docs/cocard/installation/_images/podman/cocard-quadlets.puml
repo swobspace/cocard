@@ -1,0 +1,67 @@
+@startuml
+top to bottom direction
+!theme cocard from ../../../../..
+
+rectangle network #lightgreen [ 
+  Network
+  <i>cocard.network</i>
+]
+
+rectangle cocard [
+  <b>cocard</b>
+  <i>cocard.container</i>
+]
+
+rectangle worker [
+  <b>cocard-worker</b>
+  <i>cocard-worker.container</i>
+]
+
+rectangle postgres [
+  <b>cocard-postgres</b>
+  <i>cocard-postgres.container</i>
+]
+
+rectangle redis [
+  <b>cocard-redis</b>
+  <i>cocard-redis.container</i>
+]
+
+storage v_postgres [
+  <b>cocard-postgres</b>
+  <i>cocard-postgres.volume</i>  
+]
+
+storage v_redis [
+  <b>cocard-redis</b>
+  <i>cocard-redis.volume</i>  
+]
+
+storage v_storage [
+  <b>cocard-storage</b>
+  <i>cocard-storage.volume</i>  
+]
+
+storage v_tmp [
+  <b>cocard-tmp</b>
+  <i>cocard-tmp.volume</i>  
+]
+
+file env #lightblue [
+  ./env.production
+]
+
+network #-- cocard
+network #-- postgres
+network #-- redis
+network #-- worker
+
+cocard --# v_storage
+cocard --# v_tmp
+
+worker --# v_storage
+
+postgres --# v_postgres
+redis --# v_redis
+
+@enduml

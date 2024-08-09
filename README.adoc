@@ -74,10 +74,6 @@ Cocard steht als https://github.com/swobspace/cocard/pkgs/container/cocard[Conta
 Einsatz mit Podman und Quadlets. Neben dem Cocard-Container wird noch 
 PostgreSQL und Redis benötigt (ebenfalls als Container).
 
-NOTE: Die Dokumentation für die Installation ist noch nicht fertig. Es fehlt 
-noch ein `docker-compose.yml`. Stay tuned. Bei Interesse bitte eine kurze Info 
-in https://github.com/swobspace/cocard/discussions[Discussions] hinterlassen.
-
 == Fragen, Bugs und andere Sachen ...
 
 Fragen zu Cocard bitte in https://github.com/swobspace/cocard/discussions[Discussions] stellen. https://github.com/swobspace/cocard/issues[Issues] 

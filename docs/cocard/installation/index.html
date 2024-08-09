@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Certificate Authority für Clientsysteme :: Cocard</title>
+    <title>Installation :: Cocard</title>
     <meta name="generator" content="Antora 3.1.9">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -39,13 +39,13 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="../installation/index.html">Installation</a>
+    <a class="nav-link" href="index.html">Installation</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="../installation/podman/quickstart.html">Quickstart</a>
+    <a class="nav-link" href="podman/quickstart.html">Quickstart</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../first-steps.html">Erste Schritte</a>
@@ -53,13 +53,13 @@
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../installation/podman/podman-systemd.html">Systemd und Quadlets</a>
+    <a class="nav-link" href="podman/podman-systemd.html">Systemd und Quadlets</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../installation/podman/reverse-proxy.html">Reverse Proxy</a>
+    <a class="nav-link" href="podman/reverse-proxy.html">Reverse Proxy</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../installation/configuration.html">Configuration</a>
+    <a class="nav-link" href="configuration.html">Configuration</a>
   </li>
 </ul>
   </li>
@@ -109,7 +109,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Cocard</a></li>
-    <li><a href="telematik-ca.html">Certificate Authority für Clientsysteme</a></li>
+    <li><a href="index.html">Installation</a></li>
   </ul>
 </nav>
 </div>
@@ -118,110 +118,36 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Certificate Authority für Clientsysteme</h1>
-<div id="preamble">
+<h1 class="page">Installation</h1>
+<div class="sect1">
+<h2 id="_podman"><a class="anchor" href="#_podman"></a>Podman</h2>
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Referenz: <a href="https://openssl-ca.readthedocs.io/en/latest" class="bare">https://openssl-ca.readthedocs.io/en/latest</a></p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Ich benutze <code>podman</code> anstelle von <code>docker</code>. <code>podman</code> integriert sich mit Quadlets bestens in <code>systemd</code>, und das auch noch als normaler Benutzer (<code>rootless</code>). Wer sich mit <code>docker</code> und <code>docker-compose</code> wohler fühlt, sollte einen Blick auf das Create-Skript für den Quickstart werfen: <a href="_attachments/quickstart/create-playground.sh" class="xref attachment">create-playground.sh</a>. Mit etwas Docker-Erfahrung sollte sich das Skript einfach in ein <code>docker-compose.yml</code> verwandeln lassen.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_ca_aufsetzen"><a class="anchor" href="#_ca_aufsetzen"></a>CA aufsetzen</h2>
+<h2 id="_quickstart"><a class="anchor" href="#_quickstart"></a><a href="podman/quickstart.html" class="xref page">Quickstart</a></h2>
 <div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre>mkdir /etc/ssl/telematik
-cd /etc/ssl/telematik
-mkdir certs crl newcerts private reqs
-chmod 700 private
-touch index.txt
-echo 1000 &gt; serial</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>cp /etc/ssl/openssl.cnf /etc/ssl/telematik/.</pre>
-</div>
-</div>
-<div class="olist lowerroman">
-<ol class="lowerroman" type="i">
-<li>
-<p>bearbeiten</p>
-</li>
-</ol>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-KoCoBox in der Version 5 unterstützt RSA nur bis 2048 bit!
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="title">CA-Key</div>
-<div class="content">
-<pre>openssl genrsa -aes256 -out private/cakey.pem 2048
-chmod 400 private/cakey.pem</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">CA-Zertifikat</div>
-<div class="content">
-<pre>openssl req -config openssl.cnf -key private/cakey.pem \
-    -new -x509 -days 7300 -sha256 -extensions v3_ca \
-    -out certs/cacert.pem
-chmod 4444 certs/cacert.pem
-openssl x509 -noout -text -in certs/cacert.pem</pre>
-</div>
+<div class="paragraph">
+<p>Im Quickstart-Guide kommt <code>podman pod</code> zum Einsatz. Die Umgebung ist nicht für den produktiven Einsatz gedacht, ist aber einfach anzuwenden, wenn man Cocard einfach mal nur ausprobieren will.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_zertifikat_für_client_system"><a class="anchor" href="#_zertifikat_für_client_system"></a>Zertifikat für Client-System</h2>
+<h2 id="_podman_mit_systemd_und_quadlets_für_produktiv_umgebungen"><a class="anchor" href="#_podman_mit_systemd_und_quadlets_für_produktiv_umgebungen"></a><a href="podman/podman-systemd.html" class="xref page">Podman mit Systemd und Quadlets für Produktiv-Umgebungen</a></h2>
 <div class="sectionbody">
-<div class="listingblock">
-<div class="title">PKey</div>
-<div class="content">
-<pre>openssl genrsa -aes256 -out private/intern.key.pem 2048
-chmod 400 private/intern.key.pem</pre>
+<div class="paragraph">
+<p>Quadlets integrieren sich perfekt in <code>systemd</code> und sind daher die bevorzugte Variante für den produktiven Einsatz von Podman. Benötigt wird mindestens <code>podman</code> Version 4.4.</p>
 </div>
 </div>
-<div class="listingblock">
-<div class="title">Request</div>
-<div class="content">
-<pre>openssl req -config openssl.cnf \
-    -key private/intern.key.pem \
-    -new -sha256 -out reqs/intern.req.pem</pre>
 </div>
-</div>
-<div class="listingblock">
-<div class="title">Zertifikat für Client-System</div>
-<div class="content">
-<pre>openssl ca -config openssl.cnf -days 1825 \
-  -in reqs/intern.req.pem \
-  -out certs/intern.cert.pem
-chmod 444 certs/intern.cert.pem
-openssl x509 -noout -text -in certs/intern.cert.pem</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Export als PKCS12</div>
-<div class="content">
-<pre>openssl pkcs12 -export -out certs/intern.p12 \
-    -inkey private/intern.key.pem \
-    -in certs/intern.cert.pem \
-    -certfile certs/cacert.pem</pre>
-</div>
+<div class="sect1">
+<h2 id="_reverse_proxy_zur_absicherung_von_cocard"><a class="anchor" href="#_reverse_proxy_zur_absicherung_von_cocard"></a><a href="podman/reverse-proxy.html" class="xref page">Reverse Proxy zur Absicherung von Cocard</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Cocard als Container ist für den Einsatz hinter einen Reverse Proxy wie Traefik gedacht. Der Einsatz mit Apache2 oder Nginx ist aber ebenfalls möglich. Cocard stellt selbst keine TLS-Verbindung zur Verfügung, die Handhabung von TLS und den notwendigen Zertifikaten ist Aufgabe des Reverse Proxy.</p>
 </div>
 </div>
 </div>

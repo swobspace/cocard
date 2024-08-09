@@ -1,0 +1,37 @@
+# ------------------------------------------
+# static configuration
+# ------------------------------------------
+
+log:
+  level: INFO
+
+api:
+  insecure: true
+  dashboard: true
+
+entryPoints:
+  web: 
+    address: :8000
+  websecure:
+    address: :8443
+
+providers:
+  docker: 
+    # endpoint: "unix:///var/run/docker.sock"
+    exposedByDefault: false
+    watch: true
+  file:
+    fileName: /etc/traefik/traefik.yaml
+    watch: true
+
+# ------------------------------------------
+# dynamic configuration
+# ------------------------------------------
+
+tls:
+  certificates:
+    - certFile: /ssl/mydomain_public_Bundle_Cert+CA.crt
+      keyFile: /ssl/mydomain.key
+  options:
+    default:
+      sniStrict: true

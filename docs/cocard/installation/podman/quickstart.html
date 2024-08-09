@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Quickstart :: Cocard</title>
+    <meta name="generator" content="Antora 3.1.9">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../..">Cocard</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="abstand">
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+          <div class="navbar-item dark">Cocard</div>
+           <a class="navbar-item" href="../../../devnotes/index.html">DevNotes</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="cocard" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../../index.html">Cocard</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Installation</a>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="quickstart.html">Quickstart</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../first-steps.html">Erste Schritte</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="podman-systemd.html">Systemd und Quadlets</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="reverse-proxy.html">Reverse Proxy</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../configuration.html">Configuration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../index.html">Cocard</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Cocard</span>
+    <span class="version">default</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../../index.html">Cocard</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../../devnotes/index.html">DevNotes</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../devnotes/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">Cocard</a></li>
+    <li><a href="../index.html">Installation</a></li>
+    <li><a href="quickstart.html">Quickstart</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Quickstart</h1>
+<div class="sect1">
+<h2 id="_installation_und_start"><a class="anchor" href="#_installation_und_start"></a>Installation und Start</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Kopiere folgende Dateien in ein lokales Verzeichnis</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="../_attachments/quickstart/create-playground.sh" class="xref attachment">create-playground.sh</a></p>
+</li>
+<li>
+<p><a href="../_attachments/quickstart/env.playground" class="xref attachment">env.playground</a></p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>env.playground</code> enthält 2 Secrets, die man vor dem Einsatz ändern sollte. Die Datei enthält eine kurze Anweisung dazu.
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Pod erzeugen</dt>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>bash create-playground.sh</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Das Skript erzeugt einen Pod mit dem Namen <code>play-cocard</code>.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Pod starten</dt>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>podman pod start play-cocard</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_webzugriff"><a class="anchor" href="#_webzugriff"></a>Webzugriff</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><code><a href="http://localhost:3000" class="bare">http://localhost:3000</a></code></p>
+</li>
+<li>
+<p>login: <code>admin</code></p>
+</li>
+<li>
+<p>password: <code>admin9999</code></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Passwort für <code>admin</code> beim ersten Login ändern!
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_erste_schritte"><a class="anchor" href="#_erste_schritte"></a><a href="../../first-steps.html" class="xref page">Erste Schritte</a></h3>
+
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_podman_pod_nützliche_kommandos"><a class="anchor" href="#_podman_pod_nützliche_kommandos"></a>Podman pod: nützliche Kommandos</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="title">Pod anzeigen</div>
+<div class="content">
+<pre>podman pod ls</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Pod stoppen</div>
+<div class="content">
+<pre>podman pod stop play-cocard</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Welche Container laufen</div>
+<div class="content">
+<pre>podman ps</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Pod löschen</div>
+<div class="content">
+<pre>podman pod stop play-cocard
+podman pod rm play-cocard</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>podman pod rm</code> löscht nicht die Volumes. Diese müssen separat gelöscht werden. Die Volumes aus dem Create-Skript beginnen alle mit <code>play</code>:
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>local       play-cocard-postgres
+local       play-cocard-redis
+local       play-cocard-storage</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Gelöscht wird ein Volumen mit <code>podman rm &lt;volume&gt;</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_ressourcen"><a class="anchor" href="#_ressourcen"></a>Ressourcen</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="title">Integrierte Hilfe</div>
+<div class="content">
+<pre>podman pod --help
+podman --help</pre>
+</div>
+</div>
+<div class="ulist">
+<div class="title">Links</div>
+<ul>
+<li>
+<p><a href="https://podman.io/docs">Podman Dokumentation</a></p>
+</li>
+<li>
+<p><a href="https://kubernetes.io/de/docs/concepts/workloads/pods/">Was ist ein Pod (Kubernetes)</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_current_issues"><a class="anchor" href="#_current_issues"></a>Current Issues</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Beim ersten Start muss man ggf. den Pod zweimal starten, da PostgreSQL beim Setup manchmal zu lange braucht. Solange das Volume dazu nicht gelöscht wird, tritt das Problem später nicht wieder auf.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <span>Wolfgang Barth (C) 2024</span>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script src="../../../_/js/vendor/medium-zoom.min.js"></script>
+<script>mediumZoom('img:not(.copy-icon');</script>
+  </body>
+</html>

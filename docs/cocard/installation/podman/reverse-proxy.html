@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Reverse Proxy zur Absicherung von Cocard :: Cocard</title>
+    <meta name="generator" content="Antora 3.1.9">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../..">Cocard</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="abstand">
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+          <div class="navbar-item dark">Cocard</div>
+           <a class="navbar-item" href="../../../devnotes/index.html">DevNotes</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="cocard" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../../index.html">Cocard</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Installation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="quickstart.html">Quickstart</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../first-steps.html">Erste Schritte</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="podman-systemd.html">Systemd und Quadlets</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="reverse-proxy.html">Reverse Proxy</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../configuration.html">Configuration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../index.html">Cocard</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Cocard</span>
+    <span class="version">default</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../../index.html">Cocard</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../../devnotes/index.html">DevNotes</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../devnotes/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">Cocard</a></li>
+    <li><a href="../index.html">Installation</a></li>
+    <li><a href="reverse-proxy.html">Reverse Proxy</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Reverse Proxy zur Absicherung von Cocard</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><mark>FIXME</mark></p>
+</div>
+<div class="paragraph">
+<p>A common approach to secure access to container applications is to use a reverse proxy. The reverse proxy terminates the HTTPS connection for one or more containers on the same host.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/podman/reverse-proxy.svg" alt="reverse proxy">
+</div>
+</div>
+<div class="paragraph">
+<p>Cocard uses websockets, so there is a second connection that needs to be forwarded in addition to the http/s connection.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_traefik"><a class="anchor" href="#_traefik"></a>Traefik</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="title">Traefik: directory and files</div>
+<div class="content">
+<pre>/etc/containers/systemd/users/1001/traefik
+├── <a href="../_attachments/podman/quadlet/traefik.yaml" class="xref attachment">traefik.yml</a>
+├── <a href="../_attachments/podman/quadlet/traefik.container" class="xref attachment">traefik.container</a>
+├── <a href="../_attachments/podman/quadlet/traefik.network" class="xref attachment">traefik.network</a></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Traefik opens port 8443. To redirect http(s) requests to Cocard, simply add a few lines to <code>cocard.container</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">Network=traefik.network
+Label=traefik.enable=true
+Label=traefik.http.routers.cocard.rule=Host(`cocard.example.com`)
+Label=traefik.http.routers.cocard.entrypoints=websecure
+Label=traefik.http.routers.cocard.tls=true
+Label=traefik.http.routers.cocard.service=svc-cocard
+Label=traefik.http.services.svc-cocard.loadbalancer.server.port=3001</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The entries starting with <code>Label</code> are configuring traefik. The entry <code>Network</code> makes Cocard accessible from traefik. Only the Cocard container itself needs to be connected to traefik.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_apache_2_4"><a class="anchor" href="#_apache_2_4"></a>Apache 2.4</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+I don&#8217;t use this setup anymore, so it may or may not work.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-apache hljs" data-lang="apache">&lt;VirtualHost *:443&gt;
+...
+  &lt;Location "/"&gt;
+    ProxyPass http://127.0.0.1:4001/
+    ProxyPassReverse http://127.0.0.1:4001/
+  &lt;/Location&gt;
+
+  &lt;Location /cable&gt;
+    ProxyPass ws://127.0.0.1:4001/cable
+    ProxyPassReverse ws://127.0.0.1:4001/cable
+  &lt;/Location&gt;
+
+  &lt;Proxy *&gt;
+    Order deny,allow
+    Allow from all
+  &lt;/Proxy&gt;
+
+  SSLEngine On
+  SSLCertificateKeyFile ....
+  SSLCertificateFile ...
+  ...
+&lt;/VirtualHost&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <span>Wolfgang Barth (C) 2024</span>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script src="../../../_/js/vendor/medium-zoom.min.js"></script>
+<script>mediumZoom('img:not(.copy-icon');</script>
+  </body>
+</html>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Certificate Authority für Clientsysteme :: Cocard</title>
+    <title>Configuration :: Cocard</title>
     <meta name="generator" content="Antora 3.1.9">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -41,11 +41,11 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="../installation/index.html">Installation</a>
+    <a class="nav-link" href="index.html">Installation</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="../installation/podman/quickstart.html">Quickstart</a>
+    <a class="nav-link" href="podman/quickstart.html">Quickstart</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../first-steps.html">Erste Schritte</a>
@@ -53,13 +53,13 @@
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../installation/podman/podman-systemd.html">Systemd und Quadlets</a>
+    <a class="nav-link" href="podman/podman-systemd.html">Systemd und Quadlets</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../installation/podman/reverse-proxy.html">Reverse Proxy</a>
+    <a class="nav-link" href="podman/reverse-proxy.html">Reverse Proxy</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../installation/configuration.html">Configuration</a>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="configuration.html">Configuration</a>
   </li>
 </ul>
   </li>
@@ -109,7 +109,8 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Cocard</a></li>
-    <li><a href="telematik-ca.html">Certificate Authority für Clientsysteme</a></li>
+    <li><a href="index.html">Installation</a></li>
+    <li><a href="configuration.html">Configuration</a></li>
   </ul>
 </nav>
 </div>
@@ -118,109 +119,96 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Certificate Authority für Clientsysteme</h1>
+<h1 class="page">Configuration</h1>
 <div id="preamble">
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Referenz: <a href="https://openssl-ca.readthedocs.io/en/latest" class="bare">https://openssl-ca.readthedocs.io/en/latest</a></p>
-</li>
-</ul>
+<div class="paragraph">
+<p><mark>FIXME</mark> <mark>NOT MIGRATED YET</mark></p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_ca_aufsetzen"><a class="anchor" href="#_ca_aufsetzen"></a>CA aufsetzen</h2>
+<h2 id="_cocard_yml"><a class="anchor" href="#_cocard_yml"></a><code>cocard.yml</code></h2>
 <div class="sectionbody">
-<div class="listingblock">
+<div class="paragraph">
+<p>The main configuration file is <code>cocard.yml</code>.</p>
+</div>
+<div id="cocard.yml" class="listingblock">
+<div class="title">cocard.yml</div>
 <div class="content">
-<pre>mkdir /etc/ssl/telematik
-cd /etc/ssl/telematik
-mkdir certs crl newcerts private reqs
-chmod 700 private
-touch index.txt
-echo 1000 &gt; serial</pre>
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">#
+# config/cocard.yml
+#
+# -- job scheduling
+cron_fetch_statistics: '*/5 * * * *' <i class="conum" data-value="1"></i><b>(1)</b>
+cron_fetch_channels: '0 1 * * 6' <i class="conum" data-value="2"></i><b>(2)</b>
+cron_fetch_configuration: '15 1 * * 6' <i class="conum" data-value="3"></i><b>(3)</b>
+cron_purge_timescale:  '30 1 * * 6' <i class="conum" data-value="4"></i><b>(4)</b>
+
+# -- SSL
+use_ssl: false <i class="conum" data-value="5"></i><b>(5)</b>
+
+# -- action cable request origins
+action_cable_allowed_request_origins: <i class="conum" data-value="6"></i><b>(6)</b>
+  - http://cocard.example.com
+  - https://cocard.example.com</code></pre>
 </div>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre>cp /etc/ssl/openssl.cnf /etc/ssl/telematik/.</pre>
-</div>
-</div>
-<div class="olist lowerroman">
-<ol class="lowerroman" type="i">
-<li>
-<p>bearbeiten</p>
-</li>
-</ol>
-</div>
-<div class="admonitionblock important">
+<div class="colist arabic">
 <table>
 <tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-KoCoBox in der Version 5 unterstützt RSA nur bis 2048 bit!
-</td>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>How often should Cocard retrieve channel statistics from your Mirth Connect servers?</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Update channel configuration once per week</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Backup mirth configuration (XML only) once per week</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Purge old timescaledb data once per week</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Should be false if you are running Cocard behind a reverse proxy.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>http:// and https:// site Urls accessing Cocard from outside</td>
 </tr>
 </table>
 </div>
-<div class="listingblock">
-<div class="title">CA-Key</div>
-<div class="content">
-<pre>openssl genrsa -aes256 -out private/cakey.pem 2048
-chmod 400 private/cakey.pem</pre>
+<div class="sect2">
+<h3 id="_ldap_settings"><a class="anchor" href="#_ldap_settings"></a>LDAP settings</h3>
+<div class="paragraph">
+<p>You can use LDAP to create new users and for authentication.
+In most cases you will use both or neither. LDAP is completely
+optional, so you can choose not to use it. <code>ldap_options</code>
+goes directly to Net::LDAP, see the following page for configuration:
+<a href="https://www.rubydoc.info/gems/ruby-net-ldap/Net/LDAP" class="bare">https://www.rubydoc.info/gems/ruby-net-ldap/Net/LDAP</a></p>
 </div>
-</div>
-<div class="listingblock">
-<div class="title">CA-Zertifikat</div>
-<div class="content">
-<pre>openssl req -config openssl.cnf -key private/cakey.pem \
-    -new -x509 -days 7300 -sha256 -extensions v3_ca \
-    -out certs/cacert.pem
-chmod 4444 certs/cacert.pem
-openssl x509 -noout -text -in certs/cacert.pem</pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_zertifikat_für_client_system"><a class="anchor" href="#_zertifikat_für_client_system"></a>Zertifikat für Client-System</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="title">PKey</div>
-<div class="content">
-<pre>openssl genrsa -aes256 -out private/intern.key.pem 2048
-chmod 400 private/intern.key.pem</pre>
-</div>
+<div class="paragraph">
+<p>The LDAP attribute <code>userPrincipalName</code> is mapped to <code>username</code>. LDAP authentication works best with Active Directory. If you are using another directory service, you are on your own.</p>
 </div>
 <div class="listingblock">
-<div class="title">Request</div>
+<div class="title">Example</div>
 <div class="content">
-<pre>openssl req -config openssl.cnf \
-    -key private/intern.key.pem \
-    -new -sha256 -out reqs/intern.req.pem</pre>
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">enable_ldap_authentication: true
+ldap_options:
+  hosts:
+    - [ dc1.example.com, 3269 ]
+    - [ dc2.example.com, 3269 ]
+  base: dc=example,dc=de
+  encryption: :simple_tls
+  auth:
+    method: :simple
+    username: readonlyuser@example.com
+    password: averystrongsecret</code></pre>
 </div>
-</div>
-<div class="listingblock">
-<div class="title">Zertifikat für Client-System</div>
-<div class="content">
-<pre>openssl ca -config openssl.cnf -days 1825 \
-  -in reqs/intern.req.pem \
-  -out certs/intern.cert.pem
-chmod 444 certs/intern.cert.pem
-openssl x509 -noout -text -in certs/intern.cert.pem</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Export als PKCS12</div>
-<div class="content">
-<pre>openssl pkcs12 -export -out certs/intern.p12 \
-    -inkey private/intern.key.pem \
-    -in certs/intern.cert.pem \
-    -certfile certs/cacert.pem</pre>
 </div>
 </div>
 </div>

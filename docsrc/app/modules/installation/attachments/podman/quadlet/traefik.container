@@ -1,0 +1,26 @@
+[Unit]
+Description=Traefik
+
+[Container]
+# The official v2 Traefik docker image
+Image=docker.io/traefik:v2.11
+ContainerName=traefik
+
+Volume=/run/user/1001/podman/podman.sock:/var/run/docker.sock:ro
+Volume=./traefik.yaml:/etc/traefik/traefik.yaml:ro
+Volume=./ssl:/ssl:ro
+
+Network=traefik.network
+PublishPort=8000:8000
+PublishPort=8443:8443
+PublishPort=8080:8080
+
+[Service]
+Restart=always
+
+# pulling an image may exceed the default timeout
+TimeoutStartSec=900
+
+[Install]
+WantedBy=multi-user.target default.target
+
