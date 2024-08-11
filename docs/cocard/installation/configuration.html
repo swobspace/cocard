@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Configuration :: Cocard</title>
+    <title>Konfiguration :: Cocard</title>
     <meta name="generator" content="Antora 3.1.9">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -59,7 +59,7 @@
     <a class="nav-link" href="podman/reverse-proxy.html">Reverse Proxy</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="configuration.html">Configuration</a>
+    <a class="nav-link" href="configuration.html">Konfiguration</a>
   </li>
 </ul>
   </li>
@@ -110,7 +110,7 @@
   <ul>
     <li><a href="../index.html">Cocard</a></li>
     <li><a href="index.html">Installation</a></li>
-    <li><a href="configuration.html">Configuration</a></li>
+    <li><a href="configuration.html">Konfiguration</a></li>
   </ul>
 </nav>
 </div>
@@ -119,100 +119,109 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Configuration</h1>
-<div id="preamble">
-<div class="sectionbody">
-<div class="paragraph">
-<p><mark>FIXME</mark> <mark>NOT MIGRATED YET</mark></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_cocard_yml"><a class="anchor" href="#_cocard_yml"></a><code>cocard.yml</code></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The main configuration file is <code>cocard.yml</code>.</p>
-</div>
-<div id="cocard.yml" class="listingblock">
-<div class="title">cocard.yml</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">#
-# config/cocard.yml
-#
-# -- job scheduling
-cron_fetch_statistics: '*/5 * * * *' <i class="conum" data-value="1"></i><b>(1)</b>
-cron_fetch_channels: '0 1 * * 6' <i class="conum" data-value="2"></i><b>(2)</b>
-cron_fetch_configuration: '15 1 * * 6' <i class="conum" data-value="3"></i><b>(3)</b>
-cron_purge_timescale:  '30 1 * * 6' <i class="conum" data-value="4"></i><b>(4)</b>
-
-# -- SSL
-use_ssl: false <i class="conum" data-value="5"></i><b>(5)</b>
-
-# -- action cable request origins
-action_cable_allowed_request_origins: <i class="conum" data-value="6"></i><b>(6)</b>
-  - http://cocard.example.com
-  - https://cocard.example.com</code></pre>
-</div>
-</div>
-<div class="colist arabic">
+<h1 class="page">Konfiguration</h1>
+<div class="admonitionblock note">
 <table>
 <tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>How often should Cocard retrieve channel statistics from your Mirth Connect servers?</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Update channel configuration once per week</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Backup mirth configuration (XML only) once per week</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>Purge old timescaledb data once per week</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>Should be false if you are running Cocard behind a reverse proxy.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="6"></i><b>6</b></td>
-<td>http:// and https:// site Urls accessing Cocard from outside</td>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Die gesamte externe Konfiguration findet zum jetzigen Zeitpunkt als Umgebungsvariablen noch in <code>env.production</code> statt. In einer späteren Version werden ggf. einige Variablen in eine externe Konfigurationsdatei ausgelagert.
+</td>
 </tr>
 </table>
 </div>
-<div class="sect2">
-<h3 id="_ldap_settings"><a class="anchor" href="#_ldap_settings"></a>LDAP settings</h3>
-<div class="paragraph">
-<p>You can use LDAP to create new users and for authentication.
-In most cases you will use both or neither. LDAP is completely
-optional, so you can choose not to use it. <code>ldap_options</code>
-goes directly to Net::LDAP, see the following page for configuration:
-<a href="https://www.rubydoc.info/gems/ruby-net-ldap/Net/LDAP" class="bare">https://www.rubydoc.info/gems/ruby-net-ldap/Net/LDAP</a></p>
-</div>
-<div class="paragraph">
-<p>The LDAP attribute <code>userPrincipalName</code> is mapped to <code>username</code>. LDAP authentication works best with Active Directory. If you are using another directory service, you are on your own.</p>
-</div>
 <div class="listingblock">
-<div class="title">Example</div>
+<div class="title">env.production</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">enable_ldap_authentication: true
-ldap_options:
-  hosts:
-    - [ dc1.example.com, 3269 ]
-    - [ dc2.example.com, 3269 ]
-  base: dc=example,dc=de
-  encryption: :simple_tls
-  auth:
-    method: :simple
-    username: readonlyuser@example.com
-    password: averystrongsecret</code></pre>
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml"># -------------------------------------------------------------------
+# WICHTIG: alle Passwörter unten vor Inbetriebnahme ändern!
+# -&gt; SECRET_KEY_BASE, POSTGRES_PASSWORD
+# -------------------------------------------------------------------
+#
+# Timezone, Locale
+TZ=Europe/Berlin
+LOCALE=de
+
+# generate key with bin/rails secret
+# head -c64 &lt;/dev/urandom | xxd -p -c 64
+SECRET_KEY_BASE=7eedef6a36b8c32a4a60c3c49567ac7469e5724fe1755177d41697917b1c0ca46e00b81c28a51593e3c04ea5aa874fac4c2e4ea0650902246c71c03461dcb4df
+
+# -- redis
+REDIS_URL=redis://cocard-redis:6379
+
+# -- postgres
+POSTGRES_DB=cocard_production
+POSTGRES_USER=cocard
+# pwgen 31 1
+POSTGRES_PASSWORD=eithaeshaeQu6ohsidaiNgaingaequi
+POSTGRES_HOST=cocard-postgres
+
+# URL building
+URL_HOST=cocard.example.com
+URL_PORT=8443
+URL_PROTOCOL=https</code></pre>
 </div>
 </div>
-</div>
-</div>
-</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Variable</th>
+<th class="tableblock halign-left valign-top">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TZ</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zeitzone, z.B. <code>Europe/Berlin</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOCALE</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SECRET_KEY_BASE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Basis-Secret für Rails für die Absicherung von Sessions.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>REDIS_URL</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URL für den Zugriff auf den Redis-Container; Zugriff erfolgt über das interne Cocard-Netzwerk und benötigt daher den Hostnamen des Redis-Containers.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>POSTGRES_DB</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name der PostgreSQL-Datenbank-Instanz</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>POSTGRES_USER</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Benutzer für PostgreSQL</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>POSTGRES_PASSWORD</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passwort</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>POSTGRES_HOST</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hostname aus Sicht des Cocard-Containers in Cocard-Netzwerk.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>URL_HOST</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hostname, unter der Cocard von außen erreichbar ist</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>URL_PORT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Port, über den Cocard von außen erreichbar ist. Entweder 3000 bei direkter Veröffentlichung des Cocard-Ports oder 8443 via Traefik, wenn die Beispielkonfiguration verwendet wird.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>URL_PROTOCOL</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Protokoll für den Zugriff (http bei direktem Zugriff)</p></td>
+</tr>
+</tbody>
+</table>
 </article>
   </div>
 </main>

@@ -59,7 +59,7 @@
     <a class="nav-link" href="reverse-proxy.html">Reverse Proxy</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../configuration.html">Configuration</a>
+    <a class="nav-link" href="../configuration.html">Konfiguration</a>
   </li>
 </ul>
   </li>
@@ -179,6 +179,24 @@
 </tr>
 </tbody>
 </table>
+<div class="sect2">
+<h3 id="_benötigte_pakete"><a class="anchor" href="#_benötigte_pakete"></a>Benötigte Pakete</h3>
+<div class="listingblock">
+<div class="title">Ubuntu 24.04</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">apt install -y podman uidmap aardvark-dns dbus-user-session acl</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Fedora 40</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">dnf install podman shadow-utils-subid aardvark-dns</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Für die Installation von Quadlets gibt es auch eine Ansible-Rolle unter <a href="https://github.com/swobspace/ansible-role-podman" class="bare">https://github.com/swobspace/ansible-role-podman</a>. Die Rolle ist sehr einfach aufgebaut: User <code>poddy</code> einrichten, Pakete installieren, Quadlets aus einem lokalen Verzeichnis kopieren und <code>systemd</code> im Userkontext neu laden. Fertig.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -211,10 +229,30 @@
 </div>
 </div>
 <div class="sect1">
+<h2 id="_webzugriff_auf_cocard"><a class="anchor" href="#_webzugriff_auf_cocard"></a>Webzugriff auf Cocard</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Entweder veröffentlicht man direkt aus <code>cocard.container</code> den Port 3000 nach außen, oder man benutzt einen Reverse Proxy und fügt ein Netzwerk hinzu, auf das der Reverse Proxy Zugriff hat:</p>
+</div>
+<div class="listingblock">
+<div class="title">cocard.container</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">...
+# Network=traefik.network
+Publish=3000
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Hier ist Cocard direkt per Port 3000 erreichbar. Für den Einsatz mit Traefik kommentiert man Eintrag mit <code>Publish</code> aus und entfernt das Kommentarzeichen vor <code>Network</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_rootless_container_handling"><a class="anchor" href="#_rootless_container_handling"></a>Rootless Container Handling</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Normalerweise sind Systemd-Prozesse eines Users an die Session gebunden. Loggt sich der User aus, werden die Prozesse beendet. Für den unbeaufsichtigten Dauereinsatz ist das unterwünscht, daher muss man explizit konfigurieren, dass Sessions eines Users auch einen Logout oder Reboot überleben mit <code>enable-linger</code>:</p>
+<p>Normalerweise sind Systemd-Prozesse eines Users an die Session gebunden. Loggt sich der User aus, werden die Prozesse beendet. Für den unbeaufsichtigten Dauereinsatz ist das unterwünscht, daher muss man explizit konfigurieren, dass Sessions eines Users auch einen Logout oder Reboot überleben:</p>
 </div>
 <div class="listingblock">
 <div class="title">Enable linger for poddy</div>
@@ -223,7 +261,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Wer sich nicht direkt als User <code>poddy</code> einloggt, sondern <code>sudo</code> und/oder <code>su</code> benutzt, muss noch einige Variablen explizit korrigieren:</p>
+<p>Wer sich nicht direkt als User <code>poddy</code> einloggt, sondern <code>sudo</code> und/oder <code>su</code> benutzt, muss noch einige Variablen explizit setzen:</p>
 </div>
 <div class="listingblock">
 <div class="title">Set environment variables</div>

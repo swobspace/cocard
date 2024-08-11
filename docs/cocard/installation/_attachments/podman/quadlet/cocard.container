@@ -11,7 +11,8 @@ ContainerName=cocard
 Volume=cocard-storage.volume:/rails/storage
 Volume=cocard-tmp.volume:/rails/tmp
 Network=cocard.network
-Network=traefik.network
+# Network=traefik.network
+Publish=3000
 EnvironmentFile=env.production
 Environment=FORCE_SSL=false
 AddCapability=CAP_NET_RAW

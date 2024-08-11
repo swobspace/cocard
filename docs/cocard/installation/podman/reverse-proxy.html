@@ -59,7 +59,7 @@
     <a class="nav-link" href="reverse-proxy.html">Reverse Proxy</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../configuration.html">Configuration</a>
+    <a class="nav-link" href="../configuration.html">Konfiguration</a>
   </li>
 </ul>
   </li>
@@ -123,10 +123,8 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><mark>FIXME</mark></p>
-</div>
-<div class="paragraph">
-<p>A common approach to secure access to container applications is to use a reverse proxy. The reverse proxy terminates the HTTPS connection for one or more containers on the same host.</p>
+<p>In produktiven Umgebungen sichert man Webserver in Containern fast immer über einen Reverse Proxy ab. Der Reverse Proxy ist sicher von außen zu erreichen, stellt TLS/HTTPS und ggf. eine zusätzliche Authentifikation zur Verfügung.
+Der Zugriff zwischen Reverse Proxy und Container kann dann einfach über HTTP erfolgen, der Aufwand für die Konfiguration von TLS in den Containern kann entfallen.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -134,7 +132,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Cocard uses websockets, so there is a second connection that needs to be forwarded in addition to the http/s connection.</p>
+<p>Cocard benutzt Websockets, d.h. es gibt hier zweite Verbindung, die man separat im Proxy berücksichtigen muss, wenn man z.B. Apache einsetzt. Bei Traefik entfällt eine Sonderbehandlung der Websockets.</p>
 </div>
 </div>
 </div>
@@ -151,7 +149,10 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Traefik opens port 8443. To redirect http(s) requests to Cocard, simply add a few lines to <code>cocard.container</code>:</p>
+<p>In der Beispielkonfiguration öffnet Traefik den Port 8443 für den HTTPS-Zugriff. Die mitgelieferte Konfiguration ist so nicht lauffähig und benötigt Anpassungen auf die eigene Umgebung einschließlich der dazu passenden Zertifikate.</p>
+</div>
+<div class="paragraph">
+<p>Traefik konfiguriert für den Container über das Basis-Setup hinaus mit Labels; diese ergänzt man in <code>cocard.container</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -161,11 +162,27 @@ Label=traefik.http.routers.cocard.rule=Host(`cocard.example.com`)
 Label=traefik.http.routers.cocard.entrypoints=websecure
 Label=traefik.http.routers.cocard.tls=true
 Label=traefik.http.routers.cocard.service=svc-cocard
-Label=traefik.http.services.svc-cocard.loadbalancer.server.port=3001</code></pre>
+Label=traefik.http.services.svc-cocard.loadbalancer.server.port=3000</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The entries starting with <code>Label</code> are configuring traefik. The entry <code>Network</code> makes Cocard accessible from traefik. Only the Cocard container itself needs to be connected to traefik.</p>
+<p>Die Beispielkonfiguration nutzt ein eigenes Netzwerk für die Kommunikation zwischen Container und Traefik (<code>traefik.network</code>). Das Netzwerk muss daher zusätzlich zum Cocard-internen Netzwerk im Quadlet <code>cocard.container</code> vorhanden sein.</p>
+</div>
+<div class="sect2">
+<h3 id="_podman_socket"><a class="anchor" href="#_podman_socket"></a>podman.socket</h3>
+<div class="paragraph">
+<p>Traefik liest die containerspezifische Dokumentation über eine Socket aus. Bei Docker ist dieser Socket standardmäßig aktiv, bei Podman muss er explizit gestartet werden:</p>
+</div>
+<div class="listingblock">
+<div class="title">User poddy</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">systemctl --user start podman.socket
+systemctl --user enable podman.socket</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Weitere Infos zum Socket erhält man unter <a href="https://github.com/containers/podman/blob/main/docs/tutorials/socket_activation.md" class="bare">https://github.com/containers/podman/blob/main/docs/tutorials/socket_activation.md</a></p>
+</div>
 </div>
 </div>
 </div>
@@ -179,7 +196,7 @@ Label=traefik.http.services.svc-cocard.loadbalancer.server.port=3001</code></pre
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-I don&#8217;t use this setup anymore, so it may or may not work.
+Ich benutze Apache nicht länger als Reverse Proxy, das Folgende ist daher nur eine Gedankenstütze und keine lauffähige abschließende Konfiguration.
 </td>
 </tr>
 </table>
@@ -189,13 +206,13 @@ I don&#8217;t use this setup anymore, so it may or may not work.
 <pre class="highlightjs highlight"><code class="language-apache hljs" data-lang="apache">&lt;VirtualHost *:443&gt;
 ...
   &lt;Location "/"&gt;
-    ProxyPass http://127.0.0.1:4001/
-    ProxyPassReverse http://127.0.0.1:4001/
+    ProxyPass http://127.0.0.1:3000/
+    ProxyPassReverse http://127.0.0.1:3000/
   &lt;/Location&gt;
 
   &lt;Location /cable&gt;
-    ProxyPass ws://127.0.0.1:4001/cable
-    ProxyPassReverse ws://127.0.0.1:4001/cable
+    ProxyPass ws://127.0.0.1:3000/cable
+    ProxyPassReverse ws://127.0.0.1:3000/cable
   &lt;/Location&gt;
 
   &lt;Proxy *&gt;

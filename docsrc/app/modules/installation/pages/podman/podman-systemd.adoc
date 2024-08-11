@@ -24,6 +24,22 @@ Manpage zu Podman Quadlets: https://docs.podman.io/en/stable/markdown/podman-sys
 |Ubuntu 24.04 |4.7.2 |ok
 |===
 
+=== Benötigte Pakete
+
+.Ubuntu 24.04
+[source]
+----
+apt install -y podman uidmap aardvark-dns dbus-user-session acl
+----
+
+.Fedora 40
+[source]
+----
+dnf install podman shadow-utils-subid aardvark-dns
+----
+
+Für die Installation von Quadlets gibt es auch eine Ansible-Rolle unter https://github.com/swobspace/ansible-role-podman. Die Rolle ist sehr einfach aufgebaut: User `poddy` einrichten, Pakete installieren, Quadlets aus einem lokalen Verzeichnis kopieren und `systemd` im Userkontext neu laden. Fertig.
+
 == Überblick
 
 image::podman/cocard-quadlets.svg[]
@@ -46,10 +62,24 @@ Für den Einsatz von Rootless-Containern nutzt man idealerweise einen eigenen Be
 └── xref:attachment$podman/quadlet/cocard-worker-container[cocard-worker.container]
 ----
 
+== Webzugriff auf Cocard
+
+Entweder veröffentlicht man direkt aus `cocard.container` den Port 3000 nach außen, oder man benutzt einen Reverse Proxy und fügt ein Netzwerk hinzu, auf das der Reverse Proxy Zugriff hat:
+
+.cocard.container
+[source,yaml]
+----
+...
+# Network=traefik.network
+Publish=3000
+...
+----
+
+Hier ist Cocard direkt per Port 3000 erreichbar. Für den Einsatz mit Traefik kommentiert man Eintrag mit `Publish` aus und entfernt das Kommentarzeichen vor `Network`.
 
 == Rootless Container Handling
 
-Normalerweise sind Systemd-Prozesse eines Users an die Session gebunden. Loggt sich der User aus, werden die Prozesse beendet. Für den unbeaufsichtigten Dauereinsatz ist das unterwünscht, daher muss man explizit konfigurieren, dass Sessions eines Users auch einen Logout oder Reboot überleben mit `enable-linger`:
+Normalerweise sind Systemd-Prozesse eines Users an die Session gebunden. Loggt sich der User aus, werden die Prozesse beendet. Für den unbeaufsichtigten Dauereinsatz ist das unterwünscht, daher muss man explizit konfigurieren, dass Sessions eines Users auch einen Logout oder Reboot überleben:
 
 .Enable linger for poddy
 [source,sh]
@@ -57,7 +87,7 @@ Normalerweise sind Systemd-Prozesse eines Users an die Session gebunden. Loggt s
 loginctl enable-linger poddy
 ----
 
-Wer sich nicht direkt als User `poddy` einloggt, sondern `sudo` und/oder `su` benutzt, muss noch einige Variablen explizit korrigieren:
+Wer sich nicht direkt als User `poddy` einloggt, sondern `sudo` und/oder `su` benutzt, muss noch einige Variablen explizit setzen:
 
 .Set environment variables
 [source,sh]

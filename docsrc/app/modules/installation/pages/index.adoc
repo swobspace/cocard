@@ -4,7 +4,7 @@
 
 == Podman
 
-Ich benutze `podman` anstelle von `docker`. `podman` integriert sich mit Quadlets bestens in `systemd`, und das auch noch als normaler Benutzer (`rootless`). Wer sich mit `docker` und `docker-compose` wohler fühlt, sollte einen Blick auf das Create-Skript für den Quickstart werfen: xref:attachment$quickstart/create-playground.sh[create-playground.sh]. Mit etwas Docker-Erfahrung sollte sich das Skript einfach in ein `docker-compose.yml` verwandeln lassen.
+Ich benutze `podman` anstelle von `docker`. `podman` integriert sich mit Quadlets bestens in `systemd`, und das auch noch als normaler Benutzer (rootless). Wer sich mit `docker` und `docker-compose` wohler fühlt, sollte einen Blick auf das Create-Skript für den Quickstart werfen: xref:attachment$quickstart/create-playground.sh[create-playground.sh]. Mit etwas Docker-Erfahrung sollte sich das Skript einfach in ein `docker-compose.yml` verwandeln lassen.
 
 
 == xref:podman/quickstart.adoc[]

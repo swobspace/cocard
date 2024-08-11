@@ -55,7 +55,7 @@ image::docsrc/app/modules/ROOT/images/cocard-checkmk-embedded.png[]
 
 Cocard nutzt die von der Gematik definierten SOAP-Schnittstellen am Konnektor, 
 insbesondere `GetResourceInformation`, `GetCardTerminals`, `GetCards`, 
-`GetPinStatus` und `ReadCardCertificate`. Über SOAP sollte Cocard mit jedem 
+`GetPinStatus`, `VerifyPin` und `ReadCardCertificate`. Über SOAP sollte Cocard mit jedem 
 Konnektor kommunizieren können, im Einsatz ist Cocard bisher mit der KoCoBox.
 
 Eine entscheidende Rolle spielt der Kontext aus Mandant, ClientSystemID und 
@@ -74,10 +74,12 @@ Cocard steht als https://github.com/swobspace/cocard/pkgs/container/cocard[Conta
 Einsatz mit Podman und Quadlets. Neben dem Cocard-Container wird noch 
 PostgreSQL und Redis benötigt (ebenfalls als Container).
 
+https://swobspace.github.io/cocard/cocard/installation/index.html[Dokumentation zur Installation]
+
 == Fragen, Bugs und andere Sachen ...
 
-Fragen zu Cocard bitte in https://github.com/swobspace/cocard/discussions[Discussions] stellen. https://github.com/swobspace/cocard/issues[Issues] 
-bleibt den echten Bugs vorbehalten. Feature-Requests bitte ebenfalls zuerst in 
-Diskussions einstellen. Nicht immer ist ein Feature-Request 1:1 umsetzbar, und 
-machmal ist die Funktion bereits vorhanden, nur vielleicht nicht sofort 
-erkennbar.
+* https://swobspace.github.io/cocard/cocard/index.html[Dokumentation]
+
+* Fragen zu Cocard bitte in https://github.com/swobspace/cocard/discussions[Discussions] stellen. 
+* https://github.com/swobspace/cocard/issues[Issues] bleibt den echten Bugs vorbehalten. 
+* Feature-Requests bitte ebenfalls zuerst in https://github.com/swobspace/cocard/discussions[Discussions] einstellen. Nicht immer ist ein Feature-Request 1:1 umsetzbar, und machmal ist die Funktion bereits vorhanden, nur vielleicht nicht sofort erkennbar.
