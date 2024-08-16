@@ -69,55 +69,64 @@ class CardsController < ApplicationController
     if set_context
       result = Cocard::GetPinStatus.new(card: @card, context: set_context).call
       unless result.success?
-        @card.errors.add(:base, :invalid)
-        @card.errors.add(:base, result.error_messages.join("; "))
-        flash[:alert] = (@card.to_s + "<br/>" +
-                            "Kontext: #{@context}<br/>ERROR:: " + 
-                            result.error_messages.join(', ')).html_safe
+        status  = :alert
+        message = (@card.to_s + "<br/>" +
+                   "Kontext: #{@context}<br/>ERROR:: " + 
+                   result.error_messages.join(', ')).html_safe
       else
-        flash[:notice] = "Kontext: #{@context}, " +
-                         "PIN-Status: #{result.pin_status.pin_status}, " +
-                         "left_tries: #{result.pin_status.left_tries}"
+        status  = :success
+        message = "Kontext: #{@context}, " +
+                  "PIN-Status: #{result.pin_status.pin_status}, " +
+                  "left_tries: #{result.pin_status.left_tries}"
       end
     else
-      @card.errors.add(:base, :invalid)
-      flash[:alert] = "No context assigned or context not found!"
+      status  = :alert
+      message = "No context assigned or context not found!"
     end
-    # respond_with(@card, action: :show)
-    render turbo_stream: turbo_stream.prepend("toaster", partial: "shared/flash_toast")
+    render turbo_stream: [
+      turbo_stream.prepend("toaster", partial: "shared/turbo_toast", 
+                                      locals: {status: status, message: message})
+    ]
   end
 
   def verify_pin
     if set_context
       result = Cocard::VerifyPin.new(card: @card, context: set_context).call
       unless result.success?
-        @card.errors.add(:base, :invalid)
-        @card.errors.add(:base, result.error_messages.join("; "))
-        flash.now[:alert] = (@card.to_s + "<br/>" +
+        status  = :alert
+        message = (@card.to_s + "<br/>" +
                             "Kontext: #{@context}<br/>ERROR:: " + 
                             result.error_messages.join(', ')).html_safe
       else
-        flash.now[:notice] = "Kontext: #{@context}, " +
-                         "Verify PIN: #{result.verify_pin.pin_result}"
+        status  = :success
+        message = (card.to_s + "<br/>" + "Kontext: #{cctx}<br/>" +
+                   "VERIFY PIN successful").html_safe
       end
     else
-      @card.errors.add(:base, :invalid)
-      flash.now[:alert] = "No context assigned or context not found!"
+      status  = :alert
+      message = "No context assigned or context not found!"
     end
     @card.save
-    render turbo_stream: turbo_stream.prepend("toaster", partial: "shared/flash_toast")
+    render turbo_stream: [
+      turbo_stream.prepend("toaster", partial: "shared/turbo_toast", 
+                                      locals: {status: status, message: message})
+    ]
   end
 
   def get_card
       result = Cocard::GetCard.new(card: @card, context: set_context).call
       unless result.success?
-        @card.errors.add(:base, :invalid)
-        @card.errors.add(:base, result.error_messages.join("; "))
-        flash[:alert] = "Kontext: #{@context} / ERROR:: " + result.error_messages.join(', ')
+        status  = :alert
+        message = "Kontext: #{@context} / ERROR:: " + result.error_messages.join(', ')
       else
-        flash[:notice] = "Karte im Kontext: #{@context} aktualisiert"
+        status  = :success
+        message = "Karte im Kontext: #{@context} aktualisiert"
     end
-    respond_with(@card, action: :show)
+    @card.save
+    render turbo_stream: [
+      turbo_stream.prepend("toaster", partial: "shared/turbo_toast", 
+                                      locals: {status: status, message: message})
+    ]
   end
 
   # DELETE /cards/1
