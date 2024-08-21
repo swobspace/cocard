@@ -25,7 +25,7 @@
             <td><%= log.loggable_type %></td>
             <td>
               <%= link_to log.loggable, 
-                          polymorphic_path(log.loggable, anchor: 'logs'),
+                          polymorphic_path(log.loggable),
                           class: 'primary-link',
                           data: { 'turbo-frame' => '_top' }
                %>
