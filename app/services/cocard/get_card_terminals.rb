@@ -34,14 +34,16 @@ module Cocard
                  client_system: client_system,
                  workplace: workplace).call
       if result.success?
-        entry = result.response[:get_card_terminals_response][:card_terminals][:card_terminal]
-        cts = (entry.kind_of? Hash) ? [entry] : entry
-        cts.each do |ct|
-          card_terminal = Cocard::CardTerminal.new(ct)
-          card_terminals << card_terminal
-          #
-          # Create Card Terminals or update
-          #
+        entry = result.response&.dig(:get_card_terminals_response, :card_terminals, :card_terminal)
+        unless entry.nil?
+          cts = (entry.kind_of? Hash) ? [entry] : entry
+          cts.each do |ct|
+            card_terminal = Cocard::CardTerminal.new(ct)
+            card_terminals << card_terminal
+            #
+            # Create Card Terminals or update
+            #
+          end
         end
         connector.update(soap_request_success: true,
                          last_ok: Time.current)
