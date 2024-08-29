@@ -27,11 +27,11 @@ class CardTerminal < ApplicationRecord
                     message: "Entweder MAC oder Seriennummer müssen vorhanden sein"
                   },
                   unless: -> { serial.present? }
+  validates_uniqueness_of :mac, allow_nil: true, case_sensitive: false
   validates :serial, presence: {
                     message: "Entweder MAC oder Seriennummer müssen vorhanden sein"
                   },
                   unless: -> { mac.present? }
-
 
   # -- common methods
   def to_s

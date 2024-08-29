@@ -44,6 +44,7 @@ RSpec.describe CardTerminal, type: :model do
     expect(g).to be_valid
     expect(h).not_to be_valid
     expect(f).to validate_uniqueness_of(:ct_id).scoped_to(:connector_id)
+    expect(f).to validate_uniqueness_of(:mac).case_insensitive.allow_nil
   end
 
   describe "#to_s" do
