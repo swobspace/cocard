@@ -1,0 +1,9 @@
+= Changelog
+
+== 0.34 - 2024-08-30
+
+* Fix: Überprüfung auf doppelte MACs bei Kartenterminal
+* Fix: Konnektoren ohne Kartenterminal liefern unvollständige SOAP-Nachricht
+* Change: VerifyPin mit 2 Sekunden Delay zwischen zwei PIN-Eingaben
+* Change: Klick auf Konnektor in Eventlogs im Dashboard ohne Anchor
+* Change: Überarbeitung der Ausgaben bei VerifyPin, PinStatus und GetCard (einheitlich als Toast- statt Flash-Nachricht)
