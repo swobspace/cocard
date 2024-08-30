@@ -13,7 +13,7 @@ RSpec.describe Card::GetCardButtonComponent, type: :component do
   describe "with but force == true " do
     it "shows green ok utf char" do
       render_inline(described_class.new(card: card, context: context, force: true))
-      expect(page).to have_css('button[class="btn btn-sm btn-warning me-1"]')
+      expect(page).to have_css('button[class="btn btn-warning me-1"]')
     end
   end
 
@@ -21,7 +21,7 @@ RSpec.describe Card::GetCardButtonComponent, type: :component do
     it "shows green ok utf char" do
       expect(card).to receive_message_chain(:card_terminal, :connector, :manual_update).and_return(true)
       render_inline(described_class.new(card: card, context: context ))
-      expect(page).to have_css('button[class="btn btn-sm btn-warning me-1"]')
+      expect(page).to have_css('button[class="btn btn-warning me-1"]')
     end
   end
 
@@ -29,7 +29,7 @@ RSpec.describe Card::GetCardButtonComponent, type: :component do
     it "shows green ok utf char" do
       expect(card).to receive_message_chain(:card_terminal, :connector, :manual_update).and_return(false)
       render_inline(described_class.new(card: card, context: context))
-      expect(page).not_to have_css('button[class="btn btn-sm btn-warning me-1"]')
+      expect(page).not_to have_css('button[class="btn btn-warning me-1"]')
     end
   end
 
@@ -37,7 +37,7 @@ RSpec.describe Card::GetCardButtonComponent, type: :component do
     it "shows green ok utf char" do
       expect(card).to receive_message_chain(:card_terminal, :connector, :manual_update).and_return(true)
       render_inline(described_class.new(card: card, context: context))
-      expect(page).to have_css('button[class="btn btn-sm btn-warning me-1"]')
+      expect(page).to have_css('button[class="btn btn-warning me-1"]')
     end
   end
 
