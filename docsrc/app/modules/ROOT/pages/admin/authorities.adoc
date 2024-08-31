@@ -1,0 +1,57 @@
+= Berechtigungen
+:author: Wolfgang Barth
+:revdate: 2024-08-31
+
+Berechtigungen werden in Cocard über Rollen vergeben. Jede Rolle kann für sich alleine vergeben werden und enthält alle für die Aufgabe notwendigen Berechtigungen. Die Rolle `Admin` hat eine Sonderstellung: sie darf alles, die Vergabe zusätzlicher Rollen wird ignoriert.
+
+NOTE: Bis auf die Rolle `Admin` können alle Rollen kombiniert werden.
+
+== Rolle Admin
+
+Ein Administrator hat alle Zugriffsrechte. Sofern die Rolle vorhanden ist, werden alle anderen Rollen des Benutzers ignoriert. Die Rolle `Admin` sollte nur an wenige Personen vergeben werden, weil damit auch die Pflege von Benutzern und Berechtigungen möglich ist.
+
+== Reader
+
+* Alles Lesen (*)
+
+== ConnectorManager
+
+* Alles Lesen (*)
+** Connector#id_contract (Vertragsinformationen) lesen
+* Vollzugriff auf Konnektoren
+
+
+== CardTerminalManager
+
+* Alles Lesen (*)
+* Vollzugriff auf Kartenterminals
+
+== CardManager
+
+* Alles Lesen (*)
+** Card#private_information (Geschützte Informationen) lesen
+* Vollzugriff auf Karten
+
+
+== VerifyPin
+
+* Alles Lesen (*)
+* PinStatus prüfen und PinVerify ausführen (sowohl einzeln bei der Karte als auch über die Sammelübersicht zur Pin-Verifizierung)
+
+== Support
+
+* Alles Lesen (*)
+* Pflege der Felder Raum, Kontakt und Netzwerk/Dose/Switch bei Kartenterminals
+
+== (*) Geschützte Informationen
+
+Folgende Felder sind besonders geschützt und nur lesbar, wenn explizit angegeben (außer bei der Rolle `Admin`):
+
+[cols="1,2,3"]
+|===
+|Modell |Feld | Beschreibung
+
+|ClientCertificate | alle Felder | Client-Zertifikate
+|Connector |#id_contract | Vertragsinformationen
+|Card      |#private_information | Geschützte Informationen
+|===

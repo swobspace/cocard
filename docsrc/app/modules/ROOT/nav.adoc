@@ -1,2 +1,4 @@
 * xref:index.adoc[]
 ** xref:changelog.adoc[]
+* Administration
+** xref:admin/authorities.adoc[]
