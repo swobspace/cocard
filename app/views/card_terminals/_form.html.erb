@@ -2,40 +2,55 @@
 <%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
 
   <div class="form-input">
-    <%= form.input :displayname
+    <%= form.input :displayname, 
+                    disabled: !can?(:update, @card_terminal, :displayname)
        %>
-    <%= form.association :location
+    <%= form.association :location,
+                    disabled: !can?(:update, @card_terminal, :location)
        %>
-    <%= form.input :room
+    <%= form.input :room,
+                    disabled: !can?(:update, @card_terminal, :room)
        %>
-    <%= form.input :contact
+    <%= form.input :contact,
+                    disabled: !can?(:update, @card_terminal, :contact)
        %>
-    <%= form.input :plugged_in
+    <%= form.input :plugged_in,
+                    disabled: !can?(:update, @card_terminal, :plugged_in)
        %>
-    <%= form.input :delivery_date, as: :string, wrapper: :horizontal_date
+    <%= form.input :delivery_date, as: :string, wrapper: :horizontal_date,
+                    disabled: !can?(:update, @card_terminal, :delivery_date)
        %>
-    <%= form.input :supplier
+    <%= form.input :supplier,
+                    disabled: !can?(:update, @card_terminal, :supplier)
        %>
-    <%= form.input :serial
+    <%= form.input :serial,
+                    disabled: !can?(:update, @card_terminal, :serial)
        %>
-    <%= form.input :id_product
-       %>
-    <%= form.input :description, as: :rich_text_area
+    <%= form.input :id_product,
+                    disabled: !can?(:update, @card_terminal, :id_product)
        %>
 
-    <div class="alert alert-warning" role="alert">
-      <%= t('cocard.new_card_terminal_manual_warning') %>
-    </div>
+    <% if can? :manage, @card_terminal %>
+      <%= form.input :description, as: :rich_text_area
+       %>
+
+      <div class="alert alert-warning" role="alert">
+        <%= t('cocard.new_card_terminal_manual_warning') %>
+      </div>
+    <% end %>
 
     <%= form.input :mac, as: :string, 
-          input_html: { value: @card_terminal.rawmac }
+          input_html: { value: @card_terminal.rawmac },
+          disabled: !can?(:update, @card_terminal, :mac)
      %>
-    <%= form.input :ip, as: :string
-       %>
-    <%= form.input :slots
-       %>
-    <%= form.association :connector
-       %>
+    <% if can? :manage, @card_terminal %>
+      <%= form.input :ip, as: :string
+         %>
+      <%= form.input :slots
+         %>
+      <%= form.association :connector
+         %>
+    <% end %>
 
     <%= form.button :submit, class: 'btn btn-primary' %>
     <%= cancel_button %>

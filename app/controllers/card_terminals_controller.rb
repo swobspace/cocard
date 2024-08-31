@@ -73,11 +73,9 @@ class CardTerminalsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def card_terminal_params
       params.require(:card_terminal)
-            .permit(:displayname, :location_id, :description, :room,
-                    :contact, :plugged_in, :mac, :ip, :slots, :connector_id,
-                    :last_ok,
-                    :delivery_date, :supplier, :id_product, :serial)
-            .reject { |k, v| k == 'mac' && v.blank? }
+            .permit(current_ability
+                    .permitted_attributes(:update, (@card_terminal||CardTerminal.new)))
+            .reject {|k,v| k == 'mac' && v.blank? }
 
     end
 end

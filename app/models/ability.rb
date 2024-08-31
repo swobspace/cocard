@@ -14,6 +14,7 @@ class Ability
     # role Admin overrides all other roles
     elsif @user.is_admin?
       can :manage, :all
+      can :update, CardTerminal, :description
       cannot %i[update destroy], Wobauth::Role
 
     # user has at least one role, perhaps more
@@ -39,6 +40,7 @@ class Ability
 
       if @user.role?(:card_terminal_manager)
         can :manage, CardTerminal
+        can :update, CardTerminal, :description
       end
 
       if @user.role?(:verify_pin)
