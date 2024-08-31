@@ -7,11 +7,11 @@ RSpec.describe "connectors/index", type: :view do
   before(:each) do
     @ability = Object.new
     @ability.extend(CanCan::Ability)
+    @ability.can :read, Connector, :id_contract
     allow(controller).to receive(:current_ability) { @ability }
     allow(controller).to receive(:controller_name) { 'connectors' }
     allow(controller).to receive(:action_name) { 'index' }
     @current_user = FactoryBot.create(:user, sn: 'Mustermann', givenname: 'Max')
-    allow(@current_user).to receive(:is_admin?).and_return(true)
 
     assign(:connectors, [
       Connector.create!(
