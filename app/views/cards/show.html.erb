@@ -13,7 +13,7 @@
         <%= render ConditionIconComponent.new(item: @card) %>
       </div>
       <div role="toolbar" class="ms-auto pt-3">
-        <% if can?(:manage, @card) %>
+        <% if can?(:get_certificate, @card) %>
           <%= render Card::GetCertificateButtonComponent.new(card: @card) %>
         <% end %>
         <%= edit_link(@card) %>
@@ -48,7 +48,7 @@
             <th class="w-10 pe-3"><%= t('attributes.description')%>:</th>
             <td><%= @card.description %></td>
           </tr>
-          <% if @current_user and @current_user.is_admin? %>
+          <% if can?(:read, @card, :private_information) %>
             <tr>
               <th class="w-10 pe-3"><%= t('attributes.private_information')%>:</th>
               <td><%= @card.private_information %></td>

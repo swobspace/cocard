@@ -1,5 +1,9 @@
 = Changelog
 
+== 0.35 - 2024-08-31
+
+* xref:admin/authorities.adoc[Erweiterung der Berechtigungsverwaltung]
+
 == 0.34 - 2024-08-30
 
 * Fix: Überprüfung auf doppelte MACs bei Kartenterminal
