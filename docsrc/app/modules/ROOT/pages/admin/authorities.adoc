@@ -10,35 +10,35 @@ NOTE: Bis auf die Rolle `Admin` können alle Rollen kombiniert werden.
 
 Ein Administrator hat alle Zugriffsrechte. Sofern die Rolle vorhanden ist, werden alle anderen Rollen des Benutzers ignoriert. Die Rolle `Admin` sollte nur an wenige Personen vergeben werden, weil damit auch die Pflege von Benutzern und Berechtigungen möglich ist.
 
-== Reader
+== Rolle Reader
 
 * Alles Lesen (*)
 
-== ConnectorManager
+== Rolle ConnectorManager
 
 * Alles Lesen (*)
 ** Connector#id_contract (Vertragsinformationen) lesen
 * Vollzugriff auf Konnektoren
 
 
-== CardTerminalManager
+== Rolle CardTerminalManager
 
 * Alles Lesen (*)
 * Vollzugriff auf Kartenterminals
 
-== CardManager
+== Rolle CardManager
 
 * Alles Lesen (*)
 ** Card#private_information (Geschützte Informationen) lesen
 * Vollzugriff auf Karten
 
 
-== VerifyPin
+== Rolle VerifyPin
 
 * Alles Lesen (*)
 * PinStatus prüfen und PinVerify ausführen (sowohl einzeln bei der Karte als auch über die Sammelübersicht zur Pin-Verifizierung)
 
-== Support
+== Rolle Support
 
 * Alles Lesen (*)
 * Pflege der Felder Raum, Kontakt und Netzwerk/Dose/Switch bei Kartenterminals
