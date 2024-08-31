@@ -86,7 +86,7 @@
             <th class="w-25 pe-3"><%= t('attributes.firmware_version')%>:</th>
             <td><%= @connector.firmware_version %></td>
           </tr>
-          <% if @current_user and @current_user.is_admin? %>
+          <% if can?(:read, @connector, :id_contract) %>
             <tr>
               <th class="w-25 pe-3"><%= t('attributes.id_contract')%>:</th>
               <td><%= @connector.id_contract %></td>

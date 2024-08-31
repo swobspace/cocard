@@ -34,6 +34,14 @@ class Connector < ApplicationRecord
     "#{_name} / #{ip}"
   end
 
+  def name
+    if self[:name].blank?
+      "#{ip}"
+    else
+      self[:name]
+    end
+  end
+
   def product_information
     return nil if connector_services.nil?
     Cocard::ProductInformation.new(connector_services['ProductInformation'])
@@ -86,7 +94,7 @@ private
   end
 
   def _name
-    if name.blank?
+    if self[:name].blank?
       "-"
     else
       name

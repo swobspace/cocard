@@ -1,3 +1,8 @@
 roles:
   - name: Admin
   - name: Reader
+  - name: CardManager
+  - name: CardTerminalManager
+  - name: ConnectorManager
+  - name: VerifyPin
+  - name: Support

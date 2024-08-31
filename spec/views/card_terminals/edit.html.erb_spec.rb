@@ -14,6 +14,7 @@ RSpec.describe "card_terminals/edit", type: :view do
   before(:each) do
     @ability = Object.new
     @ability.extend(CanCan::Ability)
+    @ability.can :manage, CardTerminal
     allow(controller).to receive(:current_ability) { @ability }
     allow(controller).to receive(:controller_name) { 'card_terminals' }
     allow(controller).to receive(:action_name) { 'edit' }

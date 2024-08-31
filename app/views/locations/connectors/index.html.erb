@@ -80,7 +80,7 @@
             <td><%= render BooleanComponent.new(value: connector.use_tls,
                                                 text: :text) %></td>
             <td><%= t(connector.authentication, scope: :authentications) %></td>
-            <td><%= connector.id_contract if @current_user.is_admin? %></td>
+            <td><%= connector.id_contract if can?(:read, connector, :id_contract) %></td>
             <td><%= connector.serial %></td>
             <td class="text-nowrap">
               <%= show_link connector, 

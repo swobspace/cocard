@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Berechtigungen :: Cocard</title>
+    <meta name="generator" content="Antora 3.1.9">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">Cocard</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="abstand">
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+          <div class="navbar-item dark">Cocard</div>
+           <a class="navbar-item" href="../../devnotes/index.html">DevNotes</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="cocard" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Cocard</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Cocard</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Administration</span>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="authorities.html">Berechtigungen</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../installation/index.html">Installation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../installation/podman/quickstart.html">Quickstart</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../first-steps.html">Erste Schritte</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/podman/podman-systemd.html">Systemd und Quadlets</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/podman/reverse-proxy.html">Reverse Proxy</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/configuration.html">Konfiguration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Cocard</span>
+    <span class="version">default</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Cocard</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../devnotes/index.html">DevNotes</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../devnotes/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Cocard</a></li>
+    <li>Administration</li>
+    <li><a href="authorities.html">Berechtigungen</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Berechtigungen</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Berechtigungen werden in Cocard über Rollen vergeben. Jede Rolle kann für sich alleine vergeben werden und enthält alle für die Aufgabe notwendigen Berechtigungen. Die Rolle <code>Admin</code> hat eine Sonderstellung: sie darf alles, die Vergabe zusätzlicher Rollen wird ignoriert.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Bis auf die Rolle <code>Admin</code> können alle Rollen kombiniert werden.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rolle_admin"><a class="anchor" href="#_rolle_admin"></a>Rolle Admin</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Ein Administrator hat alle Zugriffsrechte. Sofern die Rolle vorhanden ist, werden alle anderen Rollen des Benutzers ignoriert. Die Rolle <code>Admin</code> sollte nur an wenige Personen vergeben werden, weil damit auch die Pflege von Benutzern und Berechtigungen möglich ist.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rolle_reader"><a class="anchor" href="#_rolle_reader"></a>Rolle Reader</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Alles Lesen (*)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rolle_connectormanager"><a class="anchor" href="#_rolle_connectormanager"></a>Rolle ConnectorManager</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Alles Lesen (*)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Connector#id_contract (Vertragsinformationen) lesen</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Vollzugriff auf Konnektoren</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rolle_cardterminalmanager"><a class="anchor" href="#_rolle_cardterminalmanager"></a>Rolle CardTerminalManager</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Alles Lesen (*)</p>
+</li>
+<li>
+<p>Vollzugriff auf Kartenterminals</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rolle_cardmanager"><a class="anchor" href="#_rolle_cardmanager"></a>Rolle CardManager</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Alles Lesen (*)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Card#private_information (Geschützte Informationen) lesen</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Vollzugriff auf Karten</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rolle_verifypin"><a class="anchor" href="#_rolle_verifypin"></a>Rolle VerifyPin</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Alles Lesen (*)</p>
+</li>
+<li>
+<p>PinStatus prüfen und PinVerify ausführen (sowohl einzeln bei der Karte als auch über die Sammelübersicht zur Pin-Verifizierung)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rolle_support"><a class="anchor" href="#_rolle_support"></a>Rolle Support</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Alles Lesen (*)</p>
+</li>
+<li>
+<p>Pflege der Felder Raum, Kontakt und Netzwerk/Dose/Switch bei Kartenterminals</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_geschützte_informationen"><a class="anchor" href="#_geschützte_informationen"></a>(*) Geschützte Informationen</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Folgende Felder sind besonders geschützt und nur lesbar, wenn explizit angegeben (außer bei der Rolle <code>Admin</code>):</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 33.3333%;">
+<col style="width: 50.0001%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Modell</th>
+<th class="tableblock halign-left valign-top">Feld</th>
+<th class="tableblock halign-left valign-top">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ClientCertificate</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">alle Felder</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Client-Zertifikate</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Connector</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">#id_contract</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Vertragsinformationen</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Card</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">#private_information</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Geschützte Informationen</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <span>Wolfgang Barth (C) 2024</span>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/vendor/medium-zoom.min.js"></script>
+<script>mediumZoom('img:not(.copy-icon');</script>
+  </body>
+</html>

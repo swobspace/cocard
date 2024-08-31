@@ -6,11 +6,15 @@
     </div>
     <% if card.card_type == 'SMC-B' %>
       <div class="col-12 col-lg-4 text-muted text-end">
-        <% if can? :manage, card %>
+        <% if can? :verify_pin, card %>
           <%= render Card::VerifyPinComponent.new(card: card, context: context) %>
+        <% end %>
+        <% if can? :get_card, card %>
           <%= render Card::GetCardButtonComponent.new(card: card, context: context, force: true) %>
         <% end %>
-        <%= render Card::GetPinStatusComponent.new(card: card, context: context) %>
+        <% if can? :get_pin_status, card %>
+          <%= render Card::GetPinStatusComponent.new(card: card, context: context) %>
+        <% end %>
       </div>
     <% end %>
   </div>
