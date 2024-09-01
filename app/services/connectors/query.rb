@@ -108,7 +108,7 @@ module Connectors
     end
 
     def string_fields
-      [ :name, :admin_url, :sds_url, :firmware_version]
+      [ :name, :admin_url, :sds_url, :serial, :firmware_version]
     end
 
     def id_fields

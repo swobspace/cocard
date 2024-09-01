@@ -101,8 +101,8 @@ module CardTerminals
     end
 
     def string_fields
-      [ :name, :room, :contact, :plugged_in, :supplier, :displayname, :ct_id,
-        :firmware_version ]
+      [ :displayname, :room, :contact, :plugged_in, :supplier, :seriaal, :id_product,
+        :name, :ct_id, :firmware_version ]
     end
 
     def id_fields

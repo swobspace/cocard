@@ -101,7 +101,8 @@ module Cards
 
     def string_fields
       [ :name, :lanr, :fachrichtung, :bsnr, :telematikid, :card_handle, :card_type,
-        :iccsn, :cert_subject_cn, :cert_subject_title,
+        :iccsn, :card_holder_name,
+        :cert_subject_cn, :cert_subject_title,
         :cert_subject_sn, :cert_subject_givenname, :cert_subject_street,
         :cert_subject_postalcode, :cert_subject_l, :cert_subject_o ]
     end
