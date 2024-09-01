@@ -243,6 +243,22 @@ bin/rails g scaffold ClientCertificate \
   --no-stylesheets --no-javascripts --no-helper
 ----
 
+== model Note
+
+[source,sh]
+----
+bin/rails g scaffold Note \
+  notable:belongs_to{polymorphic} \
+  user:belongs_to \
+  valid_until:date \
+  type:integer \
+  description:rich_text \
+  --no-stylesheets --no-javascripts --no-helper
+----
+
+----
+enum type: { plain: 0, acknowledge: 1 }
+----
 
 == HABTM Tables
 

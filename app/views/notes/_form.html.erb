@@ -1,0 +1,19 @@
+<%= simple_form_for(@note) do |form| %>
+<%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
+
+  <div class="form-input">
+    <%= form.association :notable
+       %>
+    <%= form.association :user
+       %>
+    <%= form.input :valid_until
+       %>
+    <%= form.input :type
+       %>
+    <%= form.input :description
+       %>
+
+    <%= form.button :submit, class: 'btn btn-primary' %>
+    <%= cancel_button %>
+  </div>
+<% end %>

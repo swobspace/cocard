@@ -1,0 +1,50 @@
+<div class="card mb-3">
+  <div class="card-header">
+    <div class="d-flex w-100 justify-content-between">
+      <div>
+        <span class="subtitle">
+          <%= t('activerecord.models.note') %>: 
+          #<%= @note.id %>
+        </span>
+        <h4 class="title"><%= @note %></h4>
+      </div>
+      <div role="toolbar" class="pt-3">
+        <%= edit_link(@note) %>
+        <%= delete_link(@note) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <table class="table table-sm table-borderless">
+    
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.notable')%>:</th>
+        <td><%= @note.notable %></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.user')%>:</th>
+        <td><%= @note.user %></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.valid_until')%>:</th>
+        <td><%= @note.valid_until %></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.type')%>:</th>
+        <td><%= @note.type %></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.description')%>:</th>
+        <td><%= @note.description %></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<%= back_link %>
+<%= new_link Note %>

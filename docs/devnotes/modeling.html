@@ -407,6 +407,27 @@ bin/rails g migration AddNameToWorkplace \
 </div>
 </div>
 <div class="sect1">
+<h2 id="_model_note"><a class="anchor" href="#_model_note"></a>model Note</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g scaffold Note \
+  notable:belongs_to{polymorphic} \
+  user:belongs_to \
+  valid_until:date \
+  type:integer \
+  description:rich_text \
+  --no-stylesheets --no-javascripts --no-helper</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>enum type: { plain: 0, acknowledge: 1 }</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_habtm_tables"><a class="anchor" href="#_habtm_tables"></a>HABTM Tables</h2>
 <div class="sectionbody">
 <div class="sect2">

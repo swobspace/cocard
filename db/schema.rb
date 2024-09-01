@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_27_111128) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_01_140527) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -333,6 +333,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_27_111128) do
     t.index ["location_id"], name: "index_networks_on_location_id"
   end
 
+  create_table "notes", force: :cascade do |t|
+    t.string "notable_type", null: false
+    t.bigint "notable_id", null: false
+    t.bigint "user_id", null: false
+    t.date "valid_until"
+    t.integer "type", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["notable_type", "notable_id"], name: "index_notes_on_notable"
+    t.index ["user_id"], name: "index_notes_on_user_id"
+  end
+
   create_table "operational_states", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "description", default: ""
@@ -440,6 +452,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_27_111128) do
   add_foreign_key "connector_contexts", "connectors"
   add_foreign_key "connector_contexts", "contexts"
   add_foreign_key "networks", "locations"
+  add_foreign_key "notes", "wobauth_users", column: "user_id"
   add_foreign_key "terminal_workplaces", "card_terminals"
   add_foreign_key "terminal_workplaces", "workplaces"
 end

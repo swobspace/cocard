@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :notes
   get 'verify_pins', to: 'verify_pins#index'
   post 'verify_pins', to: 'verify_pins#verify'
   resources :client_certificates
