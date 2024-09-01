@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :notes
   get 'verify_pins', to: 'verify_pins#index'
   post 'verify_pins', to: 'verify_pins#verify'
   resources :client_certificates
@@ -14,6 +13,7 @@ Rails.application.routes.draw do
     collection do
       get :sindex
     end
+    resources :notes, module: :logs
   end
   get "search", to: 'searches#index'
   resources :operational_states

@@ -10,7 +10,7 @@ class Note < ApplicationRecord
   enum type: { plain: 0, acknowledge: 1 }
 
   # -- validations and callbacks
-  validates :user_id, presence: true
+  validates :user_id, :message, presence: true
   validates :type, inclusion: { in: types.keys }
 
   # -- common methods

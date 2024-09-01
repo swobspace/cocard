@@ -1,16 +1,12 @@
-<%= simple_form_for(@note) do |form| %>
+<%= simple_form_for([@notable, @note]) do |form| %>
 <%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
 
   <div class="form-input">
-    <%= form.association :notable
+    <%= form.input :valid_until, html5: true, wrapper: :horizontal_date
        %>
-    <%= form.association :user
+    <%= form.input :type, as: :hidden
        %>
-    <%= form.input :valid_until
-       %>
-    <%= form.input :type
-       %>
-    <%= form.input :description
+    <%= form.input :message, as: :rich_text_area
        %>
 
     <%= form.button :submit, class: 'btn btn-primary' %>

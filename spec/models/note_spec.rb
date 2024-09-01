@@ -6,6 +6,7 @@ RSpec.describe Note, type: :model do
   it { is_expected.to belong_to(:notable) }
   it { is_expected.to belong_to(:user) }
   it { is_expected.to define_enum_for(:type).with_values(plain: 0, acknowledge: 1) }
+  it { is_expected.to validate_presence_of(:message) }
 
   it 'should get plain factory working' do
     f = FactoryBot.create(:note, :with_log)

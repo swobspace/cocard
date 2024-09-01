@@ -4,7 +4,7 @@ class NotesController < ApplicationController
 
   # GET /notes
   def index
-    @notes = Note.all
+    @notes = @notable.notes
     respond_with(@notes)
   end
 
@@ -15,7 +15,7 @@ class NotesController < ApplicationController
 
   # GET /notes/new
   def new
-    @note = Note.new
+    @note = @notable.notes.build(type: params[:type].to_i || Note.types[:plain])
     respond_with(@note)
   end
 
@@ -25,23 +25,33 @@ class NotesController < ApplicationController
 
   # POST /notes
   def create
-    @note = Note.new(note_params)
-
-    @note.save
-    respond_with(@note)
+    @note = @notable.notes.build(default_note_params.merge(note_params,force_note_params))
+    if @note.save
+      Turbo::StreamsChannel.broadcast_refresh_to(:home)
+    else
+      render :new, status: :unprocessable_entity 
+    end
   end
 
   # PATCH/PUT /notes/1
   def update
-    @note.update(note_params)
-    respond_with(@note)
+    if @note.update(note_params)
+      Turbo::StreamsChannel.broadcast_refresh_to(:home)
+    else
+      render :edit, status: :unprocessable_entity 
+    end
   end
 
   # DELETE /notes/1
   def destroy
     @note.destroy!
-    respond_with(@note)
+    Turbo::StreamsChannel.broadcast_refresh_to(@notable)
   end
+
+  protected
+    def set_notable
+      raise "set_notable must be set from submodule"
+    end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -51,6 +61,22 @@ class NotesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def note_params
-      params.require(:note).permit(:notable_id, :notable_type, :user_id, :valid_until, :type, :description)
+      params.require(:note).permit(:notable_id, :notable_type, :valid_until, :message)
     end
+
+    def default_note_params
+      if params[:note][:type].present? 
+        newtype = params[:note][:type].to_i
+      else
+        newtype = Note.types[:plain]
+      end 
+      { type: newtype }
+    end 
+      
+    def force_note_params
+      {   
+        user_id: @current_user.id
+      }   
+    end 
+
 end

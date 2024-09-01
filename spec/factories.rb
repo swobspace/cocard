@@ -99,6 +99,7 @@ FactoryBot.define do
 
   factory :note do
     association :user
+    message { "dummy text" }
     trait :with_log do
       association :notable, factory: [:log, :with_connector]
     end

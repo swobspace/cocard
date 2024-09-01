@@ -72,6 +72,7 @@ de:
       location: Standort
       log: Log
       network: Netzwerk
+      note: Notiz
       operational_state: Betriebszustand
       user: User
       terminal_workplaces: Zugeordnete Arbeitsplätze
@@ -143,6 +144,7 @@ de:
     name: Name
     network: Netzwerk
     netzwerk: Netzwerk
+    note: Notiz
     operational: in Betrieb
     operational_state: Betriebszustand
     passphrase: Passphrase
@@ -183,6 +185,7 @@ de:
     locations/connectors: Konnektoren
     logs: Logs
     networks: Netzwerke
+    notes: Notizen
     operational_states: Betriebszustände
     searches: Suche
     users: Benutzer
