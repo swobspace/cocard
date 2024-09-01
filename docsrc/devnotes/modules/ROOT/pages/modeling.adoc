@@ -252,7 +252,7 @@ bin/rails g scaffold Note \
   user:belongs_to \
   valid_until:date \
   type:integer \
-  description:rich_text \
+  message:rich_text \
   --no-stylesheets --no-javascripts --no-helper
 ----
 
