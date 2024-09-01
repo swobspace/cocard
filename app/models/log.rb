@@ -1,6 +1,9 @@
 class Log < ApplicationRecord
+  include NotableConcerns
   # -- associations
   belongs_to :loggable, polymorphic: true
+  has_many :notes, as: :notable, dependent: :destroy
+
   default_scope { order('since desc NULLS LAST') }
 
   # -- configuration

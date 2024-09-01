@@ -97,6 +97,13 @@ FactoryBot.define do
     location
   end
 
+  factory :note do
+    association :user
+    trait :with_log do
+      association :notable, factory: [:log, :with_connector]
+    end
+  end
+
   factory :operational_state do
     name { generate(:aname) }
   end
