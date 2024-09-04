@@ -1,3 +1,3 @@
-<%= render FormComponent.new(title: t('wobapphelpers.actions.edit', model: t('note', scope: 'activerecord.models'))) do %>
-  <%= render 'form' %>
+<%= render ModalComponent.new(title: t('wobapphelpers.actions.edit', model: t('note', scope: 'activerecord.models'))) do %>
+  <%= render 'form', note: @note, notable: @notable  %>
 <% end %>

@@ -31,7 +31,7 @@ RSpec.describe Log, type: :model do
     it { expect(log.to_s).to match("WARN - TK-AXC-04 >> GetCard: A warning message") }
   end
 
-  describe "#acknowledges" do
+  describe "#notes" do
     let(:log) { FactoryBot.create(:log, :with_connector) }
 
     let!(:note) { FactoryBot.create(:note, notable: log, type: Note.types[:plain]) }
@@ -46,6 +46,7 @@ RSpec.describe Log, type: :model do
 
     it { expect(log.acknowledges).to contain_exactly(ack, oldack) }
     it { expect(log.current_acknowledge).to eq(ack) }
+    it { expect(log.current_note).to eq(ack) }
   end
 
 end

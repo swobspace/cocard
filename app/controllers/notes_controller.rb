@@ -45,7 +45,8 @@ class NotesController < ApplicationController
   # DELETE /notes/1
   def destroy
     @note.destroy!
-    Turbo::StreamsChannel.broadcast_refresh_to(@notable)
+    respond_with(@note, location: location)
+    # Turbo::StreamsChannel.broadcast_refresh_to(@notable)
   end
 
   protected
@@ -57,6 +58,11 @@ class NotesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_note
       @note = Note.find(params[:id])
+    end
+
+    def location
+      polymorphic_path([@notable, :notes])
+      # polymorphic_path(@notable, anchor: 'notes')
     end
 
     # Only allow a trusted parameter "white list" through.

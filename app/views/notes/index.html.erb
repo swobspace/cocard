@@ -1,6 +1,7 @@
 <%= render 'shared/turbo-cache-control' %>
 
-<h1><%= t('controller.notes') %></h1>
+<h1> <%= t('controller.notes') %></h1>
+Für: <%= @notable %>
 
 <div data-controller="datatables">
   <%= content_tag :table, role: :datatable,

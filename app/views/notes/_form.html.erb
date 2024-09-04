@@ -1,4 +1,4 @@
-<%= simple_form_for([@notable, @note]) do |form| %>
+<%= simple_form_for([notable, note]) do |form| %>
 <%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
 
   <div class="form-input">

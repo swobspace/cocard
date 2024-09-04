@@ -38,6 +38,8 @@
             <td class="text-nowrap">
               <%= show_link log, class: 'btn btn-sm btn-outline-secondary',
                                  data: { "turbo-frame" => "_top" } %>
+              <%= render NoteButtonComponent.new(notable: log, 
+                                                 type: Note.types[:acknowledge]) %>
             </td>
           <% end %>
         <% end %>

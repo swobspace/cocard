@@ -60,6 +60,7 @@ de:
     card_terminals_count: Anzahl Terminals
     cards_count: Anzahl Karten
     connectors_count: Anzahl Konnektoren
+    acknowledge: Acknowledge
 
   activerecord:
     models:
