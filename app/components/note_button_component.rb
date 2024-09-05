@@ -28,7 +28,7 @@ class NoteButtonComponent < ViewComponent::Base
     if @current.nil?
       new_log_note_path(notable, type: type)
     else
-      log_notes_path(notable)
+      log_note_path(notable, current)
     end
   end
 
