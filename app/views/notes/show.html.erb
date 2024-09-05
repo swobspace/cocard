@@ -1,4 +1,4 @@
-<%= render ModalComponent.new(title: t('activerecord.models.note')) do %>
+<%= render ModalComponent.new(title: t('activerecord.models.note') + ": " + @notable.to_s) do %>
 
 <div class="card mb-3">
   <div class="card-header">
