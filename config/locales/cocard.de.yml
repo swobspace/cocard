@@ -185,6 +185,7 @@ de:
     locations/card_terminals: Kartenterminals
     locations/connectors: Konnektoren
     logs: Logs
+    logs/notes: Notizen
     networks: Netzwerke
     notes: Notizen
     operational_states: Betriebszustände
