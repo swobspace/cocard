@@ -204,6 +204,9 @@ de:
   accessibilities:
     nothing: None
     ping: Ping
+  notes:
+    plain: Notiz
+    acknowledge: Acknowledge
 
   form:
     card:
