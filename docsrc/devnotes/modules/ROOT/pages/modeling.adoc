@@ -198,9 +198,12 @@ bin/rails g scaffold Log \
   message:text \
   is_valid:boolean \
   condition:integer \
+  acknowledge_id:bigint \
   --no-stylesheets --no-javascripts --no-helper
 ----
 
+NOTE: `acknowledge_id` contains the current acknowledge if available.
+ 
 == model Network
 
 [source,sh]

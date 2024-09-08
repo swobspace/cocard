@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_01_140527) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_08_092229) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -319,6 +319,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_01_140527) do
     t.boolean "is_valid", default: false
     t.integer "condition", default: -1
     t.datetime "since", precision: nil
+    t.bigint "acknowledge_id"
     t.index ["is_valid"], name: "index_logs_on_is_valid"
     t.index ["level"], name: "index_logs_on_level"
     t.index ["loggable_type", "loggable_id"], name: "index_logs_on_loggable"
