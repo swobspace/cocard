@@ -46,7 +46,11 @@ RSpec.describe Log, type: :model do
 
     it { expect(log.acknowledges).to contain_exactly(ack, oldack) }
     it { expect(log.current_acknowledge).to eq(ack) }
-    it { expect(log.current_note).to eq(ack) }
+    it { expect(log.acknowledges.active).to contain_exactly(ack) }
+    it { expect(log.acknowledges.count).to eq(2) }
+    it { expect(log.current_note).to eq(note) }
+    it { expect(log.notes.active).to contain_exactly(note) }
+    it { expect(log.notes.count).to eq(1) }
   end
 
 end

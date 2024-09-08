@@ -4,8 +4,10 @@ module NotableConcerns
   extend ActiveSupport::Concern
 
   included do
+    has_many :notes, -> { where(type: types[:plain]) },
+             as: :notable, dependent: :destroy
     has_many :acknowledges, -> { where(type: types[:acknowledge]) },
-             as: :notable, class_name: 'Note'
+             as: :notable, class_name: 'Note', dependent: :destroy
   end
 
   def current_note
