@@ -112,8 +112,9 @@ module Logs
           expect(ack.valid_until).to be_nil
           subject.call(true)
           ack.reload
-          expect(ack.valid_until).to eq(Date.current)
+          expect(ack.valid_until.to_s).to eq(1.minute.before(Time.current).to_s)
           expect(log.current_acknowledge).to be_nil
+          expect(log.acknowledges.active).to be_empty
         end
 
         it { expect(subject.call).to be_truthy }

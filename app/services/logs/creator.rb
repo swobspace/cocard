@@ -56,7 +56,7 @@ module Logs
         else
           # mark as invalid instead of destroy
           # and terminate all open acknowledgements
-          @log.acknowledges.active.update_all(valid_until: Time.current)
+          @log.acknowledges.active.update_all(valid_until: (Time.current - 1.minute))
           @log.update(is_valid: false, acknowledge_id: nil)
         end
       elsif (!destroy) 

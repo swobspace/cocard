@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_08_092229) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_08_163233) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -338,7 +338,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_08_092229) do
     t.string "notable_type", null: false
     t.bigint "notable_id", null: false
     t.bigint "user_id", null: false
-    t.date "valid_until"
+    t.datetime "valid_until"
     t.integer "type", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

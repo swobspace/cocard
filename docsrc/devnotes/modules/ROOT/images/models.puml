@@ -164,7 +164,7 @@ Class ClientCertificate {
 Class Note {
   notable: polymorphic
   message: rich_text
-  valid_until: date
+  valid_until: datetime
   type: integer
   user_id
 }
