@@ -14,6 +14,11 @@ class Note < ApplicationRecord
   validates :type, inclusion: { in: types.keys }
 
   # -- common methods
+
+  scope :active, -> do
+    where("notes.valid_until >= ? or notes.valid_until IS NULL", Date.current)
+  end
+
   def to_s
     message.to_plain_text.truncate(80, :ommision => "...")
   end

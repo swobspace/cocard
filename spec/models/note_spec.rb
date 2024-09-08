@@ -19,4 +19,20 @@ RSpec.describe Note, type: :model do
     it { expect(note.to_s).to match('some text') }
   end
 
+  describe "#active" do
+    let(:log) { FactoryBot.create(:log, :with_connector) }
+
+    let!(:note) { FactoryBot.create(:note, notable: log, type: Note.types[:plain]) }
+    let!(:ack) { FactoryBot.create(:note, notable: log, type: Note.types[:acknowledge]) }
+    let!(:oldack) do
+      FactoryBot.create(:note, 
+        notable: log, 
+        type: Note.types[:acknowledge],
+        valid_until: Date.yesterday
+      )
+    end
+
+    it {expect(Note.active).to contain_exactly(note, ack) }
+
+  end
 end
