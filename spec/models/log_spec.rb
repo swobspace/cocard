@@ -34,9 +34,8 @@ RSpec.describe Log, type: :model do
     it { expect(log.to_s).to match("WARN - TK-AXC-04 >> GetCard: A warning message") }
   end
 
-  describe "#notes" do
+  describe "with notes" do
     let(:log) { FactoryBot.create(:log, :with_connector) }
-
     let!(:note) { FactoryBot.create(:note, notable: log, type: Note.types[:plain]) }
     let!(:ack) { FactoryBot.create(:note, notable: log, type: Note.types[:acknowledge]) }
     let!(:oldnote) do
@@ -64,6 +63,23 @@ RSpec.describe Log, type: :model do
     it { expect(log.plain_notes).to contain_exactly(note, oldnote) }
     it { expect(log.plain_notes.active).to contain_exactly(note) }
     it { expect(log.plain_notes.count).to eq(2) }
+  end
+
+  describe "#acknowledged" do
+    let!(:log) { FactoryBot.create(:log, :with_connector) }
+    let!(:nlog) { FactoryBot.create(:log, :with_connector) }
+    let!(:ack) { log.acknowledges.create(user_id: 1) }
+
+    before(:each) do
+      # log.update(acknowledge_id: ack.id)
+      log.reload
+      puts log.acknowledge_id
+    end
+    it { expect(log.acknowledge_id).to eq(ack.id) }
+
+    it { expect(Log.acknowledged).to contain_exactly(log) }
+    it { expect(Log.not_acknowledged).to contain_exactly(nlog) }
+
   end
 
 end

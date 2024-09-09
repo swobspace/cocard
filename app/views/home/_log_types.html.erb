@@ -30,3 +30,14 @@
     </span>
   <% end %>
 </div>
+
+<div class="me-2">
+  <%= link_to sindex_logs_path(acknowledged: 'true'),
+              class: 'btn btn-outline-secondary',
+              "data-turbo-frame": 'logs' do %>
+    Acknowledged
+    <span class="badge text-bg-secondary">
+      <%= Log.valid.acknowledged.count %>
+    </span>
+  <% end %>
+</div>
