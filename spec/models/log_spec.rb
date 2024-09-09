@@ -15,6 +15,8 @@ RSpec.describe Log, type: :model do
   it { is_expected.to belong_to(:loggable) }
   it { is_expected.to belong_to(:acknowledge).optional }
   it { is_expected.to have_many(:notes).dependent(:destroy) }
+  it { is_expected.to have_many(:plain_notes).dependent(:destroy) }
+  it { is_expected.to have_many(:acknowledges).dependent(:destroy) }
   it { is_expected.to validate_presence_of(:action) }
   it { is_expected.to validate_presence_of(:last_seen) }
   it { is_expected.to validate_presence_of(:level) }
@@ -37,6 +39,13 @@ RSpec.describe Log, type: :model do
 
     let!(:note) { FactoryBot.create(:note, notable: log, type: Note.types[:plain]) }
     let!(:ack) { FactoryBot.create(:note, notable: log, type: Note.types[:acknowledge]) }
+    let!(:oldnote) do
+      FactoryBot.create(:note, 
+        notable: log, 
+        type: Note.types[:plain],
+        valid_until: Date.yesterday
+      )
+    end
     let!(:oldack) do
       FactoryBot.create(:note, 
         notable: log, 
@@ -50,8 +59,11 @@ RSpec.describe Log, type: :model do
     it { expect(log.acknowledges.active).to contain_exactly(ack) }
     it { expect(log.acknowledges.count).to eq(2) }
     it { expect(log.current_note).to eq(note) }
-    it { expect(log.notes.active).to contain_exactly(note) }
-    it { expect(log.notes.count).to eq(1) }
+    it { expect(log.notes.active).to contain_exactly(note, ack) }
+    it { expect(log.notes.count).to eq(4) }
+    it { expect(log.plain_notes).to contain_exactly(note, oldnote) }
+    it { expect(log.plain_notes.active).to contain_exactly(note) }
+    it { expect(log.plain_notes.count).to eq(2) }
   end
 
 end
