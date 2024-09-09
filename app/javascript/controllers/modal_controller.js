@@ -7,6 +7,11 @@ export default class extends Controller {
     console.log("modal#connect")
     this.modal = new bootstrap.Modal(this.element)
     this.modal.show()
+    this.element.addEventListener('hidden.bs.modal', event => {
+      console.log("modal closed")
+      this.element.parentElement.removeAttribute('src')
+      this.element.remove()
+    })
   }
 
   disconnect() {
@@ -18,7 +23,7 @@ export default class extends Controller {
     this.modal.hide()
   }
 
-  // catch turbo:submit-end via action 
+  // catch turbo:submit-end via action
   handleSubmit = (event) => {
     console.log("modal#handleSubmit")
     // close modal if form submission is successful
