@@ -37,7 +37,7 @@
 
             <td class="text-nowrap">
               <%= show_link log, class: 'btn btn-sm btn-outline-secondary',
-                                 data: { "turbo-frame" => "_top" } %>
+                                 data: { "turbo" => false } %>
               <%= render AcknowledgeButtonComponent.new(
                            notable: log,
                            readonly: cannot?(:manage, log.loggable)
