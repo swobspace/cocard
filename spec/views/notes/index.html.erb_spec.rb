@@ -29,7 +29,8 @@ RSpec.describe "notes/index", type: :view do
   it "renders a list of notes" do
     render
     cell_selector = 'tr>td'
+    assert_select cell_selector, text: Regexp.new(@notable.to_s), count: 2
     assert_select cell_selector, text: Regexp.new('2024-01-01'.to_s), count: 2
-    assert_select cell_selector, text: Regexp.new('some another text'.to_s), count: 2
+    assert_select 'div.trix-content', text: Regexp.new('some other text'.to_s), count: 2
   end
 end
