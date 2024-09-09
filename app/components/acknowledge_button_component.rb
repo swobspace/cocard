@@ -1,19 +1,12 @@
 # frozen_string_literal: true
 
-class NoteButtonComponent < ViewComponent::Base
+class AcknowledgeButtonComponent < ViewComponent::Base
   # include Rails.application.routes.url_helpers
-  def initialize(notable:, type: Note.types[:plain])
+  def initialize(notable:, readonly: true)
     @notable = notable
-    @type = type
-
-    case type
-    when Note.types[:plain]
-      @current = notable.current_note
-    when Note.types[:acknowledge]
-      @current = notable.current_acknowledge
-    else
-      raise "NoteButtonComponent: type #{type} not implemented"
-    end
+    @readonly = readonly
+    @type = Note.types[:acknowledge]
+    @current = notable.current_acknowledge
   end
 
   def button_css
@@ -32,7 +25,11 @@ class NoteButtonComponent < ViewComponent::Base
     end
   end
 
+  def render?
+    !!current || !readonly
+  end
+
   private
-  attr_reader :notable, :type, :current
+  attr_reader :notable, :type, :readonly, :current
 
 end
