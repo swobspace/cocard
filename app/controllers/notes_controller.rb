@@ -29,10 +29,12 @@ class NotesController < ApplicationController
   # POST /notes
   def create
     @note = @notable.notes.build(default_note_params.merge(note_params,force_note_params))
-    if @note.save
-      Turbo::StreamsChannel.broadcast_refresh_to(:home)
-    else
-      render :new, status: :unprocessable_entity 
+    respond_with(@task, location: location) do |format|
+      if @note.save
+        format.turbo_stream { flash.now[:notice] = "Note successfully created" }
+      else
+        render :new, status: :unprocessable_entity 
+      end
     end
   end
 
@@ -48,8 +50,9 @@ class NotesController < ApplicationController
   # DELETE /notes/1
   def destroy
     @note.destroy!
-    respond_with(@note, location: location)
-    # Turbo::StreamsChannel.broadcast_refresh_to(@notable)
+    respond_with(@note, location: location) do |format|
+      format.turbo_stream { flash.now[:notice] = "Note successfully deleted" }
+    end
   end
 
   protected

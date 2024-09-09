@@ -1,0 +1,7 @@
+<%= turbo_stream.replace('ack_' + dom_id(@notable)) do %>
+  <%= render AcknowledgeButtonComponent.new(
+               notable: @notable,
+               readonly: cannot?(:manage, @notable.loggable)
+             )
+   %>
+<% end %>
