@@ -4,7 +4,7 @@
               "data-turbo-frame": 'logs' do %>
     Connectors
     <span class="badge text-bg-secondary">
-      <%= Log.valid.where(loggable_type: 'Connector').count %>
+      <%= Log.valid.not_acknowledged.where(loggable_type: 'Connector').count %>
     </span>
   <% end %>
 </div>
@@ -15,7 +15,7 @@
               "data-turbo-frame": 'logs' do %>
     Card Terminals
     <span class="badge text-bg-secondary">
-      <%= Log.valid.where(loggable_type: 'CardTerminal').count %>
+      <%= Log.valid.not_acknowledged.where(loggable_type: 'CardTerminal').count %>
     </span>
   <% end %>
 </div>
@@ -26,7 +26,7 @@
               "data-turbo-frame": 'logs' do %>
     Cards
     <span class="badge text-bg-secondary">
-      <%= Log.valid.where(loggable_type: 'Card').count %>
+      <%= Log.valid.not_acknowledged.where(loggable_type: 'Card').count %>
     </span>
   <% end %>
 </div>
