@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Log, type: :model do
+  let(:user) { FactoryBot.create(:user) }
   let!(:ts) { Time.current }
   let(:conn) { FactoryBot.create(:connector, name: 'TK-AXC-04') }
   let(:log) do 
@@ -68,18 +69,11 @@ RSpec.describe Log, type: :model do
   describe "#acknowledged" do
     let!(:log) { FactoryBot.create(:log, :with_connector) }
     let!(:nlog) { FactoryBot.create(:log, :with_connector) }
-    let!(:ack) { log.acknowledges.create(user_id: 1) }
+    let!(:ack) { log.acknowledges.create!(user_id: user.id, message: "some text") }
 
-    before(:each) do
-      # log.update(acknowledge_id: ack.id)
-      log.reload
-      puts log.acknowledge_id
-    end
     it { expect(log.acknowledge_id).to eq(ack.id) }
-
     it { expect(Log.acknowledged).to contain_exactly(log) }
     it { expect(Log.not_acknowledged).to contain_exactly(nlog) }
-
   end
 
 end
