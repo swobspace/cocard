@@ -63,3 +63,6 @@
 </div>
 
 <%= back_link %>
+
+<%= turbo_frame_tag("notes", src: log_notes_path(@log, active: 1),
+                            refresh: "morph") %>

@@ -9,7 +9,7 @@ module Logs
     end
 
     def add_breadcrumb_show
-      add_breadcrumb_for([set_notable, @note])
+      # add_breadcrumb_for([set_notable, @note])
     end
   end
 end

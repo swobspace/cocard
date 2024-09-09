@@ -5,6 +5,9 @@ class NotesController < ApplicationController
   # GET /notes
   def index
     @notes = @notable.notes
+    @notes = @notes.active if params[:active].present?
+    @pagy, @notes = pagy(@notes)
+
     respond_with(@notes)
   end
 
