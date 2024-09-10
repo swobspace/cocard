@@ -2,7 +2,7 @@
 
 == 0.3.6 - 2024-09-10
 
-* Neu: Acknowledges und Notizen für Log-Einträge
+* Neu: xref:user/acknowledges.adoc[Acknowledges und Notizen für Log-Einträge]
 
 == 0.35 - 2024-08-31
 
