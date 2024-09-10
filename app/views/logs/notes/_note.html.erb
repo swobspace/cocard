@@ -1,6 +1,9 @@
 <%= tag.tr id: dom_id(note) do %>
-  <td><%= note.created_at.localtime.to_s %></td>
-  <td><%= note.type %></td>
+  <td>
+    <%= render IsCurrentComponent.new(item: note, attr: :created_at,
+                                      relative: true, icon: false) %>
+  </td>
+  <td><%= t(note.type, scope: 'notes') %></td>
   <td><%= truncate(note.message.to_plain_text, length: 200) %></td>
   <td class="text-end"><%= note.valid_until&.localtime&.to_s %></td>
   <td><%= note.user %></td>
