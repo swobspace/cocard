@@ -4,7 +4,7 @@ class NotesController < ApplicationController
 
   # GET /notes
   def index
-    @notes = @notable.notes
+    @notes = @notable.notes.order('created_at DESC')
     @notes = @notes.active if params[:active].present?
     @pagy, @notes = pagy(@notes)
 
@@ -90,5 +90,9 @@ class NotesController < ApplicationController
         user_id: @current_user.id
       }   
     end 
+
+    def add_breadcrumb_index
+      # skip
+    end
 
 end
