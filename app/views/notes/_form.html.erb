@@ -2,7 +2,7 @@
 <%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
 
   <div class="form-input">
-    <%= form.input :valid_until, html5: true, wrapper: :horizontal_date
+    <%= form.input :valid_until, html5: true, wrapper: :horizontal_datetime
        %>
     <%= form.input :type, as: :hidden
        %>
