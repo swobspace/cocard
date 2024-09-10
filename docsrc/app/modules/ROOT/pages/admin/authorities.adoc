@@ -19,19 +19,21 @@ Ein Administrator hat alle Zugriffsrechte. Sofern die Rolle vorhanden ist, werde
 * Alles Lesen (*)
 ** Connector#id_contract (Vertragsinformationen) lesen
 * Vollzugriff auf Konnektoren
+* Erstellen von Acknowledges für Logeinträge
 
 
 == Rolle CardTerminalManager
 
 * Alles Lesen (*)
 * Vollzugriff auf Kartenterminals
+* Erstellen von Acknowledges für Logeinträge
 
 == Rolle CardManager
 
 * Alles Lesen (*)
 ** Card#private_information (Geschützte Informationen) lesen
 * Vollzugriff auf Karten
-
+* Erstellen von Acknowledges für Logeinträge
 
 == Rolle VerifyPin
 
