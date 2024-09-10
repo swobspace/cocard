@@ -33,17 +33,19 @@ class NotesController < ApplicationController
       if @note.save
         format.turbo_stream { flash.now[:notice] = "Note successfully created" }
       else
-        render :new, status: :unprocessable_entity 
+        format.html { render :new, status: :unprocessable_entity }
       end
     end
   end
 
   # PATCH/PUT /notes/1
   def update
-    if @note.update(note_params)
-      Turbo::StreamsChannel.broadcast_refresh_to(:home)
-    else
-      render :edit, status: :unprocessable_entity 
+    respond_with(@note, location: location) do |format|
+      if @note.update(note_params)
+        format.turbo_stream
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+      end
     end
   end
 
