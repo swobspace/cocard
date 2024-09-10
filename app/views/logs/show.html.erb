@@ -8,7 +8,7 @@
         </span>
         <h4 class="title"><%= @log %></h4>
       </div>
-      <div role="toolbar" class="pt-3">
+      <div role="toolbar" class="text-nowrap pt-3">
         <%= render AcknowledgeButtonComponent.new(
                      notable: @log, small: false,
                      readonly: cannot?(:manage, @log.loggable)
