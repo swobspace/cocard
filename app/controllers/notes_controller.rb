@@ -1,10 +1,13 @@
 class NotesController < ApplicationController
   before_action :set_note, only: [:show, :edit, :update, :destroy]
-  before_action :add_breadcrumb_show, only: [:show]
+  # before_action :add_breadcrumb_show, only: [:show]
 
   # GET /notes
   def index
-    @notes = @notable.notes
+    @notes = @notable.notes.order('created_at DESC')
+    @notes = @notes.active if params[:active].present?
+    @pagy, @notes = pagy(@notes)
+
     respond_with(@notes)
   end
 
@@ -26,27 +29,32 @@ class NotesController < ApplicationController
   # POST /notes
   def create
     @note = @notable.notes.build(default_note_params.merge(note_params,force_note_params))
-    if @note.save
-      Turbo::StreamsChannel.broadcast_refresh_to(:home)
-    else
-      render :new, status: :unprocessable_entity 
+    respond_with(@task, location: location) do |format|
+      if @note.save
+        format.turbo_stream { flash.now[:notice] = "Note successfully created" }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+      end
     end
   end
 
   # PATCH/PUT /notes/1
   def update
-    if @note.update(note_params)
-      Turbo::StreamsChannel.broadcast_refresh_to(:home)
-    else
-      render :edit, status: :unprocessable_entity 
+    respond_with(@note, location: location) do |format|
+      if @note.update(note_params)
+        format.turbo_stream
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+      end
     end
   end
 
   # DELETE /notes/1
   def destroy
     @note.destroy!
-    respond_with(@note, location: location)
-    # Turbo::StreamsChannel.broadcast_refresh_to(@notable)
+    respond_with(@note, location: location) do |format|
+      format.turbo_stream { flash.now[:notice] = "Note successfully deleted" }
+    end
   end
 
   protected
@@ -84,5 +92,9 @@ class NotesController < ApplicationController
         user_id: @current_user.id
       }   
     end 
+
+    def add_breadcrumb_index
+      # skip
+    end
 
 end

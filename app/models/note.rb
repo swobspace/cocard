@@ -16,11 +16,15 @@ class Note < ApplicationRecord
   # -- common methods
 
   scope :active, -> do
-    where("notes.valid_until >= ? or notes.valid_until IS NULL", Date.current)
+    where("notes.valid_until >= ? or notes.valid_until IS NULL", Time.current)
   end
 
   def to_s
     message.to_plain_text.truncate(80, :ommision => "...")
+  end
+
+  def is_active
+    valid_until.nil? || valid_until >= Time.current
   end
 
 end

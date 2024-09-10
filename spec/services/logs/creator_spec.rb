@@ -54,6 +54,18 @@ module Logs
       it { expect(subject.call).to be_truthy }
 
       context 'with an existing log' do
+        let!(:ack) do
+          FactoryBot.create(:note, notable: log, 
+            type: Note.types[:acknowledge]
+          )
+        end
+        let!(:oldack) do
+          FactoryBot.create(:note, notable: log,
+            type: Note.types[:acknowledge],
+            valid_until: Date.yesterday
+          )
+        end
+
         let!(:log) do
           FactoryBot.create(:log,
             loggable: conn,
@@ -66,12 +78,22 @@ module Logs
           )
         end
         before(:each) { log.reload }
+
         it 'does not create a log' do
           expect {
             subject.call
           }.to change(Log, :count).by(0)
           expect(subject.log).to be_kind_of(Log)
           expect(subject.log).to eq(log)
+        end
+
+        it 'updates acknowledge' do
+          log.update(acknowledge_id: oldack.id)
+          log.reload
+          expect(log.acknowledge_id).to eq(oldack.id)
+          subject.call(false)
+          log.reload
+          expect(log.acknowledge_id).to eq(ack.id)
         end
 
         it 'deletes log with call(true)' do
@@ -84,6 +106,15 @@ module Logs
           subject.call(true)
           log.reload
           expect(log.is_valid).to be_falsey
+        end
+
+        it 'terminates all open acknowledges' do
+          expect(ack.valid_until).to be_nil
+          subject.call(true)
+          ack.reload
+          expect(ack.valid_until.to_s).to eq(1.minute.before(Time.current).to_s)
+          expect(log.current_acknowledge).to be_nil
+          expect(log.acknowledges.active).to be_empty
         end
 
         it { expect(subject.call).to be_truthy }

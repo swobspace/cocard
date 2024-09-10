@@ -24,7 +24,7 @@
             <td><%= render ErrorLevelBadgeComponent.new(level: log.level) %></td>
             <td><%= log.loggable_type %></td>
             <td>
-              <%= link_to log.loggable, 
+              <%= link_to log.loggable,
                           polymorphic_path(log.loggable),
                           class: 'primary-link',
                           data: { 'turbo-frame' => '_top' }
@@ -36,10 +36,13 @@
                                                   relative: true)%></td>
 
             <td class="text-nowrap">
-              <%= show_link log, class: 'btn btn-sm btn-outline-secondary',
-                                 data: { "turbo-frame" => "_top" } %>
-              <%= render NoteButtonComponent.new(notable: log, 
-                                                 type: Note.types[:acknowledge]) %>
+              <%= show_link log, class: 'btn btn-sm btn-outline-secondary me-1',
+                                 data: { "turbo" => false } %>
+              <%= render AcknowledgeButtonComponent.new(
+                           notable: log,
+                           readonly: cannot?(:manage, log.loggable)
+                         )
+               %>
             </td>
           <% end %>
         <% end %>

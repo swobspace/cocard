@@ -28,12 +28,16 @@ class Ability
 
       if @user.role?(:connector_manager)
         can :manage, Connector
+        can :create, Note
+        can :manage, Note, notable_type: ['Log', 'Connector']
       else
         cannot [:read], Connector, :id_contract
       end
 
       if @user.role?(:card_manager)
         can :manage, Card
+        can :create, Note
+        can :manage, Note, notable_type: ['Log', 'Card']
       else
         cannot [:read], Card, :private_information
       end
@@ -41,6 +45,8 @@ class Ability
       if @user.role?(:card_terminal_manager)
         can :manage, CardTerminal
         can :update, CardTerminal, :description
+        can :create, Note
+        can :manage, Note, notable_type: ['Log', 'CardTerminal']
       end
 
       if @user.role?(:verify_pin)

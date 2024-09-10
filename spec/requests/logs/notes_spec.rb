@@ -88,7 +88,7 @@ module Logs
           note = Note.create! valid_attributes
           patch log_note_url(log,note), params: { note: new_attributes }
           note.reload
-          expect(note.valid_until.to_s).to eq('2024-01-01')
+          expect(note.valid_until.to_s).to eq('2024-01-01 00:00:00 UTC')
         end
 
         it "redirects to the note" do

@@ -198,9 +198,12 @@ bin/rails g scaffold Log \
   message:text \
   is_valid:boolean \
   condition:integer \
+  acknowledge_id:bigint \
   --no-stylesheets --no-javascripts --no-helper
 ----
 
+NOTE: `acknowledge_id` contains the current acknowledge if available.
+ 
 == model Network
 
 [source,sh]
@@ -250,7 +253,7 @@ bin/rails g scaffold ClientCertificate \
 bin/rails g scaffold Note \
   notable:belongs_to{polymorphic} \
   user:belongs_to \
-  valid_until:date \
+  valid_until:datetime \
   type:integer \
   message:rich_text \
   --no-stylesheets --no-javascripts --no-helper

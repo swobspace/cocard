@@ -1,5 +1,6 @@
 <%= link_to( raw(%Q[<i class="fa-solid fa-person-digging"></i>]),
                button_action,
+               id: 'ack_' + dom_id(notable),
                title: t('cocard.acknowledge'),
                class: "#{button_css}",
                data: {"turbo-frame": 'modal'}

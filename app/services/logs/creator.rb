@@ -44,16 +44,20 @@ module Logs
         if destroy == false
           if @log.is_valid
             # update, don't touch :since or :is_valid
-            attrs = { last_seen: @last_seen, message: @message }
+            # update always acknowledge, present ack may be expired
+            attrs = { last_seen: @last_seen, message: @message,
+                      acknowledge_id: current_ackid }
           else
             # switch from invalid to valid => update :since
-            attrs = { last_seen: @last_seen, message: @message, 
+            attrs = { last_seen: @last_seen, message: @message,
                       is_valid: true, since: @since }
           end
           @log.update(attrs)
         else
           # mark as invalid instead of destroy
-          @log.update(is_valid: false)
+          # and terminate all open acknowledgements
+          @log.acknowledges.active.update_all(valid_until: (Time.current - 1.minute))
+          @log.update(is_valid: false, acknowledge_id: nil)
         end
       elsif (!destroy) 
         if @log.save
@@ -69,6 +73,12 @@ module Logs
         true
       end
     end
+
+  private
+    def current_ackid
+      @log.current_acknowledge&.id
+    end
+    
     # rubocop:enable Metrics/AbcSize, Rails/SkipsModelValidations
   end
 end

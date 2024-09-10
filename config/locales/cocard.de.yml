@@ -27,6 +27,9 @@ de:
     new_connector: Neuer Konnektor
     new_location: Neuer Standort
     new_network: Neues Netzwerk
+    new_note: Neue Notiz
+    all_notes: Alle Notizen
+    current_notes: Aktuelle Notizen
     new_operational_state: Neuer Betriebszustand
     new_workplace: Neuer Arbeitsplatz
     import_options: Import-Optionen
@@ -115,6 +118,7 @@ de:
     context: Kontext
     contexts: Kontexte
     context_ids: Kontexte
+    creator: Ersteller
     delivery_date: Lieferdatum
     description: Beschreibung
     displayname: Anzeigename
@@ -163,6 +167,7 @@ de:
     status: Status
     supplier: Lieferant
     telematikid: Telematik-ID
+    type: Typ
     updated_at: zuletzt aktualisiert
     username: Username
     use_tls: TLS verwenden

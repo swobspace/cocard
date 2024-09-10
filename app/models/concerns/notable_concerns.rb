@@ -4,24 +4,27 @@ module NotableConcerns
   extend ActiveSupport::Concern
 
   included do
-    has_many :notes, -> { where(type: types[:plain]) },
-             as: :notable, dependent: :destroy
-    has_many :acknowledges, -> { where(type: types[:acknowledge]) },
+    has_many :notes, as: :notable, dependent: :destroy
+    has_many :plain_notes, -> { where(type: types[:plain]) },
              as: :notable, class_name: 'Note', dependent: :destroy
+    has_many :acknowledges, -> { where(type: types[:acknowledge]) },
+             as: :notable, class_name: 'Note', dependent: :destroy,
+             after_add: :update_acknowledge
   end
 
   def current_note
-    notes
-    .where("notes.valid_until <= ? or notes.valid_until IS NULL", Date.current)
-    .order("valid_until DESC NULLS FIRST, id DESC")
-    .first
+    # plain_notes.active.order("valid_until DESC NULLS FIRST, id DESC").first
+    plain_notes.active.order("id DESC").first
   end
   
   def current_acknowledge
-    acknowledges
-    .where("notes.valid_until <= ? or notes.valid_until IS NULL", Date.current)
-    .order("valid_until DESC NULLS FIRST, id DESC")
-    .first
+    # acknowledges.active.order("valid_until DESC NULLS FIRST, id DESC").first
+    acknowledges.active.order("id DESC").first
+  end
+
+  def update_acknowledge(ack)
+    # self[:acknowledge_id] = ack.id
+    update(acknowledge_id: ack.id)
   end
 
 end
