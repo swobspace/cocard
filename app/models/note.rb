@@ -23,4 +23,8 @@ class Note < ApplicationRecord
     message.to_plain_text.truncate(80, :ommision => "...")
   end
 
+  def is_active
+    valid_until.nil? || valid_until >= Time.current
+  end
+
 end

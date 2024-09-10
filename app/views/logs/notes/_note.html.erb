@@ -1,4 +1,4 @@
-<%= tag.tr id: dom_id(note) do %>
+<%= tag.tr id: dom_id(note), class: "#{'invalid' unless note.is_active}" do %>
   <td>
     <%= render IsCurrentComponent.new(item: note, attr: :created_at,
                                       relative: true, icon: false) %>
