@@ -27,6 +27,7 @@ de:
     new_connector: Neuer Konnektor
     new_location: Neuer Standort
     new_network: Neues Netzwerk
+    new_note: Neue Notiz
     new_operational_state: Neuer Betriebszustand
     new_workplace: Neuer Arbeitsplatz
     import_options: Import-Optionen
@@ -115,6 +116,7 @@ de:
     context: Kontext
     contexts: Kontexte
     context_ids: Kontexte
+    creator: Ersteller
     delivery_date: Lieferdatum
     description: Beschreibung
     displayname: Anzeigename
