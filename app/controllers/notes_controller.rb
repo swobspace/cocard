@@ -32,6 +32,7 @@ class NotesController < ApplicationController
     respond_with(@task, location: location) do |format|
       if @note.save
         format.turbo_stream { flash.now[:notice] = "Note successfully created" }
+        Notes::Processor.new(note: @note).call(:create)
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -43,6 +44,7 @@ class NotesController < ApplicationController
     respond_with(@note, location: location) do |format|
       if @note.update(note_params)
         format.turbo_stream
+        Notes::Processor.new(note: @note).call(:update)
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -54,6 +56,7 @@ class NotesController < ApplicationController
     @note.destroy!
     respond_with(@note, location: location) do |format|
       format.turbo_stream { flash.now[:notice] = "Note successfully deleted" }
+      Notes::Processor.new(note: @note).call(:destroy)
     end
   end
 
