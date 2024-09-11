@@ -22,7 +22,7 @@ class LogsController < ApplicationController
     if params[:type]
       @logs = Log.where(loggable_type: params[:type]).valid.not_acknowledged
     elsif params[:acknowledged]
-      @logs = Log.acknowledged 
+      @logs = Log.valid.acknowledged
     else
       @logs = Log.valid.not_acknowledged
     end
