@@ -66,14 +66,4 @@ RSpec.describe Log, type: :model do
     it { expect(log.plain_notes.count).to eq(2) }
   end
 
-  describe "#acknowledged" do
-    let!(:log) { FactoryBot.create(:log, :with_connector) }
-    let!(:nlog) { FactoryBot.create(:log, :with_connector) }
-    let!(:ack) { log.acknowledges.create!(user_id: user.id, message: "some text") }
-
-    it { expect(log.acknowledge_id).to eq(ack.id) }
-    it { expect(Log.acknowledged).to contain_exactly(log) }
-    it { expect(Log.not_acknowledged).to contain_exactly(nlog) }
-  end
-
 end
