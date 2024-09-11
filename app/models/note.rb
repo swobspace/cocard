@@ -13,9 +13,6 @@ class Note < ApplicationRecord
   validates :user_id, :message, presence: true
   validates :type, inclusion: { in: types.keys }
 
-  after_create :update_acknowledge
-  before_destroy :remove_acknowledge
-
   # -- common methods
 
   scope :active, -> do
@@ -30,16 +27,4 @@ class Note < ApplicationRecord
     valid_until.nil? || valid_until >= Time.current
   end
 
-private
-  def update_acknowledge
-    if type == Note.types[:acknowledge]
-      self.notable.update(acknowledge_id: self.id)
-    end
-  end
-
-  def remove_acknowledge
-    if type == Note.types[:acknowledge]
-      self.notable.update(acknowledge_id: nil)
-    end
-  end
 end
