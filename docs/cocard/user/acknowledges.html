@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Installation :: Cocard</title>
+    <title>Acknowledges :: Cocard</title>
     <meta name="generator" content="Antora 3.1.9">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -43,8 +43,8 @@
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="../index.html">Cocard</a>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../user/acknowledges.html">Acknowledges</a>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="acknowledges.html">Acknowledges</a>
   </li>
 </ul>
   </li>
@@ -61,13 +61,13 @@
   </li>
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="index.html">Installation</a>
+    <a class="nav-link" href="../installation/index.html">Installation</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="podman/quickstart.html">Quickstart</a>
+    <a class="nav-link" href="../installation/podman/quickstart.html">Quickstart</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../first-steps.html">Erste Schritte</a>
@@ -75,13 +75,13 @@
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="podman/podman-systemd.html">Systemd und Quadlets</a>
+    <a class="nav-link" href="../installation/podman/podman-systemd.html">Systemd und Quadlets</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="podman/reverse-proxy.html">Reverse Proxy</a>
+    <a class="nav-link" href="../installation/podman/reverse-proxy.html">Reverse Proxy</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="configuration.html">Konfiguration</a>
+    <a class="nav-link" href="../installation/configuration.html">Konfiguration</a>
   </li>
 </ul>
   </li>
@@ -124,7 +124,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Cocard</a></li>
-    <li><a href="index.html">Installation</a></li>
+    <li><a href="acknowledges.html">Acknowledges</a></li>
   </ul>
 </nav>
 </div>
@@ -133,38 +133,55 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Installation</h1>
-<div class="sect1">
-<h2 id="_podman"><a class="anchor" href="#_podman"></a>Podman</h2>
-<div class="sectionbody">
+<h1 class="page">Acknowledges</h1>
 <div class="paragraph">
-<p>Ich benutze <code>podman</code> anstelle von <code>docker</code>. <code>podman</code> integriert sich mit Quadlets bestens in <code>systemd</code>, und das auch noch als normaler Benutzer (rootless). Wer sich mit <code>docker</code> und <code>docker-compose</code> wohler fühlt, sollte einen Blick auf das Create-Skript für den Quickstart werfen: <a href="_attachments/quickstart/create-playground.sh" class="xref attachment">create-playground.sh</a>. Mit etwas Docker-Erfahrung sollte sich das Skript einfach in ein <code>docker-compose.yml</code> verwandeln lassen.</p>
+<p>Acknowledges sind eine Form von Notizen, die Übersicht im Dashboard schaffen. Einträge mit Acknowledge werden in der Standard-Ansicht herausgefiltert und müssen explizit über den Button <b class="button">Acknowledged</b> eingeblendet werden.</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Aktuell sind Acknowledges nur für Logeinträge möglich. Geplant ist, Acknowledges auch für Konnektoren, Kartenterminals und Karten einzuführen.
+</td>
+</tr>
+</table>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_quickstart"><a class="anchor" href="#_quickstart"></a><a href="podman/quickstart.html" class="xref page">Quickstart</a></h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>Im Quickstart-Guide kommt <code>podman pod</code> zum Einsatz. Die Umgebung ist nicht für den produktiven Einsatz gedacht, ist aber einfach anzuwenden, wenn man Cocard einfach mal nur ausprobieren will.</p>
+<p>Sind die notwendigen Rechte vorhanden, wird der Acknowledge-Button angezeigt:</p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/dashboard/dashboard-eventlog.png" alt="dashboard eventlog">
 </div>
+<div class="title">Abbildung 1. Dashboard: Acknowledge-Button im Event Log</div>
 </div>
-<div class="sect1">
-<h2 id="_podman_mit_systemd_und_quadlets_für_produktiv_umgebungen"><a class="anchor" href="#_podman_mit_systemd_und_quadlets_für_produktiv_umgebungen"></a><a href="podman/podman-systemd.html" class="xref page">Podman mit Systemd und Quadlets für Produktiv-Umgebungen</a></h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>Quadlets integrieren sich perfekt in <code>systemd</code> und sind daher die bevorzugte Variante für den produktiven Einsatz von Podman. Benötigt wird mindestens <code>podman</code> Version 4.4.</p>
+<p>Mit Klick auf den Button erscheint ein modales Fenster. Das Feld <code>Nachricht</code> ist verpflichtend, die Angabe von <code>gültig bis</code> ist optional. Damit lässt sich die Dauer des Acknowledges begrenzen. In jedem Falle wird wird das Acknowledge automatisch abterminiert, sobald der Grund für den Logeintrag entfällt.</p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/dashboard/dashboard-eventlog-create-ack.png" alt="dashboard eventlog create ack">
 </div>
+<div class="title">Abbildung 2. Acknowledge erstellen</div>
 </div>
-<div class="sect1">
-<h2 id="_reverse_proxy_zur_absicherung_von_cocard"><a class="anchor" href="#_reverse_proxy_zur_absicherung_von_cocard"></a><a href="podman/reverse-proxy.html" class="xref page">Reverse Proxy zur Absicherung von Cocard</a></h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>Cocard als Container ist für den Einsatz hinter einen Reverse Proxy wie Traefik gedacht. Der Einsatz mit Apache2 oder Nginx ist aber ebenfalls möglich. Cocard stellt selbst keine TLS-Verbindung zur Verfügung, die Handhabung von TLS und den notwendigen Zertifikaten ist Aufgabe des Reverse Proxy.</p>
+<p>Nach dem erfolgreichen Acknowledge ändert sich die Anzeige des Acknowledge-Buttons:</p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/dashboard/dashboard-eventlog-ack-created.png" alt="dashboard eventlog ack created">
 </div>
+<div class="title">Abbildung 3. Acknowledge-Button nach erfolgreichem Acknowledge</div>
+</div>
+<div class="paragraph">
+<p>Die Bearbeitung von Acknowledges und Notizen ist über die Ansicht zum jeweiligen Objekt möglich (hier: Logeintrag).</p>
+</div>
+<div class="paragraph">
+<div class="title">Ansicht Logeintrag</div>
+<p><span class="image"><img src="../_images/logs/log-show.png" alt="log show"></span></p>
 </div>
 </article>
   </div>

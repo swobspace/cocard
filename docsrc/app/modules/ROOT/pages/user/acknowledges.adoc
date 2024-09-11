@@ -1,0 +1,29 @@
+= Acknowledges
+:author: Wolfgang Barth
+:revdate: 2024-09-10
+:imagesdir: ../../images
+:experimental: true
+
+Acknowledges sind eine Form von Notizen, die Übersicht im Dashboard schaffen. Einträge mit Acknowledge werden in der Standard-Ansicht herausgefiltert und müssen explizit über den Button btn:[Acknowledged] eingeblendet werden.
+
+NOTE: Aktuell sind Acknowledges nur für Logeinträge möglich. Geplant ist, Acknowledges auch für Konnektoren, Kartenterminals und Karten einzuführen.
+
+Sind die notwendigen Rechte vorhanden, wird der Acknowledge-Button angezeigt:
+
+.Dashboard: Acknowledge-Button im Event Log
+image::dashboard/dashboard-eventlog.png[]
+
+Mit Klick auf den Button erscheint ein modales Fenster. Das Feld `Nachricht` ist verpflichtend, die Angabe von `gültig bis` ist optional. Damit lässt sich die Dauer des Acknowledges begrenzen. In jedem Falle wird wird das Acknowledge automatisch abterminiert, sobald der Grund für den Logeintrag entfällt.
+
+.Acknowledge erstellen
+image::dashboard/dashboard-eventlog-create-ack.png[]
+
+Nach dem erfolgreichen Acknowledge ändert sich die Anzeige des Acknowledge-Buttons:
+
+.Acknowledge-Button nach erfolgreichem Acknowledge
+image::dashboard/dashboard-eventlog-ack-created.png[]
+
+Die Bearbeitung von Acknowledges und Notizen ist über die Ansicht zum jeweiligen Objekt möglich (hier: Logeintrag).
+
+.Ansicht Logeintrag
+image:logs/log-show.png[]

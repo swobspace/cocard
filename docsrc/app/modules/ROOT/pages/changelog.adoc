@@ -1,5 +1,9 @@
 = Changelog
 
+== 0.3.6 - 2024-09-10
+
+* Neu: xref:user/acknowledges.adoc[Acknowledges und Notizen für Log-Einträge]
+
 == 0.35 - 2024-08-31
 
 * xref:admin/authorities.adoc[Erweiterung der Berechtigungsverwaltung]
