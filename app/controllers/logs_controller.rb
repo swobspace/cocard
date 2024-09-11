@@ -20,9 +20,11 @@ class LogsController < ApplicationController
 
   def sindex
     if params[:type]
-      @logs = Log.where(loggable_type: params[:type]).valid
+      @logs = Log.where(loggable_type: params[:type]).valid.not_acknowledged
+    elsif params[:acknowledged]
+      @logs = Log.valid.acknowledged
     else
-      @logs = Log.valid
+      @logs = Log.valid.not_acknowledged
     end
     @pagy, @logs = pagy(@logs)
     respond_with(@logs)

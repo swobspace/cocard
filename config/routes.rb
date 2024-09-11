@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     collection do
       get :sindex
     end
+    resources :notes, module: :logs
   end
   get "search", to: 'searches#index'
   resources :operational_states

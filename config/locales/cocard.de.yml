@@ -27,6 +27,9 @@ de:
     new_connector: Neuer Konnektor
     new_location: Neuer Standort
     new_network: Neues Netzwerk
+    new_note: Neue Notiz
+    all_notes: Alle Notizen
+    current_notes: Aktuelle Notizen
     new_operational_state: Neuer Betriebszustand
     new_workplace: Neuer Arbeitsplatz
     import_options: Import-Optionen
@@ -60,6 +63,7 @@ de:
     card_terminals_count: Anzahl Terminals
     cards_count: Anzahl Karten
     connectors_count: Anzahl Konnektoren
+    acknowledge: Acknowledge
 
   activerecord:
     models:
@@ -72,6 +76,7 @@ de:
       location: Standort
       log: Log
       network: Netzwerk
+      note: Notiz
       operational_state: Betriebszustand
       user: User
       terminal_workplaces: Zugeordnete Arbeitsplätze
@@ -113,6 +118,7 @@ de:
     context: Kontext
     contexts: Kontexte
     context_ids: Kontexte
+    creator: Ersteller
     delivery_date: Lieferdatum
     description: Beschreibung
     displayname: Anzeigename
@@ -143,6 +149,7 @@ de:
     name: Name
     network: Netzwerk
     netzwerk: Netzwerk
+    note: Notiz
     operational: in Betrieb
     operational_state: Betriebszustand
     passphrase: Passphrase
@@ -160,6 +167,7 @@ de:
     status: Status
     supplier: Lieferant
     telematikid: Telematik-ID
+    type: Typ
     updated_at: zuletzt aktualisiert
     username: Username
     use_tls: TLS verwenden
@@ -182,7 +190,9 @@ de:
     locations/card_terminals: Kartenterminals
     locations/connectors: Konnektoren
     logs: Logs
+    logs/notes: Notizen
     networks: Netzwerke
+    notes: Notizen
     operational_states: Betriebszustände
     searches: Suche
     users: Benutzer
@@ -199,6 +209,9 @@ de:
   accessibilities:
     nothing: None
     ping: Ping
+  notes:
+    plain: Notiz
+    acknowledge: Acknowledge
 
   form:
     card:

@@ -349,8 +349,21 @@ end</code></pre>
   message:text \
   is_valid:boolean \
   condition:integer \
+  acknowledge_id:bigint \
   --no-stylesheets --no-javascripts --no-helper</code></pre>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>acknowledge_id</code> contains the current acknowledge if available.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -402,6 +415,27 @@ bin/rails g migration AddNameToWorkplace \
   pkey:text \
   passphrase:string \
   --no-stylesheets --no-javascripts --no-helper</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_model_note"><a class="anchor" href="#_model_note"></a>model Note</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g scaffold Note \
+  notable:belongs_to{polymorphic} \
+  user:belongs_to \
+  valid_until:datetime \
+  type:integer \
+  message:rich_text \
+  --no-stylesheets --no-javascripts --no-helper</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>enum type: { plain: 0, acknowledge: 1 }</pre>
 </div>
 </div>
 </div>

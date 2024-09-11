@@ -28,6 +28,17 @@ RSpec.shared_examples "a CardManager" do
   it { is_expected.to be_able_to(:verify_pin, Card.new) }
   it { is_expected.to be_able_to(:get_certificate, Card.new) }
   it { is_expected.to be_able_to(:get_card, Card.new) }
+
+  it { is_expected.to be_able_to(:create, Note) }
+  it { is_expected.to be_able_to(:update, Note.new(notable_type: 'Log')) }
+  it { is_expected.to be_able_to(:update, Note.new(notable_type: 'Card')) }
+  it { is_expected.not_to be_able_to(:update, Note.new(notable_type: 'CardTerminal')) }
+  it { is_expected.not_to be_able_to(:update, Note.new(notable_type: 'Connector')) }
+  it { is_expected.to be_able_to(:destroy, Note.new(notable_type: 'Log')) }
+  it { is_expected.to be_able_to(:destroy, Note.new(notable_type: 'Card')) }
+  it { is_expected.not_to be_able_to(:destroy, Note.new(notable_type: 'CardTerminal')) }
+  it { is_expected.not_to be_able_to(:destroy, Note.new(notable_type: 'Connector')) }
+  
 end
 
 RSpec.describe "User", :type => :model do

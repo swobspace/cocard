@@ -141,6 +141,7 @@ Class Log {
   message: text
   is_valid: boolean
   condition: integer
+  acknowledge_id: bitint
 }
 
 Class Network {
@@ -158,6 +159,14 @@ Class ClientCertificate {
   pkey: text
   passphrase: string
   cn()
+}
+
+Class Note {
+  notable: polymorphic
+  message: rich_text
+  valid_until: datetime
+  type: integer
+  user_id
 }
 
 Network "*" - "1" Location
@@ -178,4 +187,5 @@ CardTerminal "1" -- "*" Log
 Card "1" -- "*" Log
 
 Connector "*" -- "*" ClientCertificate
+
 @enduml

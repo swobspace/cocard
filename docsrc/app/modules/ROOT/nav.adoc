@@ -1,4 +1,5 @@
 * xref:index.adoc[]
+** xref:user/acknowledges.adoc[]
 * Administration
 ** xref:admin/authorities.adoc[]
 //* xref:changelog.adoc[]
