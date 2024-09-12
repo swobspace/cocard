@@ -24,7 +24,11 @@ module Cocard
       describe "#firmware_version" do
         it { expect(subject.firmware_version).to eq('5.1.8') }
       end
-     
+
+      describe "#product_code" do
+        it { expect(subject.product_code).to eq('kocobox') }
+      end
+
       describe "#to_s" do
         it "shows product information summary" do
           expect(subject.to_s).to eq(<<~PRODINFO.chomp
@@ -68,6 +72,10 @@ module Cocard
 
       describe "#firmware_version" do
         it { expect(subject.firmware_version).to eq('3.8.2') }
+      end
+
+      describe "#product_code" do
+        it { expect(subject.product_code).to eq('ORGA6100') }
       end
 
       describe "#to_s" do
