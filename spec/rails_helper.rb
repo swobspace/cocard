@@ -60,7 +60,7 @@ Rails.root.glob('spec/support/**/*.rb').sort.each { |f| require f }
 
 RSpec.configure do |config|
   config.include Capybara::DSL
-  config.filter_run_excluding :soap => true
+  config.filter_run_excluding(:soap, :rmi)
 
   config.fixture_paths = [
     Rails.root.join('spec/fixtures')
