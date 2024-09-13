@@ -40,6 +40,7 @@ module CardTerminals
           ws.on :message do |event|
             debug("--- :message ---")
             response = parse_ws_response(event.data)
+            debug("Type: #{response.type}")
             debug("Token: #{response.token}")
             debug("Action: #{session[response.token]}")
             debug("JSON: #{response.json.inspect}")
@@ -52,18 +53,30 @@ module CardTerminals
             when :get_property
               if response.rmi_smcb_pin_enabled
                 debug("rmi_smcb_pin_enabled: true")
+                debug("--- starting timer ---")
+                @timeout = EM::Timer.new(30) do 
+                  debug("### TIMEOUT ###")
+                  ws.close
+                end
+                debug("--- send subscription ---")
                 ws.send(request_subscription(generate_token(:subscribe)))
               else
                 debug("rmi_smcb_pin_enabled: false")
               end
-              ws.close
 
             when :subscribe
-              subscription_uuid = data.dig('response', 'result')
+              subscription_uuid = response.result
               debug("Subscription UUID: " + subscription_uuid.to_s)
               session[:subscription_uuid] = subscription_uuid
 
             when :notification
+              @timeout.cancel
+              debug("Notification received: #{response.json}")
+              ws.send(verify_pin(generate_token(:verify_pin)))
+
+            when :verify_pin
+              debug("Verify Pin Response: #{response.json}")
+              ws.close
 
             else
               ws.close
@@ -118,6 +131,10 @@ module CardTerminals
         ENV['WS_AUTH_PASS']
       end
 
+      def smcb_pin
+        ENV['CARD_SMCB_PIN']
+      end
+
       #
       # Request/Response constructs
       #
@@ -156,18 +173,36 @@ module CardTerminals
 
       def request_subscription(token)
         {
-          "request" => {
+          "subscription" => {
             "token": token,
             "service": "Smartcard",
-            "method": {
+            "topic": {
               "pinVerificationTopic": {
                 "sessionId": session['id'],
-                "propertyIds": iccsn
+                "iccsn": iccsn
               }
             }
           }
         }.to_json
       end
+
+      def verify_pin(token)
+        {
+          "request" => {
+            "token": token,
+            "service": "Smartcard",
+            "method": {
+              "verifyPin": {
+                "sessionId": session['id'],
+                "iccsn": iccsn,
+                "pinId": "SMCB-PIN",
+                "pin": smcb_pin
+              }
+            }
+          }
+        }.to_json
+      end
+     
 
       def debug(message)
         logger.debug("CardTerminal(#{card_terminal.id})::RMI: #{message}")

@@ -18,11 +18,27 @@ module CardTerminals
       end
 
       def session_id
-        json.dig('response', 'result', 'session', 'id')
+        if result.kind_of? String
+          nil
+        else
+          json.dig('response', 'result', 'session', 'id')
+        end
       end
 
       def rmi_smcb_pin_enabled
-        json.dig('response', 'result', 'properties', 'rmi_smcb_pinEnabled') || false
+        if result.kind_of? String
+          nil
+        else
+          json.dig('response', 'result', 'properties', 'rmi_smcb_pinEnabled') || false
+        end
+      end
+
+      def result
+        json.dig('response', 'result')
+      end
+
+      def type
+        json.keys.first
       end
 
     end
