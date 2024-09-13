@@ -9,8 +9,13 @@ module CardTerminals::RMI
         ip: ENV['CT_IP']
       )
     end
+    let(:card) do
+      FactoryBot.create(:card,
+        iccsn: ENV['CARD_ICCSN'],
+      )
+    end
   
-    subject { CardTerminals::RMI::OrgaV1.new(card_terminal: ct) }
+    subject { CardTerminals::RMI::OrgaV1.new(card_terminal: ct, iccsn: card.iccsn) }
 
     # check for instance methods
     describe 'check if instance methods exists' do

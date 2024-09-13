@@ -4,7 +4,7 @@ module CardTerminals
     # Remote Management Interface for Orga 6141 Version 1.03
     #
     class OrgaV1
-      attr_reader :card_terminal, :valid, :session
+      attr_reader :card_terminal, :iccsn, :valid, :session
 
       #
       # rmi = CardTerminal::RMI::OrgaV1.new(options)
@@ -30,7 +30,7 @@ module CardTerminals
                )
 
           ws.on :open do |event|
-            debug([:open])
+            debug(">>> :open >>>")
 
             token = generate_token(:authenticate)
             debug(request_auth(token))
@@ -38,30 +38,33 @@ module CardTerminals
           end
 
           ws.on :message do |event|
-            debug([:message])
-            (token, data) = parse_ws_response(event.data)
-            debug("Token: " + token)
-            debug("Action: " + session[token].to_s)
-            debug("Data: " + data.inspect)
-            debug("SessionId: " + session['id'].to_s)
+            debug("--- :message ---")
+            response = parse_ws_response(event.data)
+            debug("Token: #{response.token}")
+            debug("Action: #{session[response.token]}")
+            debug("JSON: #{response.json.inspect}")
+            debug("SessionId: #{session['id']}")
 
-            case session[token]
+            case session[response.token]
             when :authenticate
               ws.send(request_get_property(generate_token(:get_property)))
+
             when :get_property
-              rmi_smcb_pin_enabled = data.dig('response', 'result', 'properties', 'rmi_smcb_pinEnabled')
-              if rmi_smcb_pin_enabled
+              if response.rmi_smcb_pin_enabled
                 debug("rmi_smcb_pin_enabled: true")
                 ws.send(request_subscription(generate_token(:subscribe)))
               else
                 debug("rmi_smcb_pin_enabled: false")
               end
               ws.close
+
             when :subscribe
               subscription_uuid = data.dig('response', 'result')
               debug("Subscription UUID: " + subscription_uuid.to_s)
               session[:subscription_uuid] = subscription_uuid
+
             when :notification
+
             else
               ws.close
             end
@@ -72,9 +75,11 @@ module CardTerminals
           end
 
           ws.on :close do |event|
+            debug("--- :close ---")
             debug([:close, event.code, event.reason])
             ws = nil
             EM.stop
+            debug("<<< :closed <<<")
           end
         }
       end
@@ -94,16 +99,11 @@ module CardTerminals
       end
 
       def parse_ws_response(data)
-        json = JSON.parse(data)
-        if json['response'].present?
-          token = json.dig('response', 'token')
-          if (session[token] == :authenticate)
-            session['id'] = json.dig('response', 'result', 'session', 'id')
-          end
-        elsif json['notification'].present?
-        else
+        response = Response.new(data)
+        if response.session_id.present?
+          session['id'] = response.session_id
         end
-        [token, json]
+        response
       end
 
       def ws_url
