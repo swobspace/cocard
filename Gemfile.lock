@@ -151,6 +151,7 @@ GEM
     erubi (1.13.0)
     et-orbi (1.2.11)
       tzinfo
+    eventmachine (1.2.7)
     factory_bot (6.4.6)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.4.3)
@@ -163,6 +164,9 @@ GEM
       logger
     faraday-net_http (3.3.0)
       net-http
+    faye-websocket (0.11.3)
+      eventmachine (>= 0.12.0)
+      websocket-driver (>= 0.5.1)
     ffi (1.17.0-aarch64-linux-gnu)
     ffi (1.17.0-arm-linux-gnu)
     ffi (1.17.0-arm64-darwin)
@@ -459,9 +463,11 @@ DEPENDENCIES
   cssbundling-rails
   debug
   dotenv
+  eventmachine (~> 1.2)
   factory_bot_rails
   faker (~> 3.3)
   faraday (~> 2.9)
+  faye-websocket (~> 0.11.3)
   good_job (~> 4.1.0)
   guard
   guard-rspec

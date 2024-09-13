@@ -30,8 +30,7 @@ module CardTerminals::RMI
 
     describe 'without valid product information' do
       it { expect(subject.valid).to be_falsey }
-      it { expect(subject.session).to be_nil }
-      it { expect(subject.connection).to be_kind_of(Faraday::Connection) }
+      it { expect(subject.session).to be_empty }
     end
 
     describe 'with valid product information' do
@@ -41,8 +40,8 @@ module CardTerminals::RMI
       end
       it { expect(subject.valid).to be_truthy }
 
-      describe "#get_api" do
-        it { pp subject.get_api }
+      describe "#call" do
+        it { subject.call }
       end
     end
 
