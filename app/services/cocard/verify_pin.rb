@@ -41,6 +41,12 @@ module Cocard
                           pin_steatus: nil)
       end
 
+      if card.card_terminal&.pin_mode == 'on_demand'
+        CardTerminals::RMI::VerifyPinJob.perform_later(card: card)
+        # wait before continue
+        sleep 3
+      end
+
       result = Cocard::SOAP::VerifyPin.new(
                  card_handle: card.card_handle,
                  connector: connector,
