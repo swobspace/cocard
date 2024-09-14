@@ -1,5 +1,10 @@
 = Changelog
 
+== 0.3.7 - 2024-09-14
+
+* Fix: Fehlermeldung bei erfolreicher Pin-Verifikation korrigiert
+* Acknowledge-Button jetzt auch im Log-Bereich von Konnektor/Karte/Terminal (bisher: nur im Dashboard)
+
 == 0.3.6 - 2024-09-10
 
 * Neu: xref:user/acknowledges.adoc[Acknowledges und Notizen für Log-Einträge]
