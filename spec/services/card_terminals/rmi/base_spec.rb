@@ -42,6 +42,7 @@ module CardTerminals::RMI
       before(:each) do
         allow(ct).to receive(:firmware_version).and_return('3.9.0')
         allow(ct).to receive_message_chain(:product_information, :product_code).and_return('ORGA6100')
+        allow(ct).to receive(:pin_mode).and_return(CardTerminal.pin_modes['on_demand'])
       end
       it { expect(subject.valid).to be_truthy }
 

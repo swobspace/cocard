@@ -14,6 +14,10 @@ module CardTerminals
 
     private
       def check_requirements(card)
+        if card.card_terminal.pin_mode == 'off'
+          Rails.logger.warn(prefix + "CardTerminal pin mode == off")
+          return false
+        end
         if card.card_type != 'SMC-B'
           Rails.logger.warn(prefix + "Card is not a SMC-B card")
           return false

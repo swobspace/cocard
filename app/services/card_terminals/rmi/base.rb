@@ -22,6 +22,11 @@ module CardTerminals
     private
 
       def check_terminal
+        if card_terminal.pin_mode == 'off'
+          @messages << "CardTerminal pin mode == 'off', please check settings"
+          return [false, nil]
+        end
+
         pc = card_terminal.product_information&.product_code
         fw = card_terminal.firmware_version
         if pc == "ORGA6100" && fw >= '3.9.0'

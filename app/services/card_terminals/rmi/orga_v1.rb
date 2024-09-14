@@ -102,6 +102,7 @@ module CardTerminals
       attr_reader :logger
 
       def check_terminal
+        card_terminal.pin_mode == 'on_demand' &&
         card_terminal.product_information&.product_code == "ORGA6100" &&
         card_terminal.firmware_version >= '3.9.0'
       end
