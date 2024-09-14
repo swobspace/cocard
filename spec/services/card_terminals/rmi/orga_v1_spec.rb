@@ -45,8 +45,8 @@ module CardTerminals::RMI
       end
       it { expect(subject.valid).to be_truthy }
 
-      describe "#call" do
-        it { subject.call }
+      describe "#verify_pin" do
+        it { subject.verify_pin }
       end
     end
 

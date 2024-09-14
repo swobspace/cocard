@@ -21,7 +21,7 @@ module CardTerminals
         @logger = ActiveSupport::Logger.new(File.join(Rails.root, 'log', 'card_terminals_rmi_orgav1.log'))
       end
 
-      def call
+      def verify_pin
         EM.run {
           ws = Faye::WebSocket::Client.new(ws_url, [], {
                    ping: 15,
@@ -72,7 +72,7 @@ module CardTerminals
 
             when :notification
               debug("Notification received: #{response.json}")
-              ws.send(verify_pin(generate_token(:verify_pin)))
+              ws.send(request_verify_pin(generate_token(:verify_pin)))
 
             when :verify_pin
               @timeout.cancel
@@ -187,7 +187,7 @@ module CardTerminals
         }.to_json
       end
 
-      def verify_pin(token)
+      def request_verify_pin(token)
         {
           "request" => {
             "token": token,
