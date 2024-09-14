@@ -176,7 +176,13 @@ POSTGRES_HOST=cocard-postgres
 # URL building
 URL_HOST=cocard.example.com
 URL_PORT=8443
-URL_PROTOCOL=https</code></pre>
+URL_PROTOCOL=https
+
+
+# card terminal websocket and SMC-B pin
+DEFAULT_WS_AUTH_USER=admin
+DEFAULT_WS_AUTH_PASS=strenggeheim
+DEFAULT_SMCB_PIN=11111111</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -234,6 +240,18 @@ URL_PROTOCOL=https</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>URL_PROTOCOL</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Protokoll für den Zugriff (http bei direktem Zugriff)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DEFAULT_WS_AUTH_USER</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Benutzer für das RMI-Interface des Kartenterminals für SMC-B Remote Pin Eingabe</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DEFAULT_WS_AUTH_PASS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passwort für das RMI-Interface des Kartenterminals passen zum User</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DEFAULT_SMCB_PIN</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pin für SMC-B bei Remote-Eingabe</p></td>
 </tr>
 </tbody>
 </table>

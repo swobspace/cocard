@@ -32,6 +32,7 @@ RSpec.describe CardTerminal, type: :model do
   it { is_expected.to belong_to(:network).optional }
   it { is_expected.to have_many(:cards).dependent(:destroy) }
   # it { is_expected.to validate_presence_of(:mac) }
+  it { is_expected.to define_enum_for(:pin_mode).with_values(off: 0, on_demand: 1) }
 
   it "validates if mac or serial is present" do
   end

@@ -99,6 +99,7 @@ bin/rails g scaffold CardTerminal \
   supplier:string \
   serial:string \
   id_product:string \
+  pin_mode:integer \
   --no-stylesheets --no-javascripts --no-helper
 
 bin/rails g migration AddInternalToCardTerminal \
@@ -117,6 +118,9 @@ bin/rails g migration AddInternalToCardTerminal \
   firmware_version:string
 ----
 
+----
+enum pin_mode: { off: 0, on_demand: 1 }
+----
 
 .app/models/card_terminal.rb
 [source,ruby]

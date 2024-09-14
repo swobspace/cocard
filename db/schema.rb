@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_08_163233) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_14_155737) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -93,6 +93,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_08_163233) do
     t.string "condition_message", default: ""
     t.datetime "last_ok", precision: nil
     t.bigint "network_id"
+    t.integer "pin_mode", default: 0
     t.index ["condition"], name: "index_card_terminals_on_condition"
     t.index ["connector_id"], name: "index_card_terminals_on_connector_id"
     t.index ["location_id"], name: "index_card_terminals_on_location_id"
