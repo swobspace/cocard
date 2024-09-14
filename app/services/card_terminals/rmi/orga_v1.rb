@@ -125,15 +125,15 @@ module CardTerminals
       end
 
       def ws_auth_user
-        ENV['WS_AUTH_USER']
+        ENV['DEFAULT_WS_AUTH_USER']
       end
 
       def ws_auth_pass
-        ENV['WS_AUTH_PASS']
+        ENV['DEFAULT_WS_AUTH_PASS']
       end
 
       def smcb_pin
-        ENV['CARD_SMCB_PIN']
+        ENV['DEFAULT_SMCB_PIN']
       end
 
       #
