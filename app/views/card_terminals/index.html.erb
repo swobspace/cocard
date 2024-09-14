@@ -31,6 +31,7 @@
             <th><%= t('attributes.id_product') %></th>
             <th><%= t('attributes.firmware_version') %></th>
             <th class="notvisible"><%= t('attributes.description') %></th>
+            <th class="notvisible"><%= t('attributes.pin_mode') %></th>
             <th><%= t('attributes.updated_at') %></th>
             <th><%= t('attributes.last_ok') %></th>
             <th class="nosort"><%= t('cocard.action') %></th>
@@ -38,6 +39,7 @@
     </thead>
     <tfoot class="search">
       <tr>
+            <th></th>
             <th></th>
             <th></th>
             <th></th>
@@ -92,6 +94,7 @@
           <td><%= card_terminal.id_product %></td>
           <td><%= card_terminal.firmware_version %></td>
           <td><%= card_terminal.description %></td>
+          <td><%= t(card_terminal.pin_mode, scope: 'pin_modes') %></td>
           <td><%= render UpdatedAtComponent.new(item: card_terminal) %></td>
           <td><%= render IsCurrentComponent.new(item: card_terminal, attr: :last_ok) %></td>
           <td class="text-nowrap">

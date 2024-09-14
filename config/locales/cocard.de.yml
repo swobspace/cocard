@@ -153,6 +153,7 @@ de:
     operational: in Betrieb
     operational_state: Betriebszustand
     passphrase: Passphrase
+    pin_mode: SMB-C Auto-Pin-Mode
     pkey: Private Key (PEM)
     plugged_in: Netzwerk, Dose, Switch
     private_information: Geschützte Information
@@ -205,6 +206,10 @@ de:
   authentications:
     noauth: 'Keine'
     clientcert: 'Client-Zertifikat'
+
+  pin_modes:
+    'off': Aus
+    on_demand: On Demand
 
   accessibilities:
     nothing: None

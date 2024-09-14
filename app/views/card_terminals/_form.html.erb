@@ -34,6 +34,13 @@
       <%= form.input :description, as: :rich_text_area
        %>
 
+      <%= form.input :pin_mode, 
+          collection: CardTerminal.pin_modes
+                              .collect {|c| [t(c[0], scope: 'pin_modes'), c[0]]},
+          include_blank: false
+
+       %>
+
       <div class="alert alert-warning" role="alert">
         <%= t('cocard.new_card_terminal_manual_warning') %>
       </div>
