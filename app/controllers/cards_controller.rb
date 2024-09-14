@@ -99,7 +99,7 @@ class CardsController < ApplicationController
                             result.error_messages.join(', ')).html_safe
       else
         status  = :success
-        message = (card.to_s + "<br/>" + "Kontext: #{cctx}<br/>" +
+        message = (@card.to_s + "<br/>" + "Kontext: #{@context}<br/>" +
                    "VERIFY PIN successful").html_safe
       end
     else
