@@ -68,13 +68,14 @@ module CardTerminals
               subscription_uuid = response.result
               debug("Subscription UUID: " + subscription_uuid.to_s)
               session[:subscription_uuid] = subscription_uuid
+              session[subscription_uuid] = :notification
 
             when :notification
-              @timeout.cancel
               debug("Notification received: #{response.json}")
               ws.send(verify_pin(generate_token(:verify_pin)))
 
             when :verify_pin
+              @timeout.cancel
               debug("Verify Pin Response: #{response.json}")
               ws.close
 
@@ -92,7 +93,7 @@ module CardTerminals
             debug([:close, event.code, event.reason])
             ws = nil
             EM.stop
-            debug("<<< :closed <<<")
+            debug("<<< :closed <<<\n")
           end
         }
       end

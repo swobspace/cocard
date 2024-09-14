@@ -14,7 +14,11 @@ module CardTerminals
       end
 
       def token
-        json.dig('response', 'token')
+        if type == 'notification'
+          json.dig('notification', 'subscriptionId')
+        else
+          json.dig('response', 'token')
+        end
       end
 
       def session_id
