@@ -2,4 +2,5 @@
 ** xref:user/acknowledges.adoc[]
 * Administration
 ** xref:admin/authorities.adoc[]
+** xref:admin/smcb-remote-pin.adoc[]
 //* xref:changelog.adoc[]

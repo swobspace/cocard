@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Berechtigungen :: Cocard</title>
+    <title>Remote PIN für SMC-B Karten :: Cocard</title>
     <meta name="generator" content="Antora 3.1.9">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -52,10 +52,10 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Administration</span>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="authorities.html">Berechtigungen</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="smcb-remote-pin.html">Remote PIN für SMC-B Karten</a>
   </li>
 </ul>
@@ -128,7 +128,7 @@
   <ul>
     <li><a href="../index.html">Cocard</a></li>
     <li>Administration</li>
-    <li><a href="authorities.html">Berechtigungen</a></li>
+    <li><a href="smcb-remote-pin.html">Remote PIN für SMC-B Karten</a></li>
   </ul>
 </nav>
 </div>
@@ -137,11 +137,14 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Berechtigungen</h1>
+<h1 class="page">Remote PIN für SMC-B Karten</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Berechtigungen werden in Cocard über Rollen vergeben. Jede Rolle kann für sich alleine vergeben werden und enthält alle für die Aufgabe notwendigen Berechtigungen. Die Rolle <code>Admin</code> hat eine Sonderstellung: sie darf alles, die Vergabe zusätzlicher Rollen wird ignoriert.</p>
+<p>Bei neueren Kartenterminals kann man die PIN einer SMC-B-Karte remote eingegeben: entweder über eine Weboberfläche oder über ein Remote-Management-Interface (RMI).</p>
+</div>
+<div class="paragraph">
+<p>Cocard unterstützt die Remote-Eingabe, wenn alle nötigen Voraussetzungen dazu erfüllt sind. Löst ein Anwender die Aktion <code>VerifyPin</code> aus, startet Cocard zunächst eine Verbindung zum Kartenterminal und wartet auf die <code>VerifyPin</code>-Anfrage. Parallel dazu sendet Cocard die <code>VerifyPin</code>-Anfrage an den Konnektor, der diese an das Kartenterminal weitergibt. Das Kartenterminal benachrichtigt dann Cocard über die eingetroffene <code>VerifyPin</code>-Anfrage und Cocard sendet die fest hinterlegte PIN. Der Konnektor gibt Erfolg zurück, sofern kein Fehler auftritt.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -150,7 +153,7 @@
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Bis auf die Rolle <code>Admin</code> können alle Rollen kombiniert werden.
+Cocard unterstützt derzeit nur das Terminal Orga6141 in der Firmware-Version 3.9.0
 </td>
 </tr>
 </table>
@@ -158,160 +161,93 @@ Bis auf die Rolle <code>Admin</code> können alle Rollen kombiniert werden.
 </div>
 </div>
 <div class="sect1">
-<h2 id="_rolle_admin"><a class="anchor" href="#_rolle_admin"></a>Rolle Admin</h2>
+<h2 id="_voraussetzungen_für_remote_pin_eingabe"><a class="anchor" href="#_voraussetzungen_für_remote_pin_eingabe"></a>Voraussetzungen für Remote-PIN-Eingabe</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>Ein Administrator hat alle Zugriffsrechte. Sofern die Rolle vorhanden ist, werden alle anderen Rollen des Benutzers ignoriert. Die Rolle <code>Admin</code> sollte nur an wenige Personen vergeben werden, weil damit auch die Pflege von Benutzern und Berechtigungen möglich ist.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_rolle_reader"><a class="anchor" href="#_rolle_reader"></a>Rolle Reader</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Alles Lesen (*)</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_rolle_connectormanager"><a class="anchor" href="#_rolle_connectormanager"></a>Rolle ConnectorManager</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Alles Lesen (*)</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Connector#id_contract (Vertragsinformationen) lesen</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Vollzugriff auf Konnektoren</p>
-</li>
-<li>
-<p>Erstellen von Acknowledges für Logeinträge</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_rolle_cardterminalmanager"><a class="anchor" href="#_rolle_cardterminalmanager"></a>Rolle CardTerminalManager</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Alles Lesen (*)</p>
-</li>
-<li>
-<p>Vollzugriff auf Kartenterminals</p>
-</li>
-<li>
-<p>Erstellen von Acknowledges für Logeinträge</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_rolle_cardmanager"><a class="anchor" href="#_rolle_cardmanager"></a>Rolle CardManager</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Alles Lesen (*)</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Card#private_information (Geschützte Informationen) lesen</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Vollzugriff auf Karten</p>
-</li>
-<li>
-<p>Erstellen von Acknowledges für Logeinträge</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_rolle_verifypin"><a class="anchor" href="#_rolle_verifypin"></a>Rolle VerifyPin</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Alles Lesen (*)</p>
-</li>
-<li>
-<p>PinStatus prüfen und PinVerify ausführen (sowohl einzeln bei der Karte als auch über die Sammelübersicht zur Pin-Verifizierung)</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_rolle_support"><a class="anchor" href="#_rolle_support"></a>Rolle Support</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Alles Lesen (*)</p>
-</li>
-<li>
-<p>Pflege der Felder Raum, Kontakt und Netzwerk/Dose/Switch bei Kartenterminals</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_geschützte_informationen"><a class="anchor" href="#_geschützte_informationen"></a>(*) Geschützte Informationen</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Folgende Felder sind besonders geschützt und nur lesbar, wenn explizit angegeben (außer bei der Rolle <code>Admin</code>):</p>
-</div>
+<div class="sect2">
+<h3 id="_kartenterminal"><a class="anchor" href="#_kartenterminal"></a>Kartenterminal</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 16.6666%;">
 <col style="width: 33.3333%;">
-<col style="width: 50.0001%;">
+<col style="width: 66.6667%;">
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Modell</th>
-<th class="tableblock halign-left valign-top">Feld</th>
+<th class="tableblock halign-left valign-top">Was</th>
 <th class="tableblock halign-left valign-top">Beschreibung</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ClientCertificate</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">alle Felder</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Client-Zertifikate</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kartenterminal</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ProductCode == <code>ORGA6100</code> &amp;&amp; FirmwareVersion <code>&lt;= 3.9.0</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Connector</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#id_contract</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Vertragsinformationen</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Card</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#private_information</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Geschützte Informationen</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RMI Remote SMC-B PIN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">muss eingeschaltet sein, siehe Abbildung</p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/ct/orga6141-enable-remote-smcb-pin.png" alt="orga6141 enable remote smcb pin"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cocard_einstellungen_beim_kartenterminal"><a class="anchor" href="#_cocard_einstellungen_beim_kartenterminal"></a>Cocard: Einstellungen beim Kartenterminal</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Was</th>
+<th class="tableblock halign-left valign-top">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SMC-B Auto-PIN-Mode</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>On Demand</code>, siehe Abbildung</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<div class="title">SMC-B Auto-PIN-Mode Bearbeiten</div>
+<p><span class="image"><img src="../_images/ct/card-terminal-edit-auto-pin-mode.png" alt="card terminal edit auto pin mode"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cocard_installationsetup"><a class="anchor" href="#_cocard_installationsetup"></a>Cocard-Installation/Setup</h3>
+<div class="paragraph">
+<p>Folgende Umgebungsvariablen müssent im <a href="../installation/configuration.html" class="xref page">Setup</a> von Cocard hinterlegt sein:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Was</th>
+<th class="tableblock halign-left valign-top">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DEFAULT_WS_AUTH_USER</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RMI-Authentifikation: Rolle <code>admin</code>. Cocard prüft, ob <code>Remote SMC-B PIN</code> eingeschaltet ist, dazu ist die <code>admin</code>-Rolle erforderlich.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DEFAULT_WS_AUTH_PASS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RMI-Authentifikation: Passwort für Rolle <code>admin</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DEFAULT_SMCB_PIN=11111111</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Environment-Variable; zur Zeit unterstützt Cocard nur eine einheitliche SMCB-PIN für alle Karten.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 </article>
