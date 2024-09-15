@@ -45,6 +45,7 @@ RSpec.describe "card_terminals/show", type: :view do
       serial: '11122277634',
       id_product: 'ORGA61411',
       last_ok: 1.day.before(ts),
+      pin_mode: 'on_demand',
       network: network
     )
   end
@@ -77,6 +78,7 @@ RSpec.describe "card_terminals/show", type: :view do
     expect(rendered).to match(/11122277634/)
     expect(rendered).to match(/11122277634/)
     expect(rendered).to match("127.0.0.0/8")
+    expect(rendered).to match("On Demand")
     expect(rendered).to match("#{ts.localtime.to_s.gsub(/\+.*/, '')}")
 
   end

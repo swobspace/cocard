@@ -75,6 +75,15 @@
   </li>
 </ul>
   </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Card Terminal</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../orga-rmi.html">Remote Management Interface ORGA-6141</a>
+  </li>
+</ul>
+  </li>
 </ul>
   </li>
 </ul>
@@ -207,7 +216,12 @@ POSTGRES_HOST=localhost
 # URL building
 URL_HOST=example.com
 URL_PORT=8443
-URL_PROTOCOL=https</code></pre>
+URL_PROTOCOL=https
+
+# card terminal websocket and SMC-B pin
+DEFAULT_WS_AUTH_USER=admin
+DEFAULT_WS_AUTH_PASS=strenggeheim
+DEFAULT_SMCB_PIN=11111111</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">

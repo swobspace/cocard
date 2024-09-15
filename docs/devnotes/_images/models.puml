@@ -37,6 +37,7 @@ class CardTerminal {
   supplier: string
   serial: string
   id_product: string
+  pin_mode: integer
   location_id
   --
   properties: jsonb

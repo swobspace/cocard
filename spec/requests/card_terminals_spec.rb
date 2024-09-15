@@ -94,6 +94,7 @@ RSpec.describe "/card_terminals", type: :request do
         id_product: 'ORGA6141',
         serial: 'S11122277635',
         connector_id: connector.id,
+        pin_mode: 'on_demand',
         last_ok: 1.day.before(ts)
       }}
 
@@ -114,6 +115,7 @@ RSpec.describe "/card_terminals", type: :request do
         expect(card_terminal.id_product).to eq('ORGA6141')
         expect(card_terminal.serial).to eq('S11122277635')
         expect(card_terminal.connector_id).to eq(connector.id)
+        expect(card_terminal.pin_mode.to_s).to eq('on_demand')
         expect(card_terminal.last_ok).to eq(1.day.before(ts).to_s)
       end
 

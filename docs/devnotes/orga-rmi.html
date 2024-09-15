@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Remote Management Interface ORGA-6141 :: Cocard</title>
+    <meta name="generator" content="Antora 3.1.9">
+    <link rel="stylesheet" href="../_/css/site.css">
+    <script>var uiRootPath = '../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="..">Cocard</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="abstand">
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+           <a class="navbar-item" href="../cocard/index.html">Cocard</a>
+          <div class="navbar-item dark">DevNotes</div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="devnotes" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">DevNotes</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index.html">Developer Notes</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="modeling.html">Modeling cocard</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="cocard-services.html">Cocard::Services</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="conditions.html">Zustände</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="healthcheck.html">Healthchecks</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="todo.html">Todos</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="podman/index.html">Podman</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="podman/production.html">Production</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="podman/dockerfile-prod.html">Dockerfile for Production</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="podman/network.html">Network</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Card Terminal</span>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="orga-rmi.html">Remote Management Interface ORGA-6141</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">DevNotes</span>
+    <span class="version">default</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../cocard/index.html">Cocard</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../cocard/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="index.html">DevNotes</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">default</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../cocard/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">DevNotes</a></li>
+    <li>Card Terminal</li>
+    <li><a href="orga-rmi.html">Remote Management Interface ORGA-6141</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Remote Management Interface ORGA-6141</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Original-Dokumentation: <a href="https://worldline.com/content/dam/worldline/local/de-de/documents/Remote-Management-Interface-ORGA-6141-online-V1.0.3.pdf" class="bare">https://worldline.com/content/dam/worldline/local/de-de/documents/Remote-Management-Interface-ORGA-6141-online-V1.0.3.pdf</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_session"><a class="anchor" href="#_session"></a>Session</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="title">API-Information (ohne Authentifikation)</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+    "request": {
+        "token": "&lt;uuid&gt;",
+        "service": "Api",
+        "method": {
+            "getVersionInfo": {}
+        }
+    }
+}
+{
+    "response": {
+        "token": "&lt;uuid&gt;",
+        "service": "Api",
+        "result": {
+            "protocolVersion": "1.0.0",
+            "services": [
+                {
+                    "name": "Auth",
+                    "version": "1.0.0"
+                },
+                {...
+                },
+                {
+                    "name": "Update",
+                    "version": "1.0.0"
+                }
+            ]
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Login with authentication</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+    "request": {
+        "token": "&lt;uuid&gt;",
+        "service": "Auth",
+        "method": {
+            "basicAuth": {
+                "user": "admin",
+                "credentials": "12345678"
+            }
+        }
+    }
+}
+{
+    "response": {
+        "token": "&lt;uuid&gt;",
+        "service": "Auth",
+        "result": {
+            "session": {
+                "sessionId": "&lt;Session-ID&gt;",
+                "userName": "admin",
+                "permissions": [ ...
+                ]
+            }
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Keep alive</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+    "request": {
+        "token": "&lt;uuid&gt;",
+        "service": "Auth",
+        "method": {
+            "keepAlive": {
+                "sessionId": "&lt;Session-ID&gt;"
+            }
+        }
+    }
+}
+{
+    "response": {
+        "token": "&lt;uuid&gt;",
+        "service": "Auth",
+        "result": null
+    }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Logout</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+    "request": {
+        "token": "&lt;uuid&gt;",
+        "service": "Auth",
+        "method": {
+            "close": {
+                "sessionId": "&lt;Session-ID&gt;"
+            }
+        }
+    }
+}
+{
+    "response": {
+        "token": "&lt;uuid&gt;",
+        "service": "Auth",
+        "result": null
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_enable_remote_pin_for_smcb"><a class="anchor" href="#_enable_remote_pin_for_smcb"></a>Enable Remote Pin for SMCB</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Login as Admin</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">GetProperty <code>rmi_smcb_pinEnabled</code></div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+    "request": {
+        "token": "&lt;uuid&gt;",
+        "service": "Settings",
+        "method": {
+            "getProperties": {
+                "sessionId": "&lt;Session-ID&gt;",
+                "propertyIds": [
+                    "rmi_smcb_pinEnabled"
+                ]
+            }
+        }
+    }
+}
+
+{
+    "response": {
+        "token": "&lt;uuid&gt;",
+        "service": "Settings",
+        "result": {
+            "properties": {
+                "rmi_smcb_pinEnabled": false
+            }
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">SetProperty <code>rmi_smcb_pinEnabled</code></div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+    "request": {
+        "token": "&lt;uuid&gt;",
+        "service": "Settings",
+        "method": {
+            "setProperties": {
+                "sessionId": "&lt;Session-ID&gt;",
+                "properties": {
+                    "rmi_smcb_pinEnabled": true
+                }
+            }
+        }
+    }
+}
+
+{
+    "response": {
+        "token": "&lt;uuid&gt;",
+        "service": "Settings",
+        "result": null
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_enter_pin_for_smc_b_on_demand"><a class="anchor" href="#_enter_pin_for_smc_b_on_demand"></a>Enter Pin for SMC-B on demand</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="title">Check Card</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+    "request": {
+        "token": "&lt;uuid&gt;",
+        "service": "Smartcard",
+        "method": {
+            "getCardInfo": {
+                "sessionId": "&lt;Session-ID&gt;",
+                "cardSpecifications": [
+                    "smcb"
+                ]
+            }
+        }
+    }
+}
+
+{
+    "response": {
+        "token": "&lt;uuid&gt;",
+        "service": "Smartcard",
+        "result": {
+            "cardInfos": [
+                {
+                    "slotNo": "3", ... ,
+                    "iccsn": "&lt;iccsn&gt;",
+                    "pinInfos": [
+                        {
+                            "pinId": "SMCB-PIN",
+                            "pinStatus": "unlockableViaPin",
+                            "attemptsRemaining": 3
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Cocard prüft die Karte nicht über das RMI-Interface des Kartenterminals, sondern nutzt die von der Gematik definierte SOAP-Funktion <code>GetPinStatus</code> über den Konnektor. Subscription und VerifyPin werden nur über das RMI-Interface ausgeführt, wenn der Rückgabewert des PinStatus == <code>VERIFIABLE</code> ist.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Subscribe for SMC-B PIN Events</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+    "subscription": {
+        "token": "&lt;uuid&gt;",
+        "service": "Smartcard",
+        "topic": {
+            "pinVerificationTopic": {
+                "sessionId": "&lt;Session-ID&gt;",
+                "iccsn": "&lt;iccsn&gt;"
+            }
+        }
+    }
+}
+
+{
+    "response": {
+        "token": "&lt;uuid&gt;",
+        "service": "Smartcard",
+        "result": "&lt;subscriptionUuid&gt;"
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>VerifyPIN SMC-B
+SICCT Perform Verification()
+Display Message: "Remote SMC-B Pin"</p>
+</div>
+<div class="listingblock">
+<div class="title">Receive Notification</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+    "notification": {
+        "subscriptionId": "&lt;subscriptionUuid&gt;",
+        "service": "Smartcard",
+        "event": {
+            "pinVerificationEvent": {
+                "iccsn": "&lt;iccsn&gt;", ...,
+                "maxPinLength": "12",
+                "dialogMsg": "&lt;msg-1&gt;", ...,
+                "idleTimeoutSeconds": 30,
+                "overallTimeoutSeconds": 300
+            }
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">VerifyPin</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+    "request": {
+        "token": "&lt;uuid&gt;",
+        "service": "Smartcard",
+        "method": {
+            "verifyPin": {
+                "sessionId": "&lt;Session-ID&gt;",
+                "iccsn": "&lt;iccsn&gt;",
+                "pinId": "SMCB-PIN",
+                "pin": "123456"
+            }
+        }
+    }
+}
+
+{
+    "response": {
+        "token": "&lt;uuid&gt;",
+        "service": "Smartcard",
+        "result": "null"
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <span>Wolfgang Barth (C) 2024</span>
+</footer>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+<script src="../_/js/vendor/medium-zoom.min.js"></script>
+<script>mediumZoom('img:not(.copy-icon');</script>
+  </body>
+</html>

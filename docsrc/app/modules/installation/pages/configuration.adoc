@@ -34,6 +34,13 @@ POSTGRES_HOST=cocard-postgres
 URL_HOST=cocard.example.com
 URL_PORT=8443
 URL_PROTOCOL=https
+
+
+# card terminal websocket and SMC-B pin
+DEFAULT_WS_AUTH_USER=admin
+DEFAULT_WS_AUTH_PASS=strenggeheim
+DEFAULT_SMCB_PIN=11111111
+
 ----
 
 [cols="1m,4"]
@@ -72,4 +79,14 @@ URL_PROTOCOL=https
 
 |URL_PROTOCOL
 |Protokoll für den Zugriff (http bei direktem Zugriff)
+
+|DEFAULT_WS_AUTH_USER
+|Benutzer für das RMI-Interface des Kartenterminals für SMC-B Remote Pin Eingabe
+
+|DEFAULT_WS_AUTH_PASS
+|Passwort für das RMI-Interface des Kartenterminals passen zum User
+
+|DEFAULT_SMCB_PIN
+|Pin für SMC-B bei Remote-Eingabe
+
 |===

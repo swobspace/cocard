@@ -1,5 +1,9 @@
 = Changelog
 
+== 0.3.8 - 2024-09-14
+
+* xref:admin/smcb-remote-pin.adoc[Remote-SMC-B PIN Support für Orga6141]
+
 == 0.3.7 - 2024-09-14
 
 * Fix: Fehlermeldung bei erfolreicher Pin-Verifikation korrigiert

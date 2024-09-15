@@ -1,0 +1,60 @@
+= Remote PIN für SMC-B Karten
+:author: Wolfgang Barth
+:revdate: 2024-09-15
+:imagesdir: ../../images
+
+Bei neueren Kartenterminals kann man die PIN einer SMC-B-Karte remote eingegeben: entweder über eine Weboberfläche oder über ein Remote-Management-Interface (RMI).
+
+Cocard unterstützt die Remote-Eingabe, wenn alle nötigen Voraussetzungen dazu erfüllt sind. Löst ein Anwender die Aktion `VerifyPin` aus, startet Cocard zunächst eine Verbindung zum Kartenterminal und wartet auf die `VerifyPin`-Anfrage. Parallel dazu sendet Cocard die `VerifyPin`-Anfrage an den Konnektor, der diese an das Kartenterminal weitergibt. Das Kartenterminal benachrichtigt dann Cocard über die eingetroffene `VerifyPin`-Anfrage und Cocard sendet die fest hinterlegte PIN. Der Konnektor gibt Erfolg zurück, sofern kein Fehler auftritt.
+
+NOTE: Cocard unterstützt derzeit nur das Terminal Orga6141 in der Firmware-Version 3.9.0
+
+== Voraussetzungen für Remote-PIN-Eingabe
+
+=== Kartenterminal
+
+[cols="1,2"]
+|===
+|Was | Beschreibung
+
+|Kartenterminal
+|ProductCode == `ORGA6100` && FirmwareVersion `\<= 3.9.0`
+
+|RMI Remote SMC-B PIN
+|muss eingeschaltet sein, siehe Abbildung
+|===
+
+
+image:ct/orga6141-enable-remote-smcb-pin.png[]
+
+=== Cocard: Einstellungen beim Kartenterminal
+
+[cols="1,2"]
+|===
+|Was | Beschreibung
+
+|SMC-B Auto-PIN-Mode
+|`On Demand`, siehe Abbildung
+|===
+
+.SMC-B Auto-PIN-Mode Bearbeiten
+image:ct/card-terminal-edit-auto-pin-mode.png[]
+
+=== Cocard-Installation/Setup
+
+Folgende Umgebungsvariablen müssent im xref:installation:configuration.adoc[Setup] von Cocard hinterlegt sein:
+
+[cols="1,2"]
+|===
+|Was | Beschreibung
+
+|DEFAULT_WS_AUTH_USER
+|RMI-Authentifikation: Rolle `admin`. Cocard prüft, ob `Remote SMC-B PIN` eingeschaltet ist, dazu ist die `admin`-Rolle erforderlich.
+
+|DEFAULT_WS_AUTH_PASS
+|RMI-Authentifikation: Passwort für Rolle `admin`
+
+|DEFAULT_SMCB_PIN=11111111
+|Environment-Variable; zur Zeit unterstützt Cocard nur eine einheitliche SMCB-PIN für alle Karten.
+|===
+

@@ -31,6 +31,7 @@ RSpec.describe "card_terminals/index", type: :view do
         firmware_version: '3.1.9',
         serial: '11122277634',
         id_product: 'ORGA61411',
+        pin_mode: 'on_demand',
         last_ok: ts,
       ),
       CardTerminal.create!(
@@ -51,6 +52,7 @@ RSpec.describe "card_terminals/index", type: :view do
         firmware_version: '3.1.9',
         serial: '11122277634',
         id_product: 'ORGA61411',
+        pin_mode: 'on_demand',
         last_ok: ts,
       )
     ]
@@ -80,6 +82,7 @@ RSpec.describe "card_terminals/index", type: :view do
     assert_select cell_selector, text: Regexp.new('11122277634'.to_s), count: 2
     assert_select cell_selector, text: Regexp.new('ORGA6141'.to_s), count: 2
     assert_select cell_selector, text: Regexp.new('CardTerminal online'.to_s), count: 2
+    assert_select cell_selector, text: Regexp.new('On Demand'.to_s), count: 2
     assert_select cell_selector, text: Regexp.new(Time.current.localtime.to_s.gsub(/\d\d \+.*/, '')), count: 4
   end
 end
