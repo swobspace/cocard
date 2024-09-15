@@ -15,4 +15,5 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.acronym "SDS"
   inflect.acronym "SOAP"
   inflect.acronym "CSV"
+  inflect.acronym "RMI"
 end

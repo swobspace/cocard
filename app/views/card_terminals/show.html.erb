@@ -85,6 +85,11 @@
             <th class="w-25 pe-3"><%= t('attributes.description')%>:</th>
             <td><%= @card_terminal.description %></td>
           </tr>
+
+          <tr>
+            <th class="w-25 pe-3"><%= t('attributes.pin_mode')%>:</th>
+            <td><%= t(@card_terminal.pin_mode, scope: 'pin_modes') %></td>
+          </tr>
         </table>
 
         <div class="card-title border-bottom bg-light pt-2 ps-2">

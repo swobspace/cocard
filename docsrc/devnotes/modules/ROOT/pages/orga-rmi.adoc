@@ -1,0 +1,306 @@
+= Remote Management Interface ORGA-6141
+:author: Wolfgang Barth
+:revdate: 2024-09-12
+
+
+
+Original-Dokumentation: https://worldline.com/content/dam/worldline/local/de-de/documents/Remote-Management-Interface-ORGA-6141-online-V1.0.3.pdf
+
+== Session
+
+.API-Information (ohne Authentifikation)
+[source,json]
+----
+{
+    "request": {
+        "token": "<uuid>",
+        "service": "Api",
+        "method": {
+            "getVersionInfo": {}
+        }
+    }
+}
+{
+    "response": {
+        "token": "<uuid>",
+        "service": "Api",
+        "result": {
+            "protocolVersion": "1.0.0",
+            "services": [
+                {
+                    "name": "Auth",
+                    "version": "1.0.0"
+                },
+                {...
+                },
+                {
+                    "name": "Update",
+                    "version": "1.0.0"
+                }
+            ]
+        }
+    }
+}
+----
+
+.Login with authentication
+[source,json]
+----
+{
+    "request": {
+        "token": "<uuid>",
+        "service": "Auth",
+        "method": {
+            "basicAuth": {
+                "user": "admin",
+                "credentials": "12345678"
+            }
+        }
+    }
+}
+{
+    "response": {
+        "token": "<uuid>",
+        "service": "Auth",
+        "result": {
+            "session": {
+                "sessionId": "<Session-ID>",
+                "userName": "admin",
+                "permissions": [ ...
+                ]
+            }
+        }
+    }
+}
+----
+
+.Keep alive
+[source,json]
+----
+{
+    "request": {
+        "token": "<uuid>",
+        "service": "Auth",
+        "method": {
+            "keepAlive": {
+                "sessionId": "<Session-ID>"
+            }
+        }
+    }
+}
+{
+    "response": {
+        "token": "<uuid>",
+        "service": "Auth",
+        "result": null
+    }
+}
+----
+
+
+.Logout
+[source,json]
+----
+{
+    "request": {
+        "token": "<uuid>",
+        "service": "Auth",
+        "method": {
+            "close": {
+                "sessionId": "<Session-ID>"
+            }
+        }
+    }
+}
+{
+    "response": {
+        "token": "<uuid>",
+        "service": "Auth",
+        "result": null
+    }
+}
+----
+
+== Enable Remote Pin for SMCB
+
+* Login as Admin
+
+.GetProperty `rmi_smcb_pinEnabled`
+[source,json]
+----
+{
+    "request": {
+        "token": "<uuid>",
+        "service": "Settings",
+        "method": {
+            "getProperties": {
+                "sessionId": "<Session-ID>",
+                "propertyIds": [
+                    "rmi_smcb_pinEnabled"
+                ]
+            }
+        }
+    }
+}
+
+{
+    "response": {
+        "token": "<uuid>",
+        "service": "Settings",
+        "result": {
+            "properties": {
+                "rmi_smcb_pinEnabled": false
+            }
+        }
+    }
+}
+----
+
+.SetProperty `rmi_smcb_pinEnabled`
+[source,json]
+----
+{
+    "request": {
+        "token": "<uuid>",
+        "service": "Settings",
+        "method": {
+            "setProperties": {
+                "sessionId": "<Session-ID>",
+                "properties": {
+                    "rmi_smcb_pinEnabled": true
+                }
+            }
+        }
+    }
+}
+
+{
+    "response": {
+        "token": "<uuid>",
+        "service": "Settings",
+        "result": null
+    }
+}
+----
+
+== Enter Pin for SMC-B on demand
+
+.Check Card
+[source,json]
+----
+{
+    "request": {
+        "token": "<uuid>",
+        "service": "Smartcard",
+        "method": {
+            "getCardInfo": {
+                "sessionId": "<Session-ID>",
+                "cardSpecifications": [
+                    "smcb"
+                ]
+            }
+        }
+    }
+}
+
+{
+    "response": {
+        "token": "<uuid>",
+        "service": "Smartcard",
+        "result": {
+            "cardInfos": [
+                {
+                    "slotNo": "3", ... ,
+                    "iccsn": "<iccsn>",
+                    "pinInfos": [
+                        {
+                            "pinId": "SMCB-PIN",
+                            "pinStatus": "unlockableViaPin",
+                            "attemptsRemaining": 3
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
+----
+
+NOTE: Cocard prüft die Karte nicht über das RMI-Interface des Kartenterminals, sondern nutzt die von der Gematik definierte SOAP-Funktion `GetPinStatus` über den Konnektor. Subscription und VerifyPin werden nur über das RMI-Interface ausgeführt, wenn der Rückgabewert des PinStatus == `VERIFIABLE` ist.
+
+
+.Subscribe for SMC-B PIN Events
+[source,json]
+----
+{
+    "subscription": {
+        "token": "<uuid>",
+        "service": "Smartcard",
+        "topic": {
+            "pinVerificationTopic": {
+                "sessionId": "<Session-ID>",
+                "iccsn": "<iccsn>"
+            }
+        }
+    }
+}
+
+{
+    "response": {
+        "token": "<uuid>",
+        "service": "Smartcard",
+        "result": "<subscriptionUuid>"
+    }
+}
+----
+
+VerifyPIN SMC-B
+SICCT Perform Verification()
+Display Message: "Remote SMC-B Pin"
+
+.Receive Notification
+[source,json]
+----
+{
+    "notification": {
+        "subscriptionId": "<subscriptionUuid>",
+        "service": "Smartcard",
+        "event": {
+            "pinVerificationEvent": {
+                "iccsn": "<iccsn>", ...,
+                "maxPinLength": "12",
+                "dialogMsg": "<msg-1>", ...,
+                "idleTimeoutSeconds": 30,
+                "overallTimeoutSeconds": 300
+            }
+        }
+    }
+}
+----
+
+.VerifyPin
+[source,json]
+----
+{
+    "request": {
+        "token": "<uuid>",
+        "service": "Smartcard",
+        "method": {
+            "verifyPin": {
+                "sessionId": "<Session-ID>",
+                "iccsn": "<iccsn>",
+                "pinId": "SMCB-PIN",
+                "pin": "123456"
+            }
+        }
+    }
+}
+
+{
+    "response": {
+        "token": "<uuid>",
+        "service": "Smartcard",
+        "result": "null"
+    }
+}
+----

@@ -15,12 +15,16 @@ class CardTerminal < ApplicationRecord
   # -- configuration
   broadcasts_refreshes
 
+  enum pin_mode: { off: 0, on_demand: 1 }
+
   has_rich_text :description
   delegate :accessibility, to: :network, allow_nil: true
 
   # -- validations and callbacks
   before_save :ensure_displayname
   before_save :update_condition
+
+  validates :pin_mode, inclusion: { in: pin_modes.keys }
   validates_uniqueness_of :ct_id, scope: [:connector_id],
                           allow_nil: true, allow_blank: true
   validates :mac, presence: {

@@ -8,3 +8,5 @@
 ** xref:podman/production.adoc[]
 *** xref:podman/dockerfile-prod.adoc[]
 ** xref:podman/network.adoc[]
+* Card Terminal
+** xref:orga-rmi.adoc[]

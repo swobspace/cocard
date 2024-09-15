@@ -107,3 +107,7 @@ gem "liquid", "~> 5.5"
 gem "pagy", "~> 9.0"
 
 gem "highline", "~> 3.0", require: false
+
+gem "faye-websocket", "~> 0.11.3"
+
+gem "eventmachine", "~> 1.2"

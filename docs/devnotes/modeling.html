@@ -75,6 +75,15 @@
   </li>
 </ul>
   </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Card Terminal</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="orga-rmi.html">Remote Management Interface ORGA-6141</a>
+  </li>
+</ul>
+  </li>
 </ul>
   </li>
 </ul>
@@ -242,6 +251,7 @@ end</code></pre>
   supplier:string \
   serial:string \
   id_product:string \
+  pin_mode:integer \
   --no-stylesheets --no-javascripts --no-helper
 
 bin/rails g migration AddInternalToCardTerminal \
@@ -258,6 +268,11 @@ bin/rails g migration AddInternalToCardTerminal \
   connector:belongs_to \
   network:belongs_to \
   firmware_version:string</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>enum pin_mode: { off: 0, on_demand: 1 }</pre>
 </div>
 </div>
 <div class="listingblock">
