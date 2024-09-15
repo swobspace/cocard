@@ -41,12 +41,18 @@ module Cocard
                           pin_steatus: nil)
       end
 
+      #
+      # Auto-enter SMC-B PIN if possible
+      #
       if card.card_terminal&.pin_mode == 'on_demand'
         CardTerminals::RMI::VerifyPinJob.perform_later(card: card)
         # wait before continue
         sleep 3
       end
 
+      #
+      # Start VerifyPin process
+      #
       result = Cocard::SOAP::VerifyPin.new(
                  card_handle: card.card_handle,
                  connector: connector,
