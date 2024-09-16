@@ -32,9 +32,7 @@ module CardTerminals
           ws.on :open do |event|
             debug(">>> :open >>>")
 
-            token = generate_token(:authenticate)
-            debug(request_auth(token))
-            ws.send(request_auth(token))
+            ws.send(request_auth(generate_token(:authenticate)))
           end
 
           ws.on :message do |event|
@@ -54,13 +52,22 @@ module CardTerminals
               if response.rmi_smcb_pin_enabled
                 debug("rmi_smcb_pin_enabled: true")
                 debug("--- starting timer ---")
-                @timeout = EM::Timer.new(30) do 
+                @timeout = EM::Timer.new(30) do
                   debug("### TIMEOUT ###")
                   ws.close
                 end
                 debug("--- send subscription ---")
                 ws.send(request_subscription(generate_token(:subscribe)))
               else
+                Turbo::StreamsChannel.broadcast_prepend_to(
+                  'verify_pins',
+                  target: 'toaster',
+                  partial: "shared/turbo_toast",
+                  locals: {
+                    status: :warning,
+                    message: "Remote SMC-B PIN ist am Terminal deaktiviert!"
+                  }
+                )
                 debug("rmi_smcb_pin_enabled: false")
               end
 
@@ -204,7 +211,7 @@ module CardTerminals
           }
         }.to_json
       end
-     
+
 
       def debug(message)
         logger.debug("CardTerminal(#{card_terminal.id})::RMI: #{message}")
