@@ -1,0 +1,7 @@
+= Kontexte
+:author: Wolfgang Barth
+:revdate: 2024-09-16
+
+#FIXME#
+
+Mandant - Clientsystem - Arbeitsplatz

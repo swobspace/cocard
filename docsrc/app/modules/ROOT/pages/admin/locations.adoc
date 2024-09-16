@@ -1,0 +1,7 @@
+= Standorte
+:author: Wolfgang Barth
+:revdate: 2024-09-16
+
+#FIXME#
+
+Standorte sind als Zusatzinformation gedacht und komplett optional.

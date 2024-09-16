@@ -1,0 +1,41 @@
+= Konnektor anlegen/bearbeiten
+:author: Wolfgang Barth
+:revdate: 2024-09-16
+:imagesdir: ../../images
+:experimental: true
+
+
+== Ohne TLS, ohne Authentifikation
+
+Für die Anlage eines Konnektors in Cocard genügt zunächst die IP-Adresse, alle anderen Felder sind optional. `Admin-Url` und `SDS-Url` werden dabei automatisch generiert, man kann sie später manuell abändern, wenn der vorbelegte Wert nicht stimmt.
+
+Nach dem Speichern ruft man das Bearbeitungsformular ein zweites Mal auf und weist dem Konnektor eine oder mehrere xref:admin/contexts.adoc[Kontexte] zu.
+
+Idealerweise konfiguriert man alle Konnektoren so, dass man mit einem Default-Kontext alle Konnektordaten, Kartenterminals und Karten abfragen kann. In diesem Falle genügt ein einziger Kontext. Nur wenn es Kartenterminals oder Karten gibt, die man über diesen Kontext nicht abfragen kann, sind weitere Kontexte erforderlich.
+
+image:connector/connector-edit-http.png[]
+
+.Konnektor: Felder #FIXME#
+|===
+|Feld | Beschreibung
+
+
+|===
+
+Nach dem Speichern betätigt man einmal den Button btn:[Abfrage SDS]. Damit erhält Cocard die Informationen über die einzelnen Services und Endpunkte, die für die Abfrage von Informationen per SOAP über die von der Gematik definierten Funktionen erforderlich sind. Cocard aktualisiert diese Information einmal pro Tag danach automatisch.
+
+image:connector/connector-fetch-sds-button.png[]
+
+Mit der Information aus dem Service Directory Service (SDS) kann Cocard Kartenterminals und Karten abfragen. Die Abfrage erfolgt dabei mehrmals pro Stunde (bis auf das SDS selbst). Details zu den Zeitinterfallen sind in xref:admin/jobs.adoc[Jobverwaltung] beschrieben.
+
+== Mit TLS, mit Authentifikation per Client-Zertifikat
+#FIXME#
+
+* SDS-Url https eintragen
+* TLS verwenden aktivieren
+* Authentifikation Client-Zertifikat
+* Client-Zertifikat hinterlegen, passen zum Kontext.
+* Alles speichern
+* Einmal manuell SDS holen mit 
+
+image:connector/connector-edit-https-cert.png[]

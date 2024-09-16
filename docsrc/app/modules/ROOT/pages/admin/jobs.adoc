@@ -1,0 +1,17 @@
+= Jobverwaltung
+:author: Wolfgang Barth
+:revdate: 2024-09-16
+:imagesdir: ../../images
+:experimental: true
+
+In die Jobverwaltung gelangt man über das Menü menu:Jobs[]. Hierfür ist die Rolle `Admin` erforderlich.
+
+image:jobs/menu-jobs.png[]
+
+== Überblick
+
+image:jobs/good-job-overview.png[]
+
+== Zeitgesteuerte Jobs
+
+image:jobs/good-job-cron-jobs.png[]
