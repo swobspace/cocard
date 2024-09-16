@@ -85,6 +85,7 @@ de:
   attributes:
     accessibility: Test Erreichbarkeit
     action: Aktion
+    admin_url: Admin-Url
     authentication: Authentifikation
     bsnr: BSNR
     card: Karte
