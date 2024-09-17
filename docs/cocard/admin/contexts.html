@@ -150,11 +150,38 @@
 </aside>
 <article class="doc">
 <h1 class="page">Kontexte</h1>
+<div class="sect1">
+<h2 id="_überblick"><a class="anchor" href="#_überblick"></a>Überblick</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p><mark>FIXME</mark></p>
+<p>Jede Anfrage an den Konnektor benötigt gemäß der Definition der Gematik einen Aufrufkontext. Der Aufrufkontext besteht aus dem Triplet</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Mandant - Clientsystem - Arbeitsplatz</pre>
+</div>
 </div>
 <div class="paragraph">
-<p>Mandant - Clientsystem - Arbeitsplatz</p>
+<p>Der Aufrufkontext wirkt als Filter. Anfragen zu bestimmten Kartenlesegeräten oder Karten, die im Infomodell nicht die Kombination aus den drei Werten besitzen, werden abgelehnt bzw. liefern ggf. eine leere Liste. Mit aktivierter Authentifikation wird zusätzlich geprüft, ob die Anfrage unter dem Namen des Clientsystems erfolgt ist. Eine Abfrage z.B. des Kontextes <code>Ein1 - iMedOne - Konnektor</code> ist nur möglich, wenn die Authentifikation als Client <code>iMedOne</code> erfolgt. Andernfalls wird die Anfrage abgelehnt.</p>
+</div>
+<div class="paragraph">
+<p>Die Abfrage von Kartenterminals (<code>GetCardTerminals</code>) und Karten (<code>GetCards</code>) erfolgt mandantenweit, d.h. der Konnektor liefert eine Liste aller Kartenterminals bzw. Karten zurück, die im Infomodell dem Mandanten zugewiesen sind, unabhängig vom Clientsystem und dem Arbeitsplatz. Trotzdem müssen Clientsystem und Arbeitsplatz grundsätzlich im Infomodell des Konnektors vorhanden sein, sonst filtert der Konnektor ggf. Einträge heraus und die Liste ist unvollständig.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_kontexte_in_cocard"><a class="anchor" href="#_kontexte_in_cocard"></a>Kontexte in Cocard</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Ein Kontext in Cocard besteht immer aus dem Triplet <code>Mandant - Clientsystem - Arbeitsplatz</code>. Der Kontext muss auch so im Infomodell des Konnektors hinterlegt sein.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/context/context-edit.png" alt="context edit"></span></p>
+</div>
+<div class="paragraph">
+<p>Neben den drei Angaben Mandant, Clientsystem gibt die Möglichkeit, eine kurze Beschreibung anzugeben, die später eine Identifizierung des Kontextes erleichtert, etwa den Namen einer Institutsambulanz, wenn als Mandant nur eine wenig sprechende Betriebsstättennummer verwendet wird.</p>
+</div>
+</div>
 </div>
 </article>
   </div>

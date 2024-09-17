@@ -1,7 +1,24 @@
 = Kontexte
 :author: Wolfgang Barth
-:revdate: 2024-09-16
+:revdate: 2024-09-17
+:imagesdir: ../../images
 
-#FIXME#
+== Überblick
 
+Jede Anfrage an den Konnektor benötigt gemäß der Definition der Gematik einen Aufrufkontext. Der Aufrufkontext besteht aus dem Triplet
+
+----
 Mandant - Clientsystem - Arbeitsplatz
+----
+
+Der Aufrufkontext wirkt als Filter. Anfragen zu bestimmten Kartenlesegeräten oder Karten, die im Infomodell nicht die Kombination aus den drei Werten besitzen, werden abgelehnt bzw. liefern ggf. eine leere Liste. Mit aktivierter Authentifikation wird zusätzlich geprüft, ob die Anfrage unter dem Namen des Clientsystems erfolgt ist. Eine Abfrage z.B. des Kontextes `Ein1 - iMedOne - Konnektor` ist nur möglich, wenn die Authentifikation als Client `iMedOne` erfolgt. Andernfalls wird die Anfrage abgelehnt.
+
+Die Abfrage von Kartenterminals (`GetCardTerminals`) und Karten (`GetCards`) erfolgt mandantenweit, d.h. der Konnektor liefert eine Liste aller Kartenterminals bzw. Karten zurück, die im Infomodell dem Mandanten zugewiesen sind, unabhängig vom Clientsystem und dem Arbeitsplatz. Trotzdem müssen Clientsystem und Arbeitsplatz grundsätzlich im Infomodell des Konnektors vorhanden sein, sonst filtert der Konnektor ggf. Einträge heraus und die Liste ist unvollständig.
+
+== Kontexte in Cocard
+
+Ein Kontext in Cocard besteht immer aus dem Triplet `Mandant - Clientsystem - Arbeitsplatz`. Der Kontext muss auch so im Infomodell des Konnektors hinterlegt sein.
+
+image:context/context-edit.png[]
+
+Neben den drei Angaben Mandant, Clientsystem gibt die Möglichkeit, eine kurze Beschreibung anzugeben, die später eine Identifizierung des Kontextes erleichtert, etwa den Namen einer Institutsambulanz, wenn als Mandant nur eine wenig sprechende Betriebsstättennummer verwendet wird.
