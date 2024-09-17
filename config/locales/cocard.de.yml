@@ -85,7 +85,7 @@ de:
   attributes:
     accessibility: Test Erreichbarkeit
     action: Aktion
-    admin_url: Admin-Url
+    admin_url: Admin-URL
     authentication: Authentifikation
     bsnr: BSNR
     card: Karte
@@ -160,7 +160,7 @@ de:
     private_information: Geschützte Information
     product_information: Produktinformation
     room: Raum
-    sds_url: SDS-Url
+    sds_url: SDS-URL
     search: Suche
     serial: Seriennummer
     since: seit
