@@ -1,7 +1,10 @@
 = Standorte
 :author: Wolfgang Barth
-:revdate: 2024-09-16
+:revdate: 2024-09-18
+:imagesdir: ../../images
 
-#FIXME#
+Standorte sind als Zusatzinformation gedacht und komplett optional. Die Zuordnung von Konnektoren und Karten zu Standorten erfolgt manuell, die Zuordnung von Kartenterminals kann über die IP-Adresse automatisiert erfolgen, wenn ein passendes xref:admin/networks.adoc[Netzwerk] angelegt wurde.
 
-Standorte sind als Zusatzinformation gedacht und komplett optional.
+Die Übersicht eines Standortes zeigt die verknüpften Objekte:
+
+image:location/location-show.png[]

@@ -62,6 +62,9 @@
     <a class="nav-link" href="../admin/locations.html">Standorte</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/networks.html">Netzwerke</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../admin/jobs.html">Jobverwaltung</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -178,29 +181,13 @@ echo 1000 &gt; serial</pre>
 <pre>cp /etc/ssl/openssl.cnf /etc/ssl/telematik/.</pre>
 </div>
 </div>
-<div class="olist lowerroman">
-<ol class="lowerroman" type="i">
-<li>
+<div class="paragraph">
 <p>bearbeiten</p>
-</li>
-</ol>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-KoCoBox in der Version 5 unterstützt RSA nur bis 2048 bit!
-</td>
-</tr>
-</table>
 </div>
 <div class="listingblock">
 <div class="title">CA-Key</div>
 <div class="content">
-<pre>openssl genrsa -aes256 -out private/cakey.pem 2048
+<pre>openssl genrsa -aes256 -out private/cakey.pem 3072
 chmod 400 private/cakey.pem</pre>
 </div>
 </div>

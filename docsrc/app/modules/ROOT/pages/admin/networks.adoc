@@ -1,0 +1,25 @@
+= Netzwerke
+:author: Wolfgang Barth
+:revdate: 2024-09-18
+:imagesdir: ../../images
+
+Die Pflege von Netzwerken in Cocard ist optional und dient der automatisierten Zuordnung von Kartenterminals zu xref:admin/locations.adoc[Standorten]. Bei der Abfrage von Kartenterminals prüft Cocard, ob das Kartenterminal eine IP-Adresse hat. Wenn ja sucht Cocard nach einem passenden Netzwerk. Wird ein Netzwerk gefunden, zu der die IP-Adresse gehört, dann wird dem Kartenterminal automatisch der im Netzwerk hinterlegte Standort zugewiesen. Ein schon vorhandener Standort wird dabei überschrieben.
+
+NOTE: Sollen Standorte bei bestimmten Kartenterminals manuell gepflegt werden, darf es zu dem IP-Bereich der Kartenterminals kein passendes Netzwerk geben.
+
+== Anlage von Netzwerken
+
+.Netzwerk anlegen
+image:network/network-create.png[]
+
+Die Angabe eines Netzwerkes erfolgt immer in der CIDR-Notation. Mit dem Test der Erreichbarkeit via Ping erfolgt zusätzlich eine Prüfung über ICMP-Ping. Ist das Netzwerk des Kartenterminals vom Cocard-Server aus nicht erreichbar, kann der Test deaktiviert werden.
+
+NOTE: Wenn kein Netzwerk zur IP des Kartenterminals existiert, wird kein ICMP-Ping durchgeführt und für die Erreichbarkeit des Kartenterminals nur der Wert `Connected` des Konnektors ausgewertet.
+
+== Anzeige von Netzwerken
+
+.Übersicht Netzwerke
+image:network/networks-index.png[]
+
+.Einzelanzeige Netzwerk - zur Zeit noch ohne verknüpfte Kartenterminals und Konnektoren
+image:network/network-show.png[]

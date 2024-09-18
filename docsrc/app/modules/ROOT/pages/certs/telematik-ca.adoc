@@ -20,14 +20,12 @@ echo 1000 > serial
 cp /etc/ssl/openssl.cnf /etc/ssl/telematik/.
 ----
 
-... bearbeiten
-
-IMPORTANT: KoCoBox in der Version 5 unterstützt RSA nur bis 2048 bit!
+bearbeiten
 
 
 .CA-Key
 ----
-openssl genrsa -aes256 -out private/cakey.pem 2048
+openssl genrsa -aes256 -out private/cakey.pem 3072
 chmod 400 private/cakey.pem
 ----
 
