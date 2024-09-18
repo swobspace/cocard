@@ -20,7 +20,7 @@
     
       <tr>
         <th class="w-10 pe-3"><%= t('attributes.netzwerk')%>:</th>
-        <td><%= @network.netzwerk %></td>
+        <td><%= @network.to_cidr_s %></td>
       </tr>
       <tr>
         <th class="w-10 pe-3"><%= t('attributes.description')%>:</th>
