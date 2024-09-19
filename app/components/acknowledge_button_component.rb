@@ -28,17 +28,25 @@ class AcknowledgeButtonComponent < ViewComponent::Base
 
   def button_action
     if @current.nil?
-      new_log_note_path(notable, type: type)
+      new_polymorphic_path([notable, :note], type: type)
     else
-      log_note_path(notable, current)
+      polymorphic_path([notable, current])
     end
   end
 
   def render?
-    !!current || !readonly
+    (!!current || !readonly) && error_state
   end
 
   private
   attr_reader :notable, :type, :readonly, :current, :small
+
+  def error_state
+    if notable.kind_of? Log
+      true
+    else
+      notable.condition >= Cocard::States::WARNING
+    end
+  end
 
 end
