@@ -1,0 +1,13 @@
+<%= turbo_stream.replace('ack_' + dom_id(@notable)) do %>
+  <%= render AcknowledgeButtonComponent.new(
+               notable: @notable,
+               readonly: cannot?(:manage, @notable)
+             )
+   %>
+<% end %>
+
+<%= turbo_stream.replace('notes') do %>
+  <%= turbo_frame_tag("notes", src: polymorphic_path([@notable, :notes], active: 1),
+                               refresh: "morph") %>
+<% end %>
+
