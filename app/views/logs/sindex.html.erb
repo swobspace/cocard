@@ -13,7 +13,7 @@
               <th><%= t('attributes.action') %></th>
               <th><%= t('attributes.message') %></th>
               <th><%= t('attributes.last_seen') %></th>
-              <th class="nosort"><%= t('cocard.action') %></th>
+              <th class="nosort text-end"><%= t('cocard.action') %></th>
         </tr>
       </thead>
       <tbody>
@@ -35,7 +35,7 @@
             <td><%= render IsCurrentComponent.new(item: log, attr: :last_seen,
                                                   relative: true)%></td>
 
-            <td class="text-nowrap">
+            <td class="text-nowrap text-end">
               <%= show_link log, class: 'btn btn-sm btn-outline-secondary me-1',
                                  data: { "turbo" => false } %>
               <%= render AcknowledgeButtonComponent.new(
