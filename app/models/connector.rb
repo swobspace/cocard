@@ -2,6 +2,7 @@ class Connector < ApplicationRecord
   include PingConcerns
   include ConnectorConcerns
   include Cocard::Condition
+  include NotableConcerns
 
   # -- associations
   has_many :logs, as: :loggable, dependent: :destroy

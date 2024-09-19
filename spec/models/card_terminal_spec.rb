@@ -25,6 +25,10 @@ RSpec.describe CardTerminal, type: :model do
   end
 
   it { is_expected.to have_many(:logs) }
+  it { is_expected.to belong_to(:acknowledge).optional }
+  it { is_expected.to have_many(:notes).dependent(:destroy) }
+  it { is_expected.to have_many(:plain_notes).dependent(:destroy) }
+  it { is_expected.to have_many(:acknowledges).dependent(:destroy) }
   it { is_expected.to have_many(:terminal_workplaces).dependent(:destroy) }
   it { is_expected.to have_many(:workplaces).through(:terminal_workplaces) }
   it { is_expected.to belong_to(:connector).optional }
@@ -248,4 +252,34 @@ RSpec.describe CardTerminal, type: :model do
       end
     end
   end
+  describe "with notes" do
+    let!(:note) { FactoryBot.create(:note, notable: ct, type: Note.types[:plain]) }
+    let!(:ack) { FactoryBot.create(:note, notable: ct, type: Note.types[:acknowledge]) }
+    let!(:oldnote) do
+      FactoryBot.create(:note,
+        notable: ct,
+        type: Note.types[:plain],
+        valid_until: Date.yesterday
+      )
+    end
+    let!(:oldack) do
+      FactoryBot.create(:note,
+        notable: ct,
+        type: Note.types[:acknowledge],
+        valid_until: Date.yesterday
+      )
+    end
+
+    it { expect(ct.acknowledges).to contain_exactly(ack, oldack) }
+    it { expect(ct.current_acknowledge).to eq(ack) }
+    it { expect(ct.acknowledges.active).to contain_exactly(ack) }
+    it { expect(ct.acknowledges.count).to eq(2) }
+    it { expect(ct.current_note).to eq(note) }
+    it { expect(ct.notes.active).to contain_exactly(note, ack) }
+    it { expect(ct.notes.count).to eq(4) }
+    it { expect(ct.plain_notes).to contain_exactly(note, oldnote) }
+    it { expect(ct.plain_notes.active).to contain_exactly(note) }
+    it { expect(ct.plain_notes.count).to eq(2) }
+  end
+
 end

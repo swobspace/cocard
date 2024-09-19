@@ -2,7 +2,6 @@ class Log < ApplicationRecord
   include NotableConcerns
   # -- associations
   belongs_to :loggable, polymorphic: true
-  belongs_to :acknowledge, class_name: 'Note', optional: true
 
   default_scope { order('since desc NULLS LAST') }
 

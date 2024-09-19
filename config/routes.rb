@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       post :verify_pin
       post :get_card
     end
+    resources :notes, module: :cards
   end
   resources :card_terminals do
     resources :logs, only: [:index, :show, :destroy], module: :card_terminals
@@ -37,6 +38,7 @@ Rails.application.routes.draw do
     member do
       get :ping
     end
+    resources :notes, module: :card_terminals
   end
   resources :contexts
   resources :connectors do
@@ -51,6 +53,7 @@ Rails.application.routes.draw do
       post :get_cards
       get :ping
     end
+    resources :notes, module: :connectors
   end
   resources :locations do
     resources :connectors, only: [:index, :show, :destroy], module: :locations

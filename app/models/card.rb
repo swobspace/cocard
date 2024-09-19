@@ -1,9 +1,11 @@
 class Card < ApplicationRecord
   include CardConcerns
   include Cocard::Condition
+  include NotableConcerns
 
   # -- associations
   has_many :logs, as: :loggable, dependent: :destroy
+
   belongs_to :card_terminal, optional: true
   has_many :card_contexts, dependent: :destroy
   has_many :contexts, through: :card_contexts

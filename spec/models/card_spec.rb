@@ -16,6 +16,10 @@ RSpec.describe Card, type: :model do
     )
   end
   it { is_expected.to have_many(:logs) }
+  it { is_expected.to belong_to(:acknowledge).optional }
+  it { is_expected.to have_many(:notes).dependent(:destroy) }
+  it { is_expected.to have_many(:plain_notes).dependent(:destroy) }
+  it { is_expected.to have_many(:acknowledges).dependent(:destroy) }
   it { is_expected.to belong_to(:card_terminal).optional }
   it { is_expected.to have_many(:card_contexts).dependent(:destroy) }
   it { is_expected.to have_many(:contexts).through(:card_contexts) }
@@ -170,4 +174,35 @@ RSpec.describe Card, type: :model do
     
     end
   end
+
+  describe "with notes" do
+    let!(:note) { FactoryBot.create(:note, notable: card, type: Note.types[:plain]) }
+    let!(:ack) { FactoryBot.create(:note, notable: card, type: Note.types[:acknowledge]) }
+    let!(:oldnote) do
+      FactoryBot.create(:note,
+        notable: card,
+        type: Note.types[:plain],
+        valid_until: Date.yesterday
+      )
+    end
+    let!(:oldack) do
+      FactoryBot.create(:note,
+        notable: card,
+        type: Note.types[:acknowledge],
+        valid_until: Date.yesterday
+      )
+    end
+
+    it { expect(card.acknowledges).to contain_exactly(ack, oldack) }
+    it { expect(card.current_acknowledge).to eq(ack) }
+    it { expect(card.acknowledges.active).to contain_exactly(ack) }
+    it { expect(card.acknowledges.count).to eq(2) }
+    it { expect(card.current_note).to eq(note) }
+    it { expect(card.notes.active).to contain_exactly(note, ack) }
+    it { expect(card.notes.count).to eq(4) }
+    it { expect(card.plain_notes).to contain_exactly(note, oldnote) }
+    it { expect(card.plain_notes.active).to contain_exactly(note) }
+    it { expect(card.plain_notes.count).to eq(2) }
+  end
+
 end
