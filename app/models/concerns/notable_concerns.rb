@@ -10,6 +10,9 @@ module NotableConcerns
              as: :notable, class_name: 'Note', dependent: :destroy
     has_many :acknowledges, -> { where(type: types[:acknowledge]) },
              as: :notable, class_name: 'Note', dependent: :destroy
+
+    scope :acknowledged, -> { joins(:acknowledge) }
+    scope :not_acknowledged, -> { where(acknowledge_id: nil) }
   end
 
   def current_note
