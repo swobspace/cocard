@@ -14,7 +14,7 @@ class CardTerminal < ApplicationRecord
   has_many :cards, dependent: :destroy
 
   # -- configuration
-  broadcasts_refreshes
+  # broadcasts_refreshes
 
   enum pin_mode: { off: 0, on_demand: 1 }
 
