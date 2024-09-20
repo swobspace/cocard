@@ -13,7 +13,7 @@ class Card < ApplicationRecord
   belongs_to :operational_state, optional: true
 
   # -- configuration
-  # broadcasts_refreshes
+  broadcasts_refreshes
 
   has_rich_text :description
   has_rich_text :private_information

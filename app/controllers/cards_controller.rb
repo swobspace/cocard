@@ -36,7 +36,7 @@ class CardsController < ApplicationController
     @card = Card.new
     respond_with(@card)
   end
-    
+
   # GET /cards/1/edit
   def edit
   end
@@ -71,7 +71,7 @@ class CardsController < ApplicationController
       unless result.success?
         status  = :alert
         message = (@card.to_s + "<br/>" +
-                   "Kontext: #{@context}<br/>ERROR:: " + 
+                   "Kontext: #{@context}<br/>ERROR:: " +
                    result.error_messages.join(', ')).html_safe
       else
         status  = :success
@@ -84,8 +84,10 @@ class CardsController < ApplicationController
       message = "No context assigned or context not found!"
     end
     render turbo_stream: [
-      turbo_stream.prepend("toaster", partial: "shared/turbo_toast", 
-                                      locals: {status: status, message: message})
+      turbo_stream.prepend("toaster", partial: "shared/turbo_toast",
+                                      locals: {status: status, message: message}),
+      turbo_stream.replace(@card, partial: "cards/show",
+                                      locals: { card: @card })
     ]
   end
 
@@ -95,7 +97,7 @@ class CardsController < ApplicationController
       unless result.success?
         status  = :alert
         message = (@card.to_s + "<br/>" +
-                            "Kontext: #{@context}<br/>ERROR:: " + 
+                            "Kontext: #{@context}<br/>ERROR:: " +
                             result.error_messages.join(', ')).html_safe
       else
         status  = :success
@@ -108,8 +110,10 @@ class CardsController < ApplicationController
     end
     @card.save
     render turbo_stream: [
-      turbo_stream.prepend("toaster", partial: "shared/turbo_toast", 
-                                      locals: {status: status, message: message})
+      turbo_stream.prepend("toaster", partial: "shared/turbo_toast",
+                                      locals: {status: status, message: message}),
+      turbo_stream.replace(@card, partial: "cards/show",
+                                      locals: { card: @card })
     ]
   end
 
@@ -124,8 +128,10 @@ class CardsController < ApplicationController
     end
     @card.save
     render turbo_stream: [
-      turbo_stream.prepend("toaster", partial: "shared/turbo_toast", 
-                                      locals: {status: status, message: message})
+      turbo_stream.prepend("toaster", partial: "shared/turbo_toast",
+                                      locals: { status: status, message: message }),
+      turbo_stream.replace(@card, partial: "cards/show",
+                                      locals: { card: @card })
     ]
   end
 
@@ -152,7 +158,7 @@ class CardsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def card_params
       params.require(:card)
-            .permit(:name, :description, :iccsn, :slotid, :card_type, 
+            .permit(:name, :description, :iccsn, :slotid, :card_type,
                     :card_holder_name, :card_terminal_id, :location_id,
                     :operational_state_id, :lanr, :bsnr, :telematikid,
                     :fachrichtung, :context_id, :private_information,

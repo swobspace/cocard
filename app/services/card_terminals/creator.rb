@@ -61,12 +61,14 @@ module CardTerminals
       #
       # final save
       #
-      if @card_terminal.save
-        @card_terminal.touch
-      else
-        Rails.logger.warn("WARN:: could not create or save card terminal #{@card_terminal.mac}: " +
-          @card_terminal.errors.full_messages.join('; '))
-        false
+      CardTerminal.suppressing_turbo_broadcasts do
+        if @card_terminal.save
+          @card_terminal.touch
+        else
+          Rails.logger.warn("WARN:: could not create or save card terminal #{@card_terminal.mac}: " +
+            @card_terminal.errors.full_messages.join('; '))
+          false
+        end
       end
     end
     # rubocop:enable Metrics/AbcSize, Rails/SkipsModelValidations
