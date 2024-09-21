@@ -15,6 +15,11 @@
         <%= render ConditionIconComponent.new(item: @card_terminal) %>
       </div>
       <div role="toolbar" class="ms-auto pt-3">
+        <%= render AcknowledgeButtonComponent.new(
+                     notable: @card_terminal, small: false,
+                     readonly: cannot?(:manage, @card_terminal)
+                   )
+         %>
         <%= edit_link(@card_terminal) %>
         <%= delete_link(@card_terminal) %>
       </div>
@@ -228,4 +233,7 @@
 
 <%= turbo_frame_tag("logs", src: card_terminal_logs_path(@card_terminal, valid: 1),
                             refresh: "morph") %>
+
+<%= turbo_frame_tag("notes", src: polymorphic_path([@card_terminal, :notes], active: 1),
+                             refresh: "morph") %>
 

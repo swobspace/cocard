@@ -33,3 +33,13 @@
                   link:  sindex_connectors_path(condition: Cocard::States::NOTHING),
                   myframe: 'connectors') %>
 </div>
+<div class="me-2">
+  <%= link_to sindex_connectors_path(acknowledged: 'true'),
+              class: 'btn btn-outline-secondary',
+              "data-turbo-frame": 'connectors' do %>
+    <i class="fa-solid fa-person-digging"></i>
+    <span class="badge text-bg-secondary">
+      <%= Connector.acknowledged.count %>
+    </span>
+  <% end %>
+</div>

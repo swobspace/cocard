@@ -6,6 +6,8 @@ class CardTerminalsController < ApplicationController
   def index
     if @locatable
       @card_terminals = @locatable.card_terminals
+    elsif params[:acknowledged]
+      @card_terminals = CardTerminal.acknowledged
     else
       @card_terminals = CardTerminal.all
     end
@@ -14,10 +16,12 @@ class CardTerminalsController < ApplicationController
 
   def sindex
     if params[:condition]
-      @card_terminals = CardTerminal.condition(params[:condition])
+      @card_terminals = CardTerminal.condition(params[:condition]).not_acknowledged
                                     .order('last_ok desc NULLS LAST')
+    elsif params[:acknowledged]
+      @card_terminals = CardTerminal.acknowledged
     else
-      @card_terminals = CardTerminal.failed
+      @card_terminals = CardTerminal.failed.not_acknowledged
                                     .order('last_ok desc NULLS LAST')
     end
     @pagy, @card_terminals = pagy(@card_terminals)

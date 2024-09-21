@@ -6,6 +6,8 @@ class CardsController < ApplicationController
   def index
     if @locatable
       @cards = @locatable.cards
+    elsif params[:acknowledged]
+      @cards = Card.acknowledged
     else
       @cards = Card.all
     end
@@ -18,9 +20,11 @@ class CardsController < ApplicationController
 
   def sindex
     if params[:condition]
-      @cards = Card.condition(params[:condition])
+      @cards = Card.condition(params[:condition]).not_acknowledged
+    elsif params[:acknowledged]
+      @cards = Card.acknowledged
     else
-      @cards = Card.failed
+      @cards = Card.failed.not_acknowledged
     end
     @pagy, @cards = pagy(@cards)
     respond_with(@cards)
