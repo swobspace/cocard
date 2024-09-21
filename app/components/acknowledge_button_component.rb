@@ -20,7 +20,7 @@ class AcknowledgeButtonComponent < ViewComponent::Base
 
   def button_css
     if @current.nil?
-      "btn #{btn_size} btn-outline-warning text-acknowledge"
+      "btn #{btn_size} btn-warning"
     else
       "btn #{btn_size} btn-outline-secondary"
     end
