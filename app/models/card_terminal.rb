@@ -2,6 +2,7 @@ class CardTerminal < ApplicationRecord
   include PingConcerns
   include CardTerminalConcerns
   include Cocard::Condition
+  include NotableConcerns
 
   # -- associations
   has_many :logs, as: :loggable, dependent: :destroy

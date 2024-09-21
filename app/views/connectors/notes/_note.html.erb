@@ -1,0 +1,16 @@
+<%= tag.tr id: dom_id(note), class: "#{'invalid' unless note.is_active}" do %>
+  <td>
+    <%= render IsCurrentComponent.new(item: note, attr: :created_at,
+                                      relative: true, icon: false) %>
+  </td>
+  <td><%= t(note.type, scope: 'notes') %></td>
+  <td><%= truncate(note.message.to_plain_text, length: 200) %></td>
+  <td class="text-end"><%= note.valid_until&.localtime&.to_s %></td>
+  <td><%= note.user %></td>
+  <td class="text-end text-nowrap">
+    <%= show_link [note.notable, note], class: 'btn btn-sm btn-secondary', data: { "turbo-frame" => "modal" } %>
+    <%= edit_link [note.notable, note], class: 'btn btn-sm btn-secondary', data: { "turbo-frame" => "modal" } %>
+    <%= delete_link [note.notable, note], class: 'btn btn-sm btn-danger' %>
+  </td>
+<% end %>
+

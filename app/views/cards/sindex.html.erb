@@ -13,6 +13,7 @@
         <th><%= t('attributes.iccsn') %></th>
         <th><%= t('attributes.connector') %></th>
         <th><%= t('attributes.card_terminal') %></th>
+        <th class="nosort text-end"><%= t('cocard.action') %></th>
       </tr>
     </thead>
     <tbody>
@@ -37,6 +38,17 @@
                           data: { "turbo-frame" => "_top" },
                           class: "primary-link"
                          ) if card.card_terminal %></td>
+          <td class="text-end text-nowrap">
+              <%= show_link card,
+                            class: 'btn btn-sm btn-outline-secondary me-1',
+                            data: { "turbo" => false } %>
+              <%= render AcknowledgeButtonComponent.new(
+                           notable: card,
+                           readonly: cannot?(:manage, card)
+                         )
+               %>
+          </td>
+
         <% end %>
       <% end %>
     </tbody>

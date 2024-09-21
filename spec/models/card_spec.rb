@@ -16,6 +16,10 @@ RSpec.describe Card, type: :model do
     )
   end
   it { is_expected.to have_many(:logs) }
+  it { is_expected.to belong_to(:acknowledge).optional }
+  it { is_expected.to have_many(:notes).dependent(:destroy) }
+  it { is_expected.to have_many(:plain_notes).dependent(:destroy) }
+  it { is_expected.to have_many(:acknowledges).dependent(:destroy) }
   it { is_expected.to belong_to(:card_terminal).optional }
   it { is_expected.to have_many(:card_contexts).dependent(:destroy) }
   it { is_expected.to have_many(:contexts).through(:card_contexts) }
@@ -120,6 +124,29 @@ RSpec.describe Card, type: :model do
           card.update_condition
         }.to change(card, :condition).to(Cocard::States::UNKNOWN)
       end
+
+      describe "changing to OK" do
+        let(:ack) do 
+          FactoryBot.create(:note, notable: card, 
+            type: Note.types[:acknowledge]
+          )
+        end
+ 
+        it "auto-closes ack" do
+          card.update_columns(acknowledge_id: ack.id, condition: Cocard::States::WARNING)
+          card.reload
+          expect(card.acknowledge).to eq(ack)
+          expect(card.condition).to eq(Cocard::States::WARNING)
+          expect {
+            card.update_condition
+          }.to change(card, :condition).to(Cocard::States::OK)
+                  connector.reload
+          expect(card.acknowledge).to be_nil
+          ack.reload
+          expect(ack.valid_until).to be >= 1.second.before(Time.current)
+          expect(ack.valid_until).to be <= 1.second.after(Time.current)
+        end
+      end
     end
 
     describe "with updated at 1 hour ago" do
@@ -133,6 +160,7 @@ RSpec.describe Card, type: :model do
       end
     end
   end
+
 
   describe "#pin_status" do
     let!(:cctx1) { FactoryBot.create(:card_context, card: card) }
@@ -168,6 +196,50 @@ RSpec.describe Card, type: :model do
       it { expect(card.pin_status(cctx1.context_id)).to eq(Cocard::States::OK) }
       it { expect(card.pin_status(cctx2.context_id)).to eq(Cocard::States::CRITICAL) }
     
+    end
+  end
+
+  describe "with notes" do
+    let!(:note) { FactoryBot.create(:note, notable: card, type: Note.types[:plain]) }
+    let!(:ack) { FactoryBot.create(:note, notable: card, type: Note.types[:acknowledge]) }
+    let!(:oldnote) do
+      FactoryBot.create(:note,
+        notable: card,
+        type: Note.types[:plain],
+        valid_until: Date.yesterday
+      )
+    end
+    let!(:oldack) do
+      FactoryBot.create(:note,
+        notable: card,
+        type: Note.types[:acknowledge],
+        valid_until: Date.yesterday
+      )
+    end
+
+    it { expect(card.acknowledges).to contain_exactly(ack, oldack) }
+    it { expect(card.current_acknowledge).to eq(ack) }
+    it { expect(card.acknowledges.active).to contain_exactly(ack) }
+    it { expect(card.acknowledges.count).to eq(2) }
+    it { expect(card.current_note).to eq(note) }
+    it { expect(card.notes.active).to contain_exactly(note, ack) }
+    it { expect(card.notes.count).to eq(4) }
+    it { expect(card.plain_notes).to contain_exactly(note, oldnote) }
+    it { expect(card.plain_notes.active).to contain_exactly(note) }
+    it { expect(card.plain_notes.count).to eq(2) }
+
+    describe "#close_acknowledge" do
+      before(:each) do
+        connector.update(acknowledge_id: ack.id)
+        connector.reload
+      end
+
+      it "terminates current ack" do
+        expect(connector.acknowledge).to eq(ack)
+        expect {
+          connector.close_acknowledge
+        }.to change(connector, :acknowledge_id).to(nil)
+      end
     end
   end
 end

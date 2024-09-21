@@ -31,6 +31,12 @@
                         class: 'btn btn-warning me-1') if can? :manage, @connector 
            %>
         <% end %>
+        <%= render AcknowledgeButtonComponent.new(
+                     notable: @connector, small: false,
+                     readonly: cannot?(:manage, @connector)
+                   )
+         %>
+
         <%= edit_link(@connector) %>
         <%= delete_link(@connector) %>
       </div>
@@ -209,4 +215,7 @@
 
 <%= turbo_frame_tag("logs", src: connector_logs_path(@connector, valid: 1),
                             refresh: "morph") %>
+
+<%= turbo_frame_tag("notes", src: polymorphic_path([@connector, :notes], active: 1),
+                             refresh: "morph") %>
 

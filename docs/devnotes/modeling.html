@@ -217,7 +217,8 @@ bin/rails g migration AddReadonlyToConnector \
   condition_message:string  \
   soap_request_success:boolean \
   vpnti_online:boolean \
-  firmware_version:string</code></pre>
+  firmware_version:string \
+  acknowledge_id:bigint</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -267,7 +268,8 @@ bin/rails g migration AddInternalToCardTerminal \
   last_ok:timestamp \
   connector:belongs_to \
   network:belongs_to \
-  firmware_version:string</code></pre>
+  firmware_version:string \
+  acknowledge_id:bigint</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -312,6 +314,7 @@ bin/rails g migration AddInternalToCard \
   expiration_date:date \
   condition:integer \
   condition_message:string  \
+  acknowledge_id:bigint \
   card_terminal:belongs_to
 
 bin/rails g migration AddCertificateToCard \

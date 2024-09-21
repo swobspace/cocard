@@ -6,11 +6,12 @@
         class: "table tablesm mb-0" do %>
     <thead>
       <tr class="">
-            <th class="text-center"><%= t('attributes.condition') %></th>
-            <th><%= t('attributes.name') %></th>
-            <th><%= t('attributes.condition_message') %></th>
-            <th class="text-center"><%= t('attributes.last_check') %></th>
-            <th class="text-center"><%= t('attributes.last_ok') %></th>
+        <th class="text-center"><%= t('attributes.condition') %></th>
+        <th><%= t('attributes.name') %></th>
+        <th><%= t('attributes.condition_message') %></th>
+        <th class="text-center"><%= t('attributes.last_check') %></th>
+        <th class="text-center"><%= t('attributes.last_ok') %></th>
+        <th class="nosort text-end"><%= t('cocard.action') %></th>
       </tr>
     </thead>
     <tbody>
@@ -29,6 +30,17 @@
                                                 relative: true)%></td>
           <td><%= render IsCurrentComponent.new(item:connector, attr: :last_ok,
                                                 relative: true)%></td>
+          <td class="text-end text-nowrap">
+              <%= show_link connector, 
+                            class: 'btn btn-sm btn-outline-secondary me-1',
+                            data: { "turbo" => false } %>
+              <%= render AcknowledgeButtonComponent.new(
+                           notable: connector,
+                           readonly: cannot?(:manage, connector)
+                         )
+               %>
+          </td>
+
         <% end %>
       <% end %>
     </tbody>

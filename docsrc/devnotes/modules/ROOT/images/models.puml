@@ -25,6 +25,7 @@ class Connector  {
   soap_request_success: boolean
   vpnti_online: boolean
   firmware_version: string
+  acknowledge_id: bigint
 }
 
 class CardTerminal {
@@ -51,6 +52,7 @@ class CardTerminal {
   condition: integer
   last_ok: timestamp
   firmware_version: string
+  acknowledge_id: bigint
   connector_id
   network_id
 }
@@ -102,6 +104,7 @@ class Card {
   expiration_date: date
   condition: integer
   condition_message: string
+  acknowledge_id: bigint
   card_terminal_id
   --
   certificate:text
@@ -142,7 +145,7 @@ Class Log {
   message: text
   is_valid: boolean
   condition: integer
-  acknowledge_id: bitint
+  acknowledge_id: bigint
 }
 
 Class Network {

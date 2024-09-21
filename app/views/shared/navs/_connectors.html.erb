@@ -10,6 +10,9 @@
       <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
             t('controller.connectors')),
           main_app.connectors_path, class: "dropdown-item" %>
+      <%= link_to raw( '<span class="fa-solid fa-fw fa-person-digging" aria-hidden="true"></span> ' +
+            t('controller.connectors')),
+          main_app.connectors_path(acknowledged: true), class: "dropdown-item" %>
       <% if can? :create, Connector %>
         <%= link_to raw('<span class="fas fa-fw fa-plus" aria-hidden="true"></span> ' +
                         t('cocard.new_connector')),

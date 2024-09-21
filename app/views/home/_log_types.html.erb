@@ -35,7 +35,7 @@
   <%= link_to sindex_logs_path(acknowledged: 'true'),
               class: 'btn btn-outline-secondary',
               "data-turbo-frame": 'logs' do %>
-    Acknowledged
+    <i class="fa-solid fa-person-digging"></i>
     <span class="badge text-bg-secondary">
       <%= Log.valid.acknowledged.count %>
     </span>

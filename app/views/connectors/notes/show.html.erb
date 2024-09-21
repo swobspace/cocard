@@ -1,0 +1,34 @@
+<%= render ModalComponent.new(title: t(@note.type, scope: :notes)) do %>
+
+  <table class="table table-sm table-borderless">
+  
+    <tr>
+      <th class="w-10 pe-3">
+        <%= t('activerecord.models.' + @note.notable.class&.name&.to_s.underscore )%>:
+      </th>
+      <td><%= @note.notable %></td>
+    </tr>
+
+    <tr>
+      <th class="w-10 pe-3"><%= t('attributes.message')%>:</th>
+      <td><%= @note.message %></td>
+    </tr>
+
+    <tr>
+      <th class="w-10 pe-3"><%= t('attributes.user')%>:</th>
+      <td><%= @note.user %></td>
+    </tr>
+
+    <tr>
+      <th class="w-10 pe-3"><%= t('attributes.valid_until')%>:</th>
+      <td><%= @note.valid_until %></td>
+    </tr>
+
+    <tr>
+      <th class="w-10 pe-3"><%= t('attributes.type')%>:</th>
+      <td><%= @note.type %></td>
+    </tr>
+
+  </table>
+
+<% end %>

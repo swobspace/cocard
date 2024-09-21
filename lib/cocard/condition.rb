@@ -11,6 +11,9 @@ module Cocard
         if respond_to?(:last_ok)
           self[:last_ok] = Time.current
         end
+        if respond_to?(:close_acknowledge)
+          close_acknowledge
+        end
       end
     end
 

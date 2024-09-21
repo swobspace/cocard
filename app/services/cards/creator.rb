@@ -72,12 +72,14 @@ module Cards
 
       @card.updated_at = Time.current
 
-      if @card.save
-        true
-      else
-        Rails.logger.warn("WARN:: could not create or save card #{@card.iccsn}: " +
-          @card.errors.full_messages.join('; '))
-        false
+      Card.suppressing_turbo_broadcasts do
+        if @card.save
+          true
+        else
+          Rails.logger.warn("WARN:: could not create or save card #{@card.iccsn}: " +
+            @card.errors.full_messages.join('; '))
+          false
+        end
       end
     end
     # rubocop:enable Metrics/AbcSize, Rails/SkipsModelValidations

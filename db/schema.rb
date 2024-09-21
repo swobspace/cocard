@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_15_093613) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_19_073653) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -94,6 +94,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_15_093613) do
     t.datetime "last_ok", precision: nil
     t.bigint "network_id"
     t.integer "pin_mode", default: 0
+    t.bigint "acknowledge_id"
     t.index ["condition"], name: "index_card_terminals_on_condition"
     t.index ["connector_id"], name: "index_card_terminals_on_connector_id"
     t.index ["location_id"], name: "index_card_terminals_on_location_id"
@@ -133,6 +134,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_15_093613) do
     t.integer "condition", default: -1
     t.string "old_pin_status", default: ""
     t.string "condition_message", default: ""
+    t.bigint "acknowledge_id"
     t.index ["card_terminal_id"], name: "index_cards_on_card_terminal_id"
     t.index ["condition"], name: "index_cards_on_condition"
     t.index ["iccsn"], name: "index_cards_on_iccsn", unique: true
@@ -194,6 +196,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_15_093613) do
     t.boolean "use_tls", default: false
     t.integer "authentication", default: 0
     t.string "condition_message", default: ""
+    t.bigint "acknowledge_id"
     t.index ["condition"], name: "index_connectors_on_condition"
   end
 

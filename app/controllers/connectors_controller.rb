@@ -6,6 +6,8 @@ class ConnectorsController < ApplicationController
   def index
     if @locatable
       @connectors = @locatable.connectors
+    elsif params[:acknowledged]
+      @connectors = Connector.acknowledged
     else
       @connectors = Connector.all
     end
@@ -14,9 +16,11 @@ class ConnectorsController < ApplicationController
 
   def sindex
     if params[:condition]
-      @connectors = Connector.condition(params[:condition])
+      @connectors = Connector.condition(params[:condition]).not_acknowledged
+    elsif params[:acknowledged]
+      @connectors = Connector.acknowledged
     else
-      @connectors = Connector.failed
+      @connectors = Connector.failed.not_acknowledged
     end
     @pagy, @connectors = pagy(@connectors)
     respond_with(@connectors)
