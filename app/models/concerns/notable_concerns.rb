@@ -25,4 +25,12 @@ module NotableConcerns
     acknowledges.active.order("id DESC").first
   end
 
+  def close_acknowledge
+    return if acknowledge.nil?
+    ActiveRecord::Base.transaction do
+      acknowledge.update(valid_until: Time.current)
+      update(acknowledge_id: nil)
+    end
+  end
+
 end

@@ -90,13 +90,27 @@ RSpec.describe Connector, type: :model do
     end
 
     describe "with vpnti_status online" do
-      it "-> CRITICAL" do
-        expect(connector).to receive(:up?).and_return(true)
-        expect(connector).to receive(:soap_request_success).and_return(true)
-        expect(connector).to receive(:vpnti_online).and_return(true)
+      let(:ack) do 
+        FactoryBot.create(:note, notable: connector, 
+          type: Note.types[:acknowledge]
+        )
+      end
+
+      it "-> OK" do
+        connector.update(acknowledge_id: ack.id)
+        connector.reload
+        expect(connector.acknowledge).to eq(ack)
+        expect(connector).to receive(:up?).at_least(:once).and_return(true)
+        expect(connector).to receive(:soap_request_success).at_least(:once).and_return(true)
+        expect(connector).to receive(:vpnti_online).at_least(:once).and_return(true)
         expect {
           connector.update_condition
         }.to change(connector, :condition).to(Cocard::States::OK)
+        connector.reload
+        expect(connector.acknowledge).to be_nil
+        ack.reload
+        expect(ack.valid_until).to be >= 1.second.before(Time.current)
+        expect(ack.valid_until).to be <= 1.second.after(Time.current)
       end
     end
 
@@ -137,6 +151,7 @@ RSpec.describe Connector, type: :model do
       end
     end
   end
+
   describe "with notes" do
     let!(:note) { FactoryBot.create(:note, notable: connector, type: Note.types[:plain]) }
     let!(:ack) { FactoryBot.create(:note, notable: connector, type: Note.types[:acknowledge]) }
@@ -165,6 +180,19 @@ RSpec.describe Connector, type: :model do
     it { expect(connector.plain_notes).to contain_exactly(note, oldnote) }
     it { expect(connector.plain_notes.active).to contain_exactly(note) }
     it { expect(connector.plain_notes.count).to eq(2) }
-  end
 
+    describe "#close_acknowledge" do
+      before(:each) do
+        connector.update(acknowledge_id: ack.id)
+        connector.reload
+      end
+
+      it "terminates current ack" do
+        expect(connector.acknowledge).to eq(ack)
+        expect {
+          connector.close_acknowledge
+        }.to change(connector, :acknowledge_id).to(nil)
+      end
+    end
+  end
 end

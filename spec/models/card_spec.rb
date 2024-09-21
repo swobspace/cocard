@@ -124,6 +124,29 @@ RSpec.describe Card, type: :model do
           card.update_condition
         }.to change(card, :condition).to(Cocard::States::UNKNOWN)
       end
+
+      describe "changing to OK" do
+        let(:ack) do 
+          FactoryBot.create(:note, notable: card, 
+            type: Note.types[:acknowledge]
+          )
+        end
+ 
+        it "auto-closes ack" do
+          card.update_columns(acknowledge_id: ack.id, condition: Cocard::States::WARNING)
+          card.reload
+          expect(card.acknowledge).to eq(ack)
+          expect(card.condition).to eq(Cocard::States::WARNING)
+          expect {
+            card.update_condition
+          }.to change(card, :condition).to(Cocard::States::OK)
+                  connector.reload
+          expect(card.acknowledge).to be_nil
+          ack.reload
+          expect(ack.valid_until).to be >= 1.second.before(Time.current)
+          expect(ack.valid_until).to be <= 1.second.after(Time.current)
+        end
+      end
     end
 
     describe "with updated at 1 hour ago" do
@@ -137,6 +160,7 @@ RSpec.describe Card, type: :model do
       end
     end
   end
+
 
   describe "#pin_status" do
     let!(:cctx1) { FactoryBot.create(:card_context, card: card) }
@@ -203,6 +227,19 @@ RSpec.describe Card, type: :model do
     it { expect(card.plain_notes).to contain_exactly(note, oldnote) }
     it { expect(card.plain_notes.active).to contain_exactly(note) }
     it { expect(card.plain_notes.count).to eq(2) }
-  end
 
+    describe "#close_acknowledge" do
+      before(:each) do
+        connector.update(acknowledge_id: ack.id)
+        connector.reload
+      end
+
+      it "terminates current ack" do
+        expect(connector.acknowledge).to eq(ack)
+        expect {
+          connector.close_acknowledge
+        }.to change(connector, :acknowledge_id).to(nil)
+      end
+    end
+  end
 end

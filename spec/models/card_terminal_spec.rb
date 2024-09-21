@@ -150,13 +150,27 @@ RSpec.describe CardTerminal, type: :model do
       end
 
       describe "with connected online" do
+        let(:ack) do 
+          FactoryBot.create(:note, notable: ct, 
+            type: Note.types[:acknowledge]
+          )
+        end
+
         it "-> OK" do
-          expect(ct).to receive(:up?).and_return(true)
-          expect(ct).to receive(:connected).and_return(true)
+          ct.update(acknowledge_id: ack.id)
+          ct.reload
+          expect(ct.acknowledge).to eq(ack)
+          expect(ct).to receive(:up?).at_least(:once).and_return(true)
+          expect(ct).to receive(:connected).at_least(:once).and_return(true)
           expect {
             ct.update_condition
           }.to change(ct, :condition).to(Cocard::States::OK)
           expect(ct.condition_message).to match(/CardTerminal online/)
+          ct.reload
+          expect(ct.acknowledge).to be_nil
+          ack.reload
+          expect(ack.valid_until).to be >= 1.second.before(Time.current)
+          expect(ack.valid_until).to be <= 1.second.after(Time.current)
         end
       end
 
@@ -280,6 +294,19 @@ RSpec.describe CardTerminal, type: :model do
     it { expect(ct.plain_notes).to contain_exactly(note, oldnote) }
     it { expect(ct.plain_notes.active).to contain_exactly(note) }
     it { expect(ct.plain_notes.count).to eq(2) }
-  end
 
+    describe "#close_acknowledge" do
+      before(:each) do
+        connector.update(acknowledge_id: ack.id)
+        connector.reload
+      end
+
+      it "terminates current ack" do
+        expect(connector.acknowledge).to eq(ack)
+        expect {
+          connector.close_acknowledge
+        }.to change(connector, :acknowledge_id).to(nil)
+      end
+    end
+  end
 end
