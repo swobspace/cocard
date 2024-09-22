@@ -44,7 +44,8 @@ module Cocard
           # Update connector information if card.is_connector_cert
           #
           if card.is_connector_cert
-            # check here
+            connector.expiration_date = card.expiration_date
+            connector.iccsn = card.iccsn
           end
         end
         connector.update(soap_request_success: true,

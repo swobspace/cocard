@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_19_073653) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_22_095241) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -197,6 +197,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_19_073653) do
     t.integer "authentication", default: 0
     t.string "condition_message", default: ""
     t.bigint "acknowledge_id"
+    t.string "iccsn", default: ""
+    t.date "expiration_date"
     t.index ["condition"], name: "index_connectors_on_condition"
   end
 

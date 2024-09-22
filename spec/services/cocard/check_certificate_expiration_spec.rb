@@ -64,7 +64,7 @@ module Cocard
         it { expect(subject.call.cards).to be_kind_of(Array) }
 
         describe "cards" do
-          let(:cards) { subject.call.cards }
+          let!(:cards) { subject.call.cards }
           describe 'with real card' do
             let(:card) { cards[0] }
             it { expect(card.card_handle).to eq('20e81a27-92ce-4af0-b709-db8ac14c601b') }
@@ -75,12 +75,17 @@ module Cocard
           end
 
           describe 'with connector certificate' do
+            before(:each) do
+              connector.reload
+            end
             let(:card) { cards[1] }
             it { expect(card.card_handle).to be_nil }
             it { expect(card.ct_id).to be_nil }
             it { expect(card.iccsn).to eq("80276003640000909999")}
             it { expect(card.expiration_date.to_s).to eq("2025-12-31")}
             it { expect(card.is_connector_cert).to be_truthy }
+            it { expect(connector.iccsn).to eq("80276003640000909999") }
+            it { expect(connector.expiration_date.to_s).to eq("2025-12-31")}
           end
         end
       end
