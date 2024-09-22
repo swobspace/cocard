@@ -113,6 +113,17 @@
             <td><%= render BooleanComponent.new(value: @connector.use_tls,
                                                 text: :text) %></td>
           </tr>
+
+          <tr>
+            <th class="w-25 pe-3"><%= t('attributes.iccsn')%>:</th>
+            <td><%= @connector.iccsn %></td>
+          </tr>
+
+          <tr>
+            <th class="w-25 pe-3"><%= t('attributes.expiration_date')%>:</th>
+            <td><%= @connector.expiration_date %></td>
+          </tr>
+
         </table>
       </div>
 

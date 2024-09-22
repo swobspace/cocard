@@ -30,7 +30,9 @@ RSpec.describe "connectors/index", type: :view do
         use_tls: true,
         vpnti_online: true,
         soap_request_success: true,
-        condition_message: "Quark"
+        condition_message: "Quark",
+        iccsn: "8027600355000099999",
+        expiration_date: "2025-12-31"
       ),
       Connector.create!(
         name: "Name",
@@ -47,7 +49,9 @@ RSpec.describe "connectors/index", type: :view do
         authentication: :noauth,
         use_tls: false,
         vpnti_online: false,
-        condition_message: "Quark"
+        condition_message: "Quark",
+        iccsn: "8027600355000099999",
+        expiration_date: "2025-12-31"
       )
     ])
   end
@@ -75,5 +79,7 @@ RSpec.describe "connectors/index", type: :view do
     assert_select cell_selector, text: Regexp.new("UNKNOWN".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("OK Connector TI online".to_s), count: 1
     assert_select cell_selector, text: Regexp.new("soap request failed".to_s), count: 1
+    assert_select cell_selector, text: Regexp.new("2025-12-31".to_s), count: 2
+    assert_select cell_selector, text: Regexp.new("8027600355000099999".to_s), count: 2
   end
 end
