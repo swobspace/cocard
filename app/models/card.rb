@@ -34,8 +34,8 @@ class Card < ApplicationRecord
   def update_condition
     # -- NOTHING
     if (!operational_state&.operational)
-      set_condition( Cocard::States::NOTHING,
-                     "Karte nicht in Betrieb" )
+      msg = operational_state&.name || "Karte nicht in Betrieb"
+      set_condition( Cocard::States::NOTHING, msg )
     elsif card_terminal&.connector.nil?
       set_condition( Cocard::States::NOTHING,
                      "CardTerminal fehlt - UNUSED" )
