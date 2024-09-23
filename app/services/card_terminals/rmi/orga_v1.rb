@@ -79,6 +79,15 @@ module CardTerminals
 
             when :notification
               debug("Notification received: #{response.json}")
+              Turbo::StreamsChannel.broadcast_prepend_to(
+                'verify_pins',
+                target: 'toaster',
+                partial: "shared/turbo_toast",
+                locals: {
+                  status: :info,
+                  message: "PIN-Anfrage vom Terminal erhalten, sende SMC-B PIN ..."
+                }
+              )
               ws.send(request_verify_pin(generate_token(:verify_pin)))
 
             when :verify_pin
