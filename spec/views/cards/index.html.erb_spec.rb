@@ -85,7 +85,7 @@ RSpec.describe "cards/index", type: :view do
     assert_select cell_selector, text: Regexp.new("22999".to_s), count: 1
     assert_select cell_selector, text: Regexp.new(ts.to_s), count: 2
     assert_select cell_selector, text: Regexp.new(1.year.after(Date.current).to_s), count: 2
-    assert_select cell_selector, text: Regexp.new("im Schrank".to_s), count: 2
+    assert_select cell_selector, text: Regexp.new("im Schrank".to_s), count: 4
     assert_select cell_selector, text: Regexp.new("AXXC".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("999777333".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("222444667".to_s), count: 2
@@ -99,6 +99,6 @@ RSpec.describe "cards/index", type: :view do
     assert_select cell_selector, text: Regexp.new("Nirgendwo".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("22244466688".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("StrengGeheim".to_s), count: 0
-    assert_select cell_selector, text: Regexp.new("Karte nicht in Betrieb".to_s), count: 2
+    assert_select cell_selector, text: Regexp.new("Karte nicht in Betrieb".to_s), count: 0
   end
 end
