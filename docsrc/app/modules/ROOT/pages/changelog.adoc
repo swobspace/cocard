@@ -1,5 +1,10 @@
 = Changelog
 
+== 0.4.1-dev - 2024-09-23
+
+* Abfrage der SMC-K Daten vom Konnektor (ICCSN, Gültigkeit bis)
+* Verbesserte Info-Ausgaben bei Nutzung der SMC-B Remote PIN
+
 == 0.4.0 - 2024-09-21
 
 * Acknowledges und Notizen für Konnektoren, Karten und Kartenterminals
