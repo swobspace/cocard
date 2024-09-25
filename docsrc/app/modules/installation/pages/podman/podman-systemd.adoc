@@ -138,6 +138,30 @@ journalctl --user -u cocard-worker -f
 journalctl --user -u cocard-postgres -f
 ----
 
+== Ping aus dem Container heraus
+
+Ping nutzt einen Raw-Socket und benötigt erweiterte Rechte. Innerhalb des Cocard-Containers sind diese bereits gesetzt. Während bei Fedora bereits der `ping_group_range` passend gesetzt ist, muss man bei Ubuntu das explizit selbst setzen. Dazu trägt man in die Datei `/etc/sysctl.d/90-local.conf` folgende Zeile ein:
+
+./etc/sysctl.d/90-local.conf
+[source]
+----
+net.ipv4.ping_group_range=0 2147483647
+----
+
+Anschließend lädt man die Datei mit 
+[source]
+----
+sysctl --load /etc/sysctl.d/90-local.conf
+----
+
+.(User poddy) Test aus dem Container heraus
+[source,bash]
+----
+podman exec -it cocard /bin/bash
+$> ping <ipadresse>
+----
+
+
 == Resources
 
 * https://www.redhat.com/sysadmin/quadlet-podman

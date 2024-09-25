@@ -5,6 +5,5 @@
 		}
 	],
 	"settings": {
-		"asciidoc.antora.enableAntoraSupport": true
 	}
 }
