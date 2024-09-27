@@ -27,10 +27,10 @@ module Cocard
                    ).call
 
           if result.success?
-            msg = "DEBUG:: #{connector.name}: fetching connector sds successful"
+            msg = "DEBUG:: #{connector.name}: get_resource_information successful"
             Rails.logger.debug(msg)
           else
-            msg = "WARN:: #{connector.name}: fetch connector sds failed\n" +
+            msg = "WARN:: #{connector.name}: get_resource_information failed\n" +
                   result.error_messages.join("\n")
             Rails.logger.warn(msg)
           end
