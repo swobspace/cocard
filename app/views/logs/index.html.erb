@@ -77,11 +77,11 @@
 <% if params[:outdated] %>
         <%= button_to(t('cocard.delete_outdated_logs'),
                       delete_outdated_logs_path(),
-                      "data-turbo-frame": "_top",
+                      method: :delete,
                       form: { 
-                        method: :delete,
                         "data-turbo-confirm": "Alle veralteten Logeinträge löschen?"
                       },
+                      "data-turbo-frame": "_top",
                       class: 'btn btn-warning me-1') if current_user.is_admin?
          %>
 
