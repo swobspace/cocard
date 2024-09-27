@@ -26,6 +26,10 @@ RSpec.describe LogsController, type: :routing do
     end
 
 
+    it "routes to #delete_outdated" do
+      expect(delete: "/logs/delete_outdated").to route_to("logs#delete_outdated")
+    end
+
     it "routes to #create" do
       # expect(post: "/logs").to route_to("logs#create")
       expect(post: "/logs").not_to be_routable

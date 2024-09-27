@@ -46,6 +46,7 @@ de:
     card_data: Kartendaten
     card_terminal_data: Daten des Kartenterminals
     certificate_data: Daten des Zertfikats
+    delete_outdated_logs: Veraltete Logeinträge löschen
     fetch_sds: Abfrage SDS
     get_resource_information: Abfrage Konnektor
     get_cards_terminal: Abfrage Kartenterminals

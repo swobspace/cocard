@@ -11,7 +11,12 @@ class LogsController < ApplicationController
     else
       if params[:valid]
         @logs = Log.valid
+        @title = "Aktuelle Logeinträge"
+      elsif params[:outdated]
+        @logs = Log.valid.where("last_seen < ?", outdated)
+        @title = "Veraltete Logeinträge"
       else
+        @title = "Alle Logeinträge"
         @logs = Log.all
       end
     end
@@ -66,6 +71,12 @@ class LogsController < ApplicationController
     respond_with(@log, location: polymorphic_path([@loggable, :logs]))
   end
 
+  def delete_outdated
+    @logs = Log.valid.where("last_seen < ?", outdated)
+    @logs.destroy_all
+    redirect_to logs_path(outdated: true)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_log
@@ -75,5 +86,9 @@ class LogsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def log_params
       params.require(:log).permit(:loggable_id, :loggable_type, :action, :last_seen, :level, :message)
+    end
+
+    def outdated
+      (2*Cocard::grace_period).before(Time.current)
     end
 end

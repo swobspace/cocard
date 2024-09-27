@@ -1,6 +1,6 @@
 <%= render 'shared/turbo-cache-control' %>
 
-<h1><%= t('controller.logs') %></h1>
+<h1><%= @title %></h1>
 
 <%= turbo_frame_tag('logs') do %>
   <div data-controller="datatables">
@@ -74,3 +74,15 @@
 <br />
 
 <%= back_link %>
+<% if params[:outdated] %>
+        <%= button_to(t('cocard.delete_outdated_logs'),
+                      delete_outdated_logs_path(),
+                      "data-turbo-frame": "_top",
+                      form: { 
+                        method: :delete,
+                        "data-turbo-confirm": "Alle veralteten Logeinträge löschen?"
+                      },
+                      class: 'btn btn-warning me-1') if current_user.is_admin?
+         %>
+
+<% end %>

@@ -122,4 +122,23 @@ RSpec.describe "/logs", type: :request do
       expect(response).to redirect_to(logs_url)
     end
   end
+
+  describe "DELETE /delete_outdated" do
+    it "destroys the outdated logs" do
+      logs = FactoryBot.create_list(:log, 2, :with_connector, 
+                                     last_seen: 1.day.before(Time.current),
+                                     is_valid: true)
+      expect {
+        delete delete_outdated_logs_url()
+      }.to change(Log, :count).by(-2)
+    end
+
+    it "redirects to the logs list" do
+      logs = FactoryBot.create_list(:log, 2, :with_connector, 
+                                     last_seen: 1.day.before(Time.current),
+                                     is_valid: true)
+      delete delete_outdated_logs_url()
+      expect(response).to redirect_to(logs_url(outdated: true))
+    end
+  end
 end

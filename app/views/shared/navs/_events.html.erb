@@ -13,12 +13,8 @@
       <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
                        t('controller.logs')), 
                   main_app.logs_path, class: "dropdown-item" %>
-     <% if false # comming soon %>
-      <div class="dropdown-divider"></div>
-        <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
-                         t('controller.events')), 
-                    '#', class: "dropdown-item" %>
-     <% end %>
+      <%= link_to raw(Cocard::States.flag(Cocard::States::WARNING) + ' Veraltete Logs'),
+                  main_app.logs_path(outdated: true), class: "dropdown-item" %>
     </div>
 
   </li>
