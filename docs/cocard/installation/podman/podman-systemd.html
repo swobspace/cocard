@@ -370,6 +370,35 @@ journalctl --user -u cocard-postgres -f</pre>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_ping_aus_dem_container_heraus"><a class="anchor" href="#_ping_aus_dem_container_heraus"></a>Ping aus dem Container heraus</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Ping nutzt einen Raw-Socket und benötigt erweiterte Rechte. Innerhalb des Cocard-Containers sind diese bereits gesetzt. Während bei Fedora bereits der <code>ping_group_range</code> passend gesetzt ist, muss man bei Ubuntu das explizit selbst setzen. Dazu trägt man in die Datei <code>/etc/sysctl.d/90-local.conf</code> folgende Zeile ein:</p>
+</div>
+<div class="listingblock">
+<div class="title">/etc/sysctl.d/90-local.conf</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">net.ipv4.ping_group_range=0 2147483647</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Anschließend lädt man die Datei mit</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">sysctl --load /etc/sysctl.d/90-local.conf</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">(User poddy) Test aus dem Container heraus</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman exec -it cocard /bin/bash
+$&gt; ping &lt;ipadresse&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_resources"><a class="anchor" href="#_resources"></a>Resources</h2>
 <div class="sectionbody">
 <div class="ulist">

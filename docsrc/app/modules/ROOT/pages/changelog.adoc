@@ -1,9 +1,10 @@
 = Changelog
 
-== 0.4.1-dev - 2024-09-23
+== 0.4.1 - 2024-09-27
 
 * Abfrage der SMC-K Daten vom Konnektor (ICCSN, Gültigkeit bis)
 * Verbesserte Info-Ausgaben bei Nutzung der SMC-B Remote PIN
+* Separate Übersicht veralteter Logeinträge mit der Möglichkeit alle zu löschen
 
 == 0.4.0 - 2024-09-21
 
