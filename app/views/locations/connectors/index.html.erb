@@ -67,7 +67,7 @@
                  %></td>
             <td><%= connector.sds_url %></td>
             <td><%= connector.manual_update %></td>
-            <td><%= connector.locations.order(:lid).map(&:lid).join('; ') %></td>
+            <td><%= connector.locations.order(:lid).map(&:lid).join(' - ') %></td>
             <td class="text-center"><%= connector.firmware_version %></td>
             <td><%= connector.description %></td>
             <td class="text-center">

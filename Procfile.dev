@@ -1,4 +1,4 @@
 web: env RUBY_DEBUG_OPEN=true bin/rails server
 js: yarn build --watch
 css: yarn watch:css
-# worker: bundle exec good_job start --queues="cocard_development_default:2,cocard_development_rmi:1;turbo_streams_development:2;*:1" --max-threads=5 --probe-port=7001
+# worker: bundle exec good_job start --queues="cocard_development_default:2;cocard_development_rmi:1;turbo_streams_development:2;*:1" --max-threads=5 --probe-port=7001

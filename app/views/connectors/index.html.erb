@@ -30,11 +30,15 @@
             <th class="notvisible"><%= t('attributes.id_contract') %></th>
             <th class="notvisible"><%= t('attributes.serial') %></th>
             <th class="notvisible"><%= t('cocard.card_terminals_count') %></th>
+            <th class="notvisible"><%= t('attributes.iccsn') %></th>
+            <th class="notvisible"><%= t('attributes.expiration_date') %></th>
             <th class="noexport nosort"><%= t('cocard.action') %></th>
       </tr>
     </thead>
     <tfoot class="search">
       <tr>
+            <th></th>
+            <th></th>
             <th></th>
             <th></th>
             <th></th>
@@ -68,7 +72,7 @@
           <td><%= link_to nil, connector.admin_url %></td>
           <td><%= connector.sds_url %></td>
           <td><%= connector.manual_update %></td>
-          <td><%= connector.locations.order(:lid).map(&:lid).join('; ') %></td>
+          <td><%= connector.locations.order(:lid).map(&:lid).join(' - ') %></td>
           <td class="text-center"><%= connector.firmware_version %></td>
           <td><%= connector.description %></td>
           <td class="text-center">
@@ -84,6 +88,8 @@
           <td><%= connector.id_contract if can?(:read, connector, :id_contract) %></td>
           <td><%= connector.serial %></td>
           <td><%= connector.card_terminals.count %></td>
+          <td><%= connector.iccsn %></td>
+          <td><%= connector.expiration_date %></td>
           <td class="text-nowrap">
             <%= show_link connector %>
             <%= edit_link connector %>

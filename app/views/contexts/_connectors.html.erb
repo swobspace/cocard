@@ -21,7 +21,7 @@
                         connector_path(connector),
                         class: 'primary-link')
             %></td>
-        <td><%= connector.locations.order(:lid).map(&:lid).join('; ') %></td>
+        <td><%= connector.locations.order(:lid).map(&:lid).join(' - ') %></td>
         <td><%= render IsCurrentComponent.new(item: connector, attr: :last_check) %></td>
         <td><%= render IsCurrentComponent.new(item: connector, attr: :last_ok) %></td>
         <td><%= connector.card_terminals.count %></td>

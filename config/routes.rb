@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :logs, only: [:show, :index, :destroy] do
     collection do
       get :sindex
+      delete :delete_outdated
     end
     resources :notes, module: :logs
   end

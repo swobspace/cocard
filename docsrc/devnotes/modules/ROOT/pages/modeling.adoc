@@ -69,7 +69,9 @@ bin/rails g migration AddReadonlyToConnector \
   soap_request_success:boolean \
   vpnti_online:boolean \
   firmware_version:string \
-  acknowledge_id:bigint
+  acknowledge_id:bigint \
+  iccsn:string \
+  expiration_date:date
 ----
 
 .Install ActionText

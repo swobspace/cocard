@@ -72,6 +72,9 @@ class Connector < ApplicationRecord
     elsif !vpnti_online
       set_condition(Cocard::States::CRITICAL,
                     "Connector reachable but TI offline!")
+    elsif expiration_date.present? and (expiration_date <= 3.month.after(Date.current))
+      set_condition( Cocard::States::WARNING,
+                     "Connector certificate expires at #{expiration_date.to_s} (<= 3 month)" )
     else
       set_condition(Cocard::States::OK,
                     "Connector TI online")

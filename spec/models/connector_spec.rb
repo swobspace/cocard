@@ -79,13 +79,26 @@ RSpec.describe Connector, type: :model do
     end
 
     describe "with vpnti_status offline" do
-      it "-> WARNING" do
+      it "-> CRITICAL" do
         expect(connector).to receive(:up?).and_return(true)
         expect(connector).to receive(:soap_request_success).and_return(true)
         expect(connector).to receive(:vpnti_online).and_return(false)
         expect {
           connector.update_condition
         }.to change(connector, :condition).to(Cocard::States::CRITICAL)
+      end
+    end
+
+    describe "with expiring certificate" do
+      it "-> CRITICAL" do
+        expect(connector).to receive(:up?).and_return(true)
+        expect(connector).to receive(:soap_request_success).and_return(true)
+        expect(connector).to receive(:vpnti_online).and_return(true)
+        expect(connector).to receive(:expiration_date).
+               at_least(:once).and_return(1.month.after(Date.current))
+        expect {
+          connector.update_condition
+        }.to change(connector, :condition).to(Cocard::States::WARNING)
       end
     end
 
@@ -103,6 +116,8 @@ RSpec.describe Connector, type: :model do
         expect(connector).to receive(:up?).at_least(:once).and_return(true)
         expect(connector).to receive(:soap_request_success).at_least(:once).and_return(true)
         expect(connector).to receive(:vpnti_online).at_least(:once).and_return(true)
+        expect(connector).to receive(:expiration_date).
+               at_least(:once).and_return(4.month.after(Date.current))
         expect {
           connector.update_condition
         }.to change(connector, :condition).to(Cocard::States::OK)

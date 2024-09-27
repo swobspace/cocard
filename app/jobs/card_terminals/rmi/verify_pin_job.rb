@@ -6,6 +6,7 @@ module CardTerminals
       def perform(options = {})
         options = options.symbolize_keys
         card = options.fetch(:card)
+        @prefix = "VerifyPinJob:: Card #{card.iccsn}:: ".freeze
         if check_requirements(card)
           _rmi = @rmi.new(card_terminal: card.card_terminal, iccsn: card.iccsn)
           _rmi.verify_pin
@@ -13,17 +14,18 @@ module CardTerminals
       end
 
     private
+      attr_reader :prefix
       def check_requirements(card)
+        if card.card_terminal.nil?
+          Rails.logger.warn(prefix + "Card has no card terminal assigned")
+          return false
+        end
         if card.card_terminal.pin_mode == 'off'
           Rails.logger.warn(prefix + "CardTerminal pin mode == off")
           return false
         end
         if card.card_type != 'SMC-B'
           Rails.logger.warn(prefix + "Card is not a SMC-B card")
-          return false
-        end
-        if card.card_terminal.nil?
-          Rails.logger.warn(prefix + "Card has no card terminal assigned")
           return false
         end
 
@@ -36,10 +38,6 @@ module CardTerminals
           @rmi = rmi.rmi
           true
         end
-      end
-
-      def prefix
-        "VerifyPinJob:: Card #{card.iccsn}:: "
       end
     end
   end

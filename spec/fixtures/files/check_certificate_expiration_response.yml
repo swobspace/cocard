@@ -1,0 +1,59 @@
+---
+:check_certificate_expiration_response:
+  :status:
+    :result: !ruby/string:Nori::StringWithAttributes
+      str: OK
+      attributes: {}
+  :certificate_expiration:
+  - :ct_id: !ruby/string:Nori::StringWithAttributes
+      str: CT_ID_0176
+      attributes: {}
+    :card_handle: !ruby/string:Nori::StringWithAttributes
+      str: 20e81a27-92ce-4af0-b709-db8ac14c601b
+      attributes: {}
+    :iccsn: !ruby/string:Nori::StringWithAttributes
+      str: '80276002711000059999'
+      attributes: {}
+    :subject_common_name: !ruby/string:Nori::StringWithAttributes
+      str: Doctor Who's Universe
+      attributes: {}
+    :serial_number: !ruby/string:Nori::StringWithAttributes
+      str: '4613338'
+      attributes: {}
+    :validity: 2026-08-15
+  - :ct_id:
+    :card_handle:
+    :iccsn: !ruby/string:Nori::StringWithAttributes
+      str: '80276003640000909999'
+      attributes: {}
+    :subject_common_name: !ruby/string:Nori::StringWithAttributes
+      str: 80276003640000909999-20200224
+      attributes: {}
+    :serial_number: !ruby/string:Nori::StringWithAttributes
+      str: '1469298'
+      attributes: {}
+    :validity: 2025-12-31
+  - :ct_id: !ruby/string:Nori::StringWithAttributes
+      str: CT_ID_0176
+      attributes: {}
+    :card_handle: !ruby/string:Nori::StringWithAttributes
+      str: 98836d97-9e39-49e2-96ae-2bda49718737
+      attributes: {}
+    :iccsn: !ruby/string:Nori::StringWithAttributes
+      str: '80276003550000469999'
+      attributes: {}
+    :subject_common_name: !ruby/string:Nori::StringWithAttributes
+      str: '80276003550000469999'
+      attributes: {}
+    :serial_number: !ruby/string:Nori::StringWithAttributes
+      str: '275972'
+      attributes: {}
+    :validity: 2026-11-11
+  :@xmlns:ns2: http://ws.gematik.de/conn/ConnectorCommon/v5.0
+  :@xmlns:ns3: http://ws.gematik.de/tel/error/v2.0
+  :@xmlns:ns4: urn:oasis:names:tc:dss:1.0:core:schema
+  :@xmlns:ns5: http://www.w3.org/2000/09/xmldsig#
+  :@xmlns:ns6: http://ws.gematik.de/conn/CertificateService/v6.0
+  :@xmlns:ns7: http://ws.gematik.de/conn/ConnectorContext/v2.0
+  :@xmlns:ns8: http://ws.gematik.de/conn/CertificateServiceCommon/v2.0
+  :@xmlns:ns9: urn:oasis:names:tc:SAML:1.0:assertion

@@ -24,7 +24,9 @@ RSpec.describe "connectors/show", type: :view do
       id_contract: '919XaWZ3',
       serial: 'S12344321',
       use_tls: false,
-      authentication: :noauth
+      authentication: :noauth,
+      iccsn: "8027600355000099999",
+      expiration_date: "2025-12-31"
     ))
   end
 
@@ -42,5 +44,7 @@ RSpec.describe "connectors/show", type: :view do
     expect(rendered).to match(/S12344321/)
     expect(rendered).to match(/Keine/)
     expect(rendered).to match(/Nein/)
+    expect(rendered).to match(/8027600355000099999/)
+    expect(rendered).to match(/2025-12-31/)
   end
 end

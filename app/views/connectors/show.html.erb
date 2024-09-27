@@ -82,7 +82,7 @@
           </tr>
           <tr>
             <th class="w-25 pe-3"><%= t('attributes.locations')%>:</th>
-            <td><%= @connector.locations.map(&:to_s).join('; ') %></td>
+            <td><%= @connector.locations.map(&:to_s).join(' - ') %></td>
           </tr>
           <tr>
             <th class="w-25 pe-3"><%= t('attributes.description')%>:</th>
@@ -113,6 +113,17 @@
             <td><%= render BooleanComponent.new(value: @connector.use_tls,
                                                 text: :text) %></td>
           </tr>
+
+          <tr>
+            <th class="w-25 pe-3"><%= t('attributes.iccsn')%>:</th>
+            <td><%= @connector.iccsn %></td>
+          </tr>
+
+          <tr>
+            <th class="w-25 pe-3"><%= t('attributes.expiration_date')%>:</th>
+            <td><%= @connector.expiration_date %></td>
+          </tr>
+
         </table>
       </div>
 

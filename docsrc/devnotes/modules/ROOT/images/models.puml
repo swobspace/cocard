@@ -26,6 +26,8 @@ class Connector  {
   vpnti_online: boolean
   firmware_version: string
   acknowledge_id: bigint
+  iccsn: string
+  expiration_date: date
 }
 
 class CardTerminal {

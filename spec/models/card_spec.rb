@@ -50,7 +50,8 @@ RSpec.describe Card, type: :model do
       it "-> NOTHING" do
         card.update(condition: Cocard::States::OK)
         card.reload
-        expect(card).to receive_message_chain(:operational_state, :operational).and_return(nil)
+        allow(card).to receive_message_chain(:operational_state, :operational).and_return(nil)
+        expect(card).to receive_message_chain(:operational_state, :name).and_return(nil)
         expect {
           card.update_condition
         }.to change(card, :condition).to(Cocard::States::NOTHING)
