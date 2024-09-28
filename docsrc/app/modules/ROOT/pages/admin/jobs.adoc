@@ -1,17 +1,49 @@
 = Jobverwaltung
 :author: Wolfgang Barth
-:revdate: 2024-09-16
+:revdate: 2024-09-28
 :imagesdir: ../../images
 :experimental: true
 
+Cocard nutzt für die Jobverwaltung https://github.com/bensheldon/good_job[GoodJob], das neben einem Webfrontend für die Jobverwaltung auch die zeitgesteuerte Jobs - sogenannte Cron-Jobs - ermöglicht.
+
+== Job-Übersicht
+
 In die Jobverwaltung gelangt man über das Menü menu:Jobs[]. Hierfür ist die Rolle `Admin` erforderlich.
 
+.menu:Menüleiste[Jobs]
 image:jobs/menu-jobs.png[]
 
-== Überblick
+In der Jobübersicht sollte man insbesondere die Werte bei _Queued_ und _Discarded_ im Auge behalten. _Discarded_ Jobs sind abgebrochene Jobs, die auf einen Fehler hindeuten. Der Wert bei _Queued_ sollte konstant klein oder eher 0 sein. Steigt der Wert über einen längeren Zeitraum ist das ein Hinweis auf Probleme in der Abarbeitung der einzelnen Jobs.
 
+.Übersicht Jobs
 image:jobs/good-job-overview.png[]
 
 == Zeitgesteuerte Jobs
 
+Welche Jobs regelmäßig von Cocard ausgeführt werden erfährt man in der Übersicht _Cron Schedules_. Die Darstellung der Ausführungszeiten folgt dem klassischen https://de.wikipedia.org/wiki/Cron[Cron-Schema] (Minute - Stunde - Tag- Monat- Wochentag)
+
+.Cocard: zeitgesteuerte Jobs (aka Cron-Jobs)
 image:jobs/good-job-cron-jobs.png[]
+
+Einzelne Cron-Einträge kann man über die Symbole am Ende jeder Zeile auch manuell anstoßen oder die Ausführung pausieren.
+
+== Prozesse
+
+Die Queues von Cocard werden aus Performancegründen parallel in mehreren https://github.com/bensheldon/good_job?tab=readme-ov-file#optimize-queues-threads-and-processes[Pools] ausgeführt. Die Konfiguration erfolgt über folgende Zeile in xref:attachment$podman/quadlet/cocard-worker.container[cocard-worker.container]:
+
+.GoodJob-Ausführung mit mehreren Pools
+----
+Exec=bundle exec good_job start \
+--queues="cocard_production_default:4;cocard_production_rmi:1;turbo_streams_production:2;*:1"
+----
+
+Ob alle Pools ausgeführt werden sieht man in der Prozess-Übersicht:
+
+image:jobs/good-job-processes.png[]
+
+
+== Performance
+
+In der Performance-Übersicht erhält man die durchschnittliche Ausführungszeit. Werte über einer Minute sind problematisch und deuten auf Engpässe von Ressourcen hin. Gründe könnten sein: Fehlkonfiguration (Cocard versucht Konnektoren oder Kartenterminals abzufragen, die alle nicht erreichbar sind), zu geringe parallele Ausführung von Jobs (Threads und Pools vergrössern) oder generell zu wenig Ressourcen an CPU und Speicher im Host.
+
+image:jobs/good-job-performance.png[]

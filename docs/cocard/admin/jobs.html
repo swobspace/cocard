@@ -156,17 +156,25 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>In die Jobverwaltung gelangt man über das Menü <b class="menuref">Jobs</b>. Hierfür ist die Rolle <code>Admin</code> erforderlich.</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="../_images/jobs/menu-jobs.png" alt="menu jobs"></span></p>
+<p>Cocard nutzt für die Jobverwaltung <a href="https://github.com/bensheldon/good_job">GoodJob</a>, das neben einem Webfrontend für die Jobverwaltung auch die zeitgesteuerte Jobs - sogenannte Cron-Jobs - ermöglicht.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_überblick"><a class="anchor" href="#_überblick"></a>Überblick</h2>
+<h2 id="_job_übersicht"><a class="anchor" href="#_job_übersicht"></a>Job-Übersicht</h2>
 <div class="sectionbody">
 <div class="paragraph">
+<p>In die Jobverwaltung gelangt man über das Menü <b class="menuref">Jobs</b>. Hierfür ist die Rolle <code>Admin</code> erforderlich.</p>
+</div>
+<div class="paragraph">
+<div class="title"><span class="menuseq"><b class="menu">Menüleiste</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Jobs</b></span></div>
+<p><span class="image"><img src="../_images/jobs/menu-jobs.png" alt="menu jobs"></span></p>
+</div>
+<div class="paragraph">
+<p>In der Jobübersicht sollte man insbesondere die Werte bei <em>Queued</em> und <em>Discarded</em> im Auge behalten. <em>Discarded</em> Jobs sind abgebrochene Jobs, die auf einen Fehler hindeuten. Der Wert bei <em>Queued</em> sollte konstant klein oder eher 0 sein. Steigt der Wert über einen längeren Zeitraum ist das ein Hinweis auf Probleme in der Abarbeitung der einzelnen Jobs.</p>
+</div>
+<div class="paragraph">
+<div class="title">Übersicht Jobs</div>
 <p><span class="image"><img src="../_images/jobs/good-job-overview.png" alt="good job overview"></span></p>
 </div>
 </div>
@@ -175,7 +183,46 @@
 <h2 id="_zeitgesteuerte_jobs"><a class="anchor" href="#_zeitgesteuerte_jobs"></a>Zeitgesteuerte Jobs</h2>
 <div class="sectionbody">
 <div class="paragraph">
+<p>Welche Jobs regelmäßig von Cocard ausgeführt werden erfährt man in der Übersicht <em>Cron Schedules</em>. Die Darstellung der Ausführungszeiten folgt dem klassischen <a href="https://de.wikipedia.org/wiki/Cron">Cron-Schema</a> (Minute - Stunde - Tag- Monat- Wochentag)</p>
+</div>
+<div class="paragraph">
+<div class="title">Cocard: zeitgesteuerte Jobs (aka Cron-Jobs)</div>
 <p><span class="image"><img src="../_images/jobs/good-job-cron-jobs.png" alt="good job cron jobs"></span></p>
+</div>
+<div class="paragraph">
+<p>Einzelne Cron-Einträge kann man über die Symbole am Ende jeder Zeile auch manuell anstoßen oder die Ausführung pausieren.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prozesse"><a class="anchor" href="#_prozesse"></a>Prozesse</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Die Queues von Cocard werden aus Performancegründen parallel in mehreren <a href="https://github.com/bensheldon/good_job?tab=readme-ov-file#optimize-queues-threads-and-processes">Pools</a> ausgeführt. Die Konfiguration erfolgt über folgende Zeile in <a href="#attachment$podman/quadlet/cocard-worker.container" class="xref unresolved">cocard-worker.container</a>:</p>
+</div>
+<div class="listingblock">
+<div class="title">GoodJob-Ausführung mit mehreren Pools</div>
+<div class="content">
+<pre>Exec=bundle exec good_job start \
+--queues="cocard_production_default:4;cocard_production_rmi:1;turbo_streams_production:2;*:1"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Ob alle Pools ausgeführt werden sieht man in der Prozess-Übersicht:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/jobs/good-job-processes.png" alt="good job processes"></span></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_performance"><a class="anchor" href="#_performance"></a>Performance</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In der Performance-Übersicht erhält man die durchschnittliche Ausführungszeit. Werte über einer Minute sind problematisch und deuten auf Engpässe von Ressourcen hin. Gründe könnten sein: Fehlkonfiguration (Cocard versucht Konnektoren oder Kartenterminals abzufragen, die alle nicht erreichbar sind), zu geringe parallele Ausführung von Jobs (Threads und Pools vergrössern) oder generell zu wenig Ressourcen an CPU und Speicher im Host.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/jobs/good-job-performance.png" alt="good job performance"></span></p>
 </div>
 </div>
 </div>
