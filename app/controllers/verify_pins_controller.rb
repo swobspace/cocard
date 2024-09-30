@@ -21,6 +21,14 @@ class VerifyPinsController < ApplicationController
                   .where("card_contexts.pin_status = 'VERIFIABLE'")
                   .where("operational_states.operational = ?", true)
                   .distinct.each do |card|
+      #
+      # update card handle via get_card
+      #
+      result = Cocard::GetCard.new(card: card, context: card.contexts.first).call
+
+      #
+      # Loop over card contexts
+      #
       card.contexts.where("card_contexts.pin_status = 'VERIFIABLE'").each do |cctx|
         # just delay for 2 seconds
         sleep 2
