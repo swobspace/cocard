@@ -1,8 +1,8 @@
 module Cocard
   # 
-  # Fetch SDS info from connectors
+  # Get Certificate Data from Connector SMC-K
   #
-  class GetResourceInformationJob < ApplicationJob
+  class CheckCertificateExpirationJob < ApplicationJob
     queue_as :default
 
     def perform(options = {})
@@ -12,30 +12,29 @@ module Cocard
       if connector.is_a? Array
         connector.each do |conn|
           # create one job for each connector
-          Cocard::GetResourceInformationJob.perform_later(connector: conn)
+          Cocard::CheckCertificateExpirationJob.perform_later(connector: conn)
         end
       else
-        Rails.logger.debug("DEBUG:: get_resource_information from #{connector.name}")
+        Rails.logger.debug("DEBUG:: check certificate expiration from #{connector.name}")
         connector_context = connector.connector_contexts.first
 
         if connector_context.nil?
            Rails.logger.debug("DEBUG:: #{connector.name}: no connector_context available")
         else
-          result = Cocard::GetResourceInformation.new(
+          result = Cocard::CheckCertificateExpiration.new(
                      connector: connector,
                      context: connector_context.context
                    ).call
 
           if result.success?
-            msg = "DEBUG:: #{connector.name}: get_resource_information successful"
+            msg = "DEBUG:: #{connector.name}: check certificate expiration successful"
             Rails.logger.debug(msg)
           else
-            msg = "WARN:: #{connector.name}: get_resource_information failed\n" +
+            msg = "WARN:: #{connector.name}: check certificate expiration failed\n" +
                   result.error_messages.join("\n")
             Rails.logger.warn(msg)
           end
         end
-        Turbo::StreamsChannel.broadcast_refresh_later_to(:home)
       end
     end
 

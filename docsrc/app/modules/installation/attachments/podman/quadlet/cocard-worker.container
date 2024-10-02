@@ -12,7 +12,8 @@ Volume=cocard-storage.volume:/rails/storage
 Network=cocard.network
 EnvironmentFile=env.production
 Environment=FORCE_SSL=false
-Exec=bundle exec good_job start --max-threads=4
+Environment=GOOD_JOB_MAX_THREADS=8
+Exec=bundle exec good_job start --queues="cocard_production_default:4;cocard_production_rmi:1;turbo_streams_production:2;*:1"
 AddCapability=CAP_NET_RAW
 Label=traefik.enable=false
 

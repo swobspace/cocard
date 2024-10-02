@@ -38,7 +38,7 @@ module Cocard
               end
             end
           else
-            msg = "WARN:: #{connector.name}: fetch connector sds failed\n" +
+            msg = "WARN:: #{connector.name}: get_card_terminals failed\n" +
                   result.error_messages.join("\n")
             Rails.logger.warn(msg)
           end

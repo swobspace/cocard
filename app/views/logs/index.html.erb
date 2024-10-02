@@ -46,7 +46,7 @@
             <td><%= render ErrorLevelBadgeComponent.new(level: log.level) %></td>
             <td><%= log.loggable_type %></td>
             <td>
-              <%= link_to log.loggable, 
+              <%= link_to log.loggable,
                           polymorphic_path(log.loggable),
                           class: 'primary-link',
                           data: { 'turbo-frame' => '_top' }
@@ -78,10 +78,12 @@
         <%= button_to(t('cocard.delete_outdated_logs'),
                       delete_outdated_logs_path(),
                       method: :delete,
-                      form: { 
-                        "data-turbo-confirm": "Alle veralteten Logeinträge löschen?"
+                      form: {
+                        data: {
+                          "turbo-frame": "logs",
+                          "turbo-confirm": "Alle veralteten Logeinträge löschen?"
+                        }
                       },
-                      "data-turbo-frame": "_top",
                       class: 'btn btn-warning me-1') if current_user.is_admin?
          %>
 

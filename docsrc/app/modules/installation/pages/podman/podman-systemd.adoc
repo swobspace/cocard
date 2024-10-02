@@ -59,7 +59,7 @@ Für den Einsatz von Rootless-Containern nutzt man idealerweise einen eigenen Be
 ├── xref:attachment$podman/quadlet/cocard-redis.volume[cocard-redis.volume]
 ├── xref:attachment$podman/quadlet/cocard-storage.volume[cocard-storage.volume]
 ├── xref:attachment$podman/quadlet/cocard-tmp.volume[cocard-tmp.volume]
-└── xref:attachment$podman/quadlet/cocard-worker-container[cocard-worker.container]
+└── xref:attachment$podman/quadlet/cocard-worker.container[cocard-worker.container]
 ----
 
 == Webzugriff auf Cocard

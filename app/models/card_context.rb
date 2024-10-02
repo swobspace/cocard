@@ -1,6 +1,6 @@
 class CardContext < ApplicationRecord
   # -- associations
-  belongs_to :card, optional: true, inverse_of: :card_contexts
+  belongs_to :card, optional: true, inverse_of: :card_contexts, touch: true
   belongs_to :context, optional: false, inverse_of: :card_contexts
 
   # -- configuration
@@ -11,6 +11,5 @@ class CardContext < ApplicationRecord
                            uniqueness: { scope: :context_id, allow_blank: false }
   validates :context_id,   presence: true,
                            uniqueness: { scope: :card_id, allow_blank: false }
-
 
 end
