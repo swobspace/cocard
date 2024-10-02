@@ -26,31 +26,42 @@ class VerifyPinsController < ApplicationController
       #
       result = Cocard::GetCard.new(card: card, context: card.contexts.first).call
 
-      #
-      # Loop over card contexts
-      #
-      card.contexts.where("card_contexts.pin_status = 'VERIFIABLE'").each do |cctx|
-        # just delay for 2 seconds
-        sleep 2
-        # just for debugging
-        # result = Cocard::GetPinStatus.new(card: card, context: cctx).call
-        result = Cocard::VerifyPin.new(card: card, context: cctx).call
-
-        if result.success?
-          status  = :success
-          message = (card.to_s + "<br/>" + "Kontext: #{cctx}<br/>" +
-                     "VERIFY PIN successful").html_safe
-        else
-          status  = :alert
-          message = (card.to_s + "<br/>" + "Kontext: #{cctx}<br/>ERROR:: " +
-                     result.error_messages.join(', ')).html_safe
-
-        end
+      unless result.success?
+        status  = :alert
+        message = (card.to_s + "<br/>" + "Kontext: #{cctx}<br/>ERROR:: " +
+                   result.error_messages.join(', ')).html_safe
         Turbo::StreamsChannel.broadcast_prepend_to(
           'verify_pins',
           target: 'toaster',
           partial: "shared/turbo_toast",
           locals: {status: status, message: message})
+      else
+        #
+        # Loop over card contexts
+        #
+        card.contexts.where("card_contexts.pin_status = 'VERIFIABLE'").each do |cctx|
+          # just delay for 2 seconds
+          sleep 2
+          # just for debugging
+          # result = Cocard::GetPinStatus.new(card: card, context: cctx).call
+          result = Cocard::VerifyPin.new(card: card, context: cctx).call
+
+          if result.success?
+            status  = :success
+            message = (card.to_s + "<br/>" + "Kontext: #{cctx}<br/>" +
+                       "VERIFY PIN successful").html_safe
+          else
+            status  = :alert
+            message = (card.to_s + "<br/>" + "Kontext: #{cctx}<br/>ERROR:: " +
+                       result.error_messages.join(', ')).html_safe
+
+          end
+          Turbo::StreamsChannel.broadcast_prepend_to(
+            'verify_pins',
+            target: 'toaster',
+            partial: "shared/turbo_toast",
+            locals: {status: status, message: message})
+        end
       end
     end
     Turbo::StreamsChannel.broadcast_prepend_to(
