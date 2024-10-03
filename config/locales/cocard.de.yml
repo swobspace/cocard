@@ -22,7 +22,7 @@ de:
       gepflegt ist. Die MAC sollte aber immer eingetragen werden, bevor das Kartenterminal
       ans Netzwerk angeschlossen wird, andernfalls legt Cocard das Kartenterminal erneut 
       an und alle manuell gepflegten Daten müssen händisch nachgetragen werden.
-    new_client_certificate: Neues Clientzertifikat
+    new_client_certificate: Neues Client-Zertifikat
     new_context: Neuer Kontext
     new_connector: Neuer Konnektor
     new_location: Neuer Standort
@@ -70,7 +70,7 @@ de:
     models:
       card: Karte
       card_terminal: Kartenterminal
-      client_certificate: Clientzertifikat
+      client_certificate: Client-Zertifikat
       context: Kontext
       connector: Konnektor
       connector_context: Konnektor Kontext
@@ -107,8 +107,8 @@ de:
     client: Mandant
     clients: Mandanten
     client_ids: Mandanten
-    client_certificate: Clientzertifikat
-    client_certificate_ids: Clientzertifikate
+    client_certificate: Client-Zertifikat
+    client_certificate_ids: Client-Zertifikate
     client_system: Clientsystem
     condition: Zustand
     condition_message: Zustandsinfo
@@ -182,7 +182,7 @@ de:
     cards/logs: Karten/Logs
     card_terminals: Kartenterminals
     card_terminals/logs: Kartenterminals/Logs
-    client_certificates: Clientzertifikate
+    client_certificates: Client-Zertifikate
     connectors: Konnektoren
     connectors/logs: Konnektoren/Logs
     contexts: Kontexte
