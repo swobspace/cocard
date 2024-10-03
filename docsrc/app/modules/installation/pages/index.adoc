@@ -4,7 +4,7 @@
 
 == Podman
 
-Ich benutze `podman` anstelle von `docker`. `podman` integriert sich mit Quadlets bestens in `systemd`, und das auch noch als normaler Benutzer (rootless). Wer sich mit `docker` und `docker-compose` wohler fühlt, sollte einen Blick auf das Create-Skript für den Quickstart werfen: xref:attachment$quickstart/create-playground.sh[create-playground.sh]. Mit etwas Docker-Erfahrung sollte sich das Skript einfach in ein `docker-compose.yml` verwandeln lassen.
+Ich benutze `podman` anstelle von `docker`. `podman` integriert sich mit Quadlets bestens in `systemd`, und das auch noch als normaler Benutzer (rootless). Für diejenigen, die sich mit `docker` und `docker-compose` wohler fühlt, gibt es alternativ ein `docker-compose.yml`.
 
 
 == xref:podman/quickstart.adoc[]
@@ -18,3 +18,7 @@ Quadlets integrieren sich perfekt in `systemd` und sind daher die bevorzugte Var
 == xref:podman/reverse-proxy.adoc[]
 
 Cocard als Container ist für den Einsatz hinter einen Reverse Proxy wie Traefik gedacht. Der Einsatz mit Apache2 oder Nginx ist aber ebenfalls möglich. Cocard stellt selbst keine TLS-Verbindung zur Verfügung, die Handhabung von TLS und den notwendigen Zertifikaten ist Aufgabe des Reverse Proxy.
+
+== xref:podman/podman-compose.adoc[]
+
+Alternativer Einsatz von `docker-compose` statt `podman pods`.

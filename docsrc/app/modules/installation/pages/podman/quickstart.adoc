@@ -1,4 +1,4 @@
-= Quickstart
+= Quickstart: podman pods
 :revdate: 2024-08-09
 :author: Wolfgang Barth 
 :repo: https://github.com/swobspace/cocard

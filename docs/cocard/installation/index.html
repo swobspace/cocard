@@ -85,7 +85,16 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="podman/quickstart.html">Quickstart</a>
+    <a class="nav-link" href="podman/quickstart.html">Quickstart: podman pods</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../first-steps.html">Erste Schritte</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="podman/podman-compose.html">Quickstart: docker-compose</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../first-steps.html">Erste Schritte</a>
@@ -156,12 +165,12 @@
 <h2 id="_podman"><a class="anchor" href="#_podman"></a>Podman</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Ich benutze <code>podman</code> anstelle von <code>docker</code>. <code>podman</code> integriert sich mit Quadlets bestens in <code>systemd</code>, und das auch noch als normaler Benutzer (rootless). Wer sich mit <code>docker</code> und <code>docker-compose</code> wohler fühlt, sollte einen Blick auf das Create-Skript für den Quickstart werfen: <a href="_attachments/quickstart/create-playground.sh" class="xref attachment">create-playground.sh</a>. Mit etwas Docker-Erfahrung sollte sich das Skript einfach in ein <code>docker-compose.yml</code> verwandeln lassen.</p>
+<p>Ich benutze <code>podman</code> anstelle von <code>docker</code>. <code>podman</code> integriert sich mit Quadlets bestens in <code>systemd</code>, und das auch noch als normaler Benutzer (rootless). Für diejenigen, die sich mit <code>docker</code> und <code>docker-compose</code> wohler fühlt, gibt es alternativ ein <code>docker-compose.yml</code>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_quickstart"><a class="anchor" href="#_quickstart"></a><a href="podman/quickstart.html" class="xref page">Quickstart</a></h2>
+<h2 id="_quickstart_podman_pods"><a class="anchor" href="#_quickstart_podman_pods"></a><a href="podman/quickstart.html" class="xref page">Quickstart: podman pods</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Im Quickstart-Guide kommt <code>podman pod</code> zum Einsatz. Die Umgebung ist nicht für den produktiven Einsatz gedacht, ist aber einfach anzuwenden, wenn man Cocard einfach mal nur ausprobieren will.</p>
@@ -181,6 +190,14 @@
 <div class="sectionbody">
 <div class="paragraph">
 <p>Cocard als Container ist für den Einsatz hinter einen Reverse Proxy wie Traefik gedacht. Der Einsatz mit Apache2 oder Nginx ist aber ebenfalls möglich. Cocard stellt selbst keine TLS-Verbindung zur Verfügung, die Handhabung von TLS und den notwendigen Zertifikaten ist Aufgabe des Reverse Proxy.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_quickstart_docker_compose"><a class="anchor" href="#_quickstart_docker_compose"></a><a href="podman/podman-compose.html" class="xref page">Quickstart: docker-compose</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Alternativer Einsatz von <code>docker-compose</code> statt <code>podman pods</code>.</p>
 </div>
 </div>
 </div>

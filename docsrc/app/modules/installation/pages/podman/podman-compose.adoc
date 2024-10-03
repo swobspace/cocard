@@ -1,0 +1,42 @@
+= Quickstart: docker-compose
+:revdate: 2024-10-03
+:author: Wolfgang Barth 
+:repo: https://github.com/swobspace/cocard
+:experimental: true
+:imagesdir: ../images
+
+NOTE: Die Datei `docker-compose.yml` ist als Beispiel zu verstehen und für Testzwecke oder erste Schritte gedacht und auch nicht ausführlich getestet. Verbesserungsvorschläge sind jederzeit willkommen.
+
+== Installation und Start
+
+Kopiere folgende Dateien in ein lokales Verzeichnis::
+
+  * xref:attachment$compose/docker-compose.yml[docker-compose.yml]
+  * xref:attachment$compose/env.playground[env.playground]
+
+NOTE: `env.playground` enthält 2 Secrets, die man vor dem Einsatz ändern sollte. Die Datei enthält eine kurze Anweisung dazu. 
+
+
+Docker/Podman compose starten::
+----
+cd <directory-wo-das-compose-file-liegt>
+podman compose up -d
+docker-compose up -d
+----
+
+Docker/Podman compose stoppen::
+----
+cd <directory-wo-das-compose-file-liegt>
+podman compose down
+----
+
+
+== Webzugriff
+
+* `http://localhost:3000`
+* login: `admin`
+* password: `admin9999`
+
+IMPORTANT: Passwort für `admin` beim ersten Login ändern!
+
+=== xref:ROOT:first-steps.adoc[]
