@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Remote PIN für SMC-B Karten :: Cocard</title>
+    <title>Kartenterminal anlegen/bearbeiten :: Cocard</title>
     <meta name="generator" content="Antora 3.1.9">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -55,7 +55,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="connector-edit.html">Konnektor anlegen/bearbeiten</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="card-terminal-edit.html">Kartenterminal anlegen/bearbeiten</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -73,7 +73,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="authorities.html">Berechtigungen</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="smcb-remote-pin.html">Remote PIN für SMC-B Karten</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -161,7 +161,7 @@
   <ul>
     <li><a href="../index.html">Cocard</a></li>
     <li>Administration</li>
-    <li><a href="smcb-remote-pin.html">Remote PIN für SMC-B Karten</a></li>
+    <li><a href="card-terminal-edit.html">Kartenterminal anlegen/bearbeiten</a></li>
   </ul>
 </nav>
 </div>
@@ -170,117 +170,28 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Remote PIN für SMC-B Karten</h1>
-<div id="preamble">
-<div class="sectionbody">
+<h1 class="page">Kartenterminal anlegen/bearbeiten</h1>
 <div class="paragraph">
-<p>Bei neueren Kartenterminals kann man die PIN einer SMC-B-Karte remote eingegeben: entweder über eine Weboberfläche oder über ein Remote-Management-Interface (RMI).</p>
+<p>Kartenterminals, die mit einem Konnektor verbunden sind, werden automatisch erkannt und angelegt. Eine Neuanlage von Kartenterminals ist nur dann notwendig, wenn das Kartenterminal noch nicht angeschlossen ist, aber bereits inventarisiert werden soll. Oder wenn es sich um ein mobiles Gerät handelt, das keine permanente Online-Verbindung zum Konnektor aufrecht erhält.</p>
 </div>
 <div class="paragraph">
-<p>Cocard unterstützt die Remote-Eingabe, wenn alle nötigen Voraussetzungen dazu erfüllt sind. Löst ein Anwender die Aktion <code>VerifyPin</code> aus, startet Cocard zunächst eine Verbindung zum Kartenterminal und wartet auf die <code>VerifyPin</code>-Anfrage. Parallel dazu sendet Cocard die <code>VerifyPin</code>-Anfrage an den Konnektor, der diese an das Kartenterminal weitergibt. Das Kartenterminal benachrichtigt dann Cocard über die eingetroffene <code>VerifyPin</code>-Anfrage und Cocard sendet die fest hinterlegte PIN. Der Konnektor gibt Erfolg zurück, sofern kein Fehler auftritt.</p>
+<p>Für die Neuanlage genügt die MAC-Adresse oder alternativ die Seriennummer. Alle anderen Felder sind optional.</p>
 </div>
-<div class="admonitionblock note">
+<div class="admonitionblock important">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-Cocard unterstützt derzeit nur das Terminal Orga6141 in der Firmware-Version 3.9.0
+Wenn Kartenterminals vorab zur Inventarisierung erfasst werden, bitte immer die MAC-Adresse als Identifikationsmerkmal mit angeben. Dann kann Cocard später, wenn das Kartenterminal erstmals online geht, das Terminal korrekt zuordnen und weitere Daten ergänzen.
 </td>
 </tr>
 </table>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_voraussetzungen_für_remote_pin_eingabe"><a class="anchor" href="#_voraussetzungen_für_remote_pin_eingabe"></a>Voraussetzungen für Remote-PIN-Eingabe</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_kartenterminal"><a class="anchor" href="#_kartenterminal"></a>Kartenterminal</h3>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 66.6667%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Was</th>
-<th class="tableblock halign-left valign-top">Beschreibung</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Kartenterminal</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ProductCode == <code>ORGA6100</code> &amp;&amp; FirmwareVersion <code>&lt;= 3.9.0</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">RMI Remote SMC-B PIN</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">muss eingeschaltet sein, siehe Abbildung</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p><span class="image"><img src="../_images/ct/orga6141-enable-remote-smcb-pin.png" alt="orga6141 enable remote smcb pin"></span></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_cocard_einstellungen_beim_kartenterminal"><a class="anchor" href="#_cocard_einstellungen_beim_kartenterminal"></a>Cocard: Einstellungen beim Kartenterminal</h3>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 66.6667%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Was</th>
-<th class="tableblock halign-left valign-top">Beschreibung</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">SMC-B Auto-PIN-Mode</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>On Demand</code>, siehe Abbildung</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<div class="title">SMC-B Auto-PIN-Mode Bearbeiten</div>
-<p><span class="image"><img src="../_images/ct/card-terminal-edit-auto-pin-mode.png" alt="card terminal edit auto pin mode"></span></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_cocard_installationsetup"><a class="anchor" href="#_cocard_installationsetup"></a>Cocard-Installation/Setup</h3>
-<div class="paragraph">
-<p>Folgende Umgebungsvariablen müssent im <a href="../installation/configuration.html" class="xref page">Setup</a> von Cocard hinterlegt sein:</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 66.6667%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Was</th>
-<th class="tableblock halign-left valign-top">Beschreibung</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">DEFAULT_WS_AUTH_USER</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">RMI-Authentifikation: Rolle <code>admin</code>. Cocard prüft, ob <code>Remote SMC-B PIN</code> eingeschaltet ist, dazu ist die <code>admin</code>-Rolle erforderlich.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">DEFAULT_WS_AUTH_PASS</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">RMI-Authentifikation: Passwort für Rolle <code>admin</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">DEFAULT_SMCB_PIN=11111111</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Environment-Variable; zur Zeit unterstützt Cocard nur eine einheitliche SMCB-PIN für alle Karten.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/ct/card-terminal-edit.png" alt="card terminal edit">
 </div>
 </div>
 </article>

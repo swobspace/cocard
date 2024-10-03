@@ -6,3 +6,4 @@
 ** xref:podman/podman-systemd.adoc[]
 ** xref:podman/reverse-proxy.adoc[]
 ** xref:configuration.adoc[]
+** xref:checkmk.adoc[]

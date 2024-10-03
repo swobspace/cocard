@@ -1,5 +1,10 @@
 = Changelog
 
+== 0.4.3 - 2024-10-03
+
+* Update der Dokumentation
+* Fix: keine SOAP-Abfrage, wenn der Konnektor noch keine SDS-Informationen hat.
+
 == 0.4.2 - 2024-10-02
 
 * Abfrage der SMC-K Daten vom Konnektor (ICCSN, Gültigkeit bis) (1x pro Tag)

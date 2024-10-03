@@ -1,6 +1,6 @@
 = Konnektor anlegen/bearbeiten
 :author: Wolfgang Barth
-:revdate: 2024-09-17
+:revdate: 2024-10-03
 :imagesdir: ../../images
 :experimental: true
 
@@ -15,7 +15,7 @@ Idealerweise konfiguriert man alle Konnektoren so, dass man mit einem Default-Ko
 
 image:connector/connector-edit-http.png[]
 
-.Konnektor: Felder #FIXME#
+.Konnektor: Felder
 [cols="1,3"]
 |===
 |Feld | Beschreibung
@@ -47,8 +47,8 @@ image:connector/connector-edit-http.png[]
 |Authentifikation
 |`Keine`, `Client-Zertifikat`
 
-|Clientzertifikate
-|Ein oder mehrere Clientzertifikate für die Authentifikation am Konnektor
+|xref:admin/client-certificates.adoc[Client-Zertifikate]
+|Ein oder mehrere Client-Zertifikate für die Authentifikation am Konnektor
 
 |Kontexte
 |siehe xref:admin/contexts.adoc[]
@@ -76,21 +76,21 @@ Für die sichere Kommunikation sind folgende Einstellungen am Konnektor erforder
 * SDS-URL mit https eintragen
 * Schalter _TLS verwenden_ aktivieren
 * Authentifikation: _Client-Zertifikat_ auswählen
-* Client-Zertifikat hinterlegen, passen zum Kontext.
+* xref:admin/client-certificates.adoc[Client-Zertifikat] hinterlegen, passen zum Kontext.
 
 Nach dem Speichern holt man manuell einmal die SDS-Informationen mit dem Button btn:[Abfrage SDS].
 
 image:connector/connector-edit-https-cert.png[]
 
-=== Welche Clientzertifikate müssen hinterlegt werden?
+=== Welche Client-Zertifikate müssen hinterlegt werden?
 
-Der Konnektor benötigt ein Clientzertifikat für jedes Clientsystem, das von Cocard bei diesem Konnektor benutzt wird. Das sind einmal die Clientsysteme, die der Konnektor selbst in seinem zugewiesenen Kontexten verwendet, hier im Beispiel `intern`. Wenn jetzt für die PIN-Prüfung/PIN-Verifizierung bei einer Karte weitere Kontexte mit anderen Clientsystemen zum Einsatz kommen, müssen diese Zertifikate hier zusätzlich hinterlegt werden.
+Der Konnektor benötigt ein xref:admin/client-certificates.adoc[Client-Zertifikat] für jedes Clientsystem, das von Cocard bei diesem Konnektor benutzt wird. Das sind einmal die Clientsysteme, die der Konnektor selbst in seinem zugewiesenen Kontexten verwendet, hier im Beispiel `intern`. Wenn jetzt für die PIN-Prüfung/PIN-Verifizierung bei einer Karte weitere Kontexte mit anderen Clientsystemen zum Einsatz kommen, müssen diese Zertifikate hier zusätzlich hinterlegt werden.
 
 Beispiel:
 
 * Der Konnektor benutzt den administrativen Kontext `Service_Mandant - intern - Konnektor`, weil er damit alles erreichen kann, auch wenn der Kontext von Primärsystemen so nicht genutzt wird.
 * Eine SMC-B-Karte benutzt den produktiven Kontext `Ein1 - iMedOne - Konnektor` für das Primärsystem `iMedOne`.
 
-Im Konnektor hinterlegt man nun das Clientzertifikat für das Clientsystem `intern` und das Clientzertifikat für das Clientsystem `iMedOne`. 
+Im Konnektor hinterlegt man nun das Client-Zertifikat für das Clientsystem `intern` und das Client-Zertifikat für das Clientsystem `iMedOne`. 
 
 Am Konnektor selbst muss der Kontext `Ein1 - iMedOne - Konnektor` nicht eingetragen werden, wenn hier keine zusätzlichen Kartenterminals oder Karten sichtbar werden, d.h. wenn alles schon über den `Service_Mandant - intern - Konnektor` erreichbar ist.

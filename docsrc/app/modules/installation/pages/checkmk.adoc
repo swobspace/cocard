@@ -1,0 +1,23 @@
+= CheckMK Integration
+:author: Wolfgang Barth
+:revdate: 2024-10-03
+
+Cocard verfügt über eine einfache Integration in https://docs.checkmk.com/latest/de/[CheckMK]: über einen sogenannten https://docs.checkmk.com/latest/de/localchecks.html[Local Check] lassen sich Konnektoren, Kartenterminals und Karten sehr einfach in CheckMK einbinden. Hier ein Beispiel für SMC-B-Karten:
+
+image:ROOT:cocard-checkmk-embedded.png[]
+
+== Installation Plugin
+
+Das folgende Beispiel geht davon aus, dass Cocard als Container auf einem Linux-System rootless unter dem User `poddy` läuft. Der Name des Containers - hier `cocard` - hängt ab von der Umgebung. Startet man Cocard mit dem `docker-compose` Quickstart heißt der Container `compose_app_1` oder ähnlich. Ein `podman ps` (oder `docker ps`) zeigt die laufenden Container an.
+
+.CheckMK local plugin
+[source,bash]
+----
+#/bin/bash
+su - poddy -c "podman exec -i cocard bin/rake checkmk:run" | egrep -v 'HBA:'
+----
+
+Wie bei CheckMK local plugins üblich entspricht jede Zeile der Ausgabe einem separaten Service, den man in CheckMK erst inventarisiert, bevor der Service in CheckMK angezeigt wird.
+
+Wer Docker nutzt, ersetzt `podman` durch `docker`.
+

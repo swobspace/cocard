@@ -2,9 +2,11 @@
 ** xref:user/acknowledges.adoc[]
 * Administration
 ** xref:admin/connector-edit.adoc[]
+** xref:admin/card-terminal-edit.adoc[]
 ** xref:admin/contexts.adoc[]
 ** xref:admin/locations.adoc[]
 ** xref:admin/networks.adoc[]
 ** xref:admin/jobs.adoc[]
 ** xref:admin/authorities.adoc[]
 ** xref:admin/smcb-remote-pin.adoc[]
+** xref:admin/client-certificates.adoc[]
