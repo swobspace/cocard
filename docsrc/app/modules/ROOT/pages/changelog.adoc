@@ -1,6 +1,6 @@
 = Changelog
 
-== 0.4.2-dev - 2024-10-02
+== 0.4.2 - 2024-10-02
 
 * Abfrage der SMC-K Daten vom Konnektor (ICCSN, Gültigkeit bis) (1x pro Tag)
 * Aktualisierung des Card-Handles bei der Sammelaktion VerifyPin pro Kartenterminal.

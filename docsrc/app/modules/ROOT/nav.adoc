@@ -8,4 +8,3 @@
 ** xref:admin/jobs.adoc[]
 ** xref:admin/authorities.adoc[]
 ** xref:admin/smcb-remote-pin.adoc[]
-//* xref:changelog.adoc[]
