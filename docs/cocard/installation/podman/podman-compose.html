@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Reverse Proxy zur Absicherung von Cocard :: Cocard</title>
+    <title>Quickstart: docker-compose :: Cocard</title>
     <meta name="generator" content="Antora 3.1.9">
     <link rel="stylesheet" href="../../../_/css/site.css">
     <script>var uiRootPath = '../../../_'</script>
@@ -98,7 +98,7 @@
   </li>
 </ul>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="podman-compose.html">Quickstart: docker-compose</a>
 <ul class="nav-list">
@@ -110,7 +110,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="podman-systemd.html">Systemd und Quadlets</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="reverse-proxy.html">Reverse Proxy</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -161,7 +161,7 @@
   <ul>
     <li><a href="../../index.html">Cocard</a></li>
     <li><a href="../index.html">Installation</a></li>
-    <li><a href="reverse-proxy.html">Reverse Proxy</a></li>
+    <li><a href="podman-compose.html">Quickstart: docker-compose</a></li>
   </ul>
 </nav>
 </div>
@@ -170,75 +170,8 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Reverse Proxy zur Absicherung von Cocard</h1>
+<h1 class="page">Quickstart: docker-compose</h1>
 <div id="preamble">
-<div class="sectionbody">
-<div class="paragraph">
-<p>In produktiven Umgebungen sichert man Webserver in Containern fast immer über einen Reverse Proxy ab. Der Reverse Proxy ist sicher von außen zu erreichen, stellt TLS/HTTPS und ggf. eine zusätzliche Authentifikation zur Verfügung.
-Der Zugriff zwischen Reverse Proxy und Container kann dann einfach über HTTP erfolgen, der Aufwand für die Konfiguration von TLS in den Containern kann entfallen.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../_images/podman/reverse-proxy.svg" alt="reverse proxy">
-</div>
-</div>
-<div class="paragraph">
-<p>Cocard benutzt Websockets, d.h. es gibt hier zweite Verbindung, die man separat im Proxy berücksichtigen muss, wenn man z.B. Apache einsetzt. Bei Traefik entfällt eine Sonderbehandlung der Websockets.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_traefik"><a class="anchor" href="#_traefik"></a>Traefik</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="title">Traefik: directory and files</div>
-<div class="content">
-<pre>/etc/containers/systemd/users/1001/traefik
-├── <a href="../_attachments/podman/quadlet/traefik.yaml" class="xref attachment">traefik.yml</a>
-├── <a href="../_attachments/podman/quadlet/traefik.container" class="xref attachment">traefik.container</a>
-├── <a href="../_attachments/podman/quadlet/traefik.network" class="xref attachment">traefik.network</a></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>In der Beispielkonfiguration öffnet Traefik den Port 8443 für den HTTPS-Zugriff. Die mitgelieferte Konfiguration ist so nicht lauffähig und benötigt Anpassungen auf die eigene Umgebung einschließlich der dazu passenden Zertifikate.</p>
-</div>
-<div class="paragraph">
-<p>Traefik konfiguriert für den Container über das Basis-Setup hinaus mit Labels; diese ergänzt man in <code>cocard.container</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">Network=traefik.network
-Label=traefik.enable=true
-Label=traefik.http.routers.cocard.rule=Host(`cocard.example.com`)
-Label=traefik.http.routers.cocard.entrypoints=websecure
-Label=traefik.http.routers.cocard.tls=true
-Label=traefik.http.routers.cocard.service=svc-cocard
-Label=traefik.http.services.svc-cocard.loadbalancer.server.port=3000</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Die Beispielkonfiguration nutzt ein eigenes Netzwerk für die Kommunikation zwischen Container und Traefik (<code>traefik.network</code>). Das Netzwerk muss daher zusätzlich zum Cocard-internen Netzwerk im Quadlet <code>cocard.container</code> vorhanden sein.</p>
-</div>
-<div class="sect2">
-<h3 id="_podman_socket"><a class="anchor" href="#_podman_socket"></a>podman.socket</h3>
-<div class="paragraph">
-<p>Traefik liest die containerspezifische Dokumentation über eine Socket aus. Bei Docker ist dieser Socket standardmäßig aktiv, bei Podman muss er explizit gestartet werden:</p>
-</div>
-<div class="listingblock">
-<div class="title">User poddy</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">systemctl --user start podman.socket
-systemctl --user enable podman.socket</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Weitere Infos zum Socket erhält man unter <a href="https://github.com/containers/podman/blob/main/docs/tutorials/socket_activation.md" class="bare">https://github.com/containers/podman/blob/main/docs/tutorials/socket_activation.md</a></p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_apache_2_4"><a class="anchor" href="#_apache_2_4"></a>Apache 2.4</h2>
 <div class="sectionbody">
 <div class="admonitionblock note">
 <table>
@@ -247,36 +180,101 @@ systemctl --user enable podman.socket</code></pre>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Ich benutze Apache nicht länger als Reverse Proxy, das Folgende ist daher nur eine Gedankenstütze und keine lauffähige abschließende Konfiguration.
+Die Datei <code>docker-compose.yml</code> ist als Beispiel zu verstehen und für Testzwecke oder erste Schritte gedacht und auch nicht ausführlich getestet. Verbesserungsvorschläge sind jederzeit willkommen.
 </td>
 </tr>
 </table>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installation_und_start"><a class="anchor" href="#_installation_und_start"></a>Installation und Start</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Kopiere folgende Dateien in ein lokales Verzeichnis</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="../_attachments/compose/docker-compose.yml" class="xref attachment">docker-compose.yml</a></p>
+</li>
+<li>
+<p><a href="../_attachments/compose/env.playground" class="xref attachment">env.playground</a></p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>env.playground</code> enthält 2 Secrets, die man vor dem Einsatz ändern sollte. Die Datei enthält eine kurze Anweisung dazu.
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Docker/Podman compose starten</dt>
+</dl>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-apache hljs" data-lang="apache">&lt;VirtualHost *:443&gt;
-...
-  &lt;Location "/"&gt;
-    ProxyPass http://127.0.0.1:3000/
-    ProxyPassReverse http://127.0.0.1:3000/
-  &lt;/Location&gt;
-
-  &lt;Location /cable&gt;
-    ProxyPass ws://127.0.0.1:3000/cable
-    ProxyPassReverse ws://127.0.0.1:3000/cable
-  &lt;/Location&gt;
-
-  &lt;Proxy *&gt;
-    Order deny,allow
-    Allow from all
-  &lt;/Proxy&gt;
-
-  SSLEngine On
-  SSLCertificateKeyFile ....
-  SSLCertificateFile ...
-  ...
-&lt;/VirtualHost&gt;</code></pre>
+<pre>cd &lt;directory-wo-das-compose-file-liegt&gt;
+podman compose up -d
+docker-compose up -d</pre>
 </div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Docker/Podman compose stoppen</dt>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>cd &lt;directory-wo-das-compose-file-liegt&gt;
+podman compose down</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_webzugriff"><a class="anchor" href="#_webzugriff"></a>Webzugriff</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><code><a href="http://localhost:3000" class="bare">http://localhost:3000</a></code></p>
+</li>
+<li>
+<p>login: <code>admin</code></p>
+</li>
+<li>
+<p>password: <code>admin9999</code></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Passwort für <code>admin</code> beim ersten Login ändern!
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_erste_schritte"><a class="anchor" href="#_erste_schritte"></a><a href="../../first-steps.html" class="xref page">Erste Schritte</a></h3>
+
 </div>
 </div>
 </div>

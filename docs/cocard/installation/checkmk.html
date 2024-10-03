@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Standorte :: Cocard</title>
+    <title>CheckMK Integration :: Cocard</title>
     <meta name="generator" content="Antora 3.1.9">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -53,31 +53,31 @@
     <span class="nav-text">Administration</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="connector-edit.html">Konnektor anlegen/bearbeiten</a>
+    <a class="nav-link" href="../admin/connector-edit.html">Konnektor anlegen/bearbeiten</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="card-terminal-edit.html">Kartenterminal anlegen/bearbeiten</a>
+    <a class="nav-link" href="../admin/card-terminal-edit.html">Kartenterminal anlegen/bearbeiten</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="contexts.html">Kontexte</a>
-  </li>
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="locations.html">Standorte</a>
+    <a class="nav-link" href="../admin/contexts.html">Kontexte</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="networks.html">Netzwerke</a>
+    <a class="nav-link" href="../admin/locations.html">Standorte</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="jobs.html">Jobverwaltung</a>
+    <a class="nav-link" href="../admin/networks.html">Netzwerke</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="authorities.html">Berechtigungen</a>
+    <a class="nav-link" href="../admin/jobs.html">Jobverwaltung</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="smcb-remote-pin.html">Remote PIN für SMC-B Karten</a>
+    <a class="nav-link" href="../admin/authorities.html">Berechtigungen</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="client-certificates.html">Zertifikat anlegen/bearbeiten</a>
+    <a class="nav-link" href="../admin/smcb-remote-pin.html">Remote PIN für SMC-B Karten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/client-certificates.html">Zertifikat anlegen/bearbeiten</a>
   </li>
 </ul>
   </li>
@@ -87,11 +87,11 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="../installation/index.html">Installation</a>
+    <a class="nav-link" href="index.html">Installation</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="../installation/podman/quickstart.html">Quickstart: podman pods</a>
+    <a class="nav-link" href="podman/quickstart.html">Quickstart: podman pods</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../first-steps.html">Erste Schritte</a>
@@ -100,7 +100,7 @@
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="../installation/podman/podman-compose.html">Quickstart: docker-compose</a>
+    <a class="nav-link" href="podman/podman-compose.html">Quickstart: docker-compose</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../first-steps.html">Erste Schritte</a>
@@ -108,16 +108,16 @@
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../installation/podman/podman-systemd.html">Systemd und Quadlets</a>
+    <a class="nav-link" href="podman/podman-systemd.html">Systemd und Quadlets</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../installation/podman/reverse-proxy.html">Reverse Proxy</a>
+    <a class="nav-link" href="podman/reverse-proxy.html">Reverse Proxy</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../installation/configuration.html">Konfiguration</a>
+    <a class="nav-link" href="configuration.html">Konfiguration</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../installation/checkmk.html">CheckMK Integration</a>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="checkmk.html">CheckMK Integration</a>
   </li>
 </ul>
   </li>
@@ -160,8 +160,8 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Cocard</a></li>
-    <li>Administration</li>
-    <li><a href="locations.html">Standorte</a></li>
+    <li><a href="index.html">Installation</a></li>
+    <li><a href="checkmk.html">CheckMK Integration</a></li>
   </ul>
 </nav>
 </div>
@@ -170,15 +170,37 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Standorte</h1>
+<h1 class="page">CheckMK Integration</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>Standorte sind als Zusatzinformation gedacht und komplett optional. Die Zuordnung von Konnektoren und Karten zu Standorten erfolgt manuell, die Zuordnung von Kartenterminals kann über die IP-Adresse automatisiert erfolgen, wenn ein passendes <a href="networks.html" class="xref page">Netzwerk</a> angelegt wurde.</p>
+<p>Cocard verfügt über eine einfache Integration in <a href="https://docs.checkmk.com/latest/de/">CheckMK</a>: über einen sogenannten <a href="https://docs.checkmk.com/latest/de/localchecks.html">Local Check</a> lassen sich Konnektoren, Kartenterminals und Karten sehr einfach in CheckMK einbinden. Hier ein Beispiel für SMC-B-Karten:</p>
 </div>
 <div class="paragraph">
-<p>Die Übersicht eines Standortes zeigt die verknüpften Objekte:</p>
+<p><span class="image"><img src="../_images/cocard-checkmk-embedded.png" alt="cocard checkmk embedded"></span></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installation_plugin"><a class="anchor" href="#_installation_plugin"></a>Installation Plugin</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Das folgende Beispiel geht davon aus, dass Cocard als Container auf einem Linux-System rootless unter dem User <code>poddy</code> läuft. Der Name des Containers - hier <code>cocard</code> - hängt ab von der Umgebung. Startet man Cocard mit dem <code>docker-compose</code> Quickstart heißt der Container <code>compose_app_1</code> oder ähnlich. Ein <code>podman ps</code> (oder <code>docker ps</code>) zeigt die laufenden Container an.</p>
+</div>
+<div class="listingblock">
+<div class="title">CheckMK local plugin</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">#/bin/bash
+su - poddy -c "podman exec -i cocard bin/rake checkmk:run" | egrep -v 'HBA:'</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="../_images/location/location-show.png" alt="location show"></span></p>
+<p>Wie bei CheckMK local plugins üblich entspricht jede Zeile der Ausgabe einem separaten Service, den man in CheckMK erst inventarisiert, bevor der Service in CheckMK angezeigt wird.</p>
+</div>
+<div class="paragraph">
+<p>Wer Docker nutzt, ersetzt <code>podman</code> durch <code>docker</code>.</p>
+</div>
+</div>
 </div>
 </article>
   </div>

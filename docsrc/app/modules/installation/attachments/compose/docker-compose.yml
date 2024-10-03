@@ -1,0 +1,48 @@
+---
+x-base: &base
+  image: ghcr.io/swobspace/cocard:latest
+  volumes:
+    - dc-cocard-storage:/rails/storage
+  depends_on:
+    redis:
+      condition: service_started
+    postgres:
+      condition: service_healthy
+  env_file:
+    - env.playground
+  cap_add:
+    - CAP_NET_RAW
+
+services:
+  app:
+    <<: *base
+    restart: on-failure
+    ports:
+      - 3000:3000
+
+  worker:
+    <<: *base
+    command: bundle exec good_job start --queues="cocard_production_default:4;cocard_production_rmi:1;turbo_streams_production:2;*:1"
+    restart: on-failure
+
+  redis:
+    image: docker.io/library/redis:latest
+    volumes:
+      - dc-cocard-redis:/data
+
+  postgres:
+    image: docker.io/postgres:16.3
+    volumes:
+      - dc-cocard-postgres:/var/lib/postgresql/data
+    env_file:
+      - env.playground
+    healthcheck:
+      test: /usr/bin/pg_isready -q -d postgres -U postgres
+      timeout: 45s
+      interval: 10s
+      retries: 10
+
+volumes:
+  dc-cocard-redis:
+  dc-cocard-postgres:
+  dc-cocard-storage:

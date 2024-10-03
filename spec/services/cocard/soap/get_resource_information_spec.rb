@@ -40,9 +40,24 @@ module Cocard::SOAP
       expect { subject }.not_to raise_error
     end
 
+    it { expect(subject.valid?).to be_truthy }
+
     # check for instance methods
     describe 'check if instance methods exists' do
       it { expect(subject.respond_to?(:call)).to be_truthy }
+    end
+
+    describe 'without connector services' do
+      before(:each) do
+        allow(connector).to receive(:connector_services).and_return(nil)
+      end
+
+      it { expect(subject.valid?).to be_falsey }
+      it "#call returns error" do
+        result = subject.call
+        expect(result.success?).to be_falsey
+        expect(result.error_messages).to contain_exactly("Missing SDS information for connector, can't continue")
+      end
     end
 
     # must be explicit called with rspec --tag soap

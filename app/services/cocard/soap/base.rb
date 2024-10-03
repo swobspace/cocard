@@ -24,14 +24,23 @@ module Cocard::SOAP
       opera = soap_operation
       @options       = options
       @connector     = options.fetch(:connector)
-      fetch_specific_options(options)
-      @savon_client = init_savon_client
+      if @connector.connector_services.nil?
+        @valid = false
+      else
+        @valid = true
+        fetch_specific_options(options)
+        @savon_client = init_savon_client
+      end
     end
 
     # service.call()
     # do all the work here ;-)
     def call
       error_messages = []
+      unless valid?
+        error_messages << "Missing SDS information for connector, can't continue"
+        return Result.new(success?: false, error_messages: error_messages, response: nil)
+      end
       unless check_auth
         error_messages << "Missing matching client certificate for client_system: #{@client_system}"
         return Result.new(success?: false, error_messages: error_messages, response: nil)
@@ -62,6 +71,10 @@ module Cocard::SOAP
 
     def soap_operation_attributes
       {}
+    end
+
+    def valid?
+      @valid
     end
 
   protected

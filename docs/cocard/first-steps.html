@@ -56,6 +56,9 @@
     <a class="nav-link" href="admin/connector-edit.html">Konnektor anlegen/bearbeiten</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="admin/card-terminal-edit.html">Kartenterminal anlegen/bearbeiten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="admin/contexts.html">Kontexte</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -73,6 +76,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="admin/smcb-remote-pin.html">Remote PIN für SMC-B Karten</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="admin/client-certificates.html">Zertifikat anlegen/bearbeiten</a>
+  </li>
 </ul>
   </li>
 </ul>
@@ -85,7 +91,16 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="installation/podman/quickstart.html">Quickstart</a>
+    <a class="nav-link" href="installation/podman/quickstart.html">Quickstart: podman pods</a>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="first-steps.html">Erste Schritte</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="installation/podman/podman-compose.html">Quickstart: docker-compose</a>
 <ul class="nav-list">
   <li class="nav-item is-current-page" data-depth="3">
     <a class="nav-link" href="first-steps.html">Erste Schritte</a>
@@ -100,6 +115,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="installation/configuration.html">Konfiguration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="installation/checkmk.html">CheckMK Integration</a>
   </li>
 </ul>
   </li>
@@ -143,7 +161,7 @@
   <ul>
     <li><a href="index.html">Cocard</a></li>
     <li><a href="installation/index.html">Installation</a></li>
-    <li><a href="installation/podman/quickstart.html">Quickstart</a></li>
+    <li><a href="installation/podman/quickstart.html">Quickstart: podman pods</a></li>
     <li><a href="first-steps.html">Erste Schritte</a></li>
   </ul>
 </nav>
@@ -231,9 +249,6 @@ Passwort für <code>admin</code> beim ersten Login ändern!
 <div class="sect1">
 <h2 id="_konnektorzugriff_einrichten_mit_client_zertifikat"><a class="anchor" href="#_konnektorzugriff_einrichten_mit_client_zertifikat"></a>Konnektorzugriff einrichten (mit Client-Zertifikat)</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p><mark>FIXME</mark></p>
-</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -245,6 +260,9 @@ Obige Kurzanleitung geht davon aus, dass der Zugriff auf den Konnektor ohne Auth
 </td>
 </tr>
 </table>
+</div>
+<div class="paragraph">
+<p><a href="admin/connector-edit.html#_mit_tls_mit_authentifikation_per_client_zertifikat" class="xref page">Konnektorzugriff mit Client-Zertifikat einrichten</a></p>
 </div>
 </div>
 </div>

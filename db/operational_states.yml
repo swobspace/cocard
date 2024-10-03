@@ -1,0 +1,7 @@
+operational_states:
+  - name: in Betrieb
+    description: in Betrieb
+    operational: true
+  - name: offline
+    description: außer Betrieb
+    operational: false

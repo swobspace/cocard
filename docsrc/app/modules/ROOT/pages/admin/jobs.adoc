@@ -29,7 +29,7 @@ Einzelne Cron-Einträge kann man über die Symbole am Ende jeder Zeile auch manu
 
 == Prozesse
 
-Die Queues von Cocard werden aus Performancegründen parallel in mehreren https://github.com/bensheldon/good_job?tab=readme-ov-file#optimize-queues-threads-and-processes[Pools] ausgeführt. Die Konfiguration erfolgt über folgende Zeile in xref:attachment$podman/quadlet/cocard-worker.container[cocard-worker.container]:
+Die Queues von Cocard werden aus Performancegründen parallel in mehreren https://github.com/bensheldon/good_job?tab=readme-ov-file#optimize-queues-threads-and-processes[Pools] ausgeführt. Die Konfiguration erfolgt über folgende Zeile in xref:installation:attachment$podman/quadlet/cocard-worker.container[cocard-worker.container]:
 
 .GoodJob-Ausführung mit mehreren Pools
 ----

@@ -2,11 +2,11 @@
 <%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
 
   <div class="form-input">
-    <%= form.input :valid_until, html5: true, wrapper: :horizontal_datetime
-       %>
     <%= form.input :type, as: :hidden
        %>
     <%= form.input :message, as: :rich_text_area
+       %>
+    <%= form.input :valid_until, html5: true, wrapper: :horizontal_datetime
        %>
 
     <%= form.button :submit, class: 'btn btn-primary' %>
