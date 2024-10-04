@@ -51,7 +51,9 @@ private
   attr_reader :item, :color, :icon, :period, :as_text, :text, :size
 
   def outdated?
-    item.updated_at < period.before(Time.current)
+    unless item.updated_at.nil?
+      item.updated_at < period.before(Time.current)
+    end
   end
 
   def btn

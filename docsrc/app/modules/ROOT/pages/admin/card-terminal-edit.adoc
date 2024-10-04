@@ -13,3 +13,56 @@ IMPORTANT: Wenn Kartenterminals vorab zur Inventarisierung erfasst werden, bitte
 
 image::ct/card-terminal-edit.png[]
 
+Das Formular besteht aus 2 Bereichen: der obere Bereich (bis zu dem gelben Hinweis) sind Felder, die ein Administrator (Rolle Admin oder CardTerminalManager) selbst pflegt. Die Felder unten sind werden von Cocard aktualisiert und sind nur für die Ersterfassung gedacht, wenn das Kartenterminal noch nicht online ist.
+
+.Felder Kartenterminal anlegen/bearbeiten
+[cols="1,3"]
+|===
+|Feld | Beschreibung
+
+|Anzeigename
+|Name zur Identifikation des Kartenterminals
+
+|Ort
+|Zuordnung zu einem xref:admin/locations.adoc[Standort]. Wenn für die IP-Adresse des Kartenterminals ein xref:admin/networks.adoc[Netzwerk] gepflegt ist, dann aktualisiert Coccard den Standort automatisch. Soll Cocard den Standort nicht verändern, dann darf im Umkehrschluss für diese IP kein Netzwerk in den Stammdaten vorhanden sein.
+
+|Raum
+|Freitextfeld für die Lokalisation des Kartenterminals
+
+|Netzwerk, Dose, Switch
+|Freitextfeld für Angaben zum Netzwerkanschluss
+
+|Ansprechpartner
+|Freitextfeld für Kontaktinformationen
+
+|Lieferdatum
+|-
+
+|Lieferant
+|
+
+|Seriennummer
+|
+
+|Modellbezeichnung
+|Produktname oder ähnliches
+
+|Beschreibung
+|Freitext zur Dokumentation weiterer Informationen
+
+|SMC-B Auto-PIN-Mode
+|Wenn das Kartenterminal von Cocard unterstützt wird und `On Demand` eingetragene ist sendet Cocard die PIN für eine SMC-B an das Kartenterminal, wenn der Konnektor eine Pin-Verifizierung anfordert. xref:admin/smcb-remote-pin.adoc[Unterstützte Kartenterminals]
+
+|MAC
+|MAC-Adresse des Kartenterminals. Wird von Cocard zur eindeutigen Identifikation des Kartenterminals genutzt
+
+|IP-Adresse
+|IPv4-Adresse des Kartenterminals
+
+|Slots
+|Anzahl der verfügbaren Slots
+
+|Konnektor
+|Konnektor, mit dem das Kartenterminal verbunden ist. Wenn ein Kartenterminal abgebaut wird und nicht mehr erreichbar ist kann man hier den Konnektor entfernen, um Fehlalarme im Dashboard zu vermeiden.
+
+|===

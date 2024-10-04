@@ -1,7 +1,7 @@
 = Certificate Authority für Clientsysteme
 :author: Wolfgang Barth
 :navtitle: CA für Clientsysteme
-:revdate: 2024-07-04
+:revdate: 2024-10-03
 
 * Referenz: https://openssl-ca.readthedocs.io/en/latest
 
@@ -42,7 +42,7 @@ openssl x509 -noout -text -in certs/cacert.pem
 
 .PKey
 ----
-openssl genrsa -aes256 -out private/intern.key.pem 2048
+openssl genrsa -aes256 -out private/intern.key.pem 3072
 chmod 400 private/intern.key.pem
 ----
 

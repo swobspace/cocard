@@ -5,17 +5,17 @@
 :experimental: true
 
 Karten, die bereits ein einem mit dem Konnektor verbundenen Kartenterminal erreichbar sind, werden automatisch erkannt und in Cocard gespeichert. 
-In manchen Fällen ist die Voraberfassung durchaus sinnvoll, etwa wenn man die Bestellung oder den Status einer Karte dokumentieren möchte, bevor diese erstmalig in den Betrieb geht. Das einzige Pflichtfeld ist die ICCSN.
+In manchen Fällen ist eine Voraberfassung durchaus sinnvoll, etwa wenn man die Bestellung oder den Status einer Karte dokumentieren möchte, bevor diese erstmalig in den Betrieb geht. Das einzige Pflichtfeld für eine Neuanlage einer Karte ist die ICCSN.
 
-NOTE: Cocard identifiziert die Karte ausschließlich über die ICCSN. Wenn die Karte bereits erfasst wird, bevor die ICCSN bekannt ist (z.B. während einer laufenden Bestellung), dann trägt man einen Dummy als ICCSN ein. Vor Inbetriebnahme der Karte muss dann aber unbedingt die ICCSN korrigiert werden, andernfalls legt Cocard eine weitere Karte an und die schon erfassten Daten werden nicht dorthin übernommen!
+NOTE: Cocard identifiziert die Karte ausschließlich über die ICCSN. Wenn die Karte bereits erfasst wird, bevor die ICCSN bekannt ist (z.B. während einer laufenden Bestellung), dann trägt man einen Dummy als ICCSN ein. Vor Inbetriebnahme der Karte muss dann unbedingt die ICCSN korrigiert werden, andernfalls legt Cocard eine weitere Karte an und die schon erfassten Daten werden nicht dorthin übernommen!
 
 Cocard inventarisiert Karten vom Typ `SMC-B`, `SMC-KT`, `HBA`. Ein HBA taucht in Cocard nur dann auf, wenn er bei der periodischen Abfrage gerade zufällig in einem Terminal erreichbar ist. Da sich die Daten im Zertifikat zu einer ICCSN nie ändern, genügt das um zumindest die Existenz des HBAs mit Zertifikatsdaten und vor allem der Zertifikatsgültigkeit zu speichern.
-
-image:card/card-new.png[]
 
 == Formularfelder
 
 === Name, Beschreibung
+
+image:card/card-new-1.png[]
 
 .Karte: Name, Beschreibung
 [cols="1,3"]
@@ -44,7 +44,7 @@ image:card/card-new.png[]
 |Zuordnung zu einem xref:admin/locations.adoc[Standort]. Nur für die Dokumentation.
 
 |Betriebszustand
-|Über den xref:admin/operational_states.adoc[Betriebszustand] lässt sich
+|Über den xref:admin/operational_states.adoc[Betriebszustand] lässt sich sich die aktuelle Verwendung der Karte einstellen. Nur Karten die "in Betrieb" sind werden im Dashboard angezeigt und von Cocard automatisch überwacht (Card Handle, Pin Status etc.)
 
 |LANR
 |Lebenslange Arztnummer zur Dokumentation
@@ -61,6 +61,8 @@ image:card/card-new.png[]
 |===
 
 === Kartendaten
+
+image::card/card-new-2.png[]
 
 Diese Felder werden bei jeder Kartenabfrage aktualisiert, ein manueller Eintrag ist nur vor der ersten Inbetriebnahme sinnvoll.
 
@@ -88,6 +90,8 @@ Diese Felder werden bei jeder Kartenabfrage aktualisiert, ein manueller Eintrag 
 
 === Daten des Zertifikates
 
+image::card/card-new-3.png[]
+
 Hier kann eine manuelle Erfassung vor Inbetriebnahme sinnvoll sein, da man die Informationen bei der Bestellung einer SMC-B explizit mit angibt. Die Informationen werden aktualisiert, sobald Cocard das Zertifikat der Karte bei Inbetriebnahme einliest.
 
 
@@ -98,3 +102,5 @@ Für die Abfrage der Karte benötigt Cocard einen Kontext, der entsprechend im I
 Für die Abfrage aller Karten eines Konnektors werden die Kontexte benutzt, die beim Konnektor hinterlegt sind.
 
 image::card/card-edit-card-context.png[]
+
+Die Felder für die Zuweisung von Karten-Kontexten sind nur bei der Bearbeitung der Karte, aber nicht im Neu-Formular vorhanden. Bei Neunlage muss daher die Karte einmal gespeichert und die Karte noch einmal im Bearbeitungsmodus geöffnet werden.

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Zustände :: Cocard</title>
+    <meta name="generator" content="Antora 3.1.9">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">Cocard</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="abstand">
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+          <div class="navbar-item dark">Cocard</div>
+           <a class="navbar-item" href="../../devnotes/index.html">DevNotes</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="cocard" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Cocard</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Cocard</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="dashboard.html">Dashboard</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="common.html">Allgemeines zur Oberfläche</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="conditions.html">Zustände</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="acknowledges.html">Acknowledges</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Administration</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/connector-edit.html">Konnektor anlegen/bearbeiten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/card-terminal-edit.html">Kartenterminal anlegen/bearbeiten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/card-new.html">Karte anlegen/bearbeiten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/contexts.html">Kontexte</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/locations.html">Standorte</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/networks.html">Netzwerke</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/operational_states.html">Betriebszustände</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/jobs.html">Jobverwaltung</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/authorities.html">Berechtigungen</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/smcb-remote-pin.html">Remote PIN für SMC-B Karten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/client-certificates.html">Zertifikat anlegen/bearbeiten</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../installation/index.html">Installation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../installation/podman/quickstart.html">Quickstart: podman pods</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../first-steps.html">Erste Schritte</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../installation/podman/podman-compose.html">Quickstart: docker-compose</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../first-steps.html">Erste Schritte</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/podman/podman-systemd.html">Systemd und Quadlets</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/podman/reverse-proxy.html">Reverse Proxy</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/configuration.html">Konfiguration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/checkmk.html">CheckMK Integration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Cocard</span>
+    <span class="version">default</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Cocard</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../devnotes/index.html">DevNotes</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../devnotes/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Cocard</a></li>
+    <li><a href="conditions.html">Zustände</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Zustände</h1>
+<div class="paragraph">
+<p>In vielen Übersichten wie im Dashboard werden Zustände von Geräten und Karten angezeigt. Neben dem Symbol gibt es auch eine Textinformation, die man in Übersichten ggf. erst einblenden muss.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 14.2857%;">
+<col style="width: 85.7143%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-center valign-top">Zustand</th>
+<th class="tableblock halign-left valign-top">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="../_images/common/ok.png" alt="ok">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alles ok.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="../_images/common/warning.png" alt="warning">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warnzustand, etwa wenn das Zertifikat einer Karte in weniger als 3 Monaten abläuft.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="../_images/common/critical.png" alt="critical">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kritischer Zustand, der überprüft werden muss. Z.B. Konnektor hat keine Verbindung zur TI, Zertifikat abgelaufen, PIN einer Karte in einem bestimmten Kontext ist nicht verifiziert.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="../_images/common/unknown.png" alt="unknown">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unbekannter Zustand, deutet eher auf eine Fehlkonfiguration oder Fehlbedienung hin, etwa SOAP-Abfrage klappt nicht, obwohl der Konnektor sonst erreichbar ist.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="../_images/common/nothing.png" alt="nothing">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Gerät oder Karte noch nicht vollständig konfiguriert oder nicht in Betrieb.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="../_images/common/critical-outdated.png" alt="critical outdated">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wenn neben dem Button mit einer nicht ausgefüllten Fläche ein Warnzeichen erscheint, sind die vorliegenden Daten veraltet. D.h. der eigentliche Zustand kann aktuell anders sein, aber Cocard liegen im Moment keine neueren Informationen vor.</p></td>
+</tr>
+</tbody>
+</table>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <span>Wolfgang Barth (C) 2024</span>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/vendor/medium-zoom.min.js"></script>
+<script>mediumZoom('img:not(.copy-icon');</script>
+  </body>
+</html>

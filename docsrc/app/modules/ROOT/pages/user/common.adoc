@@ -1,0 +1,30 @@
+= Allgemeines zur Oberfläche
+:author: Wolfgang Barth
+:revdate: 2024-10-04
+:imagesdir: ../../images
+:experimental: true
+
+== Tabellen
+
+Für die Anzeige von Listen verwendet Cocard überwiegend Tabellen. Als Beispiel dient die Übersicht über Konnektoren in der folgenden Abbildung.
+
+.Übersicht Konnektoren
+image::connector/connectors-index.png[]
+
+Die angezeigten Spalten lassen sich über _Column Visibility_ verändern. In vielen Fällen zeigt Cocard in der Standardansicht nicht alle Spalten. Das verwendete Plugin zeigt nun immer nur soviele Spalten an wie Platz auf dem Bildschirm ist. D.h. es ist durchaus möglich, dass Spalten, die über die Sichtbarkeit eingeblendet sein sollen aus Platzgründen doch nicht angezeigt werden. Dann sollte man die angezeigten Spalten reduzieren, bis die gewünschte Spalte doch erscheint. Beim Export als CSV oder Excel werden die ausgewählten Spalten exportiert, also ggf. auch solche, die nicht angezeigt werden, weil der Bildschirm zu schmal ist.
+
+=== Kopfbereich
+
+.Kopfbereich von Tabellen
+image::common/table-header.png[]
+
+Neben der Sichtbarkeit via _Column Visibility_ kann man die angezeigten Inhalte sortieren. Dazu klickt man einfach auf die Spaltenüberschrift. Über das Feld _search_ über jeder Spalte filtert man die Einträge.
+
+Filterung, angezeigte Spalten und Sortierung bleiben für einige Stunden erhalten, auch wenn man zwischendurch in einen anderen Bereich von Cocard wechselt. Um die Standardansicht wieder herzustellen nutzt man den Button _Reset_ oberhalb der Tabelle.
+
+=== Fußbereich
+
+.Fußbereich von Tabellen
+image::common/table-bottom.png[]
+
+Im Fußbereich findet man links Informationen zur Anzahl der Einträge und ob ggf. ein Filter aktiv ist. Rechts ist ein Navigator, der zwischen den angezeigten Seiten hin- und her schaltet.
