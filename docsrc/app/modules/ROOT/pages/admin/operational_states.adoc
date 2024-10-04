@@ -1,0 +1,5 @@
+= Betriebszustände
+:author: Wolfgang Barth
+:revdate: 2024-10-04
+:imagesdir: ../../images
+:experimental: true

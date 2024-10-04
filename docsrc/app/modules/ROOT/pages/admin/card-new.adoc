@@ -1,0 +1,100 @@
+= Karte anlegen/bearbeiten
+:author: Wolfgang Barth
+:revdate: 2024-10-04
+:imagesdir: ../../images
+:experimental: true
+
+Karten, die bereits ein einem mit dem Konnektor verbundenen Kartenterminal erreichbar sind, werden automatisch erkannt und in Cocard gespeichert. 
+In manchen Fällen ist die Voraberfassung durchaus sinnvoll, etwa wenn man die Bestellung oder den Status einer Karte dokumentieren möchte, bevor diese erstmalig in den Betrieb geht. Das einzige Pflichtfeld ist die ICCSN.
+
+NOTE: Cocard identifiziert die Karte ausschließlich über die ICCSN. Wenn die Karte bereits erfasst wird, bevor die ICCSN bekannt ist (z.B. während einer laufenden Bestellung), dann trägt man einen Dummy als ICCSN ein. Vor Inbetriebnahme der Karte muss dann aber unbedingt die ICCSN korrigiert werden, andernfalls legt Cocard eine weitere Karte an und die schon erfassten Daten werden nicht dorthin übernommen!
+
+Cocard inventarisiert Karten vom Typ `SMC-B`, `SMC-KT`, `HBA`. Ein HBA taucht in Cocard nur dann auf, wenn er bei der periodischen Abfrage gerade zufällig in einem Terminal erreichbar ist. Da sich die Daten im Zertifikat zu einer ICCSN nie ändern, genügt das um zumindest die Existenz des HBAs mit Zertifikatsdaten und vor allem der Zertifikatsgültigkeit zu speichern.
+
+image:card/card-new.png[]
+
+== Formularfelder
+
+=== Name, Beschreibung
+
+.Karte: Name, Beschreibung
+[cols="1,3"]
+|===
+|Feld | Beschreibung
+
+|Name
+|Kurzbezeichnung der Karte, die bei der Identifikation hilft. z.B. `Institutsambulanz XYZ`. Cocard trägt hier bei der Ersterkennung den Common Name aus dem Zertifikat der Karte ein, wenn das Feld leer ist.
+
+|Beschreibung
+|Freitextfeld für umfangreichere Dokumentation
+
+|Geschützte Information
+|Information, die nur der Rolle Admin und der Rolle CardManager angezeigt wird
+
+|===
+
+=== Administrativa
+
+.Karte: Administrativa
+[cols="1,3"]
+|===
+|Feld | Beschreibung
+
+|Ort
+|Zuordnung zu einem xref:admin/locations.adoc[Standort]. Nur für die Dokumentation.
+
+|Betriebszustand
+|Über den xref:admin/operational_states.adoc[Betriebszustand] lässt sich
+
+|LANR
+|Lebenslange Arztnummer zur Dokumentation
+
+|BSNR
+|Betriebsstättennummer, auf die eine SMC-B ausgestellt wurde. Ist das Feld leer, extrahiert Cocard diese Information aus dem Common Name.
+
+|Fachrichtung
+|Freitext
+
+|Telematik-ID
+|Die Telematik-ID wird aus dem Zertifikat extrahiert und bei einer erneuten Zertifikatsabfrage erneut gesetzt. Eine manuelle Erfassung ist nur bei Karten vor der ersten Inbetriebnahme sinnvoll.
+
+|===
+
+=== Kartendaten
+
+Diese Felder werden bei jeder Kartenabfrage aktualisiert, ein manueller Eintrag ist nur vor der ersten Inbetriebnahme sinnvoll.
+
+.Kartendaten
+[cols="1,3"]
+|===
+|Feld | Beschreibung
+
+|ICCSN
+|Eindeutige Kartennummer
+
+|Kartentyp
+|`SMC-B`, `SMC-KT`, `HBA`
+
+|CardHolder
+|Der Eigentümer der Karte
+
+|Kartenterminal
+|Das Terminal, in dem Cocard bei der Abfrage die Karte sieht
+
+|Schachtnummer
+|Nummer des Schachtes, in dem die Karte steckt
+
+|===
+
+=== Daten des Zertifikates
+
+Hier kann eine manuelle Erfassung vor Inbetriebnahme sinnvoll sein, da man die Informationen bei der Bestellung einer SMC-B explizit mit angibt. Die Informationen werden aktualisiert, sobald Cocard das Zertifikat der Karte bei Inbetriebnahme einliest.
+
+
+== Zuweisung eines Kontextes
+
+Für die Abfrage der Karte benötigt Cocard einen Kontext, der entsprechend im Infomodell des Konnektors hinterlegt sein muss. Der Kontext wird bei allen Einzeloperationen einer Karte verwendet wie Karte aktualisieren (für das Card Handle), Pin Status prüfen, Pin Verifizierung starten, Zertifikat abfragen.
+
+Für die Abfrage aller Karten eines Konnektors werden die Kontexte benutzt, die beim Konnektor hinterlegt sind.
+
+image::card/card-edit-card-context.png[]
