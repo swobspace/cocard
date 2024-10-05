@@ -17,7 +17,9 @@ puts pkey.private?
 
 cipher = OpenSSL::Cipher.new 'aes-256-cbc'
 passphrase = 'test99'
-key_secure = pkey.export cipher, passphrase
+
+key_secure = pkey.private_to_pem cipher, passphrase
 open 'private.secure.pem', 'w' do |io|
   io.write key_secure
 end
+
