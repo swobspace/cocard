@@ -34,5 +34,14 @@ RSpec.describe ClientCertificatesController, type: :routing do
     it "routes to #destroy" do
       expect(delete: "/client_certificates/1").to route_to("client_certificates#destroy", id: "1")
     end
+
+    it "routes to #import_p12_form" do
+      expect(get: "/client_certificates/import_p12_form").to route_to("client_certificates#import_p12_form")
+    end
+
+    it "routes to #import_p12" do
+      expect(post: "/client_certificates/import_p12").to route_to("client_certificates#import_p12")
+    end
+
   end
 end

@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   get 'verify_pins', to: 'verify_pins#index'
   post 'verify_pins', to: 'verify_pins#verify'
-  resources :client_certificates
+  resources :client_certificates do
+    collection do
+      get :import_p12_form
+      post :import_p12
+    end
+  end
   resources :workplaces do
     collection do
       get :new_import
