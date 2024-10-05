@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Event Logs :: Cocard</title>
+    <meta name="generator" content="Antora 3.1.9">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">Cocard</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="abstand">
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+          <div class="navbar-item dark">Cocard</div>
+           <a class="navbar-item" href="../../devnotes/index.html">DevNotes</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="cocard" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Cocard</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Cocard</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="dashboard.html">Dashboard</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="common.html">Allgemeines zur Oberfläche</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="conditions.html">Zustände</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="logs.html">Event Logs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="acknowledges.html">Acknowledges</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Administration</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/connector-edit.html">Konnektor anlegen/bearbeiten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/card-terminal-edit.html">Kartenterminal anlegen/bearbeiten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/card-new.html">Karte anlegen/bearbeiten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/contexts.html">Kontexte</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/locations.html">Standorte</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/networks.html">Netzwerke</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/operational_states.html">Betriebszustände</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/jobs.html">Jobverwaltung</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/authorities.html">Berechtigungen</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/smcb-remote-pin.html">Remote PIN für SMC-B Karten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/client-certificates.html">Zertifikat anlegen/bearbeiten</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../installation/index.html">Installation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../installation/podman/quickstart.html">Quickstart: podman pods</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../first-steps.html">Erste Schritte</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../installation/podman/podman-compose.html">Quickstart: docker-compose</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../first-steps.html">Erste Schritte</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/podman/podman-systemd.html">Systemd und Quadlets</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/podman/reverse-proxy.html">Reverse Proxy</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/configuration.html">Konfiguration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/checkmk.html">CheckMK Integration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Cocard</span>
+    <span class="version">default</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Cocard</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../devnotes/index.html">DevNotes</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../devnotes/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Cocard</a></li>
+    <li><a href="logs.html">Event Logs</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Event Logs</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Event Logs in Cocard sind semipermanent. In klassische Logdateien wird neue Information angehangen - die Logdatei wächst stehtig und erfordert ein Logfile-Management, um den Platzbedarf zu begrenzen. In Cocard dagegen gibt es für ein bestimmtes Ereignis eines Gerätes oder einer Karte genau einen Eintrag. Dieser Eintrag ist gültig oder ungültig, wenn der Grund hierfür wieder entfallen ist. Semipermanent deshalb, weil ein Eintrag auch gelöscht werden kann.</p>
+</div>
+<div class="paragraph">
+<p>Ein Beispiel: liefert der Konnektor <code>TIKONN-123</code> den Fehlerzustand <code>OPERATIONAL_STATE/EC_TLS_Client_Certificate_Security</code> (Die Schlüssellänge des Client-Zertifikates hat ein zu niedriges Sicherheitsniveau und sollte erneuert werden), dann erstellt Cocard für die Kombination aus Konnektor und Fehlerzustand genau einen Logeintrag. Der Logeintrag wird als gültig markiert und erscheint damit in der Liste der aktuellen Logeinträge (<span class="menuseq"><b class="menu">Menu</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="submenu">Ereignisse</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Aktuelle Logs</b></span>) sowie im Dashboard im Abschnitt <em>Event Log</em>. Entfällt der Grund später wieder wird der Eintrag nicht gelöscht, sondern nur als ungültig markiert. Über <span class="menuseq"><b class="menu">Menü</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="submenu">Ereignisse</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Logs</b></span> werden alle Einträge in der Datenbank angezeigt.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Die Begriffe Event Log, Log, Logeintrag unterscheiden sich derzeit nicht in Ihrer Bedeutung, da Cocard derzeit noch keine Subscriptions vom Konnektor bezieht (aktive Benachrichtigungen, die der Konnektor bei einem Ereignis versendet, etwa Karte wurde gesteckt).
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_aktuelle_logs"><a class="anchor" href="#_aktuelle_logs"></a>Aktuelle Logs</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/logs/logs-index-current.png" alt="logs index current">
+</div>
+<div class="title">Abbildung 1. Aktuelle (gültige) Logeinträge</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Spalte</th>
+<th class="tableblock halign-left valign-top">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">seit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wann ist das Ereignis zum ersten Mal aufgetreten?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Level</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Schweregrad, wenn es ein Fehlerzustand (OPERATIONAL_STATE) den Konnektors ist.
+Bei Cocard-internen Meldungen entspricht der Level der Text-Bezeichnung des <a href="conditions.html" class="xref page">Zustandes</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Typ</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Card</code>, <code>CardTerminal</code>, <code>Connector</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Log für</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Objekt, das den Eintrag ausgelöst hat (also Konnektor, Karte oder Kartenterminal)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Aktion</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Eindeutiger Identifier für den Logeintrag. Aus der Kombination <code>Log für</code> und <code>Aktion</code> wird der Log identifiziert, für jede Kombination gibt es immer nur genau einen Eintrag.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nachricht</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ergänzende Informationen wie Fehlermeldungen</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">gültig</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ist der Eintrag aktuell gültig?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">zuletzt gesehen</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wann hat Cocard den Eintrag zuletzt gesehen? Wenn Cocard mit dem Hintergrundjobs erneut auf den Fehlerzustand stößt, wird der Eintrag aktualisiert - oder, wenn der Fehler behoben ist, markiert Cocard den Eintrag als ungültig. Findet Cocard keine passende Kombination aus <code>Log für</code> und <code>Aktion</code>, wird der Eintrag nicht mehr aktualisiert und veraltet (Warnzeichen neben dem Alter).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Aktion</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Buttons für die Einzelanzeige eines Logs oder zum Löschen des Eintrages.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_veraltete_logs"><a class="anchor" href="#_veraltete_logs"></a>Veraltete Logs</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/logs/logs-obsolete.png" alt="logs obsolete">
+</div>
+</div>
+<div class="paragraph">
+<p>Logeinträge können übrig bleiben und veralten, wenn es die Kombination aus <code>Log für</code> und <code>Aktion</code> nicht mehr gibt. Beispiel: man prüft den Status der PIN einer Karte mit einem Kontext, der im Infomodell des Konnektors gar nicht hinterlegt ist. Dabei tritt ein Fehler auf und Cocard erzeugt einen Logeintrag.</p>
+</div>
+<div class="paragraph">
+<p>Korrigiert man jetzt den Kontext bei der Karte und prüft den Status der PIN erneut, ist das für Cocard ein anderer Logeintrag, da der Kontext in die <code>Aktion</code> mit  eingeht. Folge: der alte Logeintrag wird nie wieder aktualisiert und bleibt stehen.</p>
+</div>
+<div class="paragraph">
+<p>Um das Aufräumen zu erleichtern gibt es eine eigene Ansicht <span class="menuseq"><b class="menu">Menu</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="submenu">Ereignisse</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Veraltete Logs</b></span>, in der man mit dem Button <b class="button">Veraltete Logeinträge löschen</b> alle alten Einträge auf einmal entfernen kann.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_dashboard_abschnitt_event_log"><a class="anchor" href="#_dashboard_abschnitt_event_log"></a>Dashboard: Abschnitt Event Log</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Die Anzeige aktueller Logs im Dashboard ist ähnlich aufgebaut. Um die Übersicht zu erleichern kann man für Logs ein <a href="acknowledges.html" class="xref page">Acknowledge</a> setzen, dann verschwindet der Logeintrag in der Standard-Anzeige.</p>
+</div>
+<div class="paragraph">
+<p>Die Abbildung zeigt Einträge mit dem Schweregrad <code>Fatal</code>, so wie der Konnektor den Fehlerzustand selbst anzeigt.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Auf Fehler mit dem Level <code>Fatal</code> sollte man umgehen reagieren. Bei <code>EC_CRL_Out_Of_Date</code> hat die automatische Aktualisierung der Certificate Revocation List (CRL) nicht geklappt. Sobald der Konnektor den VPN-Tunnel zur TI neu aufbaut kommt dieser nicht mehr zustande und die TI ist nicht mehr erreichbar.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/dashboard/dashboard-eventlog-crl-out-of-date.png" alt="dashboard eventlog crl out of date">
+</div>
+<div class="title">Abbildung 2. Event Logs im Dashboard</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_anzeige_eines_logs"><a class="anchor" href="#_anzeige_eines_logs"></a>Anzeige eines Logs</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Über den Button <span class="image"><img src="../_images/common/show-button.png" alt="Anzeigebutton" width="32" height="32"></span> in der Übersicht bzw. im Dashboard wechselt man zur Einzelansicht des Logeintrages. Über die Einzelansicht erreicht man die Notizen zu dem Logeintrag. Hier kann man eigene Notizen ergänzen.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/logs/log-show.png" alt="log show">
+</div>
+<div class="title">Abbildung 3. Anzeige eines Logeintrages</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <span>Wolfgang Barth (C) 2024</span>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/vendor/medium-zoom.min.js"></script>
+<script>mediumZoom('img:not(.copy-icon');</script>
+  </body>
+</html>

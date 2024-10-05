@@ -53,6 +53,9 @@
     <a class="nav-link" href="conditions.html">Zustände</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="logs.html">Event Logs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="acknowledges.html">Acknowledges</a>
   </li>
 </ul>
@@ -190,12 +193,14 @@
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 14.2857%;">
-<col style="width: 85.7143%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 75%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-center valign-top">Zustand</th>
+<th class="tableblock halign-left valign-top">Text</th>
 <th class="tableblock halign-left valign-top">Beschreibung</th>
 </tr>
 </thead>
@@ -206,6 +211,7 @@
 <img src="../_images/common/ok.png" alt="ok">
 </div>
 </div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OK</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Alles ok.</p></td>
 </tr>
 <tr>
@@ -214,6 +220,7 @@
 <img src="../_images/common/warning.png" alt="warning">
 </div>
 </div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>WARNING</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Warnzustand, etwa wenn das Zertifikat einer Karte in weniger als 3 Monaten abläuft.</p></td>
 </tr>
 <tr>
@@ -222,6 +229,7 @@
 <img src="../_images/common/critical.png" alt="critical">
 </div>
 </div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CRITICAL</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Kritischer Zustand, der überprüft werden muss. Z.B. Konnektor hat keine Verbindung zur TI, Zertifikat abgelaufen, PIN einer Karte in einem bestimmten Kontext ist nicht verifiziert.</p></td>
 </tr>
 <tr>
@@ -230,6 +238,7 @@
 <img src="../_images/common/unknown.png" alt="unknown">
 </div>
 </div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>UNKNOWN</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Unbekannter Zustand, deutet eher auf eine Fehlkonfiguration oder Fehlbedienung hin, etwa SOAP-Abfrage klappt nicht, obwohl der Konnektor sonst erreichbar ist.</p></td>
 </tr>
 <tr>
@@ -238,6 +247,7 @@
 <img src="../_images/common/nothing.png" alt="nothing">
 </div>
 </div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>NOTHING</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Gerät oder Karte noch nicht vollständig konfiguriert oder nicht in Betrieb.</p></td>
 </tr>
 <tr>
@@ -246,6 +256,7 @@
 <img src="../_images/common/critical-outdated.png" alt="critical outdated">
 </div>
 </div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CRITICAL</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Wenn neben dem Button mit einer nicht ausgefüllten Fläche ein Warnzeichen erscheint, sind die vorliegenden Daten veraltet. D.h. der eigentliche Zustand kann aktuell anders sein, aber Cocard liegen im Moment keine neueren Informationen vor.</p></td>
 </tr>
 </tbody>

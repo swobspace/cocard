@@ -1,0 +1,80 @@
+= Event Logs
+:author: Wolfgang Barth
+:revdate: 2024-10-05
+:imagesdir: ../../images
+:experimental: true
+
+
+Event Logs in Cocard sind semipermanent. In klassische Logdateien wird neue Information angehangen - die Logdatei wächst stehtig und erfordert ein Logfile-Management, um den Platzbedarf zu begrenzen. In Cocard dagegen gibt es für ein bestimmtes Ereignis eines Gerätes oder einer Karte genau einen Eintrag. Dieser Eintrag ist gültig oder ungültig, wenn der Grund hierfür wieder entfallen ist. Semipermanent deshalb, weil ein Eintrag auch gelöscht werden kann.
+
+Ein Beispiel: liefert der Konnektor `TIKONN-123` den Fehlerzustand `OPERATIONAL_STATE/EC_TLS_Client_Certificate_Security` (Die Schlüssellänge des Client-Zertifikates hat ein zu niedriges Sicherheitsniveau und sollte erneuert werden), dann erstellt Cocard für die Kombination aus Konnektor und Fehlerzustand genau einen Logeintrag. Der Logeintrag wird als gültig markiert und erscheint damit in der Liste der aktuellen Logeinträge (menu:Menu[Ereignisse > Aktuelle Logs]) sowie im Dashboard im Abschnitt _Event Log_. Entfällt der Grund später wieder wird der Eintrag nicht gelöscht, sondern nur als ungültig markiert. Über menu:Menü[Ereignisse > Logs] werden alle Einträge in der Datenbank angezeigt.
+
+NOTE: Die Begriffe Event Log, Log, Logeintrag unterscheiden sich derzeit nicht in Ihrer Bedeutung, da Cocard derzeit noch keine Subscriptions vom Konnektor bezieht (aktive Benachrichtigungen, die der Konnektor bei einem Ereignis versendet, etwa Karte wurde gesteckt).
+
+== Aktuelle Logs
+
+.Aktuelle (gültige) Logeinträge
+image::logs/logs-index-current.png[]
+
+[cols="1,4"]
+|===
+|Spalte |Beschreibung
+
+|seit
+|Wann ist das Ereignis zum ersten Mal aufgetreten?
+
+|Level
+|Schweregrad, wenn es ein Fehlerzustand (OPERATIONAL_STATE) den Konnektors ist.
+Bei Cocard-internen Meldungen entspricht der Level der Text-Bezeichnung des xref:user/conditions.adoc[Zustandes]
+
+|Typ
+|`Card`, `CardTerminal`, `Connector`
+
+|Log für
+|Objekt, das den Eintrag ausgelöst hat (also Konnektor, Karte oder Kartenterminal)
+
+|Aktion
+|Eindeutiger Identifier für den Logeintrag. Aus der Kombination `Log für` und `Aktion` wird der Log identifiziert, für jede Kombination gibt es immer nur genau einen Eintrag.
+
+|Nachricht
+|Ergänzende Informationen wie Fehlermeldungen
+
+|gültig
+|Ist der Eintrag aktuell gültig?
+
+|zuletzt gesehen
+|Wann hat Cocard den Eintrag zuletzt gesehen? Wenn Cocard mit dem Hintergrundjobs erneut auf den Fehlerzustand stößt, wird der Eintrag aktualisiert - oder, wenn der Fehler behoben ist, markiert Cocard den Eintrag als ungültig. Findet Cocard keine passende Kombination aus `Log für` und `Aktion`, wird der Eintrag nicht mehr aktualisiert und veraltet (Warnzeichen neben dem Alter).
+
+|Aktion
+|Buttons für die Einzelanzeige eines Logs oder zum Löschen des Eintrages.
+
+|===
+
+
+== Veraltete Logs
+
+image::logs/logs-obsolete.png[]
+
+Logeinträge können übrig bleiben und veralten, wenn es die Kombination aus `Log für` und `Aktion` nicht mehr gibt. Beispiel: man prüft den Status der PIN einer Karte mit einem Kontext, der im Infomodell des Konnektors gar nicht hinterlegt ist. Dabei tritt ein Fehler auf und Cocard erzeugt einen Logeintrag.
+
+Korrigiert man jetzt den Kontext bei der Karte und prüft den Status der PIN erneut, ist das für Cocard ein anderer Logeintrag, da der Kontext in die `Aktion` mit  eingeht. Folge: der alte Logeintrag wird nie wieder aktualisiert und bleibt stehen.
+
+Um das Aufräumen zu erleichtern gibt es eine eigene Ansicht menu:Menu[Ereignisse > Veraltete Logs], in der man mit dem Button btn:[Veraltete Logeinträge löschen] alle alten Einträge auf einmal entfernen kann.
+
+== Dashboard: Abschnitt Event Log
+
+Die Anzeige aktueller Logs im Dashboard ist ähnlich aufgebaut. Um die Übersicht zu erleichern kann man für Logs ein xref:user/acknowledges.adoc[Acknowledge] setzen, dann verschwindet der Logeintrag in der Standard-Anzeige.
+
+Die Abbildung zeigt Einträge mit dem Schweregrad `Fatal`, so wie der Konnektor den Fehlerzustand selbst anzeigt.
+
+NOTE: Auf Fehler mit dem Level `Fatal` sollte man umgehen reagieren. Bei `EC_CRL_Out_Of_Date` hat die automatische Aktualisierung der Certificate Revocation List (CRL) nicht geklappt. Sobald der Konnektor den VPN-Tunnel zur TI neu aufbaut kommt dieser nicht mehr zustande und die TI ist nicht mehr erreichbar.
+
+.Event Logs im Dashboard
+image::dashboard/dashboard-eventlog-crl-out-of-date.png[]
+
+== Anzeige eines Logs
+
+Über den Button image:common/show-button.png[Anzeigebutton, 32,32] in der Übersicht bzw. im Dashboard wechselt man zur Einzelansicht des Logeintrages. Über die Einzelansicht erreicht man die Notizen zu dem Logeintrag. Hier kann man eigene Notizen ergänzen.
+
+.Anzeige eines Logeintrages
+image::logs/log-show.png[]

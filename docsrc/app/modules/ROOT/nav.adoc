@@ -2,6 +2,7 @@
 ** xref:user/dashboard.adoc[]
 ** xref:user/common.adoc[]
 ** xref:user/conditions.adoc[]
+** xref:user/logs.adoc[]
 ** xref:user/acknowledges.adoc[]
 * Administration
 ** xref:admin/connector-edit.adoc[]
