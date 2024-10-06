@@ -18,11 +18,11 @@ IMPORTANT: Passwort für `admin` beim ersten Login ändern!
 * Kontext anlegen: menu:Konfiguration[Neuer Kontext]. Dieser Kontext muss am Konnektor vorhanden sein.
 * Konnektor anlegen: menu:Konnektoren[Neuer Konnektor]. Benötigt wird im Prinzip nur die IP-Adresse.
 
-image:ROOT:connector-new.png[]
+image:ROOT:connector/connector-new.png[]
 
 * Nach dem Speichern nochmal Konnektor bearbeiten und jetzt den Kontext zuweisen.
 
-image:ROOT:connector-new-context.png[]
+image:ROOT:connector/connector-new-context.png[]
 
 * Konnektor auf manuelles Update einstellen
 * Auf der Konnektorseite den Button _Abfrage SDS_ klicken. Das SDS wird für die SOAP-Abfragen gebraucht, außerdem ist die Abfrage auch ein erster Test für die Erreichbarkeit des Konnektors.

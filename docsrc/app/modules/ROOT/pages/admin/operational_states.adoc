@@ -1,0 +1,19 @@
+= Betriebszustände
+:author: Wolfgang Barth
+:revdate: 2024-10-04
+:imagesdir: ../../images
+:experimental: true
+
+Der Betriebszustand steuert, ob eine Karte "online" über den Konnektor erreichbar ist oder nicht. Nur Karten mit dem Status `in Betrieb` (Schalter im Formular unten) werden von Cocard überprüft und regelmäßig abgefragt.
+
+Erkennt Cocard bei der Abfrage eine Karte, deren Betriebszustand bisher nicht mit `in Betrieb` gekennzeichnet ist, aktualisiert Cocard den Betriebszustand.
+
+image::card/operational_state-edit.png[]
+
+Beispiele für nicht operational Betriebszustände könnten sein:
+
+* Bestellt
+* im Ordner
+* in Betrieb in einem mobilen Kartenterminal
+* außer Betrieb - Betriebstätte nicht mehr vorhanden
+* ...

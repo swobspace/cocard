@@ -17,6 +17,8 @@ Das folgende Beispiel geht davon aus, dass Cocard als Container auf einem Linux-
 su - poddy -c "podman exec -i cocard bin/rake checkmk:run" | egrep -v 'HBA:'
 ----
 
+Unter Linux ist der Pfad zum Plugin `/usr/lib/check_mk_agent/local/cocard.sh`.
+
 Wie bei CheckMK local plugins üblich entspricht jede Zeile der Ausgabe einem separaten Service, den man in CheckMK erst inventarisiert, bevor der Service in CheckMK angezeigt wird.
 
 Wer Docker nutzt, ersetzt `podman` durch `docker`.

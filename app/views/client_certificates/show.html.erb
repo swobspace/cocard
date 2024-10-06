@@ -34,21 +34,6 @@
       </tr>
 
       <tr>
-        <th class="w-10 pe-3"><%= t('attributes.cert')%>:</th>
-        <td><pre><%= @client_certificate.cert %></pre></td>
-      </tr>
-
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.pkey')%>:</th>
-        <td><pre><%= @client_certificate.pkey %></pre></td>
-      </tr>
-
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.passphrase')%>:</th>
-        <td><%=(@client_certificate.passphrase.present? ? '************' : 'no passphrase')%></td>
-      </tr>
-
-      <tr>
         <th class="w-10 pe-3"><%= t('attributes.valid_until')%>:</th>
         <td><%= @client_certificate.valid_until.localtime %></td>
       </tr>

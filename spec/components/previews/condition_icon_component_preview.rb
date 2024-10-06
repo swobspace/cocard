@@ -5,6 +5,11 @@ class ConditionIconComponentPreview < ViewComponent::Preview
     render(ConditionIconComponent.new(item: connector))
   end
 
+  def critical_outdated
+    connector = Connector.new(condition: Cocard::States::CRITICAL, updated_at: 1.hour.before(Time.current))
+    render(ConditionIconComponent.new(item: connector))
+  end
+
   def warning
     connector = Connector.new(condition: Cocard::States::WARNING)
     render(ConditionIconComponent.new(item: connector))
@@ -18,5 +23,10 @@ class ConditionIconComponentPreview < ViewComponent::Preview
   def ok
     connector = Connector.new(condition: Cocard::States::OK)
     render(ConditionIconComponent.new(item: connector))
+  end
+
+  def nothing
+    connector5 = Connector.new(condition: Cocard::States::NOTHING)
+    render(ConditionIconComponent.new(item: connector5))
   end
 end

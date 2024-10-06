@@ -1,0 +1,19 @@
+<%= simple_form_for(@client_certificate) do |form| %>
+<%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
+
+  <div class="form-input">
+    <%= form.input :name
+       %>
+    <%= form.input :description, as: :rich_text_area
+       %>
+    <%= form.input :p12, as: :file, required: true
+       %>
+    <%= form.input :passphrase, as: :password, 
+                   required: true,
+                   placeholder: '************'
+       %>
+
+    <%= form.button :submit, t('wobapphelpers.actions.new_import', model: t('client_certificate', scope: 'activerecord.models')), class: 'btn btn-primary' %>
+    <%= cancel_button %>
+  </div>
+<% end %>

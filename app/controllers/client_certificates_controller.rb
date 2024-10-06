@@ -25,7 +25,14 @@ class ClientCertificatesController < ApplicationController
 
   # POST /client_certificates
   def create
-    @client_certificate = ClientCertificate.new(client_certificate_params)
+    if p12_params['p12'].present?
+      p12 = File.read(p12_params['p12'])
+      pass = p12_params['passphrase']
+      create_params = import_params.merge(ClientCertificate.p12_to_params(p12, pass))
+    else
+      create_params = client_certificate_params
+    end
+    @client_certificate = ClientCertificate.new(create_params)
 
     @client_certificate.save
     respond_with(@client_certificate)
@@ -43,6 +50,11 @@ class ClientCertificatesController < ApplicationController
     respond_with(@client_certificate)
   end
 
+  def import_p12
+    @client_certificate = ClientCertificate.new
+    respond_with(@client_certificate)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_client_certificate
@@ -54,5 +66,15 @@ class ClientCertificatesController < ApplicationController
       params.require(:client_certificate)
             .permit(:name, :description, :cert, :pkey, :passphrase)
             .reject { |k, v| k == 'passphrase' && v.blank? }
+    end
+
+    def import_params
+      params.require(:client_certificate)
+            .permit(:name, :description)
+    end
+
+    def p12_params
+      params.require(:client_certificate)
+            .permit(:p12, :passphrase)
     end
 end

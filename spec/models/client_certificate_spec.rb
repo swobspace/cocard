@@ -40,4 +40,20 @@ RSpec.describe ClientCertificate, type: :model do
   describe "#valid_until" do
     it { expect(client_certificate.valid_until.localtime).to eq("2051-11-09 10:08:47 +0100") }
   end
+
+  describe "ClientCertificate::p12_to_params" do
+    let(:p12) { File.read(File.join(Rails.root, 'spec/fixtures/files', 'demo.p12')) }
+    subject { ClientCertificate.p12_to_params(p12, 'justfortesting') }
+
+    it { expect(subject).to be_kind_of Hash }
+    it { expect(subject[:cert]).to be_kind_of String }
+    it { expect(subject[:pkey]).to be_kind_of String }
+    it { expect(subject[:passphrase]).to be_kind_of String }
+
+    it { expect(OpenSSL::X509::Certificate.new(subject[:cert])).
+         to be_kind_of(OpenSSL::X509::Certificate) }
+    it { expect(OpenSSL::PKey.read(subject[:pkey], subject[:passphrase])).
+         to be_kind_of(OpenSSL::PKey::RSA) }
+
+  end
 end

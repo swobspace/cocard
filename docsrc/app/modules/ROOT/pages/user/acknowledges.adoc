@@ -6,8 +6,6 @@
 
 Acknowledges sind eine Form von Notizen, die Übersicht im Dashboard schaffen. Einträge mit Acknowledge werden in der Standard-Ansicht herausgefiltert und müssen explizit über den Button btn:[Acknowledged] eingeblendet werden.
 
-NOTE: Aktuell sind Acknowledges nur für Logeinträge möglich. Geplant ist, Acknowledges auch für Konnektoren, Kartenterminals und Karten einzuführen.
-
 Sind die notwendigen Rechte vorhanden, wird der Acknowledge-Button angezeigt:
 
 .Dashboard: Acknowledge-Button im Event Log

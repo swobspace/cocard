@@ -4,13 +4,42 @@
 :imagesdir: ../../images
 :experimental: true
 
-Über menu:Konfiguration[Neues Client-Zertifikat] importiert und legt man ein neues Client-Zertifikat in Cocard an. Client-Zertifikat und Private Key müssen dabei im PEM-Format vorliegen. Das Zertifikat kopiert man dann einfach mit Cut-and-Paste in das Formularfeld. 
+Client-Zertifikate kann man in Cocard als P12-Datei oder als ASCII-Text (PEM-Format) importieren, je nach dem, in welchem Format das Zertifikat vorliegt.
+
+image::certificate/client-certificates-index-with-menu.png[]
+
+Der rote Pfeil markiert den Import im P12-Format, darunter ist die Importmöglichkeit im Textformat (PEM).
+
+== Import als P12-Datei
+
+image::certificate/client-certificate-import.png[]
+
+[cols="1,4"]
+|===
+|Feld | Beschreibung
+
+|Name
+a|Der Name wird zur Auswahl bei der Zuordnung zum Konnektor angezeigt. Hier sind die Angaben zum Clientsystem und der Gültigkeit sinnvoll, ggf. auch der Name des Konnektors, falls das Zertifikat auf dem Konnektor ausgestellt wurde und ggf. auch ob es ein RSA oder ECC-Zertifikat ist. Beispiele:
+
+* iMedOne - RSA2048 - 2026-04-02
+* TIKONN-02 - X.Concept - ECC - 2026-04-02
+
+|Beschreibung
+|Zusätzliche Angaben zum Zertifikat, zum Aussteller, Algorithmus etc.
+
+|Passphrase
+|Passwort für den P12-Container, das für den Import erforderlich ist
+
+|===
+
+== Import via ASCII-Text
+
+Wenn Client-Zertifikat und Private Key im PEM-Format vorliegen, kann man hier einfach den Textinhalt mit Cut-and-Paste in das Formularfeld kopieren.
 
 Wichtig: unbedingt `-----BEGIN CERTIFICATE-----` und `-----END CERTIFICATE-----`
 mit kopieren.
 
-Den Private Key kopiert man analog dazu in das vorgesehene Feld. Der Private Key sollte passwortgeschützt sein, da jeder mit Admin-Rolle den Key aus Cocard wieder heraus kopieren kann.
+Den Private Key kopiert man analog dazu in das vorgesehene Feld. Der Private Key sollte passwortgeschützt sein.
 
-image::certificate/client-certificate-edit.png[]
+image::certificate/client-certificate-new.png[]
 
-NOTE: Ein Import über eine PKCS12-Datei ist derzeit noch nicht möglich, aber für ein zukünftiges Release vorgesehen.

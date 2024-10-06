@@ -15,7 +15,7 @@ RSpec.shared_examples "a ConnectorManager" do
   it { is_expected.to be_able_to(:destroy, Connector.new) }
 
   [ CardTerminal, Card, Network, Location, OperationalState,
-    Log, Workplace, Context, 
+    Log, Workplace, Context, ClientCertificate,
     TerminalWorkplace, CardContext, ConnectorContext ].each do |model|
       it { is_expected.not_to be_able_to(:manage, model.new) }
       it { is_expected.not_to be_able_to(:create, model.new) }

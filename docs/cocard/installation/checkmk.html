@@ -44,6 +44,18 @@
     <a class="nav-link" href="../index.html">Cocard</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/dashboard.html">Dashboard</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/common.html">Allgemeines zur Oberfläche</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/conditions.html">Zustände</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/logs.html">Event Logs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../user/acknowledges.html">Acknowledges</a>
   </li>
 </ul>
@@ -59,6 +71,9 @@
     <a class="nav-link" href="../admin/card-terminal-edit.html">Kartenterminal anlegen/bearbeiten</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/card-new.html">Karte anlegen/bearbeiten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../admin/contexts.html">Kontexte</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -66,6 +81,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../admin/networks.html">Netzwerke</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/operational_states.html">Betriebszustände</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../admin/jobs.html">Jobverwaltung</a>
@@ -193,6 +211,9 @@
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">#/bin/bash
 su - poddy -c "podman exec -i cocard bin/rake checkmk:run" | egrep -v 'HBA:'</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Unter Linux ist der Pfad zum Plugin <code>/usr/lib/check_mk_agent/local/cocard.sh</code>.</p>
 </div>
 <div class="paragraph">
 <p>Wie bei CheckMK local plugins üblich entspricht jede Zeile der Ausgabe einem separaten Service, den man in CheckMK erst inventarisiert, bevor der Service in CheckMK angezeigt wird.</p>

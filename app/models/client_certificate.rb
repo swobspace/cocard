@@ -40,6 +40,16 @@ class ClientCertificate < ApplicationRecord
     certificate.not_after
   end
 
+  def self.p12_to_params(p12, exportpass)
+    pkcs12 = OpenSSL::PKCS12.new(p12, exportpass)
+    cert = pkcs12.certificate.to_pem
+    unsecure_key = pkcs12.key
+    cipher = OpenSSL::Cipher.new 'aes-256-cbc'
+    passphrase = SecureRandom.base64(42)
+    pkey = unsecure_key.private_to_pem cipher, passphrase
+    { cert: cert, pkey: pkey, passphrase: passphrase }
+  end
+
 private
 
   def from_subject(attr)

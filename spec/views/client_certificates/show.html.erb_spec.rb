@@ -21,9 +21,9 @@ RSpec.describe "client_certificates/show", type: :view do
     render
     expect(rendered).to match(/Cert 2/)
     expect(rendered).to match(/some information/)
-    expect(rendered).to match(/BEGIN CERTIFICATE/)
-    expect(rendered).to match(/BEGIN ENCRYPTED PRIVATE KEY/)
+    expect(rendered).not_to match(/BEGIN CERTIFICATE/)
+    expect(rendered).not_to match(/BEGIN ENCRYPTED PRIVATE KEY/)
     expect(rendered).to match(/2051-11-09 10:08:47 .0100/)
-    expect(rendered).to match(/\*\*\*\*\*\*\*\*\*\*\*\*/)
+    expect(rendered).not_to match(/\*\*\*\*\*\*\*\*\*\*\*\*/)
   end
 end

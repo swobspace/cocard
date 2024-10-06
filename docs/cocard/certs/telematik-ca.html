@@ -44,6 +44,18 @@
     <a class="nav-link" href="../index.html">Cocard</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/dashboard.html">Dashboard</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/common.html">Allgemeines zur Oberfläche</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/conditions.html">Zustände</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/logs.html">Event Logs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../user/acknowledges.html">Acknowledges</a>
   </li>
 </ul>
@@ -59,6 +71,9 @@
     <a class="nav-link" href="../admin/card-terminal-edit.html">Kartenterminal anlegen/bearbeiten</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/card-new.html">Karte anlegen/bearbeiten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../admin/contexts.html">Kontexte</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -66,6 +81,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../admin/networks.html">Netzwerke</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/operational_states.html">Betriebszustände</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../admin/jobs.html">Jobverwaltung</a>
@@ -200,62 +218,32 @@ echo 1000 &gt; serial</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>bearbeiten</p>
+<p><mark>FIXME</mark> <mark>TBD</mark></p>
 </div>
-<div class="listingblock">
-<div class="title">CA-Key</div>
-<div class="content">
-<pre>openssl genrsa -aes256 -out private/cakey.pem 3072
-chmod 400 private/cakey.pem</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">CA-Zertifikat</div>
-<div class="content">
-<pre>openssl req -config openssl.cnf -key private/cakey.pem \
-    -new -x509 -days 7300 -sha256 -extensions v3_ca \
-    -out certs/cacert.pem
-chmod 4444 certs/cacert.pem
-openssl x509 -noout -text -in certs/cacert.pem</pre>
-</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Die bisherige Dokumentation basiert auf RSA-2048 und
+muss wegen Umstellung auf ECC überarbeitet werden
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_zertifikat_für_client_system"><a class="anchor" href="#_zertifikat_für_client_system"></a>Zertifikat für Client-System</h2>
+<h2 id="_memo"><a class="anchor" href="#_memo"></a>Memo</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="title">PKey</div>
+<div class="title">Beispiel aus gemSpec_Krypt_V2.36.0 [A_23511] - Konnektor, IOP, Kodierung ECC-Schlüssel, PrimärsystemVerbindungssicherung</div>
 <div class="content">
-<pre>openssl genrsa -aes256 -out private/intern.key.pem 2048
-chmod 400 private/intern.key.pem</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Request</div>
-<div class="content">
-<pre>openssl req -config openssl.cnf \
-    -key private/intern.key.pem \
-    -new -sha256 -out reqs/intern.req.pem</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Zertifikat für Client-System</div>
-<div class="content">
-<pre>openssl ca -config openssl.cnf -days 1825 \
-  -in reqs/intern.req.pem \
-  -out certs/intern.cert.pem
-chmod 444 certs/intern.cert.pem
-openssl x509 -noout -text -in certs/intern.cert.pem</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Export als PKCS12</div>
-<div class="content">
-<pre>openssl pkcs12 -export -out certs/intern.p12 \
-    -inkey private/intern.key.pem \
-    -in certs/intern.cert.pem \
-    -certfile certs/cacert.pem</pre>
+<pre>openssl ecparam -name brainpoolP256r1 \
+  -genkey -param_enc named_curve
+  -out example-named-curve-private-key.pem</pre>
 </div>
 </div>
 </div>
