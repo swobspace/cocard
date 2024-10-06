@@ -34,7 +34,7 @@ a|Der Name wird zur Auswahl bei der Zuordnung zum Konnektor angezeigt. Hier sind
 
 == Import via ASCII-Text
 
-Wenn Client-Zertifikat und Private Key im PEM-Format vorliegen, kann man hier einfach den den Textinhalt mit Cut-and-Paste in das Formularfeld kopieren.
+Wenn Client-Zertifikat und Private Key im PEM-Format vorliegen, kann man hier einfach den Textinhalt mit Cut-and-Paste in das Formularfeld kopieren.
 
 Wichtig: unbedingt `-----BEGIN CERTIFICATE-----` und `-----END CERTIFICATE-----`
 mit kopieren.
