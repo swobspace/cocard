@@ -5,7 +5,7 @@
 :experimental: true
 
 
-Event Logs in Cocard sind semipermanent. In klassische Logdateien wird neue Information angehangen - die Logdatei wächst stehtig und erfordert ein Logfile-Management, um den Platzbedarf zu begrenzen. In Cocard dagegen gibt es für ein bestimmtes Ereignis eines Gerätes oder einer Karte genau einen Eintrag. Dieser Eintrag ist gültig oder ungültig, wenn der Grund hierfür wieder entfallen ist. Semipermanent deshalb, weil ein Eintrag auch gelöscht werden kann.
+Event Logs in Cocard sind semipermanent. In klassische Logdateien wird neue Information angehangen - die Logdatei wächst stetig und erfordert ein Logfile-Management, um den Platzbedarf zu begrenzen. In Cocard dagegen gibt es für ein bestimmtes Ereignis eines Gerätes oder einer Karte genau einen Eintrag. Dieser Eintrag ist gültig oder ungültig, wenn der Grund hierfür wieder entfallen ist. Semipermanent deshalb, weil ein Eintrag auch gelöscht werden kann.
 
 Ein Beispiel: liefert der Konnektor `TIKONN-123` den Fehlerzustand `OPERATIONAL_STATE/EC_TLS_Client_Certificate_Security` (Die Schlüssellänge des Client-Zertifikates hat ein zu niedriges Sicherheitsniveau und sollte erneuert werden), dann erstellt Cocard für die Kombination aus Konnektor und Fehlerzustand genau einen Logeintrag. Der Logeintrag wird als gültig markiert und erscheint damit in der Liste der aktuellen Logeinträge (menu:Menu[Ereignisse > Aktuelle Logs]) sowie im Dashboard im Abschnitt _Event Log_. Entfällt der Grund später wieder wird der Eintrag nicht gelöscht, sondern nur als ungültig markiert. Über menu:Menü[Ereignisse > Logs] werden alle Einträge in der Datenbank angezeigt.
 
