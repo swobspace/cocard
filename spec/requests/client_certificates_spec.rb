@@ -1,7 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe "/client_certificates", type: :request do
-  
+  let(:p12) do
+    Rack::Test::UploadedFile.new(
+      Rails.root.join('spec', 'fixtures', 'files', 'demo.p12')
+    )
+  end
+  let(:p12_pass) { 'justfortesting' }
 
   let(:valid_attributes) {
     FactoryBot.attributes_for(:client_certificate,
@@ -42,6 +47,13 @@ RSpec.describe "/client_certificates", type: :request do
     end
   end
 
+  describe "GET /import_p12" do
+    it "renders a successful response" do
+      get new_client_certificate_url
+      expect(response).to be_successful
+    end
+  end
+
   describe "GET /edit" do
     it "renders a successful response" do
       client_certificate = ClientCertificate.create! valid_attributes
@@ -50,33 +62,76 @@ RSpec.describe "/client_certificates", type: :request do
     end
   end
 
-  describe "POST /create" do
-    context "with valid parameters" do
-      it "creates a new ClientCertificate" do
-        expect {
+  describe "with plaintext cert/key" do
+    describe "POST /create" do
+      context "with valid parameters" do
+        it "creates a new ClientCertificate" do
+          expect {
+            post client_certificates_url, params: { client_certificate: valid_attributes }
+          }.to change(ClientCertificate, :count).by(1)
+        end
+
+        it "redirects to the created client_certificate" do
           post client_certificates_url, params: { client_certificate: valid_attributes }
-        }.to change(ClientCertificate, :count).by(1)
+          expect(response).to redirect_to(client_certificate_url(ClientCertificate.last))
+        end
       end
 
-      it "redirects to the created client_certificate" do
-        post client_certificates_url, params: { client_certificate: valid_attributes }
-        expect(response).to redirect_to(client_certificate_url(ClientCertificate.last))
+      context "with invalid parameters" do
+        it "does not create a new ClientCertificate" do
+          expect {
+            post client_certificates_url, params: { client_certificate: invalid_attributes }
+          }.to change(ClientCertificate, :count).by(0)
+        end
+
+      
+        it "renders a response with 422 status (i.e. to display the 'new' template)" do
+          post client_certificates_url, params: { client_certificate: invalid_attributes }
+          expect(response).to have_http_status(:unprocessable_entity)
+        end
+      
       end
     end
+  end
 
-    context "with invalid parameters" do
-      it "does not create a new ClientCertificate" do
-        expect {
+  describe "with p12 file" do
+    let(:valid_attributes) do
+      { 
+        name: 'P12-Demo',
+        description: 'just a test for p12',
+        p12: p12,
+        passphrase: p12_pass
+      }
+    end
+
+    describe "POST /create" do
+      context "with valid parameters" do
+        it "creates a new ClientCertificate" do
+          expect {
+            post client_certificates_url, params: { client_certificate: valid_attributes }
+          }.to change(ClientCertificate, :count).by(1)
+        end
+
+        it "redirects to the created client_certificate" do
+          post client_certificates_url, params: { client_certificate: valid_attributes }
+          expect(response).to redirect_to(client_certificate_url(ClientCertificate.last))
+        end
+      end
+
+      context "with invalid parameters" do
+        it "does not create a new ClientCertificate" do
+          expect {
+            post client_certificates_url, params: { client_certificate: invalid_attributes }
+          }.to change(ClientCertificate, :count).by(0)
+        end
+
+      
+        it "renders a response with 422 status (i.e. to display the 'new' template)" do
           post client_certificates_url, params: { client_certificate: invalid_attributes }
-        }.to change(ClientCertificate, :count).by(0)
+          expect(response).to have_http_status(:unprocessable_entity)
+        end
+      
       end
-
-    
-      it "renders a response with 422 status (i.e. to display the 'new' template)" do
-        post client_certificates_url, params: { client_certificate: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
-    
     end
   end
 

@@ -25,7 +25,14 @@ class ClientCertificatesController < ApplicationController
 
   # POST /client_certificates
   def create
-    @client_certificate = ClientCertificate.new(client_certificate_params)
+    if p12_params['p12'].present?
+      p12 = File.read(p12_params['p12'])
+      pass = p12_params['passphrase']
+      create_params = import_params.merge(ClientCertificate.p12_to_params(p12, pass))
+    else
+      create_params = client_certificate_params
+    end
+    @client_certificate = ClientCertificate.new(create_params)
 
     @client_certificate.save
     respond_with(@client_certificate)
@@ -43,18 +50,8 @@ class ClientCertificatesController < ApplicationController
     respond_with(@client_certificate)
   end
 
-  def import_p12_form
-    @client_certificate = ClientCertificate.new
-    respond_with(@client_certificate)
-  end
-
   def import_p12
-    p12 = File.read(p12_params['p12'])
-    pass = p12_params['passphrase']
-    params = import_params.merge(ClientCertificate.p12_to_params(p12, pass))
-    @client_certificate = ClientCertificate.new(params)
-
-    @client_certificate.save
+    @client_certificate = ClientCertificate.new
     respond_with(@client_certificate)
   end
 

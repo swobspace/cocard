@@ -20,6 +20,21 @@ echo 1000 > serial
 cp /etc/ssl/openssl.cnf /etc/ssl/telematik/.
 ----
 
+#FIXME# #TBD#
+
+NOTE: Die bisherige Dokumentation basiert auf RSA-2048 und 
+muss wegen Umstellung auf ECC überarbeitet werden
+
+== Memo
+
+.Beispiel aus gemSpec_Krypt_V2.36.0 [A_23511] - Konnektor, IOP, Kodierung ECC-Schlüssel, PrimärsystemVerbindungssicherung
+----
+openssl ecparam -name brainpoolP256r1 \
+  -genkey -param_enc named_curve 
+  -out example-named-curve-private-key.pem
+----
+
+////
 bearbeiten
 
 
@@ -69,3 +84,5 @@ openssl pkcs12 -export -out certs/intern.p12 \
     -in certs/intern.cert.pem \
     -certfile certs/cacert.pem
 ----
+
+////

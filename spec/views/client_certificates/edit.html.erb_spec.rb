@@ -24,11 +24,11 @@ RSpec.describe "client_certificates/edit", type: :view do
 
       assert_select "input[name=?]", "client_certificate[description]"
 
-      assert_select "textarea[name=?]", "client_certificate[cert]"
+      assert_select "textarea[name=?]", "client_certificate[cert]", count: 0
 
-      assert_select "textarea[name=?]", "client_certificate[pkey]"
+      assert_select "textarea[name=?]", "client_certificate[pkey]", count: 0
 
-      assert_select "input[name=?]", "client_certificate[passphrase]"
+      assert_select "input[name=?]", "client_certificate[passphrase]", count: 0
     end
   end
 end

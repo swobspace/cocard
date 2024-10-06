@@ -6,13 +6,15 @@
        %>
     <%= form.input :description, as: :rich_text_area
        %>
-    <%= form.input :cert, input_html: { rows: 8 }
-       %>
-    <%= form.input :pkey, input_html: { rows: 8 }
-       %>
-    <%= form.input :passphrase, as: :password,
-                   placeholder: '************'
-       %>
+    <% unless  @client_certificate.persisted? %>
+      <%= form.input :cert, input_html: { rows: 8 }
+         %>
+      <%= form.input :pkey, input_html: { rows: 8 }
+         %>
+      <%= form.input :passphrase, as: :password,
+                     placeholder: '************'
+         %>
+    <% end %>
 
     <%= form.button :submit, class: 'btn btn-primary' %>
     <%= cancel_button %>

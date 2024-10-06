@@ -22,7 +22,8 @@ de:
       gepflegt ist. Die MAC sollte aber immer eingetragen werden, bevor das Kartenterminal
       ans Netzwerk angeschlossen wird, andernfalls legt Cocard das Kartenterminal erneut 
       an und alle manuell gepflegten Daten müssen händisch nachgetragen werden.
-    new_client_certificate: Neues Client-Zertifikat
+    new_client_certificate: Client-Zertifikat importieren (PEM)
+    import_client_certificate: Client-Zertifikat importieren (P12)
     new_context: Neuer Kontext
     new_connector: Neuer Konnektor
     new_location: Neuer Standort

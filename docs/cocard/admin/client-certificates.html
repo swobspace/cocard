@@ -189,32 +189,88 @@
 </aside>
 <article class="doc">
 <h1 class="page">Zertifikat anlegen/bearbeiten</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>Über <span class="menuseq"><b class="menu">Konfiguration</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Neues Client-Zertifikat</b></span> importiert und legt man ein neues Client-Zertifikat in Cocard an. Client-Zertifikat und Private Key müssen dabei im PEM-Format vorliegen. Das Zertifikat kopiert man dann einfach mit Cut-and-Paste in das Formularfeld.</p>
+<p>Client-Zertifikate kann man in Cocard als P12-Datei oder als ASCII-Text (PEM-Format) importieren, je nach dem, in welchem Format das Zertifikat vorliegt.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/certificate/client-certificates-index-with-menu.png" alt="client certificates index with menu">
+</div>
+</div>
+<div class="paragraph">
+<p>Der rote Pfeil markiert den Import im P12-Format, darunter ist die Importmöglichkeit im Textformat (PEM).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_import_als_p12_datei"><a class="anchor" href="#_import_als_p12_datei"></a>Import als P12-Datei</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/certificate/client-certificate-import.png" alt="client certificate import">
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Feld</th>
+<th class="tableblock halign-left valign-top">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Der Name wird zur Auswahl bei der Zuordnung zum Konnektor angezeigt. Hier sind die Angaben zum Clientsystem und der Gültigkeit sinnvoll, ggf. auch der Name des Konnektors, falls das Zertifikat auf dem Konnektor ausgestellt wurde und ggf. auch ob es ein RSA oder ECC-Zertifikat ist. Beispiele:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>iMedOne - RSA2048 - 2026-04-02</p>
+</li>
+<li>
+<p>TIKONN-02 - X.Concept - ECC - 2026-04-02</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Beschreibung</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zusätzliche Angaben zum Zertifikat, zum Aussteller, Algorithmus etc.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passphrase</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passwort für den P12-Container, das für den Import erforderlich ist</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_import_via_ascii_text"><a class="anchor" href="#_import_via_ascii_text"></a>Import via ASCII-Text</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Wenn Client-Zertifikat und Private Key im PEM-Format vorliegen, kann man hier einfach den den Textinhalt mit Cut-and-Paste in das Formularfeld kopieren.</p>
 </div>
 <div class="paragraph">
 <p>Wichtig: unbedingt <code>-----BEGIN CERTIFICATE-----</code> und <code>-----END CERTIFICATE-----</code>
 mit kopieren.</p>
 </div>
 <div class="paragraph">
-<p>Den Private Key kopiert man analog dazu in das vorgesehene Feld. Der Private Key sollte passwortgeschützt sein, da jeder mit Admin-Rolle den Key aus Cocard wieder heraus kopieren kann.</p>
+<p>Den Private Key kopiert man analog dazu in das vorgesehene Feld. Der Private Key sollte passwortgeschützt sein.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../_images/certificate/client-certificate-edit.png" alt="client certificate edit">
+<img src="../_images/certificate/client-certificate-new.png" alt="client certificate new">
 </div>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Ein Import über eine PKCS12-Datei ist derzeit noch nicht möglich, aber für ein zukünftiges Release vorgesehen.
-</td>
-</tr>
-</table>
+</div>
 </div>
 </article>
   </div>
