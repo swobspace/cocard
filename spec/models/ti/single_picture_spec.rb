@@ -31,7 +31,6 @@ module TI
    
     describe "with real data" do
       it { expect(subject.time.localtime).to eq(ts.localtime) }
-      it { puts subject.time.class.name }
       it { expect(subject.updated_at.localtime).to eq(ts) }
       it { expect(subject.ci).to eq("CI-0000001") }
       it { expect(subject.tid).to eq("BITTE") }
