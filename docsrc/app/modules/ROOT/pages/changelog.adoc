@@ -1,8 +1,13 @@
 = Changelog
 
+
+== 0.4.5-dev - 2024-10-06
+
+* Neu: TI-Lagebild
+
 == 0.4.4 - 2024-10-06
 
-* Import von Client-Zertifikaten als P12-Datei
+* Neu: Import von Client-Zertifikaten als P12-Datei
 
 == 0.4.3 - 2024-10-03
 
