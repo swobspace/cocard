@@ -1,0 +1,2873 @@
+---
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000001
+  tid: BITTE
+  bu: PU
+  organization: BITMARCK Technik GmbH
+  pdt: PDT20
+  product: Fachdienste VSDM (UFS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (UFS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000002
+  tid: BITTE
+  bu: RU
+  organization: BITMARCK Technik GmbH
+  pdt: PDT20
+  product: Fachdienste VSDM (UFS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (UFS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000003
+  tid: BITTE
+  bu: TU
+  organization: BITMARCK Technik GmbH
+  pdt: PDT20
+  product: Fachdienste VSDM (UFS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (UFS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000004
+  tid: BITTE
+  bu: PU
+  organization: BITMARCK Technik GmbH
+  pdt: PDT23
+  product: Fachdienste VSDM (VSDD)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (VSDD)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000005
+  tid: BITTE
+  bu: RU
+  organization: BITMARCK Technik GmbH
+  pdt: PDT23
+  product: Fachdienste VSDM (VSDD)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (VSDD)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000006
+  tid: BITTE
+  bu: TU
+  organization: BITMARCK Technik GmbH
+  pdt: PDT23
+  product: Fachdienste VSDM (VSDD)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (VSDD)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000007
+  tid: BITTE
+  bu: PU
+  organization: BITMARCK Technik GmbH
+  pdt: PDT26
+  product: Fachdienste VSDM (CMS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (CMS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000008
+  tid: BITTE
+  bu: RU
+  organization: BITMARCK Technik GmbH
+  pdt: PDT26
+  product: Fachdienste VSDM (CMS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (CMS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000009
+  tid: BITTE
+  bu: TU
+  organization: BITMARCK Technik GmbH
+  pdt: PDT26
+  product: Fachdienste VSDM (CMS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (CMS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000010
+  tid: BIT01
+  bu: PU
+  organization: BITMARCK Technik GmbH
+  pdt: PDT03
+  product: Trust Service Provider X.509 nonQES - eGK
+  availability: 1
+  comment:
+  name: BITMARCK-OCSP
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000011
+  tid: BIT01
+  bu: RU
+  organization: BITMARCK Technik GmbH
+  pdt: PDT03
+  product: Trust Service Provider X.509 nonQES - eGK
+  availability: 1
+  comment:
+  name: BITMARCK-OCSP
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000012
+  tid: BIT01
+  bu: TU
+  organization: BITMARCK Technik GmbH
+  pdt: PDT03
+  product: Trust Service Provider X.509 nonQES - eGK
+  availability: 1
+  comment:
+  name: BITMARCK-OCSP
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000019
+  tid: DTR30
+  bu: PU
+  organization: D-Trust GmbH
+  pdt: PDT38
+  product: Trust Service Provider X.509 nonQES – SMC-B
+  availability: 1
+  comment:
+  name: TSP X.509 non QES - SMC-B -P für G.2
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000020
+  tid: DTR30
+  bu: RU
+  organization: D-Trust GmbH
+  pdt: PDT38
+  product: Trust Service Provider X.509 nonQES – SMC-B
+  availability: 1
+  comment:
+  name: TSP X.509 non QES - SMC-B -P für G.2
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000021
+  tid: DTR30
+  bu: TU
+  organization: D-Trust GmbH
+  pdt: PDT38
+  product: Trust Service Provider X.509 nonQES – SMC-B
+  availability: 1
+  comment:
+  name: TSP X.509 non QES - SMC-B -P für G.2
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000022
+  tid: ITSCG
+  bu: PU
+  organization: itsc GmbH
+  pdt: PDT20
+  product: Fachdienste VSDM (UFS)
+  availability: 1
+  comment:
+  name: Fachdienste VSDM (UFS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000023
+  tid: ITSCG
+  bu: RU
+  organization: itsc GmbH
+  pdt: PDT20
+  product: Fachdienste VSDM (UFS)
+  availability: 1
+  comment:
+  name: Fachdienste VSDM (UFS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000024
+  tid: ITSCG
+  bu: TU
+  organization: itsc GmbH
+  pdt: PDT20
+  product: Fachdienste VSDM (UFS)
+  availability: 1
+  comment:
+  name: Fachdienste VSDM (UFS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000025
+  tid: ITSCG
+  bu: PU
+  organization: itsc GmbH
+  pdt: PDT23
+  product: Fachdienste VSDM (VSDD)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (VSDD)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000026
+  tid: ITSCG
+  bu: RU
+  organization: itsc GmbH
+  pdt: PDT23
+  product: Fachdienste VSDM (VSDD)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (VSDD)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000027
+  tid: ITSCG
+  bu: TU
+  organization: itsc GmbH
+  pdt: PDT23
+  product: Fachdienste VSDM (VSDD)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (VSDD)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000028
+  tid: ITSCG
+  bu: PU
+  organization: itsc GmbH
+  pdt: PDT26
+  product: Fachdienste VSDM (CMS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (CMS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000029
+  tid: ITSCG
+  bu: RU
+  organization: itsc GmbH
+  pdt: PDT26
+  product: Fachdienste VSDM (CMS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (CMS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000030
+  tid: ITSCG
+  bu: TU
+  organization: itsc GmbH
+  pdt: PDT26
+  product: Fachdienste VSDM (CMS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (CMS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000031
+  tid: ITSCA
+  bu: PU
+  organization: ITSCare - IT Services für den Gesundheitsmarkt
+  pdt: PDT20
+  product: Fachdienste VSDM (UFS)
+  availability: 1
+  comment:
+  name: Fachdienste VSDM (UFS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000032
+  tid: ITSCA
+  bu: RU
+  organization: ITSCare - IT Services für den Gesundheitsmarkt
+  pdt: PDT20
+  product: Fachdienste VSDM (UFS)
+  availability: 1
+  comment:
+  name: Fachdienste VSDM (UFS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000033
+  tid: ITSCA
+  bu: TU
+  organization: ITSCare - IT Services für den Gesundheitsmarkt
+  pdt: PDT20
+  product: Fachdienste VSDM (UFS)
+  availability: 1
+  comment:
+  name: Fachdienste VSDM (UFS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000034
+  tid: ITSCA
+  bu: PU
+  organization: ITSCare - IT Services für den Gesundheitsmarkt
+  pdt: PDT23
+  product: Fachdienste VSDM (VSDD)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (VSDD)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000035
+  tid: ITSCA
+  bu: RU
+  organization: ITSCare - IT Services für den Gesundheitsmarkt
+  pdt: PDT23
+  product: Fachdienste VSDM (VSDD)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (VSDD)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000036
+  tid: ITSCA
+  bu: TU
+  organization: ITSCare - IT Services für den Gesundheitsmarkt
+  pdt: PDT23
+  product: Fachdienste VSDM (VSDD)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (VSDD)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000037
+  tid: ITSCA
+  bu: PU
+  organization: ITSCare - IT Services für den Gesundheitsmarkt
+  pdt: PDT26
+  product: Fachdienste VSDM (CMS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (CMS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000038
+  tid: ITSCA
+  bu: RU
+  organization: ITSCare - IT Services für den Gesundheitsmarkt
+  pdt: PDT26
+  product: Fachdienste VSDM (CMS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (CMS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000039
+  tid: ITSCA
+  bu: TU
+  organization: ITSCare - IT Services für den Gesundheitsmarkt
+  pdt: PDT26
+  product: Fachdienste VSDM (CMS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (CMS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000049
+  tid: KUBUS
+  bu: PU
+  organization: kubus IT - Arbeitsgemeinschaft von Körperschaften des öffentlichen
+    Rechts eGbR
+  pdt: PDT20
+  product: Fachdienste VSDM (UFS)
+  availability: 1
+  comment:
+  name: Fachdienste VSDM (UFS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000050
+  tid: KUBUS
+  bu: RU
+  organization: kubus IT - Arbeitsgemeinschaft von Körperschaften des öffentlichen
+    Rechts eGbR
+  pdt: PDT20
+  product: Fachdienste VSDM (UFS)
+  availability: 1
+  comment:
+  name: Fachdienste VSDM (UFS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000051
+  tid: KUBUS
+  bu: TU
+  organization: kubus IT - Arbeitsgemeinschaft von Körperschaften des öffentlichen
+    Rechts eGbR
+  pdt: PDT20
+  product: Fachdienste VSDM (UFS)
+  availability: 1
+  comment:
+  name: Fachdienste VSDM (UFS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000052
+  tid: KUBUS
+  bu: PU
+  organization: kubus IT - Arbeitsgemeinschaft von Körperschaften des öffentlichen
+    Rechts eGbR
+  pdt: PDT23
+  product: Fachdienste VSDM (VSDD)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (VSDD)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000053
+  tid: KUBUS
+  bu: RU
+  organization: kubus IT - Arbeitsgemeinschaft von Körperschaften des öffentlichen
+    Rechts eGbR
+  pdt: PDT23
+  product: Fachdienste VSDM (VSDD)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (VSDD)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000054
+  tid: KUBUS
+  bu: TU
+  organization: kubus IT - Arbeitsgemeinschaft von Körperschaften des öffentlichen
+    Rechts eGbR
+  pdt: PDT23
+  product: Fachdienste VSDM (VSDD)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (VSDD)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000055
+  tid: KUBUS
+  bu: PU
+  organization: kubus IT - Arbeitsgemeinschaft von Körperschaften des öffentlichen
+    Rechts eGbR
+  pdt: PDT26
+  product: Fachdienste VSDM (CMS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (CMS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000056
+  tid: KUBUS
+  bu: RU
+  organization: kubus IT - Arbeitsgemeinschaft von Körperschaften des öffentlichen
+    Rechts eGbR
+  pdt: PDT26
+  product: Fachdienste VSDM (CMS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (CMS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000057
+  tid: KUBUS
+  bu: TU
+  organization: kubus IT - Arbeitsgemeinschaft von Körperschaften des öffentlichen
+    Rechts eGbR
+  pdt: PDT26
+  product: Fachdienste VSDM (CMS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (CMS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000058
+  tid: KUB01
+  bu: PU
+  organization: kubus IT - Arbeitsgemeinschaft von Körperschaften des öffentlichen
+    Rechts eGbR
+  pdt: PDT03
+  product: Trust Service Provider X.509 nonQES - eGK
+  availability: 1
+  comment:
+  name: TSP X.509nonQES eGK
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000059
+  tid: KUB01
+  bu: RU
+  organization: kubus IT - Arbeitsgemeinschaft von Körperschaften des öffentlichen
+    Rechts eGbR
+  pdt: PDT03
+  product: Trust Service Provider X.509 nonQES - eGK
+  availability: 1
+  comment:
+  name: TSP X.509nonQES eGK
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000060
+  tid: KUB01
+  bu: TU
+  organization: kubus IT - Arbeitsgemeinschaft von Körperschaften des öffentlichen
+    Rechts eGbR
+  pdt: PDT03
+  product: Trust Service Provider X.509 nonQES - eGK
+  availability: 1
+  comment:
+  name: TSP X.509nonQES eGK
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000064
+  tid: ISCMO
+  bu: PU
+  organization: Mobil ISC GmbH
+  pdt: PDT20
+  product: Fachdienste VSDM (UFS)
+  availability: 1
+  comment:
+  name: Fachdienste VSDM (UFS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000065
+  tid: ISCMO
+  bu: RU
+  organization: Mobil ISC GmbH
+  pdt: PDT20
+  product: Fachdienste VSDM (UFS)
+  availability: 1
+  comment:
+  name: Fachdienste VSDM (UFS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000066
+  tid: ISCMO
+  bu: TU
+  organization: Mobil ISC GmbH
+  pdt: PDT20
+  product: Fachdienste VSDM (UFS)
+  availability: 1
+  comment:
+  name: Fachdienste VSDM (UFS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000067
+  tid: ISCMO
+  bu: PU
+  organization: Mobil ISC GmbH
+  pdt: PDT23
+  product: Fachdienste VSDM (VSDD)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (VSDD)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000068
+  tid: ISCMO
+  bu: RU
+  organization: Mobil ISC GmbH
+  pdt: PDT23
+  product: Fachdienste VSDM (VSDD)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (VSDD)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000069
+  tid: ISCMO
+  bu: TU
+  organization: Mobil ISC GmbH
+  pdt: PDT23
+  product: Fachdienste VSDM (VSDD)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (VSDD)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000070
+  tid: ISCMO
+  bu: PU
+  organization: Mobil ISC GmbH
+  pdt: PDT26
+  product: Fachdienste VSDM (CMS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (CMS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000071
+  tid: ISCMO
+  bu: RU
+  organization: Mobil ISC GmbH
+  pdt: PDT26
+  product: Fachdienste VSDM (CMS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (CMS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000072
+  tid: ISCMO
+  bu: TU
+  organization: Mobil ISC GmbH
+  pdt: PDT26
+  product: Fachdienste VSDM (CMS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (CMS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000073
+  tid: ARVTO
+  bu: PU
+  organization: Arvato systems GmbH
+  pdt: PDT01
+  product: OCSP-Responder-Proxy
+  availability: 1
+  comment:
+  name: OCSP Responder Proxy
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000074
+  tid: ARVTO
+  bu: RU
+  organization: Arvato systems GmbH
+  pdt: PDT01
+  product: OCSP-Responder-Proxy
+  availability: 1
+  comment:
+  name: OCSP Responder Proxy
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000075
+  tid: ARVTO
+  bu: TU
+  organization: Arvato systems GmbH
+  pdt: PDT01
+  product: OCSP-Responder-Proxy
+  availability: 1
+  comment:
+  name: OCSP Responder Proxy
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000076
+  tid: ARVTO
+  bu: PU
+  organization: Arvato systems GmbH
+  pdt: PDT04
+  product: TSL-Dienst
+  availability: 1
+  comment:
+  name: TSL Dienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000077
+  tid: ARVTO
+  bu: RU
+  organization: Arvato systems GmbH
+  pdt: PDT04
+  product: TSL-Dienst
+  availability: 1
+  comment:
+  name: TSL Dienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000078
+  tid: ARVTO
+  bu: TU
+  organization: Arvato systems GmbH
+  pdt: PDT04
+  product: TSL-Dienst
+  availability: 1
+  comment:
+  name: TSL Dienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000079
+  tid: ARVTO
+  bu: PU
+  organization: Arvato systems GmbH
+  pdt: PDT05
+  product: Störungsampel
+  availability: 1
+  comment:
+  name: Störungsampel
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000080
+  tid: ARVTO
+  bu: RU
+  organization: Arvato systems GmbH
+  pdt: PDT05
+  product: Störungsampel
+  availability: 1
+  comment:
+  name: Störungsampel
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000081
+  tid: ARVTO
+  bu: TU
+  organization: Arvato systems GmbH
+  pdt: PDT05
+  product: Störungsampel
+  availability: 1
+  comment:
+  name: Störungsampel
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000082
+  tid: ARVTO
+  bu: PU
+  organization: Arvato systems GmbH
+  pdt: PDT06
+  product: Namensdienst
+  availability: 1
+  comment:
+  name: Namensdienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000083
+  tid: ARVTO
+  bu: RU
+  organization: Arvato systems GmbH
+  pdt: PDT06
+  product: Namensdienst
+  availability: 1
+  comment:
+  name: Namensdienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000084
+  tid: ARVTO
+  bu: TU
+  organization: Arvato systems GmbH
+  pdt: PDT06
+  product: Namensdienst
+  availability: 1
+  comment:
+  name: Namensdienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000085
+  tid: ARVTO
+  bu: PU
+  organization: Arvato systems GmbH
+  pdt: PDT07
+  product: Zeitdienst
+  availability: 1
+  comment:
+  name: Zeitdienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000086
+  tid: ARVTO
+  bu: RU
+  organization: Arvato systems GmbH
+  pdt: PDT07
+  product: Zeitdienst
+  availability: 1
+  comment:
+  name: Zeitdienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000087
+  tid: ARVTO
+  bu: TU
+  organization: Arvato systems GmbH
+  pdt: PDT07
+  product: Zeitdienst
+  availability: 1
+  comment:
+  name: Zeitdienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000094
+  tid: ARVTO
+  bu: PU
+  organization: Arvato systems GmbH
+  pdt: PDT11
+  product: Konfigurationsdienst
+  availability: 1
+  comment:
+  name: Konfigurationsdienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000095
+  tid: ARVTO
+  bu: RU
+  organization: Arvato systems GmbH
+  pdt: PDT11
+  product: Konfigurationsdienst
+  availability: 1
+  comment:
+  name: Konfigurationsdienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000096
+  tid: ARVTO
+  bu: TU
+  organization: Arvato systems GmbH
+  pdt: PDT11
+  product: Konfigurationsdienst
+  availability: 1
+  comment:
+  name: Konfigurationsdienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000097
+  tid: ARVTO
+  bu: RU
+  organization: Arvato systems GmbH
+  pdt: PDT21
+  product: Intermediär VSDM
+  availability: 1
+  comment:
+  name: Intermediär VSDM
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000098
+  tid: ARVTO
+  bu: TU
+  organization: Arvato systems GmbH
+  pdt: PDT21
+  product: Intermediär VSDM
+  availability: 1
+  comment:
+  name: Intermediär VSDM
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000099
+  tid: ARVTO
+  bu: PU
+  organization: Arvato systems GmbH
+  pdt: PDT22
+  product: gematik-Root-CA
+  availability: 1
+  comment:
+  name: CVC Root CA
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000100
+  tid: ARVTO
+  bu: RU
+  organization: Arvato systems GmbH
+  pdt: PDT22
+  product: gematik-Root-CA
+  availability: 1
+  comment:
+  name: CVC Root CA
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000101
+  tid: ARVTO
+  bu: TU
+  organization: Arvato systems GmbH
+  pdt: PDT22
+  product: gematik-Root-CA
+  availability: 1
+  comment:
+  name: CVC Root CA
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000102
+  tid: ARVTO
+  bu: PU
+  organization: Arvato systems GmbH
+  pdt: PDT25
+  product: Verzeichnisdienst
+  availability: 1
+  comment:
+  name: Verzeichnisdienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000103
+  tid: ARVTO
+  bu: RU
+  organization: Arvato systems GmbH
+  pdt: PDT25
+  product: Verzeichnisdienst
+  availability: 1
+  comment:
+  name: Verzeichnisdienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000104
+  tid: ARVTO
+  bu: TU
+  organization: Arvato systems GmbH
+  pdt: PDT25
+  product: Verzeichnisdienst
+  availability: 1
+  comment:
+  name: Verzeichnisdienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000108
+  tid: ARVTO
+  bu: PU
+  organization: Arvato systems GmbH
+  pdt: PDT37
+  product: Trust Service Provider X.509 nonQES – Komponentenzertifikate
+  availability: 1
+  comment:
+  name: TSP X.509
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000109
+  tid: ARVTO
+  bu: RU
+  organization: Arvato systems GmbH
+  pdt: PDT37
+  product: Trust Service Provider X.509 nonQES – Komponentenzertifikate
+  availability: 1
+  comment:
+  name: TSP X.509
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000110
+  tid: ARVTO
+  bu: TU
+  organization: Arvato systems GmbH
+  pdt: PDT37
+  product: Trust Service Provider X.509 nonQES – Komponentenzertifikate
+  availability: 1
+  comment:
+  name: TSP X.509
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000113
+  tid: TECHK
+  bu: PU
+  organization: Techniker Krankenkasse
+  pdt: PDT20
+  product: Fachdienste VSDM (UFS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (UFS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000114
+  tid: TECHK
+  bu: RU
+  organization: Techniker Krankenkasse
+  pdt: PDT20
+  product: Fachdienste VSDM (UFS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (UFS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000115
+  tid: TECHK
+  bu: TU
+  organization: Techniker Krankenkasse
+  pdt: PDT20
+  product: Fachdienste VSDM (UFS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (UFS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000116
+  tid: TECHK
+  bu: PU
+  organization: Techniker Krankenkasse
+  pdt: PDT23
+  product: Fachdienste VSDM (VSDD)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (VSDD)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000117
+  tid: TECHK
+  bu: RU
+  organization: Techniker Krankenkasse
+  pdt: PDT23
+  product: Fachdienste VSDM (VSDD)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (VSDD)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000118
+  tid: TECHK
+  bu: TU
+  organization: Techniker Krankenkasse
+  pdt: PDT23
+  product: Fachdienste VSDM (VSDD)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (VSDD)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000119
+  tid: TECHK
+  bu: PU
+  organization: Techniker Krankenkasse
+  pdt: PDT26
+  product: Fachdienste VSDM (CMS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (CMS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000120
+  tid: TECHK
+  bu: RU
+  organization: Techniker Krankenkasse
+  pdt: PDT26
+  product: Fachdienste VSDM (CMS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (CMS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000121
+  tid: TECHK
+  bu: TU
+  organization: Techniker Krankenkasse
+  pdt: PDT26
+  product: Fachdienste VSDM (CMS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (CMS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000122
+  tid: TSY01
+  bu: PU
+  organization: Deutsche Telekom Security GmbH
+  pdt: PDT03
+  product: Trust Service Provider X.509 nonQES - eGK
+  availability: 1
+  comment:
+  name: TSPX.509 nonQES eGK
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000123
+  tid: TSY01
+  bu: RU
+  organization: Deutsche Telekom Security GmbH
+  pdt: PDT03
+  product: Trust Service Provider X.509 nonQES - eGK
+  availability: 1
+  comment:
+  name: TSPX.509 nonQES eGK
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000124
+  tid: TSY01
+  bu: TU
+  organization: Deutsche Telekom Security GmbH
+  pdt: PDT03
+  product: Trust Service Provider X.509 nonQES - eGK
+  availability: 1
+  comment:
+  name: TSPX.509 nonQES eGK
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000128
+  tid: DTH01
+  bu: PU
+  organization: T-Systems International GmbH
+  pdt: PDT09
+  product: VPN-Zugangsdienst
+  availability: 1
+  comment:
+  name: VPN-Zugangsdienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000129
+  tid: DTH01
+  bu: RU
+  organization: T-Systems International GmbH
+  pdt: PDT09
+  product: VPN-Zugangsdienst
+  availability: 1
+  comment:
+  name: VPN-Zugangsdienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000130
+  tid: DTH01
+  bu: TU
+  organization: T-Systems International GmbH
+  pdt: PDT09
+  product: VPN-Zugangsdienst
+  availability: 1
+  comment:
+  name: VPN-Zugangsdienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000131
+  tid: DTH01
+  bu: PU
+  organization: T-Systems International GmbH
+  pdt: PDT21
+  product: Intermediär VSDM
+  availability: 1
+  comment:
+  name: Intermediär VSDM
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000132
+  tid: DTH01
+  bu: RU
+  organization: T-Systems International GmbH
+  pdt: PDT21
+  product: Intermediär VSDM
+  availability: 1
+  comment:
+  name: Intermediär VSDM
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000133
+  tid: DTH01
+  bu: TU
+  organization: T-Systems International GmbH
+  pdt: PDT21
+  product: Intermediär VSDM
+  availability: 1
+  comment:
+  name: Intermediär VSDM
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000137
+  tid: TSY30
+  bu: PU
+  organization: T-Systems International GmbH
+  pdt: PDT38
+  product: Trust Service Provider X.509 nonQES – SMC-B
+  availability: 1
+  comment:
+  name: TSP X509 nonQES SMC-B
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000138
+  tid: TSY30
+  bu: RU
+  organization: T-Systems International GmbH
+  pdt: PDT38
+  product: Trust Service Provider X.509 nonQES – SMC-B
+  availability: 1
+  comment:
+  name: TSP X509 nonQES SMC-B
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000139
+  tid: TSY30
+  bu: TU
+  organization: T-Systems International GmbH
+  pdt: PDT38
+  product: Trust Service Provider X.509 nonQES – SMC-B
+  availability: 1
+  comment:
+  name: TSP X509 nonQES SMC-B
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000140
+  tid: TSY31
+  bu: PU
+  organization: T-Systems International GmbH
+  pdt: PDT02
+  product: Trust Service Provider X.509 QES
+  availability: 1
+  comment:
+  name: TSP X509 QES HBA
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000141
+  tid: TSY31
+  bu: RU
+  organization: T-Systems International GmbH
+  pdt: PDT02
+  product: Trust Service Provider X.509 QES
+  availability: 1
+  comment:
+  name: TSP X509 QES HBA
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000142
+  tid: TSY31
+  bu: TU
+  organization: T-Systems International GmbH
+  pdt: PDT02
+  product: Trust Service Provider X.509 QES
+  availability: 1
+  comment:
+  name: TSP X509 QES HBA
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000146
+  tid: TSY31
+  bu: PU
+  organization: T-Systems International GmbH
+  pdt: PDT36
+  product: Trust Service Provider X.509 nonQES - HBA
+  availability: 1
+  comment:
+  name: TSP X509 nonQES HBA
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000147
+  tid: TSY31
+  bu: RU
+  organization: T-Systems International GmbH
+  pdt: PDT36
+  product: Trust Service Provider X.509 nonQES - HBA
+  availability: 1
+  comment:
+  name: TSP X509 nonQES HBA
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000148
+  tid: TSY31
+  bu: TU
+  organization: T-Systems International GmbH
+  pdt: PDT36
+  product: Trust Service Provider X.509 nonQES - HBA
+  availability: 1
+  comment:
+  name: TSP X509 nonQES HBA
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000149
+  tid: ATO01
+  bu: PU
+  organization: Eviden Germany GmbH
+  pdt: PDT03
+  product: Trust Service Provider X.509 nonQES - eGK
+  availability: 1
+  comment:
+  name: TSP X.509 non QES eGK für G2 / G2.1
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000150
+  tid: ATO01
+  bu: RU
+  organization: Eviden Germany GmbH
+  pdt: PDT03
+  product: Trust Service Provider X.509 nonQES - eGK
+  availability: 1
+  comment:
+  name: TSP X.509 non QES eGK für G2 / G2.1
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000151
+  tid: ATO01
+  bu: TU
+  organization: Eviden Germany GmbH
+  pdt: PDT03
+  product: Trust Service Provider X.509 nonQES - eGK
+  availability: 1
+  comment:
+  name: TSP X.509 non QES eGK für G2 / G2.1
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000155
+  tid: GKVIN
+  bu: PU
+  organization: GKV informatik
+  pdt: PDT20
+  product: Fachdienste VSDM (UFS)
+  availability: 1
+  comment:
+  name: Fachdienste VSDM (UFS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000156
+  tid: GKVIN
+  bu: RU
+  organization: GKV informatik
+  pdt: PDT20
+  product: Fachdienste VSDM (UFS)
+  availability: 1
+  comment:
+  name: Fachdienste VSDM (UFS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000842
+  tid: WRLDL
+  bu: RU
+  organization: equensWorldline SE Germany
+  pdt: PDT23
+  product: Fachdienste VSDM (VSDD)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (VSDD)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000843
+  tid: WRLDL
+  bu: TU
+  organization: equensWorldline SE Germany
+  pdt: PDT23
+  product: Fachdienste VSDM (VSDD)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (VSDD)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000844
+  tid: WRLDL
+  bu: PU
+  organization: equensWorldline SE Germany
+  pdt: PDT20
+  product: Fachdienste VSDM (UFS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (UFS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000845
+  tid: WRLDL
+  bu: TU
+  organization: equensWorldline SE Germany
+  pdt: PDT20
+  product: Fachdienste VSDM (UFS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (UFS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000851
+  tid: BNO51
+  bu: PU
+  organization: Bundesnotarkammer K.d.ö.R.
+  pdt: PDT57
+  product: Anbieter Anschlusspunkt SGW/SZZP
+  availability: 1
+  comment:
+  name: Anschlusspunkt SGW Bundenotarkammer
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000853
+  tid: BNO50
+  bu: PU
+  organization: Bundesnotarkammer K.d.ö.R.
+  pdt: PDT56
+  product: WANDA Basic
+  availability: 1
+  comment:
+  name: Zentrales Vorsorgeregister
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000855
+  tid: BAM50
+  bu: PU
+  organization: Bundesinstitut für Arzneimittel und Medizinprodukte
+  pdt: PDT56
+  product: WANDA Basic
+  availability: 1
+  comment:
+  name: Antragsportal Betäubungsmittelrezepte
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000858
+  tid: BMG52
+  bu: PU
+  organization: Bundesministerium für Gesundheit Referat 126
+  pdt: PDT54
+  product: WANDA Smart
+  availability: 1
+  comment:
+  name: Implantateregister Deutschland - Registerstelle
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000867
+  tid: SHC31
+  bu: RU
+  organization: SHC Stolle & Heinz Consultants GmbH & Co. KG
+  pdt: PDT02
+  product: Trust Service Provider X.509 QES
+  availability: 1
+  comment:
+  name: SHC TSP X509 QES HBA
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000868
+  tid: SHC31
+  bu: TU
+  organization: SHC Stolle & Heinz Consultants GmbH & Co. KG
+  pdt: PDT02
+  product: Trust Service Provider X.509 QES
+  availability: 1
+  comment:
+  name: SHC TSP X509 QES HBA
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000869
+  tid: SHC31
+  bu: PU
+  organization: SHC Stolle & Heinz Consultants GmbH & Co. KG
+  pdt: PDT02
+  product: Trust Service Provider X.509 QES
+  availability: 1
+  comment:
+  name: SHC TSP X509 QES HBA
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000874
+  tid: RIS39
+  bu: RU
+  organization: RISE GmbH
+  pdt: PDT70
+  product: Federation Master
+  availability: 1
+  comment:
+  name: Federation Master
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000875
+  tid: RIS39
+  bu: TU
+  organization: RISE GmbH
+  pdt: PDT70
+  product: Federation Master
+  availability: 1
+  comment:
+  name: Federation Master
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000876
+  tid: RIS39
+  bu: PU
+  organization: RISE GmbH
+  pdt: PDT70
+  product: Federation Master
+  availability: 1
+  comment:
+  name: Federation Master
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000877
+  tid: AKN43
+  bu: RU
+  organization: akquinet health service GmbH
+  pdt: PDT64
+  product: TI-Messenger-Fachdienst
+  availability: 1
+  comment:
+  name: TI-Messenger Fachdienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000881
+  tid: RKI52
+  bu: PU
+  organization: Robert Koch-Institut
+  pdt: PDT54
+  product: WANDA Smart
+  availability: 1
+  comment:
+  name: Implantateregister Deutschland – Vertrauensstelle
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000884
+  tid: RKI50
+  bu: PU
+  organization: Robert Koch-Institut
+  pdt: PDT56
+  product: WANDA Basic
+  availability: 1
+  comment:
+  name: Weitere Anwendung DEMIS Meldeportal Frankfurt
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000895
+  tid: RKI51
+  bu: PU
+  organization: Robert Koch-Institut
+  pdt: PDT57
+  product: Anbieter Anschlusspunkt SGW/SZZP
+  availability: 1
+  comment:
+  name: SZZP light Vertrauensstellen
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000901
+  tid: RPD53
+  bu: PU
+  organization: RpDoc Solutions GmbH
+  pdt: PDT55
+  product: WANDA Smart Hosting
+  availability: 1
+  comment:
+  name: elektronische Medikationsmanagement ambulant
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000920
+  tid: RIS40
+  bu: RU
+  organization: RISE GmbH
+  pdt: PDT24
+  product: Fachdienst KIM
+  availability: 1
+  comment:
+  name: RISE Fachdienst KIM 1.5
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000921
+  tid: RIS40
+  bu: PU
+  organization: RISE GmbH
+  pdt: PDT24
+  product: Fachdienst KIM
+  availability: 1
+  comment:
+  name: RISE Fachdienst KIM 1.5
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000922
+  tid: TSY37
+  bu: TU
+  organization: T-Systems International GmbH
+  pdt: PDT73
+  product: Sektoraler Identity Provider für den Sektor Kostenträger
+  availability: 1
+  comment:
+  name: Verimi Wallet as a Service
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000923
+  tid: TSY37
+  bu: RU
+  organization: T-Systems International GmbH
+  pdt: PDT73
+  product: Sektoraler Identity Provider für den Sektor Kostenträger
+  availability: 1
+  comment:
+  name: Verimi Wallet as a Service
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000924
+  tid: RIS40
+  bu: TU
+  organization: RISE GmbH
+  pdt: PDT24
+  product: Fachdienst KIM
+  availability: 1
+  comment:
+  name: RISE Fachdienst KIM 1.5
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000930
+  tid: ARVTO
+  bu: RU
+  organization: Arvato systems GmbH
+  pdt: PDT66
+  product: Verzeichnisdienst FHIR
+  availability: 1
+  comment:
+  name: VZD FHIR
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000932
+  tid: ARVTO
+  bu: PU
+  organization: Arvato systems GmbH
+  pdt: PDT66
+  product: Verzeichnisdienst FHIR
+  availability: 1
+  comment:
+  name: VZD FHIR
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000935
+  tid: BIT37
+  bu: PU
+  organization: BITMARCK Service GmbH
+  pdt: PDT73
+  product: Sektoraler Identity Provider für den Sektor Kostenträger
+  availability: 1
+  comment:
+  name: Sektoraler Identity Provider (KTR) Bitmarck Servic
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000936
+  tid: BIT37
+  bu: RU
+  organization: BITMARCK Service GmbH
+  pdt: PDT73
+  product: Sektoraler Identity Provider für den Sektor Kostenträger
+  availability: 1
+  comment:
+  name: Sektoraler Identity Provider (KTR) Bitmarck Servic
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000937
+  tid: BIT37
+  bu: TU
+  organization: BITMARCK Service GmbH
+  pdt: PDT73
+  product: Sektoraler Identity Provider für den Sektor Kostenträger
+  availability: 1
+  comment:
+  name: Sektoraler Identity Provider (KTR) Bitmarck Servic
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000938
+  tid: IBM37
+  bu: RU
+  organization: IBM Deutschland GmbH
+  pdt: PDT73
+  product: Sektoraler Identity Provider für den Sektor Kostenträger
+  availability: 1
+  comment:
+  name: Sektoraler Identity Provider (KTR) IBM
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000939
+  tid: IBM37
+  bu: TU
+  organization: IBM Deutschland GmbH
+  pdt: PDT73
+  product: Sektoraler Identity Provider für den Sektor Kostenträger
+  availability: 1
+  comment:
+  name: Sektoraler Identity Provider (KTR) IBM
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000940
+  tid: IBM37
+  bu: PU
+  organization: IBM Deutschland GmbH
+  pdt: PDT73
+  product: Sektoraler Identity Provider für den Sektor Kostenträger
+  availability: 1
+  comment:
+  name: Sektoraler Identity Provider (KTR) IBM
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000947
+  tid: TSY37
+  bu: PU
+  organization: T-Systems International GmbH
+  pdt: PDT73
+  product: Sektoraler Identity Provider für den Sektor Kostenträger
+  availability: 1
+  comment:
+  name: Verimi Wallet as a Service
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000948
+  tid: RIS37
+  bu: RU
+  organization: RISE GmbH
+  pdt: PDT73
+  product: Sektoraler Identity Provider für den Sektor Kostenträger
+  availability: 1
+  comment:
+  name: RISE Digital ID
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000949
+  tid: RIS37
+  bu: TU
+  organization: RISE GmbH
+  pdt: PDT73
+  product: Sektoraler Identity Provider für den Sektor Kostenträger
+  availability: 1
+  comment:
+  name: RISE Digital ID
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000960
+  tid: GMT14
+  bu: TU
+  organization: gematik - GmbH (GTI)
+  pdt: PDT73
+  product: Sektoraler Identity Provider für den Sektor Kostenträger
+  availability: 1
+  comment:
+  name: Sektoraler Identity Provider (KTR) gematik
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000990
+  tid: RIS65
+  bu: RU
+  organization: RISE GmbH
+  pdt: PDT72
+  product: TI-Gateway-Zugangsmodul
+  availability: 1
+  comment:
+  name: RISE TI-Gateway
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000991
+  tid: RIS65
+  bu: TU
+  organization: RISE GmbH
+  pdt: PDT72
+  product: TI-Gateway-Zugangsmodul
+  availability: 0
+  comment:
+  name: RISE TI-Gateway
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000997
+  tid: EHX67
+  bu: RU
+  organization: eHealth Experts GmbH
+  pdt: PDT72
+  product: TI-Gateway-Zugangsmodul
+  availability: 1
+  comment:
+  name: Infinity Gate
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0001080
+  tid: EHX67
+  bu: TU
+  organization: eHealth Experts GmbH
+  pdt: PDT72
+  product: TI-Gateway-Zugangsmodul
+  availability: 1
+  comment:
+  name: Infinity Gate
+- time: '2024-10-06T12:00:15.813Z'
+  ci: SO-0000001
+  tid: GMT01
+  bu: RU
+  organization: gematik - GmbH (GTI)
+  pdt: PDT41
+  product: BDE RU
+  availability: 1
+  comment:
+  name:
+- time: '2024-10-06T12:00:15.813Z'
+  ci: SO-0000002
+  tid: GMT01
+  bu: TU
+  organization: gematik - GmbH (GTI)
+  pdt: PDT41
+  product: BDE TU
+  availability: 1
+  comment:
+  name:
+- time: '2024-10-06T12:00:15.813Z'
+  ci: SO-0000003
+  tid: GMT01
+  bu: PU
+  organization: gematik - GmbH (GTI)
+  pdt: PDT41
+  product: BDE PU - TI
+  availability: 1
+  comment:
+  name:
+- time: '2024-10-06T12:00:15.813Z'
+  ci: SO-0000004
+  tid: GMT01
+  bu: INT
+  organization: gematik - GmbH (GTI)
+  pdt: PDT41
+  product: BDE RU TU PU - Internet
+  availability: 1
+  comment:
+  name:
+- time: '2024-10-06T12:00:15.813Z'
+  ci: SO-0000005
+  tid: GMT01
+  bu: TU
+  organization: gematik - GmbH (GTI)
+  pdt: DEMIS
+  product: DEMIS TU
+  availability: 1
+  comment:
+  name:
+- time: '2024-10-06T12:00:15.813Z'
+  ci: SO-0000006
+  tid: GMT01
+  bu: PU
+  organization: gematik - GmbH (GTI)
+  pdt: DEMIS
+  product: DEMIS PU
+  availability: 1
+  comment:
+  name:
+- time: '2024-10-06T12:00:15.813Z'
+  ci: SO-0000007
+  tid: IBM60
+  bu: RUX
+  organization: IBM Deutschland GmbH
+  pdt: PDT50
+  product: FD eRP in RUX
+  availability: 1
+  comment:
+  name:
+- time: '2024-10-06T12:00:15.813Z'
+  ci: SO-0000026
+  tid: ARVTO
+  bu: PU
+  organization: Arvato systems GmbH
+  pdt: PDT57
+  product: BNetz_DNS splitdns.ti-dienste.de
+  availability: 1
+  comment:
+  name:
+- time: '2024-10-06T12:00:15.813Z'
+  ci: SO-0000041
+  tid: ARVTO
+  bu: RU
+  organization: Arvato systems GmbH
+  pdt: PDT57
+  product: BNetz DNS RU splitdns.ti-dienste.de
+  availability: 1
+  comment:
+  name:
+- time: '2024-10-06T12:00:15.813Z'
+  ci: SO-0000047
+  tid: GMT01
+  bu: INT
+  organization: gematik - GmbH (GTI)
+  pdt: COMMUNITY
+  product: gemmunity
+  availability: 1
+  comment:
+  name:
+- time: '2024-10-06T12:00:15.813Z'
+  ci: SO-0000049
+  tid: GMT01
+  bu: INT
+  organization: gematik - GmbH (GTI)
+  pdt: PORTAL
+  product: INA_GEMATIK
+  availability: 1
+  comment:
+  name:
+- time: '2024-10-06T12:00:15.813Z'
+  ci: SO-0000053
+  tid: GMT01
+  bu: PU
+  organization: gematik - GmbH (GTI)
+  pdt: PDT41
+  product: TI_GW
+  availability: 1
+  comment:
+  name:
+- time: '2024-10-06T12:00:15.813Z'
+  ci: SO-0000054
+  tid: GMT01
+  bu: INT
+  organization: gematik - GmbH (GTI)
+  pdt: PDT41
+  product: TILAGE_REST
+  availability: 1
+  comment:
+  name:
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000157
+  tid: GKVIN
+  bu: TU
+  organization: GKV informatik
+  pdt: PDT20
+  product: Fachdienste VSDM (UFS)
+  availability: 1
+  comment:
+  name: Fachdienste VSDM (UFS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000158
+  tid: GKVIN
+  bu: PU
+  organization: GKV informatik
+  pdt: PDT23
+  product: Fachdienste VSDM (VSDD)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (VSDD)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000159
+  tid: GKVIN
+  bu: RU
+  organization: GKV informatik
+  pdt: PDT23
+  product: Fachdienste VSDM (VSDD)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (VSDD)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000160
+  tid: GKVIN
+  bu: TU
+  organization: GKV informatik
+  pdt: PDT23
+  product: Fachdienste VSDM (VSDD)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (VSDD)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000161
+  tid: GKVIN
+  bu: PU
+  organization: GKV informatik
+  pdt: PDT26
+  product: Fachdienste VSDM (CMS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (CMS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000162
+  tid: GKVIN
+  bu: RU
+  organization: GKV informatik
+  pdt: PDT26
+  product: Fachdienste VSDM (CMS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (CMS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000163
+  tid: GKVIN
+  bu: TU
+  organization: GKV informatik
+  pdt: PDT26
+  product: Fachdienste VSDM (CMS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (CMS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000164
+  tid: CGM01
+  bu: PU
+  organization: CompuGroup Medical Deutschland AG
+  pdt: PDT09
+  product: VPN-Zugangsdienst
+  availability: 1
+  comment:
+  name: VPN Zugangsdienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000165
+  tid: CGM01
+  bu: RU
+  organization: CompuGroup Medical Deutschland AG
+  pdt: PDT09
+  product: VPN-Zugangsdienst
+  availability: 1
+  comment:
+  name: VPN Zugangsdienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000166
+  tid: CGM01
+  bu: TU
+  organization: CompuGroup Medical Deutschland AG
+  pdt: PDT09
+  product: VPN-Zugangsdienst
+  availability: 1
+  comment:
+  name: VPN Zugangsdienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000167
+  tid: CGM01
+  bu: PU
+  organization: CompuGroup Medical Deutschland AG
+  pdt: PDT21
+  product: Intermediär VSDM
+  availability: 1
+  comment:
+  name: Intermediär VSDM
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000168
+  tid: CGM01
+  bu: RU
+  organization: CompuGroup Medical Deutschland AG
+  pdt: PDT21
+  product: Intermediär VSDM
+  availability: 1
+  comment:
+  name: Intermediär VSDM
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000169
+  tid: CGM01
+  bu: TU
+  organization: CompuGroup Medical Deutschland AG
+  pdt: PDT21
+  product: Intermediär VSDM
+  availability: 1
+  comment:
+  name: Intermediär VSDM
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000173
+  tid: RZAOK
+  bu: PU
+  organization: ARGE AOK
+  pdt: PDT20
+  product: Fachdienste VSDM (UFS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (UFS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000174
+  tid: RZAOK
+  bu: RU
+  organization: ARGE AOK
+  pdt: PDT20
+  product: Fachdienste VSDM (UFS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (UFS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000175
+  tid: RZAOK
+  bu: TU
+  organization: ARGE AOK
+  pdt: PDT20
+  product: Fachdienste VSDM (UFS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (UFS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000176
+  tid: RZAOK
+  bu: PU
+  organization: ARGE AOK
+  pdt: PDT23
+  product: Fachdienste VSDM (VSDD)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (VSDD)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000177
+  tid: RZAOK
+  bu: RU
+  organization: ARGE AOK
+  pdt: PDT23
+  product: Fachdienste VSDM (VSDD)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (VSDD)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000178
+  tid: RZAOK
+  bu: TU
+  organization: ARGE AOK
+  pdt: PDT23
+  product: Fachdienste VSDM (VSDD)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (VSDD)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000179
+  tid: RZAOK
+  bu: PU
+  organization: ARGE AOK
+  pdt: PDT26
+  product: Fachdienste VSDM (CMS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (CMS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000180
+  tid: RZAOK
+  bu: RU
+  organization: ARGE AOK
+  pdt: PDT26
+  product: Fachdienste VSDM (CMS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (CMS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000181
+  tid: RZAOK
+  bu: TU
+  organization: ARGE AOK
+  pdt: PDT26
+  product: Fachdienste VSDM (CMS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (CMS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000182
+  tid: ARV01
+  bu: PU
+  organization: Arvato Systems Digital GmbH
+  pdt: PDT09
+  product: VPN-Zugangsdienst
+  availability: 1
+  comment:
+  name: Anbieter VPN Zugangsdienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000183
+  tid: ARV01
+  bu: RU
+  organization: Arvato Systems Digital GmbH
+  pdt: PDT09
+  product: VPN-Zugangsdienst
+  availability: 1
+  comment:
+  name: Anbieter VPN Zugangsdienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000184
+  tid: ARV01
+  bu: TU
+  organization: Arvato Systems Digital GmbH
+  pdt: PDT09
+  product: VPN-Zugangsdienst
+  availability: 1
+  comment:
+  name: Anbieter VPN Zugangsdienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000185
+  tid: ARV01
+  bu: PU
+  organization: Arvato Systems Digital GmbH
+  pdt: PDT21
+  product: Intermediär VSDM
+  availability: 1
+  comment:
+  name: Intermediär VSDM
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000186
+  tid: MED30
+  bu: PU
+  organization: medisign GmbH
+  pdt: PDT38
+  product: Trust Service Provider X.509 nonQES – SMC-B
+  availability: 1
+  comment:
+  name: MandantP2118 fCA fuer SMC-B für G.2
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000187
+  tid: MED30
+  bu: RU
+  organization: medisign GmbH
+  pdt: PDT38
+  product: Trust Service Provider X.509 nonQES – SMC-B
+  availability: 1
+  comment:
+  name: MandantP2118 fCA fuer SMC-B für G.2
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000188
+  tid: MED30
+  bu: TU
+  organization: medisign GmbH
+  pdt: PDT38
+  product: Trust Service Provider X.509 nonQES – SMC-B
+  availability: 1
+  comment:
+  name: MandantP2118 fCA fuer SMC-B für G.2
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000189
+  tid: SHC31
+  bu: PU
+  organization: SHC Stolle & Heinz Consultants GmbH & Co. KG
+  pdt: PDT36
+  product: Trust Service Provider X.509 nonQES - HBA
+  availability: 1
+  comment:
+  name: TSP HBA
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000190
+  tid: SHC31
+  bu: RU
+  organization: SHC Stolle & Heinz Consultants GmbH & Co. KG
+  pdt: PDT36
+  product: Trust Service Provider X.509 nonQES - HBA
+  availability: 1
+  comment:
+  name: TSP HBA
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000191
+  tid: SHC31
+  bu: TU
+  organization: SHC Stolle & Heinz Consultants GmbH & Co. KG
+  pdt: PDT36
+  product: Trust Service Provider X.509 nonQES - HBA
+  availability: 1
+  comment:
+  name: TSP HBA
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000192
+  tid: SHC30
+  bu: PU
+  organization: SHC Stolle & Heinz Consultants GmbH & Co. KG
+  pdt: PDT38
+  product: Trust Service Provider X.509 nonQES – SMC-B
+  availability: 1
+  comment:
+  name: TSP SMCB
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000193
+  tid: SHC30
+  bu: RU
+  organization: SHC Stolle & Heinz Consultants GmbH & Co. KG
+  pdt: PDT38
+  product: Trust Service Provider X.509 nonQES – SMC-B
+  availability: 1
+  comment:
+  name: TSP SMCB
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000194
+  tid: SHC30
+  bu: TU
+  organization: SHC Stolle & Heinz Consultants GmbH & Co. KG
+  pdt: PDT38
+  product: Trust Service Provider X.509 nonQES – SMC-B
+  availability: 1
+  comment:
+  name: TSP SMCB
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000195
+  tid: DTR31
+  bu: PU
+  organization: D-Trust GmbH
+  pdt: PDT36
+  product: Trust Service Provider X.509 nonQES - HBA
+  availability: 1
+  comment:
+  name: TSP X.509 nonQES - HBA - P
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000196
+  tid: DTR31
+  bu: RU
+  organization: D-Trust GmbH
+  pdt: PDT36
+  product: Trust Service Provider X.509 nonQES - HBA
+  availability: 1
+  comment:
+  name: TSP X.509 nonQES - HBA - P
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000197
+  tid: DTR31
+  bu: TU
+  organization: D-Trust GmbH
+  pdt: PDT36
+  product: Trust Service Provider X.509 nonQES - HBA
+  availability: 1
+  comment:
+  name: TSP X.509 nonQES - HBA - P
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000200
+  tid: CGM40
+  bu: PU
+  organization: CompuGroup Medical Deutschland AG
+  pdt: PDT24
+  product: Fachdienst KIM
+  availability: 1
+  comment:
+  name: Fachdienst KIM
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000201
+  tid: CGM40
+  bu: RU
+  organization: CompuGroup Medical Deutschland AG
+  pdt: PDT24
+  product: Fachdienst KIM
+  availability: 1
+  comment:
+  name: Fachdienst KIM
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000203
+  tid: DTR31
+  bu: PU
+  organization: D-Trust GmbH
+  pdt: PDT02
+  product: Trust Service Provider X.509 QES
+  availability: 1
+  comment:
+  name: TSP X.509 QES -P
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000204
+  tid: DTR31
+  bu: RU
+  organization: D-Trust GmbH
+  pdt: PDT02
+  product: Trust Service Provider X.509 QES
+  availability: 1
+  comment:
+  name: TSP X.509 QES -P
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000205
+  tid: DTR31
+  bu: TU
+  organization: D-Trust GmbH
+  pdt: PDT02
+  product: Trust Service Provider X.509 QES
+  availability: 1
+  comment:
+  name: TSP X.509 QES -P
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000206
+  tid: MED31
+  bu: PU
+  organization: medisign GmbH
+  pdt: PDT36
+  product: Trust Service Provider X.509 nonQES - HBA
+  availability: 1
+  comment:
+  name: MandantP2117 fCA fuer HBA
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000207
+  tid: MED31
+  bu: RU
+  organization: medisign GmbH
+  pdt: PDT36
+  product: Trust Service Provider X.509 nonQES - HBA
+  availability: 1
+  comment:
+  name: MandantP2117 fCA fuer HBA
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000208
+  tid: MED31
+  bu: TU
+  organization: medisign GmbH
+  pdt: PDT36
+  product: Trust Service Provider X.509 nonQES - HBA
+  availability: 1
+  comment:
+  name: MandantP2117 fCA fuer HBA
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000220
+  tid: DTR25
+  bu: PU
+  organization: D-Trust GmbH
+  pdt: PDT48
+  product: Schlüsselgenerierungsdienst ePA
+  availability: 1
+  comment:
+  name: SGD ePA Zentral
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000221
+  tid: DTR25
+  bu: TU
+  organization: D-Trust GmbH
+  pdt: PDT48
+  product: Schlüsselgenerierungsdienst ePA
+  availability: 1
+  comment:
+  name: SGD ePA Zentral
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000222
+  tid: DTR25
+  bu: RU
+  organization: D-Trust GmbH
+  pdt: PDT48
+  product: Schlüsselgenerierungsdienst ePA
+  availability: 1
+  comment:
+  name: SGD ePA Zentral
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000226
+  tid: CGM40
+  bu: TU
+  organization: CompuGroup Medical Deutschland AG
+  pdt: PDT24
+  product: Fachdienst KIM
+  availability: 1
+  comment:
+  name: Fachdienst KIM
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000235
+  tid: GMT14
+  bu: TU
+  organization: gematik - GmbH (GTI)
+  pdt: PDT02
+  product: Trust Service Provider X.509 QES
+  availability: 1
+  comment:
+  name: gematik TSP X.509 QES
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000236
+  tid: GMT14
+  bu: RU
+  organization: gematik - GmbH (GTI)
+  pdt: PDT02
+  product: Trust Service Provider X.509 QES
+  availability: 1
+  comment:
+  name: gematik TSP X.509 QES
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000237
+  tid: GMT14
+  bu: TU
+  organization: gematik - GmbH (GTI)
+  pdt: PDT03
+  product: Trust Service Provider X.509 nonQES - eGK
+  availability: 1
+  comment:
+  name: gematik TSP X.509 non QES eGK
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000238
+  tid: GMT14
+  bu: RU
+  organization: gematik - GmbH (GTI)
+  pdt: PDT03
+  product: Trust Service Provider X.509 nonQES - eGK
+  availability: 1
+  comment:
+  name: gematik TSP X.509 non QES eGK
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000249
+  tid: GMT14
+  bu: RU
+  organization: gematik - GmbH (GTI)
+  pdt: PDT09
+  product: VPN-Zugangsdienst
+  availability: 1
+  comment:
+  name: gematik VPN-ZugD
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000250
+  tid: GMT14
+  bu: TU
+  organization: gematik - GmbH (GTI)
+  pdt: PDT09
+  product: VPN-Zugangsdienst
+  availability: 1
+  comment:
+  name: gematik VPN-ZugD
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000303
+  tid: GMT14
+  bu: TU
+  organization: gematik - GmbH (GTI)
+  pdt: PDT36
+  product: Trust Service Provider X.509 nonQES - HBA
+  availability: 1
+  comment:
+  name: gematik TSP-X.509nQ-HBA
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000304
+  tid: GMT14
+  bu: RU
+  organization: gematik - GmbH (GTI)
+  pdt: PDT36
+  product: Trust Service Provider X.509 nonQES - HBA
+  availability: 1
+  comment:
+  name: gematik TSP-X.509nQ-HBA
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000305
+  tid: GMT14
+  bu: RU
+  organization: gematik - GmbH (GTI)
+  pdt: PDT37
+  product: Trust Service Provider X.509 nonQES – Komponentenzertifikate
+  availability: 1
+  comment:
+  name: gematik TSP-X.509nQ-Komp
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000306
+  tid: GMT14
+  bu: TU
+  organization: gematik - GmbH (GTI)
+  pdt: PDT37
+  product: Trust Service Provider X.509 nonQES – Komponentenzertifikate
+  availability: 1
+  comment:
+  name: gematik TSP-X.509nQ-Komp
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000307
+  tid: GMT14
+  bu: TU
+  organization: gematik - GmbH (GTI)
+  pdt: PDT38
+  product: Trust Service Provider X.509 nonQES – SMC-B
+  availability: 1
+  comment:
+  name: gematik TSP-X.509nQ-SMC-B
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000308
+  tid: GMT14
+  bu: RU
+  organization: gematik - GmbH (GTI)
+  pdt: PDT38
+  product: Trust Service Provider X.509 nonQES – SMC-B
+  availability: 1
+  comment:
+  name: gematik TSP-X.509nQ-SMC-B
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000398
+  tid: AKN40
+  bu: RU
+  organization: akquinet health service GmbH
+  pdt: PDT24
+  product: Fachdienst KIM
+  availability: 1
+  comment:
+  name: FD KIM akquinet
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000400
+  tid: AKN40
+  bu: TU
+  organization: akquinet health service GmbH
+  pdt: PDT24
+  product: Fachdienst KIM
+  availability: 1
+  comment:
+  name: FD KIM akquinet
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000406
+  tid: NRW50
+  bu: PU
+  organization: Landeskrebsregister Nordrhein Westfalen gGmbH
+  pdt: PDT56
+  product: WANDA Basic
+  availability: 1
+  comment:
+  name: weitere Anwendung LKR NRW Melderportal
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000407
+  tid: TSY40
+  bu: RU
+  organization: T-Systems International GmbH
+  pdt: PDT24
+  product: Fachdienst KIM
+  availability: 1
+  comment:
+  name: KOM-LE Fachdienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000408
+  tid: TSY40
+  bu: TU
+  organization: T-Systems International GmbH
+  pdt: PDT24
+  product: Fachdienst KIM
+  availability: 1
+  comment:
+  name: KOM-LE Fachdienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000409
+  tid: TSY40
+  bu: PU
+  organization: T-Systems International GmbH
+  pdt: PDT24
+  product: Fachdienst KIM
+  availability: 1
+  comment:
+  name: KOM-LE Fachdienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000414
+  tid: BIT40
+  bu: RU
+  organization: BITMARCK Service GmbH
+  pdt: PDT24
+  product: Fachdienst KIM
+  availability: 1
+  comment:
+  name: BITMARCK  Service FD KIM
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000415
+  tid: BIT40
+  bu: TU
+  organization: BITMARCK Service GmbH
+  pdt: PDT24
+  product: Fachdienst KIM
+  availability: 1
+  comment:
+  name: BITMARCK  Service FD KIM
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000421
+  tid: BIT20
+  bu: RU
+  organization: BITMARCK Technik GmbH
+  pdt: PDT43
+  product: ePA-Aktensystem
+  availability: 1
+  comment:
+  name: ePA-Aktensystem
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000422
+  tid: BIT20
+  bu: RU
+  organization: BITMARCK Technik GmbH
+  pdt: PDT48
+  product: Schlüsselgenerierungsdienst ePA
+  availability: 1
+  comment:
+  name: Schlüsselgenerierungsdienst Typ 1
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000423
+  tid: BIT20
+  bu: TU
+  organization: BITMARCK Technik GmbH
+  pdt: PDT43
+  product: ePA-Aktensystem
+  availability: 1
+  comment:
+  name: ePA-Aktensystem
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000424
+  tid: BIT20
+  bu: TU
+  organization: BITMARCK Technik GmbH
+  pdt: PDT48
+  product: Schlüsselgenerierungsdienst ePA
+  availability: 1
+  comment:
+  name: Schlüsselgenerierungsdienst Typ 1
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000425
+  tid: BIT20
+  bu: PU
+  organization: BITMARCK Technik GmbH
+  pdt: PDT43
+  product: ePA-Aktensystem
+  availability: 1
+  comment:
+  name: ePA-Aktensystem
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000426
+  tid: BIT20
+  bu: PU
+  organization: BITMARCK Technik GmbH
+  pdt: PDT48
+  product: Schlüsselgenerierungsdienst ePA
+  availability: 1
+  comment:
+  name: Schlüsselgenerierungsdienst Typ 1
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000427
+  tid: IBM40
+  bu: RU
+  organization: IBM Deutschland GmbH
+  pdt: PDT24
+  product: Fachdienst KIM
+  availability: 1
+  comment:
+  name: KIM Fachdienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000428
+  tid: IBM40
+  bu: TU
+  organization: IBM Deutschland GmbH
+  pdt: PDT24
+  product: Fachdienst KIM
+  availability: 1
+  comment:
+  name: KIM Fachdienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000431
+  tid: IBM20
+  bu: RU
+  organization: IBM Deutschland GmbH
+  pdt: PDT43
+  product: ePA-Aktensystem
+  availability: 1
+  comment:
+  name: ePA Aktensystem
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000432
+  tid: IBM20
+  bu: TU
+  organization: IBM Deutschland GmbH
+  pdt: PDT43
+  product: ePA-Aktensystem
+  availability: 1
+  comment:
+  name: ePA Aktensystem
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000437
+  tid: IBM20
+  bu: RU
+  organization: IBM Deutschland GmbH
+  pdt: PDT48
+  product: Schlüsselgenerierungsdienst ePA
+  availability: 1
+  comment:
+  name: Schlüsselgenerierungsdienst ePA
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000440
+  tid: IBM20
+  bu: TU
+  organization: IBM Deutschland GmbH
+  pdt: PDT48
+  product: Schlüsselgenerierungsdienst ePA
+  availability: 1
+  comment:
+  name: Schlüsselgenerierungsdienst ePA
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000441
+  tid: IBM40
+  bu: PU
+  organization: IBM Deutschland GmbH
+  pdt: PDT24
+  product: Fachdienst KIM
+  availability: 1
+  comment:
+  name: KIM Fachdienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000443
+  tid: IBM20
+  bu: PU
+  organization: IBM Deutschland GmbH
+  pdt: PDT43
+  product: ePA-Aktensystem
+  availability: 1
+  comment:
+  name: ePA Aktensystem
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000446
+  tid: IBM20
+  bu: PU
+  organization: IBM Deutschland GmbH
+  pdt: PDT48
+  product: Schlüsselgenerierungsdienst ePA
+  availability: 1
+  comment:
+  name: Schlüsselgenerierungsdienst ePA
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000453
+  tid: AKN40
+  bu: PU
+  organization: akquinet health service GmbH
+  pdt: PDT24
+  product: Fachdienst KIM
+  availability: 1
+  comment:
+  name: FD KIM akquinet
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000456
+  tid: BIT40
+  bu: PU
+  organization: BITMARCK Service GmbH
+  pdt: PDT24
+  product: Fachdienst KIM
+  availability: 1
+  comment:
+  name: BITMARCK  Service FD KIM
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000460
+  tid: ARV40
+  bu: PU
+  organization: Arvato Systems Digital GmbH
+  pdt: PDT24
+  product: Fachdienst KIM
+  availability: 1
+  comment:
+  name: Fachdienst KIM
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000467
+  tid: ARV40
+  bu: TU
+  organization: Arvato Systems Digital GmbH
+  pdt: PDT24
+  product: Fachdienst KIM
+  availability: 1
+  comment:
+  name: Fachdienst KIM
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000469
+  tid: ARV40
+  bu: RU
+  organization: Arvato Systems Digital GmbH
+  pdt: PDT24
+  product: Fachdienst KIM
+  availability: 1
+  comment:
+  name: Fachdienst KIM
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000470
+  tid: IBM60
+  bu: TU
+  organization: IBM Deutschland GmbH
+  pdt: PDT50
+  product: E-Rezept-Fachdienst
+  availability: 1
+  comment:
+  name: eRP Fachdienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000471
+  tid: IBM60
+  bu: RU
+  organization: IBM Deutschland GmbH
+  pdt: PDT50
+  product: E-Rezept-Fachdienst
+  availability: 1
+  comment:
+  name: eRP Fachdienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000472
+  tid: RIS35
+  bu: RU
+  organization: RISE GmbH
+  pdt: PDT52
+  product: Identity Provider Dienst
+  availability: 1
+  comment:
+  name: RISE Identity Provider Dienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000473
+  tid: RIS35
+  bu: TU
+  organization: RISE GmbH
+  pdt: PDT52
+  product: Identity Provider Dienst
+  availability: 1
+  comment:
+  name: RISE Identity Provider Dienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000474
+  tid: MED31
+  bu: PU
+  organization: medisign GmbH
+  pdt: PDT02
+  product: Trust Service Provider X.509 QES
+  availability: 1
+  comment:
+  name: MedisignX.509QESHBA
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000475
+  tid: MED31
+  bu: TU
+  organization: medisign GmbH
+  pdt: PDT02
+  product: Trust Service Provider X.509 QES
+  availability: 1
+  comment:
+  name: MedisignX.509QESHBA
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000476
+  tid: MED31
+  bu: RU
+  organization: medisign GmbH
+  pdt: PDT02
+  product: Trust Service Provider X.509 QES
+  availability: 1
+  comment:
+  name: MedisignX.509QESHBA
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000484
+  tid: RIS35
+  bu: PU
+  organization: RISE GmbH
+  pdt: PDT52
+  product: Identity Provider Dienst
+  availability: 1
+  comment:
+  name: RISE Identity Provider Dienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000485
+  tid: IBM60
+  bu: PU
+  organization: IBM Deutschland GmbH
+  pdt: PDT50
+  product: E-Rezept-Fachdienst
+  availability: 1
+  comment:
+  name: eRP Fachdienst
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000489
+  tid: APO61
+  bu: RU
+  organization: NGDA - Netzgesellschaft Deutscher Apotheken mbH
+  pdt: PDT59
+  product: Apothekenverzeichnis
+  availability: 1
+  comment:
+  name: Apothekenverzeichnis
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000490
+  tid: APO61
+  bu: PU
+  organization: NGDA - Netzgesellschaft Deutscher Apotheken mbH
+  pdt: PDT59
+  product: Apothekenverzeichnis
+  availability: 1
+  comment:
+  name: Apothekenverzeichnis
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000613
+  tid: RZV51
+  bu: PU
+  organization: Rechenzentrum Volmarstein GmbH
+  pdt: PDT57
+  product: Anbieter Anschlusspunkt SGW/SZZP
+  availability: 1
+  comment:
+  name: Anschlusspunkt SGW RZ Volmarstein
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000614
+  tid: BDR51
+  bu: PU
+  organization: Bundesdruckerei GmbH
+  pdt: PDT57
+  product: Anbieter Anschlusspunkt SGW/SZZP
+  availability: 1
+  comment:
+  name: Anschlusspunkt SGW Bundesdruckerei
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000615
+  tid: ELE51
+  bu: PU
+  organization: Element44 GmbH
+  pdt: PDT57
+  product: Anbieter Anschlusspunkt SGW/SZZP
+  availability: 1
+  comment:
+  name: Anschlusspunkt SGW Element44
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000617
+  tid: RKI51
+  bu: PU
+  organization: Robert Koch-Institut
+  pdt: PDT57
+  product: Anbieter Anschlusspunkt SGW/SZZP
+  availability: 1
+  comment:
+  name: Anschlusspunkt SGW01 Robert Koch-Institut
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000618
+  tid: RKI51
+  bu: PU
+  organization: Robert Koch-Institut
+  pdt: PDT57
+  product: Anbieter Anschlusspunkt SGW/SZZP
+  availability: 1
+  comment:
+  name: Anschlusspunkt SGW02 Robert Koch-Institut
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000623
+  tid: RZV50
+  bu: PU
+  organization: Rechenzentrum Volmarstein GmbH
+  pdt: PDT56
+  product: WANDA Basic
+  availability: 1
+  comment:
+  name: elektronische Fallakte
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000624
+  tid: ELE50
+  bu: PU
+  organization: Element44 GmbH
+  pdt: PDT56
+  product: WANDA Basic
+  availability: 1
+  comment:
+  name: HZV-Verwaltung
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000644
+  tid: NRW51
+  bu: PU
+  organization: Landeskrebsregister Nordrhein Westfalen gGmbH
+  pdt: PDT57
+  product: Anbieter Anschlusspunkt SGW/SZZP
+  availability: 1
+  comment:
+  name: Anschlusspunkt SGW Landeskrebsregister NRW
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000646
+  tid: KBK51
+  bu: PU
+  organization: Kassenärztliche Bundesvereinigung KdöR
+  pdt: PDT57
+  product: Anbieter Anschlusspunkt SGW/SZZP
+  availability: 1
+  comment:
+  name: Anschlusspunkt SGW KBV
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000787
+  tid: ARVTO
+  bu: PU
+  organization: Arvato systems GmbH
+  pdt: PDT21
+  product: Intermediär VSDM
+  availability: 1
+  comment:
+  name: Intermediär VSDM
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000804
+  tid: BAM50
+  bu: PU
+  organization: Bundesinstitut für Arzneimittel und Medizinprodukte
+  pdt: PDT56
+  product: WANDA Basic
+  availability: 1
+  comment:
+  name: Organ- und Gewebespenderegister
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000830
+  tid: KBV50
+  bu: PU
+  organization: Kassenärztliche Bundesvereinigung KdöR
+  pdt: PDT56
+  product: WANDA Basic
+  availability: 1
+  comment:
+  name: Impf-Doku
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000837
+  tid: WRLDL
+  bu: RU
+  organization: equensWorldline SE Germany
+  pdt: PDT20
+  product: Fachdienste VSDM (UFS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (UFS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000838
+  tid: WRLDL
+  bu: PU
+  organization: equensWorldline SE Germany
+  pdt: PDT26
+  product: Fachdienste VSDM (CMS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (CMS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000839
+  tid: WRLDL
+  bu: RU
+  organization: equensWorldline SE Germany
+  pdt: PDT26
+  product: Fachdienste VSDM (CMS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (CMS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000840
+  tid: WRLDL
+  bu: TU
+  organization: equensWorldline SE Germany
+  pdt: PDT26
+  product: Fachdienste VSDM (CMS)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (CMS)
+- time: '2024-10-06T12:00:15.813Z'
+  ci: CI-0000841
+  tid: WRLDL
+  bu: PU
+  organization: equensWorldline SE Germany
+  pdt: PDT23
+  product: Fachdienste VSDM (VSDD)
+  availability: 1
+  comment:
+  name: Fachdienst VSDM (VSDD)

@@ -16,4 +16,5 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.acronym "SOAP"
   inflect.acronym "CSV"
   inflect.acronym "RMI"
+  inflect.acronym "TI"
 end
