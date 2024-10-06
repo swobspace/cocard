@@ -27,6 +27,14 @@ module TI
       end
     end
 
+    def updated_at
+      time.to_datetime
+    end
+
+    def condition_message
+      comment.to_s
+    end
+
   private
     attr_reader :hash
   end

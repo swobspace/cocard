@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'situation_picture', to: 'situation_picture#index', as: :situation_picture
   get 'verify_pins', to: 'verify_pins#index'
   post 'verify_pins', to: 'verify_pins#verify'
   get "client_certificates/import_p12", to: "client_certificates#import_p12",

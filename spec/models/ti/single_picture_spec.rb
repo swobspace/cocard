@@ -30,7 +30,9 @@ module TI
     end
    
     describe "with real data" do
-      it { expect(subject.time).to eq(ts) }
+      it { expect(subject.time.localtime).to eq(ts.localtime) }
+      it { puts subject.time.class.name }
+      it { expect(subject.updated_at.localtime).to eq(ts) }
       it { expect(subject.ci).to eq("CI-0000001") }
       it { expect(subject.tid).to eq("BITTE") }
       it { expect(subject.bu).to eq("PU") }
@@ -40,6 +42,7 @@ module TI
       it { expect(subject.availability).to eq(1) }
       it { expect(subject.condition).to eq(Cocard::States::OK) }
       it { expect(subject.comment).to be_nil }
+      it { expect(subject.condition_message).to eq("") }
       it { expect(subject.name).to eq("Fachdienst VSDM (UFS)") }
     end
 
