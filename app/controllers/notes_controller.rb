@@ -4,9 +4,10 @@ class NotesController < ApplicationController
 
   # GET /notes
   def index
-    @notes = @notable.notes.order('created_at DESC')
+    @notes = @notable.notes
     @notes = @notes.active if params[:active].present?
-    @pagy, @notes = pagy(@notes)
+    ordered = @notes.order('created_at DESC')
+    @pagy, @notes = pagy(ordered, count: ordered.count)
 
     respond_with(@notes)
   end

@@ -22,7 +22,8 @@ class ConnectorsController < ApplicationController
     else
       @connectors = Connector.failed.not_acknowledged
     end
-    @pagy, @connectors = pagy(@connectors)
+    ordered = @connectors.order(:name)
+    @pagy, @connectors = pagy(ordered, count: ordered.count)
     respond_with(@connectors)
   end
 
