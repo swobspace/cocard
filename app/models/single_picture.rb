@@ -10,4 +10,18 @@ class SinglePicture < ApplicationRecord
     "#{ci} - #{name}, #{organization}"
   end
 
+  def condition
+    if availability == 1
+      Cocard::States::OK
+    elsif availability == 0
+      Cocard::States::CRITICAL
+    else
+      Cocard::States::UNKNOWN
+    end
+  end
+
+  def condition_message
+    comment.to_s
+  end
+
 end

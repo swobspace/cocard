@@ -44,7 +44,7 @@
       <% @situation_picture.each do |entry| %>
         <%= content_tag(:tr) do %>
           <td><%= render ConditionIconComponent.new(item: entry, as_text: true) %></td>
-          <td><%= render IsCurrentComponent.new(item: entry, attr: :updated_at) %></td>
+          <td><%= render IsCurrentComponent.new(item: entry, attr: :time) %></td>
           <td><%= entry.ci %></td>
           <td><%= entry.tid %></td>
           <td><%= entry.bu %></td>
