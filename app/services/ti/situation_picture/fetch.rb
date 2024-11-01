@@ -53,7 +53,15 @@ module TI
           ssl: {
             verify: false
           }
-        }
+        }.merge(proxy_options)
+      end
+
+      def proxy_options
+        if ENV['INTERNET_PROXY']
+          { proxy: { uri: ENV['INTERNET_PROXY'] } }
+        else
+          {}
+        end
       end
 
       def lagebild_api
