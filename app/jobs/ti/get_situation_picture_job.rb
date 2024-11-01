@@ -23,7 +23,7 @@ module TI
               result.error_messages.join("\n")
         Rails.logger.warn(msg)
       end
-      # Turbo::StreamsChannel.broadcast_refresh_later_to(:ti_lagebild)
+      Turbo::StreamsChannel.broadcast_refresh_later_to(:ti_lagebild)
     end
 
     def max_attempts
