@@ -1,4 +1,5 @@
 class SinglePicture < ApplicationRecord
+  include SinglePictureConcerns
   # -- associations
   # -- configuration
   # -- validations and callbacks
