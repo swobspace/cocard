@@ -28,6 +28,12 @@ Rails.application.configure do
         class: "Cocard::GetCardTerminalsJob",
         description: "Get card terminals from connector"
       },
+      ti_lagebild: {
+        cron: '*/5 * * * *',
+        class: "TI::GetSituationPictureJob",
+        description: "Get card terminals from connector",
+        set: { wait: 1.minute }
+      },
       get_cards: {
         cron: '*/7 * * * *',
         class: "Cocard::GetCardsJob",
