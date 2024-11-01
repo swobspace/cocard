@@ -385,3 +385,23 @@ t.index [:card_terminal_id, :mandant,\
 t.index [:workplace_id, :card_terminal_id]
 t.index [:card_terminal_id, :workplace_id]
 ----
+
+== model SinglePicture
+
+aka _TI-Lagebild_
+
+[source,sh]
+----
+bin/rails g model SinglePicture \
+  time:timestamp \
+  ci:string \
+  tid:string \
+  bu:string:index \
+  organization:string \
+  pdt:string:index \
+  product:string \
+  availability:integer:index \
+  comment:string \
+  name:string \
+  --no-stylesheets --no-javascripts --no-helper
+----

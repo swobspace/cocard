@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_22_095241) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_01_074307) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -360,6 +360,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_22_095241) do
     t.datetime "updated_at", null: false
     t.boolean "operational", default: false
     t.index ["operational"], name: "index_operational_states_on_operational"
+  end
+
+  create_table "situation_picture", force: :cascade do |t|
+    t.datetime "time", precision: nil
+    t.string "ci", default: ""
+    t.string "tid", default: ""
+    t.string "bu", default: ""
+    t.string "organization", default: ""
+    t.string "pdt", default: ""
+    t.string "product", default: ""
+    t.integer "availability", default: 0
+    t.string "comment", default: ""
+    t.string "name", default: ""
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["availability"], name: "index_situation_picture_on_availability"
+    t.index ["bu"], name: "index_situation_picture_on_bu"
+    t.index ["pdt"], name: "index_situation_picture_on_pdt"
   end
 
   create_table "terminal_workplaces", force: :cascade do |t|

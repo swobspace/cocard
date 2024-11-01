@@ -17,5 +17,5 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.acronym "CSV"
   inflect.acronym "RMI"
   inflect.acronym "TI"
-  inflect.uncountable %w( situation_picture )
+  inflect.irregular "single_picture", "situation_picture"
 end

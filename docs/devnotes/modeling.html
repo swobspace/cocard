@@ -592,6 +592,30 @@ t.index [:card_terminal_id, :workplace_id]</code></pre>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_model_singlepicture"><a class="anchor" href="#_model_singlepicture"></a>model SinglePicture</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>aka <em>TI-Lagebild</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g model SinglePicture \
+  time:timestamp \
+  ci:string \
+  tid:string \
+  bu:string:index \
+  organization:string \
+  pdt:string:index \
+  product:string \
+  availability:integer:index \
+  comment:string \
+  name:string \
+  --no-stylesheets --no-javascripts --no-helper</code></pre>
+</div>
+</div>
+</div>
+</div>
 </article>
   </div>
 </main>

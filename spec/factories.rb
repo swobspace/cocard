@@ -109,6 +109,10 @@ FactoryBot.define do
     name { generate(:aname) }
   end
 
+  factory :single_picture do
+    ci { generate(:aname) }
+  end
+
   factory :workplace do
     name { generate(:aname) }
   end
