@@ -24,6 +24,11 @@ module TI
         Rails.logger.warn(msg)
       end
       Turbo::StreamsChannel.broadcast_refresh_later_to(:ti_lagebild)
+      Turbo::StreamsChannel.replace_later_to(
+        'body',
+        target: 'ti_alert',
+        partial: "shared/navs/ti"
+      )
     end
 
     def max_attempts
