@@ -4,6 +4,7 @@
 ** xref:user/conditions.adoc[]
 ** xref:user/logs.adoc[]
 ** xref:user/acknowledges.adoc[]
+** xref:user/ti-lagebild.adoc[]
 * Administration
 ** xref:admin/connector-edit.adoc[]
 ** xref:admin/card-terminal-edit.adoc[]

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Certificate Authority für Clientsysteme :: Cocard</title>
+    <title>TI-Lagebild :: Cocard</title>
     <meta name="generator" content="Antora 3.1.9">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -44,22 +44,22 @@
     <a class="nav-link" href="../index.html">Cocard</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../user/dashboard.html">Dashboard</a>
+    <a class="nav-link" href="dashboard.html">Dashboard</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../user/common.html">Allgemeines zur Oberfläche</a>
+    <a class="nav-link" href="common.html">Allgemeines zur Oberfläche</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../user/conditions.html">Zustände</a>
+    <a class="nav-link" href="conditions.html">Zustände</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../user/logs.html">Event Logs</a>
+    <a class="nav-link" href="logs.html">Event Logs</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../user/acknowledges.html">Acknowledges</a>
+    <a class="nav-link" href="acknowledges.html">Acknowledges</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../user/ti-lagebild.html">TI-Lagebild</a>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="ti-lagebild.html">TI-Lagebild</a>
   </li>
 </ul>
   </li>
@@ -181,7 +181,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Cocard</a></li>
-    <li><a href="telematik-ca.html">Certificate Authority für Clientsysteme</a></li>
+    <li><a href="ti-lagebild.html">TI-Lagebild</a></li>
   </ul>
 </nav>
 </div>
@@ -190,117 +190,48 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Certificate Authority für Clientsysteme</h1>
+<h1 class="page">TI-Lagebild</h1>
 <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Cocard fragt alle 5min den TI-Status über das API
+<a href="https://ti-lage.prod.ccs.gematik.solutions/lageapi/v1/tilage/" class="bare">https://ti-lage.prod.ccs.gematik.solutions/lageapi/v1/tilage/</a> ab. Wenn ein Dienst nicht verfügbar ist, erscheint oben im Menü eine Störungsanzeige:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/ti-lagebild/ti-lagebild-menu-with-alert.png" alt="ti lagebild menu with alert"></span></p>
+</div>
+<div class="paragraph">
+<p>Mit dem Klick auf den Button gelangt man in die Übersicht der gerade nicht verfügbaren Services.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/ti-lagebild/ti-lagebild-alert-index.png" alt="ti lagebild alert index"></span></p>
+</div>
+<div class="paragraph">
+<p>Eine Gesamtübersicht aller von der Gematik überwachten Dienste erhält man über <span class="menuseq"><b class="menu">Info</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Lagebild TI</b></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/ti-lagebild/ti-lagebild-menu-info.png" alt="ti lagebild menu info" width="25%"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/ti-lagebild/ti-lagebild-index.png" alt="ti lagebild index"></span></p>
+</div>
+<div class="paragraph">
+<p>Über <code>Column visibility</code> lassen sich weitere Spalten einblenden.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_ressourcen"><a class="anchor" href="#_ressourcen"></a>Ressourcen</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p>Referenz: <a href="https://openssl-ca.readthedocs.io/en/latest" class="bare">https://openssl-ca.readthedocs.io/en/latest</a></p>
+<p>Die offizielle Status-Seite der Gematik ist <a href="https://fachportal.gematik.de/ti-status" class="bare">https://fachportal.gematik.de/ti-status</a>. Dort finden sich auch Informationen zu geplanten Wartungen.</p>
+</li>
+<li>
+<p>Beschreibung der verwendeten API: <a href="https://github.com/gematik/api-erp/tree/master/docs_sources/erp_ps_probing_lagebild-source.adoc" class="bare">https://github.com/gematik/api-erp/tree/master/docs_sources/erp_ps_probing_lagebild-source.adoc</a></p>
 </li>
 </ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_ca_aufsetzen"><a class="anchor" href="#_ca_aufsetzen"></a>CA aufsetzen</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre>mkdir /etc/ssl/telematik
-cd /etc/ssl/telematik
-mkdir certs crl newcerts private reqs
-chmod 700 private
-touch index.txt
-echo 1000 &gt; serial</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">openssl.cnf in das Verzeichnis kopieren</div>
-<div class="content">
-<pre>cp /etc/ssl/openssl.cnf /etc/ssl/telematik/.</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>und bearbeiten.</p>
-</div>
-<div class="sect2">
-<h3 id="_ec_params_datei_generieren_und_ca_key_bauen"><a class="anchor" href="#_ec_params_datei_generieren_und_ca_key_bauen"></a>EC-Params Datei generieren und CA-Key bauen</h3>
-<div class="listingblock">
-<div class="title">EC-Parameterdatei zur Wiederverwendung generieren</div>
-<div class="content">
-<pre>openssl genpkey -genparam -algorithm ec -out ec-params.pem \
-  -pkeyopt ec_paramgen_curve:brainpoolP256r1 \
-  -pkeyopt ec_param_enc:named_curve</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">CA-Key</div>
-<div class="content">
-<pre>openssl genpkey -paramfile ec-params.pem \
-  -out private/cakey.pem -aes-256-cbc
-
-chmod 400 private/cakey.pem</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">CA-Zertifikat</div>
-<div class="content">
-<pre>openssl req -config openssl.cnf -key private/cakey.pem \
-    -new -x509 -days 1825 -sha256 -extensions v3_ca \
-    -out certs/cacert.pem
-chmod 4444 certs/cacert.pem
-openssl x509 -noout -text -in certs/cacert.pem</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_zertifikat_für_client_system"><a class="anchor" href="#_zertifikat_für_client_system"></a>Zertifikat für Client-System</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="title">Environment-Variablen</div>
-<div class="content">
-<pre>export NAME=intern
-export SUBJECT="/C=DE/O=My Company/OU=Telematik/CN=${NAME}"</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">PKey</div>
-<div class="content">
-<pre>openssl genpkey -paramfile ec-params.pem \
-  -out private/$NAME.key.pem -aes-256-cbc
-chmod 400 private/$NAME.key.pem</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Request</div>
-<div class="content">
-<pre>openssl req -config openssl.cnf \
-    -subj "$SUBJECT" \
-    -key private/$NAME.key.pem \
-    -new -sha256 -out reqs/$NAME.req.pem</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Zertifikat für Client-System</div>
-<div class="content">
-<pre>echo "#3# create/sign certificate"
-openssl ca -config openssl.cnf -days 1825 \
-  -in reqs/$NAME.req.pem \
-  -out certs/$NAME.cert.pem
-chmod 444 certs/$NAME.cert.pem</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Export als PKCS12</div>
-<div class="content">
-<pre>openssl pkcs12 -export -out p12/$NAME-ecc.p12 \
-    -inkey private/$NAME.key.pem \
-    -in certs/$NAME.cert.pem \
-    -certfile certs/cacert.pem</pre>
-</div>
 </div>
 </div>
 </div>
