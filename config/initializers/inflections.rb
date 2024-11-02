@@ -16,4 +16,6 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.acronym "SOAP"
   inflect.acronym "CSV"
   inflect.acronym "RMI"
+  inflect.acronym "TI"
+  inflect.irregular "single_picture", "situation_picture"
 end

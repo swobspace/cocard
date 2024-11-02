@@ -58,6 +58,12 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="acknowledges.html">Acknowledges</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ti-lagebild.html">TI-Lagebild</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="verify-pin.html">PIN-Verifizierung</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -95,7 +101,7 @@
     <a class="nav-link" href="../admin/smcb-remote-pin.html">Remote PIN für SMC-B Karten</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../admin/client-certificates.html">Zertifikat anlegen/bearbeiten</a>
+    <a class="nav-link" href="../admin/client-certificates.html">Client-Zertifikate importieren</a>
   </li>
 </ul>
   </li>
@@ -191,7 +197,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Event Logs in Cocard sind semipermanent. In klassische Logdateien wird neue Information angehangen - die Logdatei wächst stehtig und erfordert ein Logfile-Management, um den Platzbedarf zu begrenzen. In Cocard dagegen gibt es für ein bestimmtes Ereignis eines Gerätes oder einer Karte genau einen Eintrag. Dieser Eintrag ist gültig oder ungültig, wenn der Grund hierfür wieder entfallen ist. Semipermanent deshalb, weil ein Eintrag auch gelöscht werden kann.</p>
+<p>Event Logs in Cocard sind semipermanent. In klassische Logdateien wird neue Information angehangen - die Logdatei wächst stetig und erfordert ein Logfile-Management, um den Platzbedarf zu begrenzen. In Cocard dagegen gibt es für ein bestimmtes Ereignis eines Gerätes oder einer Karte genau einen Eintrag. Dieser Eintrag ist gültig oder ungültig, wenn der Grund hierfür wieder entfallen ist. Semipermanent deshalb, weil ein Eintrag auch gelöscht werden kann.</p>
 </div>
 <div class="paragraph">
 <p>Ein Beispiel: liefert der Konnektor <code>TIKONN-123</code> den Fehlerzustand <code>OPERATIONAL_STATE/EC_TLS_Client_Certificate_Security</code> (Die Schlüssellänge des Client-Zertifikates hat ein zu niedriges Sicherheitsniveau und sollte erneuert werden), dann erstellt Cocard für die Kombination aus Konnektor und Fehlerzustand genau einen Logeintrag. Der Logeintrag wird als gültig markiert und erscheint damit in der Liste der aktuellen Logeinträge (<span class="menuseq"><b class="menu">Menu</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="submenu">Ereignisse</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Aktuelle Logs</b></span>) sowie im Dashboard im Abschnitt <em>Event Log</em>. Entfällt der Grund später wieder wird der Eintrag nicht gelöscht, sondern nur als ungültig markiert. Über <span class="menuseq"><b class="menu">Menü</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="submenu">Ereignisse</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Logs</b></span> werden alle Einträge in der Datenbank angezeigt.</p>

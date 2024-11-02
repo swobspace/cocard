@@ -41,6 +41,7 @@ DEFAULT_WS_AUTH_USER=admin
 DEFAULT_WS_AUTH_PASS=strenggeheim
 DEFAULT_SMCB_PIN=11111111
 
+INTERNET_PROXY=http://192.0.2.99:3128
 ----
 
 [cols="1m,4"]
@@ -88,5 +89,8 @@ DEFAULT_SMCB_PIN=11111111
 
 |DEFAULT_SMCB_PIN
 |Pin für SMC-B bei Remote-Eingabe
+
+|INTERNET_PROXY
+|Wenn für Internet-Verbindungen wie z.B. die Abfrage des TI-Lagebildes ein Proxy erforderlich ist, muss dieser hier explizit angegeben werden, sonst kann die Variable entfallen.
 
 |===

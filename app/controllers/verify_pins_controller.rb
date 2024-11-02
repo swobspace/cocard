@@ -41,7 +41,7 @@ class VerifyPinsController < ApplicationController
         #
         card.contexts.where("card_contexts.pin_status = 'VERIFIABLE'").each do |cctx|
           # just delay for 2 seconds
-          sleep 2
+          sleep 5
           # just for debugging
           # result = Cocard::GetPinStatus.new(card: card, context: cctx).call
           result = Cocard::VerifyPin.new(card: card, context: cctx).call

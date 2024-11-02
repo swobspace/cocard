@@ -16,38 +16,44 @@ touch index.txt
 echo 1000 > serial
 ----
 
+.openssl.cnf in das Verzeichnis kopieren
 ----
 cp /etc/ssl/openssl.cnf /etc/ssl/telematik/.
 ----
+und bearbeiten.
 
-#FIXME# #TBD#
-
-NOTE: Die bisherige Dokumentation basiert auf RSA-2048 und 
-muss wegen Umstellung auf ECC überarbeitet werden
-
+////
 == Memo
 
 .Beispiel aus gemSpec_Krypt_V2.36.0 [A_23511] - Konnektor, IOP, Kodierung ECC-Schlüssel, PrimärsystemVerbindungssicherung
 ----
 openssl ecparam -name brainpoolP256r1 \
-  -genkey -param_enc named_curve 
+  -genkey -param_enc named_curve \
   -out example-named-curve-private-key.pem
 ----
-
 ////
-bearbeiten
 
+=== EC-Params Datei generieren und CA-Key bauen
+
+.EC-Parameterdatei zur Wiederverwendung generieren
+----
+openssl genpkey -genparam -algorithm ec -out ec-params.pem \
+  -pkeyopt ec_paramgen_curve:brainpoolP256r1 \
+  -pkeyopt ec_param_enc:named_curve
+----
 
 .CA-Key
 ----
-openssl genrsa -aes256 -out private/cakey.pem 3072
+openssl genpkey -paramfile ec-params.pem \
+  -out private/cakey.pem -aes-256-cbc
+
 chmod 400 private/cakey.pem
 ----
 
 .CA-Zertifikat
 ----
 openssl req -config openssl.cnf -key private/cakey.pem \
-    -new -x509 -days 7300 -sha256 -extensions v3_ca \
+    -new -x509 -days 1825 -sha256 -extensions v3_ca \
     -out certs/cacert.pem
 chmod 4444 certs/cacert.pem    
 openssl x509 -noout -text -in certs/cacert.pem
@@ -55,34 +61,41 @@ openssl x509 -noout -text -in certs/cacert.pem
 
 == Zertifikat für Client-System
 
+.Environment-Variablen
+----
+export NAME=intern
+export SUBJECT="/C=DE/O=My Company/OU=Telematik/CN=${NAME}"
+----
+
 .PKey
 ----
-openssl genrsa -aes256 -out private/intern.key.pem 3072
-chmod 400 private/intern.key.pem
+openssl genpkey -paramfile ec-params.pem \
+  -out private/$NAME.key.pem -aes-256-cbc
+chmod 400 private/$NAME.key.pem
 ----
 
 .Request
 ----
 openssl req -config openssl.cnf \
-    -key private/intern.key.pem \
-    -new -sha256 -out reqs/intern.req.pem 
+    -subj "$SUBJECT" \
+    -key private/$NAME.key.pem \
+    -new -sha256 -out reqs/$NAME.req.pem
 ----
 
 .Zertifikat für Client-System
 ----
+echo "#3# create/sign certificate"
 openssl ca -config openssl.cnf -days 1825 \
-  -in reqs/intern.req.pem \
-  -out certs/intern.cert.pem
-chmod 444 certs/intern.cert.pem
-openssl x509 -noout -text -in certs/intern.cert.pem
+  -in reqs/$NAME.req.pem \
+  -out certs/$NAME.cert.pem 
+chmod 444 certs/$NAME.cert.pem
 ----
 
 .Export als PKCS12
 ----
-openssl pkcs12 -export -out certs/intern.p12 \
-    -inkey private/intern.key.pem \
-    -in certs/intern.cert.pem \
-    -certfile certs/cacert.pem
+openssl pkcs12 -export -out p12/$NAME-ecc.p12 \
+    -inkey private/$NAME.key.pem \
+    -in certs/$NAME.cert.pem \
+    -certfile certs/cacert.pem 
 ----
 
-////

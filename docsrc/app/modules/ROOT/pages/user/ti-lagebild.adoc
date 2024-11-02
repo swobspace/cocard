@@ -1,0 +1,28 @@
+= TI-Lagebild
+:author: Wolfgang Barth
+:revdate: 2024-11-02
+:imagesdir: ../../images
+:experimental: true
+
+Cocard fragt alle 5min den TI-Status über das API         
+https://ti-lage.prod.ccs.gematik.solutions/lageapi/v1/tilage/ ab. Wenn ein Dienst nicht verfügbar ist, erscheint oben im Menü eine Störungsanzeige:
+
+image:ti-lagebild/ti-lagebild-menu-with-alert.png[]
+
+Mit dem Klick auf den Button gelangt man in die Übersicht der gerade nicht verfügbaren Services.
+
+image:ti-lagebild/ti-lagebild-alert-index.png[]
+
+Eine Gesamtübersicht aller von der Gematik überwachten Dienste erhält man über menu:Info[Lagebild TI]
+
+image:ti-lagebild/ti-lagebild-menu-info.png[width=25%]
+
+image:ti-lagebild/ti-lagebild-index.png[]
+
+Über `Column visibility` lassen sich weitere Spalten einblenden.
+
+== Ressourcen
+
+* Die offizielle Status-Seite der Gematik ist https://fachportal.gematik.de/ti-status. Dort finden sich auch Informationen zu geplanten Wartungen. 
+
+* Beschreibung der verwendeten API: https://github.com/gematik/api-erp/tree/master/docs_sources/erp_ps_probing_lagebild-source.adoc

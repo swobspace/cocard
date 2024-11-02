@@ -1,8 +1,14 @@
 = Changelog
 
+
+== 0.4.5 - 2024-11-02
+
+* Neu: TI-Lagebild
+* Dokumentation zur PIN-Verifizierung ergänzt
+
 == 0.4.4 - 2024-10-06
 
-* Import von Client-Zertifikaten als P12-Datei
+* Neu: Import von Client-Zertifikaten als P12-Datei
 
 == 0.4.3 - 2024-10-03
 

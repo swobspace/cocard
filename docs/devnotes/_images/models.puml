@@ -194,4 +194,16 @@ Card "1" -- "*" Log
 
 Connector "*" -- "*" ClientCertificate
 
+Class SinglePicture {
+  time: timestamp
+  ci: string
+  tid: string
+  bu: string
+  organization: string
+  pdt: string
+  product: string
+  availability: integer
+  comment: string
+  name: string
+}
 @enduml

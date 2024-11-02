@@ -7,7 +7,8 @@ class LogsController < ApplicationController
     if @loggable
       @logs = @loggable.logs
       @logs = @logs.valid if params[:valid].present?
-      @pagy, @logs = pagy(@logs)
+      ordered = @logs
+      @pagy, @logs = pagy(ordered, count: ordered.count)
     else
       if params[:valid]
         @logs = Log.valid
@@ -31,7 +32,8 @@ class LogsController < ApplicationController
     else
       @logs = Log.valid.not_acknowledged
     end
-    @pagy, @logs = pagy(@logs)
+    ordered = @logs
+    @pagy, @logs = pagy(ordered, count: ordered.count)
     respond_with(@logs)
   end
 

@@ -1,4 +1,4 @@
-= Zertifikat anlegen/bearbeiten
+= Client-Zertifikate importieren
 :author: Wolfgang Barth
 :revdate: 2024-10-03
 :imagesdir: ../../images

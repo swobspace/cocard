@@ -26,7 +26,8 @@ class CardsController < ApplicationController
     else
       @cards = Card.failed.not_acknowledged
     end
-    @pagy, @cards = pagy(@cards)
+    ordered = @cards
+    @pagy, @cards = pagy(ordered, count: ordered.count)
     respond_with(@cards)
   end
 

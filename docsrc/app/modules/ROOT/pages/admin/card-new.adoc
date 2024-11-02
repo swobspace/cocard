@@ -4,7 +4,7 @@
 :imagesdir: ../../images
 :experimental: true
 
-Karten, die bereits ein einem mit dem Konnektor verbundenen Kartenterminal erreichbar sind, werden automatisch erkannt und in Cocard gespeichert. 
+Karten, die bereits über ein mit dem Konnektor verbundenen Kartenterminal erreichbar sind, werden automatisch erkannt und in Cocard gespeichert. 
 In manchen Fällen ist eine Voraberfassung durchaus sinnvoll, etwa wenn man die Bestellung oder den Status einer Karte dokumentieren möchte, bevor diese erstmalig in den Betrieb geht. Das einzige Pflichtfeld für eine Neuanlage einer Karte ist die ICCSN.
 
 NOTE: Cocard identifiziert die Karte ausschließlich über die ICCSN. Wenn die Karte bereits erfasst wird, bevor die ICCSN bekannt ist (z.B. während einer laufenden Bestellung), dann trägt man einen Dummy als ICCSN ein. Vor Inbetriebnahme der Karte muss dann unbedingt die ICCSN korrigiert werden, andernfalls legt Cocard eine weitere Karte an und die schon erfassten Daten werden nicht dorthin übernommen!
