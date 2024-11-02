@@ -1,0 +1,21 @@
+<div class="list-group-item pb-0">
+ <div class="row mb-0 px-2 pt-2">
+  <div class="col-12 col-lg-4">
+    <%= link_to raw(%Q[<i class="fa-solid fa-sim-card"></i> #{card}]),
+          card_path(card),
+          class: 'primary-link',
+          data: { 'turbo-frame' => '_top' }
+     %>
+  </div>
+  <div class="col-12 col-lg-8">
+    <div id="list_contexts">
+      <div class="list-group mb-3">
+        <%= render partial: 'cards/contexts/context',
+                   collection: card.contexts.where("card_contexts.pin_status = 'VERIFIABLE'"), as: :context,
+                   locals: {card: card} %>
+      </div>
+
+    </div>
+  </div>
+ </div>
+</div>
