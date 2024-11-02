@@ -8,19 +8,26 @@
       </div>
       <div class="card-body">
         <% (conn.card_terminals & @card_terminals).each do |ct| %>
-          <div class="row mb-3">
+          <div class="row mb-0">
             <div class="col-4 col-lg-3">
               <div>
-                <%= raw(%Q[<i class="fa-regular fa-keyboard"></i> #{ct} #{ct.mac}])
+                <%= link_to(
+                      raw(%Q[<i class="fa-regular fa-keyboard"></i> #{ct} #{ct.mac}]),
+                      card_terminal_path(ct),
+                      class: 'primary-link',
+                      data: { 'turbo-frame' => '_top' }
+                    )
                  %>
               </div>
-              <div>
+              <div class="mt-4 d-flex justify-content-between">
                <% if can? :verify, VerifyPin %>
                 <%= button_to verify_pins_path(card_terminal_id: ct.id),
                               class: "btn btn-lg btn-warning" do %>
                   <i class="fa-solid fa-arrows-rotate"></i>
                 <% end %>
-                <%= render AutoPinBadgeComponent.new(card_terminal: ct) %>
+                <span class="ms-auto">
+                  <%= render AutoPinBadgeComponent.new(card_terminal: ct) %>
+                </span>
                <% end %>
               </div>
             </div>
