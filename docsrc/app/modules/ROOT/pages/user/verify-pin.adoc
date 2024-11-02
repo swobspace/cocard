@@ -1,0 +1,53 @@
+= PIN-Verifizierung
+:author: Wolfgang Barth
+:revdate: 2024-11-02
+:imagesdir: ../../images
+:experimental: true
+
+Für die Nutzung von SMC-B-Karten muss die PIN eingegeben werden. Die PIN-Verifizierung hält nicht ewig: sobald die Verbindung zwischen dem Kartenterminal, in dem sich die SMC-B befindet und dem Konnektor unterbrochen wird, ist eine erneute PIN-Verifizierung erforderlich. Das kann eine einfache Störung im Netzwerk sein, oder Reboot des Konnektors.
+
+== Dashboard
+
+Ist eine PIN-Verifizierung einer SMC-B erforderlich, erscheint im Dashboard im Abschnitt _Card Status_ der Button btn:[PIN-Verifizierung] - geeignete Berechtigungen vorausgesetzt (siehe xref:admin/authorities.adoc[]).
+
+.Dashboard, Abschnitt Kartenstatus
+image::verify-pin/dashboard-cards-to-verify.png[]
+
+Über den Button btn:[PIN-Verifizierung] gelangt man in eine Gesamtübersicht aller zu verifizierenden SMC-B-Karten.
+
+== Übersichtsseite PIN-Verifizierung
+
+.Übersicht über ausstehende PIN-Verifizierunge
+image::verify-pin/verify-pins-index-annotated.png[]
+
+[cols="^1,10"]
+|===
+|1|Kartenterminal, in dem die SMC-B eingesteckt ist
+|2|Auslösung der PIN-Verifizierung für alle Karten und Kontexte zu diesem Kartenterminal
+|3|Hinweis, ob Auto-Pin am Kartenterminal aktiviert ist
+|4|SMC-B-Karte
+|5|Kontext, für den die PIN-Eingabe erforderlich ist
+|6|PIN-Verifizierung nur für diesen einen Kontext
+|7|Neulesen der Kartendaten
+|8|Einfache PIN-Status-Prüfung, der Status wird nur angezeigt, nicht verändert
+|===
+
+=== Ablauf
+
+Nach dem Auslösen des Buttons zur Sammelverifizierung (2) aktualisiert Cocard zunächst die Karteninformationen zur ersten Karte, dann sendet Cocard  die Anfrage `VerifyPin` an den Konnektor für die erste Karte und den ersten Kontext. Der Konnektor sendet die Anfrage weiter an das zuständige Kartenterminal. Das Kartenterminal fordert jetzt zur PIN-Eingabe auf. Ist Auto-Pin für das Kartenterminal in Cocard aktiviert (siehe xref:admin/smcb-remote-pin.adoc#_cocard_einstellungen_beim_kartenterminal[]), sendet Cocard die hinterlegte PIN selbständig an das Kartenterminal. Wenn nicht, muss die PIN am Kartenterminal manuell eingegeben werden.
+
+Nach erfolgter PIN-Eingabe meldet der Konnektor Erfolg zurück. Ohne PIN-Eingabe bricht der Konnektor nach einer Wartezeit von 30-40 Sekunden die Operation ab und meldet den Abbruch. Sind weitere Karten und/oder Kontexte zu verifizieren, wartet Cocard 5 Sekunden und startet den nächsten Durchlauf.
+
+NOTE: Cocard unternimmt nur einen einzigen Versuch je Karte und Kontext. Tritt hierbei ein Fehler auf, muss die Prozedur noch einmal neu gestartet werden. Ein Typischer Fehler ist "Ressource belegt", wenn etwa Primärsysteme zeitgleich eine Operation mit der Karte und dem Kontext ausführen wollen.
+
+IMPORTANT: Technisch ist es zwar möglich, die PIN-Verify-Buttons aller Kartenterminals unmittelbar nacheinander zu betätigen, ohne die Abarbeitung abzuwarten. Cocard arbeitet die PIN-Verifizierung an den Konnektor und das Versenden der PIN an das Kartenterminal als Hintergrundjobs parallel ab. Bei hoher Auslastung von Cocard kann es zu Timing-Problemen kommen und in der Folge klappt die PIN-Verifizierung nicht. Daher sollte man die PIN-Verifizierung Kartenterminal für Kartenterminal nacheinander abarbeiten.
+
+Die Buttons (6), (7) und (8) auf der rechten Seite werden auch auf der Seite der SMC-B-Karte angezeigt. Button (7) aktualisiert die Kartendaten und damit insbesondere auch das sogenannte Card-Handle. Das ist nach einer Unterbrechnung z.B. durch einen Konnektor-Reboot immer erforderlich. Entweder wartet man bis zu 7min, bis Cocard die Kartenabfrage im Hintergrund durchgeführt hat. Wenn es schneller gehen muss betätigt man Button (7) für jede Karte einmal manuell. Danach kann mit Button (6) die Verifizierung ausgelöst werden - spezifisch für den angezeigten Kontext zum Button.
+
+=== Benachrichtigungen
+
+Während der Ausführung der PIN-Verifizierung informiert Cocard über eingeblendete Benachrichtigungen, was gerade passiert: die Anfrage zur PIN-Eingabe vom Kartenterminal erhalten, erfolgreiche (oder auch fehlerhafte) Verifizierung und den Abschluss aller Verifizierungen zu einem Kartenlesegerät.
+
+.Benachrichtigungen zur PIN-Verifizierung
+image::verify-pin/verify-pin-toast.png[]
+

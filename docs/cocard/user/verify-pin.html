@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>PIN-Verifizierung :: Cocard</title>
+    <meta name="generator" content="Antora 3.1.9">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">Cocard</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="abstand">
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+          <div class="navbar-item dark">Cocard</div>
+           <a class="navbar-item" href="../../devnotes/index.html">DevNotes</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="cocard" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Cocard</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Cocard</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="dashboard.html">Dashboard</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="common.html">Allgemeines zur Oberfläche</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="conditions.html">Zustände</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="logs.html">Event Logs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="acknowledges.html">Acknowledges</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ti-lagebild.html">TI-Lagebild</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="verify-pin.html">PIN-Verifizierung</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Administration</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/connector-edit.html">Konnektor anlegen/bearbeiten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/card-terminal-edit.html">Kartenterminal anlegen/bearbeiten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/card-new.html">Karte anlegen/bearbeiten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/contexts.html">Kontexte</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/locations.html">Standorte</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/networks.html">Netzwerke</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/operational_states.html">Betriebszustände</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/jobs.html">Jobverwaltung</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/authorities.html">Berechtigungen</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/smcb-remote-pin.html">Remote PIN für SMC-B Karten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/client-certificates.html">Client-Zertifikate importieren</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../installation/index.html">Installation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../installation/podman/quickstart.html">Quickstart: podman pods</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../first-steps.html">Erste Schritte</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../installation/podman/podman-compose.html">Quickstart: docker-compose</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../first-steps.html">Erste Schritte</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/podman/podman-systemd.html">Systemd und Quadlets</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/podman/reverse-proxy.html">Reverse Proxy</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/configuration.html">Konfiguration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/checkmk.html">CheckMK Integration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Cocard</span>
+    <span class="version">default</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Cocard</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../devnotes/index.html">DevNotes</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../devnotes/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Cocard</a></li>
+    <li><a href="verify-pin.html">PIN-Verifizierung</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">PIN-Verifizierung</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Für die Nutzung von SMC-B-Karten muss die PIN eingegeben werden. Die PIN-Verifizierung hält nicht ewig: sobald die Verbindung zwischen dem Kartenterminal, in dem sich die SMC-B befindet und dem Konnektor unterbrochen wird, ist eine erneute PIN-Verifizierung erforderlich. Das kann eine einfache Störung im Netzwerk sein, oder Reboot des Konnektors.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_dashboard"><a class="anchor" href="#_dashboard"></a>Dashboard</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Ist eine PIN-Verifizierung einer SMC-B erforderlich, erscheint im Dashboard im Abschnitt <em>Card Status</em> der Button <b class="button">PIN-Verifizierung</b> - geeignete Berechtigungen vorausgesetzt (siehe <a href="../admin/authorities.html" class="xref page">Berechtigungen</a>).</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/verify-pin/dashboard-cards-to-verify.png" alt="dashboard cards to verify">
+</div>
+<div class="title">Abbildung 1. Dashboard, Abschnitt Kartenstatus</div>
+</div>
+<div class="paragraph">
+<p>Über den Button <b class="button">PIN-Verifizierung</b> gelangt man in eine Gesamtübersicht aller zu verifizierenden SMC-B-Karten.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_übersichtsseite_pin_verifizierung"><a class="anchor" href="#_übersichtsseite_pin_verifizierung"></a>Übersichtsseite PIN-Verifizierung</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/verify-pin/verify-pins-index-annotated.png" alt="verify pins index annotated">
+</div>
+<div class="title">Abbildung 2. Übersicht über ausstehende PIN-Verifizierunge</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 9.0909%;">
+<col style="width: 90.9091%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kartenterminal, in dem die SMC-B eingesteckt ist</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Auslösung der PIN-Verifizierung für alle Karten und Kontexte zu diesem Kartenterminal</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hinweis, ob Auto-Pin am Kartenterminal aktiviert ist</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SMC-B-Karte</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kontext, für den die PIN-Eingabe erforderlich ist</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PIN-Verifizierung nur für diesen einen Kontext</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">7</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Neulesen der Kartendaten</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Einfache PIN-Status-Prüfung, der Status wird nur angezeigt, nicht verändert</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="_ablauf"><a class="anchor" href="#_ablauf"></a>Ablauf</h3>
+<div class="paragraph">
+<p>Nach dem Auslösen des Buttons zur Sammelverifizierung (2) aktualisiert Cocard zunächst die Karteninformationen zur ersten Karte, dann sendet Cocard  die Anfrage <code>VerifyPin</code> an den Konnektor für die erste Karte und den ersten Kontext. Der Konnektor sendet die Anfrage weiter an das zuständige Kartenterminal. Das Kartenterminal fordert jetzt zur PIN-Eingabe auf. Ist Auto-Pin für das Kartenterminal in Cocard aktiviert (siehe <a href="../admin/smcb-remote-pin.html#_cocard_einstellungen_beim_kartenterminal" class="xref page">admin/smcb-remote-pin.adoc#_cocard_einstellungen_beim_kartenterminal</a>), sendet Cocard die hinterlegte PIN selbständig an das Kartenterminal. Wenn nicht, muss die PIN am Kartenterminal manuell eingegeben werden.</p>
+</div>
+<div class="paragraph">
+<p>Nach erfolgter PIN-Eingabe meldet der Konnektor Erfolg zurück. Ohne PIN-Eingabe bricht der Konnektor nach einer Wartezeit von 30-40 Sekunden die Operation ab und meldet den Abbruch. Sind weitere Karten und/oder Kontexte zu verifizieren, wartet Cocard 5 Sekunden und startet den nächsten Durchlauf.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Cocard unternimmt nur einen einzigen Versuch je Karte und Kontext. Tritt hierbei ein Fehler auf, muss die Prozedur noch einmal neu gestartet werden. Ein Typischer Fehler ist "Ressource belegt", wenn etwa Primärsysteme zeitgleich eine Operation mit der Karte und dem Kontext ausführen wollen.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Technisch ist es zwar möglich, die PIN-Verify-Buttons aller Kartenterminals unmittelbar nacheinander zu betätigen, ohne die Abarbeitung abzuwarten. Cocard arbeitet die PIN-Verifizierung an den Konnektor und das Versenden der PIN an das Kartenterminal als Hintergrundjobs parallel ab. Bei hoher Auslastung von Cocard kann es zu Timing-Problemen kommen und in der Folge klappt die PIN-Verifizierung nicht. Daher sollte man die PIN-Verifizierung Kartenterminal für Kartenterminal nacheinander abarbeiten.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Die Buttons (6), (7) und (8) auf der rechten Seite werden auch auf der Seite der SMC-B-Karte angezeigt. Button (7) aktualisiert die Kartendaten und damit insbesondere auch das sogenannte Card-Handle. Das ist nach einer Unterbrechnung z.B. durch einen Konnektor-Reboot immer erforderlich. Entweder wartet man bis zu 7min, bis Cocard die Kartenabfrage im Hintergrund durchgeführt hat. Wenn es schneller gehen muss betätigt man Button (7) für jede Karte einmal manuell. Danach kann mit Button (6) die Verifizierung ausgelöst werden - spezifisch für den angezeigten Kontext zum Button.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_benachrichtigungen"><a class="anchor" href="#_benachrichtigungen"></a>Benachrichtigungen</h3>
+<div class="paragraph">
+<p>Während der Ausführung der PIN-Verifizierung informiert Cocard über eingeblendete Benachrichtigungen, was gerade passiert: die Anfrage zur PIN-Eingabe vom Kartenterminal erhalten, erfolgreiche (oder auch fehlerhafte) Verifizierung und den Abschluss aller Verifizierungen zu einem Kartenlesegerät.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/verify-pin/verify-pin-toast.png" alt="verify pin toast">
+</div>
+<div class="title">Abbildung 3. Benachrichtigungen zur PIN-Verifizierung</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <span>Wolfgang Barth (C) 2024</span>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/vendor/medium-zoom.min.js"></script>
+<script>mediumZoom('img:not(.copy-icon');</script>
+  </body>
+</html>
