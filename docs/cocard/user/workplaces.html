@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Das Dashboard :: Cocard</title>
+    <title>Arbeitsplätze :: Cocard</title>
     <meta name="generator" content="Antora 3.1.9">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -43,7 +43,7 @@
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="../index.html">Cocard</a>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="dashboard.html">Dashboard</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -64,7 +64,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="verify-pin.html">PIN-Verifizierung</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="workplaces.html">Arbeitsplätze</a>
   </li>
 </ul>
@@ -187,7 +187,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Cocard</a></li>
-    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="workplaces.html">Arbeitsplätze</a></li>
   </ul>
 </nav>
 </div>
@@ -196,24 +196,118 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Das Dashboard</h1>
+<h1 class="page">Arbeitsplätze</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Bei der Abfrage der Kartenterminals erhält Cocard vom Konnektor eine Liste der zugeordneten Arbeitsplätze. Cocard legt diese automatisch in der Datenbank an und verknüpft sie mit den Kartenterminals. Man kann aber auch Arbeitsplätze manuell anlegen oder aus einer CSV-Datei importieren, wenn man eine Liste mit mehr Information z.B. aus einer Inventarisierungssoftware zur Verfügung hat.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Kontexte wirken als Filter, d.h. Cocard sieht einen Arbeitsplatz nicht, wenn in Cocard kein zum Infomodell passender Kontext hinterlegt ist.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_übersicht_arbeitsplätze"><a class="anchor" href="#_übersicht_arbeitsplätze"></a>Übersicht Arbeitsplätze</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Zu den Arbeitsplätzen gelangt man über das Menü <span class="menuseq"><b class="menu">Konfiguration</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Arbeitsplätze</b></span>:</p>
+</div>
 <div class="imageblock">
 <div class="content">
-<img src="../_images/cocard-dashboard.png" alt="cocard dashboard">
+<img src="../_images/workplace/menu-workplaces.png" alt="menu workplaces" width="50%">
 </div>
+<div class="title">Abbildung 1. Menu <span class="menuseq"><b class="menu">Konfiguration</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Arbeitsplätze</b></span></div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/workplace/workplaces-index.png" alt="workplaces index">
+</div>
+<div class="title">Abbildung 2. Übersicht Arbeitsplätze</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Feld/Spalte</th>
+<th class="tableblock halign-left valign-top">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name des Arbeitsplatzes, wie er am Konnektor hinterlegt ist</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Beschreibung</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Manuell (oder über einen CSV-Import) ergänzte Zusatzinformation. Diese Information ist nicht am Konnektor vorhanden</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kontext</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kontexte, unter denen der Arbeitsplatz am Konnektor gefunden wurde. Es werden nur Kontexte angezeigt, die Cocard zur Abfrage des Konnektors benutzt. Ein Abruf der konfigurierten Kontexte aus dem Info-Modell ist mit Cocard nicht möglich.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">zuletzt gesehen</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wenn Cocard den Arbeitsplatz bei einem Kartenterminal erkennt, wird der Eintrag aktualisiert. Cocard fragt die Kartenterminals alle 5min ab.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_einzelanzeige_eines_arbeitsplatzes"><a class="anchor" href="#_einzelanzeige_eines_arbeitsplatzes"></a>Einzelanzeige eines Arbeitsplatzes</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/workplace/workplace-show.png" alt="workplace show">
+</div>
+<div class="title">Abbildung 3. Arbeitsplatz - Einzelansicht</div>
 </div>
 <div class="paragraph">
-<p>Das Dashboard ist die zentrale Ansicht in Cocard und stellt Probleme auf einer Seite zusammengefasst dar. Beim ersten Aufruf werden nur Problemzustände (WARNING, CRITICAL und UKNOWN) angezeigt. Über die Buttons über jedem Abschnitt kann man sich gezielt Einträge mit dem gewählten Zustand anzeigen lassen.
-Um den Startzustand wieder herzustellen aktualisiert man einfach das Dashboard im Browser.</p>
+<p>In der Einzelansicht listet Cocard alle mit dem Arbeitsplatz verknüpften Kartenterminals dar.</p>
 </div>
-<div class="paragraph">
-<p>Nicht in der Übersicht angezeigt werden Konnektoren, die <em>manuelles Update</em> aktiviert haben. Diese werden generell herausgefiltert und sind nur über die Liste der Konnektoren (<span class="menuseq"><b class="menu">Menü</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="submenu">Konnektoren</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Konnektoren</b></span>) erreichbar.</p>
 </div>
-<div class="paragraph">
-<p>Über den Button <span class="image"><img src="../_images/common/ack-button.png" alt="ACK" width="32" height="32"></span> am Ende jeder Zeile kann man ein Acknowledge zum Eintrag setzen. Jetzt wird in der Standardansicht der Eintrag herausgefiltert, Einträge mit Acknowledge ruft man explizit über den grau umrandeten Button im Kopf des jeweiligen Abschnittes auf.</p>
 </div>
+<div class="sect1">
+<h2 id="_import_von_arbeitsplätzen"><a class="anchor" href="#_import_von_arbeitsplätzen"></a>Import von Arbeitsplätzen</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Das Dashboard wird automatisch aktualisiert, sobald Cocard über die periodischen Hintergrundjobs neue Informationen bereithält.</p>
+<p>Wenn man ergänzende Informationen zu den Arbeitsplätzen aus einer anderen Quelle (z.B. einem Inventarisierungsprogramm) vorliegen hat, kann man diese per CSV-Datei im Format <code>name;description</code> importieren. Der Text darf nicht in Anführungszeichen eingeschlossen sein. Der Name muss exakt dem Namen entsprechen, den Cocard vom Konnektor übermittelt bekommt (also exakt gleiche Schreibweise wie im Infomodell konfiguriert).</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/workplace/workplaces-import.png" alt="workplaces import">
+</div>
+<div class="title">Abbildung 4. Import-Formular für Arbeitsplatzimport</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_veraltete_arbeitsplätze"><a class="anchor" href="#_veraltete_arbeitsplätze"></a>Veraltete Arbeitsplätze</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Werden Arbeitsplätze aus dem Infomodell entfernt, werden diese in Cocard nicht mehr aktualisiert, bleiben aber bestehen und werden nicht automatisch gelöscht.
+Über <span class="menuseq"><b class="menu">Konfiguration</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Veraltete Arbeitsplätze</b></span> listet Cocard alle Arbeitsplätze auf, die seit mindestens 7 Tagen nicht mehr aktualisiert wurden und daher wahrscheinlich veraltet sind. Entweder löscht man Arbeitsplätze einzeln, oder man nutzt den Button <b class="button">Veraltete Arbeitsplätze löschen</b> (Rolle Admin erforderlich).</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/workplace/workplaces-outdated.png" alt="workplaces outdated">
+</div>
+<div class="title">Abbildung 5. Veraltete Arbeitsplätze</div>
+</div>
+</div>
 </div>
 </article>
   </div>
