@@ -39,6 +39,12 @@ module TerminalWorkplaces
           end.to change(Workplace, :count).by(2)
         end
 
+        it 'updates last_seen' do
+          subject.call
+          current = Workplace.where('last_seen > ?', 1.minute.before(Time.current)).count
+          expect(current).to eq(2)
+        end
+
         it 'creates new terminal_workplaces' do
           expect do
             subject.call
@@ -56,6 +62,13 @@ module TerminalWorkplaces
             expect do
               subject.call
             end.to change(Workplace, :count).by(0)
+          end
+
+          it 'updates last_seen' do
+            subject.call
+            current = Workplace.where('last_seen > ?', 1.minute.before(Time.current))
+                               .count
+            expect(current).to eq(2)
           end
 
           it 'creates new terminal_workplaces' do

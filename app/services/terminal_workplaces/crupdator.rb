@@ -50,7 +50,9 @@ module TerminalWorkplaces
     def find_or_create_workplaces_by_name(wp_names)
       [].tap do |wp|
         wp_names.each do |name|
-          wp << Workplace.find_or_create_by(name: name)
+          workplace = Workplace.find_or_create_by(name: name)
+          workplace.touch(:last_seen)
+          wp << workplace
         end
       end
     end
