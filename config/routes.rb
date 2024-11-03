@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     collection do
       get :new_import
       post :import
+      delete :delete_outdated
     end
   end
   resources :networks

@@ -146,4 +146,22 @@ RSpec.describe "/workplaces", type: :request do
       expect(response).to redirect_to(workplaces_url)
     end
   end
+
+  describe "DELETE /delete_outdated" do
+    it "destroys the outdated workplaces" do
+      workplaces = FactoryBot.create_list(:workplace, 2,
+                                     last_seen: 30.day.before(Time.current))
+      expect {
+        delete delete_outdated_workplaces_url()
+      }.to change(Workplace, :count).by(-2)
+    end
+
+    it "redirects to the workplaces list" do
+      workplaces = FactoryBot.create_list(:workplace, 2,
+                                     last_seen: 30.day.before(Time.current))
+      delete delete_outdated_workplaces_url()
+      expect(response).to redirect_to(workplaces_url(outdated: true))
+    end
+  end
+
 end

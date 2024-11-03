@@ -4,7 +4,11 @@ class WorkplacesController < ApplicationController
 
   # GET /workplaces
   def index
-    @workplaces = Workplace.all
+    if params[:outdated]
+      @workplaces = outdated
+    else
+      @workplaces = Workplace.all
+    end
     respond_with(@workplaces)
   end
 
@@ -43,6 +47,11 @@ class WorkplacesController < ApplicationController
     respond_with(@workplace)
   end
 
+  def delete_outdated
+    @workplaces.destroy_all
+    redirect_to workplaces_path(outdated: true)
+  end   
+
   def new_import     
   end                
       
@@ -59,8 +68,6 @@ class WorkplacesController < ApplicationController
     end
   end
 
-
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_workplace
@@ -74,5 +81,9 @@ class WorkplacesController < ApplicationController
 
     def import_params
       params.permit(:utf8, :authenticity_token, :file, :update_only, :force_update).to_hash
+    end
+
+    def outdated
+      @outdated = Workplace.where("last_seen < ? or last_seen IS NULL", 7.days.before(Time.current))
     end
 end

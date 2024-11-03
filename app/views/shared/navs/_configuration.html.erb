@@ -30,6 +30,10 @@
                     main_app.workplaces_path, class: "dropdown-item",
                     "data-turbo-prefetch": false
          %>
+        <%= link_to raw(Cocard::States.flag(Cocard::States::WARNING) + 
+                        ' Veraltete Arbeitsplätze'),
+                    main_app.workplaces_path(outdated: true), 
+                    class: "dropdown-item" %>
         <% if can? :import, Workplace %>
           <%= link_to raw('<span class="fa-solid fa-fw fa-upload" aria-hidden="true"></span> ' +
                            t('cocard.import_csv')),
