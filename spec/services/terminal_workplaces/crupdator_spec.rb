@@ -84,7 +84,8 @@ module TerminalWorkplaces
               card_terminal: ct,
               mandant: 'Mandy',
               client_system: 'SlowMed',
-              workplace: wp1
+              workplace: wp1,
+              updated_at: 1.day.before(Time.current)
             )
           end
           let!(:twp2)  do
@@ -92,11 +93,12 @@ module TerminalWorkplaces
               card_terminal: ct,
               mandant: 'Mandy',
               client_system: 'SlowMed',
-              workplace: wp2
+              workplace: wp2,
+              updated_at: 1.day.before(Time.current)
             )
           end
 
-          it 'creates new terminal_workplaces' do
+          it 'does not create new terminal_workplaces' do
             expect do
               subject.call
             end.to change(TerminalWorkplace, :count).by(0)
@@ -109,6 +111,8 @@ module TerminalWorkplaces
             expect(TerminalWorkplace.all).to include(twp2)
             expect(TerminalWorkplace.all).not_to include(twp1)
             expect(TerminalWorkplace.count).to eq(2)
+            wp1.reload; wp2.reload 
+            expect(wp1.updated_at).to be > 1.minute.before(Time.current)
           end
         end
       end
