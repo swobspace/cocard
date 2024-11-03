@@ -10,7 +10,8 @@ RSpec.describe "workplaces/show", type: :view do
 
     assign(:workplace, Workplace.create!(
       name: 'NB-AXC-0004',
-      description: "some more information"
+      description: "some more information",
+      last_seen: 1.day.before(Time.current)
     ))
   end
 
@@ -18,5 +19,6 @@ RSpec.describe "workplaces/show", type: :view do
     render
     expect(rendered).to match(/NB-AXC-0004/)
     expect(rendered).to match(/some more information/)
+    expect(rendered).to match(/1 day/)
   end
 end

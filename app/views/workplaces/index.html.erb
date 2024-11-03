@@ -15,11 +15,13 @@
         <th><%= t('attributes.name') %></th>
         <th><%= t('attributes.description') %></th>
         <th class="w-25"><%= t('attributes.context') %></th>
+        <th><%= t('attributes.last_seen') %></th>
         <th class="nosort text-end"><%= t('cocard.action') %></th>
       </tr>
     </thead>
     <tfoot class="search">
       <tr>
+        <th></th>
         <th></th>
         <th></th>
         <th></th>
@@ -32,6 +34,12 @@
           <td><%= link_to workplace.name, workplace, class: 'primary-link' %></td>
           <td><%= truncate(workplace.description.to_plain_text, length: 300) %></td>
           <td><%= workplace.contexts.join("<br />").html_safe %></td>
+          <td><%= render IsCurrentComponent.new(
+                           item: workplace, 
+                           attr: :last_seen,
+                           grace_period: 1.day,
+                           relative: true
+                         )%></td>
           <td class="text-nowrap text-end">
             <%= show_link workplace %>
             <%= edit_link workplace %>

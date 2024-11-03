@@ -17,10 +17,19 @@
 
   <div class="card-body">
     <table class="table table-sm table-borderless">
-    
       <tr>
         <th class="w-10 pe-3"><%= t('attributes.description')%>:</th>
         <td><%= @workplace.description %></td>
+      </tr>
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.last_seen')%>:</th>
+            <td><%= render IsCurrentComponent.new(
+                             item: @workplace, 
+                             attr: :last_seen,
+                             grace_period: 1.day,
+                             relative: true
+                           )%></td>
+
       </tr>
     </table>
   </div>
