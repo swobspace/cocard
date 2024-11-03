@@ -1,6 +1,9 @@
 = Changelog
 
-== 0.4.6-dev 2024-11-02
+== 0.4.6-dev unreleased
+
+* Fix: Einzelanzeige Kontext zeigt jetzt die Tabellen Konnektoren/Karten korrekt.
+* Update PIN-Status nach PIN-Verify, um die Änderung unmittelbar anzuzeigen.
 
 
 == 0.4.5 - 2024-11-02
