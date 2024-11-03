@@ -26,7 +26,7 @@ class LogsController < ApplicationController
 
   def sindex
     if params[:type]
-      @logs = Log.where(loggable_type: params[:type]).valid.not_acknowledged
+      @logs = Log.where(loggable_type: params[:type]).valid
     elsif params[:acknowledged]
       @logs = Log.valid.acknowledged
     else

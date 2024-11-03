@@ -20,7 +20,7 @@ class CardsController < ApplicationController
 
   def sindex
     if params[:condition]
-      @cards = Card.condition(params[:condition]).not_acknowledged
+      @cards = Card.condition(params[:condition])
     elsif params[:acknowledged]
       @cards = Card.acknowledged
     else
