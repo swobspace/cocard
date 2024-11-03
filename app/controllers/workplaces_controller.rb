@@ -5,8 +5,10 @@ class WorkplacesController < ApplicationController
   # GET /workplaces
   def index
     if params[:outdated]
+      @title = I18n.t('workplaces.outdated')
       @workplaces = outdated
     else
+      @title = I18n.t('controller.workplaces')
       @workplaces = Workplace.all
     end
     respond_with(@workplaces)
@@ -48,7 +50,7 @@ class WorkplacesController < ApplicationController
   end
 
   def delete_outdated
-    @workplaces.destroy_all
+    outdated.destroy_all
     redirect_to workplaces_path(outdated: true)
   end   
 
