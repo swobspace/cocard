@@ -4,6 +4,8 @@
 
 * Fix: Einzelanzeige Kontext zeigt jetzt die Tabellen Konnektoren/Karten korrekt.
 * Update PIN-Status nach PIN-Verify, um die Änderung unmittelbar anzuzeigen.
+* Anzeige Arbeitsplätze überarbeitet; Löschfunktion für veraltete Arbeitsplätze
+* Dokumentation für Arbeitsplätze ergänzt
 
 
 == 0.4.5 - 2024-11-02
