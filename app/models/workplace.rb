@@ -8,7 +8,7 @@ class Workplace < ApplicationRecord
   has_rich_text :description
 
   # -- validations and callbacks
-  validates :name, presence: true, uniqueness: { case_sensitive: false }
+  validates :name, presence: true, uniqueness: { case_sensitive: true }
 
   # -- common methods
   def to_s

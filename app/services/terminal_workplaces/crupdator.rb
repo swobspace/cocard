@@ -51,8 +51,12 @@ module TerminalWorkplaces
       [].tap do |wp|
         wp_names.each do |name|
           workplace = Workplace.find_or_create_by(name: name)
-          workplace.touch(:last_seen)
-          wp << workplace
+          if workplace.persisted?
+            workplace.touch(:last_seen)
+            wp << workplace
+          else
+            Rails.logger.warn("WARN:: couldn't not find or create workplace #{name}")
+          end
         end
       end
     end

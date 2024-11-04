@@ -12,7 +12,7 @@ RSpec.describe Workplace, type: :model do
     g = FactoryBot.create(:workplace)
     expect(f).to be_valid
     expect(g).to be_valid
-    expect(f).to validate_uniqueness_of(:name).case_insensitive
+    expect(f).to validate_uniqueness_of(:name)
   end
 
   describe "#to_s" do
