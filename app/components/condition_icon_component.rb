@@ -13,7 +13,13 @@ class ConditionIconComponent < ViewComponent::Base
     @as_text  = as_text
     @small = small
     @period = period
-    set_variant
+    if item.present?
+      set_variant
+    end
+  end
+
+  def render?
+    item.present?
   end
 
   def set_variant
