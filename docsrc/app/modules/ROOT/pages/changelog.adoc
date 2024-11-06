@@ -10,8 +10,9 @@
 
 == 0.4.5 - 2024-11-02
 
-* Neu: TI-Lagebild
-* Dokumentation zur PIN-Verifizierung ergänzt
+* Neu: xref:user/ti-lagebild.adoc[TI-Lagebild]: Anzeige von Störungen der 
+  Telematik-Infrastruktur
+* Dokumentation zur xref:user/verify-pin.adoc[PIN-Verifizierung] ergänzt
 
 == 0.4.4 - 2024-10-06
 
