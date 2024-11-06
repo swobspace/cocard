@@ -3,7 +3,7 @@
 
 <h1>Lagebild TI</h1>
 
-<%= turbo_frame_tag :ti_lagebild_index do %>
+<%= turbo_frame_tag 'ti_lagebild_index', refresh: 'morph' do %>
   <div data-controller="datatables">
     <%= content_tag :table, role: :datatable,
           id: "ti_lagebild_table",
@@ -62,6 +62,3 @@
     <% end %>
   </div>
 <% end %>
-
-
-
