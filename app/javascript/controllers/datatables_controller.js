@@ -12,6 +12,10 @@ export default class extends Controller {
   }
 
   connect() {
+    // overcome morph problems
+    this.element.setAttribute("data-action",
+                              "turbo:morph@window->datatables#reconnect")
+
     let _this = this
     let dtOptions = {}
     this.compileOptions(dtOptions)
@@ -94,7 +98,7 @@ export default class extends Controller {
           className: 'btn btn-outline-secondary btn-sm'
         }
       },
-      buttons: [ 
+      buttons: [
                  { "text": 'Reset',
                     "action": function(e, dt, node, config) {
                                 dt.state.clear();
@@ -122,5 +126,11 @@ export default class extends Controller {
     options.processing = true
     options.serverSide = true
     options.ajax = { "url": this.urlValue, "type": "POST" }
+  }
+
+  // fix morph problems
+  reconnect() {
+    this.disconnect()
+    this.connect()
   }
 } // Controller
