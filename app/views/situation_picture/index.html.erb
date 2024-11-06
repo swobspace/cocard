@@ -3,63 +3,65 @@
 
 <h1>Lagebild TI</h1>
 
-<div data-controller="datatables">
-  <%= content_tag :table, role: :datatable,
-        id: "lagebild_ti",
-        class: "table table-bordered table-responsive-xl",
-        data: {
-          'datatables-target': 'datatable',
-          order: [[0, 'asc']].to_json
-        } do %>
-    <thead>
-      <tr>
-        <th>Status</th>
-        <th>time</th>
-        <th>ci</th>
-        <th class="notvisible">tid</th>
-        <th class="notvisible">bu</th>
-        <th>organization</th>
-        <th class="notvisible">pdt</th>
-        <th>product</th>
-        <th class="notvisible">availability</th>
-        <th>comment</th>
-        <th>name</th>
-      </tr>
-    </thead>
-    <tfoot class="search">
-      <tr>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-    </tfoot>
-    <tbody>
-      <% @situation_picture.each do |entry| %>
-        <%= content_tag(:tr) do %>
-          <td><%= render ConditionIconComponent.new(item: entry, as_text: true) %></td>
-          <td><%= render IsCurrentComponent.new(item: entry, attr: :time) %></td>
-          <td><%= entry.ci %></td>
-          <td><%= entry.tid %></td>
-          <td><%= entry.bu %></td>
-          <td><%= entry.organization %></td>
-          <td><%= entry.pdt %></td>
-          <td><%= entry.product %></td>
-          <td><%= entry.availability %></td>
-          <td><%= entry.comment %></td>
-          <td><%= entry.name %></td>
+<%= turbo_frame_tag :ti_lagebild_index do %>
+  <div data-controller="datatables">
+    <%= content_tag :table, role: :datatable,
+          id: "ti_lagebild_table",
+          class: "table table-bordered table-responsive-xl",
+          data: {
+            'datatables-target': 'datatable',
+            order: [[0, 'asc']].to_json
+          } do %>
+      <thead>
+        <tr>
+          <th>Status</th>
+          <th>time</th>
+          <th>ci</th>
+          <th class="notvisible">tid</th>
+          <th class="notvisible">bu</th>
+          <th>organization</th>
+          <th class="notvisible">pdt</th>
+          <th>product</th>
+          <th class="notvisible">availability</th>
+          <th>comment</th>
+          <th>name</th>
+        </tr>
+      </thead>
+      <tfoot class="search">
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </tfoot>
+      <tbody>
+        <% @situation_picture.each do |entry| %>
+          <%= content_tag(:tr) do %>
+            <td><%= render ConditionIconComponent.new(item: entry, as_text: true) %></td>
+            <td><%= render IsCurrentComponent.new(item: entry, attr: :time) %></td>
+            <td><%= entry.ci %></td>
+            <td><%= entry.tid %></td>
+            <td><%= entry.bu %></td>
+            <td><%= entry.organization %></td>
+            <td><%= entry.pdt %></td>
+            <td><%= entry.product %></td>
+            <td><%= entry.availability %></td>
+            <td><%= entry.comment %></td>
+            <td><%= entry.name %></td>
+          <% end %>
         <% end %>
-      <% end %>
-    </tbody>
-  <% end %>
-</div>
+      </tbody>
+    <% end %>
+  </div>
+<% end %>
 
 
 
