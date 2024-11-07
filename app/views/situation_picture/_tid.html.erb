@@ -1,0 +1,29 @@
+<div class="card mb-3">
+  <div class="card-header">
+    <h4 class="card-title">TID: <%= tid %></h4>
+  </div>
+  <div class="card-body">
+    <%= content_tag :table,
+          id: "failed_situation_picture",
+          class: "table table-sm table-responsive-xl" do %>
+      <thead>
+        <tr>
+          <th>Status</th>
+          <th>time</th>
+          <th>ci</th>
+          <th>organization</th>
+          <th>product</th>
+          <th>comment</th>
+          <th>name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: 'single_picture',
+                   collection: @situation_picture.where(tid: tid),
+                   as: :single_picture
+         %>
+      </tbody>
+    <% end %>
+  </div>
+</div>
+

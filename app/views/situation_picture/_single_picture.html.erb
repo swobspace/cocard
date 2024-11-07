@@ -1,0 +1,9 @@
+<%= tag.tr id: dom_id(single_picture) do %>
+  <td><%= render ConditionIconComponent.new(item: single_picture, as_text: true) %></td>
+  <td><%= render IsCurrentComponent.new(item: single_picture, attr: :time) %></td>
+  <td><%= single_picture.ci %></td>
+  <td><%= single_picture.organization %></td>
+  <td><%= single_picture.product %></td>
+  <td><%= single_picture.comment %></td>
+  <td><%= single_picture.name %></td>
+<% end %>
