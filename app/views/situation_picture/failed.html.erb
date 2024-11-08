@@ -1,5 +1,16 @@
-<% @tids.each do |tid,count| %>
-  <%= render partial: 'tid', 
-             locals: { tid: tid, count: count, 
-                       product: SinglePicture.where(tid: tid).first.product } %>
+<%= turbo_stream_from :ti_lagebild %>
+
+<h1>TI-Status</h1>
+
+<%= turbo_frame_tag 'ti_lagebild_failed', refresh: 'morph' do %>
+  <% @tids.each do |tid,count| %>
+    <%= render partial: 'tid', 
+               locals: { tid: tid, count: count, 
+                         product: SinglePicture.failed.where(tid: tid).first&.product } %>
+  <% end %>
+  <% if @tids.empty? %>
+  <div>
+    Keine Störung vorhanden
+  </div>
+  <% end %>
 <% end %>
