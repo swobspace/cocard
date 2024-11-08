@@ -1,11 +1,12 @@
 = Changelog
 
-== 0.4.6-dev unreleased
+== 0.4.6 - 2024-11-08
 
 * Fix: Einzelanzeige Kontext zeigt jetzt die Tabellen Konnektoren/Karten korrekt.
 * Update PIN-Status nach PIN-Verify, um die Änderung unmittelbar anzuzeigen.
 * Anzeige Arbeitsplätze überarbeitet; Löschfunktion für veraltete Arbeitsplätze
 * Dokumentation für Arbeitsplätze ergänzt
+* Verbesserung TI-Lagebild: Unterscheidung zwischen Teil- (WARNING) und Totalausfall eines Dienstes (CRITICAL)
 
 
 == 0.4.5 - 2024-11-02
