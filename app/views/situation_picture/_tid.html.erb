@@ -27,7 +27,7 @@
       </thead>
       <tbody>
         <%= render partial: 'single_picture',
-                   collection: @situation_picture.where(tid: tid),
+                   collection: @situation_picture.where(tid: tid).order(:ci),
                    as: :single_picture
          %>
       </tbody>
