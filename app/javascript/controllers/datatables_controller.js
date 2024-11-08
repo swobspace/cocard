@@ -27,19 +27,17 @@ export default class extends Controller {
 
     // catch column visibility change
     dtable.on('column-visibility.dt', function (e, settings, column, state) {
-      // console.log(
-      //   'Column ' + column + ' has changed to ' + (state ? 'visible' : 'hidden')
-      // )
       if (state) {
-        // console.log(e.target.querySelector('tfoot th[data-dt-column="' + column + '"]'))
         let th = e.target.querySelector('tfoot th[data-dt-column="' + column + '"]')
         let sf = th.querySelector('input')
         if (!sf) {
           th.insertAdjacentHTML('afterbegin', _this.searchField(column, ''))
         }
+        $('input[name=idx'+column+']').on( 'keyup change', function() {
+          dtable.column(column).search(this.value).draw()
+        })
       }
     })
-
 
     if (!this.simpleValue) {
       this.setInputFields(dtable.state())
