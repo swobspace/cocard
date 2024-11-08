@@ -1,3 +1,5 @@
 <% @tids.each do |tid,count| %>
-  <%= render partial: 'tid', locals: { tid: tid } %>
+  <%= render partial: 'tid', 
+             locals: { tid: tid, count: count, 
+                       product: SinglePicture.where(tid: tid).first.product } %>
 <% end %>

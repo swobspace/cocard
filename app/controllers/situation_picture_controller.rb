@@ -13,6 +13,6 @@ class SituationPictureController < ApplicationController
   def failed
     @situation_picture = SinglePicture.with_failed_tids
     @tids = @situation_picture.select(:tid, :availability)
-                              .group(:tid).maximum("availability")
+                              .group(:tid).sum("availability")
   end
 end
