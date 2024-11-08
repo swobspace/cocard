@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  get 'situation_picture', to: 'situation_picture#index', as: :situation_picture
+  resources 'situation_picture', only: [:index] do
+    collection do
+      get :failed
+    end
+  end
   get 'verify_pins', to: 'verify_pins#index'
   post 'verify_pins', to: 'verify_pins#verify'
   get "client_certificates/import_p12", to: "client_certificates#import_p12",
@@ -9,6 +13,7 @@ Rails.application.routes.draw do
     collection do
       get :new_import
       post :import
+      delete :delete_outdated
     end
   end
   resources :networks

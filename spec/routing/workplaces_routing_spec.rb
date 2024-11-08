@@ -37,6 +37,10 @@ RSpec.describe WorkplacesController, type: :routing do
       expect(delete: "/workplaces/1").to route_to("workplaces#destroy", id: "1")
     end
 
+    it "routes to #delete_outdated" do
+      expect(delete: "/workplaces/delete_outdated").to route_to("workplaces#delete_outdated")
+    end
+
     it "routes to #new_import" do
       expect(:get => "/workplaces/new_import").to route_to("workplaces#new_import")
     end

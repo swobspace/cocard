@@ -7,7 +7,7 @@ window.JSZip = JSZip
 // used for PDF button
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
+pdfMake.addVirtualFileSystem(pdfFonts);
 
 import DataTable from 'datatables.net-bs5';
 import 'datatables.net-buttons-bs5';

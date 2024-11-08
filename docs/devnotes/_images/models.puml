@@ -124,6 +124,7 @@ class Workplace {
   description: string
   --
   name: string
+  last_seen: timestamp
 }
 Class TerminalWorkplaces {
   card_terminal_id

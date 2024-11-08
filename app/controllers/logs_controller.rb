@@ -11,13 +11,13 @@ class LogsController < ApplicationController
       @pagy, @logs = pagy(ordered, count: ordered.count)
     else
       if params[:valid]
+        @title = I18n.t('logs.valid')
         @logs = Log.valid
-        @title = "Aktuelle Logeinträge"
       elsif params[:outdated]
+        @title = I18n.t('logs.outdated')
         @logs = Log.valid.where("last_seen < ?", outdated)
-        @title = "Veraltete Logeinträge"
       else
-        @title = "Alle Logeinträge"
+        @title = I18n.t('logs.all')
         @logs = Log.all
       end
     end
@@ -26,7 +26,7 @@ class LogsController < ApplicationController
 
   def sindex
     if params[:type]
-      @logs = Log.where(loggable_type: params[:type]).valid.not_acknowledged
+      @logs = Log.where(loggable_type: params[:type]).valid
     elsif params[:acknowledged]
       @logs = Log.valid.acknowledged
     else

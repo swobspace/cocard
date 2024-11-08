@@ -1,0 +1,37 @@
+<div class="card mb-3">
+  <div class="card-header">
+    <div class="d-flex w-100 justify-content-between">
+      <div class="d-flex">
+        <div class="me-3">
+          <%= render TI::TidConditionButtonComponent.new(count: count) %>
+        </div>
+        <h4 class="card-title mt-1"><%= product %></h4>
+      </div>
+      <h5 class="text-secondary mt-1"> TID: <%= tid %> </h5>
+    </div>
+  </div>
+  <div class="card-body">
+    <%= content_tag :table,
+          id: "failed_situation_picture",
+          class: "table table-sm table-responsive-xl" do %>
+      <thead>
+        <tr>
+          <th>Status</th>
+          <th>time</th>
+          <th>ci</th>
+          <th>organization</th>
+          <th>product</th>
+          <th>comment</th>
+          <th>name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: 'single_picture',
+                   collection: @situation_picture.where(tid: tid).order(:ci),
+                   as: :single_picture
+         %>
+      </tbody>
+    <% end %>
+  </div>
+</div>
+

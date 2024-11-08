@@ -1,48 +1,77 @@
 <%= render 'shared/turbo-cache-control' %>
 
-<h1><%= t('controller.workplaces') %></h1>
+<h1><%= @title %></h1>
 
-<div data-controller="datatables">
-  <%= content_tag :table, role: :datatable,
-        id: "workplaces_table",
-        class: "table table-bordered table-responsive-xl",
-        data: {
-          'datatables-target': 'datatable',
-          order: [[0, 'asc']].to_json
-        } do %>
-    <thead>
-      <tr>
-        <th><%= t('attributes.name') %></th>
-        <th><%= t('attributes.description') %></th>
-        <th class="w-25"><%= t('attributes.context') %></th>
-        <th class="nosort text-end"><%= t('cocard.action') %></th>
-      </tr>
-    </thead>
-    <tfoot class="search">
-      <tr>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th class="nosearch"></th>
-      </tr>
-    </tfoot>
-    <tbody>
-      <% @workplaces.each do |workplace| %>
-        <%= content_tag(:tr, id: dom_id(workplace), class: dom_class(workplace)) do %>
-          <td><%= link_to workplace.name, workplace, class: 'primary-link' %></td>
-          <td><%= truncate(workplace.description.to_plain_text, length: 300) %></td>
-          <td><%= workplace.contexts.join("<br />").html_safe %></td>
-          <td class="text-nowrap text-end">
-            <%= show_link workplace %>
-            <%= edit_link workplace %>
-            <%= delete_link workplace %>
-          </td>
+<%= turbo_frame_tag('workplaces') do %>
+  <div data-controller="datatables">
+    <%= content_tag :table, role: :datatable,
+          id: "workplaces_table",
+          class: "table table-bordered table-responsive-xl",
+          data: {
+            'datatables-target': 'datatable',
+            order: [[0, 'asc']].to_json
+          } do %>
+      <thead>
+        <tr>
+          <th><%= t('attributes.name') %></th>
+          <th class="w50"><%= t('attributes.description') %></th>
+          <th class="w25"><%= t('attributes.context') %></th>
+          <th><%= t('attributes.last_seen') %></th>
+          <th class="nosort text-end"><%= t('cocard.action') %></th>
+        </tr>
+      </thead>
+      <tfoot class="search">
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th class="nosearch"></th>
+        </tr>
+      </tfoot>
+      <tbody>
+        <% @workplaces.each do |workplace| %>
+          <%= content_tag(:tr, id: dom_id(workplace), class: dom_class(workplace)) do %>
+            <td><%= link_to workplace.name, 
+                    workplace, 
+                    class: 'primary-link',
+                    "data-turbo-frame": '_top'
+                 %>
+            </td>
+            <td><%= truncate(workplace.description.to_plain_text, length: 300) %></td>
+            <td><%= workplace.contexts.join("<br />").html_safe %></td>
+            <td><%= render IsCurrentComponent.new(
+                             item: workplace, 
+                             attr: :last_seen,
+                             grace_period: 1.day,
+                             relative: true
+                           )%></td>
+            <td class="text-nowrap text-end">
+              <%= show_link workplace %>
+              <%= edit_link workplace %>
+              <%= delete_link workplace %>
+            </td>
+          <% end %>
         <% end %>
-      <% end %>
-    </tbody>
-  <% end %>
-</div>
+      </tbody>
+    <% end %>
+  </div>
+<% end %>
 
 <br />
 
 <%= back_link %>
+<% if params[:outdated] %>
+  <%= button_to(t('workplaces.delete_outdated'),
+                delete_outdated_workplaces_path(),
+                method: :delete,
+                form: {
+                  data: {
+                    "turbo-frame": "workplaces",
+                    "turbo-confirm": t('workplaces.delete_outdated') + '?'
+                  }
+                },
+                class: 'btn btn-warning me-1') if current_user.is_admin?
+   %>
+<% end %>
+

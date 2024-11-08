@@ -32,12 +32,12 @@
         <table class="table table-sm table-borderless">
           <tr>
             <th class="w-25 pe-3"><%= t('attributes.connector')%>:</th>
-            <td><%= link_to(@card_terminal.connector,
-                            connector_path(@card_terminal.connector),
-                            class: 'primary-link'
-                           ) if @card_terminal.connector %></td>
-          </tr>
-
+            <td>
+              <%= render ConditionIconComponent.new(
+                           item: @card_terminal.connector,
+                           small: true) %>
+              <%= render LinkToComponent.new(item: @card_terminal.connector) %>
+            </td>
           <tr>
             <th class="w-25 pe-3"><%= t('attributes.displayname')%>:</th>
             <td><%= @card_terminal.displayname %></td>
@@ -45,10 +45,9 @@
 
           <tr>
             <th class="w-25 pe-3"><%= t('attributes.location')%>:</th>
-            <td><%= link_to(@card_terminal.location,
-                            location_path(@card_terminal.location),
-                            class: 'primary-link'
-                           ) if @card_terminal.location %></td>
+            <td>
+              <%= render LinkToComponent.new(item: @card_terminal.location) %>
+            </td>
           </tr>
 
           <tr>
@@ -226,7 +225,7 @@
       </div>
     </div>
   </div>
-  <div class="m-2" data-turbo-permanent>
+  <div class="m-2">
     <%= render 'terminal_workplaces', terminal_workplaces: @card_terminal.terminal_workplaces %>
   </div>
 </div>

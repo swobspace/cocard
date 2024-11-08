@@ -61,6 +61,8 @@ class VerifyPinsController < ApplicationController
             target: 'toaster',
             partial: "shared/turbo_toast",
             locals: {status: status, message: message})
+          # update card pin status
+          Cocard::GetPinStatus.new(card: card, context: cctx).call
         end
       end
     end
@@ -69,6 +71,7 @@ class VerifyPinsController < ApplicationController
       target: 'toaster',
       partial: "shared/turbo_toast",
       locals: {status: :info, message: "VERIFY PIN für Terminal #{@card_terminal} abgeschlossen"})
+    sleep 1
     Turbo::StreamsChannel.broadcast_refresh_to(:verify_pins)
   end
 

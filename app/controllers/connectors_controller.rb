@@ -16,7 +16,7 @@ class ConnectorsController < ApplicationController
 
   def sindex
     if params[:condition]
-      @connectors = Connector.condition(params[:condition]).not_acknowledged
+      @connectors = Connector.condition(params[:condition])
     elsif params[:acknowledged]
       @connectors = Connector.acknowledged
     else

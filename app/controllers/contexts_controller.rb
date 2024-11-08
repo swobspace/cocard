@@ -10,10 +10,8 @@ class ContextsController < ApplicationController
 
   # GET /contexts/1
   def show
-    ordered_cards = @context.cards.smcb.order(:slotid)
-    @pagy_cards, @cards = pagy(ordered_cards, count: ordered_cards.count)
-    ordered_connectors = @context.connectors
-    @pagy_connectors, @connectors = pagy(ordered_connectors, count: ordered_connectors.count)
+    @cards = @context.cards.smcb.order(:slotid)
+    @connectors = @context.connectors
     respond_with(@context)
   end
 

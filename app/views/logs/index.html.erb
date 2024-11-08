@@ -1,4 +1,4 @@
-<%= render 'shared/turbo-cache-control' %>
+<% render 'shared/turbo-cache-control' %>
 
 <h1><%= @title %></h1>
 
@@ -75,13 +75,13 @@
 
 <%= back_link %>
 <% if params[:outdated] %>
-        <%= button_to(t('cocard.delete_outdated_logs'),
+        <%= button_to(t('logs.delete_outdated'),
                       delete_outdated_logs_path(),
                       method: :delete,
                       form: {
                         data: {
                           "turbo-frame": "logs",
-                          "turbo-confirm": "Alle veralteten Logeinträge löschen?"
+                          "turbo-confirm": t('logs.delete_outdated') + '?'
                         }
                       },
                       class: 'btn btn-warning me-1') if current_user.is_admin?
