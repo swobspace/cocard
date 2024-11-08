@@ -12,4 +12,11 @@ RSpec.describe "SituationPictures", type: :request do
     end
   end
 
+  describe "GET /situation_picture/failed" do
+    it "returns http success" do
+      get "/situation_picture/failed"
+      expect(response).to have_http_status(:success)
+    end
+  end
+
 end
