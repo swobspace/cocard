@@ -1,5 +1,7 @@
 = Changelog
 
+== 0.4.7-dev unreleased
+
 == 0.4.6 - 2024-11-08
 
 * Fix: Einzelanzeige Kontext zeigt jetzt die Tabellen Konnektoren/Karten korrekt.
