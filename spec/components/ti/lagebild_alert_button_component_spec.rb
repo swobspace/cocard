@@ -18,14 +18,14 @@ RSpec.describe TI::LagebildAlertButtonComponent, type: :component do
     sp = FactoryBot.create(:single_picture, availability: 0, tid: "tid-13")
     render_inline(described_class.new())
     # puts rendered_content
-    expect(page).to have_css('a[class="btn btn-warning mb-0"]')
+    expect(page).to have_css('a[class="btn btn-warning text-white mb-0"]')
     expect(page).to have_css(%Q[a[href="#{failed_situation_picture_path()}"]])
   end
 
   it "don't show button" do
     sp = FactoryBot.create(:single_picture, availability: 1, tid: "tid-13")
-    # render_inline(described_class.new())
-    puts rendered_content
+    render_inline(described_class.new())
+    # puts rendered_content
     expect(page).not_to have_css('a[class="btn btn-warning mb-0"]')
     expect(page).not_to have_css('a[class="btn btn-danger mb-0"]')
     expect(page).not_to have_css(%Q[a[href="#{failed_situation_picture_path()}"]])
