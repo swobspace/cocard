@@ -26,18 +26,7 @@ export default class extends Controller {
     let dtable = $(table).DataTable(dtOptions)
 
     // catch column visibility change
-    dtable.on('column-visibility.dt', function (e, settings, column, state) {
-      if (state) {
-        let th = e.target.querySelector('tfoot th[data-dt-column="' + column + '"]')
-        let sf = th.querySelector('input')
-        if (!sf) {
-          th.insertAdjacentHTML('afterbegin', _this.searchField(column, ''))
-        }
-        $('input[name=idx'+column+']').on( 'keyup change', function() {
-          dtable.column(column).search(this.value).draw()
-        })
-      }
-    })
+    this.colvis_change_listener(dtable)
 
     if (!this.simpleValue) {
       this.setInputFields(dtable.state())
@@ -151,10 +140,19 @@ export default class extends Controller {
     this.connect()
   }
 
-  colvis(e, settings, column, state) {
-    console.log("ColVis")
-    console.log(
-      'Column ' + column + ' has changed to ' + (state ? 'visible' : 'hidden')
-    )
+  colvis_change_listener(dtable) {
+    let _this = this
+    dtable.on('column-visibility.dt', function (e, settings, column, state) {
+      if (state) {
+        let th = e.target.querySelector('tfoot th[data-dt-column="' + column + '"]')
+        let sf = th.querySelector('input')
+        if (!sf) {
+          th.insertAdjacentHTML('afterbegin', _this.searchField(column, ''))
+        }
+        $('input[name=idx'+column+']').on( 'keyup change', function() {
+          dtable.column(column).search(this.value).draw()
+        })
+      }
+    })
   }
 } // Controller
