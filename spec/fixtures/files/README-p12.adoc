@@ -1,0 +1,6 @@
+= Build P12 with legacy cipher RC2-40-CBC
+
+openssl pkcs12 -export -in demo-cert.pem \
+  -inkey demo-pkey.pem --passin pass:justfortesting \
+  -keypbe PBE-SHA1-RC2-40 -legacy \
+  -out demo-legacy.p12
