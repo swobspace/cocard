@@ -281,6 +281,43 @@ mit kopieren.</p>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_troubleshooting"><a class="anchor" href="#_troubleshooting"></a>Troubleshooting</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_import_als_p12_datei_2"><a class="anchor" href="#_import_als_p12_datei_2"></a>Import als P12-Datei</h3>
+<div class="paragraph">
+<p>Wenn Cocard die P12-Datei nicht importieren kann, liegt das vielleicht an einem Container-Format, das OpenSSL 3.x nicht mag.</p>
+</div>
+<div class="paragraph">
+<p>Mit OpenSSL kann das das einfach testen:</p>
+</div>
+<div class="listingblock">
+<div class="title">OpenSSL 3.0: P12 prüfen auf Lesbarkeit</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">openssl pkcs12 -noout -in TEST.p12 -info</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Wenn jetzt ein <code>unsupported:crypto</code> erscheint, kann Cocard das P12 nicht so einfach lesen. Ergänzt man die <code>-legacy</code>-Option und es erscheint kein Fehler mehr, lässt sich die P12-Datei in ein aktuelles Format konvertieren:</p>
+</div>
+<div class="listingblock">
+<div class="title">OpenSSL 3.0: P12 prüfen auf Lesbarkeit - jetzt mit -legacy Option</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">openssl pkcs12 -noout -in TEST.p12 -info -legacy</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Altes P12-Format mit OpenSSL 3.x in aktuelles Format konvertieren:</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">openssl pkcs12 -in TEST.p12 -nocerts -legacy -out TEST.key.pem
+openssl pkcs12 -in TEST.p12 -clcerts -legacy -nokeys -out TEST.cert.pem
+openssl pkcs12 -export -in TEST.cert.pem -inkey TEST.key.pem -out TEST-NEW.p12</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </article>
   </div>
 </main>
