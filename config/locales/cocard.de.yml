@@ -228,6 +228,7 @@ de:
       placeholder: Suche
 
   logs:
+    invalidate_outdated: Veraltete Logeinträge auf ungültig setzen
     delete_outdated: Veraltete Logeinträge löschen
     outdated: Veraltete Logeinträge
     valid: Aktuelle Logeinträge

@@ -79,6 +79,12 @@ class LogsController < ApplicationController
     redirect_to logs_path(outdated: true)
   end
 
+  def invalidate_outdated
+    @logs = Log.valid.where("last_seen < ?", outdated)
+    @logs.update_all(is_valid: false)
+    redirect_to logs_path(outdated: true)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_log

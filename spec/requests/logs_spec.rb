@@ -141,4 +141,23 @@ RSpec.describe "/logs", type: :request do
       expect(response).to redirect_to(logs_url(outdated: true))
     end
   end
+
+  describe "PUT /invalidate_outdated" do
+    it "invalidates the outdated logs" do
+      logs = FactoryBot.create_list(:log, 2, :with_connector, 
+                                     last_seen: 1.day.before(Time.current),
+                                     is_valid: true)
+      expect {
+        put invalidate_outdated_logs_url()
+      }.to change(Log, :count).by(0)
+    end
+
+    it "redirects to the logs list" do
+      logs = FactoryBot.create_list(:log, 2, :with_connector, 
+                                     last_seen: 1.day.before(Time.current),
+                                     is_valid: true)
+      put invalidate_outdated_logs_url()
+      expect(response).to redirect_to(logs_url(outdated: true))
+    end
+  end
 end

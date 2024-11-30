@@ -43,3 +43,32 @@ Den Private Key kopiert man analog dazu in das vorgesehene Feld. Der Private Key
 
 image::certificate/client-certificate-new.png[]
 
+== Troubleshooting 
+
+=== Import als P12-Datei
+
+Wenn Cocard die P12-Datei nicht importieren kann, liegt das vielleicht an einem Container-Format, das OpenSSL 3.x nicht mag.
+
+Mit OpenSSL kann das das einfach testen:
+
+.OpenSSL 3.0: P12 prüfen auf Lesbarkeit
+[source,sh]
+----
+openssl pkcs12 -noout -in TEST.p12 -info
+----
+
+Wenn jetzt ein `unsupported:crypto` erscheint, kann Cocard das P12 nicht so einfach lesen. Ergänzt man die `-legacy`-Option und es erscheint kein Fehler mehr, lässt sich die P12-Datei in ein aktuelles Format konvertieren:
+
+.OpenSSL 3.0: P12 prüfen auf Lesbarkeit - jetzt mit -legacy Option
+[source,sh]
+----
+openssl pkcs12 -noout -in TEST.p12 -info -legacy
+----
+
+.Altes P12-Format mit OpenSSL 3.x in aktuelles Format konvertieren:
+[source,sh]
+----
+openssl pkcs12 -in TEST.p12 -nocerts -legacy -out TEST.key.pem
+openssl pkcs12 -in TEST.p12 -clcerts -legacy -nokeys -out TEST.cert.pem
+openssl pkcs12 -export -in TEST.cert.pem -inkey TEST.key.pem -out TEST-NEW.p12
+----

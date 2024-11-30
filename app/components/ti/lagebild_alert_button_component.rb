@@ -12,11 +12,13 @@ class TI::LagebildAlertButtonComponent < ViewComponent::Base
   end
 
 
-  def color
-    if @critical 
-      "danger"
+  def cssclass
+    if @critical
+      "btn btn-danger mb-0"
+    elsif @failed_count > 0
+      "btn btn-primary text-warning mb-0"
     else
-      "warning text-white"
+      "btn btn-primary text-success mb-0"
     end
   end
 end

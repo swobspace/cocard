@@ -59,7 +59,7 @@ Logeinträge können übrig bleiben und veralten, wenn es die Kombination aus `L
 
 Korrigiert man jetzt den Kontext bei der Karte und prüft den Status der PIN erneut, ist das für Cocard ein anderer Logeintrag, da der Kontext in die `Aktion` mit  eingeht. Folge: der alte Logeintrag wird nie wieder aktualisiert und bleibt stehen.
 
-Um das Aufräumen zu erleichtern gibt es eine eigene Ansicht menu:Menu[Ereignisse > Veraltete Logs], in der man mit dem Button btn:[Veraltete Logeinträge löschen] alle alten Einträge auf einmal entfernen kann.
+Um das Aufräumen zu erleichtern gibt es eine eigene Ansicht menu:Menu[Ereignisse > Veraltete Logs], in der man mit dem Button btn:[Veraltete Logeinträge auf ungültig setzen] alle alten Einträge auf ungültig setzt. Damit verschwinden diese aus der aktuellen Übersicht, bleiben aber erhalten. Mit dem Button btn:[Veraltete Logeinträge löschen] werden diese entgültig gelöscht.
 
 == Dashboard: Abschnitt Event Log
 
