@@ -1,7 +1,7 @@
 <div id="ti_alert" class="mx-auto">
-  <% if @failed_count > 0 %>
+  <% if true # @failed_count > 0 %>
     <%= link_to helpers.main_app.failed_situation_picture_path, 
-                class: "btn btn-#{color} mb-0" do %>
+                class: "#{cssclass}" do %>
       <i class="fa-solid fa-bolt-lightning"></i> <span class="me-2">TI</span>
     <%  end %>
   <%  end %>
