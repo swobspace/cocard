@@ -25,22 +25,32 @@ class ClientCertificatesController < ApplicationController
 
   # POST /client_certificates
   def create
+    action = :new
     if p12_params['p12'].present?
       p12 = p12_params['p12']
       pass = p12_params['passphrase']
-      result = Cocard::ReadP12.new(p12: p12, exportpw: pass).call
-      create_params = import_params.merge(result.params)
+      result = Cocard::ReadP12.new(p12: p12.path, exportpw: pass).call
+      if result.success?
+        @client_certificate = ClientCertificate.new(import_params.merge(result.params))
+        unless @client_certificate.save
+          flash[:alert] = @client_certificate.errors.full_messages.join(', ')
+          action = :import_p12
+        end
+      else
+        @client_certificate.errors.add(:base, result.error_messages.join("; "))
+        flash[:alert] = @client_certificate.errors.full_messages.join(', ')
+        action = :import_p12
+      end
+
     else
       create_params = client_certificate_params
+      @client_certificate = ClientCertificate.new(create_params)
+      unless @client_certificate.save
+        flash[:alert] = @client_certificate.errors.full_messages.join(', ')
+      end
     end
 
-    if result.success?
-      @client_certificate = ClientCertificate.new(create_params)
-      @client_certificate.save
-    else
-      @client_certificate.errors.add(:base, result.error_messages.join("; "))
-    end
-    respond_with(@client_certificate)
+    respond_with(@client_certificate, action: action)
   end
 
   # PATCH/PUT /client_certificates/1
