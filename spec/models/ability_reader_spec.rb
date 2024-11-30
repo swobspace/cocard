@@ -4,6 +4,7 @@ require "cancan/matchers"
 RSpec.shared_examples "a Reader" do
   it { is_expected.to be_able_to(:read, :all) }
   it { is_expected.to be_able_to(:navigate, :all) }
+  it { is_expected.to be_able_to(:failed, SinglePicture) }
   it { is_expected.not_to be_able_to(:read, ClientCertificate.new) }
   it { is_expected.not_to be_able_to(:navigate, ClientCertificate.new) }
   it { is_expected.not_to be_able_to(:read, Connector.new, :id_contract) }
