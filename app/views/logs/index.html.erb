@@ -75,16 +75,27 @@
 
 <%= back_link %>
 <% if params[:outdated] %>
-        <%= button_to(t('logs.delete_outdated'),
-                      delete_outdated_logs_path(),
-                      method: :delete,
-                      form: {
-                        data: {
-                          "turbo-frame": "logs",
-                          "turbo-confirm": t('logs.delete_outdated') + '?'
-                        }
-                      },
-                      class: 'btn btn-warning me-1') if current_user.is_admin?
-         %>
+  <%= button_to(t('logs.invalidate_outdated'),
+                invalidate_outdated_logs_path(),
+                method: :put,
+                form: {
+                  data: {
+                    "turbo-frame": "logs",
+                    "turbo-confirm": t('logs.invalidate_outdated') + '?'
+                  }
+                },
+                class: 'btn btn-warning me-1') if current_user.is_admin?
+   %>
+  <%= button_to(t('logs.delete_outdated'),
+                delete_outdated_logs_path(),
+                method: :delete,
+                form: {
+                  data: {
+                    "turbo-frame": "logs",
+                    "turbo-confirm": t('logs.delete_outdated') + '?'
+                  }
+                },
+                class: 'btn btn-danger me-1') if current_user.is_admin?
+   %>
 
 <% end %>
