@@ -2,6 +2,10 @@
 
 == 0.4.7-dev unreleased
 
+* Fix: Clientzertifikat P12-Import jetzt auch mit Legacy-Formaten möglich, 
+  sofern openssl -legacy das Format unterstützt (OpenSSL-Version 3.x). Kocoboxen erzeugen noch P12 in einem Legacy-Format.
+* Update TI-Lagebild-Button
+
 == 0.4.6 - 2024-11-08
 
 * Fix: Einzelanzeige Kontext zeigt jetzt die Tabellen Konnektoren/Karten korrekt.
