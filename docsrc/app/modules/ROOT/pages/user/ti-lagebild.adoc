@@ -13,6 +13,11 @@ Mit dem Klick auf den Button gelangt man in die Übersicht der gerade nicht verf
 
 image:ti-lagebild/ti-lagebild-alert-index.png[]
 
+Ist nur eine Komponente eines Dienstes nicht verfügbar, der Dienst aber als Ganzes noch funktionsfähig, erscheint in der Menüleiste ein gelbes Symbol. Die Übersicht zeigt dann, welche der Komponenten gerade verfügbar sind und welche nicht.
+
+image:ti-lagebild/ti-lagebild-warning-index.png[]
+
+
 Eine Gesamtübersicht aller von der Gematik überwachten Dienste erhält man über menu:Info[Lagebild TI]
 
 image:ti-lagebild/ti-lagebild-menu-info.png[width=25%]
