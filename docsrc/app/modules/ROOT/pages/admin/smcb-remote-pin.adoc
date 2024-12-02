@@ -18,7 +18,7 @@ NOTE: Cocard unterstützt derzeit nur das Terminal Orga6141 in der Firmware-Vers
 |Was | Beschreibung
 
 |Kartenterminal
-|ProductCode == `ORGA6100` && FirmwareVersion `\<= 3.9.0`
+|ProductCode == `ORGA6100` && FirmwareVersion `\>= 3.9.0`
 
 |RMI Remote SMC-B PIN
 |muss eingeschaltet sein, siehe Abbildung
