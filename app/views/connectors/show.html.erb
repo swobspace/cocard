@@ -105,7 +105,12 @@
 
           <tr>
             <th class="w-25 pe-3"><%= t('attributes.authentication')%>:</th>
-            <td><%= t(@connector.authentication, scope: :authentications) %></td>
+            <td>
+              <%= t(@connector.authentication, scope: :authentications) %>
+              <% if @connector.authentication == 'basicauth' %>
+                [ <%= @connector.auth_user %> ]
+              <% end %>
+            </td>
           </tr>
 
           <tr>

@@ -1,4 +1,5 @@
 // app/javascript/controllers/toggle_fields_controller.js
+// based on: https://github.com/driftingruby/472-dependent-fields-with-hotwire
 import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="toggle-fields"

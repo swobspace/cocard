@@ -16,7 +16,7 @@ class Connector < ApplicationRecord
   broadcasts_refreshes
   has_rich_text :description
 
-  enum authentication: { noauth: 0, clientcert: 1 }
+  enum authentication: { noauth: 0, clientcert: 1, basicauth: 2 }
 
   accepts_nested_attributes_for :connector_contexts,
     allow_destroy: true,

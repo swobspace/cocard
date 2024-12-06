@@ -209,6 +209,7 @@ de:
   authentications:
     noauth: 'Keine'
     clientcert: 'Client-Zertifikat'
+    basicauth: 'User/Passwort'
 
   pin_modes:
     'off': Aus

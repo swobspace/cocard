@@ -45,10 +45,16 @@
           }
        %>
 
-       <div data-toggle-fields-target="hidden" data-value="clientcert">
-         <%= form.input :client_certificate_ids, as: :select, 
-                        collection: ClientCertificate.all,
-                        input_html: { multiple: true }
+      <div data-toggle-fields-target="hidden" data-value="clientcert">
+        <%= form.input :client_certificate_ids, as: :select, 
+                       collection: ClientCertificate.all,
+                       input_html: { multiple: true }
+         %>
+      </div>
+      <div data-toggle-fields-target="hidden" data-value="basicauth">
+        <%= form.input :auth_user %>
+        <%= form.input :auth_password, as: :password,
+                    placeholder: '************'
          %>
       </div>
     </div>
