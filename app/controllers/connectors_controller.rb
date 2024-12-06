@@ -90,8 +90,10 @@ class ConnectorsController < ApplicationController
 
   # DELETE /connectors/1
   def destroy
-    @connector.destroy!
-    respond_with(@connector, location: polymorphic_path([@loggable, :connectors]))
+    unless @connector.destroy
+      flash[:alert] = @connectors.errors.full_messages.join("; ")
+    end
+    respond_with(@connector, location: polymorphic_path([@locatable, :connectors]))
   end
 
   private

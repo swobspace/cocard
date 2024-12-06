@@ -39,7 +39,9 @@ class OperationalStatesController < ApplicationController
 
   # DELETE /operational_states/1
   def destroy
-    @operational_state.destroy!
+    unless @operational_state.destroy
+      flash[:alert] = @operational_state.errors.full_messages.join("; ")
+    end
     respond_with(@operational_state)
   end
 

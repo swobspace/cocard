@@ -39,7 +39,9 @@ class LocationsController < ApplicationController
 
   # DELETE /locations/1
   def destroy
-    @location.destroy!
+    unless @location.destroy
+      flash[:alert] = @location.errors.full_messages.join("; ")
+    end
     respond_with(@location)
   end
 

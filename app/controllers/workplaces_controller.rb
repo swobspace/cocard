@@ -45,7 +45,9 @@ class WorkplacesController < ApplicationController
 
   # DELETE /workplaces/1
   def destroy
-    @workplace.destroy!
+    unless @workplace.destroy
+      flash[:alert] = @workplace.errors.full_messages.join("; ")
+    end
     respond_with(@workplace)
   end
 

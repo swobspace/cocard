@@ -69,7 +69,9 @@ class LogsController < ApplicationController
 #
   # DELETE /logs/1
   def destroy
-    @log.destroy!
+    unless @log.destroy
+      flash[:alert] = @log.errors.full_messages.join("; ")
+    end
     respond_with(@log, location: polymorphic_path([@loggable, :logs]))
   end
 
