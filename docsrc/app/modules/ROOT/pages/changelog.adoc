@@ -1,5 +1,9 @@
 = Changelog
 
+== 0.5.0-dev - unreleased
+
+* Fix: Löschen von Objekten mit verbesserter Fehlermeldung
+
 == 0.4.7 - 2024-11-30
 
 * Fix: Clientzertifikat P12-Import jetzt auch mit Legacy-Formaten möglich, 
