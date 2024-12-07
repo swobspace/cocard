@@ -139,7 +139,7 @@ module Cocard::SOAP
 
     def savon_basicauth_globals
       {
-        basic_auth: [auth_user, auth_passwd]
+        basic_auth: [auth_user, auth_password]
       }
     end
 
@@ -198,6 +198,10 @@ module Cocard::SOAP
       @connector.authentication == 'clientcert'
     end
 
+    def use_basicauth
+      @connector.authentication == 'basicauth'
+    end
+
     def auth_cert
       client_certificate&.certificate
     end
@@ -207,11 +211,11 @@ module Cocard::SOAP
     end
 
     def auth_user
-      ""
+      @connector.auth_user
     end
 
-    def auth_passwd
-      ""
+    def auth_password
+      @connector.auth_password
     end
   end
 end
