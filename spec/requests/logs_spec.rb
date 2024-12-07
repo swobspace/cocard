@@ -76,37 +76,38 @@ RSpec.describe "/logs", type: :request do
 #    end
 #  end
 #
-#  describe "PATCH /update" do
-#    context "with valid parameters" do
-#      let(:new_attributes) {
-#        skip("Add a hash of attributes valid for your model")
-#      }
-#
-#      it "updates the requested log" do
-#        log = Log.create! valid_attributes
-#        patch log_url(log), params: { log: new_attributes }
-#        log.reload
-#        skip("Add assertions for updated state")
-#      end
-#
-#      it "redirects to the log" do
-#        log = Log.create! valid_attributes
-#        patch log_url(log), params: { log: new_attributes }
-#        log.reload
-#        expect(response).to redirect_to(log_url(log))
-#      end
-#    end
-#
-#    context "with invalid parameters" do
-#    
-#      it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-#        log = Log.create! valid_attributes
-#        patch log_url(log), params: { log: invalid_attributes }
-#        expect(response).to have_http_status(:unprocessable_entity)
-#      end
-#    
-#    end
-#  end
+  describe "PATCH /update" do
+    context "with valid parameters" do
+      let(:new_attributes) {{
+        is_valid: true
+      }}
+
+      it "updates the requested log" do
+        log = Log.create! valid_attributes
+        expect(log.is_valid).to be_falsey
+        patch log_url(log), params: { log: new_attributes }
+        log.reload
+        expect(log.is_valid).to be_truthy
+      end
+
+      it "redirects to the log" do
+        log = Log.create! valid_attributes
+        patch log_url(log), params: { log: new_attributes }
+        log.reload
+        expect(response).to redirect_to(log_url(log))
+      end
+    end
+
+    context "with invalid parameters" do
+    
+      it "renders a response with 422 status (i.e. to display the 'edit' template)" do
+        log = Log.create! valid_attributes
+        patch log_url(log), params: { log: invalid_attributes }
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+    
+    end
+  end
 
   describe "DELETE /destroy" do
     it "destroys the requested log" do

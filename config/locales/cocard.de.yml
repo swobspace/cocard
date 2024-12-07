@@ -65,6 +65,7 @@ de:
     cards_count: Anzahl Karten
     connectors_count: Anzahl Konnektoren
     acknowledge: Acknowledge
+    set_invalid: Ungültig setzen
 
   activerecord:
     models:

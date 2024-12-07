@@ -62,6 +62,12 @@
             <td class="text-nowrap">
               <%= show_link log, class: 'btn btn-secondary',
                                  data: { "turbo-frame" => "_top" } %>
+              <%= render InvalidateButtonComponent.new(
+                           item: log, small: false,
+                           readonly: cannot?(:manage, log.loggable)
+                         )
+               %>
+
               <%= delete_link log %>
             </td>
           <% end %>

@@ -1,0 +1,7 @@
+<%= turbo_stream.replace('invalid_' + dom_id(@log)) do %>
+  <%= render InvalidateButtonComponent.new(
+               item: @log,
+               readonly: cannot?(:manage, @log.loggable)
+             )
+   %>
+<% end %>

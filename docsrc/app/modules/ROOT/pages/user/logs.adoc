@@ -61,6 +61,8 @@ Korrigiert man jetzt den Kontext bei der Karte und prüft den Status der PIN ern
 
 Um das Aufräumen zu erleichtern gibt es eine eigene Ansicht menu:Menu[Ereignisse > Veraltete Logs], in der man mit dem Button btn:[Veraltete Logeinträge auf ungültig setzen] alle alten Einträge auf ungültig setzt. Damit verschwinden diese aus der aktuellen Übersicht, bleiben aber erhalten. Mit dem Button btn:[Veraltete Logeinträge löschen] werden diese entgültig gelöscht.
 
+Logeinträge kann man auch einzeln auf ungültig setzen: entsprechende Berechtigungen vorausgesetzt, erscheint im Dashboard, in der Übersicht der Logs und in der Einzelansicht der Button image:logs/invalidate_button.png[].
+
 == Dashboard: Abschnitt Event Log
 
 Die Anzeige aktueller Logs im Dashboard ist ähnlich aufgebaut. Um die Übersicht zu erleichern kann man für Logs ein xref:user/acknowledges.adoc[Acknowledge] setzen, dann verschwindet der Logeintrag in der Standard-Anzeige.
