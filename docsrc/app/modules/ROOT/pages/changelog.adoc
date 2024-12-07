@@ -4,6 +4,7 @@
 
 * Neu: xref:admin/connector-edit.adoc#_authentifikation_per_userpasswort[Client-Authentifikation am Konnektor mit User/Passwort] (alternativ zum Client-Zertifikat)
 * Fix: Löschen von Objekten mit verbesserter Fehlermeldung
+* Einzelne Logs auf ungültig setzen (bisher nur alle veralteten Logs auf einmal)
 
 == 0.4.7 - 2024-11-30
 
