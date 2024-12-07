@@ -13,7 +13,7 @@ Nach dem erstmaligen Speichern ruft man das Bearbeitungsformular ein zweites Mal
 
 Idealerweise konfiguriert man alle Konnektoren so, dass man mit einem Default-Kontext alle Konnektordaten, Kartenterminals und Karten abfragen kann. In diesem Falle genügt ein einziger Kontext. Nur wenn es Kartenterminals oder Karten gibt, die man über diesen Kontext nicht abfragen kann, sind weitere Kontexte erforderlich.
 
-image:connector/connector-edit-http.png[]
+image::connector/connector-edit-http.png[]
 
 .Konnektor: Felder
 [cols="1,3"]
@@ -58,16 +58,20 @@ image:connector/connector-edit-http.png[]
 
 Nach dem Speichern mit einem zugewiesenen Kontext betätigt man einmal den Button btn:[Abfrage SDS]. Damit erhält Cocard die Informationen über die einzelnen Services und Endpunkte, die für die Abfrage von Informationen per SOAP über die von der Gematik definierten Funktionen erforderlich sind. Cocard aktualisiert diese Information einmal pro Tag danach automatisch.
 
-image:connector/connector-fetch-sds-button.png[]
+image::connector/connector-fetch-sds-button.png[]
 
 Mit der Information aus dem Service Directory Service (SDS) kann Cocard Kartenterminals und Karten abfragen. Die Abfrage erfolgt dabei mehrmals pro Stunde (bis auf das SDS selbst). Details zu den Zeitinterfallen sind in xref:admin/jobs.adoc[Jobverwaltung] beschrieben.
+
+NOTE: Für die Abfrage des Service Directory Service (SDS) verwendet Cocard TLS, wenn die _SDS-URL_ mit `https` beginnt. Der Schalter _TLS verwenden_ spielt hier keine Rolle.
+
+NOTE: Die KoCoBox ignoriert die Einstellung _Zugriff auf Diensteverzeichnis auch via HTTP ermöglichen_, wenn _Verbindung nur via TLS_ aktiv ist. In dem Falle kann die SDS-Abfrage nur via TLS erfolgen.
 
 == Mit TLS, mit Authentifikation per Client-Zertifikat
 
 Für eine sichere Kommunikation zwischen Client (Primärsystem, z.B. Cocard) und dem Konnektor aktiviert man TLS und die Authentifikation per Client-Zertifikat. Die nachstehende Abbildung zeigt die Einstellungen für die Kocobox v5.1.8. Für manche Szenarien wie die Komfortsignatur ist die sichere Kommunikation zwingend erforderlich.
 
 .TLS und Authentifikation auf der Kocobox aktivieren: menu:Verwaltung[Clientsysteme]
-image:connector/kocobox-tls-auth-client.png[]
+image::connector/kocobox-tls-auth-client.png[]
 
 NOTE: Cocard kann sich derzeit nur über Client-Zertifikate authentifizieren, eine Authentifikation via User/Passwort ist nicht möglich und ist zur Zeit auch nicht geplant.
 
@@ -80,7 +84,7 @@ Für die sichere Kommunikation sind folgende Einstellungen am Konnektor erforder
 
 Nach dem Speichern holt man manuell einmal die SDS-Informationen mit dem Button btn:[Abfrage SDS].
 
-image:connector/connector-edit-https-cert.png[]
+image::connector/connector-edit-https-cert.png[]
 
 === Welche Client-Zertifikate müssen hinterlegt werden?
 
@@ -94,3 +98,19 @@ Beispiel:
 Im Konnektor hinterlegt man nun das Client-Zertifikat für das Clientsystem `intern` und das Client-Zertifikat für das Clientsystem `iMedOne`. 
 
 Am Konnektor selbst muss der Kontext `Ein1 - iMedOne - Konnektor` nicht eingetragen werden, wenn hier keine zusätzlichen Kartenterminals oder Karten sichtbar werden, d.h. wenn alles schon über den `Service_Mandant - intern - Konnektor` erreichbar ist.
+
+== Authentifikation per User/Passwort
+
+Ab Cocard v0.5.0 ist die Authentifikation alternativ mit User/Passwort möglich. Die Passwort-Authentifikation muss hierfür am Konnektor aktiviert sein. Hier ein Beispiel für die KoCoBox:
+
+.KoCoBox Firmware 5.5.12
+image::connector/kocobox-tls-auth-client-passwd.png[]
+
+NOTE: User/Passwort-Authentifikation lässt sich auf der KoCoBox Firmware v5.5.12 nur noch aktivieren, wenn Authentisierungsmodus-LDAP ausgeschaltet ist.
+
+Wählt man bei Authentifikation _User/Passwort_ aus, erscheinen die Eingabefelder für Benutzer und Passwort.
+
+.User/Passwort-Authentifikation konfigurieren
+image::connector/connector-edit-basicauth.png[]
+
+NOTE: In Cocard kann man pro Konnektor nur einen Benutzer hinterlegen. Auf Konnektorseite kann man aber diesen Benutzer für mehrere Client-Systeme verwenden (zumindest bei der KoCoBox).

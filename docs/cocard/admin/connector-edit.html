@@ -210,8 +210,10 @@
 <div class="paragraph">
 <p>Idealerweise konfiguriert man alle Konnektoren so, dass man mit einem Default-Kontext alle Konnektordaten, Kartenterminals und Karten abfragen kann. In diesem Falle genügt ein einziger Kontext. Nur wenn es Kartenterminals oder Karten gibt, die man über diesen Kontext nicht abfragen kann, sind weitere Kontexte erforderlich.</p>
 </div>
-<div class="paragraph">
-<p><span class="image"><img src="../_images/connector/connector-edit-http.png" alt="connector edit http"></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/connector/connector-edit-http.png" alt="connector edit http">
+</div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 1. Konnektor: Felder</caption>
@@ -275,11 +277,37 @@
 <div class="paragraph">
 <p>Nach dem Speichern mit einem zugewiesenen Kontext betätigt man einmal den Button <b class="button">Abfrage SDS</b>. Damit erhält Cocard die Informationen über die einzelnen Services und Endpunkte, die für die Abfrage von Informationen per SOAP über die von der Gematik definierten Funktionen erforderlich sind. Cocard aktualisiert diese Information einmal pro Tag danach automatisch.</p>
 </div>
-<div class="paragraph">
-<p><span class="image"><img src="../_images/connector/connector-fetch-sds-button.png" alt="connector fetch sds button"></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/connector/connector-fetch-sds-button.png" alt="connector fetch sds button">
+</div>
 </div>
 <div class="paragraph">
 <p>Mit der Information aus dem Service Directory Service (SDS) kann Cocard Kartenterminals und Karten abfragen. Die Abfrage erfolgt dabei mehrmals pro Stunde (bis auf das SDS selbst). Details zu den Zeitinterfallen sind in <a href="jobs.html" class="xref page">Jobverwaltung</a> beschrieben.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Für die Abfrage des Service Directory Service (SDS) verwendet Cocard TLS, wenn die <em>SDS-URL</em> mit <code>https</code> beginnt. Der Schalter <em>TLS verwenden</em> spielt hier keine Rolle.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Die KoCoBox ignoriert die Einstellung <em>Zugriff auf Diensteverzeichnis auch via HTTP ermöglichen</em>, wenn <em>Verbindung nur via TLS</em> aktiv ist. In dem Falle kann die SDS-Abfrage nur via TLS erfolgen.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -289,9 +317,11 @@
 <div class="paragraph">
 <p>Für eine sichere Kommunikation zwischen Client (Primärsystem, z.B. Cocard) und dem Konnektor aktiviert man TLS und die Authentifikation per Client-Zertifikat. Die nachstehende Abbildung zeigt die Einstellungen für die Kocobox v5.1.8. Für manche Szenarien wie die Komfortsignatur ist die sichere Kommunikation zwingend erforderlich.</p>
 </div>
-<div class="paragraph">
-<div class="title">TLS und Authentifikation auf der Kocobox aktivieren: <span class="menuseq"><b class="menu">Verwaltung</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Clientsysteme</b></span></div>
-<p><span class="image"><img src="../_images/connector/kocobox-tls-auth-client.png" alt="kocobox tls auth client"></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/connector/kocobox-tls-auth-client.png" alt="kocobox tls auth client">
+</div>
+<div class="title">Abbildung 1. TLS und Authentifikation auf der Kocobox aktivieren: <span class="menuseq"><b class="menu">Verwaltung</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Clientsysteme</b></span></div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -327,8 +357,10 @@ Cocard kann sich derzeit nur über Client-Zertifikate authentifizieren, eine Aut
 <div class="paragraph">
 <p>Nach dem Speichern holt man manuell einmal die SDS-Informationen mit dem Button <b class="button">Abfrage SDS</b>.</p>
 </div>
-<div class="paragraph">
-<p><span class="image"><img src="../_images/connector/connector-edit-https-cert.png" alt="connector edit https cert"></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/connector/connector-edit-https-cert.png" alt="connector edit https cert">
+</div>
 </div>
 <div class="sect2">
 <h3 id="_welche_client_zertifikate_müssen_hinterlegt_werden"><a class="anchor" href="#_welche_client_zertifikate_müssen_hinterlegt_werden"></a>Welche Client-Zertifikate müssen hinterlegt werden?</h3>
@@ -354,6 +386,53 @@ Cocard kann sich derzeit nur über Client-Zertifikate authentifizieren, eine Aut
 <div class="paragraph">
 <p>Am Konnektor selbst muss der Kontext <code>Ein1 - iMedOne - Konnektor</code> nicht eingetragen werden, wenn hier keine zusätzlichen Kartenterminals oder Karten sichtbar werden, d.h. wenn alles schon über den <code>Service_Mandant - intern - Konnektor</code> erreichbar ist.</p>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_authentifikation_per_userpasswort"><a class="anchor" href="#_authentifikation_per_userpasswort"></a>Authentifikation per User/Passwort</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Ab Cocard v0.5.0 ist die Authentifikation alternativ mit User/Passwort möglich. Die Passwort-Authentifikation muss hierfür am Konnektor aktiviert sein. Hier ein Beispiel für die KoCoBox:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/connector/kocobox-tls-auth-client-passwd.png" alt="kocobox tls auth client passwd">
+</div>
+<div class="title">Abbildung 2. KoCoBox Firmware 5.5.12</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+User/Passwort-Authentifikation lässt sich auf der KoCoBox Firmware v5.5.12 nur noch aktivieren, wenn Authentisierungsmodus-LDAP ausgeschaltet ist.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Wählt man bei Authentifikation <em>User/Passwort</em> aus, erscheinen die Eingabefelder für Benutzer und Passwort.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/connector/connector-edit-basicauth.png" alt="connector edit basicauth">
+</div>
+<div class="title">Abbildung 3. User/Passwort-Authentifikation konfigurieren</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+In Cocard kann man pro Konnektor nur einen Benutzer hinterlegen. Auf Konnektorseite kann man aber diesen Benutzer für mehrere Client-Systeme verwenden (zumindest bei der KoCoBox).
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>

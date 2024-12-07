@@ -88,6 +88,8 @@ de:
     action: Aktion
     admin_url: Admin-URL
     authentication: Authentifikation
+    auth_user: Benutzer
+    auth_password: Passwort
     bsnr: BSNR
     card: Karte
     card_handle: CardHandle
