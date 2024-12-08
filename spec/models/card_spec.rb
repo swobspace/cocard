@@ -185,7 +185,7 @@ RSpec.describe Card, type: :model do
 
     describe "with contexts.empty?" do
       let(:card2) { FactoryBot.create(:card) }
-      it { puts card2.card_contexts }
+      # it { puts card2.card_contexts }
       it { expect(card2.pin_status).to eq(Cocard::States::WARNING) }
     end
 
