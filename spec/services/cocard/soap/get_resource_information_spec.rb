@@ -73,8 +73,8 @@ module Cocard::SOAP
             workplace: 'dontexist'
           ).call
         end
-        it { puts connector.use_tls }
-        it { puts connector.client_certificates.first }
+        # it { puts connector.use_tls }
+        # it { puts connector.client_certificates.first }
         it { expect(result.success?).to be_falsey }
         if ENV['USE_TLS'] && ENV['AUTHENTICATION'] == 'clientcert'
           it { expect(result.error_messages.first).to match(/Missing matching client certificate for client_system: dontexist/) }

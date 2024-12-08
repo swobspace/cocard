@@ -68,7 +68,7 @@ module TI::SinglePictures
           )
         end
 
-        it { puts single_picture.inspect }
+        # it { puts single_picture.inspect }
         it 'does not create a single_picture' do
           expect {
             subject.save
