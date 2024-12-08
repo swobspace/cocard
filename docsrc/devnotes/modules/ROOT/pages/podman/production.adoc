@@ -1,4 +1,7 @@
-= Production
+= Podman for Production
+:author: Wolfgang Barth
+:revdate: 2024-12-08
+:navtitle: Podman
 
 Just a memo for todos and code snippets ...
 
