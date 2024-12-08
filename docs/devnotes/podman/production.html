@@ -145,6 +145,15 @@
 <h2 id="_handling_images"><a class="anchor" href="#_handling_images"></a>Handling Images</h2>
 <div class="sectionbody">
 <div class="sect2">
+<h3 id="_update_ruby"><a class="anchor" href="#_update_ruby"></a>Update Ruby</h3>
+<div class="listingblock">
+<div class="title">Update ruby base image</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">podman pull registry.docker.com/library/ruby:3.2.6-slim</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_build_image"><a class="anchor" href="#_build_image"></a>Build Image</h3>
 <div class="listingblock">
 <div class="title">Build</div>
@@ -164,7 +173,7 @@
 <div class="listingblock">
 <div class="title">Tag image</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">podman tag cocard ghcr.io/swobspace/cocard:0.3.0
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">podman tag cocard ghcr.io/swobspace/cocard:0.5.0
 podman tag cocard ghcr.io/swobspace/cocard:latest</code></pre>
 </div>
 </div>
@@ -176,7 +185,7 @@ podman tag cocard ghcr.io/swobspace/cocard:latest</code></pre>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">export CR_PAT=YOUR_TOKEN
 echo $CR_PAT | podman login ghcr.io -u swobspace --password-stdin
-podman push ghcr.io/swobspace/cocard:0.3.0
+podman push ghcr.io/swobspace/cocard:0.5.0
 podman push ghcr.io/swobspace/cocard:latest</code></pre>
 </div>
 </div>
