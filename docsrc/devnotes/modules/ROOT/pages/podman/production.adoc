@@ -12,7 +12,7 @@ Just a memo for todos and code snippets ...
 .Update ruby base image
 [source,sh]
 ----
-podman pull registry.docker.com/library/ruby:3.2.6-slim
+podman pull docker.io/library/ruby:3.2.6-slim
 ----
 
 === Build Image
