@@ -1,0 +1,10 @@
+<div id="invalid_<%= dom_id(item) %>" class="d-inline-flex">
+  <%= button_to( button_action,
+                 method: :put,
+                 title: t('cocard.set_invalid'),
+                 class: "#{button_css}",
+                 params: {log: { 'is_valid': false }},
+                 data: { "turbo-frame": false }) do %>
+    <i class="fa-regular fa-bell-slash"></i>
+  <% end %>
+</div>

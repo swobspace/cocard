@@ -61,15 +61,23 @@ class LogsController < ApplicationController
 #    respond_with(@log)
 #  end
 #
-#  # PATCH/PUT /logs/1
-#  def update
-#    @log.update(log_params)
-#    respond_with(@log)
-#  end
-#
+ # PATCH/PUT /logs/1
+  def update
+    respond_with(@log) do |format|
+      if @log.update(log_params)
+        format.turbo_stream
+      else
+        flash[:alert] = @log.errors.full_messages.join("; ")
+        format.html { render :show, status: :unprocessable_entity } 
+      end
+    end
+  end
+
   # DELETE /logs/1
   def destroy
-    @log.destroy!
+    unless @log.destroy
+      flash[:alert] = @log.errors.full_messages.join("; ")
+    end
     respond_with(@log, location: polymorphic_path([@loggable, :logs]))
   end
 
@@ -93,7 +101,8 @@ class LogsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def log_params
-      params.require(:log).permit(:loggable_id, :loggable_type, :action, :last_seen, :level, :message)
+      params.require(:log).permit(:loggable_id, :loggable_type, :action, 
+                                  :last_seen, :level, :message, :is_valid)
     end
 
     def outdated

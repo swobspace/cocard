@@ -65,7 +65,7 @@ module Cocard::SOAP
     end
 
     def soap_operation
-      raise NotImplementedError, 
+      raise NotImplementedError,
             "#{self.class.name} - missing operation, soap_operation is not defined"
     end
 
@@ -86,7 +86,7 @@ module Cocard::SOAP
     end
 
     def soap_message
-      { 
+      {
         "CCTX:Context" => {
           "CONN:MandantId"      => @mandant,
           "CONN:ClientSystemId" => @client_system,
@@ -96,18 +96,23 @@ module Cocard::SOAP
 
     def init_savon_client
       globals = savon_globals
-      if use_tls && use_cert
+      if use_tls
         globals  = globals.merge(savon_tls_globals)
         endpoint = endpoint_tls_location
       else
         endpoint = endpoint_location
+      end
+      if use_cert
+        globals  = globals.merge(savon_cert_globals)
+      elsif use_basicauth
+        globals  = globals.merge(savon_basicauth_globals)
       end
       globals = globals.merge(endpoint: endpoint)
       client = Savon.client(globals)
     end
 
     def savon_globals
-      { 
+      {
         open_timeout: 15,
         # PIN actions may have timeouts > 45 sec.
         read_timeout: 60,
@@ -120,17 +125,29 @@ module Cocard::SOAP
     end
 
     def savon_tls_globals
-      { 
+      {
         ssl_verify_mode: :none,
+      }
+    end
+
+    def savon_cert_globals
+      {
         ssl_cert: auth_cert,
         ssl_cert_key: auth_pkey,
       }
     end
 
+    def savon_basicauth_globals
+      {
+        basic_auth: [auth_user, auth_password]
+      }
+    end
+
+
     def wsdl_content
       content = File.join(Rails.root, 'shared', 'wdsl', "EventService.wsdl")
     end
-    
+
     def endpoint_location
       # "http://#{connector_ip}/service/systeminformationservice"
       return nil unless @connector.kind_of? Connector
@@ -181,12 +198,24 @@ module Cocard::SOAP
       @connector.authentication == 'clientcert'
     end
 
+    def use_basicauth
+      @connector.authentication == 'basicauth'
+    end
+
     def auth_cert
       client_certificate&.certificate
     end
 
     def auth_pkey
       client_certificate&.private_key
+    end
+
+    def auth_user
+      @connector.auth_user
+    end
+
+    def auth_password
+      @connector.auth_password
     end
   end
 end

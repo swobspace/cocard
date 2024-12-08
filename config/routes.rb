@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     end
   end
   resources :networks
-  resources :logs, only: [:show, :index, :destroy] do
+  resources :logs, only: [:show, :index, :update, :destroy] do
     collection do
       get :sindex
       put :invalidate_outdated

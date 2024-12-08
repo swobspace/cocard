@@ -142,8 +142,8 @@ class CardsController < ApplicationController
 
   # DELETE /cards/1
   def destroy
-    @card.destroy!
-    respond_with(@card, location: polymorphic_path([@loggable, :cards]))
+    @card.destroy
+    respond_with(@card, location: polymorphic_path([@locatable, :cards]))
   end
 
   private

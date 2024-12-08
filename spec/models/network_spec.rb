@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Network, type: :model do
   let(:network) { FactoryBot.create(:network, netzwerk: '192.0.2.0/24') }
   it { is_expected.to belong_to(:location) }
-  it { is_expected.to have_many(:card_terminals).dependent(:restrict_with_error) }
+  it { is_expected.to have_many(:card_terminals).dependent(:nullify) }
   it { is_expected.to validate_presence_of(:netzwerk) }
   it { is_expected.to define_enum_for(:accessibility).with_values(nothing: -1, ping: 0) }
 

@@ -2,7 +2,7 @@ class Network < ApplicationRecord
   include NetworkConcerns
   # -- associations
   belongs_to :location
-  has_many :card_terminals, dependent: :restrict_with_error
+  has_many :card_terminals, dependent: :nullify
 
   # -- configuration
   has_rich_text :description

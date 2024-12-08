@@ -54,10 +54,11 @@ class NotesController < ApplicationController
 
   # DELETE /notes/1
   def destroy
-    @note.destroy!
     respond_with(@note, location: location) do |format|
-      format.turbo_stream { flash.now[:notice] = "Note successfully deleted" }
-      Notes::Processor.new(note: @note).call(:destroy)
+      if @note.destroy
+        format.turbo_stream { flash.now[:notice] = "Note successfully deleted" }
+        Notes::Processor.new(note: @note).call(:destroy)
+      end
     end
   end
 

@@ -25,10 +25,14 @@ module ConnectorServices
       connector.touch(:last_check)
       begin
         conn_options = faraday_options
-        if use_tls && use_cert
+        if use_tls
           conn_options = conn_options.merge(tls_options)
         end
-        conn = Faraday.new(conn_options)
+        conn = Faraday.new(conn_options) do |builder|
+                 if use_basicauth
+                   builder.request :authorization, :basic, auth_user, auth_password
+                 end
+               end
         response = conn.get(uri_path)
 
         unless response.success?
@@ -90,8 +94,8 @@ module ConnectorServices
     end
 
     def uri_base
-      scheme = ( connector.use_tls ) ? 'https' : 'http'
-      "#{scheme}://#{uri.host}"
+      # scheme = ( connector.use_tls ) ? 'https' : 'http'
+      "#{uri.scheme}://#{uri.host}"
     end
 
     def uri_path
@@ -99,13 +103,12 @@ module ConnectorServices
     end
 
     def tls_options
-      {
-        ssl: {
-          client_cert: auth_cert,
-          client_key: auth_pkey,
-          verify: false
-        }
-      }
+      if use_cert
+        sslopts = { client_cert: auth_cert, client_key: auth_pkey }
+      else
+        sslopts = {}
+      end
+      { ssl: sslopts.merge({ verify: false }) }
     end
 
     def client_certificate
@@ -113,11 +116,16 @@ module ConnectorServices
     end
 
     def use_tls
-      @connector.use_tls
+      # @connector.use_tls
+      uri.scheme == 'https'
     end
 
     def use_cert
       @connector.authentication == 'clientcert'
+    end
+
+    def use_basicauth
+      @connector.authentication == 'basicauth'
     end
 
     def auth_cert
@@ -126,6 +134,14 @@ module ConnectorServices
 
     def auth_pkey
       client_certificate&.private_key
+    end
+
+    def auth_user
+      @connector.auth_user
+    end
+
+    def auth_password
+      @connector.auth_password
     end
   end
 end

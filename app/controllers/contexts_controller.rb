@@ -41,7 +41,9 @@ class ContextsController < ApplicationController
 
   # DELETE /contexts/1
   def destroy
-    @context.destroy!
+    unless @context.destroy
+      flash[:alert] = @context.errors.full_messages.join("; ")
+    end
     respond_with(@context)
   end
 

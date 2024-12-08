@@ -61,7 +61,9 @@ class ClientCertificatesController < ApplicationController
 
   # DELETE /client_certificates/1
   def destroy
-    @client_certificate.destroy!
+    unless @client_certificate.destroy
+      flash[:alert] = @client_certificate.errors.full_messages.join("; ")
+    end
     respond_with(@client_certificate)
   end
 

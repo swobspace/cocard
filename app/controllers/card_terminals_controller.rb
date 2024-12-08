@@ -63,8 +63,10 @@ class CardTerminalsController < ApplicationController
 
   # DELETE /card_terminals/1
   def destroy
-    @card_terminal.destroy!
-    respond_with(@card_terminal, location: polymorphic_path([@loggable, :card_terminals]))
+    unless @card_terminal.destroy
+      flash[:alert] = @card_terminal.errors.full_messages.join("; ") 
+    end
+    respond_with(@card_terminal, location: polymorphic_path([@locatable, :card_terminals]))
   end
 
   private

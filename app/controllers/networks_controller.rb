@@ -39,7 +39,9 @@ class NetworksController < ApplicationController
 
   # DELETE /networks/1
   def destroy
-    @network.destroy!
+    unless @network.destroy
+      flash[:alert] = @network.errors.full_messages.join("; ")
+    end
     respond_with(@network)
   end
 

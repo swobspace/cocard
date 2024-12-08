@@ -90,8 +90,10 @@ class ConnectorsController < ApplicationController
 
   # DELETE /connectors/1
   def destroy
-    @connector.destroy!
-    respond_with(@connector, location: polymorphic_path([@loggable, :connectors]))
+    unless @connector.destroy
+      flash[:alert] = @connectors.errors.full_messages.join("; ")
+    end
+    respond_with(@connector, location: polymorphic_path([@locatable, :connectors]))
   end
 
   private
@@ -105,11 +107,13 @@ class ConnectorsController < ApplicationController
       params.require(:connector)
             .permit(:name, :ip, :sds_url, :manual_update, :description,
                     :admin_url, :id_contract, :serial, :use_tls, :authentication,
+                    :auth_user, :auth_password,
                     location_ids: [],
                     client_certificate_ids: [],
                     connector_contexts_attributes: [
                       :id, :context_id, :_destroy
                     ])
+            .reject { |k, v| k == 'auth_password' && v.blank? }
 
     end
 end

@@ -10,6 +10,8 @@ module Cocard::SOAP
         ip: ENV['SDS_IP'],
         use_tls: ENV['USE_TLS'] || false,
         authentication: ENV['AUTHENTICATION'] || 'noauth',
+        auth_user: ENV['AUTH_USER'],
+        auth_password: ENV['AUTH_PASSWORD'],
         connector_services: YAML.load_file(yaml)
       )
     end
@@ -61,13 +63,16 @@ module Cocard::SOAP
         end
         it { expect(result.success?).to be_falsey }
 
-        if ENV['USE_TLS']
+        if ENV['USE_TLS'] && ENV['AUTHENTICATION'] == 'clientcert'
           it { expect(result.error_messages.first).to match(/Missing matching client certificate for client_system: dontexist/) }
+        elsif ENV['AUTHENTICATION'] == 'basicauth'
+          it { expect(result.error_messages).to contain_exactly(
+               "Clientsystem aus dem Aufrufkontext konnte nicht authentifiziert werden.",
+               "S:Server") }
         else
           it { expect(result.error_messages).to contain_exactly(
                  "S:Server", "Ungültige Mandanten-ID")}
         end
-
       end
 
       describe "return error with nonexisting card" do

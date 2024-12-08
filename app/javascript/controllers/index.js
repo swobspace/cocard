@@ -25,5 +25,8 @@ application.register("sortable", SortableController)
 import ToastController from "./toast_controller"
 application.register("toast", ToastController)
 
+import ToggleFieldsController from "./toggle_fields_controller"
+application.register("toggle-fields", ToggleFieldsController)
+
 import PolymorphicSelectController from "@swobspace/stimulus-polymorphic-select"
 application.register("polymorphic-select", PolymorphicSelectController)

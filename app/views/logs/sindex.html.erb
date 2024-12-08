@@ -38,6 +38,12 @@
             <td class="text-nowrap text-end">
               <%= show_link log, class: 'btn btn-sm btn-outline-secondary me-1',
                                  data: { "turbo" => false } %>
+
+              <%= render InvalidateButtonComponent.new(
+                           item: log,
+                           readonly: cannot?(:manage, log.loggable)
+                         )
+               %>
               <%= render AcknowledgeButtonComponent.new(
                            notable: log,
                            readonly: cannot?(:manage, log.loggable)

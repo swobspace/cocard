@@ -65,6 +65,7 @@ de:
     cards_count: Anzahl Karten
     connectors_count: Anzahl Konnektoren
     acknowledge: Acknowledge
+    set_invalid: Ungültig setzen
 
   activerecord:
     models:
@@ -88,6 +89,8 @@ de:
     action: Aktion
     admin_url: Admin-URL
     authentication: Authentifikation
+    auth_user: Benutzer
+    auth_password: Passwort
     bsnr: BSNR
     card: Karte
     card_handle: CardHandle
@@ -209,6 +212,7 @@ de:
   authentications:
     noauth: 'Keine'
     clientcert: 'Client-Zertifikat'
+    basicauth: 'User/Passwort'
 
   pin_modes:
     'off': Aus
