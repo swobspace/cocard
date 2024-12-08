@@ -81,7 +81,8 @@
 
 <%= back_link %>
 <% if params[:outdated] %>
-  <%= button_to(t('logs.invalidate_outdated'),
+  <%= button_to(raw(%Q[<i class="fa-regular fa-bell-slash"></i> ] +
+                    t('logs.invalidate_outdated')),
                 invalidate_outdated_logs_path(),
                 method: :put,
                 form: {
@@ -92,7 +93,8 @@
                 },
                 class: 'btn btn-warning me-1') if current_user.is_admin?
    %>
-  <%= button_to(t('logs.delete_outdated'),
+  <%= button_to(raw(%Q[<i class="fa-solid fa-trash"></i> ] +
+                   t('logs.delete_outdated')),
                 delete_outdated_logs_path(),
                 method: :delete,
                 form: {
