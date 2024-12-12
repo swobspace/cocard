@@ -79,7 +79,11 @@ class CardsController < ApplicationController
                    "Kontext: #{@context}<br/>ERROR:: " +
                    result.error_messages.join(', ')).html_safe
       else
-        status  = :success
+        if result.pin_status&.pin_status == 'VERIFIED'
+          status  = :success
+        else
+          status  = :warning
+        end
         message = "Kontext: #{@context}, " +
                   "PIN-Status: #{result.pin_status.pin_status}, " +
                   "left_tries: #{result.pin_status.left_tries}"
