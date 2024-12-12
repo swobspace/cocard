@@ -8,4 +8,8 @@ export default class extends Controller {
     this.toast = new bootstrap.Toast(this.element)
     this.toast.show()
   }
+
+  disconnect() {
+    this.element.parentNode.remove()
+  }
 }
