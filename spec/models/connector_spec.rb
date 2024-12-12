@@ -210,4 +210,17 @@ RSpec.describe Connector, type: :model do
       end
     end
   end
+
+  describe "#tcp_port_open?(443)" do
+    it { expect(connector.tcp_port_open?(8080)).to be_truthy }
+  end
+  # it {puts connector.sds_url}
+
+  describe "#sds_port" do
+    it { expect(connector.sds_port).to eq(80) }
+  end
+
+  describe "#soap_port" do
+    it { expect(connector.soap_port).to eq(80) }
+  end
 end

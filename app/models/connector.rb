@@ -1,5 +1,6 @@
 class Connector < ApplicationRecord
   include PingConcerns
+  include TcpCheckConcerns
   include ConnectorConcerns
   include Cocard::Condition
   include NotableConcerns
