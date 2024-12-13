@@ -10,11 +10,16 @@ class Connectors::CheckConfigJob < ApplicationJob
     connector = options.fetch(:connector)
     status = nil
 
+    # check only if connector reachable
+    return false unless connector.up?
+
+    # SDS port
     unless connector.tcp_port_open?(connector.sds_port)
       text = "Port #{connector.sds_port} für SDS nicht erreichbar, bitte SDS_URL prüfen!"
       toaster(connector, :warning, text)
     end
 
+    # SOAP port
     unless connector.tcp_port_open?(connector.soap_port)
       text = "Port #{connector.soap_port} für SOAP nicht erreichbar, bitte TLS-Einstellungen prüfen!"
       toaster(connector, :warning, text)
