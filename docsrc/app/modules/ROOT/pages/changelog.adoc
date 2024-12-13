@@ -1,8 +1,9 @@
 = Changelog
 
-== 0.6.0-devel - 2024-12-08
+== 0.6.0-devel - 2024-12-13
 
 * Update auf Rails 7.2
+* Konfigurationscheck prüft beim Konnektor, ob die SDS-URL und der SOAP-Port erreichbar ist.
 
 == 0.5.0 - 2024-12-08
 
