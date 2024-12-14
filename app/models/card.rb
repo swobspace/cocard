@@ -38,7 +38,7 @@ class Card < ApplicationRecord
       set_condition( Cocard::States::NOTHING, msg )
     elsif card_terminal&.connector.nil?
       set_condition( Cocard::States::NOTHING,
-                     "CardTerminal fehlt - UNUSED" )
+                     "Kein Kartenterminal zugewiesen - Karte nicht gesteckt? - UNUSED" )
     elsif expiration_date.nil?
       set_condition( Cocard::States::NOTHING,
                      "Kein Ablaufdatum - UNUSED" )
@@ -49,20 +49,20 @@ class Card < ApplicationRecord
     # -- UNKNOWN
     elsif (card_type == 'SMC-B' and certificate.blank?)
       set_condition( Cocard::States::UNKNOWN,
-                     "SMB-C: no certificate available, please check configuration" )
+                     "SMB-C: kein Zertifikat verfügbar, bitte Konfiguration überprüfen" )
 
     # -- CRITICAL
     elsif (expiration_date <= Date.current)
       set_condition( Cocard::States::CRITICAL,
-                     "Card expired!" )
+                     "Gültigkeit der Karte abgelaufen!" )
     elsif (card_type == 'SMC-B' and pin_status == Cocard::States::CRITICAL)
       set_condition( Cocard::States::CRITICAL,
-                     "PIN not verified" )
+                     "PIN nicht verifiziert" )
 
     # -- WARNING
     elsif expiration_date <= 3.month.after(Date.current)
       set_condition( Cocard::States::WARNING,
-                     "Card expires at #{expiration_date.to_s} (<= 3 month)" )
+                     "Gültigkeit der Karte läuft bald ab: #{expiration_date.to_s} (<= 3 month)" )
 
     # -- OK
     else
