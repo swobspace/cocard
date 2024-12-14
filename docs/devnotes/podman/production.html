@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Production :: Cocard</title>
+    <title>Podman for Production :: Cocard</title>
     <meta name="generator" content="Antora 3.1.10">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -57,18 +57,12 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../todo.html">Todos</a>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="index.html">Podman</a>
+    <a class="nav-link" href="production.html">Podman</a>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="production.html">Production</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="dockerfile-prod.html">Dockerfile for Production</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="network.html">Network</a>
@@ -123,8 +117,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">DevNotes</a></li>
-    <li><a href="index.html">Podman</a></li>
-    <li><a href="production.html">Production</a></li>
+    <li><a href="production.html">Podman</a></li>
   </ul>
 </nav>
 </div>
@@ -133,7 +126,7 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Production</h1>
+<h1 class="page">Podman for Production</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
@@ -144,6 +137,15 @@
 <div class="sect1">
 <h2 id="_handling_images"><a class="anchor" href="#_handling_images"></a>Handling Images</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_update_ruby"><a class="anchor" href="#_update_ruby"></a>Update Ruby</h3>
+<div class="listingblock">
+<div class="title">Update ruby base image</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">podman pull docker.io/library/ruby:3.2.6-slim</code></pre>
+</div>
+</div>
+</div>
 <div class="sect2">
 <h3 id="_build_image"><a class="anchor" href="#_build_image"></a>Build Image</h3>
 <div class="listingblock">
@@ -164,7 +166,7 @@
 <div class="listingblock">
 <div class="title">Tag image</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">podman tag cocard ghcr.io/swobspace/cocard:0.3.0
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">podman tag cocard ghcr.io/swobspace/cocard:0.5.0
 podman tag cocard ghcr.io/swobspace/cocard:latest</code></pre>
 </div>
 </div>
@@ -176,7 +178,7 @@ podman tag cocard ghcr.io/swobspace/cocard:latest</code></pre>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">export CR_PAT=YOUR_TOKEN
 echo $CR_PAT | podman login ghcr.io -u swobspace --password-stdin
-podman push ghcr.io/swobspace/cocard:0.3.0
+podman push ghcr.io/swobspace/cocard:0.5.0
 podman push ghcr.io/swobspace/cocard:latest</code></pre>
 </div>
 </div>

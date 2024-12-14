@@ -1,8 +1,19 @@
-= Production
+= Podman for Production
+:author: Wolfgang Barth
+:revdate: 2024-12-08
+:navtitle: Podman
 
 Just a memo for todos and code snippets ...
 
 == Handling Images
+
+=== Update Ruby
+
+.Update ruby base image
+[source,sh]
+----
+podman pull docker.io/library/ruby:3.2.6-slim
+----
 
 === Build Image
 
@@ -23,7 +34,7 @@ podman run --rm -it cocard /bin/bash
 .Tag image
 [source,sh]
 ----
-podman tag cocard ghcr.io/swobspace/cocard:0.3.0
+podman tag cocard ghcr.io/swobspace/cocard:0.5.0
 podman tag cocard ghcr.io/swobspace/cocard:latest
 ----
 
@@ -34,7 +45,7 @@ podman tag cocard ghcr.io/swobspace/cocard:latest
 ----
 export CR_PAT=YOUR_TOKEN
 echo $CR_PAT | podman login ghcr.io -u swobspace --password-stdin
-podman push ghcr.io/swobspace/cocard:0.3.0
+podman push ghcr.io/swobspace/cocard:0.5.0
 podman push ghcr.io/swobspace/cocard:latest
 ----
 

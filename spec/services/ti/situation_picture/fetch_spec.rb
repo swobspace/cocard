@@ -42,7 +42,7 @@ module TI
         end
 
         it { expect(result.success?).to be_falsey }
-        it { puts result.error_messages }
+        # it { puts result.error_messages }
         it { expect(result.error_messages).to include('no information available') }
         it { expect(result.situation_picture).to be_nil }
 

@@ -29,6 +29,7 @@ class ConnectorsController < ApplicationController
 
   # GET /connectors/1
   def show
+    Connectors::CheckConfigJob.perform_later(connector: @connector)
     respond_with(@connector)
   end
 

@@ -1,5 +1,10 @@
 = Changelog
 
+== 0.6.0 - 2024-12-14
+
+* Update auf Rails 7.2
+* Konfigurationscheck prüft beim Konnektor, ob der Port für SDS und der SOAP-Port erreichbar sind.
+
 == 0.5.0 - 2024-12-08
 
 * Neu: xref:admin/connector-edit.adoc#_authentifikation_per_userpasswort[Client-Authentifikation am Konnektor mit User/Passwort] (alternativ zum Client-Zertifikat)

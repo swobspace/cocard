@@ -7,7 +7,7 @@ class Note < ApplicationRecord
   has_rich_text :message
   self.inheritance_column = nil
 
-  enum type: { plain: 0, acknowledge: 1 }
+  enum :type, { plain: 0, acknowledge: 1 }
 
   # -- validations and callbacks
   validates :user_id, :message, presence: true
