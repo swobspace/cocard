@@ -15,13 +15,13 @@ class Connectors::CheckConfigJob < ApplicationJob
 
     # SDS port
     unless connector.tcp_port_open?(connector.sds_port)
-      text = "Port #{connector.sds_port} für SDS nicht erreichbar, bitte SDS_URL prüfen!"
+      text = "Port #{connector.sds_port} für SDS nicht erreichbar, bitte SDS_URL und Konnektor prüfen!"
       toaster(connector, :warning, text)
     end
 
     # SOAP port
     unless connector.tcp_port_open?(connector.soap_port)
-      text = "Port #{connector.soap_port} für SOAP nicht erreichbar, bitte TLS-Einstellungen prüfen!"
+      text = "Port #{connector.soap_port} für SOAP nicht erreichbar, bitte TLS-Einstellungen und Konnektor prüfen!"
       toaster(connector, :warning, text)
     end
   end
