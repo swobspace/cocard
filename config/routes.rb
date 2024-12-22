@@ -62,6 +62,7 @@ Rails.application.routes.draw do
       post :get_card_terminals
       post :get_cards
       get :ping
+      post :reboot
     end
     resources :notes, module: :connectors
   end

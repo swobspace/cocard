@@ -1,5 +1,5 @@
 class ConnectorsController < ApplicationController
-  before_action :set_connector, only: [:show, :edit, :update, :destroy]
+  before_action :set_connector, only: [:show, :edit, :update, :destroy, :reboot]
   before_action :add_breadcrumb_show, only: [:show]
 
   # GET /connectors
@@ -86,6 +86,20 @@ class ConnectorsController < ApplicationController
 
   def get_cards
     Cocard::GetCardsJob.perform_now(connector: @connector)
+    respond_with(@connector, action: :show)
+  end
+
+  def reboot
+    if @connector.rebootable?
+      result = Connectors::RMI.new(connector: @connector).call(:reboot)
+      if result.success?
+        flash[:success] = result.response
+      else
+        flash[:alert] = "Reboot fehlgeschlagen: " + result.response
+      end
+    else
+      flash[:warning] = "Reboot des Konnektors wird nicht unterstützt"
+    end
     respond_with(@connector, action: :show)
   end
 

@@ -30,6 +30,10 @@ RSpec.describe ConnectorsController, type: :routing do
       expect(post: "/connectors").to route_to("connectors#create")
     end
 
+    it "routes to #reboot" do
+      expect(post: "/connectors/1/reboot").to route_to("connectors#reboot", id: "1")
+    end
+
     it "routes to #update via PUT" do
       expect(put: "/connectors/1").to route_to("connectors#update", id: "1")
     end
