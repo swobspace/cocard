@@ -111,3 +111,7 @@ gem "highline", "~> 3.0", require: false
 gem "faye-websocket", "~> 0.11.3"
 
 gem "eventmachine", "~> 1.2"
+
+gem "faraday-cookie_jar", "~> 0.0.7"
+
+gem "faraday-net_http_persistent", "~> 2.3"
