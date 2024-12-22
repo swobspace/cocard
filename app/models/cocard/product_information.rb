@@ -3,7 +3,7 @@ module Cocard
   class ProductInformation
     def initialize(hash)
       if hash.nil? 
-        @hash = nil
+        @hash = {}
       elsif hash.keys.include?(:information_date)
         @hash = hash
       else

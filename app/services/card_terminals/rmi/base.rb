@@ -13,7 +13,7 @@ module CardTerminals
       # * :card_terminal - card_terminal object
       #
       def initialize(options = {})
-        options.symbolize_keys
+        options = options.symbolize_keys
         @card_terminal = options.fetch(:card_terminal)
         @messages = []
         @valid, @rmi = check_terminal

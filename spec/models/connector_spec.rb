@@ -34,21 +34,43 @@ RSpec.describe Connector, type: :model do
     it { expect(connector.to_s).to match('- / 127.0.0.9') }
   end
 
-  describe "#product_information" do
-    it { expect(connector.product_information).to be_kind_of(Cocard::ProductInformation) }
+  describe "with real connector data" do
+    describe "#product_information" do
+      it { expect(connector.product_information).to be_kind_of(Cocard::ProductInformation) }
+    end
+
+    describe "#identification" do
+      it { expect(connector.identification).to eq("KOCOC-kocobox") }
+    end
+
+    describe "#service_information" do
+      it { expect(connector.service_information).to be_kind_of(Array) }
+      it { expect(connector.service_information.first).to be_kind_of(Cocard::Service) }
+    end
+
+    describe "#service('EventService')" do
+      it { expect(connector.service('EventService')).to be_kind_of(Cocard::Service) }
+    end
   end
 
-  describe "#identification" do
-    it { expect(connector.identification).to eq("KOCOC-kocobox") }
-  end
+  describe "with no data" do
+    let(:connector) { FactoryBot.create(:connector) }
+    describe "#product_information" do
+      it { expect(connector.product_information).to be_kind_of(Cocard::ProductInformation) }
+    end
 
-  describe "#service_information" do
-    it { expect(connector.service_information).to be_kind_of(Array) }
-    it { expect(connector.service_information.first).to be_kind_of(Cocard::Service) }
-  end
+    describe "#identification" do
+      it { expect(connector.identification).to eq("-") }
+    end
 
-  describe "#service('EventService')" do
-    it { expect(connector.service('EventService')).to be_kind_of(Cocard::Service) }
+    describe "#service_information" do
+      it { expect(connector.service_information).to be_kind_of(Array) }
+      it { expect(connector.service_information.first).to be_nil }
+    end
+
+    describe "#service('EventService')" do
+      it { expect(connector.service('EventService')).to be_nil }
+    end
   end
 
   describe "#update_condition" do

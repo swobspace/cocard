@@ -45,8 +45,11 @@ class Connector < ApplicationRecord
   end
 
   def product_information
-    return nil if connector_services.nil?
-    Cocard::ProductInformation.new(connector_services['ProductInformation'])
+    if connector_services.nil?
+      Cocard::ProductInformation.new(nil)
+    else
+      Cocard::ProductInformation.new(connector_services['ProductInformation'])
+    end
   end
 
   def service_information
