@@ -29,6 +29,10 @@ module Cocard
         it { expect(subject.product_code).to eq('kocobox') }
       end
 
+      describe "#product_vendor_id" do
+        it { expect(subject.product_vendor_id).to eq('KOCOC') }
+      end
+
       describe "#to_s" do
         it "shows product information summary" do
           expect(subject.to_s).to eq(<<~PRODINFO.chomp

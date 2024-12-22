@@ -31,6 +31,10 @@ module Cocard
       hash.dig(:product_identification, :product_code)
     end
 
+    def product_vendor_id
+      hash.dig(:product_identification, :product_vendor_id)
+    end
+
     def firmware_version
       begin
         product_identification[:product_version][:local][:fw_version]
