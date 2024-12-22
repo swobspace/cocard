@@ -54,8 +54,8 @@ module Cocard
           ProductCode: #{product_identification[:product_code]}
           ProductVersion:
             Local:
-              HWVersion: #{product_identification[:product_version][:local][:hw_version]}
-              FWVersion: #{product_identification[:product_version][:local][:fw_version]}
+              HWVersion: #{product_identification.dig(:product_version,:local,:hw_version)}
+              FWVersion: #{product_identification.dig(:product_version,:local,:fw_version)}
 
         ProductMiscellaneous:
           ProductVendorName: #{product_miscellaneous[:product_vendor_name]}
