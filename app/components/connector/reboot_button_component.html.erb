@@ -3,7 +3,11 @@
                  method: :post,
                  title: t('cocard.reboot'),
                  class: "btn btn-danger",
-                 data: { "turbo-frame": false }) do %>
+                  form: {
+                    data: {
+                      "turbo-confirm": t('connectors.do_reboot')
+                    }
+                  }) do %>
     <i class="fa-solid fa-power-off"></i>
   <% end %>
 </div>

@@ -241,3 +241,5 @@ de:
   workplaces:
     delete_outdated: Veraltete Arbeitsplätze löschen
     outdated: Veraltete Arbeitsplätze
+  connectors:
+    do_reboot: Konnektor neu starten? Der Konnektor ist dann für längere Zeit nicht verfügbar!
