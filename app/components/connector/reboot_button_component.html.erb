@@ -1,0 +1,10 @@
+<div id="reboot_<%= dom_id(connector) %>" class="d-inline-flex">
+  <%= button_to( reboot_connector_path(connector),
+                 method: :post,
+                 title: t('cocard.reboot'),
+                 class: "btn btn-danger",
+                 data: { "turbo-frame": false }) do %>
+    <i class="fa-solid fa-power-off"></i>
+  <% end %>
+</div>
+
