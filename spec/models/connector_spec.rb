@@ -38,6 +38,10 @@ RSpec.describe Connector, type: :model do
     it { expect(connector.product_information).to be_kind_of(Cocard::ProductInformation) }
   end
 
+  describe "#identification" do
+    it { expect(connector.identification).to eq("KOCOC-kocobox") }
+  end
+
   describe "#service_information" do
     it { expect(connector.service_information).to be_kind_of(Array) }
     it { expect(connector.service_information.first).to be_kind_of(Cocard::Service) }
