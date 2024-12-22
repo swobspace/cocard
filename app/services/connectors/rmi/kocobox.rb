@@ -7,6 +7,14 @@ module Connectors
 
       def reboot(params = {})
         #
+        # credentials present?
+        #
+        if koco_admin.blank? or koco_passwd.blank?
+          return Result.new(success?: false,
+                            response: "Fehlende Zugangsdaten: KOCO_PASSWD " +
+                                      "oder KOCO_ADMIN nicht gesetzt")
+        end
+        #
         # setup connection
         #
         conn = Faraday.new(faraday_options) do |f|
@@ -46,7 +54,7 @@ module Connectors
           xtoken = nil
         end
 
-        # 
+        #
         # if RAILS_ENV=test don't really reboot
         #
         if Rails.env.test?
