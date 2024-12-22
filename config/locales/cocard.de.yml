@@ -66,6 +66,7 @@ de:
     connectors_count: Anzahl Konnektoren
     acknowledge: Acknowledge
     set_invalid: Ungültig setzen
+    reboot: Reboot
 
   activerecord:
     models:
