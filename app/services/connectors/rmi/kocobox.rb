@@ -70,7 +70,7 @@ module Connectors
         end
 
         if r4.status == 200
-          Result.new(success?: true, response: "Reboot successful triggered")
+          Result.new(success?: true, response: "Reboot ausgelöst, der Konnektor wird neu gestartet")
         else
           Result.new(success?: false, response: r3.inspect)
         end
