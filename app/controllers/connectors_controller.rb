@@ -93,10 +93,13 @@ class ConnectorsController < ApplicationController
     if @connector.rebootable?
       result = Connectors::RMI.new(connector: @connector).call(:reboot)
       if result.success?
-        flash[:success] = result.response
+        msg = result.response
+        flash[:success] = msg
       else
-        flash[:alert] = "Reboot fehlgeschlagen: " + result.response
+        msg = "Reboot fehlgeschlagen: " + result.response
+        flash[:alert] = msg
       end
+      Note.create(notable: @connector, user: current_user, message: msg)
     else
       flash[:warning] = "Reboot des Konnektors wird nicht unterstützt"
     end
