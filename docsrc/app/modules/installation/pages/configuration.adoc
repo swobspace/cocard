@@ -42,6 +42,9 @@ DEFAULT_WS_AUTH_PASS=strenggeheim
 DEFAULT_SMCB_PIN=11111111
 
 INTERNET_PROXY=http://192.0.2.99:3128
+
+KOCO_ADMIN=koco-root
+KOCO_PASSWD=verystrongsecret
 ----
 
 [cols="1m,4"]
@@ -92,5 +95,11 @@ INTERNET_PROXY=http://192.0.2.99:3128
 
 |INTERNET_PROXY
 |Wenn für Internet-Verbindungen wie z.B. die Abfrage des TI-Lagebildes ein Proxy erforderlich ist, muss dieser hier explizit angegeben werden, sonst kann die Variable entfallen.
+
+|KOCO_ADMIN
+|Kocobox-Administrator für den Zugang zur Weboberfläche. Der User muss die Berechtigung für den Reboot des Konnektors haben
+
+|KOCO_PASSWD
+|Passwort für den Zugang zur Weboberfläche
 
 |===

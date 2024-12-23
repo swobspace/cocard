@@ -28,4 +28,9 @@ module ConnectorConcerns
   def soap_port
     ( use_tls ) ? 443 : 80
   end
+
+  def rebootable?
+    @rebootable ||= Connectors::RMI.new(connector: self)
+                                   .available_actions.include?(:reboot)
+  end
 end

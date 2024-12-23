@@ -1,5 +1,11 @@
 = Changelog
 
+== 0.6.1 - 2024-12-24
+
+* Neu: Reboot von KoCoBox-Konnektoren
+* Geschütze Information wird erst nach Userinteraktion angezeigt (bei Karte und Konnektor).
+* Dokumentation für Konnektoren ergänzt
+
 == 0.6.0 - 2024-12-14
 
 * Update auf Rails 7.2

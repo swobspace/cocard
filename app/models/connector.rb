@@ -45,8 +45,11 @@ class Connector < ApplicationRecord
   end
 
   def product_information
-    return nil if connector_services.nil?
-    Cocard::ProductInformation.new(connector_services['ProductInformation'])
+    if connector_services.nil?
+      Cocard::ProductInformation.new(nil)
+    else
+      Cocard::ProductInformation.new(connector_services['ProductInformation'])
+    end
   end
 
   def service_information
@@ -56,6 +59,10 @@ class Connector < ApplicationRecord
     end
   end
 
+  def identification
+    "#{product_information.product_vendor_id}-#{product_information.product_code}"
+  end
+
   def service(svcname)
     service_information.select{|x| x.name == svcname }.first
   end
@@ -63,22 +70,22 @@ class Connector < ApplicationRecord
   def update_condition
     if manual_update
       set_condition(Cocard::States::NOTHING, 
-                    "Manual update enabled")
+                    "Manuelles Update aktiviert")
     elsif !up?
       set_condition(Cocard::States::CRITICAL, 
-                    "Connector unreachable, ping failed")
+                    "Konnektor nicht erreichbar, Ping fehlgeschlagen")
     elsif !soap_request_success
       set_condition(Cocard::States::UNKNOWN, 
-                    "soap request failed, may be a configuration problem")
+                    "SOAP-Abfrage fehlgeschlagen, Konfigurationsproblem, Port nicht erreichbar oder Konnektor funktioniert nicht richtig")
     elsif !vpnti_online
       set_condition(Cocard::States::CRITICAL,
-                    "Connector reachable but TI offline!")
+                    "Konnektor erreichbar (Ping), aber TI offline!")
     elsif expiration_date.present? and (expiration_date <= 3.month.after(Date.current))
       set_condition( Cocard::States::WARNING,
-                     "Connector certificate expires at #{expiration_date.to_s} (<= 3 month)" )
+                     "Das Zertifikat des Konnektors läuft bald ab: #{expiration_date.to_s} (<= 3 month)" )
     else
       set_condition(Cocard::States::OK,
-                    "Connector TI online")
+                    "Konnektor online")
     end
   end
 

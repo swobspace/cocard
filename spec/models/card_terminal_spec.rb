@@ -104,7 +104,7 @@ RSpec.describe CardTerminal, type: :model do
           expect {
             ct.update_condition
           }.to change(ct, :condition).to(Cocard::States::NOTHING)
-          expect(ct.condition_message).to match(/No connector assigned/)
+          expect(ct.condition_message).to match(/Kein Konnektor zugewiesen/)
         end
       end
 
@@ -114,7 +114,7 @@ RSpec.describe CardTerminal, type: :model do
           expect {
             ct.update_condition
           }.to change(ct, :condition).to(Cocard::States::NOTHING)
-          expect(ct.condition_message).to match(/CardTerminal nicht in Betrieb/)
+          expect(ct.condition_message).to match(/Kartenterminal nicht in Betrieb/)
         end
       end
 
@@ -125,7 +125,7 @@ RSpec.describe CardTerminal, type: :model do
           expect {
             ct.update_condition
           }.to change(ct, :condition).to(Cocard::States::CRITICAL)
-          expect(ct.condition_message).to match(/CardTerminal unreachable - ping failed and not connected/)
+          expect(ct.condition_message).to match(/CRITICAL Kartenterminal nicht erreichbar, kein Ping und nicht mit dem Konnektor verbunden/)
         end
       end
 
@@ -135,7 +135,7 @@ RSpec.describe CardTerminal, type: :model do
           expect(ct).to receive(:up?).at_least(:once).and_return(true)
           ct.update_condition
           expect(ct.condition).to eq(Cocard::States::WARNING)
-          expect(ct.condition_message).to match(/CardTerminal reachable, but not connected/)
+          expect(ct.condition_message).to match(/WARNING Kartenterminal per Ping erreichbar, aber nicht mit dem Konnektor verbunden/)
         end
       end
 
@@ -145,7 +145,7 @@ RSpec.describe CardTerminal, type: :model do
           expect(ct).to receive(:up?).at_least(:once).and_return(false)
           ct.update_condition
           expect(ct.condition).to eq(Cocard::States::WARNING)
-          expect(ct.condition_message).to match(/CardTerminal is connected, but ping failed/)
+          expect(ct.condition_message).to match(/WARNING Kartenterminal mit dem Konnektor verbunden, aber Ping fehlgeschlagen/)
         end
       end
 
@@ -165,7 +165,7 @@ RSpec.describe CardTerminal, type: :model do
           expect {
             ct.update_condition
           }.to change(ct, :condition).to(Cocard::States::OK)
-          expect(ct.condition_message).to match(/CardTerminal online/)
+          expect(ct.condition_message).to match(/OK Kartenterminal online/)
           ct.reload
           expect(ct.acknowledge).to be_nil
           ack.reload
@@ -200,7 +200,7 @@ RSpec.describe CardTerminal, type: :model do
           expect {
             ct.update_condition
           }.to change(ct, :condition).to(Cocard::States::NOTHING)
-          expect(ct.condition_message).to match(/No connector assigned/)
+          expect(ct.condition_message).to match(/Kein Konnektor zugewiesen/)
         end
       end
 
@@ -210,7 +210,7 @@ RSpec.describe CardTerminal, type: :model do
           expect {
             ct.update_condition
           }.to change(ct, :condition).to(Cocard::States::NOTHING)
-          expect(ct.condition_message).to match(/CardTerminal nicht in Betrieb/)
+          expect(ct.condition_message).to match(/Kartenterminal nicht in Betrieb/)
         end
       end
 
@@ -220,7 +220,7 @@ RSpec.describe CardTerminal, type: :model do
           expect {
             ct.update_condition
           }.to change(ct, :condition).to(Cocard::States::OK)
-          expect(ct.condition_message).to match(/CardTerminal online/)
+          expect(ct.condition_message).to match(/OK Kartenterminal online/)
         end
       end
     end

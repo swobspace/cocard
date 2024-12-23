@@ -58,6 +58,7 @@ RSpec.describe "connectors/index", type: :view do
 
   it "renders a list of connectors" do
     render
+    puts rendered
     cell_selector = 'tr>td'
     assert_select cell_selector, text: Regexp.new("Name".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("127.0.2.1".to_s), count: 1
@@ -77,8 +78,8 @@ RSpec.describe "connectors/index", type: :view do
     assert_select cell_selector, text: Regexp.new("Client-Zertifikat".to_s), count: 1
     assert_select cell_selector, text: Regexp.new("Keine".to_s), count: 1
     assert_select cell_selector, text: Regexp.new("UNKNOWN".to_s), count: 2
-    assert_select cell_selector, text: Regexp.new("OK Connector TI online".to_s), count: 1
-    assert_select cell_selector, text: Regexp.new("soap request failed".to_s), count: 1
+    assert_select cell_selector, text: Regexp.new("OK Konnektor online".to_s), count: 1
+    assert_select cell_selector, text: Regexp.new("UNKNOWN SOAP-Abfrage fehlgeschlagen, Konfigurationsproblem, Port nicht erreichbar oder Konnektor funktioniert nicht richtig".to_s), count: 1
     assert_select cell_selector, text: Regexp.new("2025-12-31".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("8027600355000099999".to_s), count: 2
   end

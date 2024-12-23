@@ -59,7 +59,19 @@
           <% if can?(:read, card, :private_information) %>
             <tr>
               <th class="w-10 pe-3"><%= t('attributes.private_information')%>:</th>
-              <td><%= card.private_information %></td>
+              <td>
+                <%= content_tag :span,
+                  "data-controller": "show-secret",
+                  "data-show-secret-secret-value": card.private_information do %>
+                  <span data-show-secret-target="content">
+                    <%= '**********' if card.private_information.present? %>
+                  </span>
+                  <i class="fa-solid fa-eye"
+                    data-action="click->show-secret#toggleSecret"
+                    data-show-secret-target="icon"></i>
+                <% end %>
+                <%# card.private_information %>
+              </td>
             </tr>
           <% end %>
         </table>

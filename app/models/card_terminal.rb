@@ -59,38 +59,38 @@ class CardTerminal < ApplicationRecord
   def update_condition
     if connector.nil?
       return set_condition( Cocard::States::NOTHING,
-                     "No connector assigned" )
+                     "Kein Konnektor zugewiesen" )
     end
     if online?
       return set_condition( Cocard::States::OK,
-                     "CardTerminal online" )
+                     "Kartenterminal online" )
     end
     if last_ok.blank?
       return set_condition( Cocard::States::NOTHING,
-                     "CardTerminal nicht in Betrieb" )
+                     "Kartenterminal nicht in Betrieb" )
     end
     if is_accessible?
       is_up = up?
       if !is_up and !connected
         return set_condition( Cocard::States::CRITICAL,
-                              "CardTerminal unreachable - ping failed and not connected" )
+                              "Kartenterminal nicht erreichbar, kein Ping und nicht mit dem Konnektor verbunden " )
       elsif !is_up and connected
         return set_condition( Cocard::States::WARNING,
-                              "CardTerminal is connected, but ping failed" )
+                              "Kartenterminal mit dem Konnektor verbunden, aber Ping fehlgeschlagen" )
       elsif is_up and !connected
         return set_condition( Cocard::States::WARNING,
-                              "CardTerminal reachable, but not connected" )
+                              "Kartenterminal per Ping erreichbar, aber nicht mit dem Konnektor verbunden" )
       else
         return set_condition( Cocard::States::OK,
-                              "CardTerminal online - Ping not reliable" )
+                              "Kartenterminal online - Ping nicht zuverlässig" )
       end
     else
       if !connected
         return set_condition( Cocard::States::CRITICAL,
-                       "CardTerminal not connected" ) 
+                       "Kartenterminal nicht mit dem Konnektor verbunden" ) 
       else
         return set_condition( Cocard::States::UNKNOWN,
-                   "CardTerminal unknown state, should not occur" ) 
+                   "Unbekannter Zustand, sollte nicht passieren" ) 
       end
     end
   end

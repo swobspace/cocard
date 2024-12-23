@@ -13,6 +13,7 @@
         <%= render ConditionIconComponent.new(item: @connector) %>
       </div>
       <div role="toolbar" class="ms-auto pt-3">
+        <%= render Connector::RebootButtonComponent.new(connector: @connector) if can? :manage, @connector %>
         <%= button_to(t('cocard.fetch_sds'),
                       fetch_sds_connector_path(@connector),
                       class: 'btn btn-warning me-1') if can? :manage, @connector 
@@ -95,7 +96,18 @@
           <% if can?(:read, @connector, :id_contract) %>
             <tr>
               <th class="w-25 pe-3"><%= t('attributes.id_contract')%>:</th>
-              <td><%= @connector.id_contract %></td>
+              <td>
+                <%= content_tag :span,
+                  "data-controller": "show-secret",
+                  "data-show-secret-secret-value": @connector.id_contract do %>
+                  <span data-show-secret-target="content">
+                    <%= '*' * @connector.id_contract.length %>
+                  </span>
+                  <i class="fa-solid fa-eye"
+                    data-action="click->show-secret#toggleSecret"
+                    data-show-secret-target="icon"></i>
+                <% end %>
+              </td>
             </tr>
           <% end %>
           <tr>

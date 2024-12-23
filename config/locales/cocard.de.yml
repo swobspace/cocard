@@ -66,6 +66,7 @@ de:
     connectors_count: Anzahl Konnektoren
     acknowledge: Acknowledge
     set_invalid: Ungültig setzen
+    reboot: Reboot
 
   activerecord:
     models:
@@ -177,6 +178,7 @@ de:
     updated_at: zuletzt aktualisiert
     username: Username
     use_tls: TLS verwenden
+    vpnti_online: VPN TI Online
     workplace: Arbeitsplatz
     workplaces: Arbeitsplätze
 
@@ -240,3 +242,5 @@ de:
   workplaces:
     delete_outdated: Veraltete Arbeitsplätze löschen
     outdated: Veraltete Arbeitsplätze
+  connectors:
+    do_reboot: Konnektor neu starten? Der Konnektor ist dann für längere Zeit nicht verfügbar!

@@ -53,6 +53,9 @@
     <a class="nav-link" href="../user/conditions.html">Zustände</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/connector.html">Konnektor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../user/logs.html">Event Logs</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -247,7 +250,10 @@ DEFAULT_WS_AUTH_USER=admin
 DEFAULT_WS_AUTH_PASS=strenggeheim
 DEFAULT_SMCB_PIN=11111111
 
-INTERNET_PROXY=http://192.0.2.99:3128</code></pre>
+INTERNET_PROXY=http://192.0.2.99:3128
+
+KOCO_ADMIN=koco-root
+KOCO_PASSWD=verystrongsecret</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -321,6 +327,14 @@ INTERNET_PROXY=http://192.0.2.99:3128</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>INTERNET_PROXY</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Wenn für Internet-Verbindungen wie z.B. die Abfrage des TI-Lagebildes ein Proxy erforderlich ist, muss dieser hier explizit angegeben werden, sonst kann die Variable entfallen.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>KOCO_ADMIN</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kocobox-Administrator für den Zugang zur Weboberfläche. Der User muss die Berechtigung für den Reboot des Konnektors haben</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>KOCO_PASSWD</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passwort für den Zugang zur Weboberfläche</p></td>
 </tr>
 </tbody>
 </table>

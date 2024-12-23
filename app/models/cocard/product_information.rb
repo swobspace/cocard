@@ -3,7 +3,7 @@ module Cocard
   class ProductInformation
     def initialize(hash)
       if hash.nil? 
-        @hash = nil
+        @hash = {}
       elsif hash.keys.include?(:information_date)
         @hash = hash
       else
@@ -31,6 +31,10 @@ module Cocard
       hash.dig(:product_identification, :product_code)
     end
 
+    def product_vendor_id
+      hash.dig(:product_identification, :product_vendor_id)
+    end
+
     def firmware_version
       begin
         product_identification[:product_version][:local][:fw_version]
@@ -50,8 +54,8 @@ module Cocard
           ProductCode: #{product_identification[:product_code]}
           ProductVersion:
             Local:
-              HWVersion: #{product_identification[:product_version][:local][:hw_version]}
-              FWVersion: #{product_identification[:product_version][:local][:fw_version]}
+              HWVersion: #{product_identification.dig(:product_version,:local,:hw_version)}
+              FWVersion: #{product_identification.dig(:product_version,:local,:fw_version)}
 
         ProductMiscellaneous:
           ProductVendorName: #{product_miscellaneous[:product_vendor_name]}
