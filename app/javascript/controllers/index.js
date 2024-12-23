@@ -19,6 +19,9 @@ application.register("nested-form", NestedFormController)
 import SelectController from "./ts/select_controller"
 application.register("select", SelectController)
 
+import ShowSecretController from "./show_secret_controller.js"
+application.register("show-secret", ShowSecretController)
+
 import SortableController from "./sortable_controller.js"
 application.register("sortable", SortableController)
 
