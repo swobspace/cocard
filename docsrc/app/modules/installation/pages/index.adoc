@@ -4,7 +4,7 @@
 
 == Podman
 
-Ich benutze `podman` anstelle von `docker`. `podman` integriert sich mit Quadlets bestens in `systemd`, und das auch noch als normaler Benutzer (rootless). Für diejenigen, die sich mit `docker` und `docker-compose` wohler fühlt, gibt es alternativ ein `docker-compose.yml`.
+Ich benutze `podman` anstelle von `docker`. `podman` integriert sich mit Quadlets bestens in `systemd`, und das auch noch als normaler Benutzer (rootless). Für diejenigen, die sich mit `docker` und `docker-compose` wohler fühlen, gibt es alternativ ein `docker-compose.yml`.
 
 
 == xref:podman/quickstart.adoc[]
