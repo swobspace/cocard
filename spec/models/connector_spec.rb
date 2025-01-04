@@ -88,7 +88,7 @@ RSpec.describe Connector, type: :model do
     describe "with reboot in progress" do
       it "-> WARNING" do
         expect(connector).to receive(:up?).and_return(false)
-        expect(connector).to receive(:rebooted_at).at_least(:once).and_return(Time.current)
+        expect(connector).to receive(:rebooted_at).at_least(:once).and_return(2.minutes.before(Time.current))
         expect {
           connector.update_condition
         }.to change(connector, :condition).to(Cocard::States::WARNING)
@@ -146,7 +146,7 @@ RSpec.describe Connector, type: :model do
       end
 
       it "-> OK" do
-        connector.update(acknowledge_id: ack.id, rebooted_at: Time.current)
+        connector.update(acknowledge_id: ack.id, rebooted_at: 2.minutes.before(Time.current))
         connector.reload
         expect(connector.acknowledge).to eq(ack)
         expect(connector).to receive(:up?).at_least(:once).and_return(true)

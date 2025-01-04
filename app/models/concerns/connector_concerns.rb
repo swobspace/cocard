@@ -43,4 +43,8 @@ module ConnectorConcerns
       false
     end
   end
+
+  def reboot_active?
+    rebooted_at.present? and (rebooted_at > 1.minute.before(Time.current))
+  end
 end

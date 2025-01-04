@@ -56,4 +56,22 @@ RSpec.describe ConnectorConcerns, type: :model do
       expect(connector.rebooted_at).to be_nil
     end
   end
+
+  describe "#reboot_active?" do
+    it "no if rebooted_at.nil?" do
+      expect(connector).to receive(:rebooted_at).and_return(nil)
+      expect(connector.reboot_active?).to be_falsey
+    end
+
+    it "current rebooted_at" do
+      expect(connector).to receive(:rebooted_at).at_least(:once).and_return(Time.current)
+      expect(connector.reboot_active?).to be_truthy
+    end
+
+    it "old rebooted_at" do
+      connector.update(rebooted_at: 2.minutes.before(Time.current))
+      connector.reload
+      expect(connector.reboot_active?).to be_falsey
+    end
+  end
 end

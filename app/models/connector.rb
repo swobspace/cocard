@@ -69,17 +69,17 @@ class Connector < ApplicationRecord
 
   def update_condition
     if manual_update
-      set_condition(Cocard::States::NOTHING, 
+      set_condition(Cocard::States::NOTHING,
                     "Manuelles Update aktiviert")
-
-    elsif rebooted? and (!up? or !soap_request_success or !vpnti_online)
+    elsif reboot_active? or
+          (rebooted? and (!up? or !soap_request_success or !vpnti_online))
       set_condition(Cocard::States::WARNING,
                     "Reboot um #{rebooted_at.localtime.to_s}, stay tuned...")
     elsif !up?
-      set_condition(Cocard::States::CRITICAL, 
+      set_condition(Cocard::States::CRITICAL,
                     "Konnektor nicht erreichbar, Ping fehlgeschlagen")
     elsif !soap_request_success
-      set_condition(Cocard::States::UNKNOWN, 
+      set_condition(Cocard::States::UNKNOWN,
                     "SOAP-Abfrage fehlgeschlagen, Konfigurationsproblem, Port nicht erreichbar oder Konnektor funktioniert nicht richtig")
     elsif !vpnti_online
       set_condition(Cocard::States::CRITICAL,
