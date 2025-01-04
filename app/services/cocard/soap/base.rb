@@ -51,13 +51,11 @@ module Cocard::SOAP
                    .call(soap_operation,
                          attributes: soap_operation_attributes,
                          message: soap_message)
-      rescue Savon::Error => error
-        fault = error.to_hash[:fault]
+      rescue Savon::SOAPFault => error
+        fault = error.to_hash[:fault] || {}
         error_messages = [fault[:faultcode], fault[:faultstring]]
         return Result.new(success?: false, error_messages: error_messages, response: nil)
-      rescue HTTPI::SSLError => error
-        return Result.new(success?: false, error_messages: Array(error.message), response: nil)
-      rescue Timeout::Error => error
+      rescue => error
         return Result.new(success?: false, error_messages: Array(error.message), response: nil)
       end
 
