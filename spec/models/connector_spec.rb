@@ -85,6 +85,16 @@ RSpec.describe Connector, type: :model do
       end
     end
 
+    describe "with reboot in progress" do
+      it "-> WARNING" do
+        expect(connector).to receive(:up?).and_return(false)
+        expect(connector).to receive(:rebooted_at).at_least(:once).and_return(Time.current)
+        expect {
+          connector.update_condition
+        }.to change(connector, :condition).to(Cocard::States::WARNING)
+      end
+    end
+
     describe "with ping failed" do
       it "-> CRITICAL" do
         expect(connector).to receive(:up?).and_return(false)

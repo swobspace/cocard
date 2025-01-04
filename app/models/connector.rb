@@ -71,6 +71,10 @@ class Connector < ApplicationRecord
     if manual_update
       set_condition(Cocard::States::NOTHING, 
                     "Manuelles Update aktiviert")
+
+    elsif rebooted? and (!up? or !soap_request_success or !vpnti_online)
+      set_condition(Cocard::States::WARNING,
+                    "Reboot um #{rebooted_at.localtime.to_s}, stay tuned...")
     elsif !up?
       set_condition(Cocard::States::CRITICAL, 
                     "Konnektor nicht erreichbar, Ping fehlgeschlagen")
