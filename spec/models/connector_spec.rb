@@ -146,7 +146,7 @@ RSpec.describe Connector, type: :model do
       end
 
       it "-> OK" do
-        connector.update(acknowledge_id: ack.id)
+        connector.update(acknowledge_id: ack.id, rebooted_at: Time.current)
         connector.reload
         expect(connector.acknowledge).to eq(ack)
         expect(connector).to receive(:up?).at_least(:once).and_return(true)
@@ -159,6 +159,7 @@ RSpec.describe Connector, type: :model do
         }.to change(connector, :condition).to(Cocard::States::OK)
         connector.reload
         expect(connector.acknowledge).to be_nil
+        expect(connector.rebooted_at).to be_nil
         ack.reload
         expect(ack.valid_until).to be >= 1.second.before(Time.current)
         expect(ack.valid_until).to be <= 1.second.after(Time.current)

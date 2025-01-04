@@ -90,6 +90,7 @@ class Connector < ApplicationRecord
     else
       set_condition(Cocard::States::OK,
                     "Konnektor online")
+      self[:rebooted_at] = nil
     end
   end
 
