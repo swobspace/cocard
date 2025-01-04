@@ -15,7 +15,7 @@ podman create --pod play-cocard --name play-cocard-redis \
 podman create --pod play-cocard --name play-cocard-postgres \
   --volume=play-cocard-postgres:/var/lib/postgresql/data \
   --env-file=env.playground \
-  --health-cmd="/usr/local/bin/pg_isready -q -d postgres -U postgres" \
+  --health-cmd="/usr/bin/pg_isready -q -d postgres -U postgres" \
   --health-interval=10s \
   --health-timeout=45s \
   --health-retries=10 \
