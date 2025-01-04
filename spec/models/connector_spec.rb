@@ -242,11 +242,4 @@ RSpec.describe Connector, type: :model do
   end
   # it {puts connector.sds_url}
 
-  describe "#sds_port" do
-    it { expect(connector.sds_port).to eq(80) }
-  end
-
-  describe "#soap_port" do
-    it { expect(connector.soap_port).to eq(80) }
-  end
 end

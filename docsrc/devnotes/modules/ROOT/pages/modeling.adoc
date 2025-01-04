@@ -73,7 +73,8 @@ bin/rails g migration AddReadonlyToConnector \
   firmware_version:string \
   acknowledge_id:bigint \
   iccsn:string \
-  expiration_date:date
+  expiration_date:date \
+  rebooted_at:timestamp
 ----
 
 .Install ActionText

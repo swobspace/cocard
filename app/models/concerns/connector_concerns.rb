@@ -33,4 +33,8 @@ module ConnectorConcerns
     @rebootable ||= Connectors::RMI.new(connector: self)
                                    .available_actions.include?(:reboot)
   end
+
+  def rebooted?
+    rebooted_at.present? && (rebooted_at > 20.minutes.before(Time.current))
+  end
 end
