@@ -58,6 +58,7 @@ module Connectors
         # if RAILS_ENV=test don't really reboot
         #
         if Rails.env.test?
+          connector.touch(:rebooted_at)
           return Result.new(success?: true, response: r3)
         end
 
@@ -70,6 +71,7 @@ module Connectors
         end
 
         if r4.status == 200
+          connector.touch(:rebooted_at)
           Result.new(success?: true, response: "Reboot ausgelöst, der Konnektor wird neu gestartet")
         else
           Result.new(success?: false, response: r3.inspect)
