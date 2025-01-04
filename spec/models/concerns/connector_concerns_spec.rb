@@ -49,8 +49,11 @@ RSpec.describe ConnectorConcerns, type: :model do
     end
 
     it "old rebooted_at" do
-      expect(connector).to receive(:rebooted_at).at_least(:once).and_return(1.hour.before(Time.current))
+      connector.update(rebooted_at: 1.hour.before(Time.current))
+      connector.reload
       expect(connector.rebooted?).to be_falsey
+      connector.reload
+      expect(connector.rebooted_at).to be_nil
     end
   end
 end

@@ -35,6 +35,12 @@ module ConnectorConcerns
   end
 
   def rebooted?
-    rebooted_at.present? && (rebooted_at > 20.minutes.before(Time.current))
+    return nil if rebooted_at.nil?
+    if rebooted_at > 20.minutes.before(Time.current)
+      true
+    else
+      update_column(:rebooted_at, nil)
+      false
+    end
   end
 end
