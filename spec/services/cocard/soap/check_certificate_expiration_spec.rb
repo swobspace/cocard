@@ -65,7 +65,7 @@ module Cocard::SOAP
         elsif ENV['AUTHENTICATION'] == 'basicauth'
           it { expect(result.error_messages).to contain_exactly(
                "Clientsystem aus dem Aufrufkontext konnte nicht authentifiziert werden.",
-               "S:Server") }
+               "S:Server", "code: 4204") }
         else
           it { expect(result.error_messages).to contain_exactly(
                  "S:Server", "Ungültige Mandanten-ID")}

@@ -67,8 +67,8 @@ module Cocard::SOAP
           it { expect(result.error_messages.first).to match(/Missing matching client certificate for client_system: dontexist/) }
         elsif ENV['AUTHENTICATION'] == 'basicauth'
           it { expect(result.error_messages).to contain_exactly(
-               "Karte nicht als gesteckt identifiziert",
-               "S:Server") }
+               "Karte nicht als gesteckt identifiziert", "S:Server", 
+               "code: 4008; detail: Karte mit Handle dontexist nicht vorhanden") }
         else
           it { expect(result.error_messages).to contain_exactly(
                  "S:Server", "Invalid UUID string: dontexist")}
