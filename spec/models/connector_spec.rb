@@ -6,7 +6,7 @@ RSpec.describe Connector, type: :model do
   end
   let(:connector) do 
     FactoryBot.create(:connector, 
-      ip: '127.0.0.9',
+      ip: '127.1.2.3',
       connector_services: YAML.load_file(yaml)
     )
   end
@@ -31,7 +31,7 @@ RSpec.describe Connector, type: :model do
   end
 
   describe "#to_s" do
-    it { expect(connector.to_s).to match('- / 127.0.0.9') }
+    it { expect(connector.to_s).to match("- / 127.1.2.3") }
   end
 
   describe "with real connector data" do
@@ -248,7 +248,7 @@ RSpec.describe Connector, type: :model do
     end
   end
 
-  describe "#tcp_port_open?(443)" do
+  describe "#tcp_port_open?(8080)" do
     it { expect(connector.tcp_port_open?(8080)).to be_truthy }
   end
   # it {puts connector.sds_url}

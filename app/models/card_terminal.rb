@@ -71,7 +71,10 @@ class CardTerminal < ApplicationRecord
     end
     if is_accessible?
       is_up = up?
-      if !is_up and !connected
+      if noip?
+        return set_condition( Cocard::States::UNKNOWN,
+                              "Kartenterminal hat keine sinnvolle IP: #{ip.to_s}" )
+      elsif !is_up and !connected
         return set_condition( Cocard::States::CRITICAL,
                               "Kartenterminal nicht erreichbar, kein Ping und nicht mit dem Konnektor verbunden " )
       elsif !is_up and connected
