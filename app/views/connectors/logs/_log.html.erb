@@ -8,6 +8,11 @@
   </td>
   <td class="text-end"><%= log.last_seen&.localtime&.to_s %></td>
   <td class="text-end text-nowrap">
+    <%= render InvalidateButtonComponent.new(
+                 item: log,
+                 readonly: cannot?(:manage, log.loggable)
+               )
+     %>
     <%= render AcknowledgeButtonComponent.new(
                  notable: log,
                  readonly: cannot?(:manage, log.loggable)
