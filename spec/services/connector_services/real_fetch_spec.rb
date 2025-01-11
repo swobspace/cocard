@@ -6,7 +6,7 @@ module ConnectorServices
   RSpec.describe Fetch, :soap => true do
     let(:connector) do
       FactoryBot.create(:connector,
-        ip: ENV['SDS_IP'],
+        ip: ENV['CONN_IP'],
         use_tls: ENV['USE_TLS'] || false,
         authentication: ENV['AUTHENTICATION'] || 'noauth',
         auth_user: ENV['AUTH_USER'],
@@ -14,7 +14,22 @@ module ConnectorServices
         sds_url: ENV['SDS_URL']
       )
     end
+
+    let(:clientcert) do
+      FactoryBot.create(:client_certificate,
+        name: 'myname',
+        cert: File.read(ENV['CLIENT_CERT_FILE']),
+        pkey: File.read(ENV['CLIENT_PKEY_FILE']),
+        passphrase: ENV['CLIENT_CERT_PASSPHRASE']
+      )
+    end
+
     subject { ConnectorServices::Fetch.new( connector: connector) }
+
+    before(:each) do
+      connector.client_certificates << clientcert
+      connector.reload
+    end
 
     describe '#call' do
       describe 'with status 200' do
