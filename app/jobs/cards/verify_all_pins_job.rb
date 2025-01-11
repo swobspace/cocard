@@ -7,10 +7,16 @@ module Cards
 
     def perform(options = {})
       options.symbolize_keys!
+
+      return unless Card.verifiable.any?
+
       #
       # all verifiable cards
+      #
       Card.verifiable.each do |card|
         Cocard::VerifyAllPins.new(card: card).call
+        Turbo::StreamsChannel.broadcast_refresh_later_to(:verify_pins)
+        Turbo::StreamsChannel.broadcast_refresh_later_to(:home)
       end
 
       Turbo::StreamsChannel.broadcast_prepend_to(
@@ -19,8 +25,6 @@ module Cards
         partial: "shared/turbo_toast",
         locals: {status: :info, message: "VERIFY PIN für alle Karten abgeschlossen"})
       sleep 1
-      Turbo::StreamsChannel.broadcast_refresh_later_to(:verify_pins)
-      Turbo::StreamsChannel.broadcast_refresh_later_to(:home)
     end
 
     def max_attempts
