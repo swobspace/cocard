@@ -33,4 +33,18 @@ module ConnectorConcerns
     @rebootable ||= Connectors::RMI.new(connector: self)
                                    .available_actions.include?(:reboot)
   end
+
+  def rebooted?
+    return nil if rebooted_at.nil?
+    if rebooted_at > 20.minutes.before(Time.current)
+      true
+    else
+      update_column(:rebooted_at, nil)
+      false
+    end
+  end
+
+  def reboot_active?
+    rebooted_at.present? and (rebooted_at > 1.minute.before(Time.current))
+  end
 end

@@ -4,7 +4,7 @@ RSpec.describe CardTerminal, type: :model do
   let!(:location) { FactoryBot.create(:location, lid: 'ACX') }
   let!(:network) do 
     FactoryBot.create(:network, 
-      netzwerk: '127.0.0.0/8', 
+      netzwerk: '127.2.3.0/24',
       location_id: location.id,
       accessibility: 'ping'
     )
@@ -12,7 +12,7 @@ RSpec.describe CardTerminal, type: :model do
   let(:connector) { FactoryBot.create(:connector) }
   let(:ct) do
     FactoryBot.create(:card_terminal,
-      ip: '127.0.0.9',
+      ip: '127.2.3.4',
       connector: connector,
       name: 'ACME Term',
       ct_id: 'CT_ID_0123',
@@ -126,6 +126,16 @@ RSpec.describe CardTerminal, type: :model do
             ct.update_condition
           }.to change(ct, :condition).to(Cocard::States::CRITICAL)
           expect(ct.condition_message).to match(/CRITICAL Kartenterminal nicht erreichbar, kein Ping und nicht mit dem Konnektor verbunden/)
+        end
+      end
+
+      describe "with ip 0.0.0.0, not connected" do
+        it "-> CRITICAL" do
+          expect(ct).to receive(:ip).at_least(:once).and_return('0.0.0.0')
+          expect {
+            ct.update_condition
+          }.to change(ct, :condition).to(Cocard::States::UNKNOWN)
+          expect(ct.condition_message).to match(/UNKNOWN Kartenterminal hat keine sinnvolle IP: 0.0.0.0/)
         end
       end
 
@@ -307,6 +317,29 @@ RSpec.describe CardTerminal, type: :model do
           connector.close_acknowledge
         }.to change(connector, :acknowledge_id).to(nil)
       end
+    end
+  end
+
+  describe "#noip?" do
+    describe "with real ip" do
+      before(:each) do
+        expect(ct).to receive(:ip).at_least(:once).and_return('192.0.2.17')
+      end
+      it { expect(ct.noip?).to be_falsey }
+    end
+
+    describe "with 0.0.0.0" do
+      before(:each) do
+        expect(ct).to receive(:ip).at_least(:once).and_return('0.0.0.0')
+      end
+      it { expect(ct.noip?).to be_truthy }
+    end
+
+    describe "with 127.0.0.4" do
+      before(:each) do
+        expect(ct).to receive(:ip).at_least(:once).and_return('127.0.0.4')
+      end
+      it { expect(ct.noip?).to be_truthy }
     end
   end
 end

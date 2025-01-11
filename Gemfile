@@ -98,7 +98,7 @@ gem "immutable_struct", "~> 1.2"
 
 gem "net-ping", "~> 2.0"
 
-gem "good_job", "~> 4.5.0"
+gem "good_job", "~> 4.7.0"
 
 gem "acts_as_list", "~> 1.1"
 

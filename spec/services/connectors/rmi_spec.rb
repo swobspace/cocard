@@ -58,6 +58,7 @@ module Connectors
           expect(result.response.status).to eq(200)
           puts result.response.headers
           puts result.response.body
+          expect(connector.rebooted?).to be_truthy
         end
       end
 
@@ -67,6 +68,7 @@ module Connectors
           ENV['KOCO_PASSWD'] = 'none'
           result = subject.call(:reboot)
           expect(result.success?).to be_falsey
+          expect(connector.rebooted?).to be_falsey
         end
       end
 
@@ -77,6 +79,7 @@ module Connectors
           result = subject.call(:reboot)
           expect(result.success?).to be_falsey
           expect(result.response).to eq("Fehlende Zugangsdaten: KOCO_PASSWD oder KOCO_ADMIN nicht gesetzt")
+          expect(connector.rebooted?).to be_falsey
         end
       end
     end

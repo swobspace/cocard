@@ -30,6 +30,7 @@ class Connector  {
   acknowledge_id: bigint
   iccsn: string
   expiration_date: date
+  rebooted_at: timestamp
 }
 
 class CardTerminal {

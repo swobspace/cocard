@@ -6,7 +6,7 @@ RSpec.describe Connector, type: :model do
   end
   let(:connector) do 
     FactoryBot.create(:connector, 
-      ip: '127.0.0.9',
+      ip: '127.1.2.3',
       connector_services: YAML.load_file(yaml)
     )
   end
@@ -31,7 +31,7 @@ RSpec.describe Connector, type: :model do
   end
 
   describe "#to_s" do
-    it { expect(connector.to_s).to match('- / 127.0.0.9') }
+    it { expect(connector.to_s).to match("- / 127.1.2.3") }
   end
 
   describe "with real connector data" do
@@ -82,6 +82,16 @@ RSpec.describe Connector, type: :model do
         expect {
           connector.update_condition
         }.to change(connector, :condition).to(Cocard::States::NOTHING)
+      end
+    end
+
+    describe "with reboot in progress" do
+      it "-> WARNING" do
+        expect(connector).to receive(:up?).and_return(false)
+        expect(connector).to receive(:rebooted_at).at_least(:once).and_return(2.minutes.before(Time.current))
+        expect {
+          connector.update_condition
+        }.to change(connector, :condition).to(Cocard::States::WARNING)
       end
     end
 
@@ -136,7 +146,7 @@ RSpec.describe Connector, type: :model do
       end
 
       it "-> OK" do
-        connector.update(acknowledge_id: ack.id)
+        connector.update(acknowledge_id: ack.id, rebooted_at: 2.minutes.before(Time.current))
         connector.reload
         expect(connector.acknowledge).to eq(ack)
         expect(connector).to receive(:up?).at_least(:once).and_return(true)
@@ -149,6 +159,7 @@ RSpec.describe Connector, type: :model do
         }.to change(connector, :condition).to(Cocard::States::OK)
         connector.reload
         expect(connector.acknowledge).to be_nil
+        expect(connector.rebooted_at).to be_nil
         ack.reload
         expect(ack.valid_until).to be >= 1.second.before(Time.current)
         expect(ack.valid_until).to be <= 1.second.after(Time.current)
@@ -237,16 +248,9 @@ RSpec.describe Connector, type: :model do
     end
   end
 
-  describe "#tcp_port_open?(443)" do
+  describe "#tcp_port_open?(8080)" do
     it { expect(connector.tcp_port_open?(8080)).to be_truthy }
   end
   # it {puts connector.sds_url}
 
-  describe "#sds_port" do
-    it { expect(connector.sds_port).to eq(80) }
-  end
-
-  describe "#soap_port" do
-    it { expect(connector.soap_port).to eq(80) }
-  end
 end
