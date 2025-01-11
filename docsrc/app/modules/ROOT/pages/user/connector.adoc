@@ -16,7 +16,7 @@ Die Kopfzeile enthält neben dem Namen und der IP-Adresse den Gesamtstatus des K
 
 Viele Felder aus der allgemeinen Information sind bereits in xref:admin/connector-edit.adoc[] beschrieben. Weitere Felder werden aus den Konnektor-Informationen extrahiert:
 
-[%autowidth%]
+[%autowidth]
 |===
 |Feld | Beschreibung
 
@@ -32,7 +32,7 @@ Viele Felder aus der allgemeinen Information sind bereits in xref:admin/connecto
 
 === Status
 
-[%autowidth%]
+[%autowidth]
 |===
 |Feld | Beschreibung
 
