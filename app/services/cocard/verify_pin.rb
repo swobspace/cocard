@@ -42,25 +42,6 @@ module Cocard
       end
 
       #
-      # Auto-enter SMC-B PIN if possible
-      #
-      if card.card_terminal&.pin_mode == 'on_demand'
-        CardTerminals::RMI::VerifyPinJob.perform_later(card: card)
-        # wait before continue
-        sleep 3
-      else
-        Turbo::StreamsChannel.broadcast_prepend_to(
-          'verify_pins',
-          target: 'toaster',
-          partial: "shared/turbo_toast",
-          locals: {
-            status: :warning,
-            message: "SMC-B Auto-PIN-Mode in Cocard deaktiviert, bitte PIN am Terminal eingeben"
-          }
-        )
-      end
-
-      #
       # Start VerifyPin process
       #
       result = Cocard::SOAP::VerifyPin.new(
