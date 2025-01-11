@@ -39,6 +39,11 @@ Rails.application.configure do
         class: "Cocard::GetCardsJob",
         description: "Get cards from connector; SMC-B only: check PIN status"
       },
+      verify_all_pins: {
+        cron: '@midnight',
+        class: "Cards::VerifyAllPinsJob",
+        description: "Verify PINs of all cards if neccessary"
+      },
       check_certificate_expiration: {
         cron: '55 23 * * *',
         class: "Cocard::CheckCertificateExpirationJob",
