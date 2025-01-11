@@ -2,6 +2,8 @@
 
 == 0.6.3 - unreleased
 
+* Workflow für die PIN-Verifizierung aller Karten eines Terminals verbessert.
+
 == 0.6.2 - 2025-01-11
 
 * Wird der Konnektor über Cocard gebootet, ist der Status WARNING (gelb) und wird mit dem Reboot-Datum angegeben, bis der Konnektor wieder ok ist.

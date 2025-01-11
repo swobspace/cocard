@@ -52,7 +52,7 @@ module CardTerminals
               if response.rmi_smcb_pin_enabled
                 debug("rmi_smcb_pin_enabled: true")
                 debug("--- starting timer ---")
-                @timeout = EM::Timer.new(30) do
+                @timeout = EM::Timer.new(60) do
                   debug("### TIMEOUT ###")
                   ws.close
                 end
@@ -91,12 +91,11 @@ module CardTerminals
               ws.send(request_verify_pin(generate_token(:verify_pin)))
 
             when :verify_pin
-              @timeout.cancel
+              # @timeout.cancel
               debug("Verify Pin Response: #{response.json}")
-              ws.close
-
+              # ws.close
             else
-              ws.close
+              # ws.close
             end
           end
 

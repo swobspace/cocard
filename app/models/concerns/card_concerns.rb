@@ -12,6 +12,13 @@ module CardConcerns
     scope :nothing, -> { condition(Cocard::States::NOTHING) }
     scope :failed, -> { where("cards.condition > ?", Cocard::States::OK) }
 
+    scope :verifiable, -> do
+      joins(:card_contexts, :operational_state)
+      .where("card_contexts.pin_status = 'VERIFIABLE'")
+      .where("operational_states.operational = ?", true)
+      .distinct
+    end
+
     scope :with_description_containing, ->(query) { joins(:rich_text_description).merge(ActionText::RichText.where <<~SQL, "%" + query + "%") }
     body ILIKE ?
    SQL
