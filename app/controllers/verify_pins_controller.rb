@@ -24,7 +24,8 @@ class VerifyPinsController < ApplicationController
       partial: "shared/turbo_toast",
       locals: {status: :info, message: "VERIFY PIN für Terminal #{@card_terminal} abgeschlossen"})
     sleep 1
-    Turbo::StreamsChannel.broadcast_refresh_to(:verify_pins)
+    Turbo::StreamsChannel.broadcast_refresh_later_to(:verify_pins)
+    Turbo::StreamsChannel.broadcast_refresh_later_to(:home)
   end
 
   private
