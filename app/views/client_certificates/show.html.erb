@@ -42,4 +42,10 @@
 </div>
 
 <%= back_link %>
-<%= new_link ClientCertificate %>
+<%= link_to raw( '<span class="fa-solid fa-fw fa-upload" aria-hidden="true"></span> ' +
+                 t('cocard.import_client_certificate')), 
+            main_app.import_p12_client_certificate_path, class: "btn btn-secondary me-1" %>
+<%= link_to raw( '<span class="fas fa-fw fa-plus" aria-hidden="true"></span> ' +
+                 t('cocard.new_client_certificate')),
+            main_app.new_client_certificate_path, class: "btn btn-secondary me-1" %>
+

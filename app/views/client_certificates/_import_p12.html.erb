@@ -9,8 +9,7 @@
     <%= form.input :p12, as: :file, required: true
        %>
     <%= form.input :passphrase, as: :password, 
-                   required: true,
-                   placeholder: '************'
+                   required: true
        %>
 
     <%= form.button :submit, t('wobapphelpers.actions.new_import', model: t('client_certificate', scope: 'activerecord.models')), class: 'btn btn-primary' %>
