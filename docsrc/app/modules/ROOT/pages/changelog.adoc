@@ -1,6 +1,6 @@
 = Changelog
 
-== 0.6.2 - unreleased
+== 0.6.2 - 2025-01-11
 
 * Wird der Konnektor über Cocard gebootet, ist der Status WARNING (gelb) und wird mit dem Reboot-Datum angegeben, bis der Konnektor wieder ok ist.
 * Fehlermeldungen enthalten jetzt den Code und Zusatzangaben, falls der Konnektor solche liefert (gemSpec_OM 3.2.1 Feld Detail)
