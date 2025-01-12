@@ -19,6 +19,16 @@ module CardConcerns
       .distinct
     end
 
+    scope :verifiable_auto, -> do
+      joins(:card_contexts, :operational_state, :card_terminal)
+      .where("card_terminals.pin_mode = ?", CardTerminal.pin_modes[:auto])
+      .where("card_contexts.pin_status = 'VERIFIABLE'")
+      .where("card_contexts.left_tries = 3")
+      .where("operational_states.operational = ?", true)
+      .distinct
+    end
+
+
     scope :with_description_containing, ->(query) { joins(:rich_text_description).merge(ActionText::RichText.where <<~SQL, "%" + query + "%") }
     body ILIKE ?
    SQL

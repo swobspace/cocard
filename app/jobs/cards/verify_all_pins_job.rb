@@ -8,12 +8,12 @@ module Cards
     def perform(options = {})
       options.symbolize_keys!
 
-      return unless Card.verifiable.any?
+      return unless Card.verifiable_auto.any?
 
       #
       # all verifiable cards
       #
-      Card.verifiable.each do |card|
+      Card.verifiable_auto.each do |card|
         Cocard::VerifyAllPins.new(card: card).call
         Turbo::StreamsChannel.broadcast_refresh_later_to(:verify_pins)
         Turbo::StreamsChannel.broadcast_refresh_later_to(:home)
