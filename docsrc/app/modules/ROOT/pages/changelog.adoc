@@ -3,6 +3,7 @@
 == 0.6.3 - unreleased
 
 * Workflow für die PIN-Verifizierung aller Karten eines Terminals verbessert.
+* Neu: Hintergrundjob für die automatische PIN-Verifizierung (nur unterstützte Terminals). SMC-B Auto-PIN-Mode muss hierfür am Kartenterminal gleich `Automatisch` sein. xref:admin/card-terminal-edit.adoc[Mehr zur automatischen PIN-Verifizierung]
 
 == 0.6.2 - 2025-01-11
 

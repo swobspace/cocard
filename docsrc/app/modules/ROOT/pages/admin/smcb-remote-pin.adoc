@@ -1,6 +1,6 @@
 = Remote PIN für SMC-B Karten
 :author: Wolfgang Barth
-:revdate: 2024-09-15
+:revdate: 2025-01-12
 :imagesdir: ../../images
 
 Bei neueren Kartenterminals kann man die PIN einer SMC-B-Karte remote eingegeben: entweder über eine Weboberfläche oder über ein Remote-Management-Interface (RMI).
@@ -33,9 +33,12 @@ image:ct/orga6141-enable-remote-smcb-pin.png[]
 |===
 |Was | Beschreibung
 
-|SMC-B Auto-PIN-Mode
-|`On Demand`, siehe Abbildung
+.2+|SMC-B Auto-PIN-Mode
+|`On Demand` (siehe Abbildung) - die PIN-Verifizierung muss von Anwender in Cocard über den Reload-Button manuell ausgelöst werden
+|`Auto` - Die PIN-Verifizierung übernimmt ein Hintergrundjob automatisch, sobald Cocard feststellt, dass eine PIN zu verifizieren ist.
 |===
+
+include::partial$smcb-remote-auto-pin-warning.adoc[]
 
 .SMC-B Auto-PIN-Mode Bearbeiten
 image:ct/card-terminal-edit-auto-pin-mode.png[]

@@ -1,6 +1,6 @@
 = Kartenterminal anlegen/bearbeiten
 :author: Wolfgang Barth
-:revdate: 2024-10-03
+:revdate: 2025-01-12
 :imagesdir: ../../images
 :experimental: true
 
@@ -51,7 +51,7 @@ Das Formular besteht aus 2 Bereichen: der obere Bereich (bis zu dem gelben Hinwe
 |Freitext zur Dokumentation weiterer Informationen
 
 |SMC-B Auto-PIN-Mode
-|Wenn das Kartenterminal von Cocard unterstützt wird und `On Demand` eingetragene ist sendet Cocard die PIN für eine SMC-B an das Kartenterminal, wenn der Konnektor eine Pin-Verifizierung anfordert. xref:admin/smcb-remote-pin.adoc[Unterstützte Kartenterminals]
+|Wenn das Kartenterminal von Cocard unterstützt wird sendet Cocard die PIN für eine SMC-B an das Kartenterminal, wenn der Konnektor eine Pin-Verifizierung anfordert. xref:admin/smcb-remote-pin.adoc[Unterstützte Kartenterminals]. Mögliche Werte sind `Aus`, `On Demand` und `Automatisch`. Bei `On Demand` muss die PIN-Verifizierung vom Anwender über einen Button in Cocard manuell ausgelöst werden, bei `Auto` übernimmt das ein Hintergrundjob, sobald Cocard feststellt, dass eine PIN zu verifizieren ist.
 
 |MAC
 |MAC-Adresse des Kartenterminals. Wird von Cocard zur eindeutigen Identifikation des Kartenterminals genutzt
@@ -66,3 +66,5 @@ Das Formular besteht aus 2 Bereichen: der obere Bereich (bis zu dem gelben Hinwe
 |Konnektor, mit dem das Kartenterminal verbunden ist. Wenn ein Kartenterminal abgebaut wird und nicht mehr erreichbar ist kann man hier den Konnektor entfernen, um Fehlalarme im Dashboard zu vermeiden.
 
 |===
+
+include::partial$smcb-remote-auto-pin-warning.adoc[]

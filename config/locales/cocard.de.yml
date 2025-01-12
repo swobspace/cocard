@@ -219,6 +219,7 @@ de:
   pin_modes:
     'off': Aus
     on_demand: On Demand
+    auto: Automatisch
 
   accessibilities:
     nothing: None

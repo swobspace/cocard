@@ -282,7 +282,7 @@ Wenn Kartenterminals vorab zur Inventarisierung erfasst werden, bitte immer die 
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">SMC-B Auto-PIN-Mode</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Wenn das Kartenterminal von Cocard unterstützt wird und <code>On Demand</code> eingetragene ist sendet Cocard die PIN für eine SMC-B an das Kartenterminal, wenn der Konnektor eine Pin-Verifizierung anfordert. <a href="smcb-remote-pin.html" class="xref page">Unterstützte Kartenterminals</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wenn das Kartenterminal von Cocard unterstützt wird sendet Cocard die PIN für eine SMC-B an das Kartenterminal, wenn der Konnektor eine Pin-Verifizierung anfordert. <a href="smcb-remote-pin.html" class="xref page">Unterstützte Kartenterminals</a>. Mögliche Werte sind <code>Aus</code>, <code>On Demand</code> und <code>Automatisch</code>. Bei <code>On Demand</code> muss die PIN-Verifizierung vom Anwender über einen Button in Cocard manuell ausgelöst werden, bei <code>Auto</code> übernimmt das ein Hintergrundjob, sobald Cocard feststellt, dass eine PIN zu verifizieren ist.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">MAC</p></td>
@@ -302,6 +302,30 @@ Wenn Kartenterminals vorab zur Inventarisierung erfasst werden, bitte immer die 
 </tr>
 </tbody>
 </table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Für die vollautomatische PIN-Verifizierung darf eine SMC-B-Karte keinen Fehlversuch haben (Verbleibende Versuche: 3). Sobald eine PIN falsch eingegeben wurde und die Anzahl der verbleibenden Versuche kleiner als 3 ist verzichtet der Hintergrundjob auf eine PIN-Eingabe. Das soll verhindern, dass eine falsch konfigurierte <code>DEFAULT_SMC_PIN</code> alle Karten in kurzer Zeit sperrt.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Bei Nutzung des Auto-PIN-Features bitte immer erst mit einem Kartenterminal und einer Karte testen, um Fehlkonfigurationen frühzeitig zu erkennen. Im Worst-Case könnten alle SMC-B-Karten in kürzester Zeit gesperrt werden und die Eingabe einer PUK erfordern!
+</td>
+</tr>
+</table>
+</div>
 </article>
   </div>
 </main>
