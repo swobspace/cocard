@@ -67,6 +67,11 @@ de:
     acknowledge: Acknowledge
     set_invalid: Ungültig setzen
     reboot: Reboot
+    pin_mode_auto_warning: |
+      Vorsicht! Die automatische PIN-Verifizierung kann bei Fehlkonfiguration
+      oder Software-Fehlern im Worst-Case zum Sperren aller SMB-C-Karten in kurzer
+      Zeit führen. Testen Sie bitte daher Ihre Installation und Konfiguration
+      vor einem flächendeckenden Rollout ausführlich.
 
   activerecord:
     models:
