@@ -1,6 +1,10 @@
 module Cocard
   #
   # Verifies PINs for all Contexts on one card
+  # conditions:
+  # - card_contexts.pin_status = 'VERIFIABLE'
+  # - card_contexts.left_tries = 3 (for safety)
+  #
   # Broadcasts results via TurboStream
   #
   class VerifyAllPins
@@ -23,6 +27,11 @@ module Cocard
     # do all the work here ;-)
     def call
       error_messages = []
+      unless card.card_terminal&.pin_mode == 'auto'
+        error_messages = "SMC-B Auto-PIN-Mode muss 'auto' sein - keine vollautomatische PIN-Eingabe"
+        return Result.new(success?: false, error_messages: error_messages)
+      end
+
       #
       # update card handle via get_card
       #
@@ -40,28 +49,17 @@ module Cocard
       else
 
         #
-        # Auto-enter SMC-B PIN if possible
+        # Background job for auto-enter SMC-B PIN
         #
-        if card.card_terminal&.pin_mode == 'on_demand'
-          CardTerminals::RMI::VerifyPinJob.perform_later(card: card)
-          # wait before continue
-          sleep 3
-        else
-          Turbo::StreamsChannel.broadcast_prepend_to(
-            'verify_pins',
-            target: 'toaster',
-            partial: "shared/turbo_toast",
-            locals: {
-              status: :warning,
-              message: "SMC-B Auto-PIN-Mode in Cocard deaktiviert, bitte PIN am Terminal eingeben"
-            }
-          )
-        end
+        CardTerminals::RMI::VerifyPinJob.perform_later(card: card)
+        # wait before continue
+        sleep 3
 
         #
         # Loop over card contexts
         #
-        card.contexts.where("card_contexts.pin_status = 'VERIFIABLE'").each do |cctx|
+        card.contexts.where("card_contexts.pin_status = 'VERIFIABLE'")
+                     .where("card_contexts.left_tries = 3").each do |cctx|
           # just delay for 2 seconds
           sleep 2
           # just for debugging
