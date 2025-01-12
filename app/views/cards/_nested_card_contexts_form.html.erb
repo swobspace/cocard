@@ -1,4 +1,4 @@
-<div id="card_contexts_list" data-controller="nested-form" class="offset-3">
+<div id="card_contexts_list" data-controller="nested-form" class="offset-3 clearfix">
   <template data-nested-form-target='template'>
     <%= f.simple_fields_for :card_contexts, ConnectorContext.new,
                              child_index: 'TEMPLATE_RECORD' do |builder| %>

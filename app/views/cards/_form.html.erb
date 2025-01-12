@@ -32,11 +32,14 @@
     <% end %>
 
     <hr/>
+
     <div class="card-title">
       <h6><%= t('cocard.card_data')%></h6>
     </div>
-    <div class="alert alert-warning" role="alert">
-      <%= t('cocard.new_card_manual_warning') %>
+    <div class="row mb-3">
+      <div class="col-sm-9 offset-sm-3 alert alert-warning" role="alert">
+        <%= t('cocard.new_card_manual_warning') %>
+      </div>
     </div>
 
     <%= form.input :iccsn

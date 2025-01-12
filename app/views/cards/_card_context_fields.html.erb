@@ -4,7 +4,9 @@
 
     <%= render partial: 'card_contexts/fields', locals: { f: f } %>
 
+    <div class="text-end">
     <%= link_to icon_delete, "#",
-                             class: 'btn btn-danger btn-xs mb-3',
+                             class: 'btn btn-danger btn-xs',
                              data: { action: "click->nested-form#remove_association" } %>
+    </div>
 </div>
