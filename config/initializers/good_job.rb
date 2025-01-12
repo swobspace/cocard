@@ -40,7 +40,7 @@ Rails.application.configure do
         description: "Get cards from connector; SMC-B only: check PIN status"
       },
       verify_all_pins: {
-        cron: '@midnight',
+        cron: '*/5 * * * *',
         class: "Cards::VerifyAllPinsJob",
         description: "Verify PINs of all cards if neccessary"
       },
