@@ -27,8 +27,8 @@ module Cocard
     # do all the work here ;-)
     def call
       error_messages = []
-      unless card.card_terminal&.pin_mode == 'auto'
-        error_messages = "SMC-B Auto-PIN-Mode muss 'auto' sein - keine vollautomatische PIN-Eingabe"
+      if card.card_terminal&.pin_mode == 'off'
+        error_messages = "SMC-B Auto-PIN-Mode ist off: keine Sammeleingabe von PINs. BittePIN-Verifizierung einzeln anstoßen"
         return Result.new(success?: false, error_messages: error_messages)
       end
 
