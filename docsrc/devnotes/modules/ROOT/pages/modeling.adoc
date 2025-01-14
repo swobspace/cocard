@@ -406,5 +406,6 @@ bin/rails g model SinglePicture \
   availability:integer:index \
   comment:string \
   name:string \
+  muted:boolean \
   --no-stylesheets --no-javascripts --no-helper
 ----

@@ -209,5 +209,6 @@ Class SinglePicture {
   availability: integer
   comment: string
   name: string
+  muted: boolean
 }
 @enduml
