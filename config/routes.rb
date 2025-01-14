@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources 'situation_picture', only: [:index] do
+  resources 'situation_picture', only: [:index, :update] do
     collection do
       get :failed
     end
