@@ -1,0 +1,8 @@
+<%= turbo_stream.replace('mute_' + dom_id(@single_picture)) do %>
+  <%= render MuteButtonComponent.new(
+               mutable: @single_picture,
+               small: true,
+               readonly: cannot?(:manage, @single_picture)
+             )
+   %>
+<% end %>

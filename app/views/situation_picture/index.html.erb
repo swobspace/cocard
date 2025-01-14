@@ -58,7 +58,10 @@
             <td><%= entry.availability %></td>
             <td><%= entry.comment %></td>
             <td><%= entry.name %></td>
-            <td><%= render MuteButtonComponent.new(mutable: entry, readonly: current_user.is_admin?, small: true) %></td>
+            <td><%= render MuteButtonComponent.new(mutable: entry, small: true,
+                             readonly: cannot?(:manage, @single_picture)
+                           ) %></td>
+
           <% end %>
         <% end %>
       </tbody>
