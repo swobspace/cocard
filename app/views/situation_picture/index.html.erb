@@ -25,7 +25,7 @@
           <th class="notvisible">availability</th>
           <th>comment</th>
           <th>name</th>
-          <th class="notvisible"><%= t('attributes.muted')%></th>
+          <th class="notvisible"><%= t('cocard.action')%></th>
         </tr>
       </thead>
       <tfoot class="search">
@@ -58,10 +58,11 @@
             <td><%= entry.availability %></td>
             <td><%= entry.comment %></td>
             <td><%= entry.name %></td>
-            <td><%= render MuteButtonComponent.new(mutable: entry, small: true,
+            <td class="text-center">
+              <%= render MuteButtonComponent.new(mutable: entry, small: true,
                              readonly: cannot?(:manage, @single_picture)
-                           ) %></td>
-
+                         ) %>
+            </td>
           <% end %>
         <% end %>
       </tbody>
