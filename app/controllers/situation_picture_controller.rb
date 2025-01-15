@@ -14,8 +14,9 @@ class SituationPictureController < ApplicationController
 
   def failed
     @situation_picture = SinglePicture.with_failed_tids
-    @tids = @situation_picture.select(:tid, :availability)
-                              .group(:tid).sum("availability")
+    @failures = @situation_picture.select(:pdt, :tid, :availability)
+                                  .group(:pdt, :tid)
+                                  .sum("availability")
   end
 
   # PATCH/PUT /situation_picture/1

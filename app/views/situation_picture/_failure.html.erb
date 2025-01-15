@@ -5,7 +5,7 @@
         <div class="me-3">
           <%= render TI::TidConditionButtonComponent.new(count: count) %>
         </div>
-        <h4 class="card-title mt-1"><%= product %></h4>
+        <h4 class="card-title mt-1"><%= pdt %>: <%= product %></h4>
       </div>
       <h5 class="text-secondary mt-1"> TID: <%= tid %> </h5>
     </div>
@@ -27,7 +27,7 @@
       </thead>
       <tbody>
         <%= render partial: 'single_picture',
-                   collection: @situation_picture.where(tid: tid).order(:ci),
+                   collection: @situation_picture.where(pdt: pdt, tid: tid).order(:ci),
                    as: :single_picture
          %>
       </tbody>
