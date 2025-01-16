@@ -39,7 +39,7 @@ module Cocard
 
       unless result.success?
         status  = :alert
-        message = (card.to_s + "<br/>" + "Kontext: #{cctx}<br/>ERROR:: " +
+        message = (card.to_s + "<br/>" + "Kontext: #{card.contexts.first}<br/>ERROR:: " +
                    result.error_messages.join(', ')).html_safe
         Turbo::StreamsChannel.broadcast_prepend_to(
           'verify_pins',
