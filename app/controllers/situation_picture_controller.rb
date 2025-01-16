@@ -14,7 +14,7 @@ class SituationPictureController < ApplicationController
 
   def failed
     failure_group_ids = SinglePicture
-                        .active.failed
+                        .active.current.failed
                         .select(:pdt, :tid)
                         .group(:pdt, :tid)
                         .map{|x| SinglePicture.where(pdt: x.pdt, tid: x.tid).ids}

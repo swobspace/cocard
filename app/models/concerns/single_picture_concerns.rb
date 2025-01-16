@@ -13,7 +13,7 @@ module SinglePictureConcerns
       .active
     end
     scope :active, -> { where(muted: false) }
-    scope :current, -> { where("situation_picture.time > ?", 1.day.before(Time.current)) }
+    scope :current, -> { where("situation_picture.time > ?", 7.day.before(Time.current)) }
 
     # SinglePicture.where(tid: SinglePicture.failed.pluck(:tid)).select(:tid, :availability).group(:tid).maximum("availability")
     scope :with_failed_tids, -> {
