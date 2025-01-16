@@ -13,7 +13,15 @@ class SituationPictureController < ApplicationController
   end
 
   def failed
-    @situation_picture = SinglePicture.with_failed_tids
+    failure_group_ids = SinglePicture
+                        .active.failed
+                        .select(:pdt, :tid)
+                        .group(:pdt, :tid)
+                        .map{|x| SinglePicture.where(pdt: x.pdt, tid: x.tid).ids}
+                        .flatten
+
+    @situation_picture = SinglePicture.where(id: failure_group_ids)
+
     @failures = @situation_picture.select(:pdt, :tid, :availability)
                                   .group(:pdt, :tid)
                                   .sum("availability")
