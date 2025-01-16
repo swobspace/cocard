@@ -20,7 +20,7 @@ class SituationPictureController < ApplicationController
                         .map{|x| SinglePicture.where(pdt: x.pdt, tid: x.tid).ids}
                         .flatten
 
-    @situation_picture = SinglePicture.where(id: failure_group_ids)
+    @situation_picture = SinglePicture.where(id: failure_group_ids).active.current
 
     @failures = @situation_picture.select(:pdt, :tid, :availability)
                                   .group(:pdt, :tid)
