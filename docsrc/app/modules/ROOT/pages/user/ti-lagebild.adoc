@@ -26,6 +26,12 @@ image:ti-lagebild/ti-lagebild-index.png[]
 
 Über `Column visibility` lassen sich weitere Spalten einblenden.
 
+== Einzelne Services stummschalten (mute)
+
+Wenn nicht alle Services aller Anbieter relevant sind, kann man einzelne Einträge stummschalten. Dazu blendet man in der Übersicht die Spalte _Aktion_ ein und _muted_ den nicht benötigten Eintrag. Stummgeschaltete Services fließen nicht in den Gesamstatus mit ein und werden auf der Seite der gerade nicht verfügbaren Services nicht mit angezeigt. 
+
+image:ti-lagebild/ti-lagebild-index-with-mute-button.png[]
+
 == Ressourcen
 
 * Die offizielle Status-Seite der Gematik ist https://fachportal.gematik.de/ti-status. Dort finden sich auch Informationen zu geplanten Wartungen. 
