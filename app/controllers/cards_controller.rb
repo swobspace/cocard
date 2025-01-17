@@ -102,6 +102,12 @@ class CardsController < ApplicationController
 
   def verify_pin
     if set_context
+      # start background rmi job
+      CardTerminals::RMI::VerifyPinJob.perform_later(card: @card)
+      # wait some time
+      sleep 3
+
+      # start verify pin
       result = Cocard::VerifyPin.new(card: @card, context: set_context).call
       unless result.success?
         status  = :alert

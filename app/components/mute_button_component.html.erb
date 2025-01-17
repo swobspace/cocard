@@ -1,0 +1,11 @@
+<div id="mute_<%= dom_id(mutable) %>" class="d-inline-flex">
+  <%= button_to( button_action,
+                 method: :put,
+                 class: "#{button_css}",
+                 params: {single_picture: { 'muted': !mutable.muted }},
+                 data: { "turbo-frame": false }) do %>
+    <%= raw(icon) %>
+  <% end %>
+</div>
+
+

@@ -1,0 +1,4 @@
+
+NOTE: Für die vollautomatische PIN-Verifizierung darf eine SMC-B-Karte keinen Fehlversuch haben (Verbleibende Versuche: 3). Sobald eine PIN falsch eingegeben wurde und die Anzahl der verbleibenden Versuche kleiner als 3 ist verzichtet der Hintergrundjob auf eine PIN-Eingabe. Das soll verhindern, dass eine falsch konfigurierte `DEFAULT_SMC_PIN` alle Karten in kurzer Zeit sperrt.
+
+CAUTION: Bei Nutzung des Auto-PIN-Features bitte immer erst mit einem Kartenterminal und einer Karte testen, um Fehlkonfigurationen frühzeitig zu erkennen. Im Worst-Case könnten alle SMC-B-Karten in kürzester Zeit gesperrt werden und die Eingabe einer PUK erfordern!

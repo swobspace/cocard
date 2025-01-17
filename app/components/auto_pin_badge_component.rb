@@ -6,10 +6,15 @@ class AutoPinBadgeComponent < ViewComponent::Base
   end
 
   def color
-    if card_terminal.pin_mode == "off"
+    case card_terminal.pin_mode
+    when 'off'
       "text-bg-secondary"
-    else
+    when 'on_demand'
       "text-bg-info"
+    when 'auto'
+      "text-bg-success"
+    else
+      "text-bg-warning"
     end
   end
 

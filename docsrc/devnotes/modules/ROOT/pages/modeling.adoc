@@ -126,7 +126,7 @@ bin/rails g migration AddInternalToCardTerminal \
 ----
 
 ----
-enum pin_mode: { off: 0, on_demand: 1 }
+enum pin_mode: { off: 0, on_demand: 1, auto: 2 }
 ----
 
 .app/models/card_terminal.rb
@@ -406,5 +406,6 @@ bin/rails g model SinglePicture \
   availability:integer:index \
   comment:string \
   name:string \
+  muted:boolean \
   --no-stylesheets --no-javascripts --no-helper
 ----

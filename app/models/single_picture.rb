@@ -12,7 +12,9 @@ class SinglePicture < ApplicationRecord
   end
 
   def condition
-    if availability == 1
+    if time < 1.hours.before(Time.current) 
+      Cocard::States::NOTHING
+    elsif availability == 1
       Cocard::States::OK
     elsif availability == 0
       Cocard::States::CRITICAL

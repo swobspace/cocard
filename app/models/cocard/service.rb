@@ -35,10 +35,12 @@ module Cocard
     end
 
     def endpoint_location(ver)
+      return "" if version(ver).nil?
       version(ver)['endpoint']['@Location']
     end
 
     def endpoint_tls_location(ver)
+      return "" if version(ver).nil?
       version(ver)['endpoint_tls']['@Location']
     end
 

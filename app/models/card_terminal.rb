@@ -16,7 +16,7 @@ class CardTerminal < ApplicationRecord
   # -- configuration
   broadcasts_refreshes
 
-  enum :pin_mode, { off: 0, on_demand: 1 }
+  enum :pin_mode, { off: 0, on_demand: 1, auto: 2 }
 
   has_rich_text :description
   delegate :accessibility, to: :network, allow_nil: true

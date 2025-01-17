@@ -273,7 +273,7 @@ bin/rails g migration AddInternalToCardTerminal \
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>enum pin_mode: { off: 0, on_demand: 1 }</pre>
+<pre>enum pin_mode: { off: 0, on_demand: 1, auto: 2 }</pre>
 </div>
 </div>
 <div class="listingblock">
@@ -608,6 +608,7 @@ t.index [:card_terminal_id, :workplace_id]</code></pre>
   availability:integer:index \
   comment:string \
   name:string \
+  muted:boolean \
   --no-stylesheets --no-javascripts --no-helper</code></pre>
 </div>
 </div>
