@@ -15,6 +15,10 @@
                   main_app.logs_path, class: "dropdown-item" %>
       <%= link_to raw(Cocard::States.flag(Cocard::States::WARNING) + ' Veraltete Logs'),
                   main_app.logs_path(outdated: true), class: "dropdown-item" %>
+      <div class="dropdown-divider"></div>
+      <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
+                       t('cocard.current_notes')), 
+                  main_app.notes_path(active: true), class: "dropdown-item" %>
     </div>
 
   </li>

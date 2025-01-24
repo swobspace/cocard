@@ -129,6 +129,7 @@ de:
     context: Kontext
     contexts: Kontexte
     context_ids: Kontexte
+    created_at: Erstellt
     creator: Ersteller
     delivery_date: Lieferdatum
     description: Beschreibung
@@ -161,6 +162,7 @@ de:
     name: Name
     network: Netzwerk
     netzwerk: Netzwerk
+    notable: Notiz für
     note: Notiz
     operational: in Betrieb
     operational_state: Betriebszustand

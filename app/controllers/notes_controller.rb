@@ -4,10 +4,16 @@ class NotesController < ApplicationController
 
   # GET /notes
   def index
-    @notes = @notable.notes
-    @notes = @notes.active if params[:active].present?
-    ordered = @notes.order('created_at DESC')
-    @pagy, @notes = pagy(ordered, count: ordered.count)
+    if @notable
+      @notes = @notable.notes
+      @notes = @notes.active if params[:active].present?
+      ordered = @notes.order('created_at DESC')
+      @pagy, @notes = pagy(ordered, count: ordered.count)
+    else
+      @notes = @notes.where(notable_type: ['Connector', 'Card', 'CardTerminal'])
+      @notes = @notes.active if params[:active].present?
+      @notes = @notes.order('created_at DESC')
+    end
 
     respond_with(@notes)
   end

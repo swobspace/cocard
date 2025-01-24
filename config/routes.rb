@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     end
   end
   resources :networks
+  resources :notes, only: [:show, :index, :edit, :update, :destroy]
   resources :logs, only: [:show, :index, :update, :destroy] do
     collection do
       get :sindex
