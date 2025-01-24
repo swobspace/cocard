@@ -1,8 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Card, type: :model do
+  let(:location) { FactoryBot.create(:location) }
   let(:connector) { FactoryBot.create(:connector) }
-  let(:ct) { FactoryBot.create(:card_terminal, :with_mac, connector: connector) }
+  let(:ct) do
+    FactoryBot.create(:card_terminal, :with_mac, 
+      connector: connector,
+      location: location,
+      ip: '127.6.19.23'
+    )
+  end
   let(:context) { FactoryBot.create(:context) }
   let(:opsta) { FactoryBot.create(:operational_state, operational: true) }
   let(:card) do
@@ -37,6 +44,35 @@ RSpec.describe Card, type: :model do
 
   describe "#to_s" do
     it { expect(card.to_s).to match("#{card.iccsn} - Doctor Who's Universe") }
+  end
+
+  describe "#save" do
+    before(:each) do
+      card.update_column(:location_id, nil)
+      card.reload
+      expect(card.location_id).to eq(nil)
+    end
+
+    it "updates location with SMC-KT" do
+      expect(card).to receive(:card_type).at_least(:once).and_return('SMC-KT')
+      expect {
+        card.save
+      }.to change(card, :location_id).to(location.id)
+    end
+
+    it "updates location with SMC-B" do
+      expect(card).to receive(:card_type).at_least(:once).and_return('SMC-B')
+      expect {
+        card.save
+      }.to change(card, :location_id).to(location.id)
+    end
+
+    it "updates location with HBA" do
+      expect(card).to receive(:card_type).at_least(:once).and_return('HBA')
+      expect {
+        card.save
+      }.not_to change(card, :location_id)
+    end
   end
 
   describe "#update_condition" do
