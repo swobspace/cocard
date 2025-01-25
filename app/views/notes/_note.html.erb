@@ -1,9 +1,10 @@
-<div id="<%= dom_id note %>" 
+<div id="<%= dom_id note %>"
      class="sidecard <%= ('postit' if (note.created_at > 1.day.before(Time.current))) %>"
 >
 
-  <div class="text-black-50">
-    <%= note.notable %> 
+  <div class="">
+    <%= link_to note.notable, note.notable,
+        class: 'primary-link', "data-turbo-frame": '_top' %>
   </div>
 
   <div>
