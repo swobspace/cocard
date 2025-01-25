@@ -3,6 +3,8 @@ class Note < ApplicationRecord
   belongs_to :notable, polymorphic: true
   belongs_to :user, class_name: 'Wobauth::User'
 
+  broadcasts_refreshes
+
   # -- configuration
   has_rich_text :message
   self.inheritance_column = nil
