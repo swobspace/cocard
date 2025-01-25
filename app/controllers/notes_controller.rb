@@ -18,6 +18,14 @@ class NotesController < ApplicationController
     respond_with(@notes)
   end
 
+  def sindex
+    @notes = @notes.where(notable_type: ['Connector', 'Card', 'CardTerminal'])
+    @notes = @notes.active if params[:active].present?
+    ordered = @notes.order('created_at DESC')
+    @pagy, @notes = pagy(ordered, count: ordered.count)
+    respond_with(@notes)
+  end
+
   # GET /notes/1
   def show
     respond_with(@note)

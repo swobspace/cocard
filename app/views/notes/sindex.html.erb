@@ -1,0 +1,6 @@
+<%= turbo_frame_tag('notes') do %>
+  <% if @notes.size > 0 %>
+    <%= render partial: 'note', collection: @notes, as: :note %>
+  <% end %>
+<% end %>
+

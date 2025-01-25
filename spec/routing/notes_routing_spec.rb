@@ -6,6 +6,10 @@ RSpec.describe NotesController, type: :routing do
       expect(get: "/notes").to route_to("notes#index")
     end
 
+    it "routes to #sindex" do
+      expect(get: "/notes/sindex").to route_to("notes#sindex")
+    end
+
     it "routes to #show" do
       expect(get: "/notes/1").to route_to("notes#show", id: "1")
     end

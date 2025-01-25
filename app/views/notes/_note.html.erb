@@ -1,27 +1,24 @@
-<div id="<%= dom_id note %>">
-  <p>
-    <strong>Notable:</strong>
-    <%= note.notable_id %>
-  </p>
+<div id="<%= dom_id note %>" 
+     class="sidecard <%= ('postit' if (note.created_at > 1.day.before(Time.current))) %>"
+>
 
-  <p>
-    <strong>User:</strong>
-    <%= note.user_id %>
-  </p>
+  <div class="text-black-50">
+    <%= note.notable %> 
+  </div>
 
-  <p>
-    <strong>Valid until:</strong>
-    <%= note.valid_until %>
-  </p>
+  <div>
+    <%= truncate(note.message.to_plain_text, length: 80) %>
+  </div>
 
-  <p>
-    <strong>Type:</strong>
-    <%= note.type %>
-  </p>
+  <div class="d-flex justify-content-xl-between">
+    <div class="text-black-50">
+      <%= note.user.shortname %>
+    </div>
 
-  <p>
-    <strong>Message:</strong>
-    <%= note.message %>
-  </p>
+    <div class="text-black-50 text-end">
+      <%= render IsCurrentComponent.new(item: note, attr: :created_at,
+                                        relative: true, icon: false )%>
+    </div>
+  </div>
 
 </div>
