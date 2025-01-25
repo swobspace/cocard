@@ -253,3 +253,5 @@ de:
     outdated: Veraltete Arbeitsplätze
   connectors:
     do_reboot: Konnektor neu starten? Der Konnektor ist dann für längere Zeit nicht verfügbar!
+  card_terminals:
+    with_smcb: KT mit SMC-B
