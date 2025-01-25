@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get "rss/notes", to: "rss/notes#index",
+                   as: "rss_notes",
+                   constraints: lambda {|req| req.format == :xml}
+
   resources 'situation_picture', only: [:index, :update] do
     collection do
       get :failed

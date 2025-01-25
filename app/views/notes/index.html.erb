@@ -1,4 +1,7 @@
 <%= render 'shared/turbo-cache-control' %>
+<% content_for :head do %>
+  <%= auto_discovery_link_tag(:rss, rss_notes_url(active: 1, format: "xml")) %>
+<% end %>
 
 <h1> <%= t('controller.notes') %></h1>
 Für: <%= @notable %>
