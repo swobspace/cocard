@@ -33,6 +33,7 @@ RSpec.shared_examples "a Support" do
   it { is_expected.not_to be_able_to(:verify_pin, Card.new) }
   it { is_expected.not_to be_able_to(:get_certificate, Card.new) }
   it { is_expected.not_to be_able_to(:get_card, Card.new) }
+  it { is_expected.to be_able_to(:create, Note.new) }
 end
 
 RSpec.describe "User", :type => :model do
