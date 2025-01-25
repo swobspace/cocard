@@ -22,6 +22,7 @@ RSpec.shared_examples "a VerifyPin" do
   it { is_expected.to be_able_to(:verify, VerifyPin) }
   it { is_expected.to be_able_to(:get_pin_status, Card.new) }
   it { is_expected.to be_able_to(:verify_pin, Card.new) }
+  it { is_expected.to be_able_to(:reboot, Connector.new) }
   it { is_expected.not_to be_able_to(:get_certificate, Card.new) }
   it { is_expected.not_to be_able_to(:get_card, Card.new) }
 end

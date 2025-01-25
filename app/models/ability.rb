@@ -54,6 +54,7 @@ class Ability
       if @user.role?(:verify_pin)
         can [:read, :verify], VerifyPin
         can [:get_pin_status, :verify_pin], Card
+        can [:reboot], Connector
       else
         cannot [:read, :verify], VerifyPin
       end
