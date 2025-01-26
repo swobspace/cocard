@@ -1,8 +1,22 @@
-= Acknowledges
+= Notizen und Acknowledges
 :author: Wolfgang Barth
 :revdate: 2024-09-10
 :imagesdir: ../../images
 :experimental: true
+
+== Notizen
+
+Konnektoren, Kartenterminals und Karten können mit Notizen versehen werden. In der Ansicht des jeweiligen Objektes gibt es unten einen Abschnitt Notizen, über den man neue Notizen hinzufügt:
+
+image::notes/connector-notes.png[]
+
+Aktuelle Notizen werden auch im Dashboard angezeigt, sofern welche vorhanden sind:
+
+image::notes/dashboard-notes.png[]
+
+NOTE: Notizen werden ggf. von Cocard automatisch erzeugt. Derzeit ist das der Fall, wenn man über Cocard den Reboot eines Konnektors auslöst.
+
+== Acknowledges
 
 Acknowledges sind eine Form von Notizen, die Übersicht im Dashboard schaffen. Einträge mit Acknowledge werden in der Standard-Ansicht herausgefiltert und müssen explizit über den Button btn:[Acknowledged] eingeblendet werden.
 
