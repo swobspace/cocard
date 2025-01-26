@@ -4,6 +4,9 @@
 <% if @current_user.present? %>
   <div class="container-fluid">
     <div class="row">
+      <% unless Note.object_notes.active.count > 0 %>
+        <div class="col-xl"></div>
+      <% end %>
       <div class="col-xl-10">
         <div class="card mt-3">
           <div class="card-header">
@@ -77,7 +80,7 @@
           </div>
         </div>
       </div>
-      <div class="col-xl-2">
+      <div class="col-xl">
         <div class="mt-3">
           <%= turbo_frame_tag("notes", src: sindex_notes_path, refresh: "morph") %>
         </div>

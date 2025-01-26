@@ -10,7 +10,7 @@ class NotesController < ApplicationController
       ordered = @notes.order('created_at DESC')
       @pagy, @notes = pagy(ordered, count: ordered.count)
     else
-      @notes = Note.where(notable_type: ['Connector', 'Card', 'CardTerminal'])
+      @notes = Note.object_notes
       @notes = @notes.active if params[:active].present?
       @notes = @notes.order('created_at DESC')
     end
@@ -19,8 +19,7 @@ class NotesController < ApplicationController
   end
 
   def sindex
-    @notes = @notes.where(notable_type: ['Connector', 'Card', 'CardTerminal'])
-    @notes = @notes.active if params[:active].present?
+    @notes = Note.object_notes.active
     ordered = @notes.order('created_at DESC')
     @pagy, @notes = pagy(ordered, count: ordered.count)
     respond_with(@notes)
