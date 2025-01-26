@@ -21,6 +21,11 @@ class Note < ApplicationRecord
     where("notes.valid_until >= ? or notes.valid_until IS NULL", Time.current)
   end
 
+  # real objects only, exclude notes from log
+  scope :object_notes, -> do
+    where(notable_type: ['Connector', 'Card', 'CardTerminal'])
+  end
+
   def to_s
     message.to_plain_text.truncate(80, :ommision => "...")
   end

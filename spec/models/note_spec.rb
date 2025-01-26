@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Note, type: :model do
   let(:note) { FactoryBot.create(:note, :with_log, message: "some text") }
+  let(:log)  { FactoryBot.create(:log, :with_connector) }
+  let(:conn) { FactoryBot.create(:connector) }
 
   it { is_expected.to belong_to(:notable) }
   it { is_expected.to belong_to(:user) }
@@ -20,7 +22,6 @@ RSpec.describe Note, type: :model do
   end
 
   describe "#active" do
-    let(:log) { FactoryBot.create(:log, :with_connector) }
 
     let!(:note) { FactoryBot.create(:note, notable: log, type: Note.types[:plain]) }
     let!(:ack) { FactoryBot.create(:note, notable: log, type: Note.types[:acknowledge]) }
@@ -33,6 +34,12 @@ RSpec.describe Note, type: :model do
     end
 
     it {expect(Note.active).to contain_exactly(note, ack) }
+  end
 
+  describe "#object_notes" do
+    let!(:log_note) { FactoryBot.create(:note, notable: log) }
+    let!(:conn_note) { FactoryBot.create(:note, notable: conn) }
+
+    it { expect(Note.object_notes).to contain_exactly(conn_note) }
   end
 end
