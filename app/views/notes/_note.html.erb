@@ -3,6 +3,11 @@
 >
 
   <div class="">
+    <% if note.type == 'acknowledge' %>
+      <i class="fa-solid fa-person-digging" title="Acknowledge"></i>
+    <% else %>
+      <i class="fa-solid fa-clipboard" title="Notiz"></i>
+    <% end %>
     <%= link_to note.notable, note.notable,
         class: 'primary-link', "data-turbo-frame": '_top' %>
   </div>
