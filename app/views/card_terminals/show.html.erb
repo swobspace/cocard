@@ -94,6 +94,18 @@
             <th class="w-25 pe-3"><%= t('attributes.pin_mode')%>:</th>
             <td><%= t(@card_terminal.pin_mode, scope: 'pin_modes') %></td>
           </tr>
+
+          <tr>
+            <th class="w-25 pe-3">SMC-KT <%= t('attributes.iccsn')%>:</th>
+            <td><%= link_to(@card_terminal.smckt&.iccsn,
+                            card_path(@card_terminal.smckt),
+                            class: 'primary-link') if @card_terminal.smckt %></td>
+          </tr>
+
+          <tr>
+            <th class="w-25 pe-3">SMC-KT <%= t('attributes.expiration_date')%>:</th>
+            <td><%= render Card::ExpirationDateComponent.new(card: @card_terminal.smckt) %></td>
+          </tr>
         </table>
 
         <div class="card-title border-bottom bg-light pt-2 ps-2">
