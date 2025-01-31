@@ -6,6 +6,7 @@
 * Liste aller Kartenterminals mit SMC-B
 * Gesamtübersicht über alle Notizen
 * Anzeige der aktuellsten Notizen im Dashboard
+* Anzeige SMC-KT ICCSN und Gültigkeit beim Kartenterminal und in der Übersicht der Kartenterminals
 
 == 0.6.3 - 2025-01-17
 * Workflow für die PIN-Verifizierung aller Karten eines Terminals verbessert.
