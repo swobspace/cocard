@@ -29,7 +29,11 @@ class Card < ApplicationRecord
 
   # -- common methods
   def to_s
-    "#{iccsn} - #{card_holder_name}"
+    if iccsn == card_holder_name
+      "#{iccsn}"
+    else
+      "#{iccsn} - #{card_holder_name}"
+    end
   end
 
   def update_condition
