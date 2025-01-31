@@ -7,7 +7,7 @@ Für: <%= @notable %>
   <div data-controller="datatables">
     <%= content_tag :table, role: :datatable,
           id: "notes_table",
-          class: "table table-bordered table-responsive-xl",
+          class: "table table-bordered table-responsive",
           data: {
             'datatables-target': 'datatable',
             order: [[0, 'desc']].to_json
