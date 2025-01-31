@@ -4,7 +4,7 @@
 <% if @current_user.present? %>
   <div class="container-fluid">
     <div class="row">
-      <% unless Note.object_notes.active.count > 0 %>
+      <% unless Note.object_notes.active.current.count > 0 %>
         <div class="col-xl"></div>
       <% end %>
       <div class="col-xl-10">

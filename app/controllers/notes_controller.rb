@@ -19,7 +19,7 @@ class NotesController < ApplicationController
   end
 
   def sindex
-    @notes = Note.object_notes.active
+    @notes = Note.object_notes.active.current
     ordered = @notes.order('created_at DESC')
     @pagy, @notes = pagy(ordered, count: ordered.count)
     respond_with(@notes)
