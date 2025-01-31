@@ -88,8 +88,14 @@ RSpec.describe CardTerminalConcerns, type: :model do
   end
 
   describe "#smcb" do
-    let(:c1) { FactoryBot.create(:card, card_terminal: ct, card_type: 'SMC-KT') }
-    let(:c2) { FactoryBot.create(:card, card_terminal: ct, card_type: 'SMC-B') }
+    let!(:c1) { FactoryBot.create(:card, card_terminal: ct, card_type: 'SMC-KT') }
+    let!(:c2) { FactoryBot.create(:card, card_terminal: ct, card_type: 'SMC-B') }
     it { expect(ct.smcb).to contain_exactly(c2) }
+  end
+
+  describe "#smckt" do
+    let!(:c1) { FactoryBot.create(:card, card_terminal: ct, card_type: 'SMC-KT') }
+    let!(:c2) { FactoryBot.create(:card, card_terminal: ct, card_type: 'SMC-B') }
+    it { expect(ct.smckt).to eq(c1) }
   end
 end

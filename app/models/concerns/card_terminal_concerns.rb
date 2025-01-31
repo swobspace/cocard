@@ -39,4 +39,8 @@ module CardTerminalConcerns
   def smcb
     cards.where(card_type: 'SMC-B')
   end
+
+  def smckt
+    cards.where(card_type: 'SMC-KT').first
+  end
 end
