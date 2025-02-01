@@ -14,6 +14,10 @@ state CRITICAL #orangered
 CRITICAL: Connector nicht erreichbar
 CRITICAL: VPNTI-Status "Offline"
 
+state WARNING #Yellow
+WARNING: Zertifikat des Konnektors läuft bald ab
+WARNING: Reboot angestoßen
+
 state UNKNOWN #LightSkyBlue
 UNKNOWN: Connector erreichbar
 UNKNOWN: fetch SDS failed or 
@@ -23,7 +27,8 @@ state NOTHING #LightGrey
 NOTHING: Nicht konfiguriert;
 NOTHING: Manuelles Update aktiviert;
 
-NOTHING --> CRITICAL
-CRITICAL --> UNKNOWN
-UNKNOWN --> OK
+NOTHING --> UNKNOWN
+UNKNOWN --> CRITICAL
+CRITICAL --> WARNING
+WARNING --> OK
 @enduml
