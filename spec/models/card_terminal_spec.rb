@@ -162,6 +162,9 @@ RSpec.describe CardTerminal, type: :model do
       describe "with ip 0.0.0.0, not connected" do
         it "-> UNKNOWN" do
           expect(ct).to receive(:ip).at_least(:once).and_return('0.0.0.0')
+          expect(ct).to receive(:current_ip).at_least(:once).and_return('0.0.0.0')
+          expect(ct).to receive(:connected).at_least(:once).and_return(false)
+          expect(ct).to receive(:up?).at_least(:once).and_return(true)
           expect {
             ct.update_condition
           }.to change(ct, :condition).to(Cocard::States::UNKNOWN)
