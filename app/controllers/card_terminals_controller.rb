@@ -8,6 +8,10 @@ class CardTerminalsController < ApplicationController
       @card_terminals = @locatable.card_terminals
     elsif params[:acknowledged]
       @card_terminals = CardTerminal.acknowledged
+    elsif params[:with_smcb]
+      @card_terminals = CardTerminal.joins(:cards)
+                                    .where("cards.card_type = 'SMC-B'")
+                                    .distinct
     else
       @card_terminals = CardTerminal.all
     end

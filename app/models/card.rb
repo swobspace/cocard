@@ -24,11 +24,16 @@ class Card < ApplicationRecord
 
   # -- validations and callbacks
   before_save :update_condition
+  before_save :update_location
   validates :iccsn, presence: true, uniqueness: { case_sensitive: false }
 
   # -- common methods
   def to_s
-    "#{iccsn} - #{card_holder_name}"
+    if iccsn == card_holder_name
+      "#{iccsn}"
+    else
+      "#{iccsn} - #{card_holder_name}"
+    end
   end
 
   def update_condition
@@ -67,6 +72,12 @@ class Card < ApplicationRecord
     # -- OK
     else
       set_condition( Cocard::States::OK, nil )
+    end
+  end
+
+  def update_location
+    if ['SMC-B', 'SMC-KT'].include?(card_type)
+      self[:location_id] = card_terminal&.location_id
     end
   end
 

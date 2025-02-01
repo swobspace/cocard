@@ -1,0 +1,3 @@
+<%= turbo_stream.replace('notes') do %>
+  <%= turbo_frame_tag("notes", src: notes_path(active: 1), refresh: "morph") %>
+<% end %>

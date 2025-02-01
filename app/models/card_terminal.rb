@@ -22,6 +22,7 @@ class CardTerminal < ApplicationRecord
   delegate :accessibility, to: :network, allow_nil: true
 
   # -- validations and callbacks
+  before_save :update_ip_and_location
   before_save :ensure_displayname
   before_save :update_condition
 
@@ -60,6 +61,10 @@ class CardTerminal < ApplicationRecord
     if connector.nil?
       return set_condition( Cocard::States::NOTHING,
                      "Kein Konnektor zugewiesen" )
+    end
+    if ip != current_ip
+        return set_condition( Cocard::States::UNKNOWN,
+                              "IP Mismatch: gefundene und konfigurierte IP-Adresse weichen von einander ab" )
     end
     if online?
       return set_condition( Cocard::States::OK,
@@ -107,6 +112,16 @@ class CardTerminal < ApplicationRecord
       !!(up? && connected)
     else
       connected
+    end
+  end
+
+  def update_ip_and_location
+    if ip.nil? and current_ip.present?
+      self[:ip] = current_ip
+    end
+
+    if will_save_change_to_ip?
+      update_location_by_ip
     end
   end
 

@@ -72,6 +72,7 @@ de:
       oder Software-Fehlern im Worst-Case zum Sperren aller SMB-C-Karten in kurzer
       Zeit führen. Testen Sie bitte daher Ihre Installation und Konfiguration
       vor einem flächendeckenden Rollout ausführlich.
+    ip_takeover: IP übernehmen?
 
   activerecord:
     models:
@@ -129,7 +130,9 @@ de:
     context: Kontext
     contexts: Kontexte
     context_ids: Kontexte
+    created_at: Erstellt
     creator: Ersteller
+    current_ip: Gefundene IP
     delivery_date: Lieferdatum
     description: Beschreibung
     displayname: Anzeigename
@@ -161,6 +164,7 @@ de:
     name: Name
     network: Netzwerk
     netzwerk: Netzwerk
+    notable: Notiz für
     note: Notiz
     operational: in Betrieb
     operational_state: Betriebszustand
@@ -251,3 +255,6 @@ de:
     outdated: Veraltete Arbeitsplätze
   connectors:
     do_reboot: Konnektor neu starten? Der Konnektor ist dann für längere Zeit nicht verfügbar!
+  card_terminals:
+    with_smcb: KT mit SMC-B
+    update_ip_from_current: Vom Konnektor gemeldete IP übernehmen

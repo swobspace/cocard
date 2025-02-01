@@ -1,4 +1,4 @@
-<div class="table-responsive-xl">
+<div class="table-responsive">
 <%= content_tag :table, id: "card_terminal_cards_table",
       class: "table table-sm" do %>
   <thead>
@@ -25,7 +25,7 @@
         <td><%= link_to card.iccsn, card_path(card), class: 'primary-link' %></td>
         <td class="text-center"><%= card.slotid %></td>
         <td><%= card.insert_time %></td>
-        <td><%= card.expiration_date %></td>
+        <td><%= render Card::ExpirationDateComponent.new(card: card) %></td>
         <td><%= card.operational_state %></td>
       <% end %>
     <% end %>

@@ -5,6 +5,10 @@ class Card::ExpirationDateComponent < ViewComponent::Base
     @card = card
   end
 
+  def render?
+    !!card
+  end
+
   def message
     if card.expiration_date.blank?
       Cocard::States.flag(Cocard::States::NOTHING)

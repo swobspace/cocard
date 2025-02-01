@@ -5,7 +5,7 @@
 <div data-controller="datatables">
   <%= content_tag :table, role: :datatable,
         id: "card_terminals_table",
-        class: "table table-bordered table-responsive-xl",
+        class: "table table-bordered table-responsive",
         data: {
           'datatables-target': 'datatable',
           order: [[0, 'asc']].to_json
@@ -25,13 +25,15 @@
             <th><%= t('attributes.room') %></th>
             <th><%= t('attributes.plugged_in') %></th>
             <th><%= t('attributes.contact') %></th>
-            <th><%= t('attributes.delivery_date') %></th>
-            <th><%= t('attributes.supplier') %></th>
-            <th><%= t('attributes.serial') %></th>
-            <th><%= t('attributes.id_product') %></th>
+            <th class="notvisible"><%= t('attributes.delivery_date') %></th>
+            <th class="notvisible"><%= t('attributes.supplier') %></th>
+            <th class="notvisible"><%= t('attributes.serial') %></th>
+            <th class="notvisible"><%= t('attributes.id_product') %></th>
             <th><%= t('attributes.firmware_version') %></th>
             <th class="notvisible"><%= t('attributes.description') %></th>
             <th class="notvisible"><%= t('attributes.pin_mode') %></th>
+            <th class="notvisible">SMC-KT <%= t('attributes.iccsn') %></th>
+            <th class="notvisible">SMC-KT <%= t('attributes.expiration_date') %></th>
             <th><%= t('attributes.updated_at') %></th>
             <th><%= t('attributes.last_ok') %></th>
             <th class="nosort"><%= t('cocard.action') %></th>
@@ -39,6 +41,8 @@
     </thead>
     <tfoot class="search">
       <tr>
+            <th></th>
+            <th></th>
             <th></th>
             <th></th>
             <th></th>
@@ -95,6 +99,8 @@
           <td><%= card_terminal.firmware_version %></td>
           <td><%= card_terminal.description %></td>
           <td><%= t(card_terminal.pin_mode, scope: 'pin_modes') %></td>
+          <td><%= card_terminal.smckt&.iccsn %></td>
+          <td><%= render Card::ExpirationDateComponent.new(card: card_terminal.smckt) %></td>
           <td><%= render UpdatedAtComponent.new(item: card_terminal) %></td>
           <td><%= render IsCurrentComponent.new(item: card_terminal, attr: :last_ok) %></td>
           <td class="text-nowrap">

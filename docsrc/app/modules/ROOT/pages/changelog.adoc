@@ -1,5 +1,15 @@
 = Changelog
 
+== 0.6.4 - 2025-02-01
+
+* SMC-B und SMC-KT übernehmen den Ort vom Kartenterminal beim Speichern
+* Liste aller Kartenterminals mit SMC-B
+* Gesamtübersicht über alle Notizen
+* Anzeige der aktuellsten Notizen im Dashboard
+* Anzeige SMC-KT ICCSN und Gültigkeit beim Kartenterminal und in der Übersicht der Kartenterminals
+* Ändert sich die IP des Kartenterminals, muss diese manuell übernommen werden. Die einmal eingestellte IP bleibt bis zur manuellen Übernahme erhalten, auch dann, wenn das Kartenterminal wegen eines Problems seine IP verliert.
+* Dokumentation für Kartenterminals ergänzt
+
 == 0.6.3 - 2025-01-17
 * Workflow für die PIN-Verifizierung aller Karten eines Terminals verbessert.
 * Neu: Hintergrundjob für die automatische PIN-Verifizierung (nur unterstützte Terminals). SMC-B Auto-PIN-Mode muss hierfür am Kartenterminal gleich `Automatisch` sein. xref:admin/card-terminal-edit.adoc[Mehr zur automatischen PIN-Verifizierung]

@@ -15,13 +15,15 @@ Erreichbar ==
 Ping oder "connected"
 endnote
 
-'state UNKNOWN #LightSkyBlue
-'UNKNOWN: not yet implemented
+state UNKNOWN #LightSkyBlue
+UNKNOWN: keine gültige IP
+UNKNOWN: IP Mismatch
 
 state NOTHING #LightGrey
 NOTHING: Kein Connector eingetragen
 
-NOTHING --> CRITICAL
+NOTHING --> UNKNOWN
+UNKNOWN --> CRITICAL
 CRITICAL --> WARNING
 WARNING --> OK
 @enduml

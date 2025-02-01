@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_14_162444) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_01_084816) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -95,6 +95,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_14_162444) do
     t.bigint "network_id"
     t.integer "pin_mode", default: 0
     t.bigint "acknowledge_id"
+    t.inet "current_ip"
     t.index ["condition"], name: "index_card_terminals_on_condition"
     t.index ["connector_id"], name: "index_card_terminals_on_connector_id"
     t.index ["location_id"], name: "index_card_terminals_on_location_id"

@@ -3,53 +3,60 @@
 <h1> <%= t('controller.notes') %></h1>
 Für: <%= @notable %>
 
-<div data-controller="datatables">
-  <%= content_tag :table, role: :datatable,
-        id: "notes_table",
-        class: "table table-bordered table-responsive-xl",
-        data: {
-          'datatables-target': 'datatable',
-          order: [[0, 'asc']].to_json
-        } do %>
-    <thead>
-      <tr>
-            <th><%= t('attributes.notable') %></th>
-            <th><%= t('attributes.user') %></th>
-            <th><%= t('attributes.valid_until') %></th>
-            <th><%= t('attributes.type') %></th>
-            <th><%= t('attributes.message') %></th>
-            <th class="nosort"><%= t('cocard.action') %></th>
-      </tr>
-    </thead>
-    <tfoot class="search">
-      <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th class="nosearch"></th>
-      </tr>
-    </tfoot>
-    <tbody>
-      <% @notes.each do |note| %>
-        <%= content_tag(:tr, id: dom_id(note), class: dom_class(note)) do %>
-                <td><%= note.notable %></td>
-                <td><%= note.user %></td>
-                <td><%= note.valid_until %></td>
-                <td><%= note.type %></td>
-                <td><%= note.message %></td>
-                <td class="text-nowrap">
-            <%= show_link [@notable, note] %>
-            <%= edit_link [@notable, note] %>
-            <%= delete_link [@notable, note] %>
-          </td>
+<%= turbo_frame_tag 'notes', refresh: 'morph' do %>
+  <div data-controller="datatables">
+    <%= content_tag :table, role: :datatable,
+          id: "notes_table",
+          class: "table table-bordered table-responsive",
+          data: {
+            'datatables-target': 'datatable',
+            order: [[0, 'desc']].to_json
+          } do %>
+      <thead>
+        <tr>
+              <th><%= t('attributes.created_at') %></th>
+              <th><%= t('attributes.type') %></th>
+              <th><%= t('attributes.notable') %></th>
+              <th><%= t('attributes.message') %></th>
+              <th><%= t('attributes.valid_until') %></th>
+              <th><%= t('attributes.type') %></th>
+              <th><%= t('attributes.user') %></th>
+              <th class="nosort"><%= t('cocard.action') %></th>
+        </tr>
+      </thead>
+      <tfoot class="search">
+        <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th class="nosearch"></th>
+        </tr>
+      </tfoot>
+      <tbody>
+        <% @notes.each do |note| %>
+          <%= content_tag(:tr, id: dom_id(note), class: dom_class(note)) do %>
+                  <td><%= note.created_at.localtime.to_s %></td>
+                  <td><%= note.notable_type %></td>
+                  <td><%= note.notable %></td>
+                  <td><%= note.message %></td>
+                  <td><%= note.valid_until %></td>
+                  <td><%= note.type %></td>
+                  <td><%= note.user %></td>
+                  <td class="text-nowrap">
+              <%= show_link note, data: { "turbo-frame" => "_top" }  %>
+              <%= edit_link note, data: { "turbo-frame" => "modal" } %>
+              <%= delete_link note %>
+            </td>
+          <% end %>
         <% end %>
-      <% end %>
-    </tbody>
-  <% end %>
-</div>
-
+      </tbody>
+    <% end %>
+  </div>
+<% end %>
 <br />
 
 <%= back_link %>

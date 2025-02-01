@@ -1,10 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe "cards/index", type: :view do
-  let(:conn) { FactoryBot.create(:connector, name: 'TIK-XXX-39') }
-  let(:ct) { FactoryBot.create(:card_terminal, :with_mac, connector: conn, ct_id: 'CT_ID_0176') }
-  let(:ops) { FactoryBot.create(:operational_state, name: 'im Schrank') }
   let(:location) { FactoryBot.create(:location, lid: 'AXXC') }
+  let(:conn) { FactoryBot.create(:connector, name: 'TIK-XXX-39') }
+  let(:ct) do
+    FactoryBot.create(:card_terminal, :with_mac, 
+      connector: conn, 
+      ct_id: 'CT_ID_0176',
+      location: location
+    ) 
+  end
+  let(:ops) { FactoryBot.create(:operational_state, name: 'im Schrank') }
 
   let(:ts) { Time.current }
   before(:each) do
@@ -86,7 +92,7 @@ RSpec.describe "cards/index", type: :view do
     assert_select cell_selector, text: Regexp.new(ts.to_s), count: 2
     assert_select cell_selector, text: Regexp.new(1.year.after(Date.current).to_s), count: 2
     assert_select cell_selector, text: Regexp.new("im Schrank".to_s), count: 4
-    assert_select cell_selector, text: Regexp.new("AXXC".to_s), count: 2
+    assert_select cell_selector, text: Regexp.new("AXXC".to_s), count: 1
     assert_select cell_selector, text: Regexp.new("999777333".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("222444667".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("1-2-3-456".to_s), count: 2

@@ -51,6 +51,11 @@
           </tr>
 
           <tr>
+            <th class="w-25 pe-3"><%= t('attributes.ip')%>:</th>
+            <td><%= @card_terminal.ip %></td>
+          </tr>
+
+          <tr>
             <th class="w-25 pe-3"><%= t('attributes.room')%>:</th>
             <td><%= @card_terminal.room %></td>
           </tr>
@@ -93,6 +98,18 @@
           <tr>
             <th class="w-25 pe-3"><%= t('attributes.pin_mode')%>:</th>
             <td><%= t(@card_terminal.pin_mode, scope: 'pin_modes') %></td>
+          </tr>
+
+          <tr>
+            <th class="w-25 pe-3">SMC-KT <%= t('attributes.iccsn')%>:</th>
+            <td><%= link_to(@card_terminal.smckt&.iccsn,
+                            card_path(@card_terminal.smckt),
+                            class: 'primary-link') if @card_terminal.smckt %></td>
+          </tr>
+
+          <tr>
+            <th class="w-25 pe-3">SMC-KT <%= t('attributes.expiration_date')%>:</th>
+            <td><%= render Card::ExpirationDateComponent.new(card: @card_terminal.smckt) %></td>
           </tr>
         </table>
 
@@ -157,8 +174,12 @@
           </tr>
 
           <tr>
-            <th class="w-25 pe-3"><%= t('attributes.ip')%>:</th>
-            <td><%= @card_terminal.ip %></td>
+            <th class="w-25 pe-3"><%= t('attributes.current_ip')%>:</th>
+            <td>
+              <%= @card_terminal.current_ip %>
+              <%= render WarnIpMismatchComponent.new(item: @card_terminal) %>
+              <%= render UseCurrentIpComponent.new(item: @card_terminal) if can? :manage, @card_terminal %>
+            </td>
           </tr>
 
           <tr>

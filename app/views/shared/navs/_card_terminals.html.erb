@@ -19,7 +19,10 @@
               main_app.new_card_terminal_path,
               class: "dropdown-item" %>
       <% end %>
-
+      <div class="dropdown-divider"></div>
+      <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
+            t('card_terminals.with_smcb')),
+          main_app.card_terminals_path(with_smcb: 1), class: "dropdown-item" %>
     </div>
   </li>
 <% end %>

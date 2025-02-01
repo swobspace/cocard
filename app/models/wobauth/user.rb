@@ -12,5 +12,13 @@ class Wobauth::User < ActiveRecord::Base
          :trackable
 
   validates :password, confirmation: true
+
+  def shortname
+    if sn.blank? and givenname.blank?
+      "#{username}"
+    else
+      "#{sn}, #{givenname}"
+    end
+  end
 end
 

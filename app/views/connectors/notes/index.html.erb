@@ -20,9 +20,9 @@
           </div>
          <% end %>
           <div class="ms-auto">
-            <%= link_to t('cocard.new_note'), new_polymorphic_path([@notable, :note]),
+            <%= link_to(t('cocard.new_note'), new_polymorphic_path([@notable, :note]),
                         class: 'btn btn-outline-secondary',
-                        data: {"turbo-frame" => "modal"} %>
+                        data: {"turbo-frame" => "modal"}) if can? :create, Note %>
           </div>
         </div>
       </div>

@@ -1,0 +1,15 @@
+<div id="update_<%= dom_id(item) %>" class="d-inline-flex mx-3">
+  <%= button_to( update_url,
+                 method: :patch,
+                 title: t('update_ip_from_current', 
+                        scope: item.class.name.underscore.pluralize),
+                 class: "btn btn-sm btn-warning",
+                  form: {
+                    data: {
+                      "turbo-confirm": t('cocard.ip_takeover')
+                    }
+                  }) do %>
+  <i class="fa-solid fa-check"></i>
+  <% end %>
+</div>
+

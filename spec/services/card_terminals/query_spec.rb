@@ -27,9 +27,9 @@ module CardTerminals
   end
 
   RSpec.describe Query do
-    let(:network) { FactoryBot.create(:network, netzwerk: '127.0.0.0/8') }
     let(:ts)  { Time.current }
     let(:ber) { FactoryBot.create(:location, lid: 'BER') }
+    let(:network) { FactoryBot.create(:network, netzwerk: '127.51.0.0/16', location: ber) }
     let(:conn) { FactoryBot.create(:connector) }
     let!(:ct1) do
       FactoryBot.create(:card_terminal, :with_mac,
@@ -37,6 +37,7 @@ module CardTerminals
         name: 'KLG-AXC-17',
         description: "some more infos",
         ip: '127.51.100.17',
+        current_ip: '127.51.100.17',
         condition: 0,
         connected: true,
         firmware_version: '5.3.4',
@@ -51,6 +52,7 @@ module CardTerminals
       FactoryBot.create(:card_terminal,
         name: 'KLG-CWZ-04',
         ip: '127.203.113.4',
+        current_ip: '127.203.113.4',
         ct_id: 'CT_ID_0124',
         condition: 2,
         firmware_version: '4.9.3',
@@ -66,6 +68,7 @@ module CardTerminals
       FactoryBot.create(:card_terminal, :with_mac,
         name: 'KLG-CWZ-05',
         ip: '127.50.100.5',
+        current_ip: '127.50.100.5',
         condition: 3,
         firmware_version: '4.9.3',
         room: 'U.16',

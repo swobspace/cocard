@@ -217,3 +217,20 @@ tr.invalid td {
 dl > dd {
   margin-left: 1.5em;
 }
+
+// ------------------------------------------------------------------------
+// sidecard: notes on dashboard
+// ------------------------------------------------------------------------
+
+div.sidecard {
+  z-index: 100;
+  box-shadow: 0px .25rem .5rem #bbb !important;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  // background-color: #FEF5BD;
+  // background-color: #FEF9D8;
+  // background-color: #FEFBE5;
+}
+div.postit {
+  background-color: #FEFBE5;
+}
