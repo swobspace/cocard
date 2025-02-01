@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Konnektor :: Cocard</title>
+    <title>Kartenterminal :: Cocard</title>
     <meta name="generator" content="Antora 3.1.10">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -52,10 +52,10 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="conditions.html">Zustände</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="connector.html">Konnektor</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="card-terminal.html">Kartenterminal</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -193,7 +193,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Cocard</a></li>
-    <li><a href="connector.html">Konnektor</a></li>
+    <li><a href="card-terminal.html">Kartenterminal</a></li>
   </ul>
 </nav>
 </div>
@@ -202,25 +202,25 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Konnektor</h1>
+<h1 class="page">Kartenterminal</h1>
 <div class="sect1">
 <h2 id="_übersicht"><a class="anchor" href="#_übersicht"></a>Übersicht</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Die Anzeige eines Konnektors besteht aus 4 Bereichen: die allgemeine Information (links oben), Status (links unten), Produktinformation (rechts oben) und Kontexte/Zertifikate (rechts unten).</p>
+<p>Die Anzeige eines Kartenterminals besteht aus 4 Bereichen: die allgemeine Information (links oben), Status (links unten), Daten des Kartenterminals (rechts oben) und Produktinformation (rechts unten).</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../_images/connector/connector-show.png" alt="connector show">
+<img src="../_images/ct/ct-show.png" alt="ct show">
 </div>
 </div>
 <div class="paragraph">
-<p>Die Kopfzeile enthält neben dem Namen und der IP-Adresse den Gesamtstatus des Konnektors und weitere Aktionsbuttons.</p>
+<p>Die Kopfzeile enthält neben dem Namen den Gesamtstatus des Kartenterminals und weitere Aktionsbuttons.</p>
 </div>
 <div class="sect2">
 <h3 id="_allgemeine_information"><a class="anchor" href="#_allgemeine_information"></a>Allgemeine Information</h3>
 <div class="paragraph">
-<p>Viele Felder aus der allgemeinen Information sind bereits in <a href="../admin/connector-edit.html" class="xref page">Konnektor anlegen/bearbeiten</a> beschrieben. Weitere Felder werden aus den Konnektor-Informationen extrahiert:</p>
+<p>Viele Felder aus der allgemeinen Information sind bereits in <a href="../admin/card-terminal-edit.html" class="xref page">Kartenterminal anlegen/bearbeiten</a> beschrieben. Weitere Felder werden aus den Kartenterminal-Informationen extrahiert:</p>
 </div>
 <table class="tableblock frame-all grid-all fit-content">
 <colgroup>
@@ -235,19 +235,18 @@
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Firmware Version</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Aus der Produktinformation extrahierte Firmwareversion</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SMC-KT ICCSN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Die ICCSN der zum Kartenterminal gehörigen SMC-KT</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ICCSN</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Die ICCSN des Konnektors. Die Abfrage erfolgt nur einmal am Tag, daher steht die Information bei Neueinrichtung nich sofort zur Verfügung</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Ablaufdatum</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Ablaufdatum des Zertfikates des Konnektors</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SMC-KT Ablaufdatum</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ablaufdatum des Zertfikates der SMC-KT</p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>Beide Werte sind auch in der Übersichttabelle aller Kartenterminals einblendbar.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_status"><a class="anchor" href="#_status"></a>Status</h3>
@@ -264,122 +263,104 @@
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Last Check</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Zuletzt ausgeführte Überprüfung des Konnektors. Wenn der Wert älter als 3min ist (Intervall der Konnektorabfrage), ist ggf. die automatische Konnektorabfrage deaktiviert (manuelles Update). Oder es stimmt etwas mit der Überwachung nicht - evtl. ist der Abfragejob deaktiviert.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">zuletzt OK</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Zeitstempel, wann der Konnektor zuletzt den Zustand OK hatte.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">VPN TI Online</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Ist der Konnektor in der Telematik Online?</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">SOAP Request</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Status der letzten SOAP-Abfrage (Konnektor, Kartenterminals oder Karten)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">online</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ist das Kartenterminal mit dem Konnektor verbunden?</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Zustand</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Gesamtzustand des Konnektors; wird auch in der Kopfzeile angezeigt.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Gesamtzustand des Kartenterminals; wird auch in der Kopfzeile angezeigt.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Anzahl Terminals</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Wieviele Terminals sind mit dem Konnektor verbunden?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">zuletzt aktualisiert</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zuletzt ausgeführte Überprüfung des Kartenterminals. Wenn der Wert älter als 7min ist (Intervall der Kartenterminalabfrage), ist ggf. die automatische Kartenterminalabfrage deaktiviert (manuelles Update). Oder es stimmt etwas mit der Überwachung nicht - evtl. ist der Abfragejob deaktiviert.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">zuletzt OK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zeitstempel, wann der Kartenterminal zuletzt den Zustand OK hatte. Zeigt an, wie lange ein Nicht-OK-Zustand bereits besteht.</p></td>
 </tr>
 </tbody>
 </table>
-<div class="paragraph">
-<p>Zur Zustandsbeurteilung des Konnektors gehört nicht nur der aktuelle Gesamtzustand, sondern auch das Alter (siehe <em>Zuletzt OK</em>). Die Abfrage des Konnektors erfolgt nur alle 3 min. Es ist durchaus möglich, dass die Abfrage genau zu dem Zeitpunkt erfolgt, in dem der VPN-Tunnel zur Telematik erneuert wird. Der Gesamtzustand des Konnektors wechselt dann auf CRITICAL (rot). Die nächste Abfrage erfolgt 3 min später. Dabei kann der Eindruck entstehen, dass die Verbindung zur TI auch solange unterbrochen war - was eher nicht der Fall ist.</p>
 </div>
-<div class="admonitionblock note">
-<table>
+<div class="sect2">
+<h3 id="_daten_des_kartenterminals"><a class="anchor" href="#_daten_des_kartenterminals"></a>Daten des Kartenterminals</h3>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
 <tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Ist der Zustand des Konnektors nicht OK, aber <em>Zuletzt OK</em> erst wenige Minuten alt, ist das noch kein Grund zur Beunruhigung. Wenn aber der letzte OK-Zustand älter als 10 min ist, sollte man sich auf die Suche nach dem Problem machen.
-</td>
+<th class="tableblock halign-left valign-top">Feld</th>
+<th class="tableblock halign-left valign-top">Beschreibung</th>
 </tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Konnektor</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Konnektor, mit dem das Kartenterminal verbunden ist. Die Anzeige ist schon allgemeinen Abschnitt vorhanden und damit redundant, wird hier aber wiederholt, um mit einem Screenshot dieses Ausschnitts alles Infos parat zu haben.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name, den der Konnektor zurückmeldet. Ist der Anzeigename leer, wird der Name automatisch in den Anzeigenamen übernommen. Der Anzeigename kann überschrieben werden, der Name nicht.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CT_ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CT_ID, die der Konnektor für das Kartenterminal vergeben hat.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MAC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MAC-Adresse. Wird für die eineindeutige Identifizierung des Kartenterminals in Cocard verwendet.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Gefundene IP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IP, die der Konnektor zurückmeldet. Die gefundene IP wird als IP-Adresse übernommen, wenn die IP-Adresse noch leer ist. Siehe Abschnitt <em>Gefundene IP</em> weiter unten.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Netzwerk</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ist unter Netzwerke ein zur IP passendes Netzwerk vorhanden, wird es hier angezeigt.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Slots</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Anzahl der Slots des Kartenterminals.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Firmware Version</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Die Version wird aus der Produktinformation extrahiert</p></td>
+</tr>
+</tbody>
 </table>
-</div>
-<div class="paragraph">
-<p>Bei einem Reboot des Konnektors können je nach Auslastung und Hardware-Performance des Konnektors bis zu 20 min vergehen, bis alle Dienste wieder erreichbar sind. Um die für einen Reboot benötigte Zeit besser abschätzen zu können, kann man sich die Zeit des Reboots notieren und dann in regelmäßigen Abständen versuchen, auf die Admin-Weboberfläche  des Konnektors zuzugreifen. So erhält man ein Gefühl dafür, wie lange ein Reboot in der eigenen Umgebung tatsächlich dauert. Ist die Adminoberfläche wieder erreichbar, ist normalerweise der Reboot des Konnektors abgeschlossen.</p>
-</div>
 </div>
 <div class="sect2">
 <h3 id="_produktinformation"><a class="anchor" href="#_produktinformation"></a>Produktinformation</h3>
 <div class="paragraph">
-<p>Dieser Abschnitt stellt die Produktinformationen als einfachen Text dar, die die Gematik in der Konnektor-Spezifikation festgelegt hat.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_zugewiesene_kontexte_und_zertifikaten"><a class="anchor" href="#_zugewiesene_kontexte_und_zertifikaten"></a>Zugewiesene Kontexte und Zertifikaten</h3>
-<div class="paragraph">
-<p>Anzeige von Zugewiesenen Kontexten und Zertifikaten. Zur Pflege von Kontexten und Zertifikaten siehe <a href="../admin/contexts.html" class="xref page">Kontexte</a> und <a href="../admin/connector-edit.html" class="xref page">Konnektor anlegen/bearbeiten</a></p>
+<p>Dieser Abschnitt stellt die Produktinformationen als einfachen Text dar, die die Gematik in der Kartenterminal-Spezifikation festgelegt hat.</p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_manuelles_update"><a class="anchor" href="#_manuelles_update"></a>Manuelles Update</h2>
+<h2 id="_gefundene_ip"><a class="anchor" href="#_gefundene_ip"></a>Gefundene IP</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Ist das manuelle Update des Konnektors aktiviert, erscheinen in der Kopfzeile weitere Buttons für die Aktionen, die sonst per Hintergrundjob ausgeführt werden.</p>
+<p>Es kommt manchmal vor, dass Kartenterminals die IP verlieren - aus welchen Gründen auch immer. Cocard überschreibt bei einer Änderung der vom Konnektor gefundene IP-Adresse nicht die konfigurierte IP, sondern speichert diese IP in einem separaten Feld. Ist bei der ersten Inbetriebnahme des Kartenterminals am Konnektor die IP noch leer, wird die gefundene IP automatisch übernommen, in allen anderen Fällen nicht.</p>
+</div>
+<div class="paragraph">
+<p>Unterscheiden sich die Einträge in IP-Adresse und gefundene IP, dann wechselt der Status des Kartenterminals auf <code>UNKNOWN</code> und Cocard zeigt rechts unter der gefundenen IP-Adresse eine Warnung an. Mit dem Button <span class="image"><img src="../_images/common/update-button.png" alt="update button"></span> kann man die gefundene IP in das Feld IP-Adresse übernehmen.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../_images/connector/connector-show-header-manual.png" alt="connector show header manual">
+<img src="../_images/ct/ct-show-ip-missmatch.png" alt="ct show ip missmatch">
 </div>
+<div class="title">Abbildung 1. Kartenterminal mit IP Mismatch</div>
 </div>
 <div class="paragraph">
-<p>Bei einer Neueinrichtung sollte man folgende Reihenfolge einhalten:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Abfrage SDS</p>
-</li>
-<li>
-<p>Abfrage Konnektor</p>
-</li>
-<li>
-<p>Abfrage Kartenterminals</p>
-</li>
-<li>
-<p>Abfrage Karten</p>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_reboot"><a class="anchor" href="#_reboot"></a>Reboot</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Wenn ein Reboot des Konnektors von Cocard unterstützt wird, erscheint
-ein roter Reboot-Button in der Kopfzeile:</p>
+<p>Ein IP-Mismatch wird auch im Dashboard angezeigt:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../_images/connector/connector-show-header-reboot.png" alt="connector show header reboot">
+<img src="../_images/dashboard/dashboard-ct-ip-missmatch.png" alt="dashboard ct ip missmatch">
 </div>
-</div>
-<div class="paragraph">
-<p>Die Zugangsdaten hierfür müssen in der <a href="../installation/configuration.html" class="xref page">Konfigurationsdatei</a> hinterlegt werden. Wird ein Reboot ausgelöst, wird auch eine Notiz beim Konnektor dazu angelegt. Die Notiz kann manuell bearbeitet, ergänzt oder gelöscht werden.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Derzeit wird nur die KoCoBox unterstützt. Die Variablen für die Zugangsdaten zur Admin-Weboberfläche sind <code>KOCO_ADMIN</code> und <code>KOCO_PASSWD</code>.
-</td>
-</tr>
-</table>
+<div class="title">Abbildung 2. Anzeige eines Kartenterminals mit IP-Mismatch im Dashboard</div>
 </div>
 </div>
 </div>

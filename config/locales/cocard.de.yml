@@ -132,6 +132,7 @@ de:
     context_ids: Kontexte
     created_at: Erstellt
     creator: Ersteller
+    current_ip: Gefundene IP
     delivery_date: Lieferdatum
     description: Beschreibung
     displayname: Anzeigename
