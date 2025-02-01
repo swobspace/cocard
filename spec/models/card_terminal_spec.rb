@@ -9,6 +9,14 @@ RSpec.describe CardTerminal, type: :model do
       accessibility: 'ping'
     )
   end
+  let!(:location2) { FactoryBot.create(:location, lid: 'BB4') }
+  let!(:network2) do 
+    FactoryBot.create(:network, 
+      netzwerk: '127.4.5.0/24',
+      location_id: location2.id,
+      accessibility: 'ping'
+    )
+  end
   let(:connector) { FactoryBot.create(:connector) }
   let(:ct) do
     FactoryBot.create(:card_terminal,
@@ -63,6 +71,27 @@ RSpec.describe CardTerminal, type: :model do
       expect {
         ct.save 
       }.to change(ct, :displayname).to ('New Name')
+    end
+
+    it "updates location from ip" do
+      ct.update(ip: "127.4.5.19")
+      ct.reload
+      expect(ct.ip.to_s).to eq("127.4.5.19")
+      expect(ct.location.lid).to eq(location2.lid)
+    end
+
+    it "doesn't update ip from current ip" do
+      ct.update(current_ip: "127.4.5.19")
+      ct.reload
+      expect(ct.ip.to_s).to eq("127.2.3.4")
+    end
+
+    it "update ip from current ip if ip.nil?" do
+      ct = FactoryBot.create(:card_terminal, :with_mac)
+      expect(ct.ip).to be_nil
+      ct.update(current_ip: "127.4.5.19")
+      ct.reload
+      expect(ct.ip.to_s).to eq("127.4.5.19")
     end
   end
 

@@ -45,14 +45,14 @@ module Cocard
       it { expect(subject.name).to eq("ORGA6100-0241000000B692")}
       it { expect(subject.mac).to eq("00-0D-F8-0C-86-52")}
       it { expect(subject.ip_address).to include(ipv4_address: "10.200.149.235")}
-      it { expect(subject.ip).to eq("10.200.149.235")}
+      it { expect(subject.current_ip).to eq("10.200.149.235")}
       it { expect(subject.slots).to eq(4)}
       it { expect(subject.is_physical).to be_truthy }
       it { expect(subject.connected).to be_truthy }
     end
 
     describe "Cocard::CardTerminal::ATTRIBUTES" do
-      it { expect(Cocard::CardTerminal::ATTRIBUTES).to contain_exactly(:properties, :name, :ct_id, :mac, :ip, :slots, :connected ) }
+      it { expect(Cocard::CardTerminal::ATTRIBUTES).to contain_exactly(:properties, :name, :ct_id, :mac, :current_ip, :slots, :connected ) }
     end
   end
 end

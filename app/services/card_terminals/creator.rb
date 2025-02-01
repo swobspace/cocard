@@ -54,9 +54,8 @@ module CardTerminals
       @card_terminal.firmware_version = @card_terminal.product_information&.firmware_version
 
       #
-      # update location via ip->network if possible
+      # update location via ip->network now via model#save
       #
-      @card_terminal.update_location_by_ip
 
       #
       # final save

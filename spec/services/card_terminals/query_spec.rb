@@ -27,9 +27,9 @@ module CardTerminals
   end
 
   RSpec.describe Query do
-    let(:network) { FactoryBot.create(:network, netzwerk: '127.0.0.0/8') }
     let(:ts)  { Time.current }
     let(:ber) { FactoryBot.create(:location, lid: 'BER') }
+    let(:network) { FactoryBot.create(:network, netzwerk: '127.51.0.0/16', location: ber) }
     let(:conn) { FactoryBot.create(:connector) }
     let!(:ct1) do
       FactoryBot.create(:card_terminal, :with_mac,

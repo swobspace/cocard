@@ -10,32 +10,30 @@ RSpec.describe CardTerminalConcerns, type: :model do
   describe "#update_location_by_ip" do
     context "without network" do
       it "doesn't update location_id" do
-        expect {
-          ct.update_location_by_ip
-        }.not_to change(ct, :location_id)
+        ct.update_location_by_ip
+        ct.save; ct.reload
+        expect(ct.location_id).to be_nil
       end
 
       it "doesn't update network_id" do
-        expect {
-          ct.update_location_by_ip
-        }.not_to change(ct, :network_id)
+        ct.update_location_by_ip
+        ct.save; ct.reload
+        expect(ct.network_id).to be_nil
       end
     end
 
     context "with matching network" do
       let!(:net) { FactoryBot.create(:network, netzwerk: '127.51.100.16/29') }
       it "updates location_id" do
-        expect {
-          ct.update_location_by_ip
-        }.to change(ct, :location_id)
-       expect(ct.location_id).to eq(net.location_id)
+        ct.update_location_by_ip
+        ct.save; ct.reload
+        expect(ct.location_id).to eq(net.location_id)
       end
 
       it "updates networkd_id" do
-        expect {
-          ct.update_location_by_ip
-        }.to change(ct, :network_id)
-       expect(ct.network_id).to eq(net.id)
+        ct.update_location_by_ip
+        ct.save; ct.reload
+        expect(ct.network_id).to eq(net.id)
       end
     end
 

@@ -1,7 +1,7 @@
 module Cocard
   class CardTerminal
 
-    ATTRIBUTES = %i( properties name ct_id mac ip slots connected )
+    ATTRIBUTES = %i( properties name ct_id mac current_ip slots connected )
 
     def initialize(hash)
       @hash = hash || {}
@@ -39,7 +39,7 @@ module Cocard
       hash[:ip_address] || {}
     end
 
-    def ip
+    def current_ip
       ip_address[:ipv4_address]
     end
 

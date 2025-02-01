@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "card_terminals/show", type: :view do
   let(:ts)        { Time.current }
-  let(:network)   { FactoryBot.create(:network, netzwerk: '127.0.0.0/8') }
   let(:location)  { FactoryBot.create(:location, lid: 'AXC') }
+  let(:network)   { FactoryBot.create(:network, netzwerk: '127.0.0.0/8', location: location) }
   let(:connector) { FactoryBot.create(:connector) }
   let(:prodinfo)  {{ product_information:
     {:information_date=> ts,
@@ -34,6 +34,7 @@ RSpec.describe "card_terminals/show", type: :view do
       ct_id: "CT_ID0815",
       mac: "00-0D-F8-07-2C-67",
       ip: "127.0.0.5",
+      current_ip: "127.1.0.5",
       connected: true,
       condition: Cocard::States::UNKNOWN,
       room: "Raum U.16",
@@ -65,6 +66,7 @@ RSpec.describe "card_terminals/show", type: :view do
     expect(rendered).to match(/CT_ID0815/)
     expect(rendered).to match(/00-0D-F8-07-2C-67/)
     expect(rendered).to match(/127.0.0.5/)
+    expect(rendered).to match(/127.1.0.5/)
     expect(rendered).to match(/true/)
     # -- should be OK with connected == true and pingable
     expect(rendered).to match(/OK/)

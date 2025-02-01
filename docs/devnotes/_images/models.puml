@@ -45,12 +45,13 @@ class CardTerminal {
   id_product: string
   pin_mode: integer
   location_id
+  ip: inet
   --
   properties: jsonb
   name: string
   ct_id: string
   mac: macaddr
-  ip: inet
+  current_ip: inet
   slots: integer
   connected: boolean
   condition_message: string
