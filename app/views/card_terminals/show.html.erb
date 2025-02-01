@@ -175,7 +175,11 @@
 
           <tr>
             <th class="w-25 pe-3"><%= t('attributes.current_ip')%>:</th>
-            <td><%= @card_terminal.current_ip %></td>
+            <td>
+              <%= @card_terminal.current_ip %>
+              <%= render WarnIpMismatchComponent.new(item: @card_terminal) %>
+              <%= render UseCurrentIpComponent.new(item: @card_terminal) if can? :manage, @card_terminal %>
+            </td>
           </tr>
 
           <tr>
