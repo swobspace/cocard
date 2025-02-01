@@ -75,6 +75,9 @@ class CardTerminal < ApplicationRecord
       if noip?
         return set_condition( Cocard::States::UNKNOWN,
                               "Kartenterminal hat keine sinnvolle IP: #{ip.to_s}" )
+      elsif ip != current_ip
+        return set_condition( Cocard::States::UNKNOWN,
+                              "IP Mismatch: gefundene und konfigurierte IP-Adresse weichen von einander ab" )
       elsif !is_up and !connected
         return set_condition( Cocard::States::CRITICAL,
                               "Kartenterminal nicht erreichbar, kein Ping und nicht mit dem Konnektor verbunden " )
