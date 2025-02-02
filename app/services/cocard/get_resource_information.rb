@@ -35,7 +35,6 @@ module Cocard
       if result.success?
         resource_information = Cocard::ResourceInformation.new(result.response[:get_resource_information_response])
         connector.soap_request_success = true
-        connector.last_ok = Time.current
         connector.vpnti_online = resource_information.vpnti_online
         # connector.update_condition
         log_error_states(resource_information.error_states)
