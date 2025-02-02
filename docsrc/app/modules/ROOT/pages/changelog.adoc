@@ -1,5 +1,8 @@
 = Changelog
 
+== 0.6.5-dev - unreleased
+
+
 == 0.6.4 - 2025-02-01
 
 * SMC-B und SMC-KT übernehmen den Ort vom Kartenterminal beim Speichern
