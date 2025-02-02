@@ -158,6 +158,7 @@ RSpec.describe Connector, type: :model do
           connector.update_condition
         }.to change(connector, :condition).to(Cocard::States::OK)
         connector.reload
+        expect(connector.last_ok).to be >= 1.second.before(Time.current)
         expect(connector.acknowledge).to be_nil
         expect(connector.rebooted_at).to be_nil
         ack.reload
