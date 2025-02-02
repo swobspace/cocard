@@ -2,6 +2,8 @@
 
 == 0.6.5-dev - unreleased
 
+* Fix: update von last_ok korrigiert, war bisher vor allem beim Konnektor nicht immer korrekt
+
 
 == 0.6.4 - 2025-02-01
 
