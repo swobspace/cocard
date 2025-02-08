@@ -11,7 +11,8 @@ class CardTerminal < ApplicationRecord
   belongs_to :location, optional: true
   belongs_to :connector, optional: true
   belongs_to :network, optional: true
-  has_many :cards, dependent: :destroy
+  has_many :card_terminal_slots, dependent: :destroy
+  has_many :cards, through: :card_terminal_slots
 
   # -- configuration
   broadcasts_refreshes

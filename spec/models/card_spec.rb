@@ -27,7 +27,9 @@ RSpec.describe Card, type: :model do
   it { is_expected.to have_many(:notes).dependent(:destroy) }
   it { is_expected.to have_many(:plain_notes).dependent(:destroy) }
   it { is_expected.to have_many(:acknowledges).dependent(:destroy) }
-  it { is_expected.to belong_to(:card_terminal).optional }
+  it { is_expected.to have_one(:card_terminal_slot) }
+  it { is_expected.to have_one(:card_terminal).through(:card_terminal_slot) }
+
   it { is_expected.to have_many(:card_contexts).dependent(:destroy) }
   it { is_expected.to have_many(:contexts).through(:card_contexts) }
   it { is_expected.to belong_to(:location).optional }

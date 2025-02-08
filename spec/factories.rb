@@ -50,6 +50,11 @@ FactoryBot.define do
     end
   end
 
+  factory :card_terminal_slot do
+    association :card_terminal, :with_mac
+    card
+  end
+
   factory :client_certificate do
     name { generate(:aname) }
     cert { File.read(File.join(Rails.root, 'spec/fixtures/files', 'demo-cert.pem')) }
