@@ -1,5 +1,7 @@
 = Changelog
 
+== 0.6.6-dev - unreleased
+
 == 0.6.5 - 2025-02-08
 
 * Fix: update von last_ok korrigiert, war bisher vor allem beim Konnektor nicht immer korrekt
