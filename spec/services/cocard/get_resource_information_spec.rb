@@ -86,12 +86,6 @@ module Cocard
             subject.call
           end.to change(connector, :last_check)
         end
-
-        it 'updates last_ok' do
-          expect do
-            subject.call
-          end.to change(connector, :last_ok)
-        end
       end
     end
   end

@@ -45,8 +45,7 @@ module Cocard
             #
           end
         end
-        connector.update(soap_request_success: true,
-                         last_ok: Time.current)
+        connector.update(soap_request_success: true)
 
         log_error(nil)
         Result.new(success?: true, error_messages: error_messages, 
