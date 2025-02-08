@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_01_084816) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_08_161721) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -66,6 +66,17 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_01_084816) do
     t.index ["context_id"], name: "index_card_contexts_on_context_id"
     t.index ["pin_status"], name: "index_card_contexts_on_pin_status"
     t.index ["position"], name: "index_card_contexts_on_position"
+  end
+
+  create_table "card_terminal_slots", force: :cascade do |t|
+    t.bigint "card_terminal_id", null: false
+    t.bigint "card_id"
+    t.integer "slot", default: -1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_card_terminal_slots_on_card_id", unique: true
+    t.index ["card_terminal_id", "slot"], name: "index_card_terminal_slots_on_card_terminal_id_and_slot", unique: true
+    t.index ["card_terminal_id"], name: "index_card_terminal_slots_on_card_terminal_id"
   end
 
   create_table "card_terminals", force: :cascade do |t|
@@ -479,6 +490,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_01_084816) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "card_contexts", "cards"
   add_foreign_key "card_contexts", "contexts"
+  add_foreign_key "card_terminal_slots", "card_terminals"
+  add_foreign_key "card_terminal_slots", "cards"
   add_foreign_key "card_terminals", "connectors"
   add_foreign_key "card_terminals", "locations"
   add_foreign_key "connector_contexts", "connectors"

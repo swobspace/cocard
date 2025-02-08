@@ -138,6 +138,18 @@ class CardTerminal < ApplicationRecord
 end
 ----
 
+
+== model CardTerminalSlot
+
+[source,sh]
+----
+bin/rails g model CardTerminalSlot \
+  card_terminal:belongs_to \
+  card:belongs_to \
+  slot:integer \
+  --no-stylesheets --no-javascripts --no-helper
+----
+
 == model Card
 
 [source,sh]
