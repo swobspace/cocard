@@ -42,10 +42,6 @@ module Cards
                          end
                        end
 
-      #
-      # update connector
-      #
-      @card.card_terminal = ct
 
       #
       # card seen by connector, so must be operational
@@ -66,14 +62,25 @@ module Cards
         Cocard::Card::ATTRIBUTES.each do |attr|
           @card.send("#{attr}=", cc.send(attr))
         end
-        # -- update condition
-        # @card.update_condition
+
+        #
+        # remove card terminal slot if slotid has changed
+        #
+        if !@card.slotid.nil? and @card.slotid != cc.slotid
+          @card.card_terminal_slot.destroy
+        end
       end
 
       @card.updated_at = Time.current
 
       Card.suppressing_turbo_broadcasts do
+        
         if @card.save
+          if !ct.nil? and @card.card_terminal_slot.nil?
+            @card.create_card_terminal_slot(card_terminal_id: ct.id, slotid: cc.slotid)
+            @card.reload_card_terminal_slot
+            @card.update_condition ; @card.save
+          end
           true
         else
           Rails.logger.warn("WARN:: could not create or save card #{@card.iccsn}: " +

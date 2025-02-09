@@ -23,7 +23,6 @@ RSpec.describe "cards/show", type: :view do
     allow(@current_user).to receive(:is_admin?).and_return(true)
 
     @card = Card.create!(
-      card_terminal_id: ct.id,
       name: "GemaCard",
       description: "some other text",
       card_handle: "7fb65ede-0a37-11ef-8f85-c025a5b36994",
@@ -32,7 +31,6 @@ RSpec.describe "cards/show", type: :view do
       insert_time: ts,
       card_holder_name: "Doctor Who's Universe",
       expiration_date: 1.year.after(Date.current),
-      slotid: 22232,
       operational_state_id: ops.id,
       location_id: location.id,
       lanr: "999777333",
@@ -49,7 +47,9 @@ RSpec.describe "cards/show", type: :view do
       cert_subject_o: "987654",
       private_information: "StrengGeheim"
     )
+    @card.create_card_terminal_slot(card_terminal_id: ct.id, slotid: 22232)
     @card.contexts << context
+    @card.reload
   end
 
   it "renders attributes in <p>" do

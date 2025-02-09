@@ -46,7 +46,7 @@ module Cocard
     end
 
     describe "Cocard::Card::ATTRIBUTES" do
-      it { expect(Cocard::Card::ATTRIBUTES).to contain_exactly(:properties, :card_handle, :card_type, :iccsn, :slotid, :insert_time, :card_holder_name, :expiration_date ) }
+      it { expect(Cocard::Card::ATTRIBUTES).to contain_exactly(:properties, :card_handle, :card_type, :iccsn, :insert_time, :card_holder_name, :expiration_date ) }
     end
   end
 end

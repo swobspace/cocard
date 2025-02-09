@@ -92,8 +92,8 @@ module Cocard
           it { expect(card.card_handle).to eq('ee676b27-5b40-4a40-9c65-979cc3113a1e') }
           it { expect(card.card_type).to eq('SMC-B') }
           it { expect(card.iccsn).to eq('80276002711000000000') }
-          it { expect(card.card_terminal.ct_id).to eq('CT_ID_0176') }
-          it { expect(card.slotid).to eq(1) }
+          it { card.reload; expect(card.card_terminal.ct_id).to eq('CT_ID_0176') }
+          it { expect(card.slotid).to eq(3) }
           it { expect(card.insert_time.to_s).to eq('2024-03-26 15:33:03 UTC') }
           it { expect(card.card_holder_name).to eq("Doctor Who's Universe") }
           it { expect(card.expiration_date.to_s).to eq('2027-01-19') }

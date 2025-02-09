@@ -60,7 +60,7 @@ module Cards
           expect(subject.card).to be_kind_of(Card)
         end
 
-        it { expect(card.card_terminal).to eq(ct) }
+        it { card.reload; expect(card.card_terminal).to eq(ct) }
         it { expect(card.name).to eq("") }
         it { expect(card.description.to_plain_text).to eq("") }
         it { expect(card.card_handle).to eq("ee676b27-5b40-4a40-9c65-979cc3113a1e") }

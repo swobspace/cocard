@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_08_161721) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_09_124658) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -71,11 +71,11 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_08_161721) do
   create_table "card_terminal_slots", force: :cascade do |t|
     t.bigint "card_terminal_id", null: false
     t.bigint "card_id"
-    t.integer "slot", default: -1
+    t.integer "slotid", default: -1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["card_id"], name: "index_card_terminal_slots_on_card_id", unique: true
-    t.index ["card_terminal_id", "slot"], name: "index_card_terminal_slots_on_card_terminal_id_and_slot", unique: true
+    t.index ["card_terminal_id", "slotid"], name: "index_card_terminal_slots_on_card_terminal_id_and_slotid", unique: true
     t.index ["card_terminal_id"], name: "index_card_terminal_slots_on_card_terminal_id"
   end
 
@@ -121,11 +121,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_08_161721) do
     t.string "card_handle", default: ""
     t.string "card_type", default: ""
     t.string "iccsn", default: ""
-    t.integer "slotid", default: -1
     t.datetime "insert_time", precision: nil
     t.string "card_holder_name", default: ""
     t.date "expiration_date"
-    t.bigint "card_terminal_id"
     t.jsonb "properties"
     t.bigint "operational_state_id"
     t.bigint "location_id"
@@ -142,17 +140,12 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_08_161721) do
     t.string "cert_subject_l", default: ""
     t.string "cert_subject_cn", default: ""
     t.string "cert_subject_o", default: ""
-    t.bigint "old_context_id"
     t.integer "condition", default: -1
-    t.string "old_pin_status", default: ""
     t.string "condition_message", default: ""
     t.bigint "acknowledge_id"
-    t.index ["card_terminal_id"], name: "index_cards_on_card_terminal_id"
     t.index ["condition"], name: "index_cards_on_condition"
     t.index ["iccsn"], name: "index_cards_on_iccsn", unique: true
     t.index ["location_id"], name: "index_cards_on_location_id"
-    t.index ["old_context_id"], name: "index_cards_on_old_context_id"
-    t.index ["old_pin_status"], name: "index_cards_on_old_pin_status"
     t.index ["operational_state_id"], name: "index_cards_on_operational_state_id"
   end
 

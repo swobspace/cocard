@@ -27,7 +27,7 @@ RSpec.describe Card, type: :model do
   it { is_expected.to have_many(:notes).dependent(:destroy) }
   it { is_expected.to have_many(:plain_notes).dependent(:destroy) }
   it { is_expected.to have_many(:acknowledges).dependent(:destroy) }
-  it { is_expected.to have_one(:card_terminal_slot) }
+  it { is_expected.to have_one(:card_terminal_slot).dependent(:destroy) }
   it { is_expected.to have_one(:card_terminal).through(:card_terminal_slot) }
 
   it { is_expected.to have_many(:card_contexts).dependent(:destroy) }
@@ -100,7 +100,7 @@ RSpec.describe Card, type: :model do
       it "-> NOTHING" do
         card.update(condition: Cocard::States::OK)
         card.reload
-        expect(card).to receive(:card_terminal).and_return(nil)
+        expect(card).to receive_message_chain(:card_terminal_slot, :card_terminal_id).and_return(nil)
         expect {
           card.update_condition
         }.to change(card, :condition).to(Cocard::States::NOTHING)
