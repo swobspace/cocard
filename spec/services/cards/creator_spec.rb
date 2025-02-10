@@ -132,12 +132,19 @@ module Cards
           )
         end
 
-        before(:each) { card.contexts << ctx; card.reload }
+        before(:each) do
+          card.contexts << ctx 
+          card.update_column(:condition, 1)
+          card.reload
+        end
 
         it 'assigns new card to slot' do
+          expect(card.condition).to eq(Cocard::States::WARNING)
           subject.save
           slot.reload
+          card.reload
           expect(slot.card).to eq(subject.card)
+          expect(card.condition).to eq(Cocard::States::NOTHING)
         end
      end
 

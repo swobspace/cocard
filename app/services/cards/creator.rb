@@ -36,6 +36,7 @@ module Cards
       ct = CardTerminal.where(connector_id: connector.id, ct_id: cc.ct_id).first
       slot = CardTerminalSlot.find_or_create_by!(card_terminal_id: ct.id, 
                                                  slotid: cc.slotid)
+      old_card_id = slot.card_id
       
       @card = Card.find_or_initialize_by(iccsn: cc.iccsn) do |card|
                          Cocard::Card::ATTRIBUTES.each do |attr|
@@ -75,7 +76,15 @@ module Cards
         if @card.save
           slot.update(card_id: @card.id)
           @card.reload_card_terminal_slot
+
+          # update condition for new card
           @card.update_condition ; @card.save
+          
+          # update condition on old card
+          if @card.id != old_card_id && !old_card_id.nil?
+            c = Card.find(old_card_id)
+            c.save
+          end
           true
         else
           Rails.logger.warn("WARN:: could not create or save card #{@card.iccsn}: " +
