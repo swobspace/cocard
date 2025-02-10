@@ -34,6 +34,8 @@ module Cards
       #
 
       ct = CardTerminal.where(connector_id: connector.id, ct_id: cc.ct_id).first
+      slot = CardTerminalSlot.find_or_create_by!(card_terminal_id: ct.id, 
+                                                 slotid: cc.slotid)
       
       @card = Card.find_or_initialize_by(iccsn: cc.iccsn) do |card|
                          Cocard::Card::ATTRIBUTES.each do |attr|
@@ -63,12 +65,7 @@ module Cards
           @card.send("#{attr}=", cc.send(attr))
         end
 
-        #
-        # remove card terminal slot if slotid has changed
-        #
-        if !@card.slotid.nil? and @card.slotid != cc.slotid
-          @card.card_terminal_slot.destroy
-        end
+        slot.update(card_id: @card.id)
       end
 
       @card.updated_at = Time.current
@@ -76,11 +73,9 @@ module Cards
       Card.suppressing_turbo_broadcasts do
         
         if @card.save
-          if !ct.nil? and @card.card_terminal_slot.nil?
-            @card.create_card_terminal_slot(card_terminal_id: ct.id, slotid: cc.slotid)
-            @card.reload_card_terminal_slot
-            @card.update_condition ; @card.save
-          end
+          slot.update(card_id: @card.id)
+          @card.reload_card_terminal_slot
+          @card.update_condition ; @card.save
           true
         else
           Rails.logger.warn("WARN:: could not create or save card #{@card.iccsn}: " +

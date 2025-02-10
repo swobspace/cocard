@@ -52,7 +52,6 @@ FactoryBot.define do
 
   factory :card_terminal_slot do
     association :card_terminal, :with_mac
-    card
   end
 
   factory :client_certificate do

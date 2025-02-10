@@ -10,7 +10,7 @@ RSpec.describe CardTerminalSlot, type: :model do
   end
 
   it { is_expected.to belong_to(:card_terminal) }
-  it { is_expected.to belong_to(:card) }
+  it { is_expected.to belong_to(:card).optional }
 
   it 'should get plain factory working' do
     f = FactoryBot.create(:card_terminal_slot)

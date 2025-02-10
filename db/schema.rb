@@ -484,7 +484,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_09_124658) do
   add_foreign_key "card_contexts", "cards"
   add_foreign_key "card_contexts", "contexts"
   add_foreign_key "card_terminal_slots", "card_terminals"
-  add_foreign_key "card_terminal_slots", "cards"
   add_foreign_key "card_terminals", "connectors"
   add_foreign_key "card_terminals", "locations"
   add_foreign_key "connector_contexts", "connectors"
