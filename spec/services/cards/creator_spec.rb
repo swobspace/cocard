@@ -116,6 +116,31 @@ module Cards
           it { expect(card.condition).to eq(Cocard::States::CRITICAL) }
         end
       end
+
+      context 'with a different card in ' do
+        let!(:card) do
+          FactoryBot.create(:card, 
+            iccsn: '80276002711000009999',
+            certificate: 'some string'
+          )
+        end
+        let!(:slot) do
+          FactoryBot.create(:card_terminal_slot,
+            card_terminal: ct,
+            slotid: 1,
+            card: card
+          )
+        end
+
+        before(:each) { card.contexts << ctx; card.reload }
+
+        it 'assigns new card to slot' do
+          subject.save
+          slot.reload
+          expect(slot.card).to eq(subject.card)
+        end
+     end
+
     end
     describe "with card_type 'EGK'" do
       before(:each) do
