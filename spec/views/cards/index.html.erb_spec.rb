@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "cards/index", type: :view do
   let(:location) { FactoryBot.create(:location, lid: 'AXXC') }
   let(:conn) { FactoryBot.create(:connector, name: 'TIK-XXX-39') }
-  let(:ct) do
+  let!(:ct) do
     FactoryBot.create(:card_terminal, :with_mac, 
       connector: conn, 
       ct_id: 'CT_ID_0176',
@@ -19,15 +19,13 @@ RSpec.describe "cards/index", type: :view do
     allow(controller).to receive(:current_ability) { @ability }
     allow(controller).to receive(:controller_name) { 'cards' }
     allow(controller).to receive(:action_name) { 'index' }
-    assign(:cards, [
-      Card.create!(
-        card_terminal_id: ct.id,
+    @cards = [
+      card1 = Card.create!(
         name: "GemaCard",
         description: "some other text",
         card_handle: "7fb65ede-0a37-11ef-8f85-c025a5b36994",
         card_type: "SMC-B",
         iccsn: "8027612345678",
-        slotid: 22888,
         insert_time: ts,
         card_holder_name: "Doctor Who's Universe",
         expiration_date: 1.year.after(Date.current),
@@ -47,13 +45,13 @@ RSpec.describe "cards/index", type: :view do
         cert_subject_o: "22244466688",
         private_information: "StrengGeheim"
       ),
-      Card.create!(
+      card2 = Card.create!(
         name: "GemaCard",
         description: "some other text",
         card_handle: "7fb65ede-0a37-11ef-8f85-c025a5b36994",
         card_type: "SMC-KT",
         iccsn: "8027612345699",
-        slotid: 222999,
+        # slotid: 222999,
         insert_time: ts,
         expiration_date: 1.year.after(Date.current),
         operational_state_id: ops.id,
@@ -72,7 +70,9 @@ RSpec.describe "cards/index", type: :view do
         cert_subject_o: "22244466688",
         private_information: "StrengGeheim"
       )
-    ])
+    ]
+    card1.create_card_terminal_slot(card_terminal_id: ct.id, slotid: 22888)
+    card1.reload
   end
 
   it "renders a list of cards" do
@@ -88,7 +88,7 @@ RSpec.describe "cards/index", type: :view do
     assert_select cell_selector, text: Regexp.new("8027612345678".to_s), count: 1
     assert_select cell_selector, text: Regexp.new("8027612345699".to_s), count: 1
     assert_select cell_selector, text: Regexp.new("22888".to_s), count: 2
-    assert_select cell_selector, text: Regexp.new("22999".to_s), count: 1
+    assert_select cell_selector, text: Regexp.new("22999".to_s), count: 0
     assert_select cell_selector, text: Regexp.new(ts.to_s), count: 2
     assert_select cell_selector, text: Regexp.new(1.year.after(Date.current).to_s), count: 2
     assert_select cell_selector, text: Regexp.new("im Schrank".to_s), count: 4

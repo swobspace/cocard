@@ -131,7 +131,7 @@
         str: CT_ID_0176
         attributes: {}
       :slot_id: !ruby/string:Nori::StringWithAttributes
-        str: '1'
+        str: '3'
         attributes: {}
       :insert_time: !ruby/object:DateTime 2024-03-26 15:33:03.441000000 Z
       :card_holder_name: !ruby/string:Nori::StringWithAttributes

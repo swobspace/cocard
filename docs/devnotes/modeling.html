@@ -288,6 +288,20 @@ end</code></pre>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_model_cardterminalslot"><a class="anchor" href="#_model_cardterminalslot"></a>model CardTerminalSlot</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g scaffold CardTerminalSlot \
+  card_terminal:belongs_to \
+  card:belongs_to \
+  slot:integer \
+  --no-stylesheets --no-javascripts --no-helper</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_model_card"><a class="anchor" href="#_model_card"></a>model Card</h2>
 <div class="sectionbody">
 <div class="listingblock">

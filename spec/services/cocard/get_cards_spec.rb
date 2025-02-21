@@ -99,7 +99,7 @@ module Cocard
           it { expect(ct.card_type).to eq('SMC-B') }
           it { expect(ct.iccsn).to eq('80276002711000000000') }
           it { expect(ct.ct_id).to eq('CT_ID_0176') }
-          it { expect(ct.slotid).to eq(1) }
+          it { expect(ct.slotid).to eq(3) }
           it { expect(ct.insert_time.to_s).to eq('2024-03-26T15:33:03+00:00') }
           it { expect(ct.card_holder_name).to eq("Doctor Who's Universe") }
           it { expect(ct.expiration_date.to_s).to eq('2027-01-19') }

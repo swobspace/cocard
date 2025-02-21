@@ -27,7 +27,9 @@ RSpec.describe Card, type: :model do
   it { is_expected.to have_many(:notes).dependent(:destroy) }
   it { is_expected.to have_many(:plain_notes).dependent(:destroy) }
   it { is_expected.to have_many(:acknowledges).dependent(:destroy) }
-  it { is_expected.to belong_to(:card_terminal).optional }
+  it { is_expected.to have_one(:card_terminal_slot).dependent(:nullify) }
+  it { is_expected.to have_one(:card_terminal).through(:card_terminal_slot) }
+
   it { is_expected.to have_many(:card_contexts).dependent(:destroy) }
   it { is_expected.to have_many(:contexts).through(:card_contexts) }
   it { is_expected.to belong_to(:location).optional }
@@ -98,7 +100,7 @@ RSpec.describe Card, type: :model do
       it "-> NOTHING" do
         card.update(condition: Cocard::States::OK)
         card.reload
-        expect(card).to receive(:card_terminal).and_return(nil)
+        expect(card).to receive_message_chain(:card_terminal_slot, :card_terminal_id).and_return(nil)
         expect {
           card.update_condition
         }.to change(card, :condition).to(Cocard::States::NOTHING)
@@ -278,5 +280,18 @@ RSpec.describe Card, type: :model do
         }.to change(connector, :acknowledge_id).to(nil)
       end
     end
+  end
+
+  describe "#destroy" do
+    let(:card) { FactoryBot.create(:card, card_type: 'SMC-KT') }
+    let!(:slot) { FactoryBot.create(:card_terminal_slot, slotid: 4, card: card) }
+
+    it "doesn't destroy card_terminal_slot" do
+      expect(slot.card).to eq(card)
+      expect {
+        card.destroy
+      }.to change(CardTerminalSlot, :count).by(0)
+    end
+    
   end
 end

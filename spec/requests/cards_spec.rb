@@ -83,11 +83,9 @@ RSpec.describe "/cards", type: :request do
       let(:new_attributes) {{
         name: "MyCard",
         description: "some additional text",
-        card_terminal_id: ct.id,
         iccsn: "8027912345678",
         card_holder_name: "Meister Quant",
         card_type: "HBA",
-        slotid: 2222,
         operational_state_id: ops.id,
         location_id: location.id,
         lanr: "999777333",
@@ -117,11 +115,9 @@ RSpec.describe "/cards", type: :request do
         card.reload
         expect(card.name).to eq("MyCard")
         expect(card.description.to_plain_text).to eq("some additional text")
-        expect(card.card_terminal).to eq(ct)
         expect(card.iccsn).to eq("8027912345678")
         expect(card.card_holder_name).to eq("Meister Quant")
         expect(card.card_type).to eq("HBA")
-        expect(card.slotid).to eq(2222)
         expect(card.operational_state).to eq(ops)
         expect(card.location).to eq(location)
         expect(card.lanr).to eq("999777333")
