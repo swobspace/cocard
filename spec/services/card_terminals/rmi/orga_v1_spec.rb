@@ -15,7 +15,7 @@ module CardTerminals::RMI
       )
     end
   
-    subject { CardTerminals::RMI::OrgaV1.new(card_terminal: ct, iccsn: card.iccsn) }
+    subject { CardTerminals::RMI::OrgaV1.new(card_terminal: ct) }
 
     # check for instance methods
     describe 'check if instance methods exists' do
@@ -48,7 +48,11 @@ module CardTerminals::RMI
       it { expect(subject.valid).to be_truthy }
 
       describe "#verify_pin", :rmi => true do
-        it { subject.verify_pin }
+        it { subject.verify_pin(card.iccsn) }
+      end
+
+      describe "#get_idle_message", :rmi2 => true do
+        it { subject.get_idle_message }
       end
     end
 

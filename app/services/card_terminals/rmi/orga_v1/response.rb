@@ -37,6 +37,14 @@ module CardTerminals
         end
       end
 
+      def gui_idle_message
+        if result.kind_of? String
+          nil
+        else
+          json.dig('response', 'result', 'properties', 'gui_idleMessage') || false
+        end
+      end
+
       def result
         json.dig('response', 'result')
       end

@@ -4,7 +4,7 @@ module CardTerminals
     # Remote Management Interface for Orga 6141 Version 1.03
     #
     class OrgaV1
-      attr_reader :card_terminal, :iccsn, :valid, :session
+      attr_reader :card_terminal, :valid, :session
 
       #
       # rmi = CardTerminal::RMI::OrgaV1.new(options)
@@ -15,13 +15,12 @@ module CardTerminals
       def initialize(options = {})
         options.symbolize_keys
         @card_terminal = options.fetch(:card_terminal)
-        @iccsn = options.fetch(:iccsn)
         @valid = check_terminal
         @session = {}
         @logger = ActiveSupport::Logger.new(File.join(Rails.root, 'log', 'card_terminals_rmi_orgav1.log'))
       end
 
-      def verify_pin
+      def verify_pin(iccsn)
         EM.run {
           ws = Faye::WebSocket::Client.new(ws_url, [], {
                    ping: 15,
@@ -46,7 +45,7 @@ module CardTerminals
 
             case session[response.token]
             when :authenticate
-              ws.send(request_get_property(generate_token(:get_property)))
+              ws.send(request_get_property_pin_enabled(generate_token(:get_property)))
 
             when :get_property
               if response.rmi_smcb_pin_enabled
@@ -57,7 +56,7 @@ module CardTerminals
                   ws.close
                 end
                 debug("--- send subscription ---")
-                ws.send(request_subscription(generate_token(:subscribe)))
+                ws.send(request_subscription(generate_token(:subscribe), iccsn))
               else
                 Turbo::StreamsChannel.broadcast_prepend_to(
                   'verify_pins',
@@ -88,7 +87,7 @@ module CardTerminals
                   message: "PIN-Anfrage vom Terminal erhalten, sende SMC-B PIN ..."
                 }
               )
-              ws.send(request_verify_pin(generate_token(:verify_pin)))
+              ws.send(request_verify_pin(generate_token(:verify_pin), iccsn))
 
             when :verify_pin
               # @timeout.cancel
@@ -96,6 +95,65 @@ module CardTerminals
               # ws.close
             else
               # ws.close
+            end
+          end
+
+          ws.on :error do |event|
+            debug([:error, event.message])
+          end
+
+          ws.on :close do |event|
+            debug("--- :close ---")
+            debug([:close, event.code, event.reason])
+            ws = nil
+            EM.stop
+            debug("<<< :closed <<<\n")
+          end
+        }
+      end
+
+      def get_idle_message
+        EM.run {
+          ws = Faye::WebSocket::Client.new(ws_url, [], {
+                   ping: 15,
+                   tls: {verify_peer: false}
+                 }
+               )
+
+          ws.on :open do |event|
+            debug(">>> :open >>>")
+
+            ws.send(request_auth(generate_token(:authenticate)))
+          end
+
+          ws.on :message do |event|
+            debug("--- :message ---")
+            response = parse_ws_response(event.data)
+            debug("Type: #{response.type}")
+            debug("Token: #{response.token}")
+            debug("Action: #{session[response.token]}")
+            debug("JSON: #{response.json.inspect}")
+            debug("SessionId: #{session['id']}")
+
+            case session[response.token]
+            when :authenticate
+              ws.send(request_get_property_idle_message(generate_token(:get_property)))
+
+            when :get_property
+              if response.gui_idle_message
+                debug("gui_idle_message: " + response.gui_idle_message.to_s)
+                puts response.gui_idle_message
+                Turbo::StreamsChannel.broadcast_prepend_to(
+                  'verify_pins',
+                  target: 'toaster',
+                  partial: "shared/turbo_toast",
+                  locals: {
+                    status: :info,
+                    message: response.gui_idle_message.inspect
+                  }
+                )
+                ws.close
+              end
             end
           end
 
@@ -171,7 +229,7 @@ module CardTerminals
         }.to_json
       end
 
-      def request_get_property(token)
+      def request_get_property_pin_enabled(token)
         {
           "request" => {
             "token": token,
@@ -188,7 +246,24 @@ module CardTerminals
         }.to_json
       end
 
-      def request_subscription(token)
+      def request_get_property_idle_message(token)
+        {
+          "request" => {
+            "token": token,
+            "service": "Settings",
+            "method": {
+              "getProperties": {
+                "sessionId": session['id'],
+                "propertyIds": [
+                  "gui_idleMessage"
+                ]
+              }
+            }
+          }
+        }.to_json
+      end
+
+      def request_subscription(token, iccsn)
         {
           "subscription" => {
             "token": token,
@@ -203,7 +278,7 @@ module CardTerminals
         }.to_json
       end
 
-      def request_verify_pin(token)
+      def request_verify_pin(token, iccsn)
         {
           "request" => {
             "token": token,
