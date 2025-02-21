@@ -6,6 +6,10 @@ RSpec.describe Connectors::NotesController, type: :routing do
       expect(get: "/connectors/88/notes").to route_to("connectors/notes#index", connector_id: '88')
     end
 
+    it "routes to #sindex" do
+      expect(get: "/connectors/88/notes/sindex").to route_to("connectors/notes#sindex", connector_id: '88')
+    end
+
     it "routes to #new" do
       expect(get: "/connectors/88/notes/new").to route_to("connectors/notes#new", connector_id: '88')
     end

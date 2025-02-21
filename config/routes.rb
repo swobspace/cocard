@@ -69,7 +69,11 @@ Rails.application.routes.draw do
       get :ping
       post :reboot
     end
-    resources :notes, module: :connectors
+    resources :notes, module: :connectors do
+      collection do
+        get :sindex
+      end
+    end
   end
   resources :locations do
     resources :connectors, only: [:index, :show, :destroy], module: :locations
