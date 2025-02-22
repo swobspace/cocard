@@ -47,4 +47,27 @@ module CardTerminalConcerns
   def smckt
     cards.where(card_type: 'SMC-KT').first
   end
+
+  def default_idle_message
+    template = Liquid::Template.parse(Cocard.ct_idle_message_template)
+    template.render(to_liquid)
+  end
+
+  def to_liquid
+    {
+      "has_smcb?" => has_smcb?,
+      "displayname" => displayname,
+      "location" => location&.lid,
+      "name" => name,
+      "ct_id" => ct_id,
+      "mac" => mac.to_s,
+      "ip" => ip.to_s,
+      "connector" => connector&.name.to_s,
+      "connector_short_name" => connector&.short_name.to_s,
+      "firmware_version" => firmware_version,
+      "serial" => serial,
+      "id_product" => id_product,
+      "network" => network.to_s
+    }
+  end
 end

@@ -29,9 +29,20 @@ module Cocard
     "http://{{ ip }}/connector.sds"
   end
 
+  def self.ct_idle_message_template
+    tmpl = <<-EOTMPL
+    {%- if has_smcb? -%}
+      {{ connector_short_name }} {{ name | slice: -6, 6 }}
+    {%- else -%}
+      {{ mac | slice: -6, 6 }}
+    {%- endif -%}
+EOTMPL
+  end
+
   Rails.application.routes.default_url_options = {
     host: (ENV['URL_HOST'] || 'localhost'),
     port: (ENV['URL_PORT'] || '3000'),
     protocol: (ENV['URL_PROTOCOL'] || 'http'),
   }
+
 end

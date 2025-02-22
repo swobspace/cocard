@@ -2,8 +2,15 @@ require 'rails_helper'
 
 RSpec.describe CardTerminalConcerns, type: :model do
   let(:ct) do
-    FactoryBot.create(:card_terminal, :with_mac,
-      ip: '127.51.100.17'
+    FactoryBot.create(:card_terminal,
+      mac: '000DF808F6AD',
+      ip: '127.51.100.17',
+      ct_id: "CT_ID_4711",
+      displayname: 'CARDTERMINAL 14',
+      name: "Product 1704",
+      firmware_version: "17.04",
+      "id_product": "CardStuff",
+      serial: "111111111",
     )
   end
 
@@ -113,6 +120,59 @@ RSpec.describe CardTerminalConcerns, type: :model do
 
     describe "#smckt" do
       it { expect(ct.smckt).to eq(c1) }
+    end
+  end
+
+  describe "#default_idle_message" do
+    let(:conn) { FactoryBot.create(:connector, short_name: 'K128') }
+    let(:ct) do 
+      FactoryBot.create(:card_terminal,
+        name: 'NAME-01234567890',
+        mac: '000DF808F6AD',
+        connector: conn
+      )
+    end
+
+    describe "with smcb" do
+      before(:each) { expect(ct).to receive(:has_smcb?).and_return(true) }
+      it { expect(ct.default_idle_message).to eq("K128 567890") }
+    end
+
+    describe "without smcb" do
+      before(:each) { expect(ct).to receive(:has_smcb?).and_return(false) }
+      it { expect(ct.default_idle_message).to eq("08F6AD") }
+    end
+  end
+
+  describe "#to_liquid" do
+    let(:connector) do
+      FactoryBot.create(:connector, name: 'TIK-123-XXX', short_name: 'K128')
+    end
+    let(:network) { FactoryBot.create(:network, netzwerk: "127.51.100.0/24") }
+    let(:location) { FactoryBot.create(:location, lid: 'AXC') }
+
+    before(:each) do
+      expect(ct).to receive(:connector).at_least(:once).and_return(connector)
+      expect(ct).to receive(:network).and_return(network)
+      expect(ct).to receive(:location).and_return(location)
+    end
+
+    it "returns hash" do
+      expect(ct.to_liquid).to include(
+        "has_smcb?" => false,
+        "displayname" => "CARDTERMINAL 14",
+        "name" => "Product 1704",
+        "location" => "AXC",
+        "ct_id" => "CT_ID_4711",
+        "mac" => "000DF808F6AD",
+        "ip" => "127.51.100.17",
+        "connector" => "TIK-123-XXX",
+        "connector_short_name" => "K128",
+        "firmware_version" => "17.04",
+        "serial" => "111111111",
+        "id_product" => "CardStuff",
+        "network" => "127.51.100.0/24"
+      )
     end
   end
 end
