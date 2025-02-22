@@ -107,6 +107,10 @@ RSpec.describe CardTerminalConcerns, type: :model do
       it { expect(ct.smcb).to contain_exactly(c2) }
     end
 
+    describe "#has_smcb?" do
+      it { expect(ct.has_smcb?).to be_truthy }
+    end
+
     describe "#smckt" do
       it { expect(ct.smckt).to eq(c1) }
     end
