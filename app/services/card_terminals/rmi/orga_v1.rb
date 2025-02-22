@@ -4,7 +4,7 @@ module CardTerminals
     # Remote Management Interface for Orga 6141 Version 1.03
     #
     class OrgaV1
-      attr_reader :card_terminal, :valid, :session
+      attr_reader :card_terminal, :valid, :session, :result
 
       #
       # rmi = CardTerminal::RMI::OrgaV1.new(options)
@@ -17,8 +17,18 @@ module CardTerminals
         @card_terminal = options.fetch(:card_terminal)
         @valid = check_terminal
         @session = {}
+        @result = {}
         @logger = ActiveSupport::Logger.new(File.join(Rails.root, 'log', 'card_terminals_rmi_orgav1.log'))
+
       end
+
+      #
+      # verify_pin(iccsn)
+      #
+      # subscribe notifications for iccsn and wait max. 60 sec
+      # for notifications.
+      # send pin if requested until timeout
+      #
 
       def verify_pin(iccsn)
         EM.run {
@@ -112,6 +122,13 @@ module CardTerminals
         }
       end
 
+      #
+      # get_idle_message
+      # 
+      # fetch idle message from card terminal
+      # and write result to @result['idle_message']
+
+
       def get_idle_message
         EM.run {
           ws = Faye::WebSocket::Client.new(ws_url, [], {
@@ -142,16 +159,7 @@ module CardTerminals
             when :get_property
               if response.gui_idle_message
                 debug("gui_idle_message: " + response.gui_idle_message.to_s)
-                puts response.gui_idle_message
-                Turbo::StreamsChannel.broadcast_prepend_to(
-                  'verify_pins',
-                  target: 'toaster',
-                  partial: "shared/turbo_toast",
-                  locals: {
-                    status: :info,
-                    message: response.gui_idle_message.inspect
-                  }
-                )
+                @result['idle_message'] = response.gui_idle_message
                 ws.close
               end
             end
@@ -175,7 +183,7 @@ module CardTerminals
       attr_reader :logger
 
       def check_terminal
-        card_terminal.pin_mode != 'off' &&
+        # card_terminal.pin_mode != 'off' &&
         card_terminal.product_information&.product_code == "ORGA6100" &&
         card_terminal.firmware_version >= '3.9.0'
       end

@@ -52,7 +52,10 @@ module CardTerminals::RMI
       end
 
       describe "#get_idle_message", :rmi2 => true do
-        it { subject.get_idle_message }
+        it "fetch idle message" do
+          subject.get_idle_message
+          expect(subject.result).to include("idle_message" => 'K03 00B692 ')
+        end
       end
     end
 
