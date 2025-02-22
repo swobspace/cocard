@@ -8,8 +8,8 @@ module CardTerminals
         card = options.fetch(:card)
         @prefix = "VerifyPinJob:: Card #{card.iccsn}:: ".freeze
         if check_requirements(card)
-          _rmi = @rmi.new(card_terminal: card.card_terminal, iccsn: card.iccsn)
-          _rmi.verify_pin
+          _rmi = @rmi.new(card_terminal: card.card_terminal)
+          _rmi.verify_pin(card.iccsn)
         end
       end
 
