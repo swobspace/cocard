@@ -142,6 +142,7 @@ de:
     iccsn: ICCSN
     id_contract: Vertragsnummer
     id_product: Modellbezeichnung
+    idle_message: Anzeige im Display
     insert_time: eingesteckt seit
     ip: IP-Adresse
     is_valid: gültig?
@@ -178,6 +179,8 @@ de:
     sds_url: SDS-URL
     search: Suche
     serial: Seriennummer
+    short: Kurz
+    short_name: Kurzbezeichnung
     since: seit
     slotid: Schachtnummer
     sn: Nachname

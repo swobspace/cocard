@@ -38,9 +38,16 @@
                            small: true) %>
               <%= render LinkToComponent.new(item: @card_terminal.connector) %>
             </td>
+          </tr>
+
           <tr>
             <th class="w-25 pe-3"><%= t('attributes.displayname')%>:</th>
             <td><%= @card_terminal.displayname %></td>
+          </tr>
+
+          <tr>
+            <th class="w-25 pe-3"><%= t('attributes.idle_message')%>:</th>
+            <td><%= @card_terminal.idle_message %></td>
           </tr>
 
           <tr>

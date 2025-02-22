@@ -27,6 +27,7 @@ RSpec.describe "card_terminals/show", type: :view do
     @card_terminal = CardTerminal.create!(
       connector_id: connector.id,
       displayname: "Displayname",
+      idle_message: "K123 MAC",
       description: "some other text",
       location_id: location.id,
       properties: prodinfo,
@@ -55,6 +56,7 @@ RSpec.describe "card_terminals/show", type: :view do
     # pp Cocard::ProductInformation.new(@card_terminal.properties).product_type_information
     render
     expect(rendered).to match(/Displayname/)
+    expect(rendered).to match(/K123 MAC/)
     expect(rendered).to match(/AXC/)
     expect(rendered).to match(/some other text/)
     expect(rendered).to match(/KardTerm/)

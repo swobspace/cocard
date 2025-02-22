@@ -21,6 +21,7 @@ RSpec.describe "connectors/new", type: :view do
 
     assert_select "form[action=?][method=?]", connectors_path, "post" do
       assert_select "input[name=?]", "connector[name]"
+      assert_select "input[name=?]", "connector[short_name]"
       assert_select "input[name=?]", "connector[ip]"
       assert_select "input[name=?]", "connector[sds_url]"
       assert_select "input[name=?]", "connector[admin_url]"

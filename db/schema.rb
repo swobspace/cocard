@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_09_124658) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_22_094605) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -107,6 +107,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_09_124658) do
     t.integer "pin_mode", default: 0
     t.bigint "acknowledge_id"
     t.inet "current_ip"
+    t.string "idle_message", default: ""
     t.index ["condition"], name: "index_card_terminals_on_condition"
     t.index ["connector_id"], name: "index_card_terminals_on_connector_id"
     t.index ["location_id"], name: "index_card_terminals_on_location_id"
@@ -207,6 +208,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_09_124658) do
     t.string "auth_user", default: ""
     t.string "auth_password", default: ""
     t.datetime "rebooted_at", precision: nil
+    t.string "short_name", default: ""
     t.index ["condition"], name: "index_connectors_on_condition"
   end
 
