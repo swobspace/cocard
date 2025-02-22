@@ -10,7 +10,7 @@ class ContextsController < ApplicationController
 
   # GET /contexts/1
   def show
-    @cards = @context.cards.smcb.order(:slotid)
+    @cards = @context.cards.smcb.joins(:card_terminal_slot).order('card_terminal_slots.slotid')
     @connectors = @context.connectors
     respond_with(@context)
   end

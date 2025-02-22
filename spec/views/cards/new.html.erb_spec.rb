@@ -24,9 +24,7 @@ RSpec.describe "cards/new", type: :view do
       assert_select "input[name=?]", "card[name]"
       assert_select "input[name=?]", "card[description]"
       assert_select "input[name=?]", "card[card_type]"
-      assert_select "input[name=?]", "card[slotid]"
       assert_select "input[name=?]", "card[card_holder_name]"
-      assert_select "select[name=?]", "card[card_terminal_id]"
       assert_select "input[name=?]", "card[iccsn]" do |input|
         assert input.attr("disabled").blank?
       end

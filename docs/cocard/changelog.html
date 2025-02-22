@@ -204,6 +204,21 @@
 <article class="doc">
 <h1 class="page">Changelog</h1>
 <div class="sect1">
+<h2 id="_0_7_0_2025_02_22"><a class="anchor" href="#_0_7_0_2025_02_22"></a>0.7.0 - 2025-02-22</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_breaking_changes"><a class="anchor" href="#_breaking_changes"></a>BREAKING CHANGES</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Änderung des Modells für die Zuordnung von Karten zu Kartenterminals. Jeder Slot kann jetzt nur noch genau eine Karte zugeordnet haben. Beim Wechsel einer Karte wie SMC-KT wird die neue (von Cocard gefundene) Karte dem Slot zugeordnet, die bisherige Karte entfernt und erhält den Status NOTHING. Damit ist sichergestellt, dass die SMC-KT, die beim Kartenterminal angezeigt wird, immer die aktuelle Karte ist und jeder Slot nur eine zugeordnete Karte haben kann (bisher: ein Kartenterminal konnte mehrere Karten pro Slot zugeordnet haben).</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_0_6_5_2025_02_08"><a class="anchor" href="#_0_6_5_2025_02_08"></a>0.6.5 - 2025-02-08</h2>
 <div class="sectionbody">
 <div class="ulist">

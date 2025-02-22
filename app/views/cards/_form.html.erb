@@ -48,11 +48,6 @@
        %>
     <%= form.input :card_holder_name
        %>
-    <%= form.association :card_terminal,
-          label_method: :to_s
-       %>
-    <%= form.input :slotid
-       %>
 
     <% if !@card.persisted? or (@card.certificate.blank? and @card.card_type == "SMC-B") %>
       <hr/>

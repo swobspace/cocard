@@ -60,7 +60,7 @@ module Cards
           expect(subject.card).to be_kind_of(Card)
         end
 
-        it { expect(card.card_terminal).to eq(ct) }
+        it { card.reload; expect(card.card_terminal).to eq(ct) }
         it { expect(card.name).to eq("") }
         it { expect(card.description.to_plain_text).to eq("") }
         it { expect(card.card_handle).to eq("ee676b27-5b40-4a40-9c65-979cc3113a1e") }
@@ -116,6 +116,38 @@ module Cards
           it { expect(card.condition).to eq(Cocard::States::CRITICAL) }
         end
       end
+
+      context 'with a different card in ' do
+        let!(:card) do
+          FactoryBot.create(:card, 
+            iccsn: '80276002711000009999',
+            certificate: 'some string'
+          )
+        end
+        let!(:slot) do
+          FactoryBot.create(:card_terminal_slot,
+            card_terminal: ct,
+            slotid: 1,
+            card: card
+          )
+        end
+
+        before(:each) do
+          card.contexts << ctx 
+          card.update_column(:condition, 1)
+          card.reload
+        end
+
+        it 'assigns new card to slot' do
+          expect(card.condition).to eq(Cocard::States::WARNING)
+          subject.save
+          slot.reload
+          card.reload
+          expect(slot.card).to eq(subject.card)
+          expect(card.condition).to eq(Cocard::States::NOTHING)
+        end
+     end
+
     end
     describe "with card_type 'EGK'" do
       before(:each) do

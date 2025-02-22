@@ -1,7 +1,7 @@
 module Cocard
   class Card
 
-    ATTRIBUTES = %i( properties card_handle card_type iccsn slotid 
+    ATTRIBUTES = %i( properties card_handle card_type iccsn
                      insert_time card_holder_name expiration_date )
 
     def initialize(hash)

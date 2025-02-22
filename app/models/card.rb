@@ -6,7 +6,8 @@ class Card < ApplicationRecord
   # -- associations
   has_many :logs, as: :loggable, dependent: :destroy
 
-  belongs_to :card_terminal, optional: true
+  has_one :card_terminal_slot, dependent: :nullify
+  has_one :card_terminal, through: :card_terminal_slot
   has_many :card_contexts, dependent: :destroy
   has_many :contexts, through: :card_contexts
   belongs_to :location, optional: true
@@ -21,6 +22,8 @@ class Card < ApplicationRecord
   accepts_nested_attributes_for :card_contexts,
     allow_destroy: true,
     reject_if: proc { |att| att['context_id'].blank? }
+
+  delegate :slotid, to: :card_terminal_slot, allow_nil: true
 
   # -- validations and callbacks
   before_save :update_condition
@@ -41,7 +44,7 @@ class Card < ApplicationRecord
     if (!operational_state&.operational)
       msg = operational_state&.name || "Karte nicht in Betrieb"
       set_condition( Cocard::States::NOTHING, msg )
-    elsif card_terminal&.connector.nil?
+    elsif card_terminal_slot&.card_terminal_id.nil?
       set_condition( Cocard::States::NOTHING,
                      "Kein Kartenterminal zugewiesen - Karte nicht gesteckt? - UNUSED" )
     elsif expiration_date.nil?

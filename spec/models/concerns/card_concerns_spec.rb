@@ -38,22 +38,31 @@ RSpec.describe CardConcerns, type: :model do
       )
     end 
 
-    let(:card1) do 
-      FactoryBot.create(:card, 
+    let(:card1) { FactoryBot.create(:card, operational_state: opstate) }
+    let(:card2) { FactoryBot.create(:card, operational_state: opstate) }
+    let(:card3) { FactoryBot.create(:card, operational_state: opstate) }
+
+    let!(:slot1) do 
+      FactoryBot.create(:card_terminal_slot,
         card_terminal: ct1,
-        operational_state: opstate
+        slotid: 1,
+        card: card1
       )
     end
-    let(:card2) do 
-      FactoryBot.create(:card, 
+
+    let!(:slot2) do 
+      FactoryBot.create(:card_terminal_slot,
         card_terminal: ct2,
-        operational_state: opstate
+        slotid: 2,
+        card: card2
       )
     end
-    let(:card3) do 
-      FactoryBot.create(:card, 
+
+    let!(:slot3) do 
+      FactoryBot.create(:card_terminal_slot,
         card_terminal: ct2,
-        operational_state: opstate
+        slotid: 3,
+        card: card3
       )
     end
 

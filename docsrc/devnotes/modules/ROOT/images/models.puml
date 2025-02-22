@@ -63,6 +63,12 @@ class CardTerminal {
   network_id
 }
 
+class CardTerminalSlot {
+  card_terminal_id: bigint
+  slot: integer
+  card_id: bigint
+}
+
 class Location {
   lid: string
   description: string
@@ -187,7 +193,8 @@ Connector "0..1" - "*" CardTerminal
 Location "0..1" -- "*" CardTerminal
 (Connector, Context) . ConnectorContext
 CardContext . (Card, Context)
-CardTerminal "0..1" - "*" Card
+CardTerminal "1" - "*" CardTerminalSlot
+CardTerminalSlot "1" - "0..1" Card
 CardTerminal "*" -- "*" Workplace
 TerminalWorkplaces . (CardTerminal, Workplace) 
 Location "0..1" -- "*" Card
