@@ -57,6 +57,15 @@ module CardTerminals::RMI
           expect(subject.result).to include("idle_message" => 'K03 00B692 ')
         end
       end
+
+      describe "#set_idle_message", :rmi3 => true do
+        it "set idle message" do
+          subject.set_idle_message('Helau@\!%[]{}')
+          expect(subject.result).to include("result" => "success")
+          subject.get_idle_message
+          expect(subject.result).to include("idle_message" => 'Helau__!_____')
+        end
+      end
     end
 
   end

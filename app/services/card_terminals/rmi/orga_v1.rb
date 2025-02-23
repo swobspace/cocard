@@ -29,7 +29,6 @@ module CardTerminals
       # for notifications.
       # send pin if requested until timeout
       #
-
       def verify_pin(iccsn)
         EM.run {
           ws = Faye::WebSocket::Client.new(ws_url, [], {
@@ -110,6 +109,7 @@ module CardTerminals
 
           ws.on :error do |event|
             debug([:error, event.message])
+            ws.close
           end
 
           ws.on :close do |event|
@@ -127,8 +127,7 @@ module CardTerminals
       # 
       # fetch idle message from card terminal
       # and write result to @result['idle_message']
-
-
+      #
       def get_idle_message
         EM.run {
           ws = Faye::WebSocket::Client.new(ws_url, [], {
@@ -167,6 +166,64 @@ module CardTerminals
 
           ws.on :error do |event|
             debug([:error, event.message])
+            ws.close
+          end
+
+          ws.on :close do |event|
+            debug("--- :close ---")
+            debug([:close, event.code, event.reason])
+            ws = nil
+            EM.stop
+            debug("<<< :closed <<<\n")
+          end
+        }
+      end
+
+      #
+      # set_idle_message
+      # 
+      # set idle message on card terminal
+      # and write result to @result['result']
+      # success means @result['result'] = 'success'
+      #
+      def set_idle_message(idle_message)
+        idle_message = clean_idle_message(idle_message)
+        EM.run {
+          ws = Faye::WebSocket::Client.new(ws_url, [], {
+                   ping: 15,
+                   tls: {verify_peer: false}
+                 }
+               )
+
+          ws.on :open do |event|
+            debug(">>> :open >>>")
+
+            ws.send(request_auth(generate_token(:authenticate)))
+          end
+
+          ws.on :message do |event|
+            debug("--- :message ---")
+            response = parse_ws_response(event.data)
+            debug("Type: #{response.type}")
+            debug("Token: #{response.token}")
+            debug("Action: #{session[response.token]}")
+            debug("JSON: #{response.json.inspect}")
+            debug("SessionId: #{session['id']}")
+
+            case session[response.token]
+            when :authenticate
+              ws.send(request_set_property_idle_message(generate_token(:set_property), idle_message))
+
+            when :set_property
+              @result['result'] = (response.result.nil?) ? 'success' : 'failure'
+              debug("set gui_idle_message: " + @result['result'])
+              ws.close
+            end
+          end
+
+          ws.on :error do |event|
+            debug([:error, event.message])
+            ws.close
           end
 
           ws.on :close do |event|
@@ -271,6 +328,23 @@ module CardTerminals
         }.to_json
       end
 
+      def request_set_property_idle_message(token, idle_message)
+        {
+          "request" => {
+            "token": token,
+            "service": "Settings",
+            "method": {
+              "setProperties": {
+                "sessionId": session['id'],
+                "properties": {
+                  "gui_idleMessage": "#{idle_message}"
+                }
+              }
+            }
+          }
+        }.to_json
+      end
+
       def request_subscription(token, iccsn)
         {
           "subscription" => {
@@ -306,6 +380,10 @@ module CardTerminals
 
       def debug(message)
         logger.debug("CardTerminal(#{card_terminal.id})::RMI: #{message}")
+      end
+   
+      def clean_idle_message(msg)
+        msg.gsub(/[^0-9A-Za-zÄÖÜäöüß!?#$&_\/*+.,;'-]/, '_')
       end
 
     end
