@@ -38,6 +38,14 @@ RSpec.describe CardTerminalsController, type: :routing do
       expect(post: "/card_terminals/1/fetch_idle_message").to route_to("card_terminals#fetch_idle_message", id: "1")
     end
 
+    it "routes to #edit_idle_message via GET" do
+      expect(get: "/card_terminals/1/edit_idle_message").to route_to("card_terminals#edit_idle_message", id: "1")
+    end
+
+    it "routes to #update_idle_message via PUT" do
+      expect(put: "/card_terminals/1/update_idle_message").to route_to("card_terminals#update_idle_message", id: "1")
+    end
+
     it "routes to #update via PATCH" do
       expect(patch: "/card_terminals/1").to route_to("card_terminals#update", id: "1")
     end

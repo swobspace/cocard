@@ -401,7 +401,7 @@ module CardTerminals
       end
    
       def clean_idle_message(msg)
-        msg.gsub(/[^0-9A-Za-zÄÖÜäöüß!?#$&_\/*+.,;'-]/, '_')
+        msg.gsub(/[^ 0-9A-Za-zÄÖÜäöüß!?#$&_\/*+.,;'-]/, '_')
       end
 
     end
