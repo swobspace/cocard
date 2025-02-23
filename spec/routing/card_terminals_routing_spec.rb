@@ -34,6 +34,10 @@ RSpec.describe CardTerminalsController, type: :routing do
       expect(put: "/card_terminals/1").to route_to("card_terminals#update", id: "1")
     end
 
+    it "routes to #fetch_idle_message via PUT" do
+      expect(post: "/card_terminals/1/fetch_idle_message").to route_to("card_terminals#fetch_idle_message", id: "1")
+    end
+
     it "routes to #update via PATCH" do
       expect(patch: "/card_terminals/1").to route_to("card_terminals#update", id: "1")
     end

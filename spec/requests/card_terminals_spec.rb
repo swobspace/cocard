@@ -139,6 +139,17 @@ RSpec.describe "/card_terminals", type: :request do
     end
   end
 
+  describe "POST /fetch_idle_message" do
+    context "with valid parameters" do
+      it "fetches idle message" do
+        ct = CardTerminal.create!(valid_attributes)
+        expect(CardTerminals::RMI::GetIdleMessageJob).to receive(:perform_now)
+        post fetch_idle_message_card_terminal_url(ct)
+        expect(response).to redirect_to(card_terminal_url(CardTerminal.last))
+      end
+    end
+  end
+
   describe "DELETE /destroy" do
     it "destroys the requested card_terminal" do
       card_terminal = CardTerminal.create! valid_attributes

@@ -1,5 +1,5 @@
 class CardTerminalsController < ApplicationController
-  before_action :set_card_terminal, only: [:show, :edit, :update, :destroy]
+  before_action :set_card_terminal, only: [:show, :edit, :update, :destroy, :fetch_idle_message]
   before_action :add_breadcrumb_show, only: [:show]
 
   # GET /card_terminals
@@ -63,6 +63,11 @@ class CardTerminalsController < ApplicationController
   def update
     @card_terminal.update(card_terminal_params)
     respond_with(@card_terminal)
+  end
+
+  def fetch_idle_message
+    CardTerminals::RMI::GetIdleMessageJob.perform_now(card_terminal: @card_terminal)
+    redirect_to @card_terminal
   end
 
   # DELETE /card_terminals/1

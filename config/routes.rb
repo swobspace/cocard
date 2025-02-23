@@ -52,6 +52,7 @@ Rails.application.routes.draw do
     end
     member do
       get :ping
+      post :fetch_idle_message
     end
     resources :notes, module: :card_terminals
   end

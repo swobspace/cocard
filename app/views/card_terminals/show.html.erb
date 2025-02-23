@@ -47,7 +47,16 @@
 
           <tr>
             <th class="w-25 pe-3"><%= t('attributes.idle_message')%>:</th>
-            <td><%= @card_terminal.idle_message %></td>
+            <td>
+              <%= @card_terminal.idle_message %>
+              <%= button_to( fetch_idle_message_card_terminal_path(@card_terminal),
+                             method: :post,
+                             title: t('cocard.reload'),
+                             class: "btn btn-sm btn-white",
+                             data: { "turbo-frame": false }) do %>
+                  <i class="fa-solid fa-rotate-right"></i>
+              <% end %>
+            </td>
           </tr>
 
           <tr>
