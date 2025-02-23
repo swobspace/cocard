@@ -38,19 +38,25 @@ module CardTerminals
                )
 
           ws.on :open do |event|
-            debug(">>> :open >>>")
+            debug(">>> :open verify pin >>>")
 
             ws.send(request_auth(generate_token(:authenticate)))
           end
 
           ws.on :message do |event|
-            debug("--- :message ---")
+            debug("--- :message verify pin ---")
             response = parse_ws_response(event.data)
             debug("Type: #{response.type}")
             debug("Token: #{response.token}")
             debug("Action: #{session[response.token]}")
-            debug("JSON: #{response.json.inspect}")
             debug("SessionId: #{session['id']}")
+            debug("JSON: #{response.json.inspect}")
+            unless response.success?
+              @result['failure'] = response.json['failure']
+              @result['result'] = 'failure'
+              debug("--- :message - closing on failure ---")
+              ws.close
+            end
 
             case session[response.token]
             when :authenticate
@@ -137,19 +143,25 @@ module CardTerminals
                )
 
           ws.on :open do |event|
-            debug(">>> :open >>>")
+            debug(">>> :open get idle >>>")
 
             ws.send(request_auth(generate_token(:authenticate)))
           end
 
           ws.on :message do |event|
-            debug("--- :message ---")
+            debug("--- :message get idle ---")
             response = parse_ws_response(event.data)
             debug("Type: #{response.type}")
             debug("Token: #{response.token}")
             debug("Action: #{session[response.token]}")
-            debug("JSON: #{response.json.inspect}")
             debug("SessionId: #{session['id']}")
+            debug("JSON: #{response.json.inspect}")
+            unless response.success?
+              @result['failure'] = response.json['failure']
+              @result['result'] = 'failure'
+              debug("--- :message - closing on failure ---")
+              ws.close
+            end
 
             case session[response.token]
             when :authenticate
@@ -196,19 +208,25 @@ module CardTerminals
                )
 
           ws.on :open do |event|
-            debug(">>> :open >>>")
+            debug(">>> :open set idle >>>")
 
             ws.send(request_auth(generate_token(:authenticate)))
           end
 
           ws.on :message do |event|
-            debug("--- :message ---")
+            debug("--- :message set idle ---")
             response = parse_ws_response(event.data)
             debug("Type: #{response.type}")
             debug("Token: #{response.token}")
             debug("Action: #{session[response.token]}")
-            debug("JSON: #{response.json.inspect}")
             debug("SessionId: #{session['id']}")
+            debug("JSON: #{response.json.inspect}")
+            unless response.success?
+              @result['failure'] = response.json['failure']
+              @result['result'] = 'failure'
+              debug("--- :message - closing on failure ---")
+              ws.close
+            end
 
             case session[response.token]
             when :authenticate

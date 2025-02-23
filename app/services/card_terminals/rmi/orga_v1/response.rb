@@ -53,6 +53,10 @@ module CardTerminals
         json.keys.first
       end
 
+      def success?
+        type == 'response'
+      end
+
     end
   end
 end
