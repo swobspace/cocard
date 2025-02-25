@@ -54,8 +54,11 @@ module CardTerminals
             unless response.success?
               @result['failure'] = response.json['failure']
               @result['result'] = 'failure'
-              debug("--- :message - closing on failure ---")
-              ws.close
+              log_failure("Function: verify_pin," +
+                          " Action: #{session[response.token]}," + 
+                          " JSON: #{response.json.inspect}")
+              # don't close here, multiple PIN verify requests possible
+              # !ws.close
             end
 
             case session[response.token]
@@ -160,6 +163,9 @@ module CardTerminals
               @result['failure'] = response.json['failure']
               @result['result'] = 'failure'
               debug("--- :message - closing on failure ---")
+              log_failure("Function: get_idle_message," +
+                          " Action: #{session[response.token]}," + 
+                          " JSON: #{response.json.inspect}")
               ws.close
             end
 
@@ -225,6 +231,9 @@ module CardTerminals
               @result['failure'] = response.json['failure']
               @result['result'] = 'failure'
               debug("--- :message - closing on failure ---")
+              log_failure("Function: set_idle_message," +
+                          " Action: #{session[response.token]}," + 
+                          " JSON: #{response.json.inspect}")
               ws.close
             end
 
@@ -398,6 +407,10 @@ module CardTerminals
 
       def debug(message)
         logger.debug("CardTerminal(#{card_terminal.id})::RMI: #{message}")
+      end
+   
+      def log_failure(message)
+        Rails.logger.warn("WARN:: CardTerminal(#{card_terminal.id})::RMI: #{message}")
       end
    
       def clean_idle_message(msg)
