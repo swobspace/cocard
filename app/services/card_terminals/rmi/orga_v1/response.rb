@@ -54,7 +54,7 @@ module CardTerminals
       end
 
       def success?
-        type == 'response'
+        type != 'failure'
       end
 
     end
