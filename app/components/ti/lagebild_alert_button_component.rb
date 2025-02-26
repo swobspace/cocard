@@ -3,12 +3,25 @@
 class TI::LagebildAlertButtonComponent < ViewComponent::Base
   def initialize
     @failed_count = SinglePicture.failed.count
+    failure_group_ids = SinglePicture
+                        .active.current.failed
+                        .select(:pdt, :tid)
+                        .group(:pdt, :tid)
+                        .map{|x| SinglePicture.where(pdt: x.pdt, tid: x.tid).ids}
+                        .flatten
+
     @critical = SinglePicture
-                .with_failed_tids
-                .select(:tid, 'sum(availability)')
-                .group(:tid)
-                .having("sum(availability) < 1")
+                .where(id: failure_group_ids).active.current
+                .select(:pdt, :tid, :availability)
+                .group(:pdt, :tid)
+                .sum("availability")
+                .select {|x,y| y == 0}
                 .any?
+                # .with_failed_tids
+                # .select(:tid, 'sum(availability)')
+                # .group(:tid)
+                # .having("sum(availability) < 1")
+                # .any?
   end
 
 
