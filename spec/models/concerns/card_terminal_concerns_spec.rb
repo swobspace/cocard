@@ -175,4 +175,25 @@ RSpec.describe CardTerminalConcerns, type: :model do
       )
     end
   end
+
+  describe "#supports_rmi?" do
+    describe "with noname terminal" do    
+      it { expect(ct.supports_rmi?).to be_falsey }
+      it { expect(ct.supports_rmi?).not_to be_nil }
+    end
+
+    describe "with supported terminal" do
+      let(:product_information) { instance_double(Cocard::ProductInformation) }
+      let(:ct) do
+        FactoryBot.create(:card_terminal, :with_mac,
+          firmware_version: '3.9.1'
+        )
+      end
+      it "supports_rmi? is true" do
+        expect(ct).to receive(:product_information).and_return(product_information)
+        expect(product_information).to receive(:product_code).and_return('ORGA6100')
+        expect(ct.supports_rmi?).to be_truthy
+      end
+    end
+  end
 end

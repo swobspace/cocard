@@ -70,4 +70,8 @@ module CardTerminalConcerns
       "network" => network.to_s
     }
   end
+
+  def supports_rmi?
+   CardTerminals::RMI::Base.new(card_terminal: self).valid
+  end
 end
