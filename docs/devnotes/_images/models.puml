@@ -5,6 +5,7 @@ top to bottom direction
 
 class Connector  {
   name: string
+  short_name: string
   description: rich_text
   ip: inet
   admin_url: string
@@ -46,6 +47,7 @@ class CardTerminal {
   pin_mode: integer
   location_id
   ip: inet
+  idle_message: string
   --
   properties: jsonb
   name: string

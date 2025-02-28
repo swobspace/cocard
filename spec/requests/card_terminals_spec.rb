@@ -82,6 +82,7 @@ RSpec.describe "/card_terminals", type: :request do
     context "with valid parameters" do
       let(:new_attributes) {{
         displayname: "Something",
+        idle_message: "K123 MAC",
         location_id: location.id,
         description: "some other text",
         room: "Raum U.16",
@@ -103,6 +104,7 @@ RSpec.describe "/card_terminals", type: :request do
         patch card_terminal_url(card_terminal), params: { card_terminal: new_attributes }
         card_terminal.reload
         expect(card_terminal.displayname).to eq('Something')
+        expect(card_terminal.idle_message).to eq('K123 MAC')
         expect(card_terminal.location.lid).to eq('AXC')
         expect(card_terminal.description.to_plain_text).to eq('some other text')
         expect(card_terminal.room).to eq('Raum U.16')
@@ -134,6 +136,17 @@ RSpec.describe "/card_terminals", type: :request do
         expect(response).to have_http_status(:unprocessable_entity)
       end
     
+    end
+  end
+
+  describe "POST /fetch_idle_message" do
+    context "with valid parameters" do
+      it "fetches idle message" do
+        ct = CardTerminal.create!(valid_attributes)
+        expect(CardTerminals::RMI::GetIdleMessageJob).to receive(:perform_now)
+        post fetch_idle_message_card_terminal_url(ct)
+        expect(response).to redirect_to(card_terminal_url(CardTerminal.last))
+      end
     end
   end
 

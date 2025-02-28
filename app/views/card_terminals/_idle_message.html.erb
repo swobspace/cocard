@@ -1,0 +1,22 @@
+<% if card_terminal.supports_rmi? %>
+  <td id="<%= dom_id(card_terminal) %>" data-turbo-prefetch="false" >
+    <span class="pe-4"><%= card_terminal.idle_message %></span>
+    <% if can? :manage, card_terminal %>
+      <%= link_to(edit_idle_message_card_terminal_path(card_terminal),
+                  title: t('cocard.edit'),
+                  class: "btn btn-sm btn-warning",
+                  data: { "turbo-frame": 'modal' }) do %>
+          <i class="fa-solid fa-pencil"></i>
+      <% end %>
+      <%= button_to(fetch_idle_message_card_terminal_path(card_terminal),
+                    method: :post,
+                    title: t('cocard.reload'),
+                    class: "btn btn-sm btn-warning",
+                    data: { "turbo-frame": false }) do %>
+          <i class="fa-solid fa-rotate-right"></i>
+      <% end %>
+    <% end %>
+  </td>
+<% else %>
+  <td><em><%= t('cocard.card_terminal_rmi_not_supported') %></em></td>
+<% end %>

@@ -5,6 +5,9 @@
     <%= form.input :displayname, 
                     disabled: !can?(:update, @card_terminal, :displayname)
        %>
+    <%= form.input :idle_message, 
+                    disabled: true # !can?(:update, @card_terminal, :idle_message)
+       %>
     <%= form.association :location,
                     disabled: !can?(:update, @card_terminal, :location)
        %>

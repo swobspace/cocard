@@ -81,6 +81,7 @@ RSpec.describe "/connectors", type: :request do
     context "with valid parameters" do
       let(:new_attributes) {{
         description: "HighSpeed",
+        short_name: 'H123',
         admin_url: 'http://1.2.3.4:5678',
         sds_url: 'http://192.0.2.99',
         manual_update: true,
@@ -99,6 +100,7 @@ RSpec.describe "/connectors", type: :request do
         patch connector_url(connector), params: { connector: new_attributes }
         connector.reload
         expect(connector.description.to_plain_text).to eq('HighSpeed')
+        expect(connector.short_name).to eq('H123')
         expect(connector.admin_url).to eq('http://1.2.3.4:5678')
         expect(connector.sds_url).to eq('http://192.0.2.99')
         expect(connector.locations).to contain_exactly(location)

@@ -28,6 +28,7 @@ RSpec.describe Connector, type: :model do
     expect(f).to be_valid
     expect(g).to be_valid
     expect(f).to validate_uniqueness_of(:ip)
+    expect(f).to validate_uniqueness_of(:short_name)
   end
 
   describe "#to_s" do

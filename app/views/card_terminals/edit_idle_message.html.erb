@@ -1,0 +1,12 @@
+<%= render ModalComponent.new(title: 'Ruhebildschirm bearbeiten') do %>
+  <%= simple_form_for(@card_terminal, method: :put, 
+        url: update_idle_message_card_terminal_path(@card_terminal)) do |form| %> 
+    <%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
+
+    <div class="form-input">
+      <%= form.input :idle_message %>
+      <%= form.button :submit, class: 'btn btn-primary' %>
+    <div>
+  <% end %>
+<% end %>
+

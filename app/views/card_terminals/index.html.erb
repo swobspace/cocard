@@ -25,6 +25,7 @@
             <th><%= t('attributes.room') %></th>
             <th><%= t('attributes.plugged_in') %></th>
             <th><%= t('attributes.contact') %></th>
+            <th class="notvisible"><%= t('attributes.idle_message') %></th>
             <th class="notvisible"><%= t('attributes.delivery_date') %></th>
             <th class="notvisible"><%= t('attributes.supplier') %></th>
             <th class="notvisible"><%= t('attributes.serial') %></th>
@@ -41,6 +42,7 @@
     </thead>
     <tfoot class="search">
       <tr>
+            <th></th>
             <th></th>
             <th></th>
             <th></th>
@@ -92,6 +94,7 @@
           <td><%= card_terminal.room %></td>
           <td><%= card_terminal.plugged_in %></td>
           <td><%= card_terminal.contact %></td>
+          <td><%= card_terminal.idle_message %></td>
           <td><%= card_terminal.delivery_date %></td>
           <td><%= card_terminal.supplier %></td>
           <td><%= card_terminal.serial %></td>

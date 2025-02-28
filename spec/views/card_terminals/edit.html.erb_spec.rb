@@ -26,6 +26,9 @@ RSpec.describe "card_terminals/edit", type: :view do
 
     assert_select "form[action=?][method=?]", card_terminal_path(card_terminal), "post" do
       assert_select "input[name=?]", "card_terminal[displayname]"
+      assert_select "input[name=?]", "card_terminal[idle_message]" do |input|
+        assert input.attr("disabled").present?
+      end
       assert_select "select[name=?]", "card_terminal[location_id]"
       assert_select "input[name=?]", "card_terminal[description]"
       assert_select "input[name=?]", "card_terminal[room]"

@@ -1,5 +1,7 @@
 class CardTerminalsController < ApplicationController
-  before_action :set_card_terminal, only: [:show, :edit, :update, :destroy]
+  before_action :set_card_terminal, only: [:show, :edit, :update, :destroy, 
+                                           :fetch_idle_message, :edit_idle_message,
+                                           :update_idle_message]
   before_action :add_breadcrumb_show, only: [:show]
 
   # GET /card_terminals
@@ -65,6 +67,26 @@ class CardTerminalsController < ApplicationController
     respond_with(@card_terminal)
   end
 
+  def fetch_idle_message
+    CardTerminals::RMI::GetIdleMessageJob.perform_now(card_terminal: @card_terminal)
+    redirect_to @card_terminal
+  end
+
+
+  def edit_idle_message
+    respond_with(@card_terminal)
+  end
+
+  def update_idle_message
+    rmi = CardTerminals::RMI::OrgaV1.new(card_terminal: @card_terminal)
+    rmi.set_idle_message(idle_message_params['idle_message'])
+    # CardTerminals::RMI::GetIdleMessageJob.perform_now(card_terminal: @card_terminal)
+    rmi.get_idle_message
+    @card_terminal.update(idle_message: rmi.result['idle_message'])
+    @card_terminal.reload
+    redirect_to @card_terminal
+  end
+
   # DELETE /card_terminals/1
   def destroy
     unless @card_terminal.destroy
@@ -86,5 +108,9 @@ class CardTerminalsController < ApplicationController
                     .permitted_attributes(:update, (@card_terminal||CardTerminal.new)))
             .reject {|k,v| k == 'mac' && v.blank? }
 
+    end
+
+    def idle_message_params
+      params.require(:card_terminal).permit(:idle_message)
     end
 end

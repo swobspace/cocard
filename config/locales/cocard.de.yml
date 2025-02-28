@@ -67,12 +67,15 @@ de:
     acknowledge: Acknowledge
     set_invalid: Ungültig setzen
     reboot: Reboot
+    reload: Reload
+    edit: Edit
     pin_mode_auto_warning: |
       Vorsicht! Die automatische PIN-Verifizierung kann bei Fehlkonfiguration
       oder Software-Fehlern im Worst-Case zum Sperren aller SMB-C-Karten in kurzer
       Zeit führen. Testen Sie bitte daher Ihre Installation und Konfiguration
       vor einem flächendeckenden Rollout ausführlich.
     ip_takeover: IP übernehmen?
+    card_terminal_rmi_not_supported: Funktion wird vom Kartenterminal nicht unterstützt
 
   activerecord:
     models:
@@ -142,6 +145,7 @@ de:
     iccsn: ICCSN
     id_contract: Vertragsnummer
     id_product: Modellbezeichnung
+    idle_message: Anzeige im Display
     insert_time: eingesteckt seit
     ip: IP-Adresse
     is_valid: gültig?
@@ -178,6 +182,8 @@ de:
     sds_url: SDS-URL
     search: Suche
     serial: Seriennummer
+    short: Kurz
+    short_name: Kurzbezeichnung
     since: seit
     slotid: Schachtnummer
     sn: Nachname
