@@ -75,7 +75,7 @@ de:
       Zeit führen. Testen Sie bitte daher Ihre Installation und Konfiguration
       vor einem flächendeckenden Rollout ausführlich.
     ip_takeover: IP übernehmen?
-    not_supported: wird nicht unterstützt
+    card_terminal_rmi_not_supported: Funktion wird vom Kartenterminal nicht unterstützt
 
   activerecord:
     models:
