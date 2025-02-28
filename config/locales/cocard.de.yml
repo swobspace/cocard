@@ -209,6 +209,7 @@ de:
     contexts: Kontexte
     events: Ereignisse
     home: Home
+    idle_messages: Ruhebildschirme
     locations: Standorte
     locations/cards: Karten
     locations/card_terminals: Kartenterminals

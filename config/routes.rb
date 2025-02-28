@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get "idle_messages", to: "idle_messages#index", as: :idle_messages
+  get "idle_messages/edit"
+  put "idle_messages", to: "idle_messages#update"
+
   resources 'situation_picture', only: [:index, :update] do
     collection do
       get :failed
