@@ -75,6 +75,7 @@ de:
       Zeit führen. Testen Sie bitte daher Ihre Installation und Konfiguration
       vor einem flächendeckenden Rollout ausführlich.
     ip_takeover: IP übernehmen?
+    not_supported: wird nicht unterstützt
 
   activerecord:
     models:
