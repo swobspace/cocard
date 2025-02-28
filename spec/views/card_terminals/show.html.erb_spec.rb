@@ -50,6 +50,7 @@ RSpec.describe "card_terminals/show", type: :view do
       pin_mode: 'on_demand',
       network: network
     )
+    allow(@card_terminal).to receive(:supports_rmi?).and_return(true)
   end
 
   it "renders attributes in <p>" do

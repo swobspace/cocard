@@ -6,7 +6,7 @@ RSpec.describe TI::LagebildAlertButtonComponent, type: :component do
   include Rails.application.routes.url_helpers
 
   it "shows alert button" do
-    sp = FactoryBot.create(:single_picture, availability: 0)
+    sp = FactoryBot.create(:single_picture, time: Time.now, availability: 0)
     render_inline(described_class.new())
     # puts rendered_content
     expect(page).to have_css('a[class="btn btn-danger mb-0"]')
@@ -14,8 +14,8 @@ RSpec.describe TI::LagebildAlertButtonComponent, type: :component do
   end
 
   it "shows warning button" do
-    sp = FactoryBot.create(:single_picture, availability: 1, tid: "tid-13")
-    sp = FactoryBot.create(:single_picture, availability: 0, tid: "tid-13")
+    sp = FactoryBot.create(:single_picture, availability: 1, time: Time.now, tid: "tid-13")
+    sp = FactoryBot.create(:single_picture, availability: 0, time: Time.now, tid: "tid-13")
     render_inline(described_class.new())
     # puts rendered_content
     expect(page).to have_css('a[class="btn btn-primary text-warning mb-0"]')
@@ -23,7 +23,7 @@ RSpec.describe TI::LagebildAlertButtonComponent, type: :component do
   end
 
   it "don't show button" do
-    sp = FactoryBot.create(:single_picture, availability: 1, tid: "tid-13")
+    sp = FactoryBot.create(:single_picture, availability: 1, time: Time.now, tid: "tid-13")
     render_inline(described_class.new())
     # puts rendered_content
     expect(page).to have_css('a[class="btn btn-primary text-success mb-0"]')
