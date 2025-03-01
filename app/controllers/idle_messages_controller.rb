@@ -19,10 +19,14 @@ class IdleMessagesController < ApplicationController
 
     @card_terminals = @card_terminals.to_a
 
-    # flash[:notice] = @card_terminals.map(&:to_s).join("; ")
-    CardTerminals::RMI::SetIdleMessageJob
-    .set(wait: 1.seconds)
-    .perform_later(card_terminal: @card_terminals, idle_message: params[:idle_message])
+    if @card_terminals.any?
+      CardTerminals::RMI::SetIdleMessageJob
+      .set(wait: 1.seconds)
+      .perform_later(card_terminal: @card_terminals, idle_message: params[:idle_message])
+    else
+      flash[:notice] = "Keine Kartenterminals mit den angegebene Suchkriterien " +
+                       "gefunden, die OK sind!"
+    end
     redirect_to idle_messages_url
   end
 
