@@ -76,6 +76,7 @@ de:
       vor einem flächendeckenden Rollout ausführlich.
     ip_takeover: IP übernehmen?
     card_terminal_rmi_not_supported: Funktion wird vom Kartenterminal nicht unterstützt
+    set_idle_messages: Ruhebildschirme setzen
 
   activerecord:
     models:
@@ -106,6 +107,7 @@ de:
     card_handle: CardHandle
     card_holder_name: CardHolder
     card_terminal: Kartenterminal
+    card_terminal_ids: Kartenterminals
     card_type: Kartentyp
     certificate: Zertifikat
     cert: Zertifikat (PEM)
@@ -128,6 +130,7 @@ de:
     configuration: Konfiguration
     connected: online
     connector: Konnektor
+    connector_ids: Konnektoren
     connector_context: Konnektor Kontext
     contact: Ansprechpartner
     context: Kontext

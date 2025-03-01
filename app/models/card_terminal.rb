@@ -45,6 +45,14 @@ class CardTerminal < ApplicationRecord
     "#{name} - #{ct_id} (#{location&.lid})"
   end
 
+  def fullname
+    if connector.present?
+      "#{connector.short_name}: #{to_s}"
+    else
+      to_s
+    end
+  end
+
   def mac
     self[:mac].gsub(/:/, '').upcase unless self[:mac].nil?
   end

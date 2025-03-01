@@ -1,0 +1,28 @@
+<dl>
+  <dt><%= t('attributes.idle_message') %></dt>
+  <dd>
+    Ein einfacher Text wird in jedem Kartenterminal identisch gesetzt. Mit einem
+    <%= link_to 'Liquid-Template', 'https://shopify.github.io/liquid/', 
+                class: 'primary-link' %> kann man Informationen abhängig vom
+    Kartenterminal setzen. Der entstehende Text darf ingesamt nicht länger 
+    als 46 Zeichen sein und ist immer einzeilig. Folgende Variablen stehen zur Verfügung
+    <ul>
+      <% CardTerminal.new.to_liquid.each do |k,v| %>
+        <li><%= k %></li>
+      <% end %>'
+    </ul>
+  </dd>
+  <dt><%= t('attributes.connector_ids') %></dt>
+  <dd> Einschränkung auf ausgewählte Konnektoren
+  </dd>
+  <dt><%= t('attributes.location_ids') %></dt>
+  <dd> Einschränkung auf ausgewählte Standorte
+  </dd>
+  <dt><%= t('attributes.card_terminal_ids') %></dt>
+  <dd> Einschränkung auf ausgewählte Kartenterminals
+  </dd>
+</dl>
+
+<p>Bei Auswahl von Konnektoren, Standorten und Kartenterminals müssen alle 
+Kriterien zutreffen, damit ein Kartenterminal aktualisiert wird. Bei ungeeigneter 
+Kombination kann die Menge der zu bearbeitenden Kartenterminals auch leer sein.</p>

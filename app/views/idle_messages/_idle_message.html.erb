@@ -1,0 +1,26 @@
+<div class="list-group-item" id="<%=dom_id(card_terminal)%>">
+  <div>
+    <span class="subtitle">
+      <%= t('activerecord.models.card_terminal') %>:
+      #<%= card_terminal.id %>
+    </span>
+  </div>
+  <div class="d-flex justify-content-between">
+    <div>
+      <% if success %> 
+        <%= Cocard::States.flag(Cocard::States::OK) %>
+      <% else %>
+        <%= Cocard::States.flag(Cocard::States::CRITICAL) %> 
+      <% end %>
+      &nbsp; 
+      <span class="fw-bold"><%= card_terminal.idle_message %></span>
+    </div>
+    <div class="">
+      <%= card_terminal.fullname %>
+    </div>
+    <div class="subtitle"><%= card_terminal.mac %></div>
+    <div class="subtitle"><%= card_terminal.ip %></div>
+    <div class="subtitle"><%= card_terminal.condition_message %></div>
+    <div class="subtitle"><%= card_terminal.location&.lid %></div>
+  </div>
+</div>
