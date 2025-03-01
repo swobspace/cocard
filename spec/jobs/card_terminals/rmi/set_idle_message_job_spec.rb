@@ -35,6 +35,7 @@ RSpec.describe CardTerminals::RMI::SetIdleMessageJob, type: :job do
         allow(ct).to receive(:firmware_version).and_return('3.9.0')
         allow(ct).to receive_message_chain(:product_information, :product_code).and_return('ORGA6100')
         ct.update(pin_mode: 'on_demand')
+        ct.update_column(:condition, Cocard::States::OK)
         ct.reload
         expect_any_instance_of(CardTerminals::RMI::OrgaV1).to receive(:set_idle_message).with('Hello World!')
         expect_any_instance_of(CardTerminals::RMI::OrgaV1).to receive(:result)
