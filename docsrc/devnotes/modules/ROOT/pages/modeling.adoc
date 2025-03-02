@@ -125,7 +125,8 @@ bin/rails g migration AddInternalToCardTerminal \
   connector:belongs_to \
   network:belongs_to \
   firmware_version:string \
-  acknowledge_id:bigint
+  acknowledge_id:bigint \
+  rebooted_at:timestamp
 ----
 
 ----

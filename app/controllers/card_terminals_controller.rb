@@ -78,14 +78,32 @@ class CardTerminalsController < ApplicationController
   end
 
   def update_idle_message
-    rmi = CardTerminals::RMI::OrgaV1.new(card_terminal: @card_terminal)
-    rmi.set_idle_message(idle_message_params['idle_message'])
-    # CardTerminals::RMI::GetIdleMessageJob.perform_now(card_terminal: @card_terminal)
-    rmi.get_idle_message
-    @card_terminal.update(idle_message: rmi.result['idle_message'])
+    rmi = CardTerminals::RMI::Base.new(card_terminal: @card_terminal)
+    _rmi = rmi.rmi.new(card_terminal: @card_terminal)
+    _rmi.set_idle_message(idle_message_params['idle_message'])
+    _rmi.get_idle_message
+    @card_terminal.update(idle_message: _rmi.result['idle_message'])
     @card_terminal.reload
     redirect_to @card_terminal
   end
+
+  def reboot
+    if @card_terminal.rebootable?
+      rmi = CardTerminals::RMI::Base.new(card_terminal: @card_terminal)
+      result = rmi.rmi.new(card_terminal: @card_terminal).reboot
+      if result['result'] == 'success'
+        flash[:success] = "Reboot gestartet"
+      else
+        msg = "Reboot fehlgeschlagen: " + result['failure']
+        flash[:alert] = msg
+      end
+      Note.create(notable: @card_terminal, user: current_user, message: msg)
+    else
+      flash[:warning] = "Reboot des Kartenterminals wird nicht unterstützt"
+    end
+    respond_with(@card_terminal, action: :show)
+  end
+
 
   # DELETE /card_terminals/1
   def destroy

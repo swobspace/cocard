@@ -15,6 +15,7 @@
         <%= render ConditionIconComponent.new(item: @card_terminal) %>
       </div>
       <div role="toolbar" class="ms-auto pt-3">
+        <%= render RebootButtonComponent.new(item: @card_terminal) if (can? :reboot, @card_terminal) %>
         <%= render AcknowledgeButtonComponent.new(
                      notable: @card_terminal, small: false,
                      readonly: cannot?(:manage, @card_terminal)

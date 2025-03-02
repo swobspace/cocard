@@ -196,4 +196,42 @@ RSpec.describe CardTerminalConcerns, type: :model do
       end
     end
   end
+
+  describe "#rebooted?" do
+    it "no if rebooted_at.nil?" do
+      expect(ct).to receive(:rebooted_at).and_return(nil)
+      expect(ct.rebooted?).to be_falsey
+    end
+
+    it "current rebooted_at" do
+      expect(ct).to receive(:rebooted_at).at_least(:once).and_return(Time.current)
+      expect(ct.rebooted?).to be_truthy
+    end
+
+    it "old rebooted_at" do
+      ct.update(rebooted_at: 1.hour.before(Time.current))
+      ct.reload
+      expect(ct.rebooted?).to be_falsey
+      ct.reload
+      expect(ct.rebooted_at).to be_nil
+    end
+  end
+
+  describe "#reboot_active?" do
+    it "no if rebooted_at.nil?" do
+      expect(ct).to receive(:rebooted_at).and_return(nil)
+      expect(ct.reboot_active?).to be_falsey
+    end
+
+    it "current rebooted_at" do
+      expect(ct).to receive(:rebooted_at).at_least(:once).and_return(Time.current)
+      expect(ct.reboot_active?).to be_truthy
+    end
+
+    it "old rebooted_at" do
+      ct.update(rebooted_at: 2.minutes.before(Time.current))
+      ct.reload
+      expect(ct.reboot_active?).to be_falsey
+    end
+  end
 end

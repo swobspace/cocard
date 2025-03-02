@@ -59,6 +59,7 @@ Rails.application.routes.draw do
       post :fetch_idle_message
       get :edit_idle_message
       put :update_idle_message
+      post :reboot
     end
     resources :notes, module: :card_terminals
   end

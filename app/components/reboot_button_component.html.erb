@@ -1,17 +1,17 @@
-<div id="reboot_<%= dom_id(connector) %>" class="d-inline-flex mx-3">
-  <% if connector.rebooted? %>
+<div id="reboot_<%= dom_id(item) %>" class="d-inline-flex mx-3">
+  <% if item.rebooted? %>
     <button class="btn btn-danger" type="button" disabled>
       <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
       <span class="visually-hidden" role="status">stay tuned...</span>
     </button>
   <% else %>
-    <%= button_to( reboot_connector_path(connector),
+    <%= button_to( polymorphic_path([:reboot, item]),
                    method: :post,
                    title: t('cocard.reboot'),
                    class: "btn btn-danger",
                     form: {
                       data: {
-                        "turbo-confirm": t('connectors.do_reboot')
+                        "turbo-confirm": t('do_reboot', scope: item.class.name.underscore.pluralize)
                       }
                     }) do %>
       <i class="fa-solid fa-power-off"></i>

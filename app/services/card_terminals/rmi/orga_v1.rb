@@ -305,6 +305,9 @@ module CardTerminals
             when :reboot
               debug("reboot done")
               @result['result'] = (response.result.nil?) ? 'success' : 'failure'
+              if @result['result'] == 'success'
+                card_terminal.update(rebooted_at: Time.current)
+              end
               ws.close
             end
           end

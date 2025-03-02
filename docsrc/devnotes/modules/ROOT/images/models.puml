@@ -61,6 +61,7 @@ class CardTerminal {
   last_ok: timestamp
   firmware_version: string
   acknowledge_id: bigint
+  rebooted_at: timestamp
   connector_id
   network_id
 }

@@ -53,5 +53,10 @@ RSpec.describe CardTerminalsController, type: :routing do
     it "routes to #destroy" do
       expect(delete: "/card_terminals/1").to route_to("card_terminals#destroy", id: "1")
     end
+
+    it "routes to #reboot" do
+      expect(post: "/card_terminals/1/reboot").to route_to("card_terminals#reboot", id: "1")
+    end
+
   end
 end

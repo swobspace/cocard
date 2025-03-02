@@ -3,6 +3,7 @@
 == 0.7.1 - unreleased
 
 * Update des Ruhebildschirms (Anzeige im Display) für Orga6141 Terminals
+* Rebootmöglichkeit von Orga6141 Terminals.
 
 == 0.7.0 - 2025-02-22
 

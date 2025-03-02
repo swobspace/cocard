@@ -74,4 +74,23 @@ module CardTerminalConcerns
   def supports_rmi?
    CardTerminals::RMI::Base.new(card_terminal: self).valid
   end
+
+  def rebootable?
+    rmi = CardTerminals::RMI::Base.new(card_terminal: self)
+    @rebootable ||= rmi.rmi.new(card_terminal: self).respond_to?(:reboot)
+  end
+
+  def rebooted?
+    return nil if rebooted_at.nil?
+    if rebooted_at > 5.minutes.before(Time.current)
+      true
+    else
+      update_column(:rebooted_at, nil)
+      false
+    end
+  end
+
+  def reboot_active?
+    rebooted_at.present? and (rebooted_at > 2.minute.before(Time.current))
+  end
 end
