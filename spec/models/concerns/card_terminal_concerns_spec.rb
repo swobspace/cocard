@@ -197,6 +197,10 @@ RSpec.describe CardTerminalConcerns, type: :model do
     end
   end
 
+  describe "#rebootable?" do
+    it { expect(ct.rebootable?).to be_falsey }
+  end
+
   describe "#rebooted?" do
     it "no if rebooted_at.nil?" do
       expect(ct).to receive(:rebooted_at).and_return(nil)

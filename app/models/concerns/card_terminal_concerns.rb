@@ -76,8 +76,12 @@ module CardTerminalConcerns
   end
 
   def rebootable?
-    rmi = CardTerminals::RMI::Base.new(card_terminal: self)
-    @rebootable ||= rmi.rmi.new(card_terminal: self).respond_to?(:reboot)
+    rmi = CardTerminals::RMI::Base.new(card_terminal: self).rmi
+    if rmi.nil?
+      false
+    else
+      rmi.new(card_terminal: self).respond_to?(:reboot)
+    end
   end
 
   def rebooted?
