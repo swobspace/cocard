@@ -84,7 +84,12 @@ class CardTerminalsController < ApplicationController
     _rmi.get_idle_message
     @card_terminal.update(idle_message: _rmi.result['idle_message'])
     @card_terminal.reload
-    redirect_to @card_terminal
+    # redirect_to @card_terminal
+    render turbo_stream: [
+      turbo_stream.replace(@card_terminal, partial: "card_terminals/show",
+                                           locals: { card_terminal: @card_terminal })
+    ]
+
   end
 
   def reboot
