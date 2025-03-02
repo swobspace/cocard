@@ -54,7 +54,7 @@ module CardTerminals::RMI
       describe "#get_idle_message", :rmi2 => true do
         it "fetch idle message" do
           subject.get_idle_message
-          expect(subject.result).to include("idle_message" => 'K03 00B692 ')
+          expect(subject.result).to include("idle_message" => 'K03 00B692')
         end
       end
 
@@ -64,6 +64,13 @@ module CardTerminals::RMI
           expect(subject.result).to include("result" => "success")
           subject.get_idle_message
           expect(subject.result).to include("idle_message" => 'Helau__!_____')
+        end
+      end
+
+      describe "#reboot", :rmi4 => true do
+        it "reboots terminal" do
+          subject.reboot
+          expect(subject.result).to include("result" => "success")
         end
       end
     end

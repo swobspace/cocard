@@ -263,6 +263,68 @@ module CardTerminals
         }
       end
 
+      #
+      # reboot
+      # 
+      def reboot
+        EM.run {
+          ws = Faye::WebSocket::Client.new(ws_url, [], {
+                   ping: 15,
+                   tls: {verify_peer: false}
+                 }
+               )
+
+          ws.on :open do |event|
+            debug(">>> :open get idle >>>")
+
+            ws.send(request_auth(generate_token(:authenticate)))
+          end
+
+          ws.on :message do |event|
+            debug("--- :message reboot ---")
+            response = parse_ws_response(event.data)
+            debug("Type: #{response.type}")
+            debug("Token: #{response.token}")
+            debug("Action: #{session[response.token]}")
+            debug("SessionId: #{session['id']}")
+            debug("JSON: #{response.json.inspect}")
+            unless response.success?
+              @result['failure'] = response.json['failure']
+              @result['result'] = 'failure'
+              debug("--- :message - closing on failure ---")
+              log_failure("Function: reboot," +
+                          " Action: #{session[response.token]}," + 
+                          " JSON: #{response.json.inspect}")
+              ws.close
+            end
+
+            case session[response.token]
+            when :authenticate
+              ws.send(request_reboot(generate_token(:reboot)))
+
+            when :reboot
+              debug("reboot done")
+              @result['result'] = (response.result.nil?) ? 'success' : 'failure'
+              ws.close
+            end
+          end
+
+          ws.on :error do |event|
+            debug([:error, event.message])
+            ws.close
+          end
+
+          ws.on :close do |event|
+            debug("--- :close ---")
+            debug([:close, event.code, event.reason])
+            ws = nil
+            EM.stop
+            debug("<<< :closed <<<\n")
+          end
+        }
+      end
+
+
     private
       attr_reader :logger
 
@@ -398,6 +460,20 @@ module CardTerminals
                 "iccsn": iccsn,
                 "pinId": "SMCB-PIN",
                 "pin": smcb_pin
+              }
+            }
+          }
+        }.to_json
+      end
+
+      def request_reboot(token)
+        {
+          "request" => {
+            "token": token,
+            "service": "System",
+            "method": {
+              "reboot": {
+                "sessionId": session['id']
               }
             }
           }
