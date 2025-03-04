@@ -146,7 +146,25 @@ module Cards
           expect(slot.card).to eq(subject.card)
           expect(card.condition).to eq(Cocard::States::NOTHING)
         end
-     end
+      end
+
+      context 'with non existing card terminal' do
+        before(:each) do
+          expect(cc).to receive(:ct_id).and_return('NOTEXISTENT')
+        end
+
+        it "does not raise an error" do
+          expect {
+            subject.save
+          }.not_to raise_error
+        end
+
+        it "doesn't create a new card" do
+          expect {
+            subject.save
+          }.not_to change(Card, :count)
+        end
+      end
 
     end
     describe "with card_type 'EGK'" do

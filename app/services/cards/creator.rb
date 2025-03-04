@@ -34,6 +34,11 @@ module Cards
       #
 
       ct = CardTerminal.where(connector_id: connector.id, ct_id: cc.ct_id).first
+      #
+      # failsafe: CardTerminal may not exist yet or ct_id has changed
+      #
+      return false if ct.nil?
+      
       slot = CardTerminalSlot.find_or_create_by!(card_terminal_id: ct.id, 
                                                  slotid: cc.slotid)
       old_card_id = slot.card_id
