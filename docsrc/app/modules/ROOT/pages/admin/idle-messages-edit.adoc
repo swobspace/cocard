@@ -1,0 +1,82 @@
+= Kartenterminals: Ruhebildschirme setzen
+:author: Wolfgang Barth
+:revdate: 2025-03-08
+:imagesdir: ../../images
+:experimental: true
+
+NOTE: Das Setzen der Displayanzeige - auch Ruhebildschirm genannt - wird derzeit nur für das Kartenterminal ORGA6141 mit einer Firmwareversion >= 3.9.0 unterstützt.
+
+Die Anzeige im Display kann man nutzen für Informationen, die im Supportfall zur leichteren Identifizierung des Kartenterminals und/oder der Umgebung führen.
+Ein Text also, den der Anwender bei Rückfrage am Telefon oder per E-Mail durchgeben kann. Das kann z.B. die Konnektor-Kurzbezeichnung sein, eine hausintern verwendete Inventarisierungsnummer oder ein sonstiges Kennzeichen.
+Zu beachten ist dabei lediglich, dass der Text nicht länger als 46 Zeichen lang sein darf und nicht alle Sonderzeichen möglich sind.
+
+Das Formular öffnet man über das Menü menu:Kartenterminals[Ruhebildschirme setzen]:
+
+image::ct/idle-messages-menu.png[]
+
+Das Formular selbst besteht aus zwei Abschnitten: einmal ein Feld zur Generierung des Wertes, zum anderen aus Filtern, die die Auswahl der Kartenterminals einschränken.
+
+Zunächst zu den Filtern: die Auswahl erlaubt einen oder mehrere Konnektoren, die Standortwahl und die Auswahl einzelner Kartenterminals. Alle 3 Bedingungen werden UND-verknüpft, d.h. bei ungeeigneter Kombination kann die Ergebnismenge auch leer sein und kein einziges Kartenterminal wird aktualisiert.
+
+In das Feld _Anzeige im Display_ kann man entweder einen einfachen Text eingeben, dieser wird dann in jedem Kartenterminal identisch gesetzt. Ein Anwendungsfall wäre etwa ein länger andauernder Ausfall in der Telematik, z.B. ein Konnektorausfall, der ersetzt werden muss.
+
+Für einen geräteabhängigen Text verwendet man ein link:https://shopify.github.io/liquid/basics/introduction/[Liquid-Template]. Die möglichen Variablen werden im Formular in der Legende angezeigt (nicht im Screenshot enthalten). Das Ergebnis des Textes darf 46 Zeichen nicht überschreiten.
+
+image::ct/idle-messages-edit.png[]
+
+Das Template im Screenshot bedeutet übersetzt:
+
+* Wenn das Kartenterminal mindestens eine SMC-B hat (`has_smcb?`), dann setzt sich der Text zusammen aus Kurznamen des Konnektors und den letzten 6 Zeichen seines Namens (in der Regel die Seriennummer bei Kocoboxen).
+* Andernfalls werden die letzten 6 Stellen der MAC-Adresse gesetzt (quasi eindeutige Inventarnummer zur Identifizierung des Gerätes).
+
+
+.Variablen für das Liquid-Template
+[%autowidth]
+|===
+|Variable | Beschreibung
+
+|has_smcb?
+|
+
+|displayname
+|
+
+|location
+|
+
+|name
+|
+
+|ct_id
+|
+
+|mac
+|
+
+|ip
+|
+
+|connector
+|
+
+|connector_short_name
+|
+
+|firmware_version
+|
+
+|serial
+|
+
+|id_product
+|
+
+|network
+|
+|===
+
+Nach dem Absenden des Formular erscheint zunächste eine leere Seite, auf der nach und nach die Einträge der bearbeiten Kartenterminals zur Info erscheinen.
+
+image::ct/idle-messages-index.png[]
+
+NOTE: Die entstandene Seite wird nicht gespeichert. Ein Reload führt zu einer neuen, aber leeren Seite!
