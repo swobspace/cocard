@@ -29,6 +29,7 @@ RSpec.describe "/connectors", type: :request do
       connector = Connector.create! valid_attributes
       get connector_url(connector)
       expect(response).to be_successful
+      expect(flash[:notice]).to match(/Es ist noch kein Kontext zugeordnet!/)
     end
   end
 

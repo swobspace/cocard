@@ -30,6 +30,9 @@ class ConnectorsController < ApplicationController
   # GET /connectors/1
   def show
     Connectors::CheckConfigJob.perform_later(connector: @connector)
+    if @connector.contexts.empty?
+      flash[:notice] = t('connectors.no_contexts_assigned')
+    end
     respond_with(@connector)
   end
 

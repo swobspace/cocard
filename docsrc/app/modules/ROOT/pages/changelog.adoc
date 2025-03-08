@@ -4,6 +4,7 @@
 
 * Update des Ruhebildschirms (Anzeige im Display) für Orga6141 Terminals
 * Rebootmöglichkeit von Orga6141 Terminals.
+* Hinweis bei fehlendem Kontext für Konnektor und Karte.
 
 == 0.7.0 - 2025-02-22
 
