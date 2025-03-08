@@ -1,6 +1,6 @@
 = Changelog
 
-== 0.7.1 - unreleased
+== 0.7.2 - 2025-03-08
 
 * Update des Ruhebildschirms (Anzeige im Display) für ORGA 6141 online Terminals
 * Rebootmöglichkeit von ORGA 6141 online Terminals.
