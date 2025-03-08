@@ -1,4 +1,4 @@
 module Cocard
-  VERSION     = '0.7.0'.freeze
-  RELEASEDATE = '2025-02-22'.freeze
+  VERSION     = '0.7.2'.freeze
+  RELEASEDATE = '2025-03-08'.freeze
 end

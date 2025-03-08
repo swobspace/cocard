@@ -34,6 +34,18 @@ RSpec.describe CardTerminalsController, type: :routing do
       expect(put: "/card_terminals/1").to route_to("card_terminals#update", id: "1")
     end
 
+    it "routes to #fetch_idle_message via PUT" do
+      expect(post: "/card_terminals/1/fetch_idle_message").to route_to("card_terminals#fetch_idle_message", id: "1")
+    end
+
+    it "routes to #edit_idle_message via GET" do
+      expect(get: "/card_terminals/1/edit_idle_message").to route_to("card_terminals#edit_idle_message", id: "1")
+    end
+
+    it "routes to #update_idle_message via PUT" do
+      expect(put: "/card_terminals/1/update_idle_message").to route_to("card_terminals#update_idle_message", id: "1")
+    end
+
     it "routes to #update via PATCH" do
       expect(patch: "/card_terminals/1").to route_to("card_terminals#update", id: "1")
     end
@@ -41,5 +53,10 @@ RSpec.describe CardTerminalsController, type: :routing do
     it "routes to #destroy" do
       expect(delete: "/card_terminals/1").to route_to("card_terminals#destroy", id: "1")
     end
+
+    it "routes to #reboot" do
+      expect(post: "/card_terminals/1/reboot").to route_to("card_terminals#reboot", id: "1")
+    end
+
   end
 end

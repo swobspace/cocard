@@ -1,4 +1,4 @@
-= Remote Management Interface ORGA-6141
+= Remote Management Interface ORGA 6141 online
 :author: Wolfgang Barth
 :revdate: 2024-09-12
 

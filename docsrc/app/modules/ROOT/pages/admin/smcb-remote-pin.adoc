@@ -7,7 +7,7 @@ Bei neueren Kartenterminals kann man die PIN einer SMC-B-Karte remote eingegeben
 
 Cocard unterstützt die Remote-Eingabe, wenn alle nötigen Voraussetzungen dazu erfüllt sind. Löst ein Anwender die Aktion `VerifyPin` aus, startet Cocard zunächst eine Verbindung zum Kartenterminal und wartet auf die `VerifyPin`-Anfrage. Parallel dazu sendet Cocard die `VerifyPin`-Anfrage an den Konnektor, der diese an das Kartenterminal weitergibt. Das Kartenterminal benachrichtigt dann Cocard über die eingetroffene `VerifyPin`-Anfrage und Cocard sendet die fest hinterlegte PIN. Der Konnektor gibt Erfolg zurück, sofern kein Fehler auftritt.
 
-NOTE: Cocard unterstützt derzeit nur das Terminal Orga6141 in der Firmware-Version 3.9.0
+NOTE: Cocard unterstützt derzeit nur das Terminal ORGA 6141 online in der Firmware-Version 3.9.0
 
 == Voraussetzungen für Remote-PIN-Eingabe
 

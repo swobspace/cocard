@@ -15,6 +15,7 @@
             <th><%= t('attributes.condition') %></th>
             <th class="notvisible"><%= t('attributes.condition_message') %></th>
             <th><%= t('attributes.name') %></th>
+            <th class="text-center"><%= t('attributes.short') %></th>
             <th><%= t('attributes.ip') %></th>
             <th class="notvisible"><%= t('attributes.admin_url') %></th>
             <th class="notvisible"><%= t('attributes.sds_url') %></th>
@@ -57,6 +58,7 @@
             <th></th>
             <th></th>
             <th></th>
+            <th></th>
             <th class="nosearch"></th>
       </tr>
     </tfoot>
@@ -67,6 +69,10 @@
           <td><%= connector.condition_message %></td>
           <td><%= link_to connector.name, connector_path(connector),
                           class: 'primary-link' %></td>
+          <td class="text-center">
+            <%= link_to connector.short_name, connector_path(connector),
+                        class: 'primary-link' %>
+          </td>
           <td><%= link_to connector.ip, connector.admin_url,
                           class: 'primary-link' %></td>
           <td><%= link_to nil, connector.admin_url %></td>

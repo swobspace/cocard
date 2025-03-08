@@ -16,6 +16,7 @@ RSpec.describe "card_terminals/index", type: :view do
       CardTerminal.create!(
         connector_id: connector.id,
         displayname: "Displayname",
+        idle_message: "K123 MAC",
         description: "some other text",
         location_id: location.id,
         name: "ORGA-DINGDONG001",
@@ -38,6 +39,7 @@ RSpec.describe "card_terminals/index", type: :view do
       CardTerminal.create!(
         connector_id: connector.id,
         displayname: "Displayname",
+        idle_message: "K123 MAC",
         description: "some other text",
         location_id: location.id,
         name: "ORGA-DINGDONG006",
@@ -66,6 +68,7 @@ RSpec.describe "card_terminals/index", type: :view do
     cell_selector = 'tr>td'
     assert_select cell_selector, text: Regexp.new("TIK-XXX-39".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("Displayname".to_s), count: 2
+    assert_select cell_selector, text: Regexp.new("K123 MAC".to_s), count: 2
     assert_select cell_selector, text: Regexp.new('AXC'.to_s), count: 2
     assert_select cell_selector, text: Regexp.new('ORGA-DINGDONG00.'.to_s), count: 2
     assert_select cell_selector, text: Regexp.new('CT_ID_0815'.to_s), count: 1

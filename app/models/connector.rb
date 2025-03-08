@@ -29,6 +29,7 @@ class Connector < ApplicationRecord
   before_save :ensure_sds_url
   before_save :ensure_admin_url
   validates :ip, presence: true, uniqueness: true
+  validates :short_name, uniqueness: { case_insensitive: true, allow_blank: true }
   validates :authentication, inclusion: { in: authentications.keys }
 
   # -- common methods

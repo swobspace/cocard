@@ -1,0 +1,61 @@
+<%= form_tag(idle_messages_url, method: :put) do -%>
+  <div class="row mb-3">
+    <%= label_tag :idle_message, t('attributes.idle_message'), 
+                  class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      <%= text_area_tag :idle_message, Cocard.ct_idle_message_template, 
+                        class: 'form-control', id: :idle_message,
+                        rows: 6
+       %>
+    </div>
+    <div class="offset-sm-2 form-text">
+      Der Text (nach Verarbeitung des Templates) darf maximal 46 Zeichen lang und muss
+      einzeilig sein.
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <%= label_tag :connector_ids, t('attributes.connector_ids'), 
+                  class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+          <%= select_tag :connector_ids,
+                options_from_collection_for_select(Connector.all, 'id', 'to_s'),
+                multiple: true,
+                include_blank: true,
+                class: 'form-control',
+                "data-controller": "select"
+           %>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <%= label_tag :location_ids, t('attributes.location_ids'), 
+                  class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+          <%= select_tag :location_ids,
+                options_from_collection_for_select(Location.all, 'id', 'to_s'),
+                multiple: true,
+                include_blank: true,
+                class: 'form-control',
+                "data-controller": "select"
+           %>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <%= label_tag :card_terminal_ids, t('attributes.card_terminal_ids'), 
+                  class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+          <%= select_tag :card_terminal_ids,
+                options_from_collection_for_select(CardTerminal.all, 'id', 'fullname'),
+                multiple: true,
+                include_blank: true,
+                class: 'form-control',
+                "data-controller": "select"
+           %>
+    </div>
+  </div>
+
+   <%= submit_tag nil, class: 'btn btn-warning mb-3' %>
+<% end %>
+

@@ -30,6 +30,7 @@ RSpec.describe "/cards", type: :request do
       card = Card.create! valid_attributes
       get card_url(card)
       expect(response).to be_successful
+      expect(flash[:notice]).to match(/Es ist noch kein Kontext zugeordnet!/)
     end
   end
 

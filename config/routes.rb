@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get "idle_messages", to: "idle_messages#index", as: :idle_messages
+  get "idle_messages/edit"
+  put "idle_messages", to: "idle_messages#update"
+
   resources 'situation_picture', only: [:index, :update] do
     collection do
       get :failed
@@ -52,6 +56,10 @@ Rails.application.routes.draw do
     end
     member do
       get :ping
+      post :fetch_idle_message
+      get :edit_idle_message
+      put :update_idle_message
+      post :reboot
     end
     resources :notes, module: :card_terminals
   end

@@ -1,6 +1,6 @@
 = Kartenterminal
 :author: Wolfgang Barth
-:revdate: 2025-02-01
+:revdate: 2025-03-08
 :imagesdir: ../../images
 :experimental: true
 
@@ -99,3 +99,18 @@ Ein IP-Mismatch wird auch im Dashboard angezeigt:
 
 .Anzeige eines Kartenterminals mit IP-Mismatch im Dashboard
 image::dashboard/dashboard-ct-ip-missmatch.png[]
+
+== Ruhebildschirm setzen/abfragen
+
+NOTE: Derzeit wird nur das nur ORGA 6141 online mit Firmware Version >= 3.9.0 unterstützt.
+
+Wird das Kartenterminal unterstützt, erscheint eine zusätzliche Zeile _Anzeige im Display_ (auch "Ruhebildschirm" genannt) bei der Anzeige eines Kartenterminals. Cocard fragt den Wert nicht selbständig ab. die Abfrage erfolgt manuell mit dem Reload-Button.
+
+.Anzeige des Ruhebildschirms, sofern unterstützt
+image::ct/card-terminal-show-idle-message.png[]
+
+NOTE: Cocard zeigt hier nur den in Cocard gespeicherten und bekannten Wert ab.
+Ohne eine Änderung/Abfrage ist der Wert zunächst in Cocard leer. Verändert man später über die Weboberfläche des Kartenterminals manuell den Wert des Ruhebildschirms, bekommt Cocard das nicht automatisch mit. Die Werte können daher vom tatsächlichen Display abweichen. Im Zweifel einfach noch einmal den Reload-Button betätigen.
+
+Für die Massenpflege von mehreren Kartenterminals gleichzeitig gibt es ein eigenes Formular (siehe xref:admin/idle-messages-edit.adoc[]).
+

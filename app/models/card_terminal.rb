@@ -45,6 +45,14 @@ class CardTerminal < ApplicationRecord
     "#{name} - #{ct_id} (#{location&.lid})"
   end
 
+  def fullname
+    if connector.present?
+      "#{connector.short_name}: #{to_s}"
+    else
+      to_s
+    end
+  end
+
   def mac
     self[:mac].gsub(/:/, '').upcase unless self[:mac].nil?
   end
@@ -66,6 +74,10 @@ class CardTerminal < ApplicationRecord
     if ip != current_ip
         return set_condition( Cocard::States::UNKNOWN,
                               "IP Mismatch: gefundene und konfigurierte IP-Adresse weichen von einander ab" )
+    end
+    if reboot_active?
+      return set_condition(Cocard::States::WARNING,
+                           "Reboot um #{rebooted_at.localtime.to_s}, stay tuned...")
     end
     if online?
       return set_condition( Cocard::States::OK,

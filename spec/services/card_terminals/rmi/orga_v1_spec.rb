@@ -15,7 +15,7 @@ module CardTerminals::RMI
       )
     end
   
-    subject { CardTerminals::RMI::OrgaV1.new(card_terminal: ct, iccsn: card.iccsn) }
+    subject { CardTerminals::RMI::OrgaV1.new(card_terminal: ct) }
 
     # check for instance methods
     describe 'check if instance methods exists' do
@@ -48,7 +48,30 @@ module CardTerminals::RMI
       it { expect(subject.valid).to be_truthy }
 
       describe "#verify_pin", :rmi => true do
-        it { subject.verify_pin }
+        it { subject.verify_pin(card.iccsn) }
+      end
+
+      describe "#get_idle_message", :rmi2 => true do
+        it "fetch idle message" do
+          subject.get_idle_message
+          expect(subject.result).to include("idle_message" => 'K03 00B692')
+        end
+      end
+
+      describe "#set_idle_message", :rmi3 => true do
+        it "set idle message" do
+          subject.set_idle_message('Helau@\!%[]{}')
+          expect(subject.result).to include("result" => "success")
+          subject.get_idle_message
+          expect(subject.result).to include("idle_message" => 'Helau__!_____')
+        end
+      end
+
+      describe "#reboot", :rmi4 => true do
+        it "reboots terminal" do
+          subject.reboot
+          expect(subject.result).to include("result" => "success")
+        end
       end
     end
 

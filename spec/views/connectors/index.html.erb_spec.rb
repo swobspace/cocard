@@ -16,6 +16,7 @@ RSpec.describe "connectors/index", type: :view do
     assign(:connectors, [
       Connector.create!(
         name: "Name",
+        short_name: "K123",
         ip: "127.0.2.1",
         admin_url: "Admin Url",
         sds_url: "Sds Url",
@@ -36,6 +37,7 @@ RSpec.describe "connectors/index", type: :view do
       ),
       Connector.create!(
         name: "Name",
+        short_name: "K124",
         ip: "127.0.2.2",
         admin_url: "Admin Url",
         sds_url: "Sds Url",
@@ -61,6 +63,8 @@ RSpec.describe "connectors/index", type: :view do
     puts rendered
     cell_selector = 'tr>td'
     assert_select cell_selector, text: Regexp.new("Name".to_s), count: 2
+    assert_select cell_selector, text: Regexp.new("K123".to_s), count: 1
+    assert_select cell_selector, text: Regexp.new("K124".to_s), count: 1
     assert_select cell_selector, text: Regexp.new("127.0.2.1".to_s), count: 1
     assert_select cell_selector, text: Regexp.new("127.0.2.2".to_s), count: 1
     assert_select cell_selector, text: Regexp.new("Admin Url".to_s), count: 2

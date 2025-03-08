@@ -1,5 +1,6 @@
 <%= turbo_stream_from :home %>
 <%= turbo_stream_from :notes %>
+<%= turbo_stream_from :verify_pins %>
 
 <% if @current_user.present? %>
   <div class="container-fluid">

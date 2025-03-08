@@ -30,6 +30,9 @@ class ConnectorsController < ApplicationController
   # GET /connectors/1
   def show
     Connectors::CheckConfigJob.perform_later(connector: @connector)
+    if @connector.contexts.empty?
+      flash[:notice] = t('connectors.no_contexts_assigned')
+    end
     respond_with(@connector)
   end
 
@@ -123,7 +126,7 @@ class ConnectorsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def connector_params
       params.require(:connector)
-            .permit(:name, :ip, :sds_url, :manual_update, :description,
+            .permit(:name, :short_name, :ip, :sds_url, :manual_update, :description,
                     :admin_url, :id_contract, :serial, :use_tls, :authentication,
                     :auth_user, :auth_password,
                     location_ids: [],

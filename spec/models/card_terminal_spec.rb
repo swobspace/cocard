@@ -17,7 +17,7 @@ RSpec.describe CardTerminal, type: :model do
       accessibility: 'ping'
     )
   end
-  let(:connector) { FactoryBot.create(:connector) }
+  let(:connector) { FactoryBot.create(:connector, short_name: 'K128') }
   let(:ct) do
     FactoryBot.create(:card_terminal,
       ip: '127.2.3.4',
@@ -64,6 +64,10 @@ RSpec.describe CardTerminal, type: :model do
 
   describe "#to_s" do
     it { expect(ct.to_s).to match('ACME Term - CT_ID_0123 (ACX)') }
+  end
+
+  describe "#fullname" do
+    it { expect(ct.fullname).to match('K128: ACME Term - CT_ID_0123 (ACX)') }
   end
 
   describe "on #save" do

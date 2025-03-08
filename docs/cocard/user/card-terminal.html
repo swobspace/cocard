@@ -83,7 +83,13 @@
     <a class="nav-link" href="../admin/connector-edit.html">Konnektor anlegen/bearbeiten</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="../admin/card-terminal-edit.html">Kartenterminal anlegen/bearbeiten</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../admin/idle-messages-edit.html">Ruhebildschirme setzen</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../admin/card-new.html">Karte anlegen/bearbeiten</a>
@@ -361,6 +367,48 @@
 <img src="../_images/dashboard/dashboard-ct-ip-missmatch.png" alt="dashboard ct ip missmatch">
 </div>
 <div class="title">Abbildung 2. Anzeige eines Kartenterminals mit IP-Mismatch im Dashboard</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_ruhebildschirm_setzenabfragen"><a class="anchor" href="#_ruhebildschirm_setzenabfragen"></a>Ruhebildschirm setzen/abfragen</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Derzeit wird nur das nur ORGA 6141 online mit Firmware Version &gt;= 3.9.0 unterstützt.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Wird das Kartenterminal unterstützt, erscheint eine zusätzliche Zeile <em>Anzeige im Display</em> (auch "Ruhebildschirm" genannt) bei der Anzeige eines Kartenterminals. Cocard fragt den Wert nicht selbständig ab. die Abfrage erfolgt manuell mit dem Reload-Button.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/ct/card-terminal-show-idle-message.png" alt="card terminal show idle message">
+</div>
+<div class="title">Abbildung 3. Anzeige des Ruhebildschirms, sofern unterstützt</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Cocard zeigt hier nur den in Cocard gespeicherten und bekannten Wert ab.
+Ohne eine Änderung/Abfrage ist der Wert zunächst in Cocard leer. Verändert man später über die Weboberfläche des Kartenterminals manuell den Wert des Ruhebildschirms, bekommt Cocard das nicht automatisch mit. Die Werte können daher vom tatsächlichen Display abweichen. Im Zweifel einfach noch einmal den Reload-Button betätigen.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Für die Massenpflege von mehreren Kartenterminals gleichzeitig gibt es ein eigenes Formular (siehe <a href="../admin/idle-messages-edit.html" class="xref page">Kartenterminals: Ruhebildschirme setzen</a>).</p>
 </div>
 </div>
 </div>

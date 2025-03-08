@@ -1,0 +1,100 @@
+= Kartenterminals: Ruhebildschirme setzen
+:navtitle: Ruhebildschirme setzen
+:author: Wolfgang Barth
+:revdate: 2025-03-08
+:imagesdir: ../../images
+:experimental: true
+
+NOTE: Das Setzen der Displayanzeige - auch Ruhebildschirm genannt - wird derzeit nur für das Kartenterminal ORGA 6141 online mit einer Firmwareversion >= 3.9.0 unterstützt.
+
+Die Anzeige im Display des Kartenterminals kann man für Informationen nutzen, die im Supportfall zur einfachen Identifizierung des Kartenterminals und/oder der Umgebung führen.
+Ein Text also, den der Anwender bei Rückfrage am Telefon oder per E-Mail durchgeben kann. Das kann z.B. die Konnektor-Kurzbezeichnung sein, eine hausintern verwendete Inventarisierungsnummer oder ein sonstiges Kennzeichen.
+Zu beachten ist dabei lediglich, dass der Text nicht länger als 46 Zeichen lang sein darf und nicht alle Sonderzeichen möglich sind.
+
+Das Formular öffnet man über das Menü menu:Kartenterminals[Ruhebildschirme setzen]:
+
+image::ct/idle-messages-menu.png[]
+
+Das Formular selbst besteht aus zwei Abschnitten: einmal ein Feld zur Generierung des Wertes, zum anderen aus Filtern, die die Auswahl der Kartenterminals einschränken.
+
+image::ct/idle-messages-edit.png[]
+
+Zunächst zu den Filtern: die Auswahl erlaubt einen oder mehrere Konnektoren, die Standortwahl und die Auswahl einzelner Kartenterminals. Alle 3 Bedingungen werden UND-verknüpft, d.h. bei ungeeigneter Kombination kann die Ergebnismenge auch leer sein und kein einziges Kartenterminal wird aktualisiert.
+
+In das Feld _Anzeige im Display_ gibt man entweder einen einfachen Text ein, dieser wird dann in jedem Kartenterminal identisch gesetzt. Ein Anwendungsfall wäre etwa eine Information an die Anwender über einen länger andauernder Ausfall in der Telematik, z.B. ein Konnektorausfall, der ersetzt werden muss.
+
+Oder man verwendet für einen geräteabhängigen Text ein link:https://shopify.github.io/liquid/basics/introduction/[Liquid-Template]. Die möglichen Variablen werden im Formular in der Legende angezeigt (nicht im Screenshot enthalten). Das Ergebnis des Textes darf 46 Zeichen nicht überschreiten.
+
+Das Template im Screenshot bedeutet übersetzt:
+
+* Wenn das Kartenterminal mindestens eine SMC-B hat (`has_smcb?`), dann setzt sich der Text zusammen aus Kurznamen des Konnektors und den letzten 6 Zeichen seines Namens (in der Regel die Seriennummer bei Kocoboxen).
+* Andernfalls werden die letzten 6 Stellen der MAC-Adresse gesetzt (quasi eindeutige Inventarnummer zur Identifizierung des Gerätes).
+
+Das Template kann beliebig angepasst werden. Die zur Verfügung stehenden Variablen listet die folgende Tabelle auf:
+
+
+.Variablen für das Liquid-Template
+[%autowidth]
+|===
+|Variable | Typ | Beschreibung
+
+|has_smcb?
+|Boolean
+|Das Kartenterminal hat mindestens eine SMC-B eingebaut. Interessant für größere Umgebungen, bei denen die SMC-B in eigenen Kartenterminals verbaut werden, also nicht in den Kartenterminals, die der Anwender für eGK und HBA nutzt.
+
+|displayname
+|String
+|Anzeigename des Kartenterminals
+
+|location
+|String
+|Standortkürzel des Standortes des Kartenterminals
+
+|name
+|String
+|Name des Kartenterminals
+
+|ct_id
+|String
+|CT_ID, die der Konnektor für das Kartenterminal vergibt
+
+|mac
+|String
+|MAC-Adresse des Kartenterminals
+
+|ip
+|String
+|IP-Adresse des Kartenterminals
+
+|connector
+|String
+|Name des Konnektors, an dem das Kartenterminal angeschlossen ist.
+
+|connector_short_name
+|String
+|Kurzbezeichnung des Konnektors, an dem das Kartenterminal angeschlossen ist.
+
+|firmware_version
+|String
+|Firmware-Version
+
+|serial
+|String
+|Seriennummer des Kartenterminals. Die Seriennummer muss manuell gepflegt werden.
+
+|id_product
+|String
+|Modellbezeichnung - muss manuell gepflegt werden.
+
+|network
+|String
+|Zugeordnetes Netzwerk
+|===
+
+Nach dem Absenden des Formular erscheint zunächste eine leere Seite, auf der nach und nach die Einträge der bearbeiten Kartenterminals zur Info erscheinen.
+
+image::ct/idle-messages-index.png[]
+
+NOTE: Die entstandene Seite wird nicht gespeichert. Ein Reload führt zu einer neuen, aber leeren Seite!
+
+NOTE: Es gibt Situationen, in denen das Update des Ruhebildschirmes nicht klappt, aber trotzdem keine Warnung ausgegeben wird. Das lässt sich mit der aktuellen Implementierung (noch) nicht vermeiden.

@@ -13,7 +13,7 @@
         <%= render ConditionIconComponent.new(item: @connector) %>
       </div>
       <div role="toolbar" class="ms-auto pt-3">
-        <%= render Connector::RebootButtonComponent.new(connector: @connector) if can? :reboot, @connector %>
+        <%= render RebootButtonComponent.new(item: @connector) if can? :reboot, @connector %>
         <%= button_to(t('cocard.fetch_sds'),
                       fetch_sds_connector_path(@connector),
                       class: 'btn btn-warning me-1') if can? :manage, @connector 
@@ -52,6 +52,11 @@
           <tr>
             <th class="w-25 pe-3"><%= t('attributes.name')%>:</th>
             <td><%= @connector.name %></td>
+          </tr>
+
+          <tr>
+            <th class="w-25 pe-3"><%= t('attributes.short_name')%>:</th>
+            <td><%= @connector.short_name %></td>
           </tr>
 
           <tr>
