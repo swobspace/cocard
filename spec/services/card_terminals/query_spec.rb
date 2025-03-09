@@ -27,10 +27,17 @@ module CardTerminals
   end
 
   RSpec.describe Query do
-    let(:ts)  { Time.current }
+    let(:ts)  { Time.parse("2025-03-11 12:00:00") }
     let(:ber) { FactoryBot.create(:location, lid: 'BER') }
     let(:network) { FactoryBot.create(:network, netzwerk: '127.51.0.0/16', location: ber) }
-    let(:conn) { FactoryBot.create(:connector) }
+    let(:conn) { FactoryBot.create(:connector, name: 'TIK-127') }
+    let(:card) do
+      FactoryBot.create(:card, 
+        card_type: 'SMC-KT', 
+        iccsn: '802761234567',
+        expiration_date: '2025-11-27',
+      )
+    end
     let!(:ct1) do
       FactoryBot.create(:card_terminal, :with_mac,
         displayname: 'QUORA - test',
@@ -39,12 +46,16 @@ module CardTerminals
         ip: '127.51.100.17',
         current_ip: '127.51.100.17',
         condition: 0,
+        condition_message: "Condition Message",
+        idle_message: "Willkommen!",
         connected: true,
         firmware_version: '5.3.4',
         location: ber,
         supplier: 'ACME Ltd. International',
+        delivery_date: '2020-03-01',
         last_ok: ts,
         network: network,
+        pin_mode: :on_demand,
       )
     end
 
@@ -53,14 +64,16 @@ module CardTerminals
         name: 'KLG-CWZ-04',
         ip: '127.203.113.4',
         current_ip: '127.203.113.4',
+        idle_message: "Willkommen!",
         ct_id: 'CT_ID_0124',
         condition: 2,
         firmware_version: '4.9.3',
         mac: '11:22:33:44:55:66',
         supplier: 'ACME Ltd. International',
         connector: conn,
-        last_ok: ts,
+        last_ok: ts - 1.week,
         network: network,
+        pin_mode: :on_demand,
       )
     end
 
@@ -75,8 +88,16 @@ module CardTerminals
         contact: 'Dr.Who',
         plugged_in: 'Switch 17/4',
         supplier: 'ACME Ltd. International',
-        last_ok: ts,
+        last_ok: ts - 1.month,
         network: network,
+      )
+    end
+
+    let!(:card_slot) do
+      FactoryBot.create(:card_terminal_slot, 
+        slotid: 4,
+        card: card,
+        card_terminal: ct2
       )
     end
 
@@ -144,6 +165,15 @@ module CardTerminals
       it_behaves_like "a card_terminal query"
     end
 
+    context "with :connector" do
+      subject { Query.new(card_terminals, {connector: "tik"}) }
+      before(:each) do
+        @matching = [ct2]
+        @nonmatching = [ct1, ct3]
+      end
+      it_behaves_like "a card_terminal query"
+    end
+
     context "with :description" do
       subject { Query.new(card_terminals, {description: "more info"}) }
       before(:each) do
@@ -189,6 +219,24 @@ module CardTerminals
       it_behaves_like "a card_terminal query"
     end
 
+    context "with :last_ok" do
+      subject { Query.new(card_terminals, {last_ok: '2025-03'}) }
+      before(:each) do
+        @matching = [ct1, ct2]
+        @nonmatching = [ct3]
+      end
+      it_behaves_like "a card_terminal query"
+    end
+
+    context "with :delivery date" do
+      subject { Query.new(card_terminals, {delivery_date: '2020-03'}) }
+      before(:each) do
+        @matching = [ct1]
+        @nonmatching = [ct2, ct3]
+      end
+      it_behaves_like "a card_terminal query"
+    end
+
     context "with :lid" do
       subject { Query.new(card_terminals, {lid: 'ber'}) }
       before(:each) do
@@ -225,6 +273,24 @@ module CardTerminals
       it_behaves_like "a card_terminal query"
     end
 
+    context "with :condition_message" do
+      subject { Query.new(card_terminals, {condition_message: "Kein Konnektor zugewiesen"}) }
+      before(:each) do
+        @matching = [ct1, ct3]
+        @nonmatching = [ct2]
+      end
+      it_behaves_like "a card_terminal query"
+    end
+
+    context "with :idle_messsage" do
+      subject { Query.new(card_terminals, {idle_message: "willkommen"}) }
+      before(:each) do
+        @matching = [ct1, ct2]
+        @nonmatching = [ct3]
+      end
+      it_behaves_like "a card_terminal query"
+    end
+
     context "with :connected" do
       subject { Query.new(card_terminals, {connected: true}) }
       before(:each) do
@@ -239,6 +305,33 @@ module CardTerminals
       before(:each) do
         @matching = [ct2, ct3]
         @nonmatching = [ct1]
+      end
+      it_behaves_like "a card_terminal query"
+    end
+
+    context "with :pin_mode" do
+      subject { Query.new(card_terminals, {pin_mode: 'dema'}) }
+      before(:each) do
+        @matching = [ct1, ct2]
+        @nonmatching = [ct3]
+      end
+      it_behaves_like "a card_terminal query"
+    end
+
+    context "with :iccsn" do
+      subject { Query.new(card_terminals, {iccsn: '3456'}) }
+      before(:each) do
+        @matching = [ct2]
+        @nonmatching = [ct1, ct3]
+      end
+      it_behaves_like "a card_terminal query"
+    end
+
+    context "with :expiration_date" do
+      subject { Query.new(card_terminals, {expiration_date: '2025-11'}) }
+      before(:each) do
+        @matching = [ct2]
+        @nonmatching = [ct1, ct3]
       end
       it_behaves_like "a card_terminal query"
     end
