@@ -9,7 +9,7 @@ module CardTerminals
     # possible search options: see code, to much to list separately
     #
     # please note:
-    #   .left_outer_joins(:location)
+    #   .left_outer_joins(:location, :connector, card_terminal_slots: :card)
     # must exist in relation
     #
     def initialize(relation, search_options = {})
@@ -58,20 +58,22 @@ module CardTerminals
         when :description
           query = query.with_description_containing(value)
         when :condition
-          query = query.where(condition: value.to_i)
+          if value.to_s == value.to_i.to_s
+            query = query.where(condition: value.to_i)
+          else
+            query = query.where(condition: i18n_search(value, I18n.t('cocard.condition')))
+          end
         when :connected
           query = query.where(connected: to_boolean(value))
         when :connector
-          query = query.joins(:connector).where("connectors.name ILIKE ?", "%#{value}%")
+          query = query.where("connectors.name ILIKE ?", "%#{value}%")
         when :pin_mode
           query = query.where(pin_mode: i18n_search(value, I18n.t('pin_modes')))
         when :iccsn
-          query = query.joins(card_terminal_slots: :card)
-                       .where("cards.card_type = ?", 'SMC-KT')
+          query = query.where("cards.card_type = ?", 'SMC-KT')
                        .where("cards.iccsn ILIKE ?", "%#{value}%")
         when :expiration_date
-          query = query.joins(card_terminal_slots: :card)
-                       .where("cards.card_type = ?", 'SMC-KT')
+          query = query.where("cards.card_type = ?", 'SMC-KT')
                        .where("to_char(cards.expiration_date, 'YYYY-MM-DD') ILIKE ?", 
                               "%#{value}%")
         when :limit

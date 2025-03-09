@@ -235,6 +235,9 @@ GEM
     jsbundling-rails (1.3.1)
       railties (>= 6.0.0)
     json (2.10.1)
+    json_spec (1.1.5)
+      multi_json (~> 1.0)
+      rspec (>= 2.0, < 4.0)
     launchy (3.1.1)
       addressable (~> 2.8)
       childprocess (~> 5.0)
@@ -265,6 +268,7 @@ GEM
     mini_portile2 (2.8.8)
     minitest (5.25.4)
     msgpack (1.8.0)
+    multi_json (1.15.0)
     mutex_m (0.3.0)
     nenv (0.3.0)
     net-http (0.6.0)
@@ -503,6 +507,7 @@ DEPENDENCIES
   image_processing (~> 1.2)
   immutable_struct (~> 1.2)
   jsbundling-rails
+  json_spec
   launchy
   liquid (~> 5.5)
   net-ping (~> 2.0)

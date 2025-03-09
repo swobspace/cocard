@@ -73,7 +73,7 @@ gem "wobauth", git: "https://github.com/swobspace/wobauth.git", branch: "master"
 group :test, :development do
   gem 'rspec-rails'
   gem 'dotenv'
-  # gem 'json_spec', require: false
+  gem 'json_spec', require: false
 end
 
 group :test do

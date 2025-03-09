@@ -101,7 +101,7 @@ module CardTerminals
       )
     end
 
-    let(:card_terminals) { CardTerminal.left_outer_joins(:location).all }
+    let(:card_terminals) { CardTerminal.left_outer_joins(:location, :connector, card_terminal_slots: :card).all }
 
     # check for class methods
     it { expect(Query.respond_to? :new).to be_truthy}
@@ -264,8 +264,17 @@ module CardTerminals
       it_behaves_like "a card_terminal query"
     end
 
-    context "with :condition" do
+    context "with :condition 0" do
       subject { Query.new(card_terminals, {condition: 1}) }
+      before(:each) do
+        @matching = [ct2]
+        @nonmatching = [ct1, ct3]
+      end
+      it_behaves_like "a card_terminal query"
+    end
+
+    context "with :condition 0" do
+      subject { Query.new(card_terminals, {condition: "WARN"}) }
       before(:each) do
         @matching = [ct2]
         @nonmatching = [ct1, ct3]
