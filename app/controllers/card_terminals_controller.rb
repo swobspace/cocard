@@ -19,6 +19,7 @@ class CardTerminalsController < ApplicationController
     end
     @card_terminals = @card_terminals
                       .left_outer_joins(:location, :connector, card_terminal_slots: :card)
+                      .distinct
     respond_with(@card_terminals) do |format|
       format.json { render json: CardTerminalsDatatable.new(@card_terminals, view_context) }
     end

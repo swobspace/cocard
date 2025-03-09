@@ -256,7 +256,7 @@ module CardTerminals
     end
 
     context "with :mac" do
-      subject { Query.new(card_terminals, {mac: '22:33:44:'}) }
+      subject { Query.new(card_terminals, {mac: '223344'}) }
       before(:each) do
         @matching = [ct2]
         @nonmatching = [ct1, ct3]
@@ -389,6 +389,7 @@ module CardTerminals
 
         it "searches for mac" do
           search = Query.new(card_terminals, {search: '22:33:44'})
+          puts CardTerminal.pluck(:mac)
           expect(search.all).to contain_exactly(ct2)
         end
 

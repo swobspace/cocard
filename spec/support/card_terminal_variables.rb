@@ -35,7 +35,6 @@ shared_context "card_terminal variables" do
   let!(:ct2) do
     FactoryBot.create(:card_terminal,
       displayname: 'KLG ct2',
-      ct_id: 'CT_ID_0002',
       name: 'KLG-CWZ-04',
       ip: '127.203.113.4',
       current_ip: '127.203.113.4',

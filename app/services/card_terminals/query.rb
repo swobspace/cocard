@@ -48,11 +48,13 @@ module CardTerminals
         when *string_fields
           query = query.where("card_terminals.#{key} ILIKE ?", "%#{value}%")
         when *cast_fields
-          query = query.where("CAST(card_terminals.#{key} AS VARCHAR) ILIKE ?", "%#{value}%")
+          query = query.where("replace(card_terminals.#{key}::varchar, ':', '') ILIKE ?",
+                              "%#{value}%")
         when *id_fields
           query = query.where(key.to_sym => value)
         when *date_fields
-          query = query.where("to_char(card_terminals.#{key}, 'YYYY-MM-DD') ILIKE ?", "%#{value}%")
+          query = query.where("to_char(card_terminals.#{key}, 'YYYY-MM-DD') ILIKE ?",
+                              "%#{value}%")
         when :lid
           query = query.where("locations.lid ILIKE ?", "%#{value}%")
         when :description
