@@ -42,12 +42,15 @@ shared_context "card_terminal variables" do
       ct_id: 'CT_ID_0124',
       condition: 2,
       firmware_version: '4.9.3',
+      serial: 'SERIAL12345',
+      id_product: 'IdProduct',
       mac: '11:22:33:44:55:66',
       supplier: 'ACME Ltd. International',
       connector: conn,
       last_ok: ts - 1.week,
       network: network,
       pin_mode: :on_demand,
+      delivery_date: '2020-03-07',
     )
   end
 
