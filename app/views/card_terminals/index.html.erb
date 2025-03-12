@@ -4,7 +4,7 @@
 
 <div id="card_terminals">
   <div data-controller="datatables"
-       data-datatables-url-value="<%= card_terminals_path(format: :json)%>">
+       data-datatables-url-value="<%= card_terminals_path((@filter|| {}).merge(format: :json))%>">
     <%= content_tag :table, role: :datatable,
           id: "card_terminals_table",
           class: "table table-bordered table-responsive",

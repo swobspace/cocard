@@ -78,6 +78,10 @@ module CardTerminals
           query = query.where("cards.card_type = ?", 'SMC-KT')
                        .where("to_char(cards.expiration_date, 'YYYY-MM-DD') ILIKE ?", 
                               "%#{value}%")
+        when :acknowledged
+          query = query.acknowledged
+        when :with_smcb
+          query = query.where("cards.card_type = 'SMC-B'")
         when :limit
           @limit = value.to_i
         when :search
