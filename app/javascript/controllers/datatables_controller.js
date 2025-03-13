@@ -161,10 +161,12 @@ export default class extends Controller {
     let _this = this
     dtable.on('column-visibility.dt', function (e, settings, column, state) {
       if (state) {
-        let th = e.target.querySelector('tfoot th[data-dt-column="' + column + '"]')
-        let sf = th.querySelector('input')
-        if (!sf) {
-          th.insertAdjacentHTML('afterbegin', _this.searchField(column, ''))
+        let th = e.target.querySelector('tfoot th[data-dt-column="' + column + '"]:not(.nosearch)')
+        if (th) {
+	  let sf = th.querySelector('input')
+	  if (!sf) {
+	    th.insertAdjacentHTML('afterbegin', _this.searchField(column, ''))
+	  }
         }
         $('input[name=idx'+column+']').on( 'keyup change', function() {
           dtable.column(column).search(this.value).draw()
