@@ -69,6 +69,7 @@ shared_context "card_terminal variables" do
       supplier: 'ACME Ltd. International',
       last_ok: ts - 1.month,
       network: network,
+      connector: conn,
     )
   end
 

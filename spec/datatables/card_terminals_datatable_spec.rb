@@ -44,8 +44,9 @@ RSpec.describe CardTerminalsDatatable, type: :model do
   include_context "card_terminal variables"
 
   let(:view_context) { double("ActionView::Base") }
-  let(:card_terminals) do
+  let(:card_terminals) do 
     CardTerminal.left_outer_joins(:location, :connector, card_terminal_slots: :card)
+                .distinct
   end
   let(:datatable)    { CardTerminalsDatatable.new(card_terminals, view_context) }
   let(:myparams)  {{}}
@@ -96,9 +97,9 @@ RSpec.describe CardTerminalsDatatable, type: :model do
     it { expect(parse_json(subject, "data/0")).to eq(card_terminal2array(ct3)) }
   end 
 
-  describe "column 0: condition, search: OK" do
+  describe "column 0: condition, search: WARNING" do
     let(:myparams) { ActiveSupport::HashWithIndifferentAccess.new(
-      columns: {"0"=> {search: {value: "NOTHING", regex: "false"}}},
+      columns: {"0"=> {search: {value: "WARNING", regex: "false"}}},
       order: {"0"=>{column: "2", dir: "asc"}},
       start: "0",
       length: "10",
@@ -108,7 +109,7 @@ RSpec.describe CardTerminalsDatatable, type: :model do
     it { expect(datatable).to be_a_kind_of CardTerminalsDatatable }
     it { expect(parse_json(subject, "recordsTotal")).to eq(3) }
     it { expect(parse_json(subject, "recordsFiltered")).to eq(2) }
-    it { expect(parse_json(subject, "data/0")).to eq(card_terminal2array(ct1)) }
+    it { expect(parse_json(subject, "data/0")).to eq(card_terminal2array(ct2)) }
     it { expect(parse_json(subject, "data/1")).to eq(card_terminal2array(ct3)) }
   end 
 
@@ -123,9 +124,8 @@ RSpec.describe CardTerminalsDatatable, type: :model do
     subject { datatable.to_json }
     it { expect(datatable).to be_a_kind_of CardTerminalsDatatable }
     it { expect(parse_json(subject, "recordsTotal")).to eq(3) }
-    it { expect(parse_json(subject, "recordsFiltered")).to eq(2) }
+    it { expect(parse_json(subject, "recordsFiltered")).to eq(1) }
     it { expect(parse_json(subject, "data/0")).to eq(card_terminal2array(ct1)) }
-    it { expect(parse_json(subject, "data/1")).to eq(card_terminal2array(ct3)) }
   end 
 
   describe "column 2: display name " do
@@ -162,6 +162,7 @@ RSpec.describe CardTerminalsDatatable, type: :model do
   describe "column 4: connector.name" do
     let(:myparams) { ActiveSupport::HashWithIndifferentAccess.new(
       columns: {"4"=> {search: {value: "127", regex: "false"}}},
+      order: {"0"=>{column: "4", dir: "asc"}},
       start: "0",
       length: "10",
       search: {value: "", regex: "false"}
@@ -169,11 +170,12 @@ RSpec.describe CardTerminalsDatatable, type: :model do
     subject { datatable.to_json }
     it { expect(datatable).to be_a_kind_of CardTerminalsDatatable }
     it { expect(parse_json(subject, "recordsTotal")).to eq(3) }
-    it { expect(parse_json(subject, "recordsFiltered")).to eq(1) }
+    it { expect(parse_json(subject, "recordsFiltered")).to eq(2) }
     it { expect(parse_json(subject, "data/0")).to eq(card_terminal2array(ct2)) }
+    it { expect(parse_json(subject, "data/1")).to eq(card_terminal2array(ct3)) }
   end 
 
-  describe "column 5: connector.name" do
+  describe "column 5: name" do
     let(:myparams) { ActiveSupport::HashWithIndifferentAccess.new(
       columns: {"5"=> {search: {value: "CWZ", regex: "false"}}},
       order: {"0"=>{column: "5", dir: "asc"}},
@@ -239,6 +241,7 @@ RSpec.describe CardTerminalsDatatable, type: :model do
   describe "column 9: lid" do
     let(:myparams) { ActiveSupport::HashWithIndifferentAccess.new(
       columns: {"9"=> {search: {value: "BER", regex: "false"}}},
+      order: {"0"=>{column: "9", dir: "asc"}},
       start: "0",
       length: "10",
       search: {value: "", regex: "false"}
@@ -421,7 +424,7 @@ RSpec.describe CardTerminalsDatatable, type: :model do
   describe "column 21: iccsn" do
     let(:myparams) { ActiveSupport::HashWithIndifferentAccess.new(
       columns: {"21"=> {search: {value: "802761234567", regex: "false"}}},
-      order: {"0"=>{column: "5", dir: "asc"}},
+      order: {"0"=>{column: "4", dir: "asc"}},
       start: "0",
       length: "10",
       search: {value: "", regex: "false"}
@@ -436,7 +439,7 @@ RSpec.describe CardTerminalsDatatable, type: :model do
   describe "column 22: expiration_date" do
     let(:myparams) { ActiveSupport::HashWithIndifferentAccess.new(
       columns: {"22"=> {search: {value: "2025-11", regex: "false"}}},
-      order: {"0"=>{column: "5", dir: "asc"}},
+      order: {"0"=>{column: "4", dir: "asc"}},
       start: "0",
       length: "10",
       search: {value: "", regex: "false"}

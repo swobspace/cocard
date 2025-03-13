@@ -73,14 +73,17 @@ class CardTerminalsDatatable < ApplicationDatatable
     else
       terminals = relation
     end
-    terminals = CardTerminals::Query.new(terminals, search_params(params, search_columns)).all
+    terminals = CardTerminals::Query.new(terminals,
+                                         search_params(params, search_columns)
+                                        ).all.distinct
   end
 
   def fetch_card_terminals
     if params['length'] == "-1"
       card_terminals = card_terminals_query
     else
-      @pagy, card_terminals = pagy(card_terminals_query, page: page, limit: per_page)
+      # @pagy, card_terminals = pagy(card_terminals_query, count: total_entries, page: page, limit: per_page)
+      card_terminals = card_terminals_query.offset((page - 1)*per_page).limit(per_page)
     end
     card_terminals
   end
@@ -90,12 +93,12 @@ class CardTerminalsDatatable < ApplicationDatatable
         card_terminals.condition_message
         card_terminals.displayname
         card_terminals.ct_id
-        connectors.name
+        card_terminals.connector_id
         card_terminals.name
         card_terminals.mac
         card_terminals.ip
         card_terminals.connected
-        locations.lid
+        card_terminals.location_id
         card_terminals.room
         card_terminals.plugged_in
         card_terminals.contact
@@ -107,8 +110,8 @@ class CardTerminalsDatatable < ApplicationDatatable
         card_terminals.firmware_version
         ""
         card_terminals.pin_mode
-        cards.iccsn
-        cards.expiration_date
+        ""
+        ""
         card_terminals.updated_at
         card_terminals.last_ok
       ]
