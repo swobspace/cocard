@@ -1,9 +1,9 @@
 = Changelog
 
-== 0.7.3 - unreleased
+== 0.7.3 - 2025-03-14
 
-* Übersicht Kartenterminals: Performance bei großer Anzahl von Terminals verbessert
-  (umgestellt auf server side processing)
+* Übersicht Kartenterminals: Performance bei großer Anzahl von Terminals 
+  verbessert (umgestellt auf server side processing)
 
 == 0.7.2 - 2025-03-08
 
