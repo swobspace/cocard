@@ -1,6 +1,8 @@
 import { Controller } from "@hotwired/stimulus"
 
 import '../src/datatables-bs5'
+import DataTable from 'datatables.net';
+
 
 export default class extends Controller {
   static values = {
@@ -20,10 +22,12 @@ export default class extends Controller {
     let dtOptions = {}
     this.compileOptions(dtOptions)
 
-    const table = $(this.element.querySelector('table'))
-    console.log(table[0].id)
-    // prepare options
-    let dtable = $(table).DataTable(dtOptions)
+    const table = this.element.querySelector('table')
+    // console.log(table)
+
+    // initialize datatable
+    let dtable = new DataTable(table, dtOptions)
+    // console.log(dtable.page.info().serverSide)
 
     // catch column visibility change
     this.colvis_change_listener(dtable)
@@ -49,7 +53,6 @@ export default class extends Controller {
 
   // search fields for each column
   setInputFields(dtable) {
-    // console.log(dtable.tables(0).columns)
     this.element.querySelectorAll("table tfoot th:not([class='nosearch'])")
         .forEach((th, idx) => {
           let col = th.getAttribute("data-dt-column")
@@ -160,6 +163,7 @@ export default class extends Controller {
   }
 
   colvis_change_listener(dtable) {
+    const search = this.createSearchWithDebounce(dtable)
     let _this = this
     dtable.on('column-visibility.dt', function (e, settings, column, state) {
       if (state) {
@@ -171,19 +175,37 @@ export default class extends Controller {
 	  }
         }
         $('input[name=idx'+column+']').on( 'keyup change', function() {
-          dtable.column(column).search(this.value).draw()
+          search(column, this.value)
         })
       }
     })
   }
 
   process_search_input(dtable) {
-    // process search input
+    const search = this.createSearchWithDebounce(dtable)
     dtable.columns().eq(0).each((colIdx) => {
       $('input[name=idx'+colIdx+']').on( 'keyup change', function() {
-	dtable.column(colIdx).search(this.value).draw()
+	search(colIdx, this.value)
       })
     })
+  }
+
+  createSearchWithDebounce(dtable, delay = 400) {
+    if (!dtable || !dtable.column || !dtable.column().search || !dtable.draw || !DataTable.util.debounce) {
+      console.error("Invalid DataTable instance or missing debounce utility.");
+      return null
+    }
+    let search;
+    if (dtable.page.info().serverSide) {
+      search = DataTable.util.debounce(function (col, val) {
+	               dtable.column(col).search(val).draw()
+                     }, delay)
+    } else {
+      search = function (col, val) {
+	               dtable.column(col).search(val).draw()
+                     }
+    }
+    return search
   }
 
   languageOptions(options) {
