@@ -75,6 +75,7 @@ export default class extends Controller {
     // common options
     options.pagingType = "full_numbers"
     options.responsive = true
+    options.retrieve = true
     options.stateSave = true
     options.stateDuration = 60 * 60 * 24
     options.lengthMenu = [10, 25, 100, 250, 1000, { label: 'Alle', value: -1}]
