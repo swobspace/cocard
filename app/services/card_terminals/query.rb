@@ -6,20 +6,10 @@ module CardTerminals
     attr_reader :search_options, :query
 
     ##
-    # possible search options:
-    # * :name - string
-    # * :description - string
-    # * :ip - string
-    # * :condition - integer
-    # * :connected - boolean
-    # * :firmware_version - string
-    # * :lid - string
-    # * :search - string
-    # * :id - integer
-    # * :limit - limit result (integer)
+    # possible search options: see code, to much to list separately
     #
     # please note:
-    #   .left_outer_joins(:location)
+    #   .left_outer_joins(:location, :connector, card_terminal_slots: :card)
     # must exist in relation
     #
     def initialize(relation, search_options = {})
@@ -58,17 +48,40 @@ module CardTerminals
         when *string_fields
           query = query.where("card_terminals.#{key} ILIKE ?", "%#{value}%")
         when *cast_fields
-          query = query.where("CAST(card_terminals.#{key} AS VARCHAR) ILIKE ?", "%#{value}%")
+          query = query.where("replace(card_terminals.#{key}::varchar, ':', '') ILIKE ?",
+                              "%#{value}%")
         when *id_fields
           query = query.where(key.to_sym => value)
+        when *date_fields
+          query = query.where("to_char(card_terminals.#{key}, 'YYYY-MM-DD') ILIKE ?",
+                              "%#{value}%")
         when :lid
           query = query.where("locations.lid ILIKE ?", "%#{value}%")
         when :description
           query = query.with_description_containing(value)
         when :condition
-          query = query.where(condition: value.to_i)
+          if value.to_s == value.to_i.to_s
+            query = query.where(condition: value.to_i)
+          else
+            query = query.where(condition: i18n_search(value, I18n.t('cocard.condition')))
+          end
         when :connected
           query = query.where(connected: to_boolean(value))
+        when :connector
+          query = query.where("connectors.name ILIKE ?", "%#{value}%")
+        when :pin_mode
+          query = query.where(pin_mode: i18n_search(value, I18n.t('pin_modes')))
+        when :iccsn
+          query = query.where("cards.card_type = ?", 'SMC-KT')
+                       .where("cards.iccsn ILIKE ?", "%#{value}%")
+        when :expiration_date
+          query = query.where("cards.card_type = ?", 'SMC-KT')
+                       .where("to_char(cards.expiration_date, 'YYYY-MM-DD') ILIKE ?", 
+                              "%#{value}%")
+        when :acknowledged
+          query = query.acknowledged
+        when :with_smcb
+          query = query.where("cards.card_type = 'SMC-B'")
         when :limit
           @limit = value.to_i
         when :search
@@ -101,8 +114,16 @@ module CardTerminals
     end
 
     def string_fields
-      [ :displayname, :room, :contact, :plugged_in, :supplier, :serial, :id_product,
-        :name, :ct_id, :firmware_version ]
+      [ :displayname, :name, :condition_message, 
+        :room, :contact, :plugged_in, 
+        :supplier, :serial, :id_product, :idle_message,
+        :ct_id, :firmware_version, 
+      ]
+    end
+
+    def date_fields
+      [ :delivery_date, :last_ok, :updated_at
+      ]
     end
 
     def id_fields
@@ -114,5 +135,16 @@ module CardTerminals
       return false if ['nein', 'false', '0', 'no', 'off', 'f'].include?(value.to_s.downcase)
       return nil
     end
+
+    # example: i18n_search('On Demand', I18n.t('pin_mode')) => 'on_demand'
+    def i18n_search(value, translation = {})
+      result = []
+      translation.each_pair do |k,v|
+        if (v =~ /#{value}/i) || value == k.to_s
+          result << ((k == :notset) ? '' : k)
+        end
+      end
+      result
+    end   
   end
 end

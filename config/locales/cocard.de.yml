@@ -36,7 +36,7 @@ de:
     import_options: Import-Optionen
     import_csv: CSV-Datei importieren
     condition:
-      -1: '-'
+      -1: NOTHING
       0: OK
       1: WARNING
       2: CRITICAL

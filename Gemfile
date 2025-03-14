@@ -73,7 +73,7 @@ gem "wobauth", git: "https://github.com/swobspace/wobauth.git", branch: "master"
 group :test, :development do
   gem 'rspec-rails'
   gem 'dotenv'
-  # gem 'json_spec', require: false
+  gem 'json_spec', require: false
 end
 
 group :test do
@@ -98,7 +98,7 @@ gem "immutable_struct", "~> 1.2"
 
 gem "net-ping", "~> 2.0"
 
-gem "good_job", "~> 4.8.1"
+gem "good_job", "~> 4.9.3"
 
 gem "acts_as_list", "~> 1.1"
 

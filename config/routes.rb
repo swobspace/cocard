@@ -49,6 +49,9 @@ Rails.application.routes.draw do
     end
     resources :notes, module: :cards
   end
+
+  post "card_terminals", to: "card_terminals#index", 
+                         constraints: lambda {|req| req.format == :json}
   resources :card_terminals do
     resources :logs, only: [:index, :show, :destroy], module: :card_terminals
     collection do

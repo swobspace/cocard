@@ -13,19 +13,19 @@ require 'view_component/test_helpers'
 require 'capybara/rspec'
 
 Capybara.register_driver :chrome_headless do |app|
-  url = "http://#{ENV['SELENIUM_REMOTE_HOST']}:4444/wd/hub"
+  # url = "http://#{ENV['SELENIUM_REMOTE_HOST']}:4444/wd/hub"
   options = Selenium::WebDriver::Chrome::Options.new
 
   options.add_argument("--headless")
   options.add_argument("--no-sandbox")
   options.add_argument("--disable-dev-shm-usage")
-  options.add_argument("--window-size=1280x1280")
+  options.add_argument("--window-size=2400,1600")
   # options.add_argument("disable-gpu")
 
   Capybara::Selenium::Driver.new(
     app,
-    browser: :remote,
-    url: url,
+    browser: :chrome,
+    # url: url,
     options: options
   )
 end
@@ -89,7 +89,6 @@ RSpec.configure do |config|
     session_server       = Capybara.current_session.server
     Capybara.app_host    = "http://#{session_server.host}:#{session_server.port}"
   end
-
 
   config.after(:suite) do
     ActiveStorage::Blob.unattached.each(&:purge)

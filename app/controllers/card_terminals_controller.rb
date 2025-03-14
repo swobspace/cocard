@@ -10,14 +10,20 @@ class CardTerminalsController < ApplicationController
       @card_terminals = @locatable.card_terminals
     elsif params[:acknowledged]
       @card_terminals = CardTerminal.acknowledged
+      @filter = { acknowledged: 1 }
     elsif params[:with_smcb]
       @card_terminals = CardTerminal.joins(:cards)
                                     .where("cards.card_type = 'SMC-B'")
-                                    .distinct
+      @filter = { with_smcb: 1 }
     else
       @card_terminals = CardTerminal.all
     end
-    respond_with(@card_terminals)
+    @card_terminals = @card_terminals
+                      .left_outer_joins(:location, :connector, card_terminal_slots: :card)
+                      .distinct
+    respond_with(@card_terminals) do |format|
+      format.json { render json: CardTerminalsDatatable.new(@card_terminals, view_context) }
+    end
   end
 
   def sindex
