@@ -2,7 +2,7 @@
 
 class TI::LagebildAlertButtonComponent < ViewComponent::Base
   def initialize
-    @failed_count = SinglePicture.failed.count
+    @failed_count = SinglePicture.active.current.failed.count
     failure_group_ids = SinglePicture
                         .active.current.failed
                         .select(:pdt, :tid)
