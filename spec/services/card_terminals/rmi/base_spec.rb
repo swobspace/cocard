@@ -47,7 +47,7 @@ module CardTerminals::RMI
       it { expect(subject.valid).to be_truthy }
 
       describe "#rmi" do
-        it { expect(subject.rmi).to eq(CardTerminals::RMI::OrgaV1) }
+        it { expect(subject.rmi).to be_kind_of(CardTerminals::RMI::OrgaV1) }
       end
     end
 

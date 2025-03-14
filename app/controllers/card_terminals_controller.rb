@@ -84,12 +84,14 @@ class CardTerminalsController < ApplicationController
   end
 
   def update_idle_message
-    rmi = CardTerminals::RMI::Base.new(card_terminal: @card_terminal)
-    _rmi = rmi.rmi.new(card_terminal: @card_terminal)
-    _rmi.set_idle_message(idle_message_params['idle_message'])
-    _rmi.get_idle_message
-    @card_terminal.update(idle_message: _rmi.result['idle_message'])
-    @card_terminal.reload
+    _rmi = CardTerminals::RMI::Base.new(card_terminal: @card_terminal)
+    if (_rmi.valid)
+      rmi = _rmi.rmi
+      rmi.set_idle_message(idle_message_params['idle_message'])
+      rmi.get_idle_message
+      @card_terminal.update(idle_message: rmi.result['idle_message'])
+      @card_terminal.reload
+    end
     # redirect_to @card_terminal
     render turbo_stream: [
       turbo_stream.replace(@card_terminal, partial: "card_terminals/show",
@@ -100,8 +102,8 @@ class CardTerminalsController < ApplicationController
 
   def reboot
     if @card_terminal.rebootable?
-      rmi = CardTerminals::RMI::Base.new(card_terminal: @card_terminal)
-      result = rmi.rmi.new(card_terminal: @card_terminal).reboot
+      rmi = CardTerminals::RMI::Base.new(card_terminal: @card_terminal).rmi
+      result = rmi.reboot
       if result['result'] == 'success'
         flash[:success] = "Reboot gestartet"
       else

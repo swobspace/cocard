@@ -190,8 +190,8 @@ RSpec.describe CardTerminalConcerns, type: :model do
         )
       end
       it "supports_rmi? is true" do
-        expect(ct).to receive(:product_information).and_return(product_information)
-        expect(product_information).to receive(:product_code).and_return('ORGA6100')
+        expect(ct).to receive(:product_information).at_least(:once).and_return(product_information)
+        expect(product_information).to receive(:product_code).at_least(:once).and_return('ORGA6100')
         expect(ct.supports_rmi?).to be_truthy
       end
     end
