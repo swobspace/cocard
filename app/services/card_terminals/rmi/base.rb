@@ -30,7 +30,7 @@ module CardTerminals
         pc = card_terminal.product_information&.product_code
         fw = card_terminal.firmware_version
         if pc == "ORGA6100" && fw >= '3.9.0'
-           [true, CardTerminals::RMI::OrgaV1]
+           [true, CardTerminals::RMI::OrgaV1.new(card_terminal: card_terminal)]
         else
            @messages << "CardTerminal #{pc} with firmware #{fw} is not supported"
            [false, nil]

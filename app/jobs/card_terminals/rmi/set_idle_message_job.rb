@@ -23,11 +23,10 @@ module CardTerminals
         else
           @prefix = "SetIdleMessage:: card_terminal #{card_terminal}:: ".freeze
           if check_requirements(card_terminal)
-            _rmi = @rmi.new(card_terminal: card_terminal)
             idle_message = prepare_message(card_terminal, idle_message)
-              _rmi.set_idle_message(idle_message)
+              @rmi.set_idle_message(idle_message)
    
-            if _rmi.result['result'] == 'failure'
+            if @rmi.result['result'] == 'failure'
               Rails.logger.warn("WARN:: #{card_terminal} - " +
                                 "could not set idle_message #{idle_message}")
               Turbo::StreamsChannel.broadcast_prepend_to(
