@@ -27,7 +27,7 @@ RSpec.describe "/cards", type: :request do
 
   describe "GET /show" do
     it "renders a successful response" do
-      card = Card.create! valid_attributes
+      card = Card.create! valid_attributes.merge({card_type: 'SMC-B'})
       get card_url(card)
       expect(response).to be_successful
       expect(flash[:notice]).to match(/Es ist noch kein Kontext zugeordnet!/)
