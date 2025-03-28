@@ -1,6 +1,6 @@
 <%= render 'shared/turbo-cache-control' %>
 
-<%= turbo_frame_tag :card_terminals_list, refresh: "morph" do %>
+<%# turbo_frame_tag :card_terminals_list, refresh: "morph" do %>
   <div data-controller="datatables">
     <%= content_tag :table, role: :datatable,
           id: "card_terminals_subtable",
@@ -65,4 +65,4 @@
       </tbody>
     <% end %>
   </div>
-<% end %>
+<%# end %>
