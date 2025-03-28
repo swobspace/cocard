@@ -14,10 +14,12 @@ export default class extends Controller {
   }
 
   connect() {
-    // overcome morph problems
-    this.element.setAttribute("data-action",
-                              "turbo:morph-element->datatables#reconnect"
-                             )
+    // datatables doesn't really work with morph
+    // set turbo-refresh-method to replace on each page with datatables
+    // otherwise leave turbo-refresh-method untouched
+    const turborefresh = document.querySelector('head meta[name="turbo-refresh-method"]')
+    turborefresh.setAttribute("content", "replace")
+
     let _this = this
     let dtOptions = {}
     this.compileOptions(dtOptions)
@@ -155,12 +157,6 @@ export default class extends Controller {
         request.setRequestHeader("X-CSRF-Token", token)
       }
     }
-  }
-
-  // fix morph problems
-  reconnect() {
-    this.disconnect()
-    this.connect()
   }
 
   colvis_change_listener(dtable) {
