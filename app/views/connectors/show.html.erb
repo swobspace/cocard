@@ -1,4 +1,5 @@
 <%= turbo_stream_from @connector %>
+<%= turbo_frame_tag @connector, refresh: :morph do %>
 <div class="card mb-3" id="<%= dom_id(@connector) %>">
   <div class="card-header">
     <div class="d-flex w-100">
@@ -226,6 +227,7 @@
     </div>
   </div>
 </div>
+<% end %>
 
 <%= back_link %>
 <%= new_link Connector %>

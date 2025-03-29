@@ -2,7 +2,9 @@
 
 <%= turbo_stream_from @card_terminal %>
 
-<%= render partial: 'show', locals: { card_terminal: @card_terminal } %>
+<%= turbo_frame_tag @card_terminal, refresh: :morph do %>
+  <%= render partial: 'show', locals: { card_terminal: @card_terminal } %>
+<% end %>
 
 <%= back_link %>
 
