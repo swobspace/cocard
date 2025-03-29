@@ -1,4 +1,4 @@
-<%= turbo_frame_tag('notes') do %>
+<%= turbo_frame_tag('side_notes') do %>
   <% if @notes.size > 0 %>
     <%= render partial: 'postit', collection: @notes, as: :note %>
   <% end %>

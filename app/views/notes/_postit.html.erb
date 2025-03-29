@@ -4,16 +4,23 @@
 
   <div class="">
     <% if note.type == 'acknowledge' %>
-      <i class="fa-solid fa-person-digging" title="Acknowledge"></i>
+      <%= link_to polymorphic_path([note.notable, note]), 
+          class: 'primary-link', data: {"turbo-frame": "modal"} do %>
+        <i class="fa-solid fa-person-digging" title="Acknowledge"></i>
+      <% end %>
     <% else %>
-      <i class="fa-solid fa-clipboard" title="Notiz"></i>
+      <%= link_to polymorphic_path([note.notable, note]), 
+                  class: 'primary-link', 
+                  data: {"turbo-frame": "modal"} do %>
+        <i class="fa-solid fa-clipboard" title="Notiz"></i>
+      <% end %>
     <% end %>
     <%= link_to note.notable, note.notable,
         class: 'primary-link', "data-turbo-frame": '_top' %>
   </div>
 
   <div>
-    <%= truncate(note.message.to_plain_text, length: 80) %>
+    <%= truncate(note.message.to_plain_text, length: 200) %>
   </div>
 
   <div class="d-flex justify-content-xl-between">
@@ -24,6 +31,13 @@
     <div class="text-black-50 text-end">
       <%= render IsCurrentComponent.new(item: note, attr: :created_at,
                                         relative: true, icon: false )%>
+      <% if note.user == current_user %>
+        <%= link_to edit_polymorphic_path([note.notable, note]),
+                    class: 'primary-link', 
+                    data: {"turbo-frame": "modal"} do %>
+          <i class="fa-solid fa-pencil" title="Edit"></i>
+        <% end %>
+      <% end %>
     </div>
   </div>
 
