@@ -1,68 +1,66 @@
 <%= render 'shared/turbo-cache-control' %>
 
-<%# turbo_frame_tag :card_terminals_list, refresh: "morph" do %>
-  <div data-controller="datatables">
-    <%= content_tag :table, role: :datatable,
-          id: "card_terminals_subtable",
-          class: "table table-sm table-responsive",
-          data: {
-            'datatables-target': 'datatable',
-            order: [[0, 'asc']].to_json
-          } do %>
-      <thead>
-        <tr>
-              <th class="text-center"><%= t('attributes.condition') %></th>
-              <th><%= t('attributes.displayname') %></th>
-              <th class="notvisible"><%= t('attributes.connector') %></th>
-              <th><%= t('attributes.ct_id') %></th>
-              <th><%= t('attributes.mac') %></th>
-              <th><%= t('attributes.serial') %></th>
-              <th><%= t('attributes.ip') %></th>
-              <th><%= t('attributes.connected') %></th>
-              <th><%= t('attributes.location') %></th>
-              <th><%= t('attributes.room') %></th>
-              <th><%= t('attributes.plugged_in') %></th>
-        </tr>
-      </thead>
-      <tfoot class="search">
-        <tr>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-        </tr>
-      </tfoot>
-      <tbody>
-        <% card_terminals.each do |card_terminal| %>
-          <%= content_tag(:tr, id: dom_id(card_terminal), class: dom_class(card_terminal)) do %>
-            <td class="text-center">
-              <%= render ConditionIconComponent.new(item: card_terminal, small: true) %>
-              <span style="visibility:hidden;"><%= card_terminal.condition %></span>
-            </td>
-            <td><%= card_terminal.displayname %></td>
-            <td><%= render LinkToComponent.new(item: card_terminal.connector) %></td>
-            <td><%= link_to card_terminal.ct_id, 
-                            card_terminal_path(card_terminal),
-                            class: 'primary-link',
-                            "data-turbo-frame": '_top'
-                 %></td>
-            <td><%= card_terminal.mac %></td>
-            <td><%= card_terminal.serial %></td>
-            <td><%= card_terminal.ip %></td>
-            <td><%= card_terminal.connected %></td>
-            <td><%= card_terminal.location&.lid %></td>
-            <td><%= card_terminal.room %></td>
-            <td><%= card_terminal.plugged_in %></td>
-          <% end %>
+<div data-controller="datatables">
+  <%= content_tag :table, role: :datatable,
+        id: "card_terminals_subtable",
+        class: "table table-sm table-responsive",
+        data: {
+          'datatables-target': 'datatable',
+          order: [[0, 'asc']].to_json
+        } do %>
+    <thead>
+      <tr>
+            <th class="text-center"><%= t('attributes.condition') %></th>
+            <th><%= t('attributes.displayname') %></th>
+            <th class="notvisible"><%= t('attributes.connector') %></th>
+            <th><%= t('attributes.ct_id') %></th>
+            <th><%= t('attributes.mac') %></th>
+            <th><%= t('attributes.serial') %></th>
+            <th><%= t('attributes.ip') %></th>
+            <th><%= t('attributes.connected') %></th>
+            <th><%= t('attributes.location') %></th>
+            <th><%= t('attributes.room') %></th>
+            <th><%= t('attributes.plugged_in') %></th>
+      </tr>
+    </thead>
+    <tfoot class="search">
+      <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+      </tr>
+    </tfoot>
+    <tbody>
+      <% card_terminals.each do |card_terminal| %>
+        <%= content_tag(:tr, id: dom_id(card_terminal), class: dom_class(card_terminal)) do %>
+          <td class="text-center">
+            <%= render ConditionIconComponent.new(item: card_terminal, small: true) %>
+            <span style="visibility:hidden;"><%= card_terminal.condition %></span>
+          </td>
+          <td><%= card_terminal.displayname %></td>
+          <td><%= render LinkToComponent.new(item: card_terminal.connector) %></td>
+          <td><%= link_to card_terminal.ct_id, 
+                          card_terminal_path(card_terminal),
+                          class: 'primary-link',
+                          "data-turbo-frame": '_top'
+               %></td>
+          <td><%= card_terminal.mac %></td>
+          <td><%= card_terminal.serial %></td>
+          <td><%= card_terminal.ip %></td>
+          <td><%= card_terminal.connected %></td>
+          <td><%= card_terminal.location&.lid %></td>
+          <td><%= card_terminal.room %></td>
+          <td><%= card_terminal.plugged_in %></td>
         <% end %>
-      </tbody>
-    <% end %>
-  </div>
-<%# end %>
+      <% end %>
+    </tbody>
+  <% end %>
+</div>

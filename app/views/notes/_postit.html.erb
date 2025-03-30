@@ -1,3 +1,4 @@
+<%= turbo_stream_from note %>
 <div id="<%= dom_id note %>"
      class="sidecard <%= ('postit' if (note.created_at > 1.day.before(Time.current))) %>"
 >
