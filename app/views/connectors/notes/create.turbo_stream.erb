@@ -11,3 +11,7 @@
                                refresh: "morph") %>
 <% end %>
 
+<%= turbo_stream.replace('side_notes') do %>
+  <%= turbo_frame_tag("side_notes", src: sindex_notes_path, refresh: "morph") %>
+<% end %>
+

@@ -36,7 +36,7 @@ class NotesController < ApplicationController
 
   # GET /notes/new
   def new
-    @note = @notable.notes.build(type: params[:type].to_i || Note.types[:plain])
+    @note = @notable.notes.build(type: params[:type] || :plain)
     respond_with(@note)
   end
 
@@ -61,7 +61,7 @@ class NotesController < ApplicationController
   def update
     respond_with(@note, location: location) do |format|
       if @note.update(note_params)
-        format.turbo_stream
+        format.turbo_stream { flash.now[:notice] = "Note successfully updated" }
         Notes::Processor.new(note: @note).call(:update)
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -97,14 +97,15 @@ class NotesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def note_params
-      params.require(:note).permit(:notable_id, :notable_type, :valid_until, :message)
+      params.require(:note).permit(:notable_id, :notable_type, :type, 
+                                   :valid_until, :message)
     end
 
     def default_note_params
       if params[:note][:type].present? 
-        newtype = params[:note][:type].to_i
+        newtype = params[:note][:type]
       else
-        newtype = Note.types[:plain]
+        newtype = :plain
       end 
       { type: newtype }
     end 

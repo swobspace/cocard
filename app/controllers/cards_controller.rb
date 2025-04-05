@@ -33,7 +33,7 @@ class CardsController < ApplicationController
 
   # GET /cards/1
   def show
-    if @card.contexts.empty?
+    if @card.card_type == 'SMC-B' and @card.contexts.empty?
       flash[:notice] = t('cards.no_contexts_assigned')
     end
     respond_with(@card)

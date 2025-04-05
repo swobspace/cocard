@@ -5,7 +5,7 @@ class AcknowledgeButtonComponent < ViewComponent::Base
   def initialize(notable:, readonly: true, small: true)
     @notable = notable
     @readonly = readonly
-    @type = Note.types[:acknowledge]
+    @type = :acknowledge
     @current = notable.current_acknowledge
     @small = small
   end

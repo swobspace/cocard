@@ -1,5 +1,13 @@
 = Changelog
 
+== 0.7.5 2025-04-05
+
+* internes Refactoring bei Funktionen für unterstützte Kartenterminals
+* Fix: Aktualisierung der Notizen im Dashboard bei Änderungen
+* Fix: Update der Anzeige bei Aktualisierung des TI-Lagebildes durch den Hintergrundjob
+* Link und Edit-Button bei Notizen im Dashboard (Edit nur bei Owner)
+* kleinere Bugfixes
+
 == 0.7.4 - 2025-03-14
 
 * HOTFIX: Problem beim Reinitialisieren von Tabellen behoben.

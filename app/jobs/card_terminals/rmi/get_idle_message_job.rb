@@ -21,10 +21,9 @@ module CardTerminals
         else
           @prefix = "GetIdleMessage:: card_terminal #{card_terminal}:: ".freeze
           if check_requirements(card_terminal)
-            _rmi = @rmi.new(card_terminal: card_terminal)
-            _rmi.get_idle_message
-            if _rmi.result['idle_message']
-              card_terminal.update(idle_message: _rmi.result['idle_message'])
+            @rmi.get_idle_message
+            if @rmi.result['idle_message']
+              card_terminal.update(idle_message: @rmi.result['idle_message'])
               Rails.logger.info("INFO:: #{card_terminal} - " +
                                 "idle_message == #{card_terminal.idle_message}")
 

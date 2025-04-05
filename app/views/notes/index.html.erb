@@ -3,7 +3,7 @@
 <h1> <%= t('controller.notes') %></h1>
 Für: <%= @notable %>
 
-<%= turbo_frame_tag 'notes', refresh: 'morph' do %>
+<%= turbo_frame_tag 'notes' do %>
   <div data-controller="datatables">
     <%= content_tag :table, role: :datatable,
           id: "notes_table",

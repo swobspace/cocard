@@ -20,5 +20,29 @@ RSpec.describe UseCurrentIpComponent, type: :component do
       render_inline(described_class.new(item: card_terminal))
       expect(page).to have_css(%Q[form[action="#{card_terminal_path(card_terminal, params)}"]])
     end
+
+    describe "with ip 0.0.0.0" do
+      it "does not shows update button" do
+        allow(card_terminal).to receive(:current_ip).and_return("0.0.0.0")
+        render_inline(described_class.new(item: card_terminal))
+        expect(page).not_to have_css('form')
+      end
+    end
+
+    describe "with ip 127.0.0.5" do
+      it "does not shows update button" do
+        allow(card_terminal).to receive(:current_ip).and_return("127.0.0.5")
+        render_inline(described_class.new(item: card_terminal))
+        expect(page).not_to have_css('form')
+      end
+    end
+
+    describe "with ip nil" do
+      it "does not shows update button" do
+        allow(card_terminal).to receive(:current_ip).and_return(nil)
+        render_inline(described_class.new(item: card_terminal))
+        expect(page).not_to have_css('form')
+      end
+    end
   end
 end
