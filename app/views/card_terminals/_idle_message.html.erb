@@ -1,5 +1,5 @@
 <% if card_terminal.supports_rmi? %>
-  <td id="<%= dom_id(card_terminal) %>" data-turbo-prefetch="false" >
+  <td id="<%= "idle_message_" + dom_id(card_terminal) %>" data-turbo-prefetch="false" >
     <span class="pe-4"><%= card_terminal.idle_message %></span>
     <% if can? :manage, card_terminal %>
       <%= link_to(edit_idle_message_card_terminal_path(card_terminal),
