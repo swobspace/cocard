@@ -74,7 +74,9 @@ class CardTerminalsController < ApplicationController
   end
 
   def fetch_idle_message
-    CardTerminals::RMI::GetIdleMessageJob.perform_now(card_terminal: @card_terminal)
+    unless CardTerminals::RMI::GetIdleMessageJob.perform_now(card_terminal: @card_terminal)
+      flash[:alert] = "Abfrage des Ruhebildschirms fehlgeschlagen!"
+    end
     redirect_to @card_terminal
   end
 
@@ -85,19 +87,37 @@ class CardTerminalsController < ApplicationController
 
   def update_idle_message
     _rmi = CardTerminals::RMI::Base.new(card_terminal: @card_terminal)
-    if (_rmi.valid)
+    if _rmi.valid
       rmi = _rmi.rmi
       rmi.set_idle_message(idle_message_params['idle_message'])
-      rmi.get_idle_message
-      @card_terminal.update(idle_message: rmi.result['idle_message'])
-      @card_terminal.reload
+      Rails.logger.debug("DEBUG:: update_idle_message: #{rmi.result}")
+      if rmi.result['result'] != 'success'
+        errormsg = "Setzen des Ruhebildschirms fehlgeschlagen!"
+        Rails.logger.debug("DEBUG:: update_idle_message: #{errormsg}")
+      else
+        rmi.get_idle_message
+        Rails.logger.debug("DEBUG:: update_idle_message: #{rmi.result}")
+        if rmi.result['result'] != 'success'
+          errormsg = "Abfrage des Ruhebildschirms fehlgeschlagen!"
+          Rails.logger.debug("DEBUG:: update_idle_message: #{errormsg}")
+        else
+          @card_terminal.update(idle_message: rmi.result['idle_message'])
+          @card_terminal.reload
+        end
+      end
     end
-    # redirect_to @card_terminal
-    render turbo_stream: [
-      turbo_stream.replace(@card_terminal, partial: "card_terminals/show",
-                                           locals: { card_terminal: @card_terminal })
-    ]
-
+    if errormsg
+      flash.now[:alert] = errormsg
+    end
+    respond_to do |format|
+      format.turbo_stream {
+        render turbo_stream: [
+          turbo_stream.replace(@card_terminal, partial: "card_terminals/show",
+                                               locals: { card_terminal: @card_terminal }),
+          turbo_stream.update('flash',  partial: "shared/flash_alert")
+        ]
+      }
+    end
   end
 
   def reboot
