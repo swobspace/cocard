@@ -106,7 +106,7 @@ module CardTerminalConcerns
   # get default port from rmi class
   def default_rmi_port
     rmi = CardTerminals::RMI::Base.new(card_terminal: self)
-    if rmi.nil?
+    if rmi.nil? || !rmi.valid
       0
     else
       rmi.rmi.class::RMI_PORT
