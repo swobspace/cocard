@@ -4,6 +4,7 @@
 
 * Ruhebildschirm setzen: Feedback bei Fehlern verbessert
 * Reboot KoCoBox: Feedback bei SSL-Fehlern, die einen Remote-Reboot verhindern
+* Prüfung Kartenterminal, ob Remote-Management-Port für RMI verfügbar ist.
 
 
 == 0.7.5 - 2025-04-05
