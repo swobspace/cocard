@@ -6,6 +6,8 @@ module CardTerminals
     class OrgaV1
       attr_reader :card_terminal, :valid, :session, :result
 
+      RMI_PORT = 443
+
       #
       # rmi = CardTerminal::RMI::OrgaV1.new(options)
       #
