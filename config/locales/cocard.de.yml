@@ -76,6 +76,7 @@ de:
       vor einem flächendeckenden Rollout ausführlich.
     ip_takeover: IP übernehmen?
     card_terminal_rmi_not_supported: Funktion wird vom Kartenterminal nicht unterstützt
+    card_terminal_rmi_not_reachable: RMI nicht erreichbar
     set_idle_messages: Ruhebildschirme setzen
 
   activerecord:

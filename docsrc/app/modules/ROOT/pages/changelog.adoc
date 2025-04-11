@@ -2,6 +2,9 @@
 
 == 0.7.6-dev - unreleased
 
+* Ruhebildschirm setzen: Feedback bei Fehlern verbessert
+* Reboot KoCoBox: Feedback bei SSL-Fehlern, die einen Remote-Reboot verhindern
+
 
 == 0.7.5 - 2025-04-05
 

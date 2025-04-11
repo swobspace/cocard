@@ -41,6 +41,7 @@ class CardTerminalsController < ApplicationController
 
   # GET /card_terminals/1
   def show
+    CardTerminals::CheckConfigJob.perform_later(card_terminal: @card_terminal)
     respond_with(@card_terminal)
   end
 
