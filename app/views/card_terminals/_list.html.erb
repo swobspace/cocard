@@ -1,6 +1,6 @@
 <%= render 'shared/turbo-cache-control' %>
 
-<div data-controller="datatables">
+<div data-controller="datatables" data-turbo-prefetch="false">
   <%= content_tag :table, role: :datatable,
         id: "card_terminals_subtable",
         class: "table table-sm table-responsive",
