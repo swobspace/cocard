@@ -10,8 +10,13 @@ class Connectors::CheckConfigJob < ApplicationJob
     connector = options.fetch(:connector)
     status = nil
 
-    # check only if connector reachable
-    return false unless connector.up?
+    if connector.up?
+      toaster(connector, :info, "PING ok")
+    else
+      toaster(connector, :danger, "PING failed")
+      return false
+    end
+
 
     # SDS port
     unless connector.tcp_port_open?(connector.sds_port)

@@ -10,8 +10,14 @@ class CardTerminals::CheckConfigJob < ApplicationJob
     card_terminal = options.fetch(:card_terminal)
     status = nil
 
-    # check only if card_terminal reachable
-    return false unless card_terminal.up?
+    if card_terminal.is_accessible?
+      if card_terminal.up?
+        toaster(card_terminal, :info, "CardTerminal PING ok")
+      else
+        toaster(card_terminal, :danger, "CardTerminal PING failed")
+        return false
+      end
+    end
 
     # rmi port
     if card_terminal.supports_rmi?

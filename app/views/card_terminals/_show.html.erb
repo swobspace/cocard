@@ -213,14 +213,5 @@
         </pre>
       </div>
     </div>
-    <% if card_terminal.is_accessible? %>
-      <div data-turbo-permanent>
-        <%= turbo_frame_tag "card_terminal_#{card_terminal.id}_ping",
-                            src: ping_card_terminal_path(card_terminal),
-                            refresh: "morph" do %>
-          <%= image_tag 'process-working.png' %>
-        <% end %>
-      </div>
-    <% end %>
   </div>
 </div>

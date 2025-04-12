@@ -1,6 +1,7 @@
 class ConnectorsController < ApplicationController
   before_action :set_connector, only: [:show, :edit, :update, :destroy, :reboot]
   before_action :add_breadcrumb_show, only: [:show]
+  after_action :check_config, only: [:show]
 
   # GET /connectors
   def index
@@ -29,7 +30,6 @@ class ConnectorsController < ApplicationController
 
   # GET /connectors/1
   def show
-    Connectors::CheckConfigJob.perform_later(connector: @connector)
     if @connector.contexts.empty?
       flash[:notice] = t('connectors.no_contexts_assigned')
     end
@@ -136,5 +136,8 @@ class ConnectorsController < ApplicationController
                     ])
             .reject { |k, v| k == 'auth_password' && v.blank? }
 
+    end
+    def check_config
+      Connectors::CheckConfigJob.set(wait: 0.5.seconds).perform_later(connector: @connector)
     end
 end

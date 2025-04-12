@@ -3,6 +3,7 @@ class CardTerminalsController < ApplicationController
                                            :fetch_idle_message, :edit_idle_message,
                                            :update_idle_message]
   before_action :add_breadcrumb_show, only: [:show]
+  after_action :check_config, only: [:show]
 
   # GET /card_terminals
   def index
@@ -41,12 +42,11 @@ class CardTerminalsController < ApplicationController
 
   # GET /card_terminals/1
   def show
-    CardTerminals::CheckConfigJob.perform_later(card_terminal: @card_terminal)
     respond_with(@card_terminal)
   end
 
   def ping
-    respond_with(@connector) do |format|
+    respond_with(@card_terminal) do |format|
     end
   end
 
@@ -164,5 +164,9 @@ class CardTerminalsController < ApplicationController
 
     def idle_message_params
       params.require(:card_terminal).permit(:idle_message)
+    end
+
+    def check_config
+      CardTerminals::CheckConfigJob.set(wait: 0.5.seconds).perform_later(card_terminal: @card_terminal)
     end
 end
