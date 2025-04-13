@@ -17,14 +17,22 @@ class CardTerminals::ConnectivityCheckJob < ApplicationJob
         toaster(card_terminal, :danger, "Kartenterminal PING failed")
         return false
       end
+    else
+      toaster(card_terminal, :warning, "PING ist über zugeordnetes Netzwerk deaktiviert")
     end
 
     # rmi port
     if card_terminal.supports_rmi?
-      unless card_terminal.tcp_port_open?(card_terminal.rmi_port)
-        text = "RMI-Port #{card_terminal.rmi_port} nicht erreichbar, kein Remote Management des Terminals möglich"
+      if card_terminal.tcp_port_open?(card_terminal.rmi_port)
+        text = "RMI-Port #{card_terminal.rmi_port} OK"
         toaster(card_terminal, :warning, text)
+      else
+        text = "RMI-Port #{card_terminal.rmi_port} nicht erreichbar, kein Remote Management des Terminals möglich"
+        toaster(card_terminal, :alert, text)
       end
+    else
+      text = "Kartenterminal unterstützt kein RMI"
+      toaster(card_terminal, :warning, text)
     end
 
   end
