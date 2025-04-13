@@ -1,6 +1,6 @@
 <%= render 'shared/turbo-cache-control' %>
 
-<div data-controller="datatables" data-turbo-prefetch="false">
+<div data-controller="datatables">
   <%= content_tag :table, role: :datatable,
         id: "card_terminals_subtable",
         class: "table table-sm table-responsive",
@@ -50,7 +50,7 @@
           <td><%= link_to card_terminal.ct_id, 
                           card_terminal_path(card_terminal),
                           class: 'primary-link',
-                          "data-turbo-frame": '_top'
+                          data: { 'turbo-frame' => '_top', 'turbo-prefetch' => false }
                %></td>
           <td><%= card_terminal.mac %></td>
           <td><%= card_terminal.serial %></td>

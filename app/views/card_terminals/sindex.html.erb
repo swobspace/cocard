@@ -25,12 +25,12 @@
           <td><%= link_to(
                     card_terminal.displayname,
                     card_terminal_path(card_terminal),
-                    data: { "turbo-frame" => "_top" },
+                    data: { "turbo-frame" => "_top", "turbo-prefetch" => false },
                     class: "primary-link") %></td>
           <td><%= link_to(
                     card_terminal.connector&.name,
                     connector_path(card_terminal.connector),
-                    data: { "turbo-frame" => "_top" },
+                    data: { "turbo-frame" => "_top", "turbo-prefetch" => false },
                     class: "primary-link") unless card_terminal.connector.nil? %></td>
           <td><%= card_terminal.condition_message %></td>
           <td><%= render IsCurrentComponent.new(item: card_terminal, attr: :last_ok,

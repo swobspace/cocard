@@ -26,16 +26,16 @@
           <td><%= card.name_or_cardholder %></td>
           <td><%= card.condition_message %></td>
           <td><%= link_to(card.iccsn, card_path(card),
-                    data: { "turbo-frame" => "_top" },
-                    class: "primary-link") %></td>
+                          data: { "turbo-frame" => "_top", "turbo-prefetch" => false },
+                          class: "primary-link") %></td>
           <td><%= link_to(card.card_terminal&.connector,
                           connector_path(card.card_terminal&.connector),
-                          data: { "turbo-frame" => "_top" },
+                          data: { "turbo-frame" => "_top", "turbo-prefetch" => false },
                           class: "primary-link"
                          ) if card.card_terminal&.connector %></td>
           <td><%= link_to(card.card_terminal&.ct_id,
                           card_terminal_path(card.card_terminal),
-                          data: { "turbo-frame" => "_top" },
+                          data: { "turbo-frame" => "_top", "turbo-prefetch" => false },
                           class: "primary-link"
                          ) if card.card_terminal %></td>
           <td class="text-end text-nowrap">

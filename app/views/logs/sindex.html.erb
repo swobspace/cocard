@@ -27,7 +27,7 @@
               <%= link_to log.loggable,
                           polymorphic_path(log.loggable),
                           class: 'primary-link',
-                          data: { 'turbo-frame' => '_top' }
+                          data: { 'turbo-frame' => '_top', 'turbo-prefetch' => false }
                %>
             </td>
             <td><%= log.action %></td>
