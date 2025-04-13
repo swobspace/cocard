@@ -23,7 +23,7 @@
           <td><%= link_to(
                     connector.name, 
                     connector_path(connector), 
-                    data: { "turbo-frame" => "_top", "turbo-prefetch" => false },
+                    data: { "turbo-frame" => "_top", "turbo-prefetch" => true },
                     class: "primary-link") %></td>
           <td><%= connector.condition_message %></td>
           <td><%= render IsCurrentComponent.new(item:connector, attr: :last_check,

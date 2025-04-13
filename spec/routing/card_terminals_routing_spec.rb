@@ -18,6 +18,10 @@ RSpec.describe CardTerminalsController, type: :routing do
       expect(get: "/card_terminals/1").to route_to("card_terminals#show", id: "1")
     end
 
+    it "routes to #check" do
+      expect(post: "/card_terminals/1/check").to route_to("card_terminals#check", id: "1")
+    end
+
     it "routes to #ping" do
       expect(get: "/card_terminals/1/ping").to route_to("card_terminals#ping", id: "1")
     end

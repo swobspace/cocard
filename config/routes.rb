@@ -59,6 +59,7 @@ Rails.application.routes.draw do
     end
     member do
       get :ping
+      post :check
       post :fetch_idle_message
       get :edit_idle_message
       put :update_idle_message
@@ -78,6 +79,7 @@ Rails.application.routes.draw do
       post :get_card_terminals
       post :get_cards
       get :ping
+      post :check
       post :reboot
     end
     resources :notes, module: :connectors

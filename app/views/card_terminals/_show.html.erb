@@ -13,6 +13,12 @@
       </div>
       <div role="toolbar" class="ms-auto pt-3">
         <%= render RebootButtonComponent.new(item: card_terminal) if (can? :reboot, card_terminal) %>
+        <%= button_to(check_card_terminal_path(@card_terminal),
+                      title: t('connectors.check_config'),
+                      class: 'btn btn-secondary me-1') do %>
+          <i class="fa-solid fa-fw fa-clipboard-check"></i>
+        <% end %>
+
         <%= render AcknowledgeButtonComponent.new(
                      notable: card_terminal, small: false,
                      readonly: cannot?(:manage, card_terminal)

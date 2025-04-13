@@ -1,7 +1,6 @@
 class ConnectorsController < ApplicationController
   before_action :set_connector, only: [:show, :edit, :update, :destroy, :reboot]
   before_action :add_breadcrumb_show, only: [:show]
-  after_action :check_config, only: [:show]
 
   # GET /connectors
   def index
@@ -38,6 +37,13 @@ class ConnectorsController < ApplicationController
 
   def ping
     respond_with(@connector) do |format|
+    end
+  end
+
+  def check
+    Connectors::CheckConfigJob.perform_now(connector: @connector)
+    respond_with(@connector) do |format|
+      format.turbo_stream { head :ok }
     end
   end
 
@@ -136,8 +142,5 @@ class ConnectorsController < ApplicationController
                     ])
             .reject { |k, v| k == 'auth_password' && v.blank? }
 
-    end
-    def check_config
-      Connectors::CheckConfigJob.set(wait: 0.5.seconds).perform_later(connector: @connector)
     end
 end
