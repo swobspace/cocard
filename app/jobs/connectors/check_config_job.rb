@@ -11,9 +11,9 @@ class Connectors::CheckConfigJob < ApplicationJob
     status = nil
 
     if connector.up?
-      toaster(connector, :info, "PING ok")
+      toaster(connector, :info, "Konnektor PING ok")
     else
-      toaster(connector, :danger, "PING failed")
+      toaster(connector, :danger, "Konnektor PING failed")
       return false
     end
 

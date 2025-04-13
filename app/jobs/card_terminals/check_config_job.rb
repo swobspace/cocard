@@ -12,9 +12,9 @@ class CardTerminals::CheckConfigJob < ApplicationJob
 
     if card_terminal.is_accessible?
       if card_terminal.up?
-        toaster(card_terminal, :info, "CardTerminal PING ok")
+        toaster(card_terminal, :info, "Kartenterminal PING ok")
       else
-        toaster(card_terminal, :danger, "CardTerminal PING failed")
+        toaster(card_terminal, :danger, "Kartenterminal PING failed")
         return false
       end
     end
