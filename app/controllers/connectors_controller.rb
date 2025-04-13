@@ -41,7 +41,7 @@ class ConnectorsController < ApplicationController
   end
 
   def check
-    Connectors::CheckConfigJob.perform_now(connector: @connector)
+    Connectors::ConnectivityCheckJob.perform_now(connector: @connector)
     respond_with(@connector) do |format|
       format.turbo_stream { head :ok }
     end

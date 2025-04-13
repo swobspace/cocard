@@ -1,9 +1,9 @@
-class CardTerminals::CheckConfigJob < ApplicationJob
+class CardTerminals::ConnectivityCheckJob < ApplicationJob
   queue_as :default
 
   #
   # Check CardTerminal Configuration and broadcast a toast if problem found
-  # CardTerminals::CheckConfigJob.perform_later(card_terminal: card_terminal)
+  # CardTerminals::ConnectivityCheckJob.perform_later(card_terminal: card_terminal)
   #
   def perform(options = {})
     options.symbolize_keys!

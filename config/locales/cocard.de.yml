@@ -274,14 +274,14 @@ de:
       ACHTUNG! Es ist noch kein Kontext zugeordnet!
       Ohne Kontext kann der Konnektor keine Informationen abfragen
       (Ausnahme: Service Directory SDS)
-    check_config: Konfigurationscheck
+    check_connectivity: Verbindungstest
   card_terminals:
     with_smcb: KT mit SMC-B
     update_ip_from_current: Vom Konnektor gemeldete IP übernehmen
     do_reboot: |
       Kartenterminal neu starten? Das Kartenterminal ist dann für
       einige Zeit nicht verfügbar!
-    check_config: Konfigurationscheck
+    check_connectivity: Verbindungstest
   cards:
     no_contexts_assigned: |
       ACHTUNG! Es ist noch kein Kontext zugeordnet!

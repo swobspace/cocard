@@ -1,9 +1,9 @@
-class Connectors::CheckConfigJob < ApplicationJob
+class Connectors::ConnectivityCheckJob < ApplicationJob
   queue_as :default
 
   #
-  # Check Connector Configuration and broadcast a toast if problem found
-  # Connectors::CheckConfigJob.perform_later(connector: connector)
+  # Check Connector connectivity and broadcast a toast if problem found
+  # Connectors::ConnectivityCheckJob.perform_later(connector: connector)
   #
   def perform(options = {})
     options.symbolize_keys!
