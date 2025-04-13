@@ -6,6 +6,8 @@ module CardTerminals
     class OrgaV1
       attr_reader :card_terminal, :valid, :session, :result
 
+      RMI_PORT = 443
+
       #
       # rmi = CardTerminal::RMI::OrgaV1.new(options)
       #
@@ -149,6 +151,12 @@ module CardTerminals
             debug(">>> :open get idle >>>")
 
             ws.send(request_auth(generate_token(:authenticate)))
+            debug("--- starting timer ---")
+            @timeout = EM::Timer.new(20) do
+              debug("### TIMEOUT ###")
+              ws.close
+              @result['result'] == timeout
+            end
           end
 
           ws.on :message do |event|
@@ -175,8 +183,10 @@ module CardTerminals
 
             when :get_property
               if response.gui_idle_message
+                @timeout.cancel
                 debug("gui_idle_message: " + response.gui_idle_message.to_s)
                 @result['idle_message'] = response.gui_idle_message
+                @result['result'] = 'success'
                 ws.close
               end
             end
@@ -215,8 +225,13 @@ module CardTerminals
 
           ws.on :open do |event|
             debug(">>> :open set idle >>>")
-
             ws.send(request_auth(generate_token(:authenticate)))
+            debug("--- starting timer ---")
+            @timeout = EM::Timer.new(20) do
+              debug("### TIMEOUT ###")
+              @result['result'] == timeout
+              ws.close
+            end
           end
 
           ws.on :message do |event|
@@ -242,6 +257,7 @@ module CardTerminals
               ws.send(request_set_property_idle_message(generate_token(:set_property), idle_message))
 
             when :set_property
+              @timeout.cancel
               @result['result'] = (response.result.nil?) ? 'success' : 'failure'
               debug("set gui_idle_message: " + @result['result'])
               ws.close

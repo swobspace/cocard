@@ -50,7 +50,7 @@
           <td><%= link_to card_terminal.ct_id, 
                           card_terminal_path(card_terminal),
                           class: 'primary-link',
-                          "data-turbo-frame": '_top'
+                          data: { 'turbo-frame' => '_top', 'turbo-prefetch' => true }
                %></td>
           <td><%= card_terminal.mac %></td>
           <td><%= card_terminal.serial %></td>

@@ -27,21 +27,36 @@ module Connectors
         #
         # authentication
         #
-        r1 = conn.post('/j_security_check') do |req|
-          params = { j_username: koco_admin, j_password: koco_passwd }
-          req.body = URI.encode_www_form(params)
+        begin
+          r1 = conn.post('/j_security_check') do |req|
+            params = { j_username: koco_admin, j_password: koco_passwd }
+            req.body = URI.encode_www_form(params)
+          end
+        rescue Faraday::Error => e
+          errmsg = "Login failed - #{e.response_body}"
+          return Result.new(success?: false, response: errmsg)
         end
 
         #
         # simulate redirect
         #
-        r2 = conn.get('/administration/start.htm')
+        begin
+          r2 = conn.get('/administration/start.htm')
+        rescue Faraday::Error => e
+          errmsg = "/administration/start.htm - #{e.response_body}"
+          return Result.new(success?: false, response: errmsg)
+        end
 
         #
         # get infoservice to access X-TOKEN
         #
-        r3 = conn.get('/administration/json-retrieve/infoservice') do |req|
-          req.headers['Content-Type'] = 'application/json'
+        begin
+          r3 = conn.get('/administration/json-retrieve/infoservice') do |req|
+            req.headers['Content-Type'] = 'application/json'
+          end
+        rescue Faraday::Error => e
+          errmsg = "Get X-TOKEN - #{e.response_body}"
+          return Result.new(success?: false, response: errmsg)
         end
 
         if r3.status != 200

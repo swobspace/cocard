@@ -18,6 +18,10 @@ RSpec.describe ConnectorsController, type: :routing do
       expect(get: "/connectors/1").to route_to("connectors#show", id: "1")
     end
 
+    it "routes to #check" do
+      expect(post: "/connectors/1/check").to route_to("connectors#check", id: "1")
+    end
+
     it "routes to #ping" do
       expect(get: "/connectors/1/ping").to route_to("connectors#ping", id: "1")
     end

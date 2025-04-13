@@ -29,7 +29,6 @@ class ConnectorsController < ApplicationController
 
   # GET /connectors/1
   def show
-    Connectors::CheckConfigJob.perform_later(connector: @connector)
     if @connector.contexts.empty?
       flash[:notice] = t('connectors.no_contexts_assigned')
     end
@@ -38,6 +37,13 @@ class ConnectorsController < ApplicationController
 
   def ping
     respond_with(@connector) do |format|
+    end
+  end
+
+  def check
+    Connectors::ConnectivityCheckJob.perform_now(connector: @connector)
+    respond_with(@connector) do |format|
+      format.turbo_stream { head :ok }
     end
   end
 

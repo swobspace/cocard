@@ -1,5 +1,6 @@
 class CardTerminal < ApplicationRecord
   include PingConcerns
+  include TcpCheckConcerns
   include CardTerminalConcerns
   include Cocard::Condition
   include NotableConcerns

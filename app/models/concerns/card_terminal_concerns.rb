@@ -97,4 +97,20 @@ module CardTerminalConcerns
   def reboot_active?
     rebooted_at.present? and (rebooted_at > 2.minute.before(Time.current))
   end
+
+  # may be later replaced by attribute :rmi_port
+  def rmi_port
+    default_rmi_port
+  end
+
+  # get default port from rmi class
+  def default_rmi_port
+    rmi = CardTerminals::RMI::Base.new(card_terminal: self)
+    if rmi.nil? || !rmi.valid
+      0
+    else
+      rmi.rmi.class::RMI_PORT
+    end
+  end
+
 end

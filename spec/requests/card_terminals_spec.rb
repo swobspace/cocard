@@ -48,6 +48,17 @@ RSpec.describe "/card_terminals", type: :request do
     end
   end
 
+  describe "POST /check" do
+    context "with valid parameters" do
+      it "checks" do
+        card_terminal = CardTerminal.create! valid_attributes
+        post check_card_terminal_url(card_terminal, format: :turbo_stream)
+        expect(response.body).to be_blank
+        expect(response).to be_successful
+      end
+    end
+  end
+
   describe "POST /create" do
     context "with valid parameters" do
       it "creates a new CardTerminal" do

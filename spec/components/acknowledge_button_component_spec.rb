@@ -14,7 +14,7 @@ RSpec.describe AcknowledgeButtonComponent, type: :component do
 
       it "shows read button" do
         render_inline(described_class.new(notable: log, readonly: true))
-        expect(page).to have_css('a[class="btn btn-sm btn-outline-secondary"]')
+        expect(page).to have_css('a[class="btn btn-sm btn-outline-secondary me-1"]')
         expect(page).to have_css(%Q[a[href="#{log_note_path(log, ack)}"]])
       end
     end
@@ -22,13 +22,13 @@ RSpec.describe AcknowledgeButtonComponent, type: :component do
     describe "without acknowledge" do
       it "shows ack button" do
         render_inline(described_class.new(notable: log, readonly: false))
-        expect(page).to have_css('a[class="btn btn-sm btn-warning"]')
+        expect(page).to have_css('a[class="btn btn-sm btn-warning me-1"]')
         expect(page).to have_css(%Q[a[href="#{new_log_note_path(log, type: :acknowledge)}"]])
       end
 
       it "readonly - does not show ack button" do
         render_inline(described_class.new(notable: log))
-        expect(page).not_to have_css('a[class="btn btn-sm btn-warning"]')
+        expect(page).not_to have_css('a[class="btn btn-sm btn-warning me-1"]')
         expect(page).not_to have_css(%Q[a[href="#{new_log_note_path(log, type: :acknowledge)}"]])
       end
     end
@@ -42,7 +42,7 @@ RSpec.describe AcknowledgeButtonComponent, type: :component do
 
       it "shows read button" do
         render_inline(described_class.new(notable: connector, readonly: true))
-        expect(page).to have_css('a[class="btn btn-sm btn-outline-secondary"]')
+        expect(page).to have_css('a[class="btn btn-sm btn-outline-secondary me-1"]')
         expect(page).to have_css(%Q[a[href="#{connector_note_path(connector, ack)}"]])
       end
     end
@@ -55,7 +55,7 @@ RSpec.describe AcknowledgeButtonComponent, type: :component do
 
         it "shows ack button" do
           render_inline(described_class.new(notable: connector, readonly: false))
-          expect(page).to have_css('a[class="btn btn-sm btn-warning"]')
+          expect(page).to have_css('a[class="btn btn-sm btn-warning me-1"]')
           expect(page).to have_css(%Q[a[href="#{new_connector_note_path(connector, type: :acknowledge)}"]])
         end
       end
@@ -67,14 +67,14 @@ RSpec.describe AcknowledgeButtonComponent, type: :component do
 
         it "does not shows ack button" do
           render_inline(described_class.new(notable: connector, readonly: false))
-          expect(page).not_to have_css('a[class="btn btn-sm btn-warning"]')
+          expect(page).not_to have_css('a[class="btn btn-sm btn-warning me-1"]')
           expect(page).not_to have_css(%Q[a[href="#{new_connector_note_path(connector, type: :acknowledge)}"]])
         end
       end
 
       it "readonly - does not show ack button" do
         render_inline(described_class.new(notable: connector))
-        expect(page).not_to have_css('a[class="btn btn-sm btn-warning"]')
+        expect(page).not_to have_css('a[class="btn btn-sm btn-warning me-1"]')
         expect(page).not_to have_css(%Q[a[href="#{new_connector_note_path(connector, type: :acknowledge)}"]])
       end
     end
