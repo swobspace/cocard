@@ -47,6 +47,7 @@ module Cards
       FactoryBot.create(:card,
         name: 'SMC-KT 0002',
         iccsn: '9980002',
+        expiration_date: 1.month.after(Date.current)
       )
     end
 
@@ -54,7 +55,8 @@ module Cards
       FactoryBot.create(:card,
         name: 'SMC-KT 0003',
         iccsn: '9980003',
-        operational_state: opsta
+        operational_state: opsta,
+        expiration_date: 1.year.after(Date.current)
       )
     end
 
@@ -149,6 +151,23 @@ module Cards
       it_behaves_like "a card query"
     end
 
+    context "with expired: true" do
+      subject { Query.new(cards, {expired: 'true'}) }
+      before(:each) do
+        @matching = [card1]
+        @nonmatching = [card2, card3]
+      end
+      it_behaves_like "a card query"
+    end
+
+    context "with expired: false" do
+      subject { Query.new(cards, {expired: 'nein'}) }
+      before(:each) do
+        @matching = [card2, card3]
+        @nonmatching = [card1]
+      end
+      it_behaves_like "a card query"
+    end
 
     describe "#all" do
       context "using :search'" do

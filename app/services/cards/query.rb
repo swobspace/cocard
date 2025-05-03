@@ -69,6 +69,12 @@ module Cards
           query = query.where(condition: value.to_i)
         when :slotid
           query = query.where(slotid: value.to_i)
+        when :expired
+          if to_boolean(value)
+            query = query.where("cards.expiration_date < ?", Date.current)
+          else
+            query = query.where("cards.expiration_date >= ?", Date.current)
+          end
         when :limit
           @limit = value.to_i
         when :search
