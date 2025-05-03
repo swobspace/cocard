@@ -31,6 +31,7 @@ module Connectors
     let!(:conn1) do
       FactoryBot.create(:connector,
         name: 'TIK-AXC-17',
+        short_name: 'K17',
         description: "some more infos",
         ip: '127.51.100.17',
         firmware_version: '5.3.4',
@@ -41,6 +42,7 @@ module Connectors
     let!(:conn2) do
       FactoryBot.create(:connector,
         name: 'TIK-CWZ-04',
+        short_name: 'K04',
         ip: '127.203.113.4',
         admin_url: 'https://127.192.2.4:9443',
         sds_url: 'http://127.192.2.4/connector.sds',
@@ -52,6 +54,7 @@ module Connectors
     let!(:conn3) do
       FactoryBot.create(:connector,
         name: 'TIK-CWZ-05',
+        short_name: 'K05',
         ip: '127.50.100.5',
         manual_update: true,
         firmware_version: '4.9.3',
@@ -85,6 +88,24 @@ module Connectors
         end
       end
     end
+
+    context "with :name" do
+      subject { Query.new(connectors, {name: 'cwz'}) }
+      before(:each) do
+        @matching = [conn2, conn3]
+        @nonmatching = [conn1]
+      end
+      it_behaves_like "a connectors query"
+    end # :name
+
+    context "with :short_name" do
+      subject { Query.new(connectors, {short_name: 'k04'}) }
+      before(:each) do
+        @matching = [conn2]
+        @nonmatching = [conn1, conn3]
+      end
+      it_behaves_like "a connectors query"
+    end # :short_name
 
     context "with :id" do
       subject { Query.new(connectors, {id: conn1.to_param}) }
