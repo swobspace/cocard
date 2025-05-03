@@ -27,6 +27,7 @@ class CardTerminal < ApplicationRecord
   before_save :update_ip_and_location
   before_save :ensure_displayname
   before_save :update_condition
+  before_save :update_acknowledge_id
 
   validates :pin_mode, inclusion: { in: pin_modes.keys }
   validates_uniqueness_of :ct_id, scope: [:connector_id],

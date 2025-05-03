@@ -28,6 +28,7 @@ class Card < ApplicationRecord
   # -- validations and callbacks
   before_save :update_condition
   before_save :update_location
+  before_save :update_acknowledge_id
   validates :iccsn, presence: true, uniqueness: { case_sensitive: false }
 
   # -- common methods

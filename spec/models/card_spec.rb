@@ -179,7 +179,7 @@ RSpec.describe Card, type: :model do
           expect {
             card.update_condition
           }.to change(card, :condition).to(Cocard::States::OK)
-                  connector.reload
+          card.reload
           expect(card.acknowledge).to be_nil
           ack.reload
           expect(ack.valid_until).to be >= 1.second.before(Time.current)
@@ -267,18 +267,33 @@ RSpec.describe Card, type: :model do
     it { expect(card.plain_notes.active).to contain_exactly(note) }
     it { expect(card.plain_notes.count).to eq(2) }
 
+
+    it "sets acknowledge_id" do
+      expect {
+        card.save
+      }.to change(card, :acknowledge_id)
+    end
+
     describe "#close_acknowledge" do
       before(:each) do
-        connector.update(acknowledge_id: ack.id)
-        connector.reload
+        card.update_column(:acknowledge_id, ack.id)
+        card.reload
       end
 
       it "terminates current ack" do
-        expect(connector.acknowledge).to eq(ack)
+        expect(card.acknowledge).to eq(ack)
         expect {
-          connector.close_acknowledge
-        }.to change(connector, :acknowledge_id).to(nil)
+          card.close_acknowledge
+        }.to change(card, :acknowledge_id).to(nil)
       end
+
+      it "deletes acknowledge_id" do
+        expect(card.acknowledge).to eq(ack)
+        ack.update(valid_until: 1.minute.before(Time.current))
+        card.save
+        expect(card.acknowledge_id).to be(nil)
+      end
+
     end
   end
 

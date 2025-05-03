@@ -33,4 +33,8 @@ module NotableConcerns
     end
   end
 
+  def update_acknowledge_id
+    self[:acknowledge_id] = current_acknowledge&.id
+  end
+
 end

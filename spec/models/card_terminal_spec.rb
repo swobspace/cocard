@@ -354,18 +354,32 @@ RSpec.describe CardTerminal, type: :model do
     it { expect(ct.plain_notes.active).to contain_exactly(note) }
     it { expect(ct.plain_notes.count).to eq(2) }
 
+    it "sets acknowledge_id" do
+      expect {
+        ct.save
+      }.to change(ct, :acknowledge_id)
+    end
+
     describe "#close_acknowledge" do
       before(:each) do
-        connector.update(acknowledge_id: ack.id)
-        connector.reload
+        ct.update(acknowledge_id: ack.id)
+        ct.reload
       end
 
       it "terminates current ack" do
-        expect(connector.acknowledge).to eq(ack)
+        expect(ct.acknowledge).to eq(ack)
         expect {
-          connector.close_acknowledge
-        }.to change(connector, :acknowledge_id).to(nil)
+          ct.close_acknowledge
+        }.to change(ct, :acknowledge_id).to(nil)
       end
+
+      it "deletes acknowledge_id" do
+        expect(ct.acknowledge).to eq(ack)
+        ack.update(valid_until: 1.minute.before(Time.current))
+        ct.save
+        expect(ct.acknowledge_id).to be(nil)
+      end
+
     end
   end
 
