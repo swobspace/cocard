@@ -12,7 +12,15 @@
       <%= link_to raw('<span class="fa-solid fa-person-digging" aria-hidden="true"></span> ' +
             t('controller.cards')), main_app.cards_path(acknowledged: true), 
             class: "dropdown-item" %>
-
+      <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
+            t('cards.expired')), main_app.cards_path(expired: true), 
+            class: "dropdown-item" %>
+      <%= link_to raw( '<span class="fa-solid fa-fw fa-triangle-exclamation" aria-hidden="true"></span> ' +
+            t('cards.expired_in_use')), main_app.cards_path(expired: true, operational: true, outdated: false),
+            class: "dropdown-item" %>
+      <%= link_to raw( '<span class="fa-solid fa-fw fa-trash" aria-hidden="true"></span> ' +
+            t('cards.expired_and_outdated')), main_app.cards_path(expired: true, outdated:true), 
+            class: "dropdown-item" %>
       <% if @current_user&.is_admin? %>
       <div class="dropdown-divider"></div>
       <%= link_to raw( '<span class="fa-solid fa-fw fa-rotate-right" aria-hidden="true"></span> ' +

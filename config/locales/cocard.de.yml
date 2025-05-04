@@ -287,3 +287,6 @@ de:
       ACHTUNG! Es ist noch kein Kontext zugeordnet!
       Ohne einen Kontext stehen einige Funktionen nicht zur Verfügung
       - Abfrage der Zertifikatsdaten, Abfrage PIN-Status, PIN-Verifizierung
+    expired: Abgelaufene Karten
+    expired_and_outdated: Obsolete Karten
+    expired_in_use: Abgelaufene Karten in Benutzung
