@@ -12,6 +12,16 @@ class CardsController < ApplicationController
       @cards = Card.all
     end
 
+    if params[:expired]
+      @cards = Cards::Query.new(@cards, expired: true).all
+    end
+
+    if params[:outdated]
+      @cards = @cards.joins(:operational_state)
+                     .where(updated_at: ..1.day.before(Date.current))
+                     .where(operational_states: {operational: true})
+    end
+
     if params[:card_type]
       @cards = @cards.where(card_type: params[:card_type])
     end
