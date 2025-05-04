@@ -59,6 +59,8 @@ module Cards
         expiration_date: 1.year.after(Date.current)
       )
     end
+
+    let!(:card4) { FactoryBot.create(:card, deleted_at: 1.minute.before(Time.current)) }
   
     let!(:ack1) do
       FactoryBot.create(:note,
@@ -196,22 +198,30 @@ module Cards
       it_behaves_like "a card query"
     end
 
+    context "with expired: false" do
+      subject { Query.new(cards, {expired: 'nein'}) }
+      before(:each) do
+        @matching = [card2, card3]
+        @nonmatching = [card1]
+      end
+      it_behaves_like "a card query"
+    end
+
+    context "with deleted: true" do
+      subject { Query.new(cards, {deleted: 'ja'}) }
+      before(:each) do
+        @matching = [card4]
+        @nonmatching = [card1, card2, card3]
+      end
+      it_behaves_like "a card query"
+    end
+
     context "with outdated: true" do
       subject { Query.new(cards, {outdated: 'true'}) }
       before(:each) do
         card1.update_column(:updated_at, 2.days.before(Date.current))
         @matching = [card1]
         @nonmatching = [card2, card3]
-      end
-      it_behaves_like "a card query"
-    end
-
-
-    context "with expired: false" do
-      subject { Query.new(cards, {expired: 'nein'}) }
-      before(:each) do
-        @matching = [card2, card3]
-        @nonmatching = [card1]
       end
       it_behaves_like "a card query"
     end

@@ -192,6 +192,9 @@ bin/rails g migration AddCertificateToCard \
   cert_subject_postalcode:string \
   cert_subject_l:string \
   cert_subject_o:string
+
+bin/rails g migration AddDeletedAtToCard \
+  deleted_at:timestamp
 ----
 
 .app/models/card_terminal.rb

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_13_123600) do
+ActiveRecord::Schema[7.2].define(version: 2025_05_04_152123) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -145,6 +145,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_13_123600) do
     t.integer "condition", default: -1
     t.string "condition_message", default: ""
     t.bigint "acknowledge_id"
+    t.datetime "deleted_at", precision: nil
     t.index ["condition"], name: "index_cards_on_condition"
     t.index ["iccsn"], name: "index_cards_on_iccsn", unique: true
     t.index ["location_id"], name: "index_cards_on_location_id"

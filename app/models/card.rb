@@ -2,6 +2,7 @@ class Card < ApplicationRecord
   include CardConcerns
   include Cocard::Condition
   include NotableConcerns
+  include SoftDeletion
 
   # -- associations
   has_many :logs, as: :loggable, dependent: :destroy

@@ -192,7 +192,7 @@ class CardsController < ApplicationController
       searchparms = params.permit(*submit_parms, Card.attribute_names,
                                   :description, :slotid, :expired, :outdated,
                                   :search, :operational, :operational_state, :lid,
-                                  :acknowledged,
+                                  :acknowledged, :deleted,
                                   :limit).to_h
       searchparms.reject do |k, v|
         v.blank? || submit_parms.include?(k) || non_search_params.include?(k)

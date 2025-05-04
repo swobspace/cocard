@@ -93,6 +93,10 @@ module Cards
           else
             query = query.where("cards.updated_at >= ?", 1.day.before(Date.current))
           end
+        when :deleted
+          if to_boolean(value)
+            query = query.unscope(where: :deleted_at).where.not(deleted_at: nil)
+          end
         when :limit
           @limit = value.to_i
         when :search

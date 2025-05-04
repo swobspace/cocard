@@ -120,6 +120,7 @@ class Card {
   condition: integer
   condition_message: string
   acknowledge_id: bigint
+  deleted_at: timestamp
   card_terminal_id
   --
   certificate:text
