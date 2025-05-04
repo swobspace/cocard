@@ -39,7 +39,7 @@ module Cards
         iccsn: '9990001',
         operational_state: opsta,
         card_terminal: ct,
-        expiration_date: 1.day.before(Date.current)
+        expiration_date: 1.day.before(Date.current),
       )
     end
 
@@ -57,6 +57,14 @@ module Cards
         iccsn: '9980003',
         operational_state: opsta,
         expiration_date: 1.year.after(Date.current)
+      )
+    end
+  
+    let!(:ack1) do
+      FactoryBot.create(:note,
+        type: :acknowledge,
+        notable_type: 'Card',
+        notable_id: card1.id,
       )
     end
 
@@ -151,6 +159,34 @@ module Cards
       it_behaves_like "a card query"
     end
 
+    context "with operational: true" do
+      subject { Query.new(cards, {operational: 'JA'}) }
+      before(:each) do
+        @matching = [card1, card3]
+        @nonmatching = [card2]
+      end
+      it_behaves_like "a card query"
+    end
+
+    context "with operational: false" do
+      subject { Query.new(cards, {operational: '0'}) }
+      before(:each) do
+        @matching = [card2]
+        @nonmatching = [card1, card3]
+      end
+      it_behaves_like "a card query"
+    end
+
+    context "with acknowledged: true" do
+      subject { Query.new(cards, {acknowledged: 'true'}) }
+      before(:each) do
+        @matching = [card1]
+        @nonmatching = [card2, card3]
+        card1.update_acknowledge_id; card1.save
+      end
+      it_behaves_like "a card query"
+    end
+
     context "with expired: true" do
       subject { Query.new(cards, {expired: 'true'}) }
       before(:each) do
@@ -159,6 +195,17 @@ module Cards
       end
       it_behaves_like "a card query"
     end
+
+    context "with outdated: true" do
+      subject { Query.new(cards, {outdated: 'true'}) }
+      before(:each) do
+        card1.update_column(:updated_at, 2.days.before(Date.current))
+        @matching = [card1]
+        @nonmatching = [card2, card3]
+      end
+      it_behaves_like "a card query"
+    end
+
 
     context "with expired: false" do
       subject { Query.new(cards, {expired: 'nein'}) }
