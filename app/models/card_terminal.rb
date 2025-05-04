@@ -27,6 +27,7 @@ class CardTerminal < ApplicationRecord
   before_save :update_ip_and_location
   before_save :ensure_displayname
   before_save :update_condition
+  before_save :update_acknowledge_id
 
   validates :pin_mode, inclusion: { in: pin_modes.keys }
   validates_uniqueness_of :ct_id, scope: [:connector_id],
@@ -74,7 +75,7 @@ class CardTerminal < ApplicationRecord
     end
     if ip != current_ip
         return set_condition( Cocard::States::UNKNOWN,
-                              "IP Mismatch: gefundene und konfigurierte IP-Adresse weichen von einander ab" )
+                              "IP Mismatch: gefundene IP (#{current_ip}) und konfigurierte IP (#{ip}) weichen von einander ab" )
     end
     if reboot_active?
       return set_condition(Cocard::States::WARNING,

@@ -25,7 +25,7 @@ class CardTerminals::ConnectivityCheckJob < ApplicationJob
     if card_terminal.supports_rmi?
       if card_terminal.tcp_port_open?(card_terminal.rmi_port)
         text = "RMI-Port #{card_terminal.rmi_port} OK"
-        toaster(card_terminal, :warning, text)
+        toaster(card_terminal, :info, text)
       else
         text = "RMI-Port #{card_terminal.rmi_port} nicht erreichbar, kein Remote Management des Terminals möglich"
         toaster(card_terminal, :alert, text)

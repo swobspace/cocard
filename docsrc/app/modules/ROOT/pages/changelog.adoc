@@ -1,5 +1,11 @@
 = Changelog
 
+== 0.7.7 - 2025-05-04
+
+* Fix: Karten mit abgelaufenen Acknowledges werden wieder korrekt im Dashboard angezeigt
+* Suche nach abgelaufenen und nicht mehr benutzten Karten
+* IP Mismatch bei Kartenterminals: Anzeige der IPs jetzt auch in der Fehlermeldung
+
 == 0.7.6 - 2025-04-13
 
 * Ruhebildschirm setzen: Feedback bei Fehlern verbessert

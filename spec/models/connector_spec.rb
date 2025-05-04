@@ -235,6 +235,12 @@ RSpec.describe Connector, type: :model do
     it { expect(connector.plain_notes.active).to contain_exactly(note) }
     it { expect(connector.plain_notes.count).to eq(2) }
 
+    it "sets acknowledge_id" do
+      expect {
+        connector.save
+      }.to change(connector, :acknowledge_id)
+    end
+
     describe "#close_acknowledge" do
       before(:each) do
         connector.update(acknowledge_id: ack.id)
@@ -246,6 +252,13 @@ RSpec.describe Connector, type: :model do
         expect {
           connector.close_acknowledge
         }.to change(connector, :acknowledge_id).to(nil)
+      end
+
+      it "deletes acknowledge_id" do
+        expect(connector.acknowledge).to eq(ack)
+        ack.update(valid_until: 1.minute.before(Time.current))
+        connector.save
+        expect(connector.acknowledge_id).to be(nil)
       end
     end
   end

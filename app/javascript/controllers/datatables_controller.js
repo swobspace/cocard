@@ -18,7 +18,9 @@ export default class extends Controller {
     // set turbo-refresh-method to replace on each page with datatables
     // otherwise leave turbo-refresh-method untouched
     const turborefresh = document.querySelector('head meta[name="turbo-refresh-method"]')
-    turborefresh.setAttribute("content", "replace")
+    if (turborefresh) {
+      turborefresh.setAttribute("content", "replace")
+    }
 
     let _this = this
     let dtOptions = {}

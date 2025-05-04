@@ -25,6 +25,14 @@ RSpec.describe "/cards", type: :request do
     end
   end
 
+  describe "GET /index with search params" do
+    let!(:card1) { FactoryBot.create(:card, expiration_date: 1.day.before(Date.current)) }
+    it "renders a successful response" do
+      get cards_url(expired: true)
+      expect(response).to be_successful
+    end
+  end
+
   describe "GET /show" do
     it "renders a successful response" do
       card = Card.create! valid_attributes.merge({card_type: 'SMC-B'})
