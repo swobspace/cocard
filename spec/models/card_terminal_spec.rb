@@ -184,7 +184,7 @@ RSpec.describe CardTerminal, type: :model do
           expect {
             ct.update_condition
           }.to change(ct, :condition).to(Cocard::States::UNKNOWN)
-          expect(ct.condition_message).to match(/UNKNOWN IP Mismatch: gefundene und konfigurierte IP-Adresse weichen von einander ab/)
+          expect(ct.condition_message).to match(/UNKNOWN IP Mismatch: gefundene IP \(127.4.5.19\) und konfigurierte IP \(127.2.3.8\) weichen von einander ab/)
         end
       end
 

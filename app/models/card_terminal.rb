@@ -75,7 +75,7 @@ class CardTerminal < ApplicationRecord
     end
     if ip != current_ip
         return set_condition( Cocard::States::UNKNOWN,
-                              "IP Mismatch: gefundene und konfigurierte IP-Adresse weichen von einander ab" )
+                              "IP Mismatch: gefundene IP (#{current_ip}) und konfigurierte IP (#{ip}) weichen von einander ab" )
     end
     if reboot_active?
       return set_condition(Cocard::States::WARNING,
