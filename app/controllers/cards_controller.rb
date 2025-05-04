@@ -6,25 +6,15 @@ class CardsController < ApplicationController
   def index
     if @locatable
       @cards = @locatable.cards
-    elsif params[:acknowledged]
-      @cards = Card.acknowledged
     else
       @cards = Card.all
     end
 
-    if params[:expired]
-      @cards = Cards::Query.new(@cards, expired: true).all
+    if search_params.present?
+      @cards = @cards.left_outer_joins(:location, :operational_state)
+      @cards = Cards::Query.new(@cards, search_params).all
     end
 
-    if params[:outdated]
-      @cards = @cards.joins(:operational_state)
-                     .where(updated_at: ..1.day.before(Date.current))
-                     .where(operational_states: {operational: true})
-    end
-
-    if params[:card_type]
-      @cards = @cards.where(card_type: params[:card_type])
-    end
     respond_with(@cards)
   end
 
@@ -197,4 +187,24 @@ class CardsController < ApplicationController
                       :id, :context_id, :_destroy
                     ])
     end
+
+    def search_params
+      searchparms = params.permit(*submit_parms, Card.attribute_names,
+                                  :description, :slotid, :expired, :outdated,
+                                  :search, :operational, :operational_state, :lid,
+                                  :acknowledged,
+                                  :limit).to_h
+      searchparms.reject do |k, v|
+        v.blank? || submit_parms.include?(k) || non_search_params.include?(k)
+      end
+    end
+
+    def submit_parms
+      [ "utf8", "authenticity_token", "commit", "format", "view" ]
+    end
+
+    def non_search_params
+      [ ]
+    end
+
 end
