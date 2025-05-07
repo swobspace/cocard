@@ -156,6 +156,7 @@ de:
     lanr: LANR
     lid: Standort-Kürzel
     last_ok: zuletzt OK
+    last_check: Letzter Check
     last_seen: zuletzt gesehen
     level: Level
     location: Standort

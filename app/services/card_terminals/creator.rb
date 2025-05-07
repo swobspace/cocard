@@ -53,9 +53,7 @@ module CardTerminals
       #
       @card_terminal.firmware_version = @card_terminal.product_information&.firmware_version
 
-      #
-      # update location via ip->network now via model#save
-      #
+      @card_terminal.last_check = Time.current
 
       #
       # final save

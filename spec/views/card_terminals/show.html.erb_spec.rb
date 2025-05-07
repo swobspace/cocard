@@ -47,6 +47,7 @@ RSpec.describe "card_terminals/show", type: :view do
       serial: '11122277634',
       id_product: 'ORGA61411',
       last_ok: 1.day.before(ts),
+      last_check: ts,
       pin_mode: 'on_demand',
       network: network
     )

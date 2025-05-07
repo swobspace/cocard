@@ -267,7 +267,7 @@ bin/rails g migration AddInternalToCardTerminal \
   connected:boolean \
   condition:integer \
   condition_message:string  \
-  last_ok:timestamp \
+  last_ok:timestamp last_check:timestamp \
   connector:belongs_to \
   network:belongs_to \
   firmware_version:string \
@@ -330,6 +330,7 @@ bin/rails g migration AddInternalToCard \
   expiration_date:date \
   condition:integer \
   condition_message:string  \
+  last_check:timestamp last_ok:timestamp \
   acknowledge_id:bigint \
   card_terminal_slot:belongs_to
 

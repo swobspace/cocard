@@ -67,7 +67,7 @@ module Cards
         end
       end
 
-      @card.updated_at = Time.current
+      @card.last_check = Time.current
 
       Card.suppressing_turbo_broadcasts do
         
