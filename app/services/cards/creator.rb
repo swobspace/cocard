@@ -71,6 +71,11 @@ module Cards
           @card.send("#{attr}=", cc.send(attr))
         end
 
+        # card can only be in one slot, so nullify old slot if card slot changes
+        # before assigning card to a new slot
+        if card.card_terminal_slot && card.card_terminal_slot != slot
+          card.card_terminal_slot.update_column(:card_id, nil)
+        end
         slot.update(card_id: @card.id)
       end
 
