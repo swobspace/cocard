@@ -37,12 +37,16 @@ module Cocard
       FactoryBot.create(:card_terminal, :with_mac, connector: connector)
     end
 
+    let(:slot) do
+      FactoryBot.create(:card_terminal_slot, card_terminal: ct, slotid: 1)
+    end
+
     #
     # card
     #
     let(:card) do
       FactoryBot.create(:card, 
-        card_terminal: ct,
+        card_terminal_slot: slot,
         card_handle: 'ee676b27-5b40-4a40-9c65-979cc3113a1e',
         card_type: 'SMC-B'
       )

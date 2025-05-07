@@ -297,7 +297,6 @@ end</code></pre>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g model CardTerminalSlot \
   card_terminal:belongs_to \
-  card:belongs_to \
   slot:integer \
   --no-stylesheets --no-javascripts --no-helper</code></pre>
 </div>
@@ -332,7 +331,7 @@ bin/rails g migration AddInternalToCard \
   condition:integer \
   condition_message:string  \
   acknowledge_id:bigint \
-  card_terminal:belongs_to
+  card_terminal_slot:belongs_to
 
 bin/rails g migration AddCertificateToCard \
   certificate:text \
