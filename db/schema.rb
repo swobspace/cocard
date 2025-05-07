@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_05_04_152123) do
+ActiveRecord::Schema[7.2].define(version: 2025_05_07_122023) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -70,11 +70,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_04_152123) do
 
   create_table "card_terminal_slots", force: :cascade do |t|
     t.bigint "card_terminal_id", null: false
-    t.bigint "card_id"
     t.integer "slotid", default: -1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["card_id"], name: "index_card_terminal_slots_on_card_id", unique: true
     t.index ["card_terminal_id", "slotid"], name: "index_card_terminal_slots_on_card_terminal_id_and_slotid", unique: true
     t.index ["card_terminal_id"], name: "index_card_terminal_slots_on_card_terminal_id"
   end
@@ -146,6 +144,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_04_152123) do
     t.string "condition_message", default: ""
     t.bigint "acknowledge_id"
     t.datetime "deleted_at", precision: nil
+    t.bigint "card_terminal_slot_id"
+    t.index ["card_terminal_slot_id"], name: "index_cards_on_card_terminal_slot_id", unique: true
     t.index ["condition"], name: "index_cards_on_condition"
     t.index ["iccsn"], name: "index_cards_on_iccsn", unique: true
     t.index ["location_id"], name: "index_cards_on_location_id"

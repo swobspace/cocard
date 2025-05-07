@@ -148,7 +148,6 @@ end
 ----
 bin/rails g model CardTerminalSlot \
   card_terminal:belongs_to \
-  card:belongs_to \
   slot:integer \
   --no-stylesheets --no-javascripts --no-helper
 ----
@@ -180,7 +179,7 @@ bin/rails g migration AddInternalToCard \
   condition:integer \
   condition_message:string  \
   acknowledge_id:bigint \
-  card_terminal:belongs_to
+  card_terminal_slot:belongs_to
 
 bin/rails g migration AddCertificateToCard \
   certificate:text \

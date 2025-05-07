@@ -1,11 +1,10 @@
 class CardTerminalSlot < ApplicationRecord
   # -- associations
   belongs_to :card_terminal
-  belongs_to :card, optional: true
+  has_one :card, dependent: :nullify
   # -- configuration
   # -- validations and callbacks
   validates_uniqueness_of :slotid, scope: :card_terminal_id
-  validates_uniqueness_of :card_id, allow_nil: true
   before_save :update_card_location
   # -- common methods
 

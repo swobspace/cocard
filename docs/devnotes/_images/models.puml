@@ -69,7 +69,6 @@ class CardTerminal {
 class CardTerminalSlot {
   card_terminal_id: bigint
   slot: integer
-  card_id: bigint
 }
 
 class Location {
@@ -121,7 +120,7 @@ class Card {
   condition_message: string
   acknowledge_id: bigint
   deleted_at: timestamp
-  card_terminal_id
+  card_terminal_slot_id
   --
   certificate:text
   cert_subject_cn: string

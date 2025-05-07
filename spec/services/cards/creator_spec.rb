@@ -84,19 +84,17 @@ module Cards
       it { expect(subject.save).to be_truthy }
 
       describe 'with an existing card' do
+        let!(:cts) do
+          FactoryBot.create(:card_terminal_slot, card_terminal_id: ct.id, slotid: 1)
+        end
         let!(:card) do
           FactoryBot.create(:card, 
             iccsn: '80276002711000000000',
-            certificate: 'some string'
+            certificate: 'some string',
+            card_terminal_slot:  cts
           )
         end
-        let!(:cts) do
-          FactoryBot.create(:card_terminal_slot,
-            card_id: card.id,
-            card_terminal_id:
-            ct.id, slotid: 1
-          )
-        end
+
         before(:each) do 
           card.contexts << ctx; card.reload
         end
@@ -139,17 +137,17 @@ module Cards
       end
 
       context 'with a different card in slot' do
-        let!(:card) do
-          FactoryBot.create(:card, 
-            iccsn: '80276002711000009999',
-            certificate: 'some string'
-          )
-        end
         let!(:slot) do
           FactoryBot.create(:card_terminal_slot,
             card_terminal: ct,
             slotid: 1,
-            card: card
+          )
+        end
+        let!(:card) do
+          FactoryBot.create(:card, 
+            iccsn: '80276002711000009999',
+            certificate: 'some string',
+            card_terminal_slot: slot
           )
         end
 
