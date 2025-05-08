@@ -357,6 +357,15 @@ module CardTerminals
       it_behaves_like "a card_terminal query"
     end
 
+    context "with outdated: true" do
+      subject { Query.new(card_terminals, {outdated: 'true'}) }
+      before(:each) do
+        @matching = [ct1, ct2]
+        @nonmatching = [ct3]
+      end
+      it_behaves_like "a card_terminal query"
+    end
+
     describe "#all" do
       context "using :search'" do
         it "searches for displayname" do
