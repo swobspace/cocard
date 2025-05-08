@@ -85,6 +85,7 @@ RSpec.describe "card_terminals/show", type: :view do
     expect(rendered).to match(/11122277634/)
     expect(rendered).to match("127.0.0.0/8")
     expect(rendered).to match("On Demand")
+    expect(rendered).to match("#{1.day.before(ts).localtime.to_s.gsub(/\+.*/, '')}")
     expect(rendered).to match("#{ts.localtime.to_s.gsub(/\+.*/, '')}")
 
   end
