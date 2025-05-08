@@ -35,7 +35,7 @@
 
       <tr>
         <th class="w-10 pe-3"><%= t('attributes.valid_until')%>:</th>
-        <td><%= @client_certificate.valid_until.localtime %></td>
+        <td><%= @client_certificate.valid_until&.localtime %></td>
       </tr>
     </table>
   </div>

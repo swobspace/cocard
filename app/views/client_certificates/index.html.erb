@@ -34,7 +34,7 @@
           <td><%= client_certificate.name %></td>
           <td><%= client_certificate.client_system %></td>
           <td><%= client_certificate.description %></td>
-          <td><%= client_certificate.valid_until.localtime %></td>
+          <td><%= client_certificate.valid_until&.localtime %></td>
           <td class="text-nowrap">
             <%= show_link client_certificate %>
             <%= edit_link client_certificate %>
