@@ -54,6 +54,7 @@ module CardTerminals
         supplier: 'ACME Ltd. International',
         delivery_date: '2020-03-01',
         last_ok: ts,
+        last_check: 1.week.after(ts),
         network: network,
         pin_mode: :on_demand,
       )
@@ -72,6 +73,7 @@ module CardTerminals
         supplier: 'ACME Ltd. International',
         connector: conn,
         last_ok: ts - 1.week,
+        last_check: 1.week.after(ts),
         network: network,
         pin_mode: :on_demand,
       )
@@ -89,6 +91,7 @@ module CardTerminals
         plugged_in: 'Switch 17/4',
         supplier: 'ACME Ltd. International',
         last_ok: ts - 1.month,
+        last_check: Time.current,
         network: network,
       )
     end
@@ -221,6 +224,15 @@ module CardTerminals
 
     context "with :last_ok" do
       subject { Query.new(card_terminals, {last_ok: '2025-03'}) }
+      before(:each) do
+        @matching = [ct1, ct2]
+        @nonmatching = [ct3]
+      end
+      it_behaves_like "a card_terminal query"
+    end
+
+    context "with :last_check" do
+      subject { Query.new(card_terminals, {last_check: '25-03-18'}) }
       before(:each) do
         @matching = [ct1, ct2]
         @nonmatching = [ct3]

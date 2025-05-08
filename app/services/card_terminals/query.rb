@@ -122,7 +122,7 @@ module CardTerminals
     end
 
     def date_fields
-      [ :delivery_date, :last_ok, :updated_at
+      [ :delivery_date, :last_ok, :last_check, :updated_at
       ]
     end
 
