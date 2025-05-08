@@ -2,6 +2,9 @@ require 'rails_helper'
 
 RSpec.describe "/cards", type: :request do
   let(:ct) { FactoryBot.create(:card_terminal, :with_mac) }
+  let(:cts) do 
+    FactoryBot.create(:card_terminal_slot, card_terminal: ct, slotid: 4)
+  end
   let(:context) { FactoryBot.create(:context) }
   let(:ops) { FactoryBot.create(:operational_state, name: "roquefort") }
   let(:location) { FactoryBot.create(:location, lid: "AXXC") }
@@ -95,6 +98,7 @@ RSpec.describe "/cards", type: :request do
         iccsn: "8027912345678",
         card_holder_name: "Meister Quant",
         card_type: "HBA",
+        card_terminal_slot_id: cts.id,
         operational_state_id: ops.id,
         location_id: location.id,
         lanr: "999777333",
@@ -129,6 +133,7 @@ RSpec.describe "/cards", type: :request do
         expect(card.card_type).to eq("HBA")
         expect(card.operational_state).to eq(ops)
         expect(card.location).to eq(location)
+        expect(card.card_terminal_slot_id).to eq(cts.id)
         expect(card.lanr).to eq("999777333")
         expect(card.bsnr).to eq("222444666")
         expect(card.telematikid).to eq("1-2-3-456")

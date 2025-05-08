@@ -46,6 +46,19 @@
                            item: card.card_terminal,
                            small: true) %>
               <%= render LinkToComponent.new(item: card.card_terminal) %>
+              <% if can? :update, card and card.card_terminal_slot_id.present? %> 
+                <%= button_to "Reset", card,
+                      method: 'patch',
+                      class: 'btn btn-sm btn-warning ms-3',
+                      title: t('cards.reset_card_terminal'),
+                      form: {
+                        data: {
+                          "turbo-confirm": t('cards.reset_card_terminal') + '?'
+                        }
+                      },
+                      params: {card: { card_terminal_slot_id: nil}}
+                 %>
+              <% end %>
             </td>
           </tr>
           <tr>
