@@ -2,7 +2,7 @@
 :author: Wolfgang Barth
 :revdate: 2025-04-12
 :navtitle: Podman
-:cocardversion: 0.7.6
+:cocardversion: 0.7.8
 :rubyversion: 3.2.7
 
 Just a memo for todos and code snippets ...
@@ -37,6 +37,7 @@ podman run --rm -it cocard /bin/bash
 [source,sh,subs="+attributes"]
 ----
 podman tag cocard ghcr.io/swobspace/cocard:{cocardversion}
+podman tag cocard ghcr.io/swobspace/cocard:stable
 podman tag cocard ghcr.io/swobspace/cocard:latest
 ----
 
@@ -48,6 +49,7 @@ podman tag cocard ghcr.io/swobspace/cocard:latest
 export CR_PAT=YOUR_TOKEN
 echo $CR_PAT | podman login ghcr.io -u swobspace --password-stdin
 podman push ghcr.io/swobspace/cocard:{cocardversion}
+podman push ghcr.io/swobspace/cocard:stable
 podman push ghcr.io/swobspace/cocard:latest
 ----
 
