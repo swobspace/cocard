@@ -4,6 +4,8 @@
 
 * Fix: Der Wechsel einer Karte von einem Slot zu einem anderen (oder auch anderem Kartenterminal) wird jetzt korrekt dargestellt.
 * `last_check` für Karten und Terminals (letztes Auffinden über den Konnektor)
+* Hintergrundjob für das Aufräumen bei abgelaufenen Acknowledges insbesondere
+für Objekte, die aus anderen Gründen nicht mehr aktualisiert werden.
 
 == 0.7.7 - 2025-05-04
 

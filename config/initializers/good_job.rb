@@ -49,6 +49,11 @@ Rails.application.configure do
         class: "Cocard::CheckCertificateExpirationJob",
         description: "Get SMC-K certificate expiration from connector"
       }
+      cleanup_expired_acknowledges: {
+        cron: '30 05 * * *',
+        class: "CleanupExpiredAcknowledgesJob",
+        description: "Cleanup expired acknowledges"
+      }
     }
   }
 end
