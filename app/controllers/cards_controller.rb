@@ -155,7 +155,7 @@ class CardsController < ApplicationController
 
   # DELETE /cards/1
   def destroy
-    @card.destroy
+    @card.soft_delete
     respond_with(@card, location: polymorphic_path([@locatable, :cards]))
   end
 
@@ -180,6 +180,7 @@ class CardsController < ApplicationController
                     :card_holder_name, :location_id,
                     :operational_state_id, :lanr, :bsnr, :telematikid,
                     :fachrichtung, :context_id, :private_information,
+                    :card_terminal_slot_id,
                     :cert_subject_title, :cert_subject_sn, :cert_subject_givenname,
                     :cert_subject_street, :cert_subject_postalcode, :cert_subject_l,
                     :cert_subject_o, :cert_subject_cn, :expiration_date,
@@ -192,7 +193,7 @@ class CardsController < ApplicationController
       searchparms = params.permit(*submit_parms, Card.attribute_names,
                                   :description, :slotid, :expired, :outdated,
                                   :search, :operational, :operational_state, :lid,
-                                  :acknowledged,
+                                  :acknowledged, :deleted,
                                   :limit).to_h
       searchparms.reject do |k, v|
         v.blank? || submit_parms.include?(k) || non_search_params.include?(k)

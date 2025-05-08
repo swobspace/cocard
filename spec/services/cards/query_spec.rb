@@ -40,6 +40,7 @@ module Cards
         operational_state: opsta,
         card_terminal: ct,
         expiration_date: 1.day.before(Date.current),
+        last_check: 2.days.before(Date.current)
       )
     end
 
@@ -47,7 +48,8 @@ module Cards
       FactoryBot.create(:card,
         name: 'SMC-KT 0002',
         iccsn: '9980002',
-        expiration_date: 1.month.after(Date.current)
+        expiration_date: 1.month.after(Date.current),
+        last_check: Time.current
       )
     end
 
@@ -56,9 +58,12 @@ module Cards
         name: 'SMC-KT 0003',
         iccsn: '9980003',
         operational_state: opsta,
-        expiration_date: 1.year.after(Date.current)
+        expiration_date: 1.year.after(Date.current),
+        last_check: Time.current
       )
     end
+
+    let!(:card4) { FactoryBot.create(:card, deleted_at: 1.minute.before(Time.current)) }
   
     let!(:ack1) do
       FactoryBot.create(:note,
@@ -196,22 +201,29 @@ module Cards
       it_behaves_like "a card query"
     end
 
-    context "with outdated: true" do
-      subject { Query.new(cards, {outdated: 'true'}) }
-      before(:each) do
-        card1.update_column(:updated_at, 2.days.before(Date.current))
-        @matching = [card1]
-        @nonmatching = [card2, card3]
-      end
-      it_behaves_like "a card query"
-    end
-
-
     context "with expired: false" do
       subject { Query.new(cards, {expired: 'nein'}) }
       before(:each) do
         @matching = [card2, card3]
         @nonmatching = [card1]
+      end
+      it_behaves_like "a card query"
+    end
+
+    context "with deleted: true" do
+      subject { Query.new(cards, {deleted: 'ja'}) }
+      before(:each) do
+        @matching = [card4]
+        @nonmatching = [card1, card2, card3]
+      end
+      it_behaves_like "a card query"
+    end
+
+    context "with outdated: true" do
+      subject { Query.new(cards, {outdated: 'true'}) }
+      before(:each) do
+        @matching = [card1]
+        @nonmatching = [card2, card3]
       end
       it_behaves_like "a card query"
     end

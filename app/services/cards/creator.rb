@@ -41,8 +41,6 @@ module Cards
       
       slot = CardTerminalSlot.find_or_create_by!(card_terminal_id: ct.id, 
                                                  slotid: cc.slotid)
-      old_card_id = slot.card_id
-      
       @card = Card.find_or_initialize_by(iccsn: cc.iccsn) do |card|
                          Cocard::Card::ATTRIBUTES.each do |attr|
                            next if attr == :iccsn
@@ -50,6 +48,11 @@ module Cards
                          end
                        end
 
+      # remove slot reference from older other card
+      if slot.card && slot.card != @card
+        slot.card.update(card_terminal_slot_id: nil)
+      end
+      @card.card_terminal_slot_id = slot.id
 
       #
       # card seen by connector, so must be operational
@@ -58,39 +61,19 @@ module Cards
         @card.operational_state = OperationalState.operational.first
       end
 
-      #
-      # Disable this function
-      # set context if card.context.nil?
-      #
-      # if @card.contexts.empty?
-      #   @card.card_contexts.build(context_id: ctx.id)
-      # end
-
       if @card.persisted?
         Cocard::Card::ATTRIBUTES.each do |attr|
           @card.send("#{attr}=", cc.send(attr))
         end
-
-        slot.update(card_id: @card.id)
       end
 
-      @card.updated_at = Time.current
+      @card.last_check = Time.current
 
       Card.suppressing_turbo_broadcasts do
         
         if @card.save
-          slot.update(card_id: @card.id)
-          @card.reload_card_terminal_slot
-
           # update condition for new card
           @card.update_condition ; @card.save
-          
-          # update condition on old card
-          if @card.id != old_card_id && !old_card_id.nil?
-            c = Card.find(old_card_id)
-            c.save
-          end
-          true
         else
           Rails.logger.warn("WARN:: could not create or save card #{@card.iccsn}: " +
             @card.errors.full_messages.join('; '))

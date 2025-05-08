@@ -39,7 +39,7 @@ class CardTerminalsDatatable < ApplicationDatatable
         column << I18n.t(ct.pin_mode, scope: 'pin_modes').to_s
         column <<  ct.smckt&.iccsn.to_s
         column << render(Card::ExpirationDateComponent.new(card: ct.smckt))
-        column << render(UpdatedAtComponent.new(item: ct))
+        column << render(IsCurrentComponent.new(item: ct, attr: :last_check))
         column << render(IsCurrentComponent.new(item: ct, attr: :last_ok))
 
         links = []
@@ -112,7 +112,7 @@ class CardTerminalsDatatable < ApplicationDatatable
         card_terminals.pin_mode
         ""
         ""
-        card_terminals.updated_at
+        card_terminals.last_check
         card_terminals.last_ok
       ]
   end
@@ -141,7 +141,7 @@ class CardTerminalsDatatable < ApplicationDatatable
         pin_mode
         iccsn
         expiration_date
-        updated_at
+        last_check
         last_ok
      ]
   end

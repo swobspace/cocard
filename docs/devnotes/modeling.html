@@ -267,7 +267,7 @@ bin/rails g migration AddInternalToCardTerminal \
   connected:boolean \
   condition:integer \
   condition_message:string  \
-  last_ok:timestamp \
+  last_ok:timestamp last_check:timestamp \
   connector:belongs_to \
   network:belongs_to \
   firmware_version:string \
@@ -297,7 +297,6 @@ end</code></pre>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g model CardTerminalSlot \
   card_terminal:belongs_to \
-  card:belongs_to \
   slot:integer \
   --no-stylesheets --no-javascripts --no-helper</code></pre>
 </div>
@@ -331,8 +330,9 @@ bin/rails g migration AddInternalToCard \
   expiration_date:date \
   condition:integer \
   condition_message:string  \
+  last_check:timestamp last_ok:timestamp \
   acknowledge_id:bigint \
-  card_terminal:belongs_to
+  card_terminal_slot:belongs_to
 
 bin/rails g migration AddCertificateToCard \
   certificate:text \
@@ -343,7 +343,10 @@ bin/rails g migration AddCertificateToCard \
   cert_subject_street:string \
   cert_subject_postalcode:string \
   cert_subject_l:string \
-  cert_subject_o:string</code></pre>
+  cert_subject_o:string
+
+bin/rails g migration AddDeletedAtToCard \
+  deleted_at:timestamp</code></pre>
 </div>
 </div>
 <div class="listingblock">

@@ -51,14 +51,19 @@ module Cards
     end
 
     describe '#save' do
+      it 'creates a new card an a new card slot' do
+        expect do
+          subject.save
+        end.to change(Card, :count).by(1)
+        expect(subject.card).to be_kind_of(Card)
+        cts = subject.card.card_terminal_slot
+        expect(cts).to be_kind_of(CardTerminalSlot)
+        expect(cts.slotid).to eq(1)
+        expect(cts.card_terminal_id).to eq(ct.id)
+      end
+
       context 'new card' do
         let(:card) { subject.save; subject.card }
-        it 'create a new card' do
-          expect do
-            subject.save
-          end.to change(Card, :count).by(1)
-          expect(subject.card).to be_kind_of(Card)
-        end
 
         it { card.reload; expect(card.card_terminal).to eq(ct) }
         it { expect(card.name).to eq("") }
@@ -78,14 +83,21 @@ module Cards
 
       it { expect(subject.save).to be_truthy }
 
-      context 'with an existing card' do
+      describe 'with an existing card' do
+        let!(:cts) do
+          FactoryBot.create(:card_terminal_slot, card_terminal_id: ct.id, slotid: 1)
+        end
         let!(:card) do
           FactoryBot.create(:card, 
             iccsn: '80276002711000000000',
-            certificate: 'some string'
+            certificate: 'some string',
+            card_terminal_slot:  cts
           )
         end
-        before(:each) { card.contexts << ctx; card.reload }
+
+        before(:each) do 
+          card.contexts << ctx; card.reload
+        end
 
         it 'does not create a card' do
           expect {
@@ -93,6 +105,12 @@ module Cards
           }.to change(Card, :count).by(0)
           expect(subject.card).to be_kind_of(Card)
           expect(subject.card).to eq(card)
+        end
+
+        it 'does not create a new slot' do
+          expect {
+            subject.save
+          }.to change(CardTerminalSlot, :count).by(0)
         end
 
         it { expect(subject.save).to be_truthy }
@@ -109,6 +127,7 @@ module Cards
           it { expect(card.card_type).to eq("SMC-B") }
           it { expect(card.iccsn).to eq("80276002711000000000") }
           it { expect(card.slotid).to eq(1) }
+          it { expect(card.card_terminal_slot).to eq(cts) }
           it { expect(card.insert_time.floor).to eq(ts.floor) }
           it { expect(card.card_holder_name).to eq("Doctor Who's Universe") }
           it { expect(card.expiration_date).to eq(1.year.after(Date.current)) }
@@ -117,18 +136,18 @@ module Cards
         end
       end
 
-      context 'with a different card in ' do
-        let!(:card) do
-          FactoryBot.create(:card, 
-            iccsn: '80276002711000009999',
-            certificate: 'some string'
-          )
-        end
+      context 'with a different card in slot' do
         let!(:slot) do
           FactoryBot.create(:card_terminal_slot,
             card_terminal: ct,
             slotid: 1,
-            card: card
+          )
+        end
+        let!(:card) do
+          FactoryBot.create(:card, 
+            iccsn: '80276002711000009999',
+            certificate: 'some string',
+            card_terminal_slot: slot
           )
         end
 
@@ -165,8 +184,60 @@ module Cards
           }.not_to change(Card, :count)
         end
       end
-
     end
+
+    describe "same card, changing slots" do
+      let!(:card) do
+        FactoryBot.create(:card, 
+          iccsn: '80276002711000000000',
+          certificate: 'some string'
+        )
+      end
+      let!(:slot) do
+        FactoryBot.create(:card_terminal_slot,
+          card_terminal: ct,
+          slotid: 1,
+          card: card
+        )
+      end
+
+      context "with same card in other slot" do
+        it "changes slotid" do
+          expect(cc).to receive(:slotid).and_return(3)
+          expect(card.slotid).to eq(1)
+          expect {
+            subject.save
+          }.to change(CardTerminalSlot, :count).by(1)
+          slot.reload
+          card.reload
+          expect(card.card_terminal_slot).not_to eq(slot)
+          expect(card.slotid).to eq(3)
+          expect(slot.card).to be_nil
+        end
+      end
+
+      context "with same card in other ct" do
+        let!(:ct2) do
+          FactoryBot.create(:card_terminal, :with_mac,
+            connector_id: connector.id,
+            ct_id: 'CT_ID_0177'
+          )
+        end
+        it "changes card terminal" do
+          expect(cc).to receive(:ct_id).and_return('CT_ID_0177')
+          expect(card.card_terminal.ct_id).to eq('CT_ID_0176')
+          expect {
+            subject.save
+          }.to change(CardTerminalSlot, :count).by(1)
+          slot.reload
+          card.reload
+          expect(card.card_terminal.ct_id).to eq('CT_ID_0177')
+          expect(card.slotid).to eq(1)
+          expect(slot.card).to be_nil
+        end
+      end
+    end
+
     describe "with card_type 'EGK'" do
       before(:each) do
         card_hash.merge!({card_type: 'EGK'})

@@ -156,6 +156,7 @@ de:
     lanr: LANR
     lid: Standort-Kürzel
     last_ok: zuletzt OK
+    last_check: Letzter Check
     last_seen: zuletzt gesehen
     level: Level
     location: Standort
@@ -290,3 +291,5 @@ de:
     expired: Abgelaufene Karten
     expired_and_outdated: Obsolete Karten
     expired_in_use: Abgelaufene Karten in Benutzung
+    deleted: Gelöschte Karten
+    reset_card_terminal: Zuordnung zum Kartenterminal löschen

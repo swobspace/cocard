@@ -2,11 +2,12 @@ class Card < ApplicationRecord
   include CardConcerns
   include Cocard::Condition
   include NotableConcerns
+  include SoftDeletion
 
   # -- associations
   has_many :logs, as: :loggable, dependent: :destroy
 
-  has_one :card_terminal_slot, dependent: :nullify
+  belongs_to :card_terminal_slot, optional: true
   has_one :card_terminal, through: :card_terminal_slot
   has_many :card_contexts, dependent: :destroy
   has_many :contexts, through: :card_contexts

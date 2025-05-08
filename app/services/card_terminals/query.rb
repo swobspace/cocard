@@ -78,6 +78,12 @@ module CardTerminals
           query = query.where("cards.card_type = ?", 'SMC-KT')
                        .where("to_char(cards.expiration_date, 'YYYY-MM-DD') ILIKE ?", 
                               "%#{value}%")
+        when :outdated
+          if to_boolean(value)
+            query = query.where("card_terminals.last_check < ? or card_terminals.last_check IS NULL", 1.day.before(Date.current))
+          else
+            query = query.where("card_terminals.last_check >= ?", 1.day.before(Date.current))
+          end
         when :acknowledged
           query = query.acknowledged
         when :with_smcb
@@ -122,7 +128,7 @@ module CardTerminals
     end
 
     def date_fields
-      [ :delivery_date, :last_ok, :updated_at
+      [ :delivery_date, :last_ok, :last_check, :updated_at
       ]
     end
 

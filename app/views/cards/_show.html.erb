@@ -31,7 +31,7 @@
       <div class="col-12 col-lg-6">
         <table class="table table-sm table-borderless">
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.connector')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.connector')%>:</th>
             <td>
               <%= render ConditionIconComponent.new(
                            item: card.card_terminal&.connector,
@@ -40,25 +40,38 @@
             </td>
           </tr>
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.card_terminal')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.card_terminal')%>:</th>
             <td>
               <%= render ConditionIconComponent.new(
                            item: card.card_terminal,
                            small: true) %>
               <%= render LinkToComponent.new(item: card.card_terminal) %>
+              <% if can? :update, card and card.card_terminal_slot_id.present? %> 
+                <%= button_to "Reset", card,
+                      method: 'patch',
+                      class: 'btn btn-sm btn-warning ms-3',
+                      title: t('cards.reset_card_terminal'),
+                      form: {
+                        data: {
+                          "turbo-confirm": t('cards.reset_card_terminal') + '?'
+                        }
+                      },
+                      params: {card: { card_terminal_slot_id: nil}}
+                 %>
+              <% end %>
             </td>
           </tr>
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.name')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.name')%>:</th>
             <td><%= card.name %></td>
           </tr>
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.description')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.description')%>:</th>
             <td><%= card.description %></td>
           </tr>
           <% if can?(:read, card, :private_information) %>
             <tr>
-              <th class="w-10 pe-3"><%= t('attributes.private_information')%>:</th>
+              <th class="w-25 pe-3"><%= t('attributes.private_information')%>:</th>
               <td>
                 <%= content_tag :span,
                   "data-controller": "show-secret",
@@ -83,31 +96,31 @@
         </div>
         <table class="table table-sm table-borderless">
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.card_handle')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.card_handle')%>:</th>
             <td><%= card.card_handle %></td>
           </tr>
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.card_type')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.card_type')%>:</th>
             <td><%= card.card_type %></td>
           </tr>
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.iccsn')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.iccsn')%>:</th>
             <td><%= card.iccsn %></td>
           </tr>
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.slotid')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.slotid')%>:</th>
             <td><%= card.slotid %></td>
           </tr>
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.insert_time')%>:</th>
-            <td><%= card.insert_time %></td>
+            <th class="w-25 pe-3"><%= t('attributes.insert_time')%>:</th>
+            <td><%= card.insert_time&.localtime %></td>
           </tr>
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.card_holder_name')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.card_holder_name')%>:</th>
             <td><%= card.card_holder_name %></td>
           </tr>
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.expiration_date')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.expiration_date')%>:</th>
             <td><%= render Card::ExpirationDateComponent.new(card: card) %></td>
           </tr>
         </table>
@@ -121,18 +134,22 @@
         </div>
         <table class="table table-sm table-borderless">
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.condition')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.condition')%>:</th>
             <td><%= card.condition_message %></td>
           </tr>
           <% if card.card_type == 'SMC-B' %>
             <tr>
-              <th class="w-10 pe-3"><%= t('attributes.pin_status')%>:</th>
+              <th class="w-25 pe-3"><%= t('attributes.pin_status')%>:</th>
               <td><%= render Card::PinStatusComponent.new(card: card) %></td>
             </tr>
           <% end %>
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.updated_at')%>:</th>
-            <td><%= render UpdatedAtComponent.new(item: card) %></td>
+            <th class="w-25 pe-3"><%= t('attributes.last_check')%>:</th>
+            <td><%= render IsCurrentComponent.new(item: card, attr: :last_check) %></td>
+          </tr>
+          <tr>
+            <th class="w-25 pe-3"><%= t('attributes.last_ok')%>:</th>
+            <td><%= render IsCurrentComponent.new(item: card, attr: :last_ok) %></td>
           </tr>
         </table>
       </div>
@@ -155,29 +172,29 @@
         </div>
         <table class="table table-sm table-borderless">
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.location')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.location')%>:</th>
             <td><%= link_to(card.location, polymorphic_path(card.location),
                                             class: 'primary-link'
                             ) if card.location %></td>
           </tr>
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.operational_state')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.operational_state')%>:</th>
             <td><%= card.operational_state %></td>
           </tr>
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.bsnr')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.bsnr')%>:</th>
             <td><%= card.bsnr %></td>
           </tr>
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.lanr')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.lanr')%>:</th>
             <td><%= card.lanr %></td>
           </tr>
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.fachrichtung')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.fachrichtung')%>:</th>
             <td><%= card.fachrichtung %></td>
           </tr>
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.telematikid')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.telematikid')%>:</th>
             <td><%= card.telematikid %></td>
           </tr>
         </table>
@@ -190,35 +207,35 @@
         </div>
         <table class="table table-sm table-borderless">
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.cert_subject_cn')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.cert_subject_cn')%>:</th>
             <td><%= card.cert_subject_cn %></td>
           </tr>
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.cert_subject_title')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.cert_subject_title')%>:</th>
             <td><%= card.cert_subject_title %></td>
           </tr>
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.cert_subject_sn')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.cert_subject_sn')%>:</th>
             <td><%= card.cert_subject_sn %></td>
           </tr>
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.cert_subject_givenname')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.cert_subject_givenname')%>:</th>
             <td><%= card.cert_subject_givenname %></td>
           </tr>
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.cert_subject_street')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.cert_subject_street')%>:</th>
             <td><%= card.cert_subject_street %></td>
           </tr>
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.cert_subject_postalcode')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.cert_subject_postalcode')%>:</th>
             <td><%= card.cert_subject_postalcode %></td>
           </tr>
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.cert_subject_l')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.cert_subject_l')%>:</th>
             <td><%= card.cert_subject_l %></td>
           </tr>
           <tr>
-            <th class="w-10 pe-3"><%= t('attributes.cert_subject_o')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.cert_subject_o')%>:</th>
             <td><%= card.cert_subject_o %></td>
           </tr>
         </table>
