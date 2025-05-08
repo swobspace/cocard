@@ -171,11 +171,15 @@ RSpec.describe "/cards", type: :request do
   end
 
   describe "DELETE /destroy" do
-    it "destroys the requested card" do
+    it "soft_deletes the requested card" do
       card = Card.create! valid_attributes
+      # count decreases due to default_scope ...
       expect {
         delete card_url(card)
       }.to change(Card, :count).by(-1)
+      # ... but card exists
+      card.reload
+      expect(card).to be_persisted
     end
 
     it "redirects to the cards list" do
