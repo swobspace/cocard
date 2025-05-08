@@ -31,6 +31,9 @@ RSpec.describe "cards/index", type: :view do
         expiration_date: 1.year.after(Date.current),
         operational_state_id: ops.id,
         location_id: location.id,
+        last_ok: 1.month.before(ts),
+        insert_time: 1.week.before(ts),
+        last_check: ts,
         lanr: "999777333",
         bsnr: "222444667",
         telematikid: "1-2-3-456",
@@ -52,10 +55,12 @@ RSpec.describe "cards/index", type: :view do
         card_type: "SMC-KT",
         iccsn: "8027612345699",
         # slotid: 222999,
-        insert_time: ts,
         expiration_date: 1.year.after(Date.current),
         operational_state_id: ops.id,
         location_id: location.id,
+        last_ok: 1.month.before(ts),
+        insert_time: 1.week.before(ts),
+        last_check: ts,
         lanr: "999777333",
         bsnr: "222444667",
         telematikid: "1-2-3-456",
@@ -89,7 +94,9 @@ RSpec.describe "cards/index", type: :view do
     assert_select cell_selector, text: Regexp.new("8027612345699".to_s), count: 1
     assert_select cell_selector, text: Regexp.new("22888".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("22999".to_s), count: 0
-    assert_select cell_selector, text: Regexp.new(ts.to_s), count: 2
+    assert_select cell_selector, text: Regexp.new(1.month.before(ts).localtime.to_s.gsub(/\+.*/,'')), count: 2
+    assert_select cell_selector, text: Regexp.new(1.week.before(ts).localtime.to_s.gsub(/\+.*/,'')), count: 2
+    assert_select cell_selector, text: Regexp.new(ts.localtime.to_s.gsub(/\+.*/,'')), count: 2
     assert_select cell_selector, text: Regexp.new(1.year.after(Date.current).to_s), count: 2
     assert_select cell_selector, text: Regexp.new("im Schrank".to_s), count: 4
     assert_select cell_selector, text: Regexp.new("AXXC".to_s), count: 1

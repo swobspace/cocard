@@ -100,7 +100,7 @@
           </tr>
           <tr>
             <th class="w-25 pe-3"><%= t('attributes.insert_time')%>:</th>
-            <td><%= card.insert_time %></td>
+            <td><%= card.insert_time&.localtime %></td>
           </tr>
           <tr>
             <th class="w-25 pe-3"><%= t('attributes.card_holder_name')%>:</th>

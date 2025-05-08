@@ -24,7 +24,7 @@
         <th class="text-center notvisible"><%= t('attributes.slotid') %></th>
         <th class="notvisible"><%= t('attributes.card_handle') %></th>
         <th class="notvisible"><%= t('attributes.description') %></th>
-        <th><%= t('attributes.insert_time') %></th>
+        <th class="notvisible"><%= t('attributes.insert_time') %></th>
         <th><%= t('attributes.card_holder_name') %></th>
         <th><%= t('attributes.expiration_date') %></th>
         <th><%= t('attributes.operational_state') %></th>
@@ -33,19 +33,23 @@
         <th><%= t('attributes.bsnr') %></th>
         <th><%= t('attributes.telematikid') %></th>
         <th><%= t('attributes.fachrichtung') %></th>
-        <th><%= t('attributes.cert_subject_cn') %></th>
-        <th><%= t('attributes.cert_subject_title') %></th>
-        <th><%= t('attributes.cert_subject_sn') %></th>
-        <th><%= t('attributes.cert_subject_givenname') %></th>
-        <th><%= t('attributes.cert_subject_street') %></th>
-        <th><%= t('attributes.cert_subject_postalcode') %></th>
-        <th><%= t('attributes.cert_subject_l') %></th>
-        <th><%= t('attributes.cert_subject_o') %></th>
+        <th class="notvisible"><%= t('attributes.cert_subject_cn') %></th>
+        <th class="notvisible"><%= t('attributes.cert_subject_title') %></th>
+        <th class="notvisible"><%= t('attributes.cert_subject_sn') %></th>
+        <th class="notvisible"><%= t('attributes.cert_subject_givenname') %></th>
+        <th class="notvisible"><%= t('attributes.cert_subject_street') %></th>
+        <th class="notvisible"><%= t('attributes.cert_subject_postalcode') %></th>
+        <th class="notvisible"><%= t('attributes.cert_subject_l') %></th>
+        <th class="notvisible"><%= t('attributes.cert_subject_o') %></th>
+        <th class="notvisible"><%= t('attributes.last_check') %></th>
+        <th class="notvisible"><%= t('attributes.last_ok') %></th>
         <th class="nosort"><%= t('cocard.action') %></th>
       </tr>
     </thead>
     <tfoot class="search">
       <tr>
+        <th></th>
+        <th></th>
         <th></th>
         <th></th>
         <th></th>
@@ -103,7 +107,7 @@
           <td class="text-center"><%= card.slotid %></td>
           <td><%= card.card_handle %></td>
           <td><%= card.description %></td>
-          <td><%= card.insert_time %></td>
+          <td><%= card.insert_time&.localtime %></td>
           <td><%= card.card_holder_name %></td>
           <td><%= render Card::ExpirationDateComponent.new(card: card) %></td>
           <td><%= card.operational_state %></td>
@@ -120,6 +124,8 @@
           <td><%= card.cert_subject_postalcode %></td>
           <td><%= card.cert_subject_l %></td>
           <td><%= card.cert_subject_o %></td>
+          <td><%= card.last_check&.localtime %></td>
+          <td><%= card.last_ok&.localtime %></td>
           <td class="text-nowrap">
             <%= show_link card %>
             <%= edit_link card %>

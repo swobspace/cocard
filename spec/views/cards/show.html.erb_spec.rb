@@ -28,10 +28,12 @@ RSpec.describe "cards/show", type: :view do
       card_handle: "7fb65ede-0a37-11ef-8f85-c025a5b36994",
       card_type: "SMC-B",
       iccsn: "8027612345678",
-      insert_time: ts,
       card_holder_name: "Doctor Who's Universe",
       expiration_date: 1.year.after(Date.current),
       operational_state_id: ops.id,
+      last_ok: 1.month.before(ts),
+      insert_time: 1.week.before(ts),
+      last_check: ts,
       location_id: location.id,
       lanr: "999777333",
       bsnr: "222444666",
@@ -62,7 +64,9 @@ RSpec.describe "cards/show", type: :view do
     expect(rendered).to match(/SMC-B/)
     expect(rendered).to match(/8027612345678/)
     expect(rendered).to match(/22232/)
-    expect(rendered).to match(/#{ts.to_s}/)
+    expect(rendered).to match(/#{1.week.before(ts).localtime.to_s.gsub(/\+.*/, '')}/)
+    expect(rendered).to match(/#{1.month.before(ts).localtime.to_s.gsub(/\+.*/, '')}/)
+    expect(rendered).to match(/#{ts.localtime.to_s.gsub(/\+.*/, '')}/)
     expect(rendered).to match(/Doctor Who&#39;s Universe/)
     expect(rendered).to match(/#{1.year.after(Date.current)}/)
     expect(rendered).to match(/999777333/)
