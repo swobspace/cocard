@@ -89,9 +89,9 @@ module Cards
           end
         when :outdated
           if to_boolean(value)
-            query = query.where("cards.updated_at < ?", 1.day.before(Date.current))
+            query = query.where("cards.last_check < ? or cards.last_check IS NULL", 1.day.before(Date.current))
           else
-            query = query.where("cards.updated_at >= ?", 1.day.before(Date.current))
+            query = query.where("cards.last_check >= ?", 1.day.before(Date.current))
           end
         when :deleted
           if to_boolean(value)

@@ -40,6 +40,7 @@ module Cards
         operational_state: opsta,
         card_terminal: ct,
         expiration_date: 1.day.before(Date.current),
+        last_check: 2.days.before(Date.current)
       )
     end
 
@@ -47,7 +48,8 @@ module Cards
       FactoryBot.create(:card,
         name: 'SMC-KT 0002',
         iccsn: '9980002',
-        expiration_date: 1.month.after(Date.current)
+        expiration_date: 1.month.after(Date.current),
+        last_check: Time.current
       )
     end
 
@@ -56,7 +58,8 @@ module Cards
         name: 'SMC-KT 0003',
         iccsn: '9980003',
         operational_state: opsta,
-        expiration_date: 1.year.after(Date.current)
+        expiration_date: 1.year.after(Date.current),
+        last_check: Time.current
       )
     end
 
@@ -219,7 +222,6 @@ module Cards
     context "with outdated: true" do
       subject { Query.new(cards, {outdated: 'true'}) }
       before(:each) do
-        card1.update_column(:updated_at, 2.days.before(Date.current))
         @matching = [card1]
         @nonmatching = [card2, card3]
       end
