@@ -69,6 +69,7 @@ gem 'rails-i18n', '~> 7.0.0'
 gem 'view_component'
 gem 'cancancan'
 gem "wobauth", git: "https://github.com/swobspace/wobauth.git", branch: "main"
+gem 'wobaduser', git: 'https://github.com/swobspace/wobaduser', branch: 'master'
 
 group :test, :development do
   gem 'rspec-rails'

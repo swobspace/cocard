@@ -1,4 +1,14 @@
 GIT
+  remote: https://github.com/swobspace/wobaduser
+  revision: bbc5042dd54539a165e90a8204a86154247ca7ff
+  branch: master
+  specs:
+    wobaduser (1.0.0)
+      activesupport
+      immutable-struct
+      net-ldap
+
+GIT
   remote: https://github.com/swobspace/wobapphelpers
   revision: f818c595edabe82724c2a64c54a91323971b1e59
   branch: master
@@ -471,10 +481,6 @@ GEM
       base64
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    wobaduser (1.0.0)
-      activesupport
-      immutable-struct
-      net-ldap
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.7.2)
@@ -532,6 +538,7 @@ DEPENDENCIES
   view_component
   web-console
   webdriver
+  wobaduser!
   wobapphelpers!
   wobauth!
 
