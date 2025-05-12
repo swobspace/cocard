@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "~> 3.2.2"
+ruby "~> 3.3.8"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.2.0"
@@ -115,3 +115,5 @@ gem "eventmachine", "~> 1.2"
 gem "faraday-cookie_jar", "~> 0.0.7"
 
 gem "faraday-net_http_persistent", "~> 2.3"
+
+gem "csv"

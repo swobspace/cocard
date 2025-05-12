@@ -133,6 +133,7 @@ GEM
     crass (1.0.6)
     cssbundling-rails (1.4.3)
       railties (>= 6.0.0)
+    csv (3.2.8)
     date (3.4.1)
     debug (1.10.0)
       irb (~> 1.10)
@@ -492,6 +493,7 @@ DEPENDENCIES
   cancancan
   capybara
   cssbundling-rails
+  csv
   debug
   dotenv
   eventmachine (~> 1.2)
@@ -534,7 +536,7 @@ DEPENDENCIES
   wobauth!
 
 RUBY VERSION
-   ruby 3.2.2p53
+   ruby 3.3.8p144
 
 BUNDLED WITH
    2.5.5
