@@ -9,8 +9,8 @@ GIT
 
 GIT
   remote: https://github.com/swobspace/wobauth.git
-  revision: 8686d1d9d1a7c94c142ffa2b08957ee2e32db134
-  branch: master
+  revision: 495c621f8c90a5521b63165ea60925685d1fe6bf
+  branch: main
   specs:
     wobauth (7.1.0)
       cancancan
@@ -21,7 +21,7 @@ GIT
       simple_form
       stimulus-rails
       view_component
-      wobaduser (~> 1.0)
+      wobaduser
       wobapphelpers (>= 6.00)
 
 GEM
@@ -143,7 +143,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    diff-lcs (1.6.1)
+    diff-lcs (1.6.2)
     domain_name (0.6.20240107)
     dotenv (3.1.8)
     drb (2.2.1)
@@ -316,7 +316,7 @@ GEM
     pry (0.15.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
-    psych (5.2.4)
+    psych (5.2.5)
       date
       stringio
     public_suffix (6.0.2)
@@ -324,8 +324,8 @@ GEM
       nio4r (~> 2.0)
     raabro (1.4.0)
     racc (1.8.1)
-    rack (3.1.13)
-    rack-session (2.1.0)
+    rack (3.1.14)
+    rack-session (2.1.1)
       base64 (>= 0.1.0)
       rack (>= 3.0.0)
     rack-test (2.2.0)
@@ -390,7 +390,7 @@ GEM
     rspec-expectations (3.13.4)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
-    rspec-mocks (3.13.3)
+    rspec-mocks (3.13.4)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
     rspec-rails (8.0.0)
