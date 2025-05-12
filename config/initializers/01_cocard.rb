@@ -1,4 +1,8 @@
 module Cocard
+  CONFIGFILE = File.join(Rails.root, 'config', 'cocard.yml')
+  config = YAML.load_file(CONFIGFILE) if File.readable? CONFIGFILE
+  CONFIG = config || {}
+
   CONFIGURATION_CONTROLLER = [
     'locations',
     'networks',
@@ -37,6 +41,28 @@ module Cocard
       {{ mac | slice: -6, 6 }}
     {%- endif -%}
 EOTMPL
+  end
+
+  def self.fetch_config(attribute, default_value)
+    CONFIG[attribute.to_s].presence || default_value
+  end
+
+  def self.ldap_options
+    if CONFIG['ldap_options'].present?
+      ldapopts = CONFIG['ldap_options']
+      ldapopts = [ldapopts] if ldapopts.is_a? Hash
+      ldapopts.each do |opts|
+        opts.symbolize_keys!
+        opts.each do |k, _v|
+          opts[k] = opts[k].symbolize_keys if opts[k].is_a? Hash
+        end
+      end
+    end
+  end
+
+  def self.enable_ldap_authentication
+    return false unless self.ldap_options.present?
+    fetch_config('enable_ldap_authentication', false)
   end
 
   Rails.application.routes.default_url_options = {
