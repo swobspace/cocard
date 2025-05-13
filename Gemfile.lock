@@ -19,10 +19,10 @@ GIT
 
 GIT
   remote: https://github.com/swobspace/wobauth.git
-  revision: 193384dae3f2615b04a44abf607220a654ef0d76
+  revision: be7e7b266208fc81f47d346236e70337eb9a5f27
   branch: main
   specs:
-    wobauth (7.1.0)
+    wobauth (7.2.0)
       cancancan
       devise
       immutable-struct
@@ -143,7 +143,7 @@ GEM
     crass (1.0.6)
     cssbundling-rails (1.4.3)
       railties (>= 6.0.0)
-    csv (3.2.8)
+    csv (3.3.4)
     date (3.4.1)
     debug (1.10.0)
       irb (~> 1.10)
@@ -245,7 +245,7 @@ GEM
       reline (>= 0.4.2)
     jsbundling-rails (1.3.1)
       railties (>= 6.0.0)
-    json (2.11.3)
+    json (2.12.0)
     json_spec (1.1.5)
       multi_json (~> 1.0)
       rspec (>= 2.0, < 4.0)
@@ -260,7 +260,7 @@ GEM
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     logger (1.7.0)
-    loofah (2.24.0)
+    loofah (2.24.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
     lumberjack (1.2.10)
@@ -276,7 +276,7 @@ GEM
       benchmark
       logger
     mini_mime (1.1.5)
-    mini_portile2 (2.8.8)
+    mini_portile2 (2.8.9)
     minitest (5.25.5)
     msgpack (1.8.0)
     multi_json (1.15.0)
@@ -327,7 +327,7 @@ GEM
     pry (0.15.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
-    psych (5.2.5)
+    psych (5.2.6)
       date
       stringio
     public_suffix (6.0.2)
