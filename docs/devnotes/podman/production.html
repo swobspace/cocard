@@ -142,7 +142,7 @@
 <div class="listingblock">
 <div class="title">Update ruby base image</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">podman pull docker.io/library/ruby:3.2.7-slim</code></pre>
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">podman pull docker.io/library/ruby:3.3-slim</code></pre>
 </div>
 </div>
 </div>
@@ -166,7 +166,7 @@
 <div class="listingblock">
 <div class="title">Tag image</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">podman tag cocard ghcr.io/swobspace/cocard:0.7.8
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">podman tag cocard ghcr.io/swobspace/cocard:0.8.0
 podman tag cocard ghcr.io/swobspace/cocard:stable
 podman tag cocard ghcr.io/swobspace/cocard:latest</code></pre>
 </div>
@@ -179,7 +179,7 @@ podman tag cocard ghcr.io/swobspace/cocard:latest</code></pre>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">export CR_PAT=YOUR_TOKEN
 echo $CR_PAT | podman login ghcr.io -u swobspace --password-stdin
-podman push ghcr.io/swobspace/cocard:0.7.8
+podman push ghcr.io/swobspace/cocard:0.8.0
 podman push ghcr.io/swobspace/cocard:stable
 podman push ghcr.io/swobspace/cocard:latest</code></pre>
 </div>

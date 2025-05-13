@@ -24,3 +24,4 @@
 
 ** xref:admin/client-certificates.adoc[]
 // *** xref:certs/telematik-ca.adoc[]
+** xref:admin/ldap-authentication.adoc[]

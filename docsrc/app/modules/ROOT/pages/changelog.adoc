@@ -2,6 +2,10 @@
 
 == 0.8.0-dev - unreleased
 
+* Authentifikation gegen LDAP parallel zur lokalen Datenbank
+* Benutzeranlage mit Vorlage aus einem LDAP-Verzeichnisdienst
+* Upgrade auf Ruby 3.3
+
 == 0.7.8 - 2025-05-08
 
 * Fix: Der Wechsel einer Karte von einem Slot zu einem anderen (oder auch anderem Kartenterminal) wird jetzt korrekt dargestellt.
