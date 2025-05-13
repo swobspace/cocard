@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "~> 3.2.2"
+ruby "~> 3.3.8"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.2.0"
@@ -68,7 +68,8 @@ gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers',
 gem 'rails-i18n', '~> 7.0.0'
 gem 'view_component'
 gem 'cancancan'
-gem "wobauth", git: "https://github.com/swobspace/wobauth.git", branch: "master"
+gem "wobauth", git: "https://github.com/swobspace/wobauth.git", branch: "main"
+gem 'wobaduser', git: 'https://github.com/swobspace/wobaduser', branch: 'master'
 
 group :test, :development do
   gem 'rspec-rails'
@@ -115,3 +116,5 @@ gem "eventmachine", "~> 1.2"
 gem "faraday-cookie_jar", "~> 0.0.7"
 
 gem "faraday-net_http_persistent", "~> 2.3"
+
+gem "csv"

@@ -17,4 +17,6 @@ Wobauth.setup do |config|
   # or for ancestry trees:
   # config.authorized_for_group_method = :arrange_as_array
   #
+  config.ldap_config = File.join( Rails.root, 'config', 'cocard.yml')
+  config.enable_ldap_authenticatable = Cocard.enable_ldap_authentication
 end

@@ -1,0 +1,105 @@
+= LDAP-Authentifikation
+:author: Wolfgang Barth
+:revdate: 2025-05-13
+:imagesdir: ../../images
+:experimental: true
+
+
+Ab Version 0.8.0 kann Cocard Benutzer auch per LDAP gegen ein Active Directory authentifizieren. Die Authentifikation ist sehr einfach aufgebaut und führt nur einen LDAP-Bind mit dem Benutzernamen durch - oder anders formuliert, der Benutzername muss so vom LDAP-Verzeichnisdienst als vollständige Konto-Angabe akzeptiert werden. Die Berechtigungsvergabe erfolgt weiterhin ausschließlich in Cocard.
+
+== Voraussetzungen 
+
+Damit die Authentifikation per LDAP klappt, müssen folgende Voraussetzungen erfüllt sein:
+
+* Der Benutzer muss mit dem verwendeten Login-Namen in Cocard angelegt sein und über Berechtigungen für den Zugriff verfügen.
+* Der Benutzer muss gültig sein, d.h. das Konto darf nicht abgelaufen oder gesperrt sein.
+* Der Benutzername muss für ein LDAP-Bind ausreichend sein, es findet keine explizite Suche nach einem passenden Distinguished Name (DN) statt.
+
+== Beispiel für einen Usernamen bei Verwendung eines Active Directorys
+
+.Beispieldaten
+[%autowidth,cols=",m"]
+|===
+|Was | Wert
+
+|Displayname    | Max Mustermann
+|samAccountName | muma
+|Domäne (full)  | example.org
+|Domäne (short) | EXAMPLE
+|userPrincipalName | max.mustermann@example.org
+
+|===
+
+.mögliche Usernamen im Active Directory
+* `max.mustermann@example.org`
+* `muma@example`
+
+NOTE: Die hier vorgestellten möglichen Benutzernamen müssen so in Cocard angelegt sein und funktionieren nur in Kombination mit einem Active Directory.
+
+Falls Bedarf besteht, andere LDAP-Verzeichnisdienste mit Cocard zu koppeln, bitte Kontakt mit dem Autor aufnehmen.
+
+== Konfiguration
+
+=== YAML-Konfigurationsdatei
+
+.`cocard.yml`
+----
+enable_ldap_authentication: true <!--1--> 
+ldap_options: <!--2-->
+  # first active directory structure accessed via global catalog
+  - hosts: <!--3-->
+      - [ dc1.example.org, 3269 ] <!--4-->
+      - [ dc2.example.org, 3269 ]
+    base: dc=example,dc=org <!--5-->
+    encryption: :simple_tls <!--6--> 
+    auth:
+      method: :simple
+      username: readonlyuser <!--7-->
+      password: strong secret
+  # second active directory structure with single domain
+  - host: second.example.net <!--8-->
+    port: 636 <!--9-->
+    base: dc=example,dc=net
+    encryption: :simple_tls
+    auth:
+      method: :simple
+      username: otherreadonlyuser
+      password: otherstrongsecret
+----
+<1> Aktivierung der Authentifikation via LDAP. Mit `false` kann man die Authentifikation unterbinden und trotzdem LDAP für die `Benutzeranlage mit Vorlage` verwenden.
+<2> Array von LDAP-Optionen für die Authentifikation gegen verschiedene LDAP-Verzeichnisdienste
+<3> Verzeichnisdienst mit mehreren Servern zwecks Ausfallsicherheit. Alle Server hier müssen diesselbe Information aus dem gleichen Verzeichnisdienst liefern.
+<4> Host, Port als Array. `3269` ist der SSL-Port des globalen Kataloges
+<5> Suchbasis des Verzeichnisdienstes
+<6> TLS aktivieren
+<7> Einfacher User mit nur Leserechten im Verzeichnisdienst (Active Directory: Domänengast genügt). Wird für die `Benutzeranlage mit Vorlage` verwendet.
+<8> Weiterer Verzeichnisdienst, aber diesmal nur ein einfacher Host ohne Redundanz.
+<9> LDAP-TLS-Port
+
+Eine ausführlichere Beschreibung der Parameter findet sich unter
+https://www.rubydoc.info/gems/net-ldap/Net/LDAP.
+
+=== Einbindung in den Container
+
+Die Konfigurationsdatei `cocard.yml` mappt man im Container in das Verzeichnis `/rails/config`:
+
+.cocard.container
+----
+[Container]
+...
+Volume=./cocard.yml:/rails/config/cocard.yml:ro,z
+...
+----
+
+== Benutzer mit Vorlage anlegen
+
+Bei bestehender LDAP-Anbindung kann der Verzeichnisdienst auch zur Anlage von Benutzern verwendet werden. Auf der Seite menu:Benutzer[] klickt man auf den Button btn:[Benutzer mit Vorlage erstellen] und gelangt damit in ein Suchformular, mit dem man Benutzer aus dem Verzeichnisdienst auswählen kann. Wenn die Anzeige nicht eindeutig ist kann man über menu:Sichtbare Spalten[] weitere Spalten einblenden lassen, die sich auf Felder in einem Active Directory beziehen.
+
+
+image::user/ad_user-index-test.png[]
+
+Über den Button btn:[+] am Ende einer Zeile gelangt man in das Formular menu:Benutzer erstellen[], in dem bereits einige Felder vorausgefüllt wurden, sofern der Verzeichnisdienst diese bereitstellt.
+
+image::user/ad_user-new-test.png[]
+
+Nach dem Speichern des Benutzers sind noch Berechtigungen zu vergeben, ohne die der User Cocard sonst nicht verwenden kann.

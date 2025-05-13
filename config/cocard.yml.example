@@ -1,0 +1,21 @@
+enable_ldap_authentication: true
+ldap_options:
+  # first active directory structure accessed via global catalog
+  - hosts:
+      - [ dc1.example.com, 3269 ]
+      - [ dc2.example.com, 3269 ]
+    base: dc=example,dc=com
+    encryption: :simple_tls
+    auth:
+      method: :simple
+      username: readonlyuser
+      password: strong secret
+  # second active directory structure with single domain
+  - host: second.example.net
+    port: 636
+    base: dc=example,dc=net
+    encryption: :simple_tls
+    auth:
+      method: :simple
+      username: otherreadonlyuser
+      password: otherstrongsecret
