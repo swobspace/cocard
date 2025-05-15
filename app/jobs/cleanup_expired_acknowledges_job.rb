@@ -9,7 +9,9 @@ class CleanupExpiredAcknowledgesJob < ApplicationJob
 
   def perform()
     Note.where(type: :acknowledge, valid_until: ..Time.current).each do |ack|
-      unless ack.notable.acknowledge_id.nil?
+      if ack.notable.nil?
+        ack.destroy # should not occur
+      elsif !ack.notable.acknowledge_id.nil?
         ack.notable.update(acknowledge_id: nil)
       end
     end
