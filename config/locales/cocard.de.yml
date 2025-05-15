@@ -145,6 +145,7 @@ de:
     displayname: Anzeigename
     expiration_date: Ablaufdatum
     fachrichtung: Fachrichtung
+    firmware_version: Firmware Version
     givenname: Vorname
     iccsn: ICCSN
     id_contract: Vertragsnummer
