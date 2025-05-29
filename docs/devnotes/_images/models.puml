@@ -189,7 +189,17 @@ Class Note {
   user_id
 }
 
+Class Tag {
+  name: string
+}
+
+Class Tagging {
+  tag_id
+  taggable: polymorphic
+}
+
 Network "*" - "1" Location
+Network "1" -- "*" CardTerminal
 Location "*" -- "*" Connector
 Context "*" -- "*" Connector
 Connector "0..1" - "*" CardTerminal
@@ -208,6 +218,12 @@ CardTerminal "1" -- "*" Log
 Card "1" -- "*" Log
 
 Connector "*" -- "*" ClientCertificate
+
+Tag "1" -- "*" Tagging
+
+'Just for Layout
+Note -[hidden]- SinglePicture
+SinglePicture -[hidden]- Tag
 
 Class SinglePicture {
   time: timestamp
