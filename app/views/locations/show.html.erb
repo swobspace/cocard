@@ -29,6 +29,13 @@
         <th class="w-10 pe-3"><%= t('attributes.description')%>:</th>
         <td><%= @location.description %></td>
       </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.tag')%>:</th>
+        <td>
+          <%= render TagListComponent.new(item: @location) %>
+        </td>
+      </tr>
     </table>
   </div>
 </div>

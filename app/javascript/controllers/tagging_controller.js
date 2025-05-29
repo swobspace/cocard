@@ -10,9 +10,12 @@ export default class extends Controller {
       whitelist: this.optionsValue,
       dropdown: {
         maxItems: 7,
+        enabled: 0,
+        position: "text",
         closeOnSelect: false,
         highlightFirst: true
       }
     })
+    console.log(this.optionsValue)
   }
 }

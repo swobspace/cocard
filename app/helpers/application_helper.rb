@@ -10,15 +10,11 @@ module ApplicationHelper
 
   def tag_list_input(form)
     form.input :tag_list_input,
-      place_holder: t('activerecord.models.tag', count: 2),
-      input_html: {
-        value: form.object.tag_list.to_json,
-        class: "form-select",
-      },
-      data: {
-        controller: "tagging",
-        "tagging-options-value": form.object.class.tags
-      }
+               input_html: {
+                 value: form.object.tag_list.to_json,
+                 class: "form-select",
+                 data: { controller: "tagging",
+                         "tagging-options-value": Tag.all.map(&:name)} }
   end
 
 end
