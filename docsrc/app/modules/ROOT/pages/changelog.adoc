@@ -2,6 +2,9 @@
 
 == 0.8.1 - unreleased
 
+* Kartenterminal: Firmwareversion ins Formular mit aufgenommen für manuellen 
+  Eintrag bei mobilen Kartenterminals
+
 == 0.8.0 - 2025-05-13
 
 * Authentifikation gegen LDAP parallel zur lokalen Datenbank
