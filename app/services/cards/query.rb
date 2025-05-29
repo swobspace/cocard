@@ -12,6 +12,7 @@ module Cards
     # * :ip - string
     # * :condition - integer
     # * :lid - string
+    # * :location_id - integer
     # * :search - string
     # * :id - integer
     # * :limit - limit result (integer)
@@ -61,6 +62,8 @@ module Cards
           query = query.where(key.to_sym => value)
         when :lid
           query = query.where("locations.lid ILIKE ?", "%#{value}%")
+        when :location_id
+          query = query.where("locations.id = ?", value.to_i)
         when :operational_state
           query = query.where("operational_states.name ILIKE ?", "%#{value}%")
         when :operational

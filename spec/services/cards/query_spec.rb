@@ -128,6 +128,15 @@ module Cards
       it_behaves_like "a card query"
     end # :description
 
+    context "with :location_id" do
+      subject { Query.new(cards, {location_id: ber.id}) }
+      before(:each) do
+        @matching = [card1]
+        @nonmatching = [card2, card3]
+      end
+      it_behaves_like "a card query"
+    end
+
     context "with :lid" do
       subject { Query.new(cards, {lid: 'ber'}) }
       before(:each) do
