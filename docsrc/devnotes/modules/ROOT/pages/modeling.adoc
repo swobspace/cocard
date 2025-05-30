@@ -299,7 +299,7 @@ enum type: { plain: 0, acknowledge: 1 }
 
 [source,sh]
 ----
-bin/rails g scaffold Tag \
+bin/rails g model Tag \
   name:string:index \
   --no-stylesheets --no-javascripts --no-helper
 ----
@@ -308,7 +308,7 @@ bin/rails g scaffold Tag \
 
 [source,sh]
 ----
-bin/rails g scaffold Tagging \
+bin/rails g model Tagging \
   taggable:belongs_to{polymorphic} \
   tag:belongs_to \
   --no-stylesheets --no-javascripts --no-helper
