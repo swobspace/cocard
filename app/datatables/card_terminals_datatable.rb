@@ -26,6 +26,7 @@ class CardTerminalsDatatable < ApplicationDatatable
         column <<  ct.ip.to_s
         column <<  ct.connected.to_s
         column <<  ct.location&.lid
+        column <<  ct.tag_list.join(", ")
         column <<  ct.room
         column <<  ct.plugged_in
         column <<  ct.contact
@@ -99,6 +100,7 @@ class CardTerminalsDatatable < ApplicationDatatable
         card_terminals.ip
         card_terminals.connected
         card_terminals.location_id
+        tags.name
         card_terminals.room
         card_terminals.plugged_in
         card_terminals.contact
@@ -128,6 +130,7 @@ class CardTerminalsDatatable < ApplicationDatatable
         ip
         connected
         lid
+        tag
         room
         plugged_in
         contact

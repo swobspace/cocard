@@ -65,6 +65,8 @@ module CardTerminals
           else
             query = query.where(condition: i18n_search(value, I18n.t('cocard.condition')))
           end
+        when :tag
+          query = query.joins(taggings: :tag).where("tags.name ILIKE ?", "%#{value}%")
         when :connected
           query = query.where(connected: to_boolean(value))
         when :connector
