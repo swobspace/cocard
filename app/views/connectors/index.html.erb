@@ -21,6 +21,7 @@
             <th class="notvisible"><%= t('attributes.sds_url') %></th>
             <th class="notvisible"><%= t('attributes.manual_update') %></th>
             <th><%= t('attributes.locations') %></th>
+            <th><%= t('controller.tags') %></th>
             <th class="text-center"><%= t('attributes.firmware_version') %></th>
             <th class="notvisible"><%= t('attributes.description') %></th>
             <th><%= t('attributes.vpnti_online') %></th>
@@ -38,6 +39,7 @@
     </thead>
     <tfoot class="search">
       <tr>
+            <th></th>
             <th></th>
             <th></th>
             <th></th>
@@ -79,6 +81,9 @@
           <td><%= connector.sds_url %></td>
           <td><%= connector.manual_update %></td>
           <td><%= connector.locations.order(:lid).map(&:lid).join(' - ') %></td>
+          <td>
+            <%= render TagListComponent.new(item: connector) %>
+          </td>
           <td class="text-center"><%= connector.firmware_version %></td>
           <td><%= connector.description %></td>
           <td class="text-center">

@@ -198,6 +198,7 @@ de:
     status: Status
     supplier: Lieferant
     tag: Tag
+    tag_list_input: Tags
     telematikid: Telematik-ID
     type: Typ
     updated_at: zuletzt aktualisiert

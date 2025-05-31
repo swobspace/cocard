@@ -108,6 +108,7 @@ RSpec.describe "/card_terminals", type: :request do
         connector_id: connector.id,
         pin_mode: 'on_demand',
         last_ok: 1.day.before(ts),
+        tag_list_input: [{value: "MyTag"}].to_json,
         firmware_version: '1.2.30'
       }}
 
@@ -132,6 +133,7 @@ RSpec.describe "/card_terminals", type: :request do
         expect(card_terminal.pin_mode.to_s).to eq('on_demand')
         expect(card_terminal.last_ok).to eq(1.day.before(ts).to_s)
         expect(card_terminal.firmware_version).to eq('1.2.30')
+        expect(card_terminal.tags.map(&:name)).to contain_exactly("MyTag")
       end
 
       it "redirects to the card_terminal" do

@@ -180,7 +180,7 @@ class CardsController < ApplicationController
                     :card_holder_name, :location_id,
                     :operational_state_id, :lanr, :bsnr, :telematikid,
                     :fachrichtung, :context_id, :private_information,
-                    :card_terminal_slot_id,
+                    :card_terminal_slot_id, :tag_list_input,
                     :cert_subject_title, :cert_subject_sn, :cert_subject_givenname,
                     :cert_subject_street, :cert_subject_postalcode, :cert_subject_l,
                     :cert_subject_o, :cert_subject_cn, :expiration_date,

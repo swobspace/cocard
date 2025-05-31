@@ -63,6 +63,13 @@
           </tr>
 
           <tr>
+            <th class="w-25 pe-3"><%= t('controller.tags')%>:</th>
+            <td>
+              <%= render TagListComponent.new(item: card_terminal) %>
+            </td>
+          </tr>
+
+          <tr>
             <th class="w-25 pe-3"><%= t('attributes.ip')%>:</th>
             <td><%= card_terminal.ip %></td>
           </tr>

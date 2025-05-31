@@ -14,11 +14,13 @@
       <tr>
             <th><%= t('attributes.lid') %></th>
             <th><%= t('attributes.description') %></th>
+            <th><%= t('controller.tags') %></th>
             <th class="nosort"><%= t('cocard.action') %></th>
       </tr>
     </thead>
     <tfoot class="search">
       <tr>
+            <th></th>
             <th></th>
             <th></th>
             <th class="nosearch"></th>
@@ -29,6 +31,7 @@
         <%= content_tag(:tr, id: dom_id(location), class: dom_class(location)) do %>
                 <td><%= location.lid %></td>
                 <td><%= location.description %></td>
+                <td><%= render TagListComponent.new(item: location) %></td>
                 <td class="text-nowrap">
             <%= show_link location %>
             <%= edit_link location %>

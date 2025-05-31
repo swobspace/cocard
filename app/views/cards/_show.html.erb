@@ -78,12 +78,17 @@
                   "data-show-secret-secret-value": card.private_information do %>
                   <span data-show-secret-target="content">
                     <%= '**********' if card.private_information.present? %>
-                  </span>
                   <i class="fa-solid fa-eye"
                     data-action="click->show-secret#toggleSecret"
                     data-show-secret-target="icon"></i>
                 <% end %>
                 <%# card.private_information %>
+              </td>
+            </tr>
+            <tr>
+              <th class="w-25 pe-3"><%= t('controller.tags')%>:</th>
+              <td>
+                <%= render TagListComponent.new(item: @card) %>
               </td>
             </tr>
           <% end %>
