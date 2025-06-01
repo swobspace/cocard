@@ -25,8 +25,8 @@ module CardTerminals
       query
     end
 
-    ## 
-    # iterate with block 
+    ##
+    # iterate with block
     def find_each(&block)
       query.find_each(&block)
     end
@@ -44,7 +44,7 @@ module CardTerminals
       search_string = [] # for global search_option :search
       search_value  = search_options.fetch(:search, false) # for global option :search
       search_options.each do |key,value|
-        case key 
+        case key
         when *string_fields
           query = query.where("card_terminals.#{key} ILIKE ?", "%#{value}%")
         when *cast_fields
@@ -78,7 +78,7 @@ module CardTerminals
                        .where("cards.iccsn ILIKE ?", "%#{value}%")
         when :expiration_date
           query = query.where("cards.card_type = ?", 'SMC-KT')
-                       .where("to_char(cards.expiration_date, 'YYYY-MM-DD') ILIKE ?", 
+                       .where("to_char(cards.expiration_date, 'YYYY-MM-DD') ILIKE ?",
                               "%#{value}%")
         when :outdated
           if to_boolean(value)
@@ -97,11 +97,11 @@ module CardTerminals
             search_string << "card_terminals.#{term} ILIKE :search"
           end
           cast_fields.each do |key|
-            search_string << "CAST(card_terminals.#{key} AS VARCHAR) ILIKE :search" 
+            search_string << "CAST(card_terminals.#{key} AS VARCHAR) ILIKE :search"
           end
           search_string << "replace(card_terminals.mac::varchar, ':', '') ILIKE :search"
         else
-          raise ArgumentError, "unknown search option #{key}"
+          raise ArgumentError, "unknown search option #{key}" unless Rails.env.production?
         end
       end
       if search_value
@@ -122,10 +122,10 @@ module CardTerminals
     end
 
     def string_fields
-      [ :displayname, :name, :condition_message, 
-        :room, :contact, :plugged_in, 
+      [ :displayname, :name, :condition_message,
+        :room, :contact, :plugged_in,
         :supplier, :serial, :id_product, :idle_message,
-        :ct_id, :firmware_version, 
+        :ct_id, :firmware_version,
       ]
     end
 
@@ -153,6 +153,6 @@ module CardTerminals
         end
       end
       result
-    end   
+    end
   end
 end

@@ -270,7 +270,6 @@ module CardTerminals
       it_behaves_like "a card_terminal query"
     end
 
-
     context "with :ip" do
       subject { Query.new(card_terminals, {ip: '127.203.113.'}) }
       before(:each) do

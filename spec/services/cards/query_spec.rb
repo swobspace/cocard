@@ -27,6 +27,7 @@ module Cards
   end
 
   RSpec.describe Query do
+    let(:tag) { FactoryBot.create(:tag, name: 'MyTag') }
     let(:ber) { FactoryBot.create(:location, lid: 'BER') }
     let(:conn) { FactoryBot.create(:connector) }
     let(:ct)  { FactoryBot.create(:card_terminal, :with_mac, connector: conn) }
@@ -140,6 +141,17 @@ module Cards
     context "with :lid" do
       subject { Query.new(cards, {lid: 'ber'}) }
       before(:each) do
+        @matching = [card1]
+        @nonmatching = [card2, card3]
+      end
+      it_behaves_like "a card query"
+    end
+
+    context "with :tag" do
+      subject { Query.new(cards, {tag: 'my'}) }
+      before(:each) do
+        card1.tags << tag
+        card1.reload
         @matching = [card1]
         @nonmatching = [card2, card3]
       end

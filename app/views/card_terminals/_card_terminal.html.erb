@@ -13,4 +13,7 @@
     <div class="col-2"><%= card_terminal.condition_message %></div>
     <div class="col-1"><%= card_terminal.location&.lid %></div>
   </div>
+  <div>
+    <%= render TagListComponent.new(item: card_terminal) %>
+  </div>
 <% end %>
