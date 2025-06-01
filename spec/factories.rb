@@ -117,6 +117,10 @@ FactoryBot.define do
     ci { generate(:aname) }
   end
 
+  factory :tag do
+    name { generate(:aname) }
+  end
+
   factory :workplace do
     name { generate(:aname) }
   end

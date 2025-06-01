@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_05_07_152302) do
+ActiveRecord::Schema[7.2].define(version: 2025_05_29_092817) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -397,6 +397,23 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_07_152302) do
     t.index ["pdt"], name: "index_situation_picture_on_pdt"
   end
 
+  create_table "taggings", force: :cascade do |t|
+    t.string "taggable_type", null: false
+    t.bigint "taggable_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tag_id"], name: "index_taggings_on_tag_id"
+    t.index ["taggable_type", "taggable_id"], name: "index_taggings_on_taggable"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_tags_on_name"
+  end
+
   create_table "terminal_workplaces", force: :cascade do |t|
     t.bigint "card_terminal_id", null: false
     t.bigint "workplace_id", null: false
@@ -498,6 +515,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_07_152302) do
   add_foreign_key "connector_contexts", "contexts"
   add_foreign_key "networks", "locations"
   add_foreign_key "notes", "wobauth_users", column: "user_id"
+  add_foreign_key "taggings", "tags"
   add_foreign_key "terminal_workplaces", "card_terminals"
   add_foreign_key "terminal_workplaces", "workplaces"
 end

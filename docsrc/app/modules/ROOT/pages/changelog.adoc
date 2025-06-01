@@ -4,6 +4,7 @@
 
 * Kartenterminal: Firmwareversion ins Formular mit aufgenommen für manuellen 
   Eintrag bei mobilen Kartenterminals
+* Tags für die objekt-übergreifende Kennzeichnung
 
 == 0.8.0 - 2025-05-13
 

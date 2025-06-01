@@ -4,6 +4,7 @@ class Connector < ApplicationRecord
   include ConnectorConcerns
   include Cocard::Condition
   include NotableConcerns
+  include Taggable
 
   # -- associations
   has_many :logs, as: :loggable, dependent: :destroy

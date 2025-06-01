@@ -13,5 +13,8 @@
     <div class="col-2"><%= card.operational_state %></div>
     <div class="col-2"><%= card.card_terminal %></div>
   </div>
+  <div>
+    <%= render TagListComponent.new(item: card) %>
+  </div>
 <% end %>
 

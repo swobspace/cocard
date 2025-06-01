@@ -479,6 +479,31 @@ bin/rails g migration AddNameToWorkplace \
 </div>
 </div>
 <div class="sect1">
+<h2 id="_model_tag"><a class="anchor" href="#_model_tag"></a>model Tag</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g scaffold Tag \
+  name:string:index \
+  --no-stylesheets --no-javascripts --no-helper</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_model_tagging"><a class="anchor" href="#_model_tagging"></a>model Tagging</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g scaffold Tagging \
+  taggable:belongs_to{polymorphic} \
+  tag:belongs_to \
+  --no-stylesheets --no-javascripts --no-helper</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_habtm_tables"><a class="anchor" href="#_habtm_tables"></a>HABTM Tables</h2>
 <div class="sectionbody">
 <div class="sect2">

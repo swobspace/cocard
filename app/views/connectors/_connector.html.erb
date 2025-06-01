@@ -10,5 +10,8 @@
     <div class="col-3"><%= connector.ip %></div>
     <div class="col-6"><%= connector.condition_message %></div>
   </div>
+  <div>
+    <%= render TagListComponent.new(item: connector) %>
+  </div>
 <% end %>
 

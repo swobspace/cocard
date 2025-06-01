@@ -116,6 +116,7 @@ RSpec.describe "/cards", type: :request do
         cert_subject_o: 'CERT o',
         cert_subject_cn: 'CERT cn',
         expiration_date: '2024-12-31',
+        tag_list_input: [{value: "MyTag"}].to_json,
         card_contexts_attributes: [
           context_id: context.id,
         ]
@@ -149,6 +150,7 @@ RSpec.describe "/cards", type: :request do
         expect(card.cert_subject_cn).to eq('CERT cn')
         expect(card.cert_subject_o).to eq('CERT o')
         expect(card.expiration_date.to_s).to eq('2024-12-31')
+        expect(card.tags.map(&:name)).to contain_exactly("MyTag")
       end
 
       it "redirects to the card" do

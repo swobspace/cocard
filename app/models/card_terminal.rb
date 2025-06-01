@@ -4,6 +4,7 @@ class CardTerminal < ApplicationRecord
   include CardTerminalConcerns
   include Cocard::Condition
   include NotableConcerns
+  include Taggable
 
   # -- associations
   has_many :logs, as: :loggable, dependent: :destroy

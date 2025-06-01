@@ -134,7 +134,7 @@ class ConnectorsController < ApplicationController
       params.require(:connector)
             .permit(:name, :short_name, :ip, :sds_url, :manual_update, :description,
                     :admin_url, :id_contract, :serial, :use_tls, :authentication,
-                    :auth_user, :auth_password,
+                    :auth_user, :auth_password, :tag_list_input,
                     location_ids: [],
                     client_certificate_ids: [],
                     connector_contexts_attributes: [

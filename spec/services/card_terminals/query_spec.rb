@@ -27,6 +27,7 @@ module CardTerminals
   end
 
   RSpec.describe Query do
+    let(:tag) { FactoryBot.create(:tag, name: 'MyTag') }
     let(:ts)  { Time.parse("2025-03-11 12:00:00") }
     let(:ber) { FactoryBot.create(:location, lid: 'BER') }
     let(:network) { FactoryBot.create(:network, netzwerk: '127.51.0.0/16', location: ber) }
@@ -252,6 +253,17 @@ module CardTerminals
     context "with :lid" do
       subject { Query.new(card_terminals, {lid: 'ber'}) }
       before(:each) do
+        @matching = [ct1]
+        @nonmatching = [ct2, ct3]
+      end
+      it_behaves_like "a card_terminal query"
+    end
+
+    context "with :tag" do
+      subject { Query.new(card_terminals, {tag: 'my'}) }
+      before(:each) do
+        ct1.tags << tag
+        ct1.reload
         @matching = [ct1]
         @nonmatching = [ct2, ct3]
       end

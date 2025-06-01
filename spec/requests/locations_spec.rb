@@ -78,7 +78,8 @@ RSpec.describe "/locations", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {{
-        description: "Quadrant D"
+        description: "Quadrant D",
+        tag_list_input: [{value: "MyTag"}].to_json
       }}
 
       it "updates the requested location" do
@@ -86,6 +87,7 @@ RSpec.describe "/locations", type: :request do
         patch location_url(location), params: { location: new_attributes }
         location.reload
         expect(location.description).to eq("Quadrant D")
+        expect(location.tags.map(&:name)).to contain_exactly("MyTag")
       end
 
       it "redirects to the location" do

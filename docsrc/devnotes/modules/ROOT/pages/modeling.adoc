@@ -294,6 +294,28 @@ bin/rails g scaffold Note \
 enum type: { plain: 0, acknowledge: 1 }
 ----
 
+
+== model Tag
+
+[source,sh]
+----
+bin/rails g model Tag \
+  name:string:index \
+  --no-stylesheets --no-javascripts --no-helper
+----
+
+== model Tagging
+
+[source,sh]
+----
+bin/rails g model Tagging \
+  taggable:belongs_to{polymorphic} \
+  tag:belongs_to \
+  --no-stylesheets --no-javascripts --no-helper
+----
+
+
+
 == HABTM Tables
 
 === ConnectorLocation

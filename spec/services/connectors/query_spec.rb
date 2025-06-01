@@ -27,6 +27,7 @@ module Connectors
   end
 
   RSpec.describe Query do
+    let(:tag) { FactoryBot.create(:tag, name: 'MyTag') }
     let(:ber) { FactoryBot.create(:location, lid: 'BER') }
     let!(:conn1) do
       FactoryBot.create(:connector,
@@ -128,6 +129,17 @@ module Connectors
     context "with :lid" do
       subject { Query.new(connectors, {lid: 'ber'}) }
       before(:each) do
+        @matching = [conn1]
+        @nonmatching = [conn2, conn3]
+      end
+      it_behaves_like "a connectors query"
+    end
+
+    context "with :tag" do
+      subject { Query.new(connectors, {tag: 'my'}) }
+      before(:each) do
+        conn1.tags << tag
+        conn1.reload
         @matching = [conn1]
         @nonmatching = [conn2, conn3]
       end

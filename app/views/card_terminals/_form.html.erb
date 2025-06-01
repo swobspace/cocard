@@ -11,6 +11,7 @@
     <%= form.association :location,
                     disabled: !can?(:update, @card_terminal, :location)
        %>
+    <%= tag_list_input(form) if can?(:manage, @card_terminal) %>
     <%= form.input :room,
                     disabled: !can?(:update, @card_terminal, :room)
        %>

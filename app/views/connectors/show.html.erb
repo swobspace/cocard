@@ -96,6 +96,12 @@
             <td><%= @connector.locations.map(&:to_s).join(' - ') %></td>
           </tr>
           <tr>
+            <th class="w-25 pe-3"><%= t('controller.tags')%>:</th>
+            <td>
+              <%= render TagListComponent.new(item: @connector) %>
+            </td>
+          </tr>
+          <tr>
             <th class="w-25 pe-3"><%= t('attributes.description')%>:</th>
             <td><%= @connector.description %></td>
           </tr>

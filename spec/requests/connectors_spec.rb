@@ -101,6 +101,7 @@ RSpec.describe "/connectors", type: :request do
         client_certificate_ids: [clientcert.id],
         id_contract: '919ZKK43',
         serial: 'S12344321',
+        tag_list_input: [{value: "MyTag"}].to_json,
         use_tls: true,
         authentication: :clientcert,
         auth_user: "intern",
@@ -123,6 +124,7 @@ RSpec.describe "/connectors", type: :request do
         expect(connector.authentication).to eq('clientcert')
         expect(connector.auth_user).to eq('intern')
         expect(connector.auth_password).to eq('secret')
+        expect(connector.tags.map(&:name)).to contain_exactly("MyTag")
       end
 
       it "redirects to the connector" do

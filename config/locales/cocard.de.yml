@@ -93,6 +93,8 @@ de:
       note: Notiz
       operational_state: Betriebszustand
       user: User
+      tag: Tag
+      tagging: Tagging
       terminal_workplaces: Zugeordnete Arbeitsplätze
       workplace: Arbeitsplatz
 
@@ -195,6 +197,8 @@ de:
     sn: Nachname
     status: Status
     supplier: Lieferant
+    tag: Tag
+    tag_list_input: Tags
     telematikid: Telematik-ID
     type: Typ
     updated_at: zuletzt aktualisiert
@@ -227,6 +231,7 @@ de:
     operational_states: Betriebszustände
     searches: Suche
     situation_picture: Lagebild TI
+    tags: Tags
     users: Benutzer
     verify_pins: PIN-Verifizierung
     workplaces: Arbeitsplätze
