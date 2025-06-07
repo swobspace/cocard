@@ -1,4 +1,5 @@
 class Location < ApplicationRecord
+  include Taggable
   # -- associations
   has_and_belongs_to_many :connectors
   has_many :card_terminals, dependent: :restrict_with_error

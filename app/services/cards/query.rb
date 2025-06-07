@@ -12,6 +12,7 @@ module Cards
     # * :ip - string
     # * :condition - integer
     # * :lid - string
+    # * :location_id - integer
     # * :search - string
     # * :id - integer
     # * :limit - limit result (integer)
@@ -61,6 +62,10 @@ module Cards
           query = query.where(key.to_sym => value)
         when :lid
           query = query.where("locations.lid ILIKE ?", "%#{value}%")
+        when :location_id
+          query = query.where("locations.id = ?", value.to_i)
+        when :tag
+          query = query.joins(taggings: :tag).where("tags.name ILIKE ?", "%#{value}%")
         when :operational_state
           query = query.where("operational_states.name ILIKE ?", "%#{value}%")
         when :operational
@@ -107,7 +112,7 @@ module Cards
             search_string << "CAST(cards.#{key} AS VARCHAR) ILIKE :search" 
           end
         else
-          raise ArgumentError, "unknown search option #{key}"
+          raise ArgumentError, "unknown search option #{key}" unless Rails.env.production?
         end
       end
       if search_value

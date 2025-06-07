@@ -6,6 +6,7 @@ RSpec.describe Location, type: :model do
   it { is_expected.to have_many(:networks).dependent(:restrict_with_error) }
   it { is_expected.to have_many(:cards).dependent(:restrict_with_error) }
   it { is_expected.to have_many(:card_terminals).dependent(:restrict_with_error) }
+  it { is_expected.to have_many(:tags).through(:taggings) }
   it { is_expected.to validate_presence_of(:lid) }
 
   it 'should get plain factory working' do

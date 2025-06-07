@@ -45,6 +45,7 @@ RSpec.describe CardTerminal, type: :model do
   it { is_expected.to belong_to(:network).optional }
   it { is_expected.to have_many(:card_terminal_slots).dependent(:destroy) }
   it { is_expected.to have_many(:cards).through(:card_terminal_slots) }
+  it { is_expected.to have_many(:tags).through(:taggings) }
   # it { is_expected.to validate_presence_of(:mac) }
   it { is_expected.to define_enum_for(:pin_mode).with_values(off: 0, on_demand: 1, auto: 2) }
 

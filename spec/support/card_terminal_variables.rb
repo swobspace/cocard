@@ -1,4 +1,5 @@
 shared_context "card_terminal variables" do
+  let(:tag) { FactoryBot.create(:tag, name: 'MyTag') }
   let(:ts)  { Time.parse("2025-03-11 12:00:00") }
   let(:ber) { FactoryBot.create(:location, lid: 'BER') }
   let(:network) { FactoryBot.create(:network, netzwerk: '127.51.0.0/16', location: ber) }

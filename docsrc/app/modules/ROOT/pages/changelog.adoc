@@ -1,5 +1,12 @@
 = Changelog
 
+== 0.8.1 - 2025-06-07
+
+* Kartenterminal: Firmwareversion ins Formular mit aufgenommen für manuellen 
+  Eintrag bei mobilen Kartenterminals
+* Tags für die objekt-übergreifende Kennzeichnung
+* Fix: Standort bei Karten wird nicht mehr überschrieben, wenn dem Kartenterminal kein Standort zugewiesen ist.
+
 == 0.8.0 - 2025-05-13
 
 * Authentifikation gegen LDAP parallel zur lokalen Datenbank

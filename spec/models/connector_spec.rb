@@ -19,6 +19,7 @@ RSpec.describe Connector, type: :model do
   it { is_expected.to have_many(:card_terminals).dependent(:restrict_with_error) }
   it { is_expected.to have_and_belong_to_many(:locations) }
   it { is_expected.to have_and_belong_to_many(:client_certificates) }
+  it { is_expected.to have_many(:tags).through(:taggings) }
   it { is_expected.to validate_presence_of(:ip) }
   it { is_expected.to define_enum_for(:authentication).with_values(noauth: 0, clientcert: 1, basicauth: 2) }
 

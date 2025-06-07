@@ -29,6 +29,7 @@
         <th><%= t('attributes.expiration_date') %></th>
         <th><%= t('attributes.operational_state') %></th>
         <th><%= t('attributes.location') %></th>
+        <th><%= t('controller.tags') %></th>
         <th><%= t('attributes.lanr') %></th>
         <th><%= t('attributes.bsnr') %></th>
         <th><%= t('attributes.telematikid') %></th>
@@ -48,6 +49,7 @@
     </thead>
     <tfoot class="search">
       <tr>
+        <th></th>
         <th></th>
         <th></th>
         <th></th>
@@ -112,6 +114,9 @@
           <td><%= render Card::ExpirationDateComponent.new(card: card) %></td>
           <td><%= card.operational_state %></td>
           <td><%= card.location %></td>
+          <td>
+            <%= render TagListComponent.new(item: card) %>
+          </td>
           <td><%= card.lanr %></td>
           <td><%= card.bsnr %></td>
           <td><%= card.telematikid %></td>

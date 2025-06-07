@@ -22,9 +22,6 @@ module Connectors
     # * :id - integer
     # * :limit - limit result (integer)
     #
-    # please note:
-    #   .joins(locations: :lid)
-    # must exist in relation
     #
     def initialize(relation, search_options = {})
       @relation       = relation
@@ -67,6 +64,8 @@ module Connectors
           query = query.where(key.to_sym => value)
         when :lid
           query = query.joins(:locations).where("locations.lid ILIKE ?", "%#{value}%")
+        when :tag
+          query = query.joins(taggings: :tag).where("tags.name ILIKE ?", "%#{value}%")
         when :description
           query = query.with_description_containing(value)
         when :condition
@@ -87,7 +86,7 @@ module Connectors
             search_string << "CAST(connectors.#{key} AS VARCHAR) ILIKE :search" 
           end
         else
-          raise ArgumentError, "unknown search option #{key}"
+          raise ArgumentError, "unknown search option #{key}" unless Rails.env.production?
         end
       end
       if search_value
