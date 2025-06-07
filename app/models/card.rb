@@ -82,7 +82,7 @@ class Card < ApplicationRecord
   end
 
   def update_location
-    if ['SMC-B', 'SMC-KT'].include?(card_type)
+    if ['SMC-B', 'SMC-KT'].include?(card_type) and card_terminal&.location_id
       self[:location_id] = card_terminal&.location_id
     end
   end
