@@ -71,7 +71,7 @@ export default class extends Controller {
 
   // single search input field
   searchField(idx, text) {
-    return `<input type="text" placeholder="search" name="idx${idx}" value="${text}"/>`
+    return `<input type="text" placeholder="Suche" name="idx${idx}" value="${text}"/>`
   }
 
   // datatables options
