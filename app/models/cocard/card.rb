@@ -44,6 +44,13 @@ module Cocard
       hash[:certificate_expiration_date]
     end
 
+    def card_version
+      Cocard::Cards::Version.new(hash[:card_version])
+    end
+
+    def object_system_version
+      card_version.object_system_version
+    end
 
   private
     attr_reader :hash
