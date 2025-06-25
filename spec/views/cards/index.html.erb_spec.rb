@@ -38,6 +38,7 @@ RSpec.describe "cards/index", type: :view do
         bsnr: "222444667",
         telematikid: "1-2-3-456",
         fachrichtung: "Innere Medizin",
+        object_system_version: "4.7.11",
         cert_subject_cn: "Card Gema",
         cert_subject_title: "Dr. med.",
         cert_subject_sn: "Mustermann",
@@ -64,6 +65,7 @@ RSpec.describe "cards/index", type: :view do
         lanr: "999777333",
         bsnr: "222444667",
         telematikid: "1-2-3-456",
+        object_system_version: "4.7.11",
         fachrichtung: "Innere Medizin",
         cert_subject_cn: "Card Gema",
         cert_subject_title: "Dr. med.",
@@ -94,12 +96,13 @@ RSpec.describe "cards/index", type: :view do
     assert_select cell_selector, text: Regexp.new("8027612345699".to_s), count: 1
     assert_select cell_selector, text: Regexp.new("22888".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("22999".to_s), count: 0
+    assert_select cell_selector, text: Regexp.new("4.7.11".to_s), count: 2
     assert_select cell_selector, text: Regexp.new(1.month.before(ts).localtime.to_s.gsub(/\+.*/,'')), count: 2
     assert_select cell_selector, text: Regexp.new(1.week.before(ts).localtime.to_s.gsub(/\+.*/,'')), count: 2
     assert_select cell_selector, text: Regexp.new(ts.localtime.to_s.gsub(/\+.*/,'')), count: 2
     assert_select cell_selector, text: Regexp.new(1.year.after(Date.current).to_s), count: 2
     assert_select cell_selector, text: Regexp.new("im Schrank".to_s), count: 4
-    assert_select cell_selector, text: Regexp.new("AXXC".to_s), count: 1
+    assert_select cell_selector, text: Regexp.new("AXXC".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("999777333".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("222444667".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("1-2-3-456".to_s), count: 2

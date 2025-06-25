@@ -37,6 +37,7 @@ RSpec.describe "cards/show", type: :view do
       location_id: location.id,
       lanr: "999777333",
       bsnr: "222444666",
+      object_system_version: "4.7.11",
       telematikid: "1-2-3-456",
       fachrichtung: "Innere Medizin",
       cert_subject_cn: "Card Gema",
@@ -84,5 +85,6 @@ RSpec.describe "cards/show", type: :view do
     expect(rendered).to match(/987654/)
     expect(rendered).to match(/CDEFAB - MySoft - Evergreen/)
     expect(rendered).to match(/StrengGeheim/)
+    expect(rendered).to match(/4.7.11/)
   end
 end

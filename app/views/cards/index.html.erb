@@ -27,6 +27,7 @@
         <th class="notvisible"><%= t('attributes.insert_time') %></th>
         <th><%= t('attributes.card_holder_name') %></th>
         <th><%= t('attributes.expiration_date') %></th>
+        <th class="notvisible"><%= t('attributes.object_system_version') %></th>
         <th><%= t('attributes.operational_state') %></th>
         <th><%= t('attributes.location') %></th>
         <th><%= t('controller.tags') %></th>
@@ -49,6 +50,7 @@
     </thead>
     <tfoot class="search">
       <tr>
+        <th></th>
         <th></th>
         <th></th>
         <th></th>
@@ -112,6 +114,7 @@
           <td><%= card.insert_time&.localtime %></td>
           <td><%= card.card_holder_name %></td>
           <td><%= render Card::ExpirationDateComponent.new(card: card) %></td>
+          <td><%= card.object_system_version %></td>
           <td><%= card.operational_state %></td>
           <td><%= card.location %></td>
           <td>
