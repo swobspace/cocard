@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_05_29_092817) do
+ActiveRecord::Schema[7.2].define(version: 2025_06_25_154159) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -148,10 +148,12 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_29_092817) do
     t.bigint "card_terminal_slot_id"
     t.datetime "last_check", precision: nil
     t.datetime "last_ok", precision: nil
+    t.string "object_system_version", default: ""
     t.index ["card_terminal_slot_id"], name: "index_cards_on_card_terminal_slot_id", unique: true
     t.index ["condition"], name: "index_cards_on_condition"
     t.index ["iccsn"], name: "index_cards_on_iccsn", unique: true
     t.index ["location_id"], name: "index_cards_on_location_id"
+    t.index ["object_system_version"], name: "index_cards_on_object_system_version"
     t.index ["operational_state_id"], name: "index_cards_on_operational_state_id"
   end
 

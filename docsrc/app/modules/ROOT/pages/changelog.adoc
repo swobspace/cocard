@@ -2,6 +2,8 @@
 
 == 0.8.2-dev - unreleased
 
+* ObjectSystemVersion einer Karte. SMC-B, HBA und gSMC-KT mit einer ObjectSystemVersion < 4.4.0 sind RSA only, HBAs dürfen für die QES ab 01.01.2026 nur noch ECC verwenden. Bei nonQES-Verfahren gilt eine Duldung bis Ende 2026.
+
 == 0.8.1 - 2025-06-07
 
 * Kartenterminal: Firmwareversion ins Formular mit aufgenommen für manuellen 
