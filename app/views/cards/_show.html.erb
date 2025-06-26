@@ -130,7 +130,13 @@
           </tr>
           <tr>
             <th class="w-25 pe-3"><%= t('attributes.object_system_version')%>:</th>
-            <td><%= card.object_system_version %></td>
+            <td><%= render CheckValueComponent.new(
+                      value: card.object_system_version,
+                      condition: card.object_system_version < "4.4.0",
+                      message: "Karte ist RSA-only (kein ECC verfügbar)"
+                    )
+                %>
+            </td>
           </tr>
         </table>
       </div>
