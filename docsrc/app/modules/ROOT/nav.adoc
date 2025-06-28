@@ -4,11 +4,13 @@
 ** xref:user/conditions.adoc[]
 ** xref:user/connector.adoc[]
 ** xref:user/card-terminal.adoc[]
+** xref:user/card.adoc[]
 ** xref:user/logs.adoc[]
 ** xref:user/acknowledges.adoc[]
 ** xref:user/ti-lagebild.adoc[]
 ** xref:user/verify-pin.adoc[]
 ** xref:user/workplaces.adoc[]
+** xref:user/tags.adoc[]
 * Administration
 ** xref:admin/connector-edit.adoc[]
 ** xref:admin/card-terminal-edit.adoc[]

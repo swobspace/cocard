@@ -180,6 +180,7 @@ bin/rails g migration AddInternalToCard \
   condition_message:string  \
   last_check:timestamp last_ok:timestamp \
   acknowledge_id:bigint \
+  object_system_version:string:index \
   card_terminal_slot:belongs_to
 
 bin/rails g migration AddCertificateToCard \

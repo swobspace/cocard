@@ -43,10 +43,12 @@ module Cocard
       it { expect(subject.insert_time).to eq(ts)}
       it { expect(subject.card_holder_name).to eq("Doctor Who's Universe")}
       it { expect(subject.expiration_date).to eq(1.year.after(Date.current))}
+      it { expect(subject.card_version).to be_kind_of(Cocard::CardVersion) }
+      it { expect(subject.object_system_version).to eq("4.8.0") }
     end
 
     describe "Cocard::Card::ATTRIBUTES" do
-      it { expect(Cocard::Card::ATTRIBUTES).to contain_exactly(:properties, :card_handle, :card_type, :iccsn, :insert_time, :card_holder_name, :expiration_date ) }
+      it { expect(Cocard::Card::ATTRIBUTES).to contain_exactly(:properties, :card_handle, :card_type, :iccsn, :insert_time, :card_holder_name, :expiration_date, :object_system_version ) }
     end
   end
 end

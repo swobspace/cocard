@@ -1,0 +1,128 @@
+= Karte
+:author: Wolfgang Barth
+:revdate: 2025-06-28
+:imagesdir: ../../images
+:experimental: true
+
+== Übersicht
+
+Die Anzeige einer Karte besteht aus 6 Abschnitten: Allgemeine Information, Status, Administrativa, Kartendaten, zugewiesene Kontexte und Daten des Zertifikates.
+
+image::card/card-show.png[]
+
+Die Kopfzeile enthält neben dem Namen den Gesamtstatus der Karte und weitere Aktionsbuttons.
+
+=== Allgemeine Information
+
+[%autowidth]
+|===
+|Feld | Beschreibung
+
+|Konnektor
+|Konnektor, an dem die Karte gefunden wurde
+
+|Kartenterminal
+|Kartenterminal, an dem die Karte gefunden wurde. Wenn die Karte in ein anderes Kartenterminal wechselt, erkennt Cocard das automatisch. Wird die Karte aber nur entnommen und ist für Cocard nicht mehr erreichbar, kann man hier einen btn:[Reset] durchführen und manuell das Kartenterminal in Cocard entfernen.
+
+|Name
+|Name der Karte. Falls leer wird die Bezeichnung aus CardHolder der Karte übernommen.
+
+|Beschreibung
+|Freitextfeld
+
+|Geschützte Information
+|Informationen, auf die nur Administratoren und Kartenmanager Zugriff haben. Hier kann man evtl. Antragsnummern oder andere private Informationen zur Karte ablegen.
+
+|Tags
+|Die zugeordneten xref:user/tags.adoc[]
+
+|===
+
+=== Status
+
+[%autowidth]
+|===
+|Feld | Beschreibung
+
+|Zustand
+|Gesamtzustand der Karte; wird auch in der Kopfzeile angezeigt.
+
+|PIN Status
+|Cocard überprüft den PIN Status zu jedem konfigurierten Kontext und zeigt dann für jeden Kontext separat den PIN-Status an.
+
+|Letzer Check
+|Zuletzt ausgeführte Überprüfung der Karte. Wenn der Wert älter als 7min ist (Intervall der Kartenabfrage), ist ggf. die automatische Kartenabfrage deaktiviert (manuelles Update). Oder es stimmt etwas mit der Überwachung nicht - evtl. ist der Abfragejob deaktiviert.
+
+|zuletzt OK
+|Zeitstempel, wann die Karte zuletzt den Zustand OK hatte. Zeigt an, wie lange ein Nicht-OK-Zustand bereits besteht.
+
+|===
+
+=== Administrativa
+
+[%autowidth]
+|===
+|Feld | Beschreibung
+
+|Ort
+|Standort. Wird automatisch vom Kartenterminal übernommen, wenn dort ein Standort zugewiesen ist.
+
+|Betriebszustand
+|Nicht in Betrieb befindliche Karten kann man hier kennzeichnen (z.B. `im Order`). Findet Cocard bei der Abfrage des Konnektors eine Karte über die ICCSN, deren Betriebszustand bisher nicht mit in Betrieb gekennzeichnet ist, setzt Cocard den Betriebszustand automatisch auf `in Betrieb`.
+
+|BSNR
+|Betriebsstättennummer. Bei SMC-Bs wird die BSNR aus dem Zertifikat (O) gesetzt, sofern das Feld noch leer ist. Kann manuell überschrieben werden.
+
+|LANR
+|LANR eines Arztes, wenn die Karte einem Arzt zuordenbar ist (HBA)
+
+|Fachrichtung
+|Textfeld für die Angabe einer Fachrichtung oder ähnlichem.
+
+|Telematik-ID
+|Telematik-ID für die Beantragung der Karte. Wird bei SMC-B automatisch aus dem Zertifikat gezogen.
+
+|===
+
+=== Kartendaten
+
+[%autowidth]
+|===
+|Feld | Beschreibung
+
+|CardHandle
+|Aktuelle ID der Karte am Konnektor. Ändert sich bei jedem Neustecken der Karte, bei jedem Reboot des Konnektors oder des Kartenterminals.
+
+|Kartentyp
+|SMC-B, SMC-KT, oder HBA
+
+|ICCSN
+|Die Seriennummer der Karte
+
+|Schachtnummer
+|In welchem Schacht am Kartenterminal steckt die Karte?
+
+|eingesteckt seit
+|selbsterklärend ;-)
+
+|CardHolder
+|Der "Eigentümer" der Karte
+
+|Ablaufdatum
+|Gültigkeit der Karte
+
+|ObjectSystemVersion
+|Die Version zeigt die technische Generation der Karte an. Versionen `< 4.4.0` besitzen nur ein RSA-Zertifikat. Versionen ab `4.4.0` haben ein ECC-Zertifikat.
+Bei RSA-only-Karten erscheint ein Warnhinweis.
+
+|===
+
+NOTE: Die Gültigkeit der Karte bezieht sich auf das `C.ENC`-Zertifikat. In der Übergangszeit von RSA nach ECC kann die Karte zwei Zertifikate besitzen. Die beiden Zertifikate können unterschiedliche Laufzeiten haben. Angezeigt wird immer die Gültigkeit des Defaultzertifikats: RSA bei G2.0-Karten, ECC bei G2.1-Karten
+
+=== Zugewiesene Kontexte (nur SMC-B)
+
+Um PIN-Prüfungen und evtl. eine automatische Remote-PIN-Eingabe vornehmen zu können ist mindestens ein Kontext erforderlich. PIN-Prüfung sowie Remote-PIN-Eingabe werden je Kontext separat vorgenommen. Ohne einen Kontext ist keine PIN-Prüfung / Remote-PIN-Eingabe möglich.
+
+=== Daten des Zertifikates (nur SMC-B)
+
+Hier werden die im Zertifikat vorhandenen Daten ausgegeben.

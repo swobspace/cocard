@@ -2,7 +2,7 @@ module Cocard
   class Card
 
     ATTRIBUTES = %i( properties card_handle card_type iccsn
-                     insert_time card_holder_name expiration_date )
+                     insert_time card_holder_name expiration_date object_system_version )
 
     def initialize(hash)
       @hash = hash || {}
@@ -44,6 +44,13 @@ module Cocard
       hash[:certificate_expiration_date]
     end
 
+    def card_version
+      Cocard::CardVersion.new(hash[:card_version])
+    end
+
+    def object_system_version
+      card_version.object_system_version
+    end
 
   private
     attr_reader :hash

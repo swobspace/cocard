@@ -1,0 +1,15 @@
+= Tags
+:author: Wolfgang Barth
+:revdate: 2025-06-28
+:imagesdir: ../../images
+:experimental: true
+
+Tags sind einfache Textbezeichner, die man an die Objekte Konnektor, Karte, Kartenterminal und Standort hängen kann. Tags sind objektübergreifend, d.h. ein einmal vergebenes Tag kann man auch bei anderen Objekten verwenden.
+
+Bei den Objekten selbst wird das wird das Tag einfach als Zusatzinformation mit angezeigt, bei tabellarischen Übersichten als eigene Spalte, die man sich einblenden kann.
+
+Die objektübergreifende Suche in der Menü-Leiste kann gezielt für die Suche nach Tags verwendet werden, wenn man das Prefix `tag:` zum Suchbegriff ergänzt:
+
+image::tags/search-tags.png[]
+
+NOTE: die objektübergreifende Suche schließt nur Konnektor, Kartenterminals und Karten ein, nicht aber Standorte.
