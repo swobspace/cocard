@@ -99,7 +99,7 @@ gem "immutable_struct", "~> 1.2"
 
 gem "net-ping", "~> 2.0"
 
-gem "good_job", "~> 4.9.3"
+gem "good_job", "~> 4.11.0"
 
 gem "acts_as_list", "~> 1.1"
 
@@ -109,7 +109,7 @@ gem "pagy", "~> 9.0"
 
 gem "highline", "~> 3.0", require: false
 
-gem "faye-websocket", "~> 0.11.3"
+gem "faye-websocket", "~> 0.12.0"
 
 gem "eventmachine", "~> 1.2"
 
