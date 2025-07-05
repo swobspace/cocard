@@ -39,9 +39,14 @@ class Connectors::ConnectivityCheckJob < ApplicationJob
 
 private
   def toaster(connector, status, message)
+    if connector.short_name.blank?
+      message = "#{connector.name}: #{message}"
+    else
+      message = "#{connector.short_name}: #{message}"
+    end
     unless status.nil?
       Turbo::StreamsChannel.broadcast_prepend_to(
-        connector,
+        :connector_check,
         target: 'toaster',
         partial: "shared/turbo_toast",
         locals: {status: status, message: message})

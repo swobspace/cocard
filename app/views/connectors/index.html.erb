@@ -1,4 +1,5 @@
 <%= render 'shared/turbo-cache-control' %>
+<%= turbo_stream_from :connector_check %>
 
 <h1><%= t('controller.connectors') %></h1>
 
@@ -105,6 +106,13 @@
             <%= show_link connector %>
             <%= edit_link connector %>
             <%= delete_link connector %>
+            <%= render RebootButtonComponent.new(item: connector) if can?(:reboot, connector)%>
+            <%= button_to(check_connector_path(connector),
+                          title: t('connectors.check_connectivity'),
+                          class: 'btn btn-secondary me-1') do %>
+              <i class="fa-solid fa-fw fa-plug-circle-bolt"></i>
+            <% end %>
+
           </td>
         <% end %>
       <% end %>
