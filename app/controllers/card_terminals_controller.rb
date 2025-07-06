@@ -172,7 +172,7 @@ class CardTerminalsController < ApplicationController
 
     def search_params
       searchparms = params.permit(*submit_parms, CardTerminal.attribute_names,
-                                  :acknowledged, :with_smcb,
+                                  :acknowledged, :with_smcb, :failed,
                                   :limit).to_h
       searchparms.reject do |k, v|
         v.blank? || submit_parms.include?(k) || non_search_params.include?(k)

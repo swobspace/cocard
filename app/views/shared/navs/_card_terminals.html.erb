@@ -13,6 +13,8 @@
       <%= link_to raw( '<span class="fa-solid fa-person-digging" aria-hidden="true"></span> ' +
             t('controller.card_terminals')),
           main_app.card_terminals_path(acknowledged: true), class: "dropdown-item" %>
+      <%= link_to raw(Cocard::States.flag(Cocard::States::WARNING) + ' Aktuelle Probleme'),
+          main_app.card_terminals_path(failed: true, acknowledged: false), class: "dropdown-item" %>
       <% if can? :create, CardTerminal %>
         <%= link_to raw('<span class="fas fa-fw fa-plus" aria-hidden="true"></span> ' +
                         t('cocard.new_card_terminal')),
