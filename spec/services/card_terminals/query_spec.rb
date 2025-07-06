@@ -407,6 +407,16 @@ module CardTerminals
       it_behaves_like "a card_terminal query"
     end
 
+    context "with failed: true" do
+      subject { Query.new(card_terminals, {failed: true}) }
+      before(:each) do
+        @matching = [ct2]
+        @nonmatching = [ct1, ct3]
+      end
+      it { puts CardTerminal.pluck(:condition) }
+      it_behaves_like "a card_terminal query"
+    end
+
     describe "#all" do
       context "using :search'" do
         it "searches for displayname" do

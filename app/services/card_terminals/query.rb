@@ -92,6 +92,8 @@ module CardTerminals
           else
             query = query.not_acknowledged
           end
+        when :failed
+          query = query.failed
         when :with_smcb
           query = query.where("cards.card_type = 'SMC-B'")
         when :limit
