@@ -11,7 +11,8 @@
                    class: "btn btn-danger",
                     form: {
                       data: {
-                        "turbo-confirm": t('do_reboot', scope: item.class.name.underscore.pluralize)
+                        "turbo-confirm": t('do_reboot', item: item.to_s,
+                                            scope: item.class.name.underscore.pluralize)
                       }
                     }) do %>
       <i class="fa-solid fa-power-off"></i>

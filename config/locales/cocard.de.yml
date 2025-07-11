@@ -276,7 +276,7 @@ de:
 
   connectors:
     do_reboot: |
-      Konnektor neu starten? Der Konnektor ist dann für längere Zeit
+      Konnektor %{item} neu starten? Der Konnektor ist dann für längere Zeit
       nicht verfügbar!
     no_contexts_assigned: |
       ACHTUNG! Es ist noch kein Kontext zugeordnet!
@@ -287,7 +287,7 @@ de:
     with_smcb: KT mit SMC-B
     update_ip_from_current: Vom Konnektor gemeldete IP übernehmen
     do_reboot: |
-      Kartenterminal neu starten? Das Kartenterminal ist dann für
+      Kartenterminal %{item} neu starten? Das Kartenterminal ist dann für
       einige Zeit nicht verfügbar!
     check_connectivity: Verbindungstest
   cards:
