@@ -4,6 +4,7 @@
 
 * Konnektor: Buttons für Reboot und Connectivity-Check jetzt auch auf der Übersichtsseite der Konnektoren
 * `fping` statt `ping` für Verbindungstests (robuster und schneller bei Erreichbarkeit)
+* Kartenterminal: Reset-Button zum einfacheren Löschen der Konnektor-Verbindung (wenn Kartenterminal != OK)
 
 == 0.8.2 - 2025-06-28
 
