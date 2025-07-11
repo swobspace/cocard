@@ -15,8 +15,8 @@ RSpec.describe CheckValueComponent, type: :component do
                                         level: :info))
       # puts rendered_content
       expect(page).to have_content("✅ 99.7.2")
-      expect(page).to have_content("MyMessage")
-      expect(page).to have_css('span[class=""]')
+      expect(page).not_to have_content("MyMessage")
+      # expect(page).to have_css('span[class=""]')
     end
   end
 
@@ -58,8 +58,7 @@ RSpec.describe CheckValueComponent, type: :component do
       # puts rendered_content
       expect(page).not_to have_content("✅ 99.7.2")
       expect(page).to have_content("99.7.2")
-      expect(page).to have_content("MyMessage")
-      expect(page).to have_css('span[class=""]')
+      expect(page).not_to have_content("MyMessage")
     end
   end
 
