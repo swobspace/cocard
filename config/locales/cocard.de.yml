@@ -290,6 +290,7 @@ de:
       Kartenterminal %{item} neu starten? Das Kartenterminal ist dann für
       einige Zeit nicht verfügbar!
     check_connectivity: Verbindungstest
+    reset_connector: Zuordnung zum Konnektor löschen
   cards:
     no_contexts_assigned: |
       ACHTUNG! Es ist noch kein Kontext zugeordnet!
