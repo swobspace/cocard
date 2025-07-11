@@ -62,5 +62,18 @@ RSpec.describe CheckValueComponent, type: :component do
     end
   end
 
+  describe "with render: nil" do
+    it "don't render" do
+      render_inline(described_class.new(value: '99.7.2', 
+                                        condition: true,
+                                        message: 'MyMessage',
+                                        render: false))
+      # puts rendered_content
+      expect(page).not_to have_content("99.7.2")
+      expect(page).not_to have_content("MyMessage")
+    end
+  end
+
+
 
 end
