@@ -1,0 +1,4 @@
+<%= turbo_stream.replace('reboot_' + dom_id(@connector)) do %>
+  rebootet
+  <%= render RebootButtonComponent.new(item: @connector)  if can?(:reboot, @connector) %>
+<% end %>
