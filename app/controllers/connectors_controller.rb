@@ -99,7 +99,7 @@ class ConnectorsController < ApplicationController
   end
 
   def reboot
-    if false # @connector.rebootable?
+    if @connector.rebootable?
       result = Connectors::RMI.new(connector: @connector).call(:reboot)
       if result.success?
         msg = result.response
@@ -110,7 +110,7 @@ class ConnectorsController < ApplicationController
       end
       Note.create(notable: @connector, user: current_user, message: msg)
     else
-      # flash[:warning] = "Reboot des Konnektors wird nicht unterstützt"
+      flash[:warning] = "Reboot des Konnektors wird nicht unterstützt"
     end
     respond_with(@connector) do |format|
       format.turbo_stream
