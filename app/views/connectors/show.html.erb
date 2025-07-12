@@ -158,6 +158,12 @@
             <td><%= @connector.expiration_date %></td>
           </tr>
 
+          <tr>
+            <th class="w-25 pe-3"><%= t('attributes.boot_mode')%>:</th>
+            <td><%= t(@connector.boot_mode, scope: :boot_mode) %></td>
+          </tr>
+
+
         </table>
       </div>
 
