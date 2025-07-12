@@ -53,7 +53,12 @@ Rails.application.configure do
         cron: '30 05 * * *',
         class: "CleanupExpiredAcknowledgesJob",
         description: "Cleanup expired acknowledges"
-      }
+      },
+      reboot_connectors: {
+        cron: Cocard.cron_reboot_connectors,
+        class: "Connectors::RebootJob",
+        description: "Automatic reboot connectors"
+      },
     }
   }
 end

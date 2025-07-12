@@ -1,0 +1,6 @@
+= Automatischer Reboot von Konnektoren
+:navtitle: Automatischer Reboot
+:author: Wolfgang Barth
+:revdate: 2025-07-12
+:imagesdir: ../../images
+:experimental: true

@@ -105,7 +105,8 @@ RSpec.describe "/connectors", type: :request do
         use_tls: true,
         authentication: :clientcert,
         auth_user: "intern",
-        auth_password: "secret"
+        auth_password: "secret",
+        boot_mode: :cron
       }}
 
       it "updates the requested connector" do
@@ -122,6 +123,7 @@ RSpec.describe "/connectors", type: :request do
         expect(connector.id_contract).to eq('919ZKK43')
         expect(connector.use_tls).to eq(true)
         expect(connector.authentication).to eq('clientcert')
+        expect(connector.boot_mode).to eq('cron')
         expect(connector.auth_user).to eq('intern')
         expect(connector.auth_password).to eq('secret')
         expect(connector.tags.map(&:name)).to contain_exactly("MyTag")
