@@ -25,7 +25,7 @@ class Connectors::RebootJob < ApplicationJob
           Rails.logger.warn("WARN:: reboot connector #{connector.name} via cron failed: #{msg}")
         end
         msg = "Via Cron: #{msg}"
-        Note.create(notable: connector, user: myadmin, message: msg)
+        Note.create!(notable: connector, user: myadmin, message: msg)
       end
     end
   end
