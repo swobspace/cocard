@@ -2,6 +2,33 @@ class Connectors::RebootJob < ApplicationJob
   queue_as :default
 
   def perform(*args)
-    # Do something later
+    options.symbolize_keys!
+    connector = options.fetch(:connector) { Connector.where(manual_update: false,
+                                                            boot_mode: :cron).to_a }
+
+    if connector.is_a? Array
+      connector.each do |conn|
+        # create one job for each connector
+        Connectors::RebootJob.perform_later(connector: conn)
+      end
+    else
+      if !connector.rebootable?
+        Rails.logger.warn("WARN:: reboot connector #{connector.name} via cron not supported")
+      elsif connector.boot_mode != :cron
+        Rails.logger.warn("WARN:: reboot connector #{connector.name} not enabled")
+      else
+        result = Connectors::RMI.new(connector: connector).call(:reboot)
+        if result.success?
+          msg = result.response
+          Rails.logger.debug("DEBUG:: reboot connector #{connector.name} via cron: #{msg}")
+        else
+          msg = "Reboot fehlgeschlagen: " + result.response
+          Rails.logger.warn("WARN:: reboot connector #{connector.name} via cron failed: #{msg}")
+        end
+        msg = "Via Cron: #{msg}"
+        Note.create(notable: @connector, user: current_user, message: msg)
+      end
+    end
   end
+
 end
