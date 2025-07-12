@@ -81,11 +81,15 @@
           </div>
         </div>
       </div>
-      <div class="col-xl">
-        <div class="mb-3">
-          <%= turbo_frame_tag("side_notes", src: sindex_notes_path, refresh: "morph") %>
+      <% unless Note.object_notes.active.current.count > 0 %>
+        <div class="col-xl"></div>
+      <% else %>
+        <div class="col-xl-2">
+          <div class="mb-3">
+            <%= turbo_frame_tag("side_notes", src: sindex_notes_path, refresh: "morph") %>
+          </div>
         </div>
-      </div>
+      <% end %>
     </div>
   </div>
 <% else %>
