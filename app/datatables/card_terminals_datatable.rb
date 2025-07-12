@@ -100,7 +100,7 @@ class CardTerminalsDatatable < ApplicationDatatable
         card_terminals.ip
         card_terminals.connected
         card_terminals.location_id
-        tags.name
+        ""
         card_terminals.room
         card_terminals.plugged_in
         card_terminals.contact
