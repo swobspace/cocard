@@ -28,6 +28,7 @@ RSpec.describe "connectors/index", type: :view do
         id_contract: '919XaWZ3',
         serial: 'S12344321',
         authentication: :clientcert,
+        boot_mode: :cron,
         use_tls: true,
         vpnti_online: true,
         soap_request_success: true,
@@ -49,6 +50,7 @@ RSpec.describe "connectors/index", type: :view do
         id_contract: '919XaWZ3',
         serial: 'S12344321',
         authentication: :noauth,
+        boot_mode: :cron,
         use_tls: false,
         vpnti_online: false,
         condition_message: "Quark",
@@ -81,6 +83,7 @@ RSpec.describe "connectors/index", type: :view do
     assert_select cell_selector, text: Regexp.new("Client-Zertifikat".to_s), count: 1
     assert_select cell_selector, text: Regexp.new("Keine".to_s), count: 1
     assert_select cell_selector, text: Regexp.new("UNKNOWN".to_s), count: 2
+    assert_select cell_selector, text: Regexp.new("via Cron".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("OK Konnektor online".to_s), count: 1
     assert_select cell_selector, text: Regexp.new("UNKNOWN SOAP-Abfrage fehlgeschlagen, Konfigurationsproblem, Port nicht erreichbar oder Konnektor funktioniert nicht richtig".to_s), count: 1
     assert_select cell_selector, text: Regexp.new("2025-12-31".to_s), count: 2

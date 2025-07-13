@@ -26,6 +26,7 @@ RSpec.describe "connectors/show", type: :view do
       serial: 'S12344321',
       use_tls: false,
       authentication: :basicauth,
+      boot_mode: :cron,
       iccsn: "8027600355000099999",
       expiration_date: "2025-12-31",
       auth_user: 'myUser'
@@ -48,6 +49,7 @@ RSpec.describe "connectors/show", type: :view do
     expect(rendered).to match(/User\/Passwort/)
     expect(rendered).to match(/[ myUser ]/)
     expect(rendered).to match(/Nein/)
+    expect(rendered).to match(/via Cron/)
     expect(rendered).to match(/8027600355000099999/)
     expect(rendered).to match(/2025-12-31/)
   end

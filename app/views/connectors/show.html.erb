@@ -72,7 +72,7 @@
 
           <tr>
             <th class="w-25 pe-3"><%= t('attributes.admin_url')%>:</th>
-            <td><%= link_to nil, @connector.admin_url, class: 'primary-link' %></td>
+            <td><%= link_to nil, @connector.admin_url, target: '_blank', class: 'primary-link' %></td>
           </tr>
 
           <tr>
@@ -157,6 +157,12 @@
             <th class="w-25 pe-3"><%= t('attributes.expiration_date')%>:</th>
             <td><%= @connector.expiration_date %></td>
           </tr>
+
+          <tr>
+            <th class="w-25 pe-3"><%= t('attributes.boot_mode')%>:</th>
+            <td><%= t(@connector.boot_mode, scope: :boot_mode) %></td>
+          </tr>
+
 
         </table>
       </div>
