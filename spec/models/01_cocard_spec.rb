@@ -7,8 +7,11 @@ RSpec.describe Cocard, type: :model do
     before(:each) do
       allow(Cocard::CONFIG).to receive(:[]).with('ldap_options').and_return(nil)
       allow(Cocard::CONFIG).to receive(:[]).with('enable_ldap_authentication').and_return(nil)
+      allow(Cocard::CONFIG).to receive(:[]).with('cron_reboot_connectors').and_return(nil)
+
     end
     it { expect(Cocard.enable_ldap_authentication).to be_falsey }
+    it { expect(Cocard.cron_reboot_connectors).to eq('5 1 * * 1') }
   end
 
   describe '::ldap_options' do

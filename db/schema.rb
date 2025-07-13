@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_06_25_154159) do
+ActiveRecord::Schema[7.2].define(version: 2025_07_12_081955) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -216,6 +216,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_25_154159) do
     t.string "auth_password", default: ""
     t.datetime "rebooted_at", precision: nil
     t.string "short_name", default: ""
+    t.integer "boot_mode", default: 0
+    t.index ["boot_mode"], name: "index_connectors_on_boot_mode"
     t.index ["condition"], name: "index_connectors_on_condition"
   end
 

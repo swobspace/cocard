@@ -35,11 +35,13 @@
             <th class="notvisible"><%= t('cocard.card_terminals_count') %></th>
             <th class="notvisible"><%= t('attributes.iccsn') %></th>
             <th class="notvisible"><%= t('attributes.expiration_date') %></th>
+            <th class="notvisible"><%= t('attributes.boot_mode') %></th>
             <th class="noexport nosort"><%= t('cocard.action') %></th>
       </tr>
     </thead>
     <tfoot class="search">
       <tr>
+            <th></th>
             <th></th>
             <th></th>
             <th></th>
@@ -102,6 +104,7 @@
           <td><%= connector.card_terminals.count %></td>
           <td><%= connector.iccsn %></td>
           <td><%= connector.expiration_date %></td>
+          <td><%= t(connector.boot_mode, scope: :boot_mode) %></td>
           <td class="text-nowrap">
             <%= show_link connector %>
             <%= edit_link connector %>

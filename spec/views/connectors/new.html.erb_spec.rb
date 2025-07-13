@@ -32,6 +32,7 @@ RSpec.describe "connectors/new", type: :view do
       assert_select "input[name=?]", "connector[id_contract]"
       assert_select "input[name=?]", "connector[use_tls]"
       assert_select "select[name=?]", "connector[authentication]"
+      assert_select "select[name=?]", "connector[boot_mode]", count: 0
     end
   end
 end

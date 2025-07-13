@@ -105,6 +105,7 @@ de:
     authentication: Authentifikation
     auth_user: Benutzer
     auth_password: Passwort
+    boot_mode: Automatischer Reboot
     bsnr: BSNR
     card: Karte
     card_handle: CardHandle
@@ -244,6 +245,10 @@ de:
     noauth: 'Keine'
     clientcert: 'Client-Zertifikat'
     basicauth: 'User/Passwort'
+
+  boot_mode:
+    'off': Aus
+    cron: via Cron
 
   pin_modes:
     'off': Aus

@@ -18,6 +18,7 @@ RSpec.describe "connectors/edit", type: :view do
     allow(controller).to receive(:action_name) { 'edit' }
 
     assign(:connector, connector)
+    expect(connector).to receive(:rebootable?).and_return(true)
   end
 
   it "renders the edit connector form" do
@@ -36,6 +37,7 @@ RSpec.describe "connectors/edit", type: :view do
       assert_select "input[name=?]", "connector[id_contract]"
       assert_select "input[name=?]", "connector[use_tls]"
       assert_select "select[name=?]", "connector[authentication]"
+      assert_select "select[name=?]", "connector[boot_mode]", count: 1
     end
   end
 end
