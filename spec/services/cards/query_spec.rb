@@ -37,6 +37,7 @@ module Cards
         name: 'SMC-B 0001',
         description: "some more infos",
         location: ber,
+        object_system_version: '4.4.0',
         iccsn: '9990001',
         operational_state: opsta,
         card_terminal: ct,
@@ -49,6 +50,7 @@ module Cards
       FactoryBot.create(:card,
         name: 'SMC-KT 0002',
         iccsn: '9980002',
+        object_system_version: '4.3.0',
         expiration_date: 1.month.after(Date.current),
         last_check: Time.current
       )
@@ -58,6 +60,7 @@ module Cards
       FactoryBot.create(:card,
         name: 'SMC-KT 0003',
         iccsn: '9980003',
+        object_system_version: '4.3.1',
         operational_state: opsta,
         expiration_date: 1.year.after(Date.current),
         last_check: Time.current
@@ -169,6 +172,15 @@ module Cards
 
     context "with :iccsn" do
       subject { Query.new(cards, {iccsn: "998"}) }
+      before(:each) do
+        @matching = [card2, card3]
+        @nonmatching = [card1]
+      end
+      it_behaves_like "a card query"
+    end
+
+    context "with :object_system_version" do
+      subject { Query.new(cards, {object_system_version: "4.3"}) }
       before(:each) do
         @matching = [card2, card3]
         @nonmatching = [card1]

@@ -91,17 +91,16 @@ class CardTerminal < ApplicationRecord
                      "Kartenterminal nicht in Betrieb" )
     end
     if is_accessible?
-      is_up = up?
       if noip?
         return set_condition( Cocard::States::UNKNOWN,
                               "Kartenterminal hat keine sinnvolle IP: #{ip.to_s}" )
-      elsif !is_up and !connected
+      elsif !up? and !connected
         return set_condition( Cocard::States::CRITICAL,
                               "Kartenterminal nicht erreichbar, kein Ping und nicht mit dem Konnektor verbunden " )
-      elsif !is_up and connected
+      elsif !up? and connected
         return set_condition( Cocard::States::WARNING,
                               "Kartenterminal mit dem Konnektor verbunden, aber Ping fehlgeschlagen" )
-      elsif is_up and !connected
+      elsif up? and !connected
         return set_condition( Cocard::States::WARNING,
                               "Kartenterminal per Ping erreichbar, aber nicht mit dem Konnektor verbunden" )
       else
@@ -119,6 +118,16 @@ class CardTerminal < ApplicationRecord
     end
   end
 
+  def update_ip_and_location
+    if ip.nil? and current_ip.present?
+      self[:ip] = current_ip
+    end
+
+    if will_save_change_to_ip?
+      update_location_by_ip
+    end
+  end
+
   def is_accessible?
     !!(network&.ping?)
   end
@@ -131,15 +140,6 @@ class CardTerminal < ApplicationRecord
     end
   end
 
-  def update_ip_and_location
-    if ip.nil? and current_ip.present?
-      self[:ip] = current_ip
-    end
-
-    if will_save_change_to_ip?
-      update_location_by_ip
-    end
-  end
 
 private
 

@@ -8,8 +8,11 @@ module PingConcerns
 
   def up?
     return false if noip?
-    check = Net::Ping::External.new(ip.to_s, nil, 2)
-    check.ping?
+    # check = Net::Ping::External.new(ip.to_s, nil, 2)
+    # check.ping?
+    Rails.cache.fetch("#{cache_key_with_version}/up", expires_in: 1.minute) do
+      system("fping -a -q -p 100 -r 5 -B 1 #{ip} >/dev/null")
+    end
   end
 
   def noip?

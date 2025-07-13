@@ -1,5 +1,11 @@
 = Changelog
 
+== 0.8.3 - 2025-07-13
+
+* Konnektor: Buttons für Reboot und Connectivity-Check jetzt auch auf der Übersichtsseite der Konnektoren
+* `fping` statt `ping` für Verbindungstests (robuster und schneller bei Erreichbarkeit)
+* Kartenterminal: Reset-Button zum einfacheren Löschen der Konnektor-Verbindung (wenn Kartenterminal != OK)
+
 == 0.8.2 - 2025-06-28
 
 * ObjectSystemVersion einer Karte. SMC-B, HBA und gSMC-KT mit einer ObjectSystemVersion < 4.4.0 sind RSA only, HBAs dürfen für die QES ab 01.01.2026 nur noch ECC verwenden. Bei nonQES-Verfahren gilt eine Duldung bis Ende 2026.

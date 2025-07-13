@@ -87,7 +87,13 @@ module CardTerminals
             query = query.where("card_terminals.last_check >= ?", 1.day.before(Date.current))
           end
         when :acknowledged
-          query = query.acknowledged
+          if to_boolean(value)
+            query = query.acknowledged
+          else
+            query = query.not_acknowledged
+          end
+        when :failed
+          query = query.failed
         when :with_smcb
           query = query.where("cards.card_type = 'SMC-B'")
         when :limit

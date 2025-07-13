@@ -1,0 +1,6 @@
+<%= turbo_stream.replace('reboot_' + dom_id(@connector)) do %>
+  <%= render RebootButtonComponent.new(item: @connector)  if can?(:reboot, @connector) %>
+<% end %>
+<%= turbo_stream.update('flash') do %>
+  <%= render "shared/flash_alert" %>
+<% end %>

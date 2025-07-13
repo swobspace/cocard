@@ -133,8 +133,8 @@
             <td><%= render CheckValueComponent.new(
                       value: card.object_system_version,
                       condition: card.object_system_version < "4.4.0",
-                      message: "Karte ist RSA-only (kein ECC verfügbar)"
-                    )
+                      message: "Karte ist RSA-only (kein ECC verfügbar)",
+                      render: card.object_system_version.presence)
                 %>
             </td>
           </tr>

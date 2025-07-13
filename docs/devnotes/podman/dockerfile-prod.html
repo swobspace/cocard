@@ -196,8 +196,9 @@ FROM base
 # Install packages needed for deployment
 RUN apt-get update -qq &amp;&amp; \
     apt-get install --no-install-recommends -y \
-                      curl libvips postgresql-client iputils-ping uuid &amp;&amp; \
+                      curl libvips postgresql-client iputils-ping fping uuid &amp;&amp; \
     setcap cap_net_raw+ep `which ping` &amp;&amp; \
+    setcap cap_net_raw+ep `which fping` &amp;&amp; \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Copy built artifacts: gems, application

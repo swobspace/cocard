@@ -41,6 +41,21 @@
                            item: card_terminal.connector,
                            small: true) %>
               <%= render LinkToComponent.new(item: card_terminal.connector) %>
+              <% if can?(:update, card_terminal) and 
+                    card_terminal.condition != Cocard::States::OK and
+                    card_terminal.connector.presence %>
+                <%= button_to "Reset", card_terminal,
+                      method: 'patch',
+                      class: 'btn btn-sm btn-warning ms-3',
+                      title: t('card_terminals.reset_connector'),
+                      form: {
+                        data: {
+                          "turbo-confirm": t('card_terminals.reset_connector') + '?'
+                        }
+                      },
+                      params: {card_terminal: { connector_id: nil}}
+                 %>
+              <% end %>
             </td>
           </tr>
 

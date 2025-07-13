@@ -1,1 +1,5 @@
-<%= set_icon %> <%= value %> <span class="<%=bgclass %>"><%= message %></span>
+<% if condition %>
+  <%= set_icon %> <%= value %> <span class="<%=bgclass %>"><%= message %></span>
+<% else %>
+  <%= set_icon %> <%= value %>
+<% end %>

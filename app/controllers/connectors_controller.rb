@@ -112,7 +112,9 @@ class ConnectorsController < ApplicationController
     else
       flash[:warning] = "Reboot des Konnektors wird nicht unterstützt"
     end
-    respond_with(@connector, action: :show)
+    respond_with(@connector) do |format|
+      format.turbo_stream
+    end
   end
 
   # DELETE /connectors/1

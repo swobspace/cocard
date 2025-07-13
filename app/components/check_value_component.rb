@@ -1,12 +1,17 @@
 # frozen_string_literal: true
 
 class CheckValueComponent < ViewComponent::Base
-  def initialize(value:, condition:, message:, icon: true, level: :info)
+  def initialize(value:, condition:, message:, icon: true, level: :info, render: true)
     @value = value
     @condition = condition
     @message = message
     @icon = icon
     @level = level
+    @render = render
+  end
+
+  def render?
+    @render
   end
 
   def set_icon

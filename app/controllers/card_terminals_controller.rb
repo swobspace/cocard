@@ -8,19 +8,16 @@ class CardTerminalsController < ApplicationController
   def index
     if @locatable
       @card_terminals = @locatable.card_terminals
-    elsif params[:acknowledged]
-      @card_terminals = CardTerminal.acknowledged
-      @filter = { acknowledged: 1 }
-    elsif params[:with_smcb]
-      @card_terminals = CardTerminal.joins(:cards)
-                                    .where("cards.card_type = 'SMC-B'")
-      @filter = { with_smcb: 1 }
     else
       @card_terminals = CardTerminal.all
     end
     @card_terminals = @card_terminals
                       .left_outer_joins(:location, :connector, card_terminal_slots: :card)
                       .distinct
+
+    @card_terminals = CardTerminals::Query.new(@card_terminals, search_params).all
+    @filter = search_params
+
     respond_with(@card_terminals) do |format|
       format.json { render json: CardTerminalsDatatable.new(@card_terminals, view_context) }
     end
@@ -172,4 +169,23 @@ class CardTerminalsController < ApplicationController
     def idle_message_params
       params.require(:card_terminal).permit(:idle_message)
     end
+
+    def search_params
+      searchparms = params.permit(*submit_parms, CardTerminal.attribute_names,
+                                  :acknowledged, :with_smcb, :failed,
+                                  :limit).to_h
+      searchparms.reject do |k, v|
+        v.blank? || submit_parms.include?(k) || non_search_params.include?(k)
+      end
+    end
+
+    def submit_parms
+      [ "utf8", "authenticity_token", "commit", "format", "view" ]
+    end
+
+    def non_search_params
+      [ ]
+    end
+
+
 end
