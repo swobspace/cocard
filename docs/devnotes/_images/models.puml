@@ -32,6 +32,7 @@ class Connector  {
   iccsn: string
   expiration_date: date
   rebooted_at: timestamp
+  boot_mode: integer
 }
 
 class CardTerminal {
@@ -59,6 +60,7 @@ class CardTerminal {
   condition_message: string
   condition: integer
   last_ok: timestamp
+  last_check: timestamp
   firmware_version: string
   acknowledge_id: bigint
   rebooted_at: timestamp

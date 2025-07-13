@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>LDAP-Authentifikation :: Cocard</title>
+    <title>Automatischer Reboot von Konnektoren :: Cocard</title>
     <meta name="generator" content="Antora 3.1.10">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -92,7 +92,7 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="connector-edit.html">Konnektor anlegen/bearbeiten</a>
   </li>
-  <li class="nav-item" data-depth="3">
+  <li class="nav-item is-current-page" data-depth="3">
     <a class="nav-link" href="connector-autoreboot.html">Automatischer Reboot</a>
   </li>
 </ul>
@@ -133,7 +133,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="client-certificates.html">Client-Zertifikate importieren</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="ldap-authentication.html">LDAP-Authentifikation</a>
   </li>
 </ul>
@@ -218,7 +218,8 @@
   <ul>
     <li><a href="../index.html">Cocard</a></li>
     <li>Administration</li>
-    <li><a href="ldap-authentication.html">LDAP-Authentifikation</a></li>
+    <li>Konnektor</li>
+    <li><a href="connector-autoreboot.html">Automatischer Reboot</a></li>
   </ul>
 </nav>
 </div>
@@ -227,81 +228,20 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">LDAP-Authentifikation</h1>
-<div id="preamble">
-<div class="sectionbody">
-<div class="paragraph">
-<p>Ab Version 0.8.0 kann Cocard Benutzer auch per LDAP gegen ein Active Directory authentifizieren. Die Authentifikation ist sehr einfach aufgebaut und führt nur einen LDAP-Bind mit dem Benutzernamen durch - oder anders formuliert, der Benutzername muss so vom LDAP-Verzeichnisdienst als vollständige Konto-Angabe akzeptiert werden. Die Berechtigungsvergabe erfolgt weiterhin ausschließlich in Cocard.</p>
-</div>
-</div>
-</div>
+<h1 class="page">Automatischer Reboot von Konnektoren</h1>
 <div class="sect1">
 <h2 id="_voraussetzungen"><a class="anchor" href="#_voraussetzungen"></a>Voraussetzungen</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Damit die Authentifikation per LDAP klappt, müssen folgende Voraussetzungen erfüllt sein:</p>
+<p>Für den automatischen Reboot von Konnektoren sind zwei Voraussetzungen zu erfüllen:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Der Benutzer muss mit dem verwendeten Login-Namen in Cocard angelegt sein und über Berechtigungen für den Zugriff verfügen.</p>
+<p>Der Konnektor muss grundsätzlich unterstützt werden.</p>
 </li>
 <li>
-<p>Der Benutzer muss gültig sein, d.h. das Konto darf nicht abgelaufen oder gesperrt sein.</p>
-</li>
-<li>
-<p>Der Benutzername muss für ein LDAP-Bind ausreichend sein, es findet keine explizite Suche nach einem passenden Distinguished Name (DN) statt.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_beispiel_für_einen_usernamen_bei_verwendung_eines_active_directorys"><a class="anchor" href="#_beispiel_für_einen_usernamen_bei_verwendung_eines_active_directorys"></a>Beispiel für einen Usernamen bei Verwendung eines Active Directorys</h2>
-<div class="sectionbody">
-<table class="tableblock frame-all grid-all fit-content">
-<caption class="title">Table 1. Beispieldaten</caption>
-<colgroup>
-<col>
-<col>
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Was</th>
-<th class="tableblock halign-left valign-top">Wert</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Displayname</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Max Mustermann</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">samAccountName</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>muma</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Domäne (full)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>example.org</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Domäne (short)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>EXAMPLE</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">userPrincipalName</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="mailto:max.mustermann@example.org">max.mustermann@example.org</a></code></p></td>
-</tr>
-</tbody>
-</table>
-<div class="ulist">
-<div class="title">mögliche Usernamen im Active Directory</div>
-<ul>
-<li>
-<p><code>max.mustermann@example.org</code></p>
-</li>
-<li>
-<p><code>muma@example</code></p>
+<p>Der Reboot via Cron mus beim Konnektor explizit aktiviert werden.</p>
 </li>
 </ul>
 </div>
@@ -312,13 +252,10 @@
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Die hier vorgestellten möglichen Benutzernamen müssen so in Cocard angelegt sein und funktionieren nur in Kombination mit einem Active Directory.
+Derzeit werden nur KoCoBoxen unterstützt, einfach weil ich keinen Zugriff und keine Testmöglichkeiten für andere Konnektoren habe.
 </td>
 </tr>
 </table>
-</div>
-<div class="paragraph">
-<p>Falls Bedarf besteht, andere LDAP-Verzeichnisdienste mit Cocard zu koppeln, bitte Kontakt mit dem Autor aufnehmen.</p>
 </div>
 </div>
 </div>
@@ -326,116 +263,39 @@ Die hier vorgestellten möglichen Benutzernamen müssen so in Cocard angelegt se
 <h2 id="_konfiguration"><a class="anchor" href="#_konfiguration"></a>Konfiguration</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_yaml_konfigurationsdatei"><a class="anchor" href="#_yaml_konfigurationsdatei"></a>YAML-Konfigurationsdatei</h3>
-<div class="listingblock">
-<div class="title"><code>cocard.yml</code></div>
-<div class="content">
-<pre>enable_ldap_authentication: true <i class="conum" data-value="1"></i><b>(1)</b>
-ldap_options: <i class="conum" data-value="2"></i><b>(2)</b>
-  # first active directory structure accessed via global catalog
-  - hosts: <i class="conum" data-value="3"></i><b>(3)</b>
-      - [ dc1.example.org, 3269 ] <i class="conum" data-value="4"></i><b>(4)</b>
-      - [ dc2.example.org, 3269 ]
-    base: dc=example,dc=org <i class="conum" data-value="5"></i><b>(5)</b>
-    encryption: :simple_tls <i class="conum" data-value="6"></i><b>(6)</b>
-    auth:
-      method: :simple
-      username: readonlyuser <i class="conum" data-value="7"></i><b>(7)</b>
-      password: strong secret
-  # second active directory structure with single domain
-  - host: second.example.net <i class="conum" data-value="8"></i><b>(8)</b>
-    port: 636 <i class="conum" data-value="9"></i><b>(9)</b>
-    base: dc=example,dc=net
-    encryption: :simple_tls
-    auth:
-      method: :simple
-      username: otherreadonlyuser
-      password: otherstrongsecret</pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Aktivierung der Authentifikation via LDAP. Mit <code>false</code> kann man die Authentifikation unterbinden und trotzdem LDAP für die <code>Benutzeranlage mit Vorlage</code> verwenden.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Array von LDAP-Optionen für die Authentifikation gegen verschiedene LDAP-Verzeichnisdienste</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Verzeichnisdienst mit mehreren Servern zwecks Ausfallsicherheit. Alle Server hier müssen diesselbe Information aus dem gleichen Verzeichnisdienst liefern.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>Host, Port als Array. <code>3269</code> ist der SSL-Port des globalen Kataloges</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>Suchbasis des Verzeichnisdienstes</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="6"></i><b>6</b></td>
-<td>TLS aktivieren</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="7"></i><b>7</b></td>
-<td>Einfacher User mit nur Leserechten im Verzeichnisdienst (Active Directory: Domänengast genügt). Wird für die <code>Benutzeranlage mit Vorlage</code> verwendet.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="8"></i><b>8</b></td>
-<td>Weiterer Verzeichnisdienst, aber diesmal nur ein einfacher Host ohne Redundanz.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="9"></i><b>9</b></td>
-<td>LDAP-TLS-Port</td>
-</tr>
-</table>
-</div>
+<h3 id="_aktivierung_beim_konnektor"><a class="anchor" href="#_aktivierung_beim_konnektor"></a>Aktivierung beim Konnektor</h3>
 <div class="paragraph">
-<p>Eine ausführlichere Beschreibung der Parameter findet sich unter
-<a href="https://www.rubydoc.info/gems/net-ldap/Net/LDAP" class="bare">https://www.rubydoc.info/gems/net-ldap/Net/LDAP</a>.</p>
+<p>Über Konnektor bearbeiten kann man den automatischen Reboot setzen:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/connector/connector-edit-reboot_mode.png" alt="connector edit reboot mode">
+</div>
+<div class="title">Abbildung 1. Aktivierung des automatischen Reboots beim Konnektor</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">NOTE</dt>
+<dd>
+<p>Das Feld erscheint nur, wenn der Konnektor von Cocard bereits ausgelesen und der Konnektor als unterstützt erkannt wurde. Bei einer Neuanlage liegen die notwendigen Informationen noch nicht vor, daher zeigt Cocard das Feld im Formular "Neuer Konnektor" nicht an.</p>
+</dd>
+</dl>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_einbindung_in_den_container"><a class="anchor" href="#_einbindung_in_den_container"></a>Einbindung in den Container</h3>
+<h3 id="_scheduling_per_cron"><a class="anchor" href="#_scheduling_per_cron"></a>Scheduling per Cron</h3>
 <div class="paragraph">
-<p>Die Konfigurationsdatei <code>cocard.yml</code> mappt man im Container in das Verzeichnis <code>/rails/config</code>:</p>
+<p>Wann der Reboot ausgeführt konfiguriert man über die Umgebungsvariable <code>CRON_REBOOT_CONNECTORS</code>. Voreinstellung ist <code>5 1 * * 1</code>, als um 01:05 jeden Montag. Alles, was man per Cron einstellen kann ist möglich. <code>GoodJob</code> verwendet <a href="https://github.com/floraison/fugit">fugit</a>, der Wert aus der Umgebungsvariable wird unverändert an <code>GoodJob</code> und damit an <code>fugit</code> weitergereicht.</p>
 </div>
 <div class="listingblock">
-<div class="title">cocard.container</div>
+<div class="title">Beispiel für den Reboot-Job jeden Montag und Donnerstag um 06:30 aus:</div>
 <div class="content">
-<pre>[Container]
+<pre># env.production
 ...
-Volume=./cocard.yml:/rails/config/cocard.yml:ro,z
+CRON_REBOOT_CONNECTORS="30 6 * * 1,4"
 ...</pre>
 </div>
 </div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_benutzer_mit_vorlage_anlegen"><a class="anchor" href="#_benutzer_mit_vorlage_anlegen"></a>Benutzer mit Vorlage anlegen</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Bei bestehender LDAP-Anbindung kann der Verzeichnisdienst auch zur Anlage von Benutzern verwendet werden. Auf der Seite <b class="menuref">Benutzer</b> klickt man auf den Button <b class="button">Benutzer mit Vorlage erstellen</b> und gelangt damit in ein Suchformular, mit dem man Benutzer aus dem Verzeichnisdienst auswählen kann. Wenn die Anzeige nicht eindeutig ist kann man über <b class="menuref">Sichtbare Spalten</b> weitere Spalten einblenden lassen, die sich auf Felder in einem Active Directory beziehen.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../_images/user/ad_user-index-test.png" alt="ad user index test">
-</div>
-</div>
-<div class="paragraph">
-<p>Über den Button <b class="button">+</b> am Ende einer Zeile gelangt man in das Formular <b class="menuref">Benutzer erstellen</b>, in dem bereits einige Felder vorausgefüllt wurden, sofern der Verzeichnisdienst diese bereitstellt.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../_images/user/ad_user-new-test.png" alt="ad user new test">
-</div>
-</div>
-<div class="paragraph">
-<p>Nach dem Speichern des Benutzers sind noch Berechtigungen zu vergeben, ohne die der User Cocard sonst nicht verwenden kann.</p>
 </div>
 </div>
 </div>

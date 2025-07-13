@@ -39,6 +39,14 @@
                    wrapper_html: {class: 'form-check form-switch'}
        %>
 
+    
+    <% if @connector&.rebootable? %>
+      <%= form.input :boot_mode, 
+          collection: Connector.boot_modes
+                               .collect {|c| [t(c[0], scope: 'boot_mode'), c[0]]},
+          include_blank: false
+       %>
+    <% end %>
     <div data-controller="toggle-fields">
       <%= form.input :authentication, 
           collection: Connector.authentications

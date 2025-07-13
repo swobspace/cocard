@@ -12,7 +12,9 @@
 ** xref:user/workplaces.adoc[]
 ** xref:user/tags.adoc[]
 * Administration
-** xref:admin/connector-edit.adoc[]
+** Konnektor
+*** xref:admin/connector-edit.adoc[]
+*** xref:admin/connector-autoreboot.adoc[]
 ** xref:admin/card-terminal-edit.adoc[]
 *** xref:admin/idle-messages-edit.adoc[]
 ** xref:admin/card-new.adoc[]

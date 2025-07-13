@@ -19,6 +19,7 @@ class Connector < ApplicationRecord
   has_rich_text :description
 
   enum :authentication, { noauth: 0, clientcert: 1, basicauth: 2 }
+  enum :boot_mode, { off: 0, cron: 1 }
 
   accepts_nested_attributes_for :connector_contexts,
     allow_destroy: true,

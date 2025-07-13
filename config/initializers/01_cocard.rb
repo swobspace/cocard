@@ -47,6 +47,10 @@ EOTMPL
     CONFIG[attribute.to_s].presence || default_value
   end
 
+  def self.cron_reboot_connectors
+    ENV['CRON_REBOOT_CONNECTORS'] || '5 1 * * 1'
+  end
+
   def self.ldap_options
     if CONFIG['ldap_options'].present?
       ldapopts = CONFIG['ldap_options']
