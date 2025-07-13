@@ -37,3 +37,5 @@ Wann der Reboot ausgeführt konfiguriert man über die Umgebungsvariable `CRON_R
 CRON_REBOOT_CONNECTORS="30 6 * * 1,4"
 ...
 ----
+
+NOTE:: ein manueller Reboot aller entsprechend konfigurierten Konnektoren außerhalb der per CRON eingestellten Interfalle ist über die Jobverwaltung möglich: menu:Jobs[Cron > Connectors::RebootJob].
