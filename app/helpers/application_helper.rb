@@ -29,4 +29,26 @@ module ApplicationHelper
     element.html_safe
   end
 
+  def copy_link(poly)
+    parent, obj = nesting_stuff(poly)
+    if can? :copy, obj
+      link_to icon_copy, polymorphic_path(poly, action: "copy"),
+      :title => t('wobapphelpers.actions.copy', 
+                   model: t(obj.class.model_name.to_s.underscore, 
+                            scope: 'activerecord.models')), 
+      :class => "btn btn-secondary"
+    else
+      ""
+    end
+  end
+
+  def nesting_stuff(poly)
+    if poly.is_a? Array
+      return poly[0], poly[-1]
+    else
+      return poly, poly
+    end
+  end
+
+
 end

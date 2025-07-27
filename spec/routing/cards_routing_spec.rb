@@ -22,6 +22,9 @@ RSpec.describe CardsController, type: :routing do
       expect(get: "/cards/1/edit").to route_to("cards#edit", id: "1")
     end
 
+    it "routes to #copy" do
+      expect(get: "/cards/1/copy").to route_to("cards#copy", id: "1")
+    end
 
     it "routes to #create" do
       expect(post: "/cards").to route_to("cards#create")

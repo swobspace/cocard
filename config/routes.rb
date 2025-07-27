@@ -42,6 +42,7 @@ Rails.application.routes.draw do
       get :sindex
     end
     member do
+      get :copy
       post :get_certificate
       post :get_pin_status
       post :verify_pin
