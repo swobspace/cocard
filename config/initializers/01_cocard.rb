@@ -48,7 +48,11 @@ EOTMPL
   end
 
   def self.cron_reboot_connectors
-    ENV['CRON_REBOOT_CONNECTORS'] || '5 1 * * 1'
+    if Fugit.parse_cron(ENV['CRON_REBOOT_CONNECTORS'])
+      ENV['CRON_REBOOT_CONNECTORS']
+    else
+      '5 1 * * 1'
+    end
   end
 
   def self.ldap_options
