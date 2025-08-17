@@ -1,8 +1,9 @@
 = Changelog
 
-== 0.8.4 - unreleased
+== 0.8.4 - 2025-08-17
 
 * Karte kopieren: existierende Karte kann als Vorlage bei Nachbestellungen verwendet werden.
+* Automatischer Reboot von Konnektoren: Fallback auf Default-Croneinstellungen für den Job wenn die Syntax der Variable CRON_REBOOT_CONNECTORS ungültig ist.
 
 == 0.8.3 - 2025-07-13
 
