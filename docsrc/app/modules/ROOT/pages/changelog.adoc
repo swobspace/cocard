@@ -1,5 +1,7 @@
 = Changelog
 
+== 0.8.5-dev - unreleased
+
 == 0.8.4 - 2025-08-17
 
 * Karte kopieren: existierende Karte kann als Vorlage bei Nachbestellungen verwendet werden.
