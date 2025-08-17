@@ -111,6 +111,11 @@ FactoryBot.define do
 
   factory :operational_state do
     name { generate(:aname) }
+
+    trait :in_betrieb do
+      name { "in Betrieb" }
+      operational { true }
+    end
   end
 
   factory :single_picture do

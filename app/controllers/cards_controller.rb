@@ -49,6 +49,15 @@ class CardsController < ApplicationController
   def edit
   end
 
+  def copy
+    card = Card.find(params[:id])
+    @card = @card.dup || Card.new
+    @card.iccsn = ''
+    @card.operational_state_id = nil
+    @card.description = card.description
+    @card.private_information = card.private_information
+  end
+
   # POST /cards
   def create
     @card = Card.new(card_params)

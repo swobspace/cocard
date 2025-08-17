@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Automatischer Reboot von Konnektoren :: Cocard</title>
-    <meta name="generator" content="Antora 3.1.10">
+    <meta name="generator" content="Antora 3.1.12">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
   </head>
@@ -296,6 +296,26 @@ CRON_REBOOT_CONNECTORS="30 6 * * 1,4"
 ...</pre>
 </div>
 </div>
+<div class="paragraph">
+<p>Zur Beschreibung der Cron-Syntax siehe <a href="https://de.wikipedia.org/wiki/Cron" class="bare">https://de.wikipedia.org/wiki/Cron</a>.</p>
+</div>
+<div class="paragraph">
+<p>NOTE::Wenn der angegebene String keine gültige Cron-Syntax aufweist erfolgt ein Fallback auf den Default. Prüfen kann man die aktuellen Croneinstellungen über <span class="menuseq"><b class="menu">Jobs</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Cron</b></span> (siehe auch nächster Abschnitt).</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_manuelles_anstoßen_des_reboot_jobs"><a class="anchor" href="#_manuelles_anstoßen_des_reboot_jobs"></a>Manuelles Anstoßen des Reboot-Jobs</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Ein manueller Reboot aller entsprechend konfigurierten Konnektoren außerhalb der per CRON eingestellten Interfalle ist über die Jobverwaltung möglich: <span class="menuseq"><b class="menu">Jobs</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="submenu">Cron</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Connectors::RebootJob</b></span>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/jobs/good-job-cron-connectors-reboot.png" alt="good job cron connectors reboot">
+</div>
+<div class="title">Abbildung 2. Manuelles Anstoßen des Konnektor-Reboot-Jobs</div>
 </div>
 </div>
 </div>

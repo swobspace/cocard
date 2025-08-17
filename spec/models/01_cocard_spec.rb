@@ -3,15 +3,26 @@
 require 'rails_helper'
 
 RSpec.describe Cocard, type: :model do
-  context ' with empty Settings' do
+  describe ' with empty Settings' do
     before(:each) do
       allow(Cocard::CONFIG).to receive(:[]).with('ldap_options').and_return(nil)
       allow(Cocard::CONFIG).to receive(:[]).with('enable_ldap_authentication').and_return(nil)
-      allow(Cocard::CONFIG).to receive(:[]).with('cron_reboot_connectors').and_return(nil)
-
+      allow(ENV).to receive(:[]).with('CRON_REBOOT_CONNECTORS').and_return(nil)
     end
     it { expect(Cocard.enable_ldap_authentication).to be_falsey }
     it { expect(Cocard.cron_reboot_connectors).to eq('5 1 * * 1') }
+  end
+
+  describe "with settings" do
+    it "uses ENV if valid?" do
+      allow(ENV).to receive(:[]).with('CRON_REBOOT_CONNECTORS').and_return('1 2 3 4 5')
+      expect(Cocard.cron_reboot_connectors).to eq('1 2 3 4 5')
+    end
+
+    it "uses default if ENV not valid" do
+      allow(ENV).to receive(:[]).with('CRON_REBOOT_CONNECTORS').and_return('1 2 3')
+      expect(Cocard.cron_reboot_connectors).to eq('5 1 * * 1')
+    end
   end
 
   describe '::ldap_options' do
