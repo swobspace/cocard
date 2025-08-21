@@ -2,6 +2,8 @@
 
 == 0.8.5-dev - unreleased
 
+* Kartenterminal: trennt man den Konnektor, wird die CT_ID und die vom Konnektor gefundene IP gelöscht.
+
 == 0.8.4 - 2025-08-17
 
 * Karte kopieren: existierende Karte kann als Vorlage bei Nachbestellungen verwendet werden.
