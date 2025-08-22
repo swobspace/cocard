@@ -4,7 +4,11 @@
 
 
 
-Original-Dokumentation: https://worldline.com/content/dam/worldline/local/de-de/documents/Remote-Management-Interface-ORGA-6141-online-V1.0.3.pdf
+Original-Dokumentation: 
+https://worldline.com/content/dam/worldline/local/de-de/documents/Remote-Management-Interface-ORGA-6141-online.pdf
+
+// https://worldline.com/content/dam/worldline/local/de-de/documents/Remote-Management-Interface-ORGA-6141-online-V1.0.3.pdf
+
 
 == Session
 
