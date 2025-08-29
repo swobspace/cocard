@@ -16,31 +16,39 @@
   </div>
 
   <div class="card-body">
-    <table class="table table-sm table-borderless">
-    
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.name')%>:</th>
-        <td><%= @client_certificate.name %></td>
-      </tr>
+    <div class="row">
+      <div class="col-lg-6">
+        <table class="table table-sm table-borderless">
+        
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.name')%>:</th>
+            <td><%= @client_certificate.name %></td>
+          </tr>
 
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.client_system')%>:</th>
-        <td><%= @client_certificate.client_system %></td>
-      </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.client_system')%>:</th>
+            <td><%= @client_certificate.client_system %></td>
+          </tr>
 
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.description')%>:</th>
-        <td><%= @client_certificate.description %></td>
-      </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.description')%>:</th>
+            <td><%= @client_certificate.description %></td>
+          </tr>
 
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.valid_until')%>:</th>
-        <td><%= @client_certificate.valid_until&.localtime %></td>
-      </tr>
-    </table>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.valid_until')%>:</th>
+            <td><%= @client_certificate.valid_until&.localtime %></td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-lg-6">
+        <pre>
+<%= @client_certificate.to_text %>
+        </pre>
+      </div>
+    </div>
   </div>
 </div>
-
 <%= back_link %>
 <%= link_to raw( '<span class="fa-solid fa-fw fa-upload" aria-hidden="true"></span> ' +
                  t('cocard.import_client_certificate')), 
