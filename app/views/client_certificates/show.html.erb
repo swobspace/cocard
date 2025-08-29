@@ -39,6 +39,14 @@
             <th class="w-10 pe-3"><%= t('attributes.valid_until')%>:</th>
             <td><%= @client_certificate.valid_until&.localtime %></td>
           </tr>
+
+          <tr>
+            <th class="w-10 pe-3"><%= t('controller.tags')%>:</th>
+            <td>
+              <%= render TagListComponent.new(item: @client_certificate) %>
+            </td>
+          </tr>
+
         </table>
       </div>
       <div class="col-lg-6">
