@@ -231,7 +231,7 @@
           <h6><%= t('cocard.assigned_certificates')%></h6>
         </div>
         <% @connector.client_certificates.each do |cert| %>
-          <div><%= cert %></div>
+          <div><%= link_to(cert.to_s, client_certificate_path(cert), class: 'primary-link') %></div>
         <% end %>
       </div>
     </div>
