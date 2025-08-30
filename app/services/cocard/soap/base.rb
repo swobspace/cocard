@@ -190,9 +190,9 @@ module Cocard::SOAP
     end
 
     def client_certificate
-      cert = @connector.client_certificates.where(client_system: @client_system).first
-      if cert.nil?
-        @connector.client_certificates.first
+      cert = @connector.client_certificates.where(client_system: @client_system).first ||
+             @connector.client_certificates.tagged_with(@client_system) ||
+             @connector.client_certificates.first
       else
         cert
       end
