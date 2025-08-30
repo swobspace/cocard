@@ -45,6 +45,9 @@ INTERNET_PROXY=http://192.0.2.99:3128
 
 KOCO_ADMIN=koco-root
 KOCO_PASSWD=verystrongsecret
+
+CRON_REBOOT_CONNECTORS="30 6 * * 1,4"
+AUTO_REBOOT_CONNECTORS_NOTE=yes
 ----
 
 [cols="1m,4"]
@@ -101,5 +104,12 @@ KOCO_PASSWD=verystrongsecret
 
 |KOCO_PASSWD
 |Passwort für den Zugang zur Weboberfläche
+
+|CRON_REBOOT_CONNECTORS
+|Cron-Eintrag für den Auto-Reboot-Job (siehe auch xref:ROOT:admin/connector-autoreboot.adoc[])
+
+|AUTO_REBOOT_CONNECTORS_NOTE
+|Soll bei einem Auto-Reboot eine Notiz erzeugt werden? Mögliche Werte: yes, no. Default: no.
+(siehe auch xref:ROOT:admin/connector-autoreboot.adoc[])
 
 |===

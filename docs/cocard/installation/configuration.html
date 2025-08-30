@@ -131,7 +131,7 @@
     <a class="nav-link" href="../admin/smcb-remote-pin.html">Remote PIN für SMC-B Karten</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../admin/client-certificates.html">Client-Zertifikate importieren</a>
+    <a class="nav-link" href="../admin/client-certificates.html">Client-Zertifikate</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../admin/ldap-authentication.html">LDAP-Authentifikation</a>
@@ -280,7 +280,10 @@ DEFAULT_SMCB_PIN=11111111
 INTERNET_PROXY=http://192.0.2.99:3128
 
 KOCO_ADMIN=koco-root
-KOCO_PASSWD=verystrongsecret</code></pre>
+KOCO_PASSWD=verystrongsecret
+
+CRON_REBOOT_CONNECTORS="30 6 * * 1,4"
+AUTO_REBOOT_CONNECTORS_NOTE=yes</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -362,6 +365,15 @@ KOCO_PASSWD=verystrongsecret</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>KOCO_PASSWD</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Passwort für den Zugang zur Weboberfläche</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CRON_REBOOT_CONNECTORS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cron-Eintrag für den Auto-Reboot-Job (siehe auch <a href="../admin/connector-autoreboot.html" class="xref page">Automatischer Reboot von Konnektoren</a>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AUTO_REBOOT_CONNECTORS_NOTE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Soll bei einem Auto-Reboot eine Notiz erzeugt werden? Mögliche Werte: yes, no. Default: no.
+(siehe auch <a href="../admin/connector-autoreboot.html" class="xref page">Automatischer Reboot von Konnektoren</a>)</p></td>
 </tr>
 </tbody>
 </table>

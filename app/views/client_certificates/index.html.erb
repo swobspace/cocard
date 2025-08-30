@@ -16,11 +16,13 @@
         <th><%= t('attributes.client_system') %></th>
         <th><%= t('attributes.description') %></th>
         <th><%= t('attributes.valid_until') %></th>
+        <th><%= t('controller.tags') %></th>
         <th class="nosort"><%= t('cocard.action') %></th>
       </tr>
     </thead>
     <tfoot class="search">
       <tr>
+        <th></th>
         <th></th>
         <th></th>
         <th></th>
@@ -35,6 +37,8 @@
           <td><%= client_certificate.client_system %></td>
           <td><%= client_certificate.description %></td>
           <td><%= client_certificate.valid_until&.localtime %></td>
+          <td><%= render TagListComponent.new(item: client_certificate) %></td>
+
           <td class="text-nowrap">
             <%= show_link client_certificate %>
             <%= edit_link client_certificate %>

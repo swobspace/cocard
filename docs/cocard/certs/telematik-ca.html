@@ -131,7 +131,7 @@
     <a class="nav-link" href="../admin/smcb-remote-pin.html">Remote PIN für SMC-B Karten</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../admin/client-certificates.html">Client-Zertifikate importieren</a>
+    <a class="nav-link" href="../admin/client-certificates.html">Client-Zertifikate</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../admin/ldap-authentication.html">LDAP-Authentifikation</a>
@@ -337,6 +337,30 @@ chmod 444 certs/$NAME.cert.pem</pre>
     -in certs/$NAME.cert.pem \
     -certfile certs/cacert.pem</pre>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pkcs12_prüfen"><a class="anchor" href="#_pkcs12_prüfen"></a>PKCS12 prüfen</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">openssl pkcs12 -info -in name.p12
+openssl pkcs12 -legacy -info -in name.p12
+openssl pkcs12 -info -passin pass:"mysecret" -in name.p12</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_weitere_infos"><a class="anchor" href="#_weitere_infos"></a>Weitere Infos</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://help.internetx.com/display/SSL/OpenSSL+-+Die+wichtigsten+Befehle" class="bare">https://help.internetx.com/display/SSL/OpenSSL+-+Die+wichtigsten+Befehle</a></p>
+</li>
+</ul>
 </div>
 </div>
 </div>
