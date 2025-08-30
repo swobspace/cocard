@@ -1,8 +1,10 @@
-= Client-Zertifikate importieren
+= Client-Zertifikate
 :author: Wolfgang Barth
-:revdate: 2024-10-03
+:revdate: 2025-08-30
 :imagesdir: ../../images
 :experimental: true
+
+== Import von Clientzertifikaten
 
 Client-Zertifikate kann man in Cocard als P12-Datei oder als ASCII-Text (PEM-Format) importieren, je nach dem, in welchem Format das Zertifikat vorliegt.
 
@@ -10,7 +12,7 @@ image::certificate/client-certificates-index-with-menu.png[]
 
 Der rote Pfeil markiert den Import im P12-Format, darunter ist die Importmöglichkeit im Textformat (PEM).
 
-== Import als P12-Datei
+=== Import als P12-Datei
 
 image::certificate/client-certificate-import.png[]
 
@@ -32,7 +34,7 @@ a|Der Name wird zur Auswahl bei der Zuordnung zum Konnektor angezeigt. Hier sind
 
 |===
 
-== Import via ASCII-Text
+=== Import via ASCII-Text
 
 Wenn Client-Zertifikat und Private Key im PEM-Format vorliegen, kann man hier einfach den Textinhalt mit Cut-and-Paste in das Formularfeld kopieren.
 
@@ -42,6 +44,19 @@ mit kopieren.
 Den Private Key kopiert man analog dazu in das vorgesehene Feld. Der Private Key sollte passwortgeschützt sein.
 
 image::certificate/client-certificate-new.png[]
+
+== Tags
+
+Man kann einem Konnektor mehrere Zertifikate zuordnen. Woher weiß der Konnektor jetzt, welches Zertifikat für welchen Kontext zu nutzen ist? Idealerweise steht das Clientsystem im Common Name, z.B. `CN=SAP`. Manche Konnektoren erzwingen sogar, dass das im Aufrufkontext verwendete Clientsystem so im `CN` stehen muss. Auf so einem Konnektor erstellte Zertifikate entsprechen auch der Anforderung. Andere Konnektoren wie die vKonns des RISE-TI-Gateways erstellen Zertifikate, die im `CN` nicht das Clientsystem enthalten. Cocard kann auch mit solchen Zertifikaten umgehen. Man ergänzt beim Client-Zertifikat ein Tag mit dem Namen des gewünschten Client-Systems:
+ 
+.Tag zum Client-Zertifikat hinzufügen
+image::certificate/client-certificate-edit.png[]
+
+Cocard prüft die dem Konnektor zugeordneten Zertifikate in folgender Reihenfolge:
+
+. Zertifikat mit CN=<clientsystem>
+. Zertifikat mit Tag <clientsystem>
+. Das erste gefundene Zertifikat
 
 == Troubleshooting 
 
