@@ -8,6 +8,7 @@ RSpec.describe Cocard, type: :model do
       allow(Cocard::CONFIG).to receive(:[]).with('ldap_options').and_return(nil)
       allow(Cocard::CONFIG).to receive(:[]).with('enable_ldap_authentication').and_return(nil)
       allow(ENV).to receive(:[]).with('CRON_REBOOT_CONNECTORS').and_return(nil)
+      allow(ENV).to receive(:[]).with('AUTO_REBOOT_CONNECTORS_NOTE').and_return(nil)
     end
     it { expect(Cocard.enable_ldap_authentication).to be_falsey }
     it { expect(Cocard.cron_reboot_connectors).to eq('5 1 * * 1') }
@@ -16,12 +17,15 @@ RSpec.describe Cocard, type: :model do
   describe "with settings" do
     it "uses ENV if valid?" do
       allow(ENV).to receive(:[]).with('CRON_REBOOT_CONNECTORS').and_return('1 2 3 4 5')
+      allow(ENV).to receive(:[]).with('AUTO_REBOOT_CONNECTORS_NOTE').and_return('yes')
       expect(Cocard.cron_reboot_connectors).to eq('1 2 3 4 5')
+      expect(Cocard.auto_reboot_connectors_note).to be_truthy
     end
 
     it "uses default if ENV not valid" do
       allow(ENV).to receive(:[]).with('CRON_REBOOT_CONNECTORS').and_return('1 2 3')
       expect(Cocard.cron_reboot_connectors).to eq('5 1 * * 1')
+      expect(Cocard.auto_reboot_connectors_note).to be_falsey
     end
   end
 
