@@ -47,6 +47,16 @@
             </td>
           </tr>
 
+          <tr>
+            <th class="w-10 pe-3"><%= t('controller.connectors')%>:</th>
+            <td>
+              <%= @client_certificate.connectors.map do |c| 
+                    link_to(c.name, connector_path(c), class: 'primary-link')
+                  end.join("<br />").html_safe
+               %>
+            </td>
+          </tr>
+
         </table>
       </div>
       <div class="col-lg-6">
