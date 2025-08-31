@@ -1,5 +1,7 @@
 = Changelog
 
+== 0.8.6-dev - unreleased
+
 == 0.8.5 - 2025-08-31
 
 * Kartenterminal: trennt man den Konnektor, wird die CT_ID und die vom Konnektor gefundene IP gelöscht.
