@@ -38,3 +38,9 @@
 .medium-zoom-image--opened {
   z-index: 999;
 }
+
+input#search-input {
+  padding: 0.25em;
+  border-radius: 0.25em;
+}
+
