@@ -1,5 +1,11 @@
 = Changelog
 
+== 0.8.5 - 2025-08-31
+
+* Kartenterminal: trennt man den Konnektor, wird die CT_ID und die vom Konnektor gefundene IP gelöscht.
+* Client-Zertifikate: alternative Auswahl des verwendeten Client-Zertifikates via Tag. Bisher musste `CN=<client_system>` sein, damit Cocard das Client-Zertifikat passend zum Kontext ausgewählt hat.
+* Automatischer Reboot von Konnektoren erzeugt per Default keine Notiz mehr.
+
 == 0.8.4 - 2025-08-17
 
 * Karte kopieren: existierende Karte kann als Vorlage bei Nachbestellungen verwendet werden.

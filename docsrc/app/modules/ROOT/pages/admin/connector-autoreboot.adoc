@@ -48,3 +48,16 @@ Ein manueller Reboot aller entsprechend konfigurierten Konnektoren außerhalb de
 
 .Manuelles Anstoßen des Konnektor-Reboot-Jobs
 image::jobs/good-job-cron-connectors-reboot.png[]
+
+== Notizeintrag beim automatischen Reboot
+
+Beim manuellen Reboot eines einzelnen Konnektors wird eine Notiz angelegt, um den Vorgang zu protokollieren. Beim automatischen Reboot ist diese Information weniger hilfreich, da man ja explizit den Reboot regelmäßig wiederholt. Cocard legt daher per Default keine Notiz an. Möchte man trotzdem für jeden Autostart eines Konnektors eine Notiz haben, kann man das wie das Cron-Scheduling per Variable setzen:
+
+----
+# env.production
+...
+AUTO_REBOOT_CONNECTORS_NOTE=yes
+...
+----
+
+Der Wert `yes` aktiviert das Erstellen von Notizen.

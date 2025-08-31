@@ -29,6 +29,7 @@ class CardTerminal < ApplicationRecord
   before_save :ensure_displayname
   before_save :update_condition
   before_save :update_acknowledge_id
+  before_save :clear_connector_info
 
   validates :pin_mode, inclusion: { in: pin_modes.keys }
   validates_uniqueness_of :ct_id, scope: [:connector_id],
@@ -125,6 +126,13 @@ class CardTerminal < ApplicationRecord
 
     if will_save_change_to_ip?
       update_location_by_ip
+    end
+  end
+
+  def clear_connector_info
+    if connector_id.nil?
+      self[:ct_id] = nil
+      self[:current_ip] = nil
     end
   end
 

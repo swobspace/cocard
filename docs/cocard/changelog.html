@@ -131,7 +131,7 @@
     <a class="nav-link" href="admin/smcb-remote-pin.html">Remote PIN für SMC-B Karten</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="admin/client-certificates.html">Client-Zertifikate importieren</a>
+    <a class="nav-link" href="admin/client-certificates.html">Client-Zertifikate</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="admin/ldap-authentication.html">LDAP-Authentifikation</a>
@@ -227,6 +227,24 @@
 </aside>
 <article class="doc">
 <h1 class="page">Changelog</h1>
+<div class="sect1">
+<h2 id="_0_8_5_2025_08_31"><a class="anchor" href="#_0_8_5_2025_08_31"></a>0.8.5 - 2025-08-31</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Kartenterminal: trennt man den Konnektor, wird die CT_ID und die vom Konnektor gefundene IP gelöscht.</p>
+</li>
+<li>
+<p>Client-Zertifikate: alternative Auswahl des verwendeten Client-Zertifikates via Tag. Bisher musste <code>CN=&lt;client_system&gt;</code> sein, damit Cocard das Client-Zertifikat passend zum Kontext ausgewählt hat.</p>
+</li>
+<li>
+<p>Automatischer Reboot von Konnektoren erzeugt per Default keine Notiz mehr.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
 <div class="sect1">
 <h2 id="_0_8_4_2025_08_17"><a class="anchor" href="#_0_8_4_2025_08_17"></a>0.8.4 - 2025-08-17</h2>
 <div class="sectionbody">

@@ -190,7 +190,9 @@ module Cocard::SOAP
     end
 
     def client_certificate
-      @connector.client_certificates.where(client_system: @client_system).first
+      @connector.client_certificates.where(client_system: @client_system).first ||
+        @connector.client_certificates.tagged_with(@client_system).first ||
+        @connector.client_certificates.first
     end
 
     def use_tls

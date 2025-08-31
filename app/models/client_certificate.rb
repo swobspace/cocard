@@ -1,4 +1,7 @@
 class ClientCertificate < ApplicationRecord
+  include ClientCertificateConcerns
+  include Taggable
+
   # -- associations
   has_and_belongs_to_many :connectors
 

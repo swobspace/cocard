@@ -548,9 +548,9 @@
   integrity sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw==
 
 "@yaireo/tagify@^4.35.1":
-  version "4.35.3"
-  resolved "https://registry.yarnpkg.com/@yaireo/tagify/-/tagify-4.35.3.tgz#4c23f676a169fd6e6131557f0c3feb3ab70917ec"
-  integrity sha512-YXqNIHoKwZXRxeMSu1E9/CaE/e4rC81RUyg2IaPYh6ZmcAl+7dVi/QoNV1pGu7MLXIqQYpXyXxzDoweIOF7GIw==
+  version "4.35.4"
+  resolved "https://registry.yarnpkg.com/@yaireo/tagify/-/tagify-4.35.4.tgz#287d8023800763ee594454b5f3855ea0b4b309c2"
+  integrity sha512-kC+1FEAZEM4DrBmn/wKMnpu5D1Lt1oMt/Wkx+VAdK13a/0B/hY+PWMoZKPePM81TX/VIpf7dstTDg6ckOvbzNw==
 
 abort-controller@^3.0.0:
   version "3.0.0"
@@ -657,9 +657,9 @@ bootstrap-icons@^1.11.3:
   integrity sha512-ijombt4v6bv5CLeXvRWKy7CuM3TRTuPEuGaGKvTV5cz65rQSY8RQ2JcHt6b90cBBAC7s8fsf2EkQDldzCoXUjw==
 
 bootstrap@^5.3.3:
-  version "5.3.7"
-  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-5.3.7.tgz#8640065036124d961d885d80b5945745e1154d90"
-  integrity sha512-7KgiD8UHjfcPBHEpDNg+zGz8L3LqR3GVwqZiBRFX04a1BCArZOz1r2kjly2HQ0WokqTO0v1nF+QAt8dsW4lKlw==
+  version "5.3.8"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-5.3.8.tgz#6401a10057a22752d21f4e19055508980656aeed"
+  integrity sha512-HP1SZDqaLDPwsNiqRqi5NcP0SSXciX2s9E+RyqJIIqGo+vJeN5AJVM98CXmW/Wux0nQ5L7jeWUdplCEf0Ee+tg==
 
 brace-expansion@^1.1.7:
   version "1.1.12"
@@ -684,12 +684,12 @@ brotli@^1.2.0:
     base64-js "^1.1.2"
 
 browserslist@^4.24.4:
-  version "4.25.2"
-  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.25.2.tgz#90c1507143742d743544ae6e92bca3348adff667"
-  integrity sha512-0si2SJK3ooGzIawRu61ZdPCO1IncZwS8IzuX73sPZsXW6EQ/w/DAfPyKI8l1ETTCr2MnvqWitmlCUxgdul45jA==
+  version "4.25.4"
+  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.25.4.tgz#ebdd0e1d1cf3911834bab3a6cd7b917d9babf5af"
+  integrity sha512-4jYpcjabC606xJ3kw2QwGEZKX0Aw7sgQdZCvIK9dhVSPh76BKo+C+btT1RRofH7B+8iNpEbgGNVWiLki5q93yg==
   dependencies:
-    caniuse-lite "^1.0.30001733"
-    electron-to-chromium "^1.5.199"
+    caniuse-lite "^1.0.30001737"
+    electron-to-chromium "^1.5.211"
     node-releases "^2.0.19"
     update-browserslist-db "^1.1.3"
 
@@ -739,10 +739,10 @@ call-bound@^1.0.2, call-bound@^1.0.3, call-bound@^1.0.4:
     call-bind-apply-helpers "^1.0.2"
     get-intrinsic "^1.3.0"
 
-caniuse-lite@^1.0.30001702, caniuse-lite@^1.0.30001733:
-  version "1.0.30001735"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001735.tgz#ba658fd3fd24a4106fd68d5ce472a2c251494dbe"
-  integrity sha512-EV/laoX7Wq2J9TQlyIXRxTJqIw4sxfXS4OYgudGxBYRuTv0q7AM6yMEpU/Vo1I94thg9U6EZ2NfZx9GJq83u7w==
+caniuse-lite@^1.0.30001702, caniuse-lite@^1.0.30001737:
+  version "1.0.30001737"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001737.tgz#8292bb7591932ff09e9a765f12fdf5629a241ccc"
+  integrity sha512-BiloLiXtQNrY5UyF0+1nSJLXUENuhka2pzy2Fx5pGxqavdrxSCW4U6Pn/PoG3Efspi2frRbHpBV2XsrPE6EDlw==
 
 chokidar@^3.3.0, chokidar@^3.5.2:
   version "3.6.0"
@@ -841,11 +841,11 @@ crypto-js@^4.2.0:
   integrity sha512-KALDyEYgpY+Rlob/iriUtjV6d5Eq+Y191A5g4UqLAi8CyGP9N1+FdVbkc1SxKc2r4YAYqG8JzO2KGL+AizD70Q==
 
 datatables.net-bs5@^2, datatables.net-bs5@^2.0.3:
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/datatables.net-bs5/-/datatables.net-bs5-2.3.2.tgz#cffb8007a9f752a997bc70c0dbe9f545edfd18eb"
-  integrity sha512-1rh0ZTLoiziIQ4oAtgr+IOYVgJfAIceDnbDe535u8kv191pBAdTrKF6ovQO98Xy9mDXLdLNB7QCrLiV/sgPoQw==
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/datatables.net-bs5/-/datatables.net-bs5-2.3.3.tgz#8bf3aec484a69e373f6007038eaac0cc0ef4ee15"
+  integrity sha512-IPtC57k3KyZaLzIYTHies23Cm2zqaKfD6lkxy/aOAUUAtsg35l53VqNY9y84AEySYG3YLghMHVBvl2ckUhvm0A==
   dependencies:
-    datatables.net "2.3.2"
+    datatables.net "2.3.3"
     jquery ">=1.7"
 
 datatables.net-buttons-bs5@^3.0.1:
@@ -866,26 +866,26 @@ datatables.net-buttons@3.2.4:
     jquery ">=1.7"
 
 datatables.net-responsive-bs5@^3.0.1:
-  version "3.0.5"
-  resolved "https://registry.yarnpkg.com/datatables.net-responsive-bs5/-/datatables.net-responsive-bs5-3.0.5.tgz#28e00ea853ef91abd70b4168ef90140d5e908f35"
-  integrity sha512-dp/4gBowyJIEjeD1bDKyjCGCiYvusxG/Rxrnfp2QBpKTZaEBP+17uo9mooCm5a7HMS3j5IDFSy1dUoAJrzk6sg==
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/datatables.net-responsive-bs5/-/datatables.net-responsive-bs5-3.0.6.tgz#9535a5e0d59487aa0c5ed4a554157c291b249aa6"
+  integrity sha512-FQNYSisTfShgcur5mBTFgpaqmtlM9fDCDAMtkqU5YyZldvR+vlMW0rJ60hSKHN9B+aAA3tIjDZuR1U3+VvO6ag==
   dependencies:
     datatables.net-bs5 "^2"
-    datatables.net-responsive "3.0.5"
+    datatables.net-responsive "3.0.6"
     jquery ">=1.7"
 
-datatables.net-responsive@3.0.5:
-  version "3.0.5"
-  resolved "https://registry.yarnpkg.com/datatables.net-responsive/-/datatables.net-responsive-3.0.5.tgz#fdebdd8518de11a085a774b9a8a2f6d2b37d1fd5"
-  integrity sha512-EnDY2OQN+f4XE72J+dajNuJwT78/GnCuuw8ACusrXaF/VpGyFEpBNr1JDzUTBj+cv7KGpDObks8AaL2p/Z2OVg==
+datatables.net-responsive@3.0.6:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/datatables.net-responsive/-/datatables.net-responsive-3.0.6.tgz#6a57a9c37840bd468ec2e2ef33649da749161cac"
+  integrity sha512-GHVgU7k7/ST7F/z1/0ieaJiNghrO1mgH8PbikAaL9MH1pw+GMcCuL5sFaFzIyMRzZz7tnrmVnjrkNX+W01VzhA==
   dependencies:
     datatables.net "^2"
     jquery ">=1.7"
 
-datatables.net@2.3.2, datatables.net@^2:
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/datatables.net/-/datatables.net-2.3.2.tgz#6821f6288e6ad3cb6879c33e0e7e11d4091d330b"
-  integrity sha512-31TzwIQM0+pr2ZOEOEH6dsHd/WSAl5GDDGPezOHPI3mM2NK4lcDyOoG8xXeWmSbVfbi852LNK5C84fpp4Q+qxg==
+datatables.net@2.3.3, datatables.net@^2:
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/datatables.net/-/datatables.net-2.3.3.tgz#fe4f96bdbc4cf47c8d11162a7af525ca6a3683d2"
+  integrity sha512-SWL3za6nheY6gdoiLgCc++tYmxbwrmv2bjrEiII9rXBWXXSbOZct6pjR3FueMVRM5jmt7pQcXiGovfuFDnutQg==
   dependencies:
     jquery ">=1.7"
 
@@ -974,10 +974,10 @@ dunder-proto@^1.0.1:
     es-errors "^1.3.0"
     gopd "^1.2.0"
 
-electron-to-chromium@^1.5.199:
-  version "1.5.203"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.5.203.tgz#ef7fc2f7e1b816fa4535c861d1ec1348204142b6"
-  integrity sha512-uz4i0vLhfm6dLZWbz/iH88KNDV+ivj5+2SA+utpgjKaj9Q0iDLuwk6Idhe9BTxciHudyx6IvTvijhkPvFGUQ0g==
+electron-to-chromium@^1.5.211:
+  version "1.5.211"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.5.211.tgz#749317bf9cf894c06f67980940cf8074e5eb08ca"
+  integrity sha512-IGBvimJkotaLzFnwIVgW9/UD/AOJ2tByUmeOrtqBfACSbAw5b1G0XpvdaieKyc7ULmbwXVx+4e4Be8pOPBrYkw==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
@@ -1926,9 +1926,9 @@ safe-stable-stringify@^2.3.1:
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
 sass@^1.72.0:
-  version "1.90.0"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.90.0.tgz#d6fc2be49c7c086ce86ea0b231a35bf9e33cb84b"
-  integrity sha512-9GUyuksjw70uNpb1MTYWsH9MQHOHY6kwfnkafC24+7aOMZn9+rVMBxRbLvw756mrBFbIsFg6Xw9IkR2Fnn3k+Q==
+  version "1.91.0"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.91.0.tgz#7d4f7f624b35d43f78da1c339cab24426e28d7fa"
+  integrity sha512-aFOZHGf+ur+bp1bCHZ+u8otKGh77ZtmFyXDo4tlYvT7PWql41Kwd8wdkPqhhT+h2879IVblcHFglIMofsFd1EA==
   dependencies:
     chokidar "^4.0.0"
     immutable "^5.0.2"

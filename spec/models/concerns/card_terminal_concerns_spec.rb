@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe CardTerminalConcerns, type: :model do
+  let(:connector) do
+    FactoryBot.create(:connector, name: 'TIK-123-XXX', short_name: 'K128')
+  end
   let(:ct) do
     FactoryBot.create(:card_terminal,
       mac: '000DF808F6AD',
@@ -11,6 +14,7 @@ RSpec.describe CardTerminalConcerns, type: :model do
       firmware_version: "17.04",
       "id_product": "CardStuff",
       serial: "111111111",
+      connector_id: connector.id,
     )
   end
 
@@ -145,14 +149,10 @@ RSpec.describe CardTerminalConcerns, type: :model do
   end
 
   describe "#to_liquid" do
-    let(:connector) do
-      FactoryBot.create(:connector, name: 'TIK-123-XXX', short_name: 'K128')
-    end
     let(:network) { FactoryBot.create(:network, netzwerk: "127.51.100.0/24") }
     let(:location) { FactoryBot.create(:location, lid: 'AXC') }
 
     before(:each) do
-      expect(ct).to receive(:connector).at_least(:once).and_return(connector)
       expect(ct).to receive(:network).and_return(network)
       expect(ct).to receive(:location).and_return(location)
     end

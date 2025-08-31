@@ -55,6 +55,14 @@ EOTMPL
     end
   end
 
+  def self.auto_reboot_connectors_note
+    if ENV['AUTO_REBOOT_CONNECTORS_NOTE'] == 'yes'
+      true
+    else
+      false
+    end
+  end
+
   def self.ldap_options
     if CONFIG['ldap_options'].present?
       ldapopts = CONFIG['ldap_options']

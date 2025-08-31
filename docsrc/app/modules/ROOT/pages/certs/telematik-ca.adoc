@@ -99,3 +99,16 @@ openssl pkcs12 -export -out p12/$NAME-ecc.p12 \
     -certfile certs/cacert.pem 
 ----
 
+== PKCS12 prüfen
+
+[source,bash]
+----
+openssl pkcs12 -info -in name.p12
+openssl pkcs12 -legacy -info -in name.p12
+openssl pkcs12 -info -passin pass:"mysecret" -in name.p12
+----
+
+
+== Weitere Infos
+
+* https://help.internetx.com/display/SSL/OpenSSL+-+Die+wichtigsten+Befehle

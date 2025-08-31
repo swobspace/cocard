@@ -53,7 +53,7 @@ RSpec.describe CardTerminal, type: :model do
   end
 
   it 'should get plain factory working' do
-    f = FactoryBot.create(:card_terminal, :with_mac)
+    f = FactoryBot.create(:card_terminal, :with_mac, connector_id: connector.id)
     g = FactoryBot.create(:card_terminal, :with_sn)
     h = FactoryBot.build(:card_terminal)
     expect(f).to be_valid
@@ -404,6 +404,15 @@ RSpec.describe CardTerminal, type: :model do
         expect(ct).to receive(:ip).at_least(:once).and_return('127.0.0.4')
       end
       it { expect(ct.noip?).to be_truthy }
+    end
+  end
+
+  describe "removing connector" do
+    it "resets ct_id and current_ip" do
+      ct.update(connector_id: nil)
+      ct.reload
+      expect(ct.ct_id).to be_blank
+      expect(ct.current_ip).to be_nil
     end
   end
 end

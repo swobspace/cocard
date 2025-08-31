@@ -123,7 +123,7 @@
                   <i class="fa-solid fa-eye"
                     data-action="click->show-secret#toggleSecret"
                     data-show-secret-target="icon"></i>
-                <% end %>
+                <% end if @connector.id_contract.present? %>
               </td>
             </tr>
           <% end %>
@@ -231,7 +231,10 @@
           <h6><%= t('cocard.assigned_certificates')%></h6>
         </div>
         <% @connector.client_certificates.each do |cert| %>
-          <div><%= cert %></div>
+          <div>
+            <%=link_to(cert.to_s, client_certificate_path(cert), class: 'primary-link')%>
+            <%= render TagListComponent.new(item: cert) %>
+          </div>
         <% end %>
       </div>
     </div>

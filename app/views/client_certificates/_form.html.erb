@@ -13,6 +13,8 @@
          %>
       <%= form.input :passphrase, as: :password
          %>
+    <% else %>
+      <%= tag_list_input(form) %>
     <% end %>
 
     <%= form.button :submit, class: 'btn btn-primary' %>

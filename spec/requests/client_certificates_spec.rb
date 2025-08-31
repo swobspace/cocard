@@ -190,7 +190,8 @@ RSpec.describe "/client_certificates", type: :request do
     context "with valid parameters" do
       let(:new_attributes) {{
         name: "newname",
-        description: "more information"
+        description: "more information",
+        tag_list_input: [{value: "MyTag"}].to_json,
       }}
 
       it "updates the requested client_certificate" do
@@ -199,6 +200,7 @@ RSpec.describe "/client_certificates", type: :request do
         client_certificate.reload
         expect(client_certificate.name).to eq("newname")
         expect(client_certificate.description.to_plain_text).to eq("more information")
+        expect(client_certificate.tags.map(&:name)).to contain_exactly("MyTag")
       end
 
       it "redirects to the client_certificate" do
