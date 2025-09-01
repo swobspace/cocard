@@ -15,7 +15,7 @@ class ClientCertificate < ApplicationRecord
 
   # -- common methods
   def to_s
-    "#{name}"
+    "#{name} (#{valid_until.to_date.to_s})"
   end
 
   def cn

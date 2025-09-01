@@ -23,7 +23,7 @@ RSpec.describe ClientCertificate, type: :model do
   end
 
   describe "#to_s" do
-    it { expect(client_certificate.to_s).to match('myname') }
+    it { expect(client_certificate.to_s).to eq("myname (#{client_certificate.valid_until.to_date})") }
   end
 
   describe "#client_system" do
