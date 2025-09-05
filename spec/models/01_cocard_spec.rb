@@ -7,10 +7,14 @@ RSpec.describe Cocard, type: :model do
     before(:each) do
       allow(Cocard::CONFIG).to receive(:[]).with('ldap_options').and_return(nil)
       allow(Cocard::CONFIG).to receive(:[]).with('enable_ldap_authentication').and_return(nil)
+      allow(Cocard::CONFIG).to receive(:[]).with('enable_ktproxy').and_return(nil)
+      allow(Cocard::CONFIG).to receive(:[]).with('ktproxy_defaults').and_return(nil)
       allow(ENV).to receive(:[]).with('CRON_REBOOT_CONNECTORS').and_return(nil)
       allow(ENV).to receive(:[]).with('AUTO_REBOOT_CONNECTORS_NOTE').and_return(nil)
     end
     it { expect(Cocard.enable_ldap_authentication).to be_falsey }
+    it { expect(Cocard.enable_ktproxy).to be_falsey }
+    it { expect(Cocard.ktproxy_defaults).to eq({}) }
     it { expect(Cocard.cron_reboot_connectors).to eq('5 1 * * 1') }
     it { expect(Cocard.auto_reboot_connectors_note).to be_falsey }
   end
@@ -21,6 +25,13 @@ RSpec.describe Cocard, type: :model do
       allow(ENV).to receive(:[]).with('AUTO_REBOOT_CONNECTORS_NOTE').and_return('yes')
       expect(Cocard.cron_reboot_connectors).to eq('1 2 3 4 5')
       expect(Cocard.auto_reboot_connectors_note).to be_truthy
+    end
+
+    it "in CONFIG" do
+      allow(Cocard::CONFIG).to receive(:[]).with('enable_ktproxy').and_return(true)
+      allow(Cocard::CONFIG).to receive(:[]).with('ktproxy_defaults').and_return({card_terminal_port: 4742})
+      expect(Cocard.enable_ktproxy).to be_truthy
+      expect(Cocard.ktproxy_defaults).to include(card_terminal_port: 4742)
     end
 
     it "uses default if ENV not valid" do

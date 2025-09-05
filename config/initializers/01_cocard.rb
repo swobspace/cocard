@@ -81,6 +81,14 @@ EOTMPL
     fetch_config('enable_ldap_authentication', false)
   end
 
+  def self.enable_ktproxy
+    fetch_config('enable_ktproxy', false)
+  end
+
+  def self.ktproxy_defaults
+    Hash(fetch_config('ktproxy_defaults', {}))
+  end
+
   Rails.application.routes.default_url_options = {
     host: (ENV['URL_HOST'] || 'localhost'),
     port: (ENV['URL_PORT'] || '3000'),
