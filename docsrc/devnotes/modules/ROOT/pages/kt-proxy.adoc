@@ -1,0 +1,23 @@
+= KT-Proxy Stuff (RISE TI-Gateway)
+:author: Wolfgang Barth
+:navdate: 2025-09-05
+
+./opt/rise/tic*/config/stores/cardterminal_proxies.json
+[source,json]
+----
+{
+    "proxies": [
+        {
+            "id": "09178083-c453-4c5c-911e-45cf49f2ee4f",
+            "name": "KT Aufnahme 01",
+            "wireguardIp": "172.16.55.29",
+            "incomingIp": "10.255.200.166",
+            "incomingPort": 8101,
+            "outgoingIp": "10.255.200.165",
+            "outgoingPort": 8101,
+            "cardTerminalIp": "10.200.149.78",
+            "cardTerminalPort": 4742
+        }
+    ]
+}
+----

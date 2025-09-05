@@ -201,6 +201,19 @@ Class Tagging {
   taggable: polymorphic
 }
 
+class KTProxy {
+  uuid: string
+  name: string
+  wireguard_ip: inet
+  incoming_ip: inet
+  incoming_port: integer
+  outgoing_ip: inet
+  outgoing_port: integer
+  card_terminal_ip: inet
+  card_terminal_port: integer
+  card_terminal_id
+}
+
 Network "*" - "1" Location
 Network "1" -- "*" CardTerminal
 Location "*" -- "*" Connector
@@ -212,6 +225,7 @@ CardContext . (Card, Context)
 CardTerminal "1" - "*" CardTerminalSlot
 CardTerminalSlot "1" - "0..1" Card
 CardTerminal "*" -- "*" Workplace
+KTProxy "1" -- "1" CardTerminal 
 TerminalWorkplaces . (CardTerminal, Workplace) 
 Location "0..1" -- "*" Card
 OperationalState "1" -- "*" Card

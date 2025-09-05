@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_07_12_081955) do
+ActiveRecord::Schema[7.2].define(version: 2025_09_05_145850) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -325,6 +325,22 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_12_081955) do
     t.index ["priority", "scheduled_at"], name: "index_good_jobs_on_priority_scheduled_at_unfinished_unlocked", where: "((finished_at IS NULL) AND (locked_by_id IS NULL))"
     t.index ["queue_name", "scheduled_at"], name: "index_good_jobs_on_queue_name_and_scheduled_at", where: "(finished_at IS NULL)"
     t.index ["scheduled_at"], name: "index_good_jobs_on_scheduled_at", where: "(finished_at IS NULL)"
+  end
+
+  create_table "kt_proxies", force: :cascade do |t|
+    t.bigint "card_terminal_id"
+    t.string "uuid", null: false
+    t.string "name", default: ""
+    t.inet "wireguard_ip"
+    t.inet "incoming_ip"
+    t.integer "incoming_port"
+    t.inet "outgoing_ip"
+    t.integer "outgoing_port"
+    t.inet "card_terminal_ip"
+    t.integer "card_terminal_port", default: 4742
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_terminal_id"], name: "index_kt_proxies_on_card_terminal_id"
   end
 
   create_table "locations", force: :cascade do |t|

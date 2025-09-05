@@ -1,0 +1,75 @@
+<div class="card mb-3">
+  <div class="card-header">
+    <div class="d-flex w-100 justify-content-between">
+      <div>
+        <span class="subtitle">
+          <%= t('activerecord.models.kt_proxy') %>: 
+          #<%= @kt_proxy.id %>
+        </span>
+        <h4 class="title"><%= @kt_proxy %></h4>
+      </div>
+      <div role="toolbar" class="pt-3">
+        <%= edit_link(@kt_proxy) %>
+        <%= delete_link(@kt_proxy) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <table class="table table-sm table-borderless">
+    
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.card_terminal')%>:</th>
+        <td><%= @kt_proxy.card_terminal %></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.uuid')%>:</th>
+        <td><%= @kt_proxy.uuid %></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.name')%>:</th>
+        <td><%= @kt_proxy.name %></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.wireguard_ip')%>:</th>
+        <td><%= @kt_proxy.wireguard_ip %></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.incoming_ip')%>:</th>
+        <td><%= @kt_proxy.incoming_ip %></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.incoming_port')%>:</th>
+        <td><%= @kt_proxy.incoming_port %></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.outgoing_ip')%>:</th>
+        <td><%= @kt_proxy.outgoing_ip %></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.outgoing_port')%>:</th>
+        <td><%= @kt_proxy.outgoing_port %></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.card_terminal_ip')%>:</th>
+        <td><%= @kt_proxy.card_terminal_ip %></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.card_terminal_port')%>:</th>
+        <td><%= @kt_proxy.card_terminal_port %></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<%= back_link %>
+<%= new_link KTProxy %>

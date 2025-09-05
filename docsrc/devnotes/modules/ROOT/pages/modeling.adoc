@@ -316,7 +316,23 @@ bin/rails g model Tagging \
   --no-stylesheets --no-javascripts --no-helper
 ----
 
+== model KTProxy (TI-Gateway)
 
+[source,sh]
+----
+bin/rails g scaffold KTProxy \
+  card_terminal:belongs_to \
+  uuid:string \
+  name:string \
+  wireguard_ip:inet \
+  incoming_ip:inet \
+  incoming_port:integer \
+  outgoing_ip:inet \
+  outgoing_port:integer \
+  card_terminal_ip:inet \
+  card_terminal_port:integer \
+  --no-stylesheets --no-javascripts --no-helper
+----
 
 == HABTM Tables
 
