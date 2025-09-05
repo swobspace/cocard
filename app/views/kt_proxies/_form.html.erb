@@ -8,17 +8,17 @@
        %>
     <%= form.input :name
        %>
-    <%= form.input :wireguard_ip
+    <%= form.input :wireguard_ip, as: :string
        %>
-    <%= form.input :incoming_ip
+    <%= form.input :incoming_ip, as: :string
        %>
     <%= form.input :incoming_port
        %>
-    <%= form.input :outgoing_ip
+    <%= form.input :outgoing_ip, as: :string
        %>
     <%= form.input :outgoing_port
        %>
-    <%= form.input :card_terminal_ip
+    <%= form.input :card_terminal_ip, as: :string
        %>
     <%= form.input :card_terminal_port
        %>
