@@ -87,6 +87,7 @@ de:
       context: Kontext
       connector: Konnektor
       connector_context: Konnektor Kontext
+      kt_proxy: KT-Proxy
       location: Standort
       log: Log
       network: Netzwerk
@@ -112,6 +113,8 @@ de:
     card_holder_name: CardHolder
     card_terminal: Kartenterminal
     card_terminal_ids: Kartenterminals
+    card_terminal_ip: IP des Kartenterminals
+    card_terminal_port: Port des Kartenterminals
     card_type: Kartentyp
     certificate: Zertifikat
     cert: Zertifikat (PEM)
@@ -154,6 +157,8 @@ de:
     id_contract: Vertragsnummer
     id_product: Modellbezeichnung
     idle_message: Anzeige im Display
+    incoming_ip: Eingehende IP
+    incoming_port: Eingehender Port
     insert_time: eingesteckt seit
     ip: IP-Adresse
     is_valid: gültig?
@@ -182,6 +187,8 @@ de:
     object_system_version: ObjectSystemVersion
     operational: in Betrieb
     operational_state: Betriebszustand
+    outgoing_ip: Ausgehende IP
+    outgoing_port: Ausgehender Port
     passphrase: Passphrase
     pin_mode: SMC-B Auto-PIN-Mode
     pkey: Private Key (PEM)
@@ -206,7 +213,9 @@ de:
     updated_at: zuletzt aktualisiert
     username: Username
     use_tls: TLS verwenden
+    uuid: UUID
     vpnti_online: VPN TI Online
+    wireguard_ip: Wireguard IP
     workplace: Arbeitsplatz
     workplaces: Arbeitsplätze
 
@@ -222,6 +231,7 @@ de:
     events: Ereignisse
     home: Home
     idle_messages: Ruhebildschirme
+    kt_proxies: KT-Proxys
     locations: Standorte
     locations/cards: Karten
     locations/card_terminals: Kartenterminals
