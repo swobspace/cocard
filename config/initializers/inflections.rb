@@ -20,3 +20,9 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.acronym "KT"
   inflect.irregular "single_picture", "situation_picture"
 end
+
+Rails.autoloaders.each do |autoloader|
+  autoloader.inflector.inflect(
+    "kt_proxy" => "KTProxy",
+  )
+end
