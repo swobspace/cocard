@@ -341,6 +341,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_09_05_145850) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["card_terminal_id"], name: "index_kt_proxies_on_card_terminal_id"
+    t.index ["uuid"], name: "index_kt_proxies_on_uuid", unique: true
   end
 
   create_table "locations", force: :cascade do |t|

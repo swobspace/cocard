@@ -15,6 +15,7 @@ class CardTerminal < ApplicationRecord
   belongs_to :network, optional: true
   has_many :card_terminal_slots, dependent: :destroy
   has_many :cards, through: :card_terminal_slots
+  has_one :kt_proxy
 
   # -- configuration
   broadcasts_refreshes

@@ -13,6 +13,8 @@ class CreateKTProxies < ActiveRecord::Migration[7.2]
       t.integer :card_terminal_port, default: 4742
 
       t.timestamps
+
+      t.index :uuid, unique: true
     end
   end
 end
