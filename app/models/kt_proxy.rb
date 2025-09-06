@@ -5,7 +5,7 @@ class KTProxy < ApplicationRecord
   # -- configuration
   # -- validations and callbacks
   validates :uuid, :card_terminal_ip, presence: true, uniqueness: true
-  validates :wireguard_ip, :incoming_ip, :outgoing_ip,
-            :incoming_port, :outgoing_port, presence: true
+  validates :incoming_port, :outgoing_port, presence: true, uniqueness: true
+  validates :wireguard_ip, :incoming_ip, :outgoing_ip, presence: true
 
 end
