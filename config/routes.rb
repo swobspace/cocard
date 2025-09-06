@@ -68,6 +68,7 @@ Rails.application.routes.draw do
       post :reboot
     end
     resources :notes, module: :card_terminals
+    resource :kt_proxy, module: :card_terminals
   end
   resources :contexts
   resources :connectors do
