@@ -16,7 +16,7 @@ class KTProxiesController < ApplicationController
   # GET /kt_proxies/new
   def new
     if @proxyable
-      @kt_proxy = @proxyable.build(new_ktproxy_params)
+      @kt_proxy = @proxyable.build_kt_proxy(new_ktproxy_params)
     else
       @kt_proxy = KTProxy.new(new_ktproxy_params)
     end
