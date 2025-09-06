@@ -89,6 +89,11 @@ EOTMPL
     Hash(fetch_config('ktproxy_defaults', {}))
   end
 
+  def self.ktproxy_equal_ports
+    fetch_config('ktproxy_equal_ports', false)
+  end
+
+
   Rails.application.routes.default_url_options = {
     host: (ENV['URL_HOST'] || 'localhost'),
     port: (ENV['URL_PORT'] || '3000'),
