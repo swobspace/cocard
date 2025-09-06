@@ -15,7 +15,11 @@ class KTProxiesController < ApplicationController
 
   # GET /kt_proxies/new
   def new
-    @kt_proxy = KTProxy.new
+    if @proxyable
+      @kt_proxy = @proxyable.build(new_ktproxy_params)
+    else
+      @kt_proxy = KTProxy.new(new_ktproxy_params)
+    end
     respond_with(@kt_proxy)
   end
 
@@ -52,5 +56,9 @@ class KTProxiesController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def kt_proxy_params
       params.require(:kt_proxy).permit(:card_terminal_id, :uuid, :name, :wireguard_ip, :incoming_ip, :incoming_port, :outgoing_ip, :outgoing_port, :card_terminal_ip, :card_terminal_port)
+    end
+
+    def new_ktproxy_params
+      Cocard::NewKTProxy.new(card_terminal: @proxyable).attributes
     end
 end
