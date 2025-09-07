@@ -14,9 +14,9 @@ module Cocard
         name: card_terminal&.displayname,
         wireguard_ip: defaults['wireguard_ip'],
         incoming_ip: defaults['incoming_ip'],
-        incoming_port: '',
+        incoming_port: new_incoming_port,
         outgoing_ip: defaults['outgoing_ip'],
-        outgoing_port: '',
+        outgoing_port: new_outgoing_port,
         card_terminal_ip: card_terminal&.ip.to_s,
         card_terminal_port: defaults['card_terminal_port']
       }
@@ -24,5 +24,20 @@ module Cocard
 
   private
     attr_reader :defaults, :options, :card_terminal
+
+    def new_incoming_port
+      port = Cocard::KTProxy::Port.new(
+               port_range: defaults['incoming_port_range'],
+               used_ports: ::KTProxy.all.pluck(:incoming_port)).next_port
+      ( port > 0 ) ? port.to_s : ""
+    end
+
+    def new_outgoing_port
+      port = Cocard::KTProxy::Port.new(
+               port_range: defaults['outgoing_port_range'],
+               used_ports: ::KTProxy.all.pluck(:outgoing_port)).next_port
+      ( port > 0 ) ? port.to_s : ""
+    end
+
   end
 end
