@@ -118,3 +118,5 @@ gem "faraday-cookie_jar", "~> 0.0.7"
 gem "faraday-net_http_persistent", "~> 2.3"
 
 gem "csv"
+
+gem "jbuilder", "~> 2.14"

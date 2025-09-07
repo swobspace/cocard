@@ -1,4 +1,5 @@
 class KTProxy < ApplicationRecord
+  include KTProxyConcerns
   # -- associations
   belongs_to :card_terminal, optional: true
 

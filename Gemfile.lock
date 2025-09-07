@@ -245,6 +245,9 @@ GEM
       pp (>= 0.6.0)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
+    jbuilder (2.14.1)
+      actionview (>= 7.0.0)
+      activesupport (>= 7.0.0)
     jsbundling-rails (1.3.1)
       railties (>= 6.0.0)
     json (2.13.2)
@@ -522,6 +525,7 @@ DEPENDENCIES
   highline (~> 3.0)
   image_processing (~> 1.2)
   immutable_struct (~> 1.2)
+  jbuilder (~> 2.14)
   jsbundling-rails
   json_spec
   launchy
