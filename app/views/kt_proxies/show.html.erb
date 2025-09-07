@@ -25,50 +25,8 @@
             <td><%= @kt_proxy.card_terminal %></td>
           </tr>
 
-          <tr>
-            <th class="w-10 pe-3"><%= t('attributes.uuid')%>:</th>
-            <td><%= @kt_proxy.uuid %></td>
-          </tr>
+          <%= render partial: 'kt_proxy', locals: {kt_proxy: @kt_proxy} %>
 
-          <tr>
-            <th class="w-10 pe-3"><%= t('attributes.name')%>:</th>
-            <td><%= @kt_proxy.name %></td>
-          </tr>
-
-          <tr>
-            <th class="w-10 pe-3"><%= t('attributes.wireguard_ip')%>:</th>
-            <td><%= @kt_proxy.wireguard_ip %></td>
-          </tr>
-
-          <tr>
-            <th class="w-10 pe-3"><%= t('attributes.incoming_ip')%>:</th>
-            <td><%= @kt_proxy.incoming_ip %></td>
-          </tr>
-
-          <tr>
-            <th class="w-10 pe-3"><%= t('attributes.incoming_port')%>:</th>
-            <td><%= @kt_proxy.incoming_port %></td>
-          </tr>
-
-          <tr>
-            <th class="w-10 pe-3"><%= t('attributes.outgoing_ip')%>:</th>
-            <td><%= @kt_proxy.outgoing_ip %></td>
-          </tr>
-
-          <tr>
-            <th class="w-10 pe-3"><%= t('attributes.outgoing_port')%>:</th>
-            <td><%= @kt_proxy.outgoing_port %></td>
-          </tr>
-
-          <tr>
-            <th class="w-10 pe-3"><%= t('attributes.card_terminal_ip')%>:</th>
-            <td><%= @kt_proxy.card_terminal_ip %></td>
-          </tr>
-
-          <tr>
-            <th class="w-10 pe-3"><%= t('attributes.card_terminal_port')%>:</th>
-            <td><%= @kt_proxy.card_terminal_port %></td>
-          </tr>
         </table>
       </div>
       <div class="col-lg-6">

@@ -1,52 +1,44 @@
-<div id="<%= dom_id kt_proxy %>">
-  <p>
-    <strong>Card terminal:</strong>
-    <%= kt_proxy.card_terminal_id %>
-  </p>
+<tr>
+  <th class="w-10 pe-3"><%= t('attributes.uuid')%>:</th>
+  <td><%= kt_proxy.uuid %></td>
+</tr>
 
-  <p>
-    <strong>Uuid:</strong>
-    <%= kt_proxy.uuid %>
-  </p>
+<tr>
+  <th class="w-10 pe-3"><%= t('attributes.name')%>:</th>
+  <td><%= kt_proxy.name %></td>
+</tr>
 
-  <p>
-    <strong>Name:</strong>
-    <%= kt_proxy.name %>
-  </p>
+<tr>
+  <th class="w-10 pe-3"><%= t('attributes.wireguard_ip')%>:</th>
+  <td><%= kt_proxy.wireguard_ip %></td>
+</tr>
 
-  <p>
-    <strong>Wireguard ip:</strong>
-    <%= kt_proxy.wireguard_ip %>
-  </p>
+<tr>
+  <th class="w-10 pe-3"><%= t('attributes.incoming_ip')%>:</th>
+  <td><%= kt_proxy.incoming_ip %></td>
+</tr>
 
-  <p>
-    <strong>Incoming ip:</strong>
-    <%= kt_proxy.incoming_ip %>
-  </p>
+<tr>
+  <th class="w-10 pe-3"><%= t('attributes.incoming_port')%>:</th>
+  <td><%= kt_proxy.incoming_port %></td>
+</tr>
 
-  <p>
-    <strong>Incoming port:</strong>
-    <%= kt_proxy.incoming_port %>
-  </p>
+<tr>
+  <th class="w-10 pe-3"><%= t('attributes.outgoing_ip')%>:</th>
+  <td><%= kt_proxy.outgoing_ip %></td>
+</tr>
 
-  <p>
-    <strong>Outgoing ip:</strong>
-    <%= kt_proxy.outgoing_ip %>
-  </p>
+<tr>
+  <th class="w-10 pe-3"><%= t('attributes.outgoing_port')%>:</th>
+  <td><%= kt_proxy.outgoing_port %></td>
+</tr>
 
-  <p>
-    <strong>Outgoing port:</strong>
-    <%= kt_proxy.outgoing_port %>
-  </p>
+<tr>
+  <th class="w-10 pe-3"><%= t('attributes.card_terminal_ip')%>:</th>
+  <td><%= kt_proxy.card_terminal_ip %></td>
+</tr>
 
-  <p>
-    <strong>Card terminal ip:</strong>
-    <%= kt_proxy.card_terminal_ip %>
-  </p>
-
-  <p>
-    <strong>Card terminal port:</strong>
-    <%= kt_proxy.card_terminal_port %>
-  </p>
-
-</div>
+<tr>
+  <th class="w-10 pe-3"><%= t('attributes.card_terminal_port')%>:</th>
+  <td><%= kt_proxy.card_terminal_port %></td>
+</tr>
