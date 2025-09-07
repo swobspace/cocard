@@ -11,7 +11,9 @@ module Cocard
 
       def next_port
         mport = @used_ports.max
-        if mport < max_port
+        if mport.nil? || mport < min_port
+          min_port
+        elsif mport < max_port
           mport += 1
         else
           first_unused_port

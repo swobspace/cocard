@@ -31,6 +31,19 @@ module Cocard
         it { expect(subject.first_unused_port).to eq(-1) }
       end
 
+      describe "with no used ports" do
+        let(:used_ports) { [] }
+        let(:port_range) { "10:20" }
+        it { expect(subject.next_port).to eq(10) }
+        it { expect(subject.first_unused_port).to eq(10) }
+      end
+
+      describe "with used ports < min" do
+        let(:used_ports) { [1,2,3] }
+        let(:port_range) { "10:20" }
+        it { expect(subject.next_port).to eq(10) }
+        it { expect(subject.first_unused_port).to eq(10) }
+      end
     end
   end
 end
