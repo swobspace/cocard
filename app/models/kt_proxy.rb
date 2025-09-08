@@ -2,6 +2,7 @@ class KTProxy < ApplicationRecord
   include KTProxyConcerns
   # -- associations
   belongs_to :card_terminal, optional: true
+  belongs_to :ti_client
 
   # -- configuration
   # -- validations and callbacks

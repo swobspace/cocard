@@ -82,6 +82,7 @@ FactoryBot.define do
   end
 
   factory :kt_proxy do
+    ti_client
     uuid { SecureRandom.uuid }
     card_terminal_ip { generate(:local_ip) }
     wireguard_ip { "192.0.2.1" }
@@ -138,6 +139,12 @@ FactoryBot.define do
 
   factory :tag do
     name { generate(:aname) }
+  end
+
+  factory :ti_client do
+    connector
+    name { generate(:aname) }
+    url  { generate(:url) }
   end
 
   factory :workplace do

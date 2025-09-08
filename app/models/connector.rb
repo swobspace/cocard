@@ -7,6 +7,7 @@ class Connector < ApplicationRecord
   include Taggable
 
   # -- associations
+  has_one :ti_client, dependent: :restrict_with_error
   has_many :logs, as: :loggable, dependent: :destroy
   has_and_belongs_to_many :locations
   has_and_belongs_to_many :client_certificates

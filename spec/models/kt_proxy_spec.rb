@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe KTProxy, type: :model do
   it { is_expected.to belong_to(:card_terminal).optional }
+  it { is_expected.to belong_to(:ti_client) }
   it { is_expected.to validate_presence_of(:uuid) }
   it { is_expected.to validate_presence_of(:card_terminal_ip) }
   it { is_expected.to validate_presence_of(:wireguard_ip) }
