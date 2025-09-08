@@ -1,0 +1,28 @@
+require 'rails_helper'
+
+RSpec.describe "ti_clients/edit", type: :view do
+  let(:ti_client) {
+    TIClient.create!(
+      connector: nil,
+      name: "MyString",
+      url: "MyString"
+    )
+  }
+
+  before(:each) do
+    assign(:ti_client, ti_client)
+  end
+
+  it "renders the edit ti_client form" do
+    render
+
+    assert_select "form[action=?][method=?]", ti_client_path(ti_client), "post" do
+
+      assert_select "input[name=?]", "ti_client[connector_id]"
+
+      assert_select "input[name=?]", "ti_client[name]"
+
+      assert_select "input[name=?]", "ti_client[url]"
+    end
+  end
+end

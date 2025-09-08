@@ -1,0 +1,40 @@
+<div class="card mb-3">
+  <div class="card-header">
+    <div class="d-flex w-100 justify-content-between">
+      <div>
+        <span class="subtitle">
+          <%= t('activerecord.models.ti_client') %>: 
+          #<%= @ti_client.id %>
+        </span>
+        <h4 class="title"><%= @ti_client %></h4>
+      </div>
+      <div role="toolbar" class="pt-3">
+        <%= edit_link(@ti_client) %>
+        <%= delete_link(@ti_client) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <table class="table table-sm table-borderless">
+    
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.connector')%>:</th>
+        <td><%= @ti_client.connector %></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.name')%>:</th>
+        <td><%= @ti_client.name %></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.url')%>:</th>
+        <td><%= @ti_client.url %></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<%= back_link %>
+<%= new_link TIClient %>
