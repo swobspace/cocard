@@ -24,5 +24,6 @@ end
 Rails.autoloaders.each do |autoloader|
   autoloader.inflector.inflect(
     "kt_proxy" => "KTProxy",
+    "ti_client" => "TIClient",
   )
 end
