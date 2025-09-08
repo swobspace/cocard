@@ -64,11 +64,11 @@ RSpec.describe CardTerminal, type: :model do
   end
 
   describe "#to_s" do
-    it { expect(ct.to_s).to match('ACME Term - CT_ID_0123 (ACX)') }
+    it { expect(ct.to_s).to match('ACME Term (ACX)') }
   end
 
   describe "#fullname" do
-    it { expect(ct.fullname).to match('K128: ACME Term - CT_ID_0123 (ACX)') }
+    it { expect(ct.fullname).to match('K128: ACME Term (ACX)') }
   end
 
   describe "on #save" do

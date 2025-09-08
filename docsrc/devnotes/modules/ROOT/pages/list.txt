@@ -6,12 +6,18 @@
 .CardTerminal
 * Button ktproxy nur bei Konnektor mit vkonn und enabled
 * IP-Adresse von Proxy als `current_ip` wenn ct.use_ktproxy?
+* #show: Product-Info + KTProxy als collapsible
+* #show: edit icon in KT-Proxy header
 
 .TIClient
 * TICLient: Specs fertig stellen
+* ti_clients#show: Liste ktproxies ausgeben
 
 .KTProxy
 * Specs mit ticlient, #index, #show mit ticlient
+* TI-Client mit anzeigen
+* uniqueness outgoing ip+port, incoming ip+port
+* #to_s mit KT IP
 
 .Navi
 * ktproxy, ticlient wenn enabled

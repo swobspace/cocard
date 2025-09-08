@@ -96,6 +96,7 @@ de:
       user: User
       tag: Tag
       tagging: Tagging
+      ti_client: TI-Client
       terminal_workplaces: Zugeordnete Arbeitsplätze
       workplace: Arbeitsplatz
 
@@ -209,6 +210,7 @@ de:
     tag: Tag
     tag_list_input: Tags
     telematikid: Telematik-ID
+    ti_client: TI-Client
     type: Typ
     updated_at: zuletzt aktualisiert
     username: Username
@@ -244,6 +246,7 @@ de:
     searches: Suche
     situation_picture: Lagebild TI
     tags: Tags
+    ti_clients: TI-Clients
     users: Benutzer
     verify_pins: PIN-Verifizierung
     workplaces: Arbeitsplätze

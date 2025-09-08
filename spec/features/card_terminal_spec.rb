@@ -38,11 +38,11 @@ RSpec.describe "CardTerminals", type: :feature, js: true do
 
   it "visit card_terminal_path" do
     expect(page).to have_content("Kartenterminal: ##{ct.id}")
-    expect(page).to have_content("ORGA-DINGDONG001 - CT_ID_0815 (AXC)".to_s)
+    expect(page).to have_content("ORGA-DINGDONG001 (AXC)".to_s)
   end
 
   it "delete an existing terminal" do
-    expect(page).to have_content("ORGA-DINGDONG001 - CT_ID_0815 (AXC)".to_s)
+    expect(page).to have_content("ORGA-DINGDONG001 (AXC)".to_s)
     expect(CardTerminal.count).to eq(1)
     accept_confirm do
       find('a[title="Kartenterminal löschen"]').click
@@ -61,7 +61,7 @@ RSpec.describe "CardTerminals", type: :feature, js: true do
     end
     # save_and_open_screenshot()
     expect(page).to have_content("Kartenterminal: ##{ct.id}")
-    expect(page).to have_content("ORGA-DINGDONG001 - CT_ID_0815 (AXC)".to_s)
+    expect(page).to have_content("ORGA-DINGDONG001 (AXC)".to_s)
     expect(page).to have_content("Anderes Terminal 05")
   end
 
