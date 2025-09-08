@@ -517,6 +517,7 @@ bin/rails g migration AddNameToWorkplace \
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g scaffold KTProxy \
   card_terminal:belongs_to \
+  ti_client:belongs_to \
   uuid:string \
   name:string \
   wireguard_ip:inet \
@@ -526,6 +527,20 @@ bin/rails g migration AddNameToWorkplace \
   outgoing_port:integer \
   card_terminal_ip:inet \
   card_terminal_port:integer \
+  --no-stylesheets --no-javascripts --no-helper</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_model_ticlient_ti_gateway"><a class="anchor" href="#_model_ticlient_ti_gateway"></a>model TIClient (TI-Gateway)</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g scaffold TIClient \
+  connector:belongs_to \
+  name:string \
+  url:string \
   --no-stylesheets --no-javascripts --no-helper</code></pre>
 </div>
 </div>

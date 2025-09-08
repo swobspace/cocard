@@ -322,6 +322,7 @@ bin/rails g model Tagging \
 ----
 bin/rails g scaffold KTProxy \
   card_terminal:belongs_to \
+  ti_client:belongs_to \
   uuid:string \
   name:string \
   wireguard_ip:inet \
@@ -331,6 +332,17 @@ bin/rails g scaffold KTProxy \
   outgoing_port:integer \
   card_terminal_ip:inet \
   card_terminal_port:integer \
+  --no-stylesheets --no-javascripts --no-helper
+----
+
+== model TIClient (TI-Gateway)
+
+[source,sh]
+----
+bin/rails g scaffold TIClient \
+  connector:belongs_to \
+  name:string \
+  url:string \
   --no-stylesheets --no-javascripts --no-helper
 ----
 
