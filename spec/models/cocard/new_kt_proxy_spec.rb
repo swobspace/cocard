@@ -38,5 +38,12 @@ module Cocard
       end
     end
 
+    describe "with card terminal ip == wireguard ip" do
+      let(:ct) { FactoryBot.create(:card_terminal, :with_mac, ip: '198.51.100.99') }
+      it "doesn't use wireguard ip for card terminal" do
+        expect(subject.attributes[:card_terminal_ip]).to be_blank
+      end
+    end
+
   end
 end

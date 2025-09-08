@@ -2,6 +2,8 @@
 <%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
 
   <div class="form-input">
+    <%= form.association :ti_client
+       %>
     <%= form.association :card_terminal
        %>
     <%= form.input :uuid

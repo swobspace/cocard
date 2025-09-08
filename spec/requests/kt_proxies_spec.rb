@@ -5,8 +5,9 @@ RSpec.describe "/kt_proxies", type: :request do
   # This should return the minimal set of attributes required to create a valid
   # KTProxy. As you add validations to KTProxy, be sure to
   # adjust the attributes here as well.
+  let(:tic) { FactoryBot.create(:ti_client) }
   let(:valid_attributes) {
-    FactoryBot.attributes_for(:kt_proxy)
+    FactoryBot.attributes_for(:kt_proxy, ti_client_id: tic.id )
   }
 
   let(:invalid_attributes) {

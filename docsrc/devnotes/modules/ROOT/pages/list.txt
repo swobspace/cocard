@@ -1,0 +1,8 @@
+* Connector: TI-Client einblenden (enabled, type vkon)
+* CardTerminal: Button ktproxy nur bei Konnektor mit vkonn und enabled
+
+* TICLient: Specs fertig stellen
+
+ktproxy: specs mit ticlient, #index, #show mit ticlient
+
+navi: ktproxy, ticlient wenn enabled

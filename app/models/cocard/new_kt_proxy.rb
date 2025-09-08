@@ -9,6 +9,7 @@ module Cocard
 
     def attributes
       {
+        ti_client_id: ti_client_id,
         card_terminal_id: card_terminal&.id,
         uuid: SecureRandom.uuid,
         name: card_terminal&.displayname,
@@ -17,7 +18,7 @@ module Cocard
         incoming_port: new_incoming_port,
         outgoing_ip: defaults['outgoing_ip'],
         outgoing_port: new_outgoing_port,
-        card_terminal_ip: card_terminal&.ip.to_s,
+        card_terminal_ip: card_terminal_ip,
         card_terminal_port: defaults['card_terminal_port']
       }
     end
@@ -39,5 +40,31 @@ module Cocard
       ( port > 0 ) ? port.to_s : ""
     end
 
+    def card_terminal_ip
+      return nil unless card_terminal.present?
+      if card_terminal_ip_blacklist.include?(card_terminal.ip.to_s)
+        nil
+      else
+        card_terminal.ip.to_s
+      end
+    end
+
+    def card_terminal_ip_blacklist
+      [
+        defaults['wireguard_ip'], 
+        '127.0.0.1', 
+        '0.0.0.0'
+      ]
+    end
+
+    def ti_client_id
+      if card_terminal.present? &&
+         card_terminal.connector.present? && 
+         card_terminal.connector.ti_client.present?
+        card_terminal.connector.ti_client.id
+      else
+        nil
+      end
+    end
   end
 end
