@@ -1,7 +1,6 @@
 
 .Connector
 * TI-Client einblenden (enabled, type vkon)
-* connector.use_ticlient?
 
 .CardTerminal
 * Button ktproxy nur bei Konnektor mit vkonn und enabled
