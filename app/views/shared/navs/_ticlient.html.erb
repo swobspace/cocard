@@ -1,0 +1,22 @@
+<% if can?(:navigate, :ticlient) && Cocard.enable_ticlient %>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle <%= active_class('logs') %>"
+       href="#" id="navbarTIClientsDropdown" data-bs-toggle="dropdown" 
+       aria-haspopup="true" aria-expanded="false">
+
+      <%= t('attributes.ti_client') %>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarTIClientsDropdown">
+      <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
+                       t('controller.ti_clients')), 
+                  main_app.ti_clients_path, class: "dropdown-item" %>
+      <div class="dropdown-divider"></div>
+      <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
+                       t('controller.kt_proxies')), 
+                  main_app.kt_proxies_path, class: "dropdown-item" %>
+    </div>
+
+  </li>
+<% end %>
+
+
