@@ -20,7 +20,10 @@
     
       <tr>
         <th class="w-10 pe-3"><%= t('attributes.connector')%>:</th>
-        <td><%= @ti_client.connector %></td>
+        <td><%= link_to @ti_client.connector,
+                        @ti_client.connector,
+                        class: 'primary-link'
+             %></td>
       </tr>
 
       <tr>
