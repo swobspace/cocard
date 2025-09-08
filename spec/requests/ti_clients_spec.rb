@@ -13,17 +13,18 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/ti_clients", type: :request do
-  
-  # This should return the minimal set of attributes required to create a valid
-  # TIClient. As you add validations to TIClient, be sure to
-  # adjust the attributes here as well.
+  let(:conn) { FactoryBot.create(:connector) }
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    FactoryBot.attributes_for(:ti_client, connector_id: conn.id)
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { url: nil }
   }
+
+  before(:each) do
+    login_admin
+  end
 
   describe "GET /index" do
     it "renders a successful response" do
@@ -86,15 +87,15 @@ RSpec.describe "/ti_clients", type: :request do
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+      let(:new_attributes) {{
+        name: "a new name",
+      }}
 
       it "updates the requested ti_client" do
         ti_client = TIClient.create! valid_attributes
         patch ti_client_url(ti_client), params: { ti_client: new_attributes }
         ti_client.reload
-        skip("Add assertions for updated state")
+        expect(ti_client.name).to eq("a new name")
       end
 
       it "redirects to the ti_client" do

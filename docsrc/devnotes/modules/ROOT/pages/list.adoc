@@ -10,8 +10,8 @@
 * #show: edit icon in KT-Proxy header
 
 .TIClient
-* TICLient: Specs fertig stellen
 * ti_clients#show: Liste ktproxies ausgeben
+* subrouting kt_proxies
 
 .KTProxy
 * Specs mit ticlient, #index, #show mit ticlient
