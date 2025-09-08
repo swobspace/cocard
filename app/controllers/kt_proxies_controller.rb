@@ -55,7 +55,10 @@ class KTProxiesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def kt_proxy_params
-      params.require(:kt_proxy).permit(:card_terminal_id, :uuid, :name, :wireguard_ip, :incoming_ip, :incoming_port, :outgoing_ip, :outgoing_port, :card_terminal_ip, :card_terminal_port)
+      params.require(:kt_proxy)
+            .permit(:card_terminal_id, :uuid, :name, :wireguard_ip, 
+                    :incoming_ip, :incoming_port, :outgoing_ip, :outgoing_port, 
+                    :card_terminal_ip, :card_terminal_port, :ti_client_id)
     end
 
     def new_ktproxy_params
