@@ -12,6 +12,7 @@
         } do %>
     <thead>
       <tr>
+            <th><%= t('attributes.ti_client') %></th>
             <th><%= t('attributes.card_terminal') %></th>
             <th><%= t('attributes.uuid') %></th>
             <th><%= t('attributes.name') %></th>
@@ -37,13 +38,21 @@
             <th></th>
             <th></th>
             <th></th>
+            <th></th>
             <th class="nosearch"></th>
       </tr>
     </tfoot>
     <tbody>
       <% @kt_proxies.each do |kt_proxy| %>
         <%= content_tag(:tr, id: dom_id(kt_proxy), class: dom_class(kt_proxy)) do %>
-                <td><%= kt_proxy.card_terminal %></td>
+                <td><%= link_to(kt_proxy.ti_client,
+                                kt_proxy.ti_client,
+                                class: 'primary-link') if kt_proxy.ti_client.present?
+                     %></td>
+                <td><%= link_to(kt_proxy.card_terminal,
+                                kt_proxy.card_terminal,
+                                class: 'primary-link') if kt_proxy.card_terminal.present?
+                     %></td>
                 <td><%= kt_proxy.uuid %></td>
                 <td><%= kt_proxy.name %></td>
                 <td><%= kt_proxy.wireguard_ip %></td>

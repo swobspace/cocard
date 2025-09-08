@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "kt_proxies/show", type: :view do
+  let(:tic) { FactoryBot.create(:ti_client, name: 'TIClient_XYZ') }
   before(:each) do
     @ability = Object.new
     @ability.extend(CanCan::Ability)
@@ -10,6 +11,7 @@ RSpec.describe "kt_proxies/show", type: :view do
     allow(controller).to receive(:action_name) { 'show' }
 
     assign(:kt_proxy, KTProxy.create!(
+      ti_client: tic,
       card_terminal: nil,
       uuid: "Uuid",
       name: "Name",
@@ -26,6 +28,7 @@ RSpec.describe "kt_proxies/show", type: :view do
   it "renders attributes in <p>" do
     render
     # expect(rendered).to match(//)
+    expect(rendered).to match(/TIClient_XYZ/)
     expect(rendered).to match(/Uuid/)
     expect(rendered).to match(/Name/)
     expect(rendered).to match(/198.51.100.99/)

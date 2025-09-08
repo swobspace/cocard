@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "kt_proxies/index", type: :view do
+  let(:tic) { FactoryBot.create(:ti_client, name: 'TIClient_XYZ') }
   before(:each) do
     @ability = Object.new
     @ability.extend(CanCan::Ability)
@@ -11,6 +12,7 @@ RSpec.describe "kt_proxies/index", type: :view do
 
     assign(:kt_proxies, [
       KTProxy.create!(
+        ti_client: tic,
         card_terminal: nil,
         uuid: "Uuid1",
         name: "Name",
@@ -23,6 +25,7 @@ RSpec.describe "kt_proxies/index", type: :view do
         card_terminal_port: 4742
       ),
       KTProxy.create!(
+        ti_client: tic,
         card_terminal: nil,
         uuid: "Uuid2",
         name: "Name",
@@ -41,6 +44,7 @@ RSpec.describe "kt_proxies/index", type: :view do
     render
     cell_selector = 'tr>td'
     # assert_select cell_selector, text: Regexp.new(nil.to_s), count: 2
+    assert_select cell_selector, text: Regexp.new("TIClient_XYZ".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("Uuid".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("Name".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("198.51.100.99".to_s), count: 2

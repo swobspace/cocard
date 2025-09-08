@@ -22,7 +22,10 @@
         
           <tr>
             <th class="w-10 pe-3"><%= t('attributes.card_terminal')%>:</th>
-            <td><%= @kt_proxy.card_terminal %></td>
+            <td><%= link_to(@kt_proxy.card_terminal,
+                            @kt_proxy.card_terminal,
+                            class: 'primary-link') if @kt_proxy.card_terminal.present?
+                 %></td>
           </tr>
 
           <%= render partial: 'kt_proxy', locals: {kt_proxy: @kt_proxy} %>
