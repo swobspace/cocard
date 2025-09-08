@@ -115,6 +115,6 @@ module CardTerminalConcerns
 
   def use_ktproxy?
     return false unless Cocard.enable_ticlient
-    kt_proxy.present || connector&.ti_client.present?
+    kt_proxy.present? || connector&.ti_client.present?
   end
 end
