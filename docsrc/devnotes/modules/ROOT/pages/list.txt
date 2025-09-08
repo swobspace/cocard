@@ -1,8 +1,20 @@
-* Connector: TI-Client einblenden (enabled, type vkon)
-* CardTerminal: Button ktproxy nur bei Konnektor mit vkonn und enabled
 
+.Connector
+* TI-Client einblenden (enabled, type vkon)
+* connector.use_ticlient?
+
+.CardTerminal
+* Button ktproxy nur bei Konnektor mit vkonn und enabled
+* IP-Adresse von Proxy als `current_ip` wenn ct.use_ktproxy?
+
+.TIClient
 * TICLient: Specs fertig stellen
 
-ktproxy: specs mit ticlient, #index, #show mit ticlient
+.KTProxy
+* Specs mit ticlient, #index, #show mit ticlient
 
-navi: ktproxy, ticlient wenn enabled
+.Navi
+* ktproxy, ticlient wenn enabled
+
+.Cocard
+* enable_ticlient statt enable_ktproxy

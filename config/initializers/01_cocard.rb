@@ -81,8 +81,8 @@ EOTMPL
     fetch_config('enable_ldap_authentication', false)
   end
 
-  def self.enable_ktproxy
-    fetch_config('enable_ktproxy', false)
+  def self.enable_ticlient
+    fetch_config('enable_ticlient', false)
   end
 
   def self.ktproxy_defaults
