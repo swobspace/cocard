@@ -238,4 +238,42 @@ RSpec.describe CardTerminalConcerns, type: :model do
       expect(ct.reboot_active?).to be_falsey
     end
   end
+
+  describe "#use_ktproxy?" do
+    describe "with enabled_ticlient disabled" do
+      it "returns false" do
+        expect(Cocard).to receive(:enable_ticlient).and_return(false)
+        expect(ct.use_ktproxy?).to be_falsey
+      end
+    end
+
+    describe "with enabled_ticlient enabled" do
+      before(:each) do
+        expect(Cocard).to receive(:enable_ticlient).and_return(true)
+      end
+
+      describe "with kt_proxy present" do
+        it "returns true" do
+          expect(ct).to receive(:kt_proxy).and_return(instance_double(KTProxy))
+          expect(ct.use_ktproxy?).to be_truthy
+        end
+      end
+
+      describe "without connector" do
+        it "returns true" do
+          expect(ct).to receive(:connector).and_return(nil)
+          expect(ct.use_ktproxy?).to be_falsey
+        end
+      end
+
+      describe "with connector.use_ticlient? == true" do
+        it "returns true" do
+          conn = instance_double(Connector)
+          expect(ct).to receive(:connector).at_least(:once).and_return(conn)
+          expect(conn).to receive(:use_ticlient?).and_return(true)
+          expect(ct.use_ktproxy?).to be_truthy
+        end
+      end
+    end
+  end
 end

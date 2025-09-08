@@ -74,4 +74,37 @@ RSpec.describe ConnectorConcerns, type: :model do
       expect(connector.reboot_active?).to be_falsey
     end
   end
+
+  describe "#use_ticlient?" do
+    describe "with enable_ticlient disabled" do
+      it "returns false" do
+        expect(Cocard).to receive(:enable_ticlient).and_return(false)
+        expect(connector.use_ticlient?).to be_falsey
+      end
+    end
+
+    describe "with enable_ticlient enabled" do
+      before(:each) do
+        expect(Cocard).to receive(:enable_ticlient).and_return(true)
+      end
+
+      describe "with identification == KOKOSNUSS" do
+        before(:each) do
+          expect(connector).to receive(:identification).and_return("KOKOSNUSS")
+        end
+        it "returns false" do
+          expect(connector.use_ticlient?).to be_falsey
+        end
+      end
+
+      describe "with identification == RISEG-RHSK" do
+        before(:each) do
+          expect(connector).to receive(:identification).and_return("RISEG-RHSK")
+        end
+        it "returns false" do
+          expect(connector.use_ticlient?).to be_truthy
+        end
+      end
+    end
+  end
 end

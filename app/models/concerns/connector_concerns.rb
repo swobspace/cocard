@@ -47,4 +47,9 @@ module ConnectorConcerns
   def reboot_active?
     rebooted_at.present? and (rebooted_at > 1.minute.before(Time.current))
   end
+
+  def use_ticlient?
+    return false unless Cocard.enable_ticlient
+    identification == 'RISEG-RHSK'    
+  end
 end
