@@ -15,7 +15,11 @@ class TIClientsController < ApplicationController
 
   # GET /ti_clients/new
   def new
-    @ti_client = TIClient.new
+    if @connector
+      @ti_client = @connector.build_ti_client
+    else
+      @ti_client = TIClient.new
+    end
     respond_with(@ti_client)
   end
 
