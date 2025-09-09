@@ -1,11 +1,13 @@
 <table class="table table-sm table-borderless">
   <tr>
     <th class="w-10 pe-3"><%= t('attributes.name')%>:</th>
-    <td><%= ti_client.name %></td>
+    <td><%= link_to ti_client.name, ti_client, class: 'primary-link'
+         %></td>
   </tr>
 
   <tr>
     <th class="w-10 pe-3"><%= t('attributes.url')%>:</th>
-    <td><%= ti_client.url %></td>
+    <td><%= link_to ti_client.url, ti_client.url, class: 'primary-link', target: :_blank %></td>
+
   </tr>
 </table>

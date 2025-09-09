@@ -242,14 +242,14 @@ RSpec.describe CardTerminalConcerns, type: :model do
   describe "#use_ktproxy?" do
     describe "with enabled_ticlient disabled" do
       it "returns false" do
-        expect(Cocard).to receive(:enable_ticlient).and_return(false)
+        expect(Cocard).to receive(:enable_ticlient).at_least(:once).and_return(false)
         expect(ct.use_ktproxy?).to be_falsey
       end
     end
 
     describe "with enabled_ticlient enabled" do
       before(:each) do
-        expect(Cocard).to receive(:enable_ticlient).and_return(true)
+        expect(Cocard).to receive(:enable_ticlient).at_least(:once).and_return(true)
       end
 
       describe "with kt_proxy present" do
