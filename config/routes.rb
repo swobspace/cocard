@@ -87,6 +87,7 @@ Rails.application.routes.draw do
       post :reboot
     end
     resources :notes, module: :connectors
+    resource :ti_client, module: :connectors
   end
   resources :locations do
     resources :connectors, only: [:index, :show, :destroy], module: :locations
