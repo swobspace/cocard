@@ -1,6 +1,7 @@
 
 .Connector
-* TI-Client einblenden (enabled, type vkon)
+* #show: edit icon in TI-Client header
+
 
 .CardTerminal
 * Button ktproxy nur bei Konnektor mit vkonn und enabled
@@ -11,6 +12,7 @@
 .TIClient
 * ti_clients#show: Liste ktproxies ausgeben
 * subrouting kt_proxies
+* index connector_id unique
 
 .KTProxy
 * Specs mit ticlient, #index, #show mit ticlient
@@ -19,7 +21,5 @@
 * #to_s mit KT IP
 
 .Navi
-* ktproxy, ticlient wenn enabled
 
 .Cocard
-* enable_ticlient statt enable_ktproxy

@@ -226,6 +226,7 @@ de:
     cards/logs: Karten/Logs
     card_terminals: Kartenterminals
     card_terminals/logs: Kartenterminals/Logs
+    card_terminals/kt_proxies: KT-Proxys
     client_certificates: Client-Zertifikate
     connectors: Konnektoren
     connectors/logs: Konnektoren/Logs
@@ -247,6 +248,7 @@ de:
     situation_picture: Lagebild TI
     tags: Tags
     ti_clients: TI-Clients
+    ti_clients/kt_proxies: KT-Proxys
     users: Benutzer
     verify_pins: PIN-Verifizierung
     workplaces: Arbeitsplätze

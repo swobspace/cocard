@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :ti_clients
+  resources :ti_clients do
+    resources :kt_proxies, module: :ti_clients, only: [:index]
+  end
   resources :kt_proxies
   get "idle_messages", to: "idle_messages#index", as: :idle_messages
   get "idle_messages/edit"
