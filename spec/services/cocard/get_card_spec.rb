@@ -6,7 +6,7 @@ module Cocard
     #  create fake response for Cocard::Soap::GetCard
     #
     let(:connector_yml) do
-      File.join(Rails.root, 'spec', 'fixtures', 'files', 'connector.sds')
+      File.join(Rails.root, 'spec', 'fixtures', 'files', 'connector_services.yaml')
     end
 
     let(:card_yml) do
@@ -30,6 +30,7 @@ module Cocard
         connector_services: YAML.load_file(connector_yml)
       )
     end
+    it {puts connector_yml}
 
     let(:context) { FactoryBot.create(:context) }
 
