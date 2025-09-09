@@ -169,7 +169,11 @@
 
 
       <div class="col-12 col-lg-6">
-        <%= render Connector::TIClientComponent.new(connector: @connector, ability: current_ability) %>
+        <%= render Connector::TIClientComponent.new(
+                     connector: @connector, 
+                     readonly: cannot?(:manage, TIClient)
+                   )
+        %>
         <div class="card-title border-bottom bg-light mt-2 pt-2 ps-2">
           <h6><%= t('attributes.product_information')%></h6>
         </div>

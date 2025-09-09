@@ -3,9 +3,13 @@
 </div>
 <% if connector.ti_client.present? %>
   <%= render partial: 'connectors/ti_client', locals: { ti_client: connector.ti_client } %>
-<% elsif ability.can? :manage, TIClient %>
-  <%= link_to "TI-Client hinzufügen", new_connector_ti_client_path(connector),
-              class: 'btn btn-warning'
-   %>
+<% else %>
+  <% if !readonly %>
+    <%= link_to "TI-Client hinzufügen", new_connector_ti_client_path(connector),
+                class: 'btn btn-warning'
+     %>
+  <% else %>
+    Kein TI-Client vorhanden
+  <% end %>
 <% end %>
 

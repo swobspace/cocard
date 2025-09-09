@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class Connector::TIClientComponent < ViewComponent::Base
-  def initialize(connector:, ability:)
+  def initialize(connector:, readonly:)
     @connector = connector
-    @ability = ability
+    @readonly = readonly
   end
 
   def render?
@@ -11,5 +11,5 @@ class Connector::TIClientComponent < ViewComponent::Base
   end
 
 private
-  attr_reader :connector, :ability
+  attr_reader :connector, :readonly
 end
