@@ -5,9 +5,11 @@
   <%= render partial: 'connectors/ti_client', locals: { ti_client: connector.ti_client } %>
 <% else %>
   <% if !readonly %>
-    <%= link_to "TI-Client hinzufügen", new_connector_ti_client_path(connector),
-                class: 'btn btn-warning'
-     %>
+    <div class="text-end">
+      <%= link_to "TI-Client hinzufügen", new_connector_ti_client_path(connector),
+                  class: 'btn btn-warning'
+       %>
+    </div>
   <% else %>
     Kein TI-Client vorhanden
   <% end %>
