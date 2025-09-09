@@ -149,6 +149,13 @@ class CardTerminal < ApplicationRecord
     end
   end
 
+  def current_ip
+    if use_ktproxy? and kt_proxy.present?
+      kt_proxy.card_terminal_ip
+    else
+      self[:current_ip]
+    end
+  end
 
 private
 
