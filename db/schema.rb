@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_09_08_113259) do
+ActiveRecord::Schema[7.2].define(version: 2025_09_10_115820) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -342,6 +342,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_09_08_113259) do
     t.datetime "updated_at", null: false
     t.bigint "ti_client_id", null: false
     t.index ["card_terminal_id"], name: "index_kt_proxies_on_card_terminal_id"
+    t.index ["incoming_ip", "incoming_port"], name: "in_socket", unique: true
+    t.index ["outgoing_ip", "outgoing_port"], name: "out_socket", unique: true
     t.index ["ti_client_id"], name: "index_kt_proxies_on_ti_client_id"
     t.index ["uuid"], name: "index_kt_proxies_on_uuid", unique: true
   end
@@ -459,7 +461,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_09_08_113259) do
     t.string "url", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["connector_id"], name: "index_ti_clients_on_connector_id"
+    t.index ["connector_id"], name: "index_ti_clients_on_connector_id", unique: true
   end
 
   create_table "wobauth_authorities", force: :cascade do |t|

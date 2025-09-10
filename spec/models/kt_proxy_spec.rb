@@ -19,8 +19,8 @@ RSpec.describe KTProxy, type: :model do
     expect(g).to be_valid
     expect(f).to validate_uniqueness_of(:uuid)
     expect(f).to validate_uniqueness_of(:card_terminal_ip)
-    expect(f).to validate_uniqueness_of(:incoming_port)
-    expect(f).to validate_uniqueness_of(:outgoing_port)
+    expect(f).to validate_uniqueness_of(:incoming_port).scoped_to(:incoming_ip)
+    expect(f).to validate_uniqueness_of(:outgoing_port).scoped_to(:outgoing_ip)
   end
 
   describe "#to_builder" do

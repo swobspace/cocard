@@ -6,7 +6,7 @@ class TIClient < ApplicationRecord
   # -- configuration
   # -- validations and callbacks
   validates :name, presence: true
-  validates :url, presence: true, uniqueness: true
+  validates :connector_id, :url, presence: true, uniqueness: true
 
   def to_s
     "#{name}"
