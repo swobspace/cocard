@@ -11,4 +11,7 @@ class KTProxy < ApplicationRecord
   validates :outgoing_port, uniqueness: { scope: [:outgoing_ip] } , presence: true
   validates :wireguard_ip, :incoming_ip, :outgoing_ip, presence: true
 
+  def to_s
+    "KT-Proxy #{card_terminal_ip}"
+  end
 end

@@ -23,6 +23,11 @@ RSpec.describe KTProxy, type: :model do
     expect(f).to validate_uniqueness_of(:outgoing_port).scoped_to(:outgoing_ip)
   end
 
+  describe "#to_s" do
+    let(:kt_proxy) { FactoryBot.create(:kt_proxy, card_terminal_ip: "192.0.2.117") }
+    it { expect(kt_proxy.to_s).to eq("KT-Proxy 192.0.2.117") }
+  end
+
   describe "#to_builder" do
     let(:kt_proxy) { FactoryBot.create(:kt_proxy) }
     let(:json) { kt_proxy.to_builder.target! }
