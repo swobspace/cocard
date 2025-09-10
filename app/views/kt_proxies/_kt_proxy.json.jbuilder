@@ -1,0 +1,9 @@
+json.set! 'id', kt_proxy.uuid
+json.set! 'name', kt_proxy.name
+json.set! 'wireguardIp', kt_proxy.wireguard_ip
+json.set! 'incomingIp', kt_proxy.incoming_ip
+json.set! 'incomingPort', kt_proxy.incoming_port
+json.set! 'outgoingIp', kt_proxy.outgoing_ip
+json.set! 'outgoingPort', kt_proxy.outgoing_port
+json.set! 'cardTerminalIp', kt_proxy.card_terminal_ip
+json.set! 'cardTerminalPort', kt_proxy.card_terminal_port

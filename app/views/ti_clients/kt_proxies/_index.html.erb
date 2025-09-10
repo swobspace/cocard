@@ -1,7 +1,18 @@
 <%= turbo_frame_tag('kt_proxies') do %>
   <div class="card mt-3">
     <div class="card-header">
-      <h4 class="me-4 pt-1"><%= t('controller.kt_proxies')%></h4>
+      <div class="d-flex justify-content-between">
+        <div>
+          <h4 class="me-4 pt-1"><%= t('controller.kt_proxies')%></h4>
+        </div>
+        <div role="toolbar" class="pt-0">
+          <%= link_to "cardterminal_proxies.json",
+                      ti_client_kt_proxies_path(@ti_client, format: :json),
+                      data: { "turbo-frame": "_top" },
+                      class: "btn btn-outline-secondary"
+           %>
+        </div>
+      </div>
     </div>
     <div class="p-2">
       <div data-controller="datatables">
@@ -47,6 +58,7 @@
               <%= content_tag(:tr, id: dom_id(kt_proxy), class: dom_class(kt_proxy)) do %>
                       <td><%= link_to(kt_proxy.card_terminal,
                                       kt_proxy.card_terminal,
+                                      data: { "turbo-frame": "_top" },
                                       class: 'primary-link') if kt_proxy.card_terminal.present?
                            %></td>
                       <td><%= kt_proxy.uuid %></td>
