@@ -8,11 +8,8 @@
 * #show: edit icon in KT-Proxy header
 
 .TIClient
-* index connector_id unique
 
 .KTProxy
-* uniqueness outgoing ip+port, incoming ip+port
-* #to_s mit KT IP
 
 .Navi
 

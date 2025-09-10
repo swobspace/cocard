@@ -5,5 +5,7 @@
 *** xref:ROOT:first-steps.adoc[]
 ** xref:podman/podman-systemd.adoc[]
 ** xref:podman/reverse-proxy.adoc[]
-** xref:configuration.adoc[]
+** Konfiguration
+*** xref:configuration.adoc[]
+*** xref:cocard_yml.adoc[]
 ** xref:checkmk.adoc[]

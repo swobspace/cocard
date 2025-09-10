@@ -1,0 +1,38 @@
+= Erweiterte Konfiguration
+:author: Wolfgang Barth
+:revdate: 2025-09-10
+
+#FIXME# #work in progress#
+
+Die erweiterte Konfiguration über die Konfigurationsdatei `cocard.yml` ist komplett optional. Die Datei wird nur benötigt, wenn Konfiguration für eine der hier beschriebenen Funktionen erforderlich ist. Andernfalls kann die Datei komplett entfallen.
+
+
+== Die Konfigurationsdatei `cocard.yml`
+
+=== LDAP-Anbindung
+
+.cocard.yml: LDAP-Anbindung
+[source,yml]
+----
+enable_ldap_authentication: true
+ldap_options:
+[...]
+----
+
+Die LDAP-Anbindung wird im Detail unter xref:ROOT:admin/ldap-authentication.adoc[] beschrieben
+
+=== TI-Client (RISE TI-Gateway)
+
+.cocard.yml: TI-Client (RISE TI-Gateway)
+[source,yml]
+----
+enable_ticlient: yes
+ktproxy_equal_ports: yes
+ktproxy_defaults:
+  wireguard_ip: 203.0.113.0
+  incoming_ip: 198.51.100.20
+  incoming_port_range: 10000:11000
+  outgoing_ip: 198.51.100.21
+  outgoing_port_range: 10000:11000
+  card_terminal_port: 4742
+----
