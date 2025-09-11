@@ -7,6 +7,7 @@ interface "CardTerminals::RMI" as rmi {
   card_terminal
   available_actions()
   call()
+  rmi_port()
 }
 
 class "CardTerminals::RMI::KoCoBox" as rmi_koco {
