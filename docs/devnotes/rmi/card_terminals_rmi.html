@@ -162,7 +162,10 @@
 <div class="content">
 <pre>rmi = CardTerminals::RMI.new(card_terminal: card_terminal)
 rmi.available_actions
-result = rmi.call(:reboot, params = {})
+result = rmi.call(:reboot)
+result = rmi.call(:get_idle_message)
+result = rmi.call(:set_idle_message, idle_message: 'text')
+result = rmi.call(:verify_pin, iccsn: iccsn)
 result.success?
 result.response</pre>
 </div>
