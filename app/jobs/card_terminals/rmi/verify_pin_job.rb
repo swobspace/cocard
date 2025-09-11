@@ -28,7 +28,7 @@ module CardTerminals
           return false
         end
 
-        rmi = CardTerminals::RMI::Base.new(card_terminal: card.card_terminal)
+        rmi = CardTerminals::RMI.new(card_terminal: card.card_terminal)
         if !rmi.valid
           Rails.logger.warn(prefix + "CardTerminal does not meet requirements" + 
                             rmi.messages.join(', '))

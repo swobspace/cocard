@@ -72,16 +72,12 @@ module CardTerminalConcerns
   end
 
   def supports_rmi?
-   CardTerminals::RMI::Base.new(card_terminal: self).valid
+   CardTerminals::RMI.new(card_terminal: self).available_actions.count > 0
   end
 
   def rebootable?
-    rmi = CardTerminals::RMI::Base.new(card_terminal: self)
-    if rmi.nil?
-      false
-    else
-      rmi.respond_to?(:reboot)
-    end
+    @rebootable ||= CardTerminals::RMI.new(card_terminal: self)
+                                      .available_actions.include?(:reboot)
   end
 
   def rebooted?
@@ -105,12 +101,7 @@ module CardTerminalConcerns
 
   # get default port from rmi class
   def default_rmi_port
-    rmi = CardTerminals::RMI::Base.new(card_terminal: self)
-    if rmi.nil? || !rmi.valid
-      0
-    else
-      rmi.rmi.class::RMI_PORT
-    end
+    CardTerminals::RMI.new(card_terminal: self).rmi_port || 443
   end
 
   def use_ktproxy?

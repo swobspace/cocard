@@ -90,7 +90,7 @@ class CardTerminalsController < ApplicationController
   end
 
   def update_idle_message
-    _rmi = CardTerminals::RMI::Base.new(card_terminal: @card_terminal)
+    _rmi = CardTerminals::RMI.new(card_terminal: @card_terminal)
     if _rmi.valid
       rmi = _rmi.rmi
       rmi.set_idle_message(idle_message_params['idle_message'])
@@ -126,7 +126,7 @@ class CardTerminalsController < ApplicationController
 
   def reboot
     if @card_terminal.rebootable?
-      rmi = CardTerminals::RMI::Base.new(card_terminal: @card_terminal).rmi
+      rmi = CardTerminals::RMI.new(card_terminal: @card_terminal).rmi
       result = rmi.reboot
       if result['result'] == 'success'
         flash[:success] = "Reboot gestartet"

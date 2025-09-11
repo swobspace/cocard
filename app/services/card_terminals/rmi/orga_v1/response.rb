@@ -1,5 +1,5 @@
 module CardTerminals
-  module RMI       
+  class RMI       
     class OrgaV1::Response
       attr_reader :data, :json
       #

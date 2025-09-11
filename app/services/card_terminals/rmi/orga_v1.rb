@@ -1,27 +1,11 @@
 module CardTerminals
-  module RMI
+  class RMI
     #
     # Remote Management Interface for Orga 6141 Version 1.03
     #
-    class OrgaV1
-      attr_reader :card_terminal, :valid, :session, :result
-
-      RMI_PORT = 443
-
-      #
-      # rmi = CardTerminal::RMI::OrgaV1.new(options)
-      #
-      # mandantory options:
-      # * :card_terminal - card_terminal object
-      #
-      def initialize(options = {})
-        options.symbolize_keys
-        @card_terminal = options.fetch(:card_terminal)
-        @valid = check_terminal
-        @session = {}
-        @result = {}
-        @logger = ActiveSupport::Logger.new(File.join(Rails.root, 'log', 'card_terminals_rmi_orgav1.log'))
-
+    class OrgaV1 < Base
+      def available_actions
+        %i( verify_pin get_idle_message set_idle_message reboot )
       end
 
       #
@@ -31,7 +15,9 @@ module CardTerminals
       # for notifications.
       # send pin if requested until timeout
       #
-      def verify_pin(iccsn)
+      def verify_pin(params = {})
+        params = params.symbolize_keys
+        iccsn = params.fetch(:iccsn)
         EM.run {
           ws = Faye::WebSocket::Client.new(ws_url, [], {
                    ping: 15,
@@ -139,7 +125,7 @@ module CardTerminals
       # fetch idle message from card terminal
       # and write result to @result['idle_message']
       #
-      def get_idle_message
+      def get_idle_message(params = {})
         EM.run {
           ws = Faye::WebSocket::Client.new(ws_url, [], {
                    ping: 15,
@@ -214,7 +200,9 @@ module CardTerminals
       # and write result to @result['result']
       # success means @result['result'] = 'success'
       #
-      def set_idle_message(idle_message)
+      def set_idle_message(params = {})
+        params = params.symbolize_keys
+        idle_message = params.fetch(:idle_message)
         idle_message = clean_idle_message(idle_message)
         EM.run {
           ws = Faye::WebSocket::Client.new(ws_url, [], {
@@ -282,7 +270,7 @@ module CardTerminals
       #
       # reboot
       # 
-      def reboot
+      def reboot(params = {})
         EM.run {
           ws = Faye::WebSocket::Client.new(ws_url, [], {
                    ping: 15,

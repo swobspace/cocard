@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-module CardTerminals::RMI
-  RSpec.describe Base do
+module CardTerminals
+  RSpec.describe RMI::Base do
     let(:ct) do
       FactoryBot.create(:card_terminal,
         mac: ENV['CT_MAC'],

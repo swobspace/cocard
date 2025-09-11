@@ -40,7 +40,7 @@ module CardTerminals
     private
       attr_reader :prefix
       def check_requirements(card_terminal)
-        rmi = CardTerminals::RMI::Base.new(card_terminal: card_terminal)
+        rmi = CardTerminals::RMI.new(card_terminal: card_terminal)
         if !rmi.valid
           Rails.logger.warn(prefix + "CardTerminal does not meet requirements" + 
                             rmi.messages.join(', '))
