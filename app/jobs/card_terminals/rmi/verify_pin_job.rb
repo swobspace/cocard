@@ -1,5 +1,5 @@
 module CardTerminals
-  module RMI
+  class RMI
     class VerifyPinJob < ApplicationJob
       queue_as :rmi
 

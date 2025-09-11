@@ -1,5 +1,5 @@
 module CardTerminals
-  module RMI
+  class RMI
     class GetIdleMessageJob < ApplicationJob
       queue_as :rmi
 
