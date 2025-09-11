@@ -1,0 +1,43 @@
+@startuml
+top to bottom direction
+
+!theme cocard from ..
+
+interface "Connector::RMI" as rmi {
+  connector
+  available_actions()
+  call()
+}
+
+class "Connector::RMI::KoCoBox" as rmi_koco {
+  connector
+  available_actions()    
+  call()
+}
+note left of rmi_koco
+available_actions:
+* reboot
+end note
+
+class "Connector::RMI::Null" as rmi_null {
+  connector
+  available_actions()
+  call()
+}
+
+class "Connector::RMI::Base" as rmi_base {
+  connector
+  available_actions()
+  call()   
+}
+
+rmi <|.. rmi_koco
+rmi <|.. rmi_null
+rmi_koco <|-- rmi_base
+rmi_null <|-- rmi_base
+
+note as n1
+supported? = available_actions.size > 0
+end note
+
+@enduml

@@ -1,6 +1,9 @@
 * xref:index.adoc[]
 * xref:modeling.adoc[]
 * xref:cocard-services.adoc[]
+* RMI
+** xref:rmi/connectors_rmi.adoc[]
+** xref:rmi/card_terminals_rmi.adoc[]
 * xref:conditions.adoc[]
 * xref:healthcheck.adoc[]
 * xref:todo.adoc[]
