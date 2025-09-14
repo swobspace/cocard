@@ -1,6 +1,6 @@
 = CardTerminals::RMI
 :author: Wolfgang Barth
-:revdate: 2025-09-10
+:revdate: 2025-09-14
 :imagesdir: ../../images
 
 == Struktur
@@ -9,13 +9,12 @@ image::card_terminals/rmi.svg[]
 
 == Usage
 
+[source,ruby]
 ----
 rmi = CardTerminals::RMI.new(card_terminal: card_terminal)
-rmi.available_actions
-result = rmi.call(:reboot)
-result = rmi.call(:get_idle_message)
-result = rmi.call(:set_idle_message, idle_message: 'text')
-result = rmi.call(:verify_pin, iccsn: iccsn)
+rmi.rmi_port # -> 443
+rmi.available_actions # -> [...]
+result = rmi.reboot()
 result.success?
 result.response
 ----

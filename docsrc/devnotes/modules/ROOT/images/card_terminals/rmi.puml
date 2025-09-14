@@ -5,34 +5,39 @@ top to bottom direction
 
 interface "CardTerminals::RMI" as rmi {
   card_terminal
-  available_actions()
-  call()
-  rmi_port()
+  +available_actions()
+  +rmi_port()
+  +reboot()
+  +get_idle_message()
+  +set_idle_message(message)
+  +verify_pin(iccsn)
+  +supported?()
 }
 
 class "CardTerminals::RMI::KoCoBox" as rmi_koco {
   card_terminal
-  available_actions()    
-  call()
+  +available_actions()    
+  +rmi_port()
+  +reboot()
+  +get_idle_message()
+  +set_idle_message(message)
+  +verify_pin(iccsn)
+  +remote_pairing()
+  +supported?() -> true
 }
-note left of rmi_koco
-available_actions:
-* reboot
-* get_idle_message
-* set_idle_message
-* verify_ping
-end note
 
 class "CardTerminals::RMI::Null" as rmi_null {
   card_terminal
-  available_actions()
-  call()
+  +available_actions()
+  +rmi_port()
+  +supported?() -> false
 }
 
-class "CardTerminals::RMI::Base" as rmi_base {
+abstract "CardTerminals::RMI::Base" as rmi_base {
   card_terminal
-  available_actions()
-  call()   
+  #available_actions()
+  #rmi_port()
+  +supported?() -> false
 }
 
 rmi <|.. rmi_koco

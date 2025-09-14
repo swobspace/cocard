@@ -160,14 +160,12 @@
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre>rmi = CardTerminals::RMI.new(card_terminal: card_terminal)
-rmi.available_actions
-result = rmi.call(:reboot)
-result = rmi.call(:get_idle_message)
-result = rmi.call(:set_idle_message, idle_message: 'text')
-result = rmi.call(:verify_pin, iccsn: iccsn)
+<pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">rmi = CardTerminals::RMI.new(card_terminal: card_terminal)
+rmi.rmi_port # -&gt; 443
+rmi.available_actions # -&gt; [...]
+result = rmi.reboot()
 result.success?
-result.response</pre>
+result.response</code></pre>
 </div>
 </div>
 </div>

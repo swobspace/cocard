@@ -4,7 +4,7 @@ module CardTerminals
     # Base class
     #
     class Base
-      Result = ImmutableStruct.new(:success?, :response)
+      RMIResult = ImmutableStruct.new(:success?, :response)
 
       attr_reader :card_terminal, :messages, :result
       #
@@ -30,9 +30,14 @@ module CardTerminals
         443
       end
 
-      def call(*args)
-        raise RuntimeError, "CardTerminals::RMI::Base class called, don't use it directly!"
+      def supported?
+        false
       end
+
+      def firmware_version
+        card_terminal.firmware_version
+      end
+
     private
       attr_reader :session, :logger
     end

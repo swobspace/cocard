@@ -5,7 +5,21 @@ module CardTerminals
     #
     class OrgaV1 < Base
       def available_actions
-        %i( verify_pin get_idle_message set_idle_message reboot )
+        if firmware_version == '3.9.0'
+          %i( verify_pin get_idle_message set_idle_message reboot )
+        elsif firmware_version >= '3.9.1'
+          %i( verify_pin get_idle_message set_idle_message reboot remote_pairing )
+        else
+          []
+        end
+      end
+
+      def supported?
+       if firmware_version >= '3.9.0'
+         true
+       else
+         false
+       end
       end
 
       #
@@ -334,12 +348,6 @@ module CardTerminals
 
     private
       attr_reader :logger
-
-      def check_terminal
-        # card_terminal.pin_mode != 'off' &&
-        card_terminal.product_information&.product_code == "ORGA6100" &&
-        card_terminal.firmware_version >= '3.9.0'
-      end
 
       def generate_token(action)
         token = SecureRandom.uuid

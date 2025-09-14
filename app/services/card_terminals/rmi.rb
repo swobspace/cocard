@@ -3,6 +3,8 @@ module CardTerminals
   # Remote Management Interface for CardTerminals
   #
   class RMI
+    # RMIResult = ImmutableStruct.new(:success?, :response)
+
     attr_reader :card_terminal, :rmi
     #
     # rmi = CardTerminals::RMI.new(options)
@@ -20,16 +22,37 @@ module CardTerminals
       rmi.available_actions
     end
 
+    def supported?
+      rmi.supported?
+    end
+
     def rmi_port
       rmi.rmi_port
     end
 
-    def call(action, params = {})
-      unless rmi.available_actions.include?(action)
-        return
+    def reboot
+      if supported? && available_actions.include?(:reboot)
+        result = rmi.reboot
+        if result.success?
+          yield Status.success(result.message)
+        else
+          yield Status.failure(result.message)
+        end
+      else
+        yield Status.unsupported
       end
-      rmi.send(action, params)
-      rmi.result
+    end
+
+    def get_idle_message
+    end
+
+    def set_idle_message(message)
+    end
+
+    def verify_pin(iccsn)
+    end
+
+    def remote_pairing
     end
 
   private
