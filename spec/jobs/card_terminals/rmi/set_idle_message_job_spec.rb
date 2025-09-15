@@ -33,7 +33,8 @@ RSpec.describe CardTerminals::RMI::SetIdleMessageJob, type: :job do
 
       before(:each) do
         allow(ct).to receive(:firmware_version).and_return('3.9.0')
-        allow(ct).to receive_message_chain(:product_information, :product_code).and_return('ORGA6100')
+        allow(ct).to receive(:identification).and_return('INGHC-ORGA6100')
+
         ct.update(pin_mode: 'on_demand')
         ct.update_column(:condition, Cocard::States::OK)
         ct.reload

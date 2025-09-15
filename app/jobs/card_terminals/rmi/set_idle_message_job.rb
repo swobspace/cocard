@@ -58,7 +58,7 @@ module CardTerminals
 
       def check_requirements(card_terminal)
         rmi = CardTerminals::RMI.new(card_terminal: card_terminal)
-        if !rmi.valid
+        if !rmi.supported?
           Rails.logger.warn(prefix + "CardTerminal does not meet requirements" + 
                             rmi.messages.join(', '))
           false
@@ -67,7 +67,7 @@ module CardTerminals
                             rmi.messages.join(', '))
           false
         else
-          @rmi = rmi.rmi
+          @rmi = rmi
           true
         end
       end

@@ -50,7 +50,7 @@ module CardTerminals
                             rmi.messages.join(', '))
           false
         else
-          @rmi = rmi.rmi
+          @rmi = rmi
           true
         end
       end

@@ -72,7 +72,7 @@ module CardTerminalConcerns
   end
 
   def supports_rmi?
-   CardTerminals::RMI.new(card_terminal: self).available_actions.count > 0
+    CardTerminals::RMI.new(card_terminal: self).supported?
   end
 
   def rebootable?

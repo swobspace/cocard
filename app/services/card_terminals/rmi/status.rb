@@ -1,19 +1,20 @@
 module CardTerminals
   class RMI
     class Status
-      def self.success(message) new(:success, message) end
+      def self.success(*args) new(:success, *args) end
       def self.unsupported() new(:unsupported) end
       def self.failure(error) new(:failure, error) end
 
-      attr_reader :error
+      attr_reader :message, :value
 
-      def initialize(status, error = nil)
-        @status = status
-        @error  = error
+      def initialize(status, message = nil, value = nil)
+        @status  = status
+        @message = message
+        @value   = value
       end
 
       def on_success
-        yield if @status == :success
+        yield(message, value) if @status == :success
       end
 
       def on_unsupported
@@ -21,7 +22,7 @@ module CardTerminals
       end
 
       def on_failure
-        yield(error) if @status == :failure
+        yield(message) if @status == :failure
       end
 
     end

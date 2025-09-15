@@ -4,6 +4,8 @@ module CardTerminals
     # Remote Management Interface for Orga 6141 Version 1.03
     #
     class OrgaV1 < Base
+      Result = Struct.new(:success?, :message, :value, keyword_init: true)
+
       def available_actions
         if firmware_version == '3.9.0'
           %i( verify_pin get_idle_message set_idle_message reboot )
@@ -29,9 +31,7 @@ module CardTerminals
       # for notifications.
       # send pin if requested until timeout
       #
-      def verify_pin(params = {})
-        params = params.symbolize_keys
-        iccsn = params.fetch(:iccsn)
+      def verify_pin(iccsn)
         EM.run {
           ws = Faye::WebSocket::Client.new(ws_url, [], {
                    ping: 15,
@@ -131,6 +131,11 @@ module CardTerminals
             debug("<<< :closed <<<\n")
           end
         }
+        if @result['result'] == 'failure'
+          return Result.new(success?: false, message: @result['failure'])
+        else
+          return Result.new(success?: true, message: "PIN Verification complete")
+        end
       end
 
       #
@@ -139,7 +144,7 @@ module CardTerminals
       # fetch idle message from card terminal
       # and write result to @result['idle_message']
       #
-      def get_idle_message(params = {})
+      def get_idle_message
         EM.run {
           ws = Faye::WebSocket::Client.new(ws_url, [], {
                    ping: 15,
@@ -203,8 +208,15 @@ module CardTerminals
             ws = nil
             EM.stop
             debug("<<< :closed <<<\n")
+
           end
         }
+        if @result['result'] == 'success'
+          Result.new(success?: true, message: "Get idle message complete",
+                     value: @result['idle_message'] )
+        else
+          Result.new(success?: false, message: @result['failure'])
+        end
       end
 
       #
@@ -214,9 +226,7 @@ module CardTerminals
       # and write result to @result['result']
       # success means @result['result'] = 'success'
       #
-      def set_idle_message(params = {})
-        params = params.symbolize_keys
-        idle_message = params.fetch(:idle_message)
+      def set_idle_message(idle_message)
         idle_message = clean_idle_message(idle_message)
         EM.run {
           ws = Faye::WebSocket::Client.new(ws_url, [], {
@@ -277,14 +287,20 @@ module CardTerminals
             ws = nil
             EM.stop
             debug("<<< :closed <<<\n")
+
           end
         }
+        if @result['result'] == 'success'
+          return Result.new(success?: true, message: "Set idle message complete")
+        else
+          return Result.new(success?: false, message: @result['failure'])
+        end
       end
 
       #
       # reboot
       # 
-      def reboot(params = {})
+      def reboot
         EM.run {
           ws = Faye::WebSocket::Client.new(ws_url, [], {
                    ping: 15,
@@ -341,10 +357,18 @@ module CardTerminals
             ws = nil
             EM.stop
             debug("<<< :closed <<<\n")
+
           end
         }
+        if @result['result'] == 'success'
+          return Result.new(success?: true, message: "Reboot initiated")
+        else
+          return Result.new(success?: false, message: @result['failure'])
+        end
       end
 
+      def remote_pairing
+      end
 
     private
       attr_reader :logger

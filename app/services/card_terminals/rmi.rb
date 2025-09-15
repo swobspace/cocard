@@ -3,8 +3,6 @@ module CardTerminals
   # Remote Management Interface for CardTerminals
   #
   class RMI
-    # RMIResult = ImmutableStruct.new(:success?, :response)
-
     attr_reader :card_terminal, :rmi
     #
     # rmi = CardTerminals::RMI.new(options)
@@ -44,15 +42,55 @@ module CardTerminals
     end
 
     def get_idle_message
+      if supported? && available_actions.include?(:get_idle_message)
+        result = rmi.get_idle_message
+        if result.success?
+          yield Status.success(result.message, result.value)
+        else
+          yield Status.failure(result.message)
+        end
+      else
+        yield Status.unsupported
+      end
     end
 
     def set_idle_message(message)
+      if supported? && available_actions.include?(:set_idle_message)
+        result = rmi.set_idle_message(message)
+        if result.success?
+          yield Status.success(result.message)
+        else
+          yield Status.failure(result.message)
+        end
+      else
+        yield Status.unsupported
+      end
     end
 
     def verify_pin(iccsn)
+      if supported? && available_actions.include?(:verify_pin)
+        result = rmi.verify_pin(iccsn)
+        if result.success?
+          yield Status.success(result.message)
+        else
+          yield Status.failure(result.message)
+        end
+      else
+        yield Status.unsupported
+      end
     end
 
     def remote_pairing
+      if supported? && available_actions.include?(:remote_pairing)
+        result = rmi.remote_pairing
+        if result.success?
+          yield Status.success(result.message)
+        else
+          yield Status.failure(result.message)
+        end
+      else
+        yield Status.unsupported
+      end
     end
 
   private
