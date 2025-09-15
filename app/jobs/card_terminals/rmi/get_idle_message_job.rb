@@ -19,18 +19,28 @@ module CardTerminals
             end
           end
         else
+          # single card terminal
           @prefix = "GetIdleMessage:: card_terminal #{card_terminal}:: ".freeze
-          if check_requirements(card_terminal)
-            @rmi.get_idle_message
-            if @rmi.result['idle_message']
-              card_terminal.update(idle_message: @rmi.result['idle_message'])
+          unless check_job_requirements(card_terminal)
+            Rails.logger.warn(@prefix + "not all requirements met")
+            return false
+          end
+
+          card_terminal.rmi.get_idle_message do |result|
+            result.on_success do |message, value|
+              card_terminal.update(idle_message: value)
               Rails.logger.info("INFO:: #{card_terminal} - " +
                                 "idle_message == #{card_terminal.idle_message}")
-
               return true
-            else
-              Rails.logger.warn("WARN:: #{card_terminal} - " +
-                                "could not get idle_message")
+            end
+
+            result.on_failure do |message|
+              Rails.logger.error(@prefix + "#{message}")
+              return false
+            end
+
+            result.on_unsupported do
+              Rails.logger.warn(@prefix + "Terminal or action not supported")
               return false
             end
           end
@@ -39,18 +49,12 @@ module CardTerminals
 
     private
       attr_reader :prefix
-      def check_requirements(card_terminal)
-        rmi = CardTerminals::RMI.new(card_terminal: card_terminal)
-        if !rmi.valid
-          Rails.logger.warn(prefix + "CardTerminal does not meet requirements" + 
-                            rmi.messages.join(', '))
-          false
-        elsif card_terminal.condition != Cocard::States::OK
+      def check_job_requirements(card_terminal)
+        if card_terminal.condition != Cocard::States::OK
           Rails.logger.warn(prefix + "CardTerminal condition must be OK, skipping" +
                             rmi.messages.join(', '))
           false
         else
-          @rmi = rmi
           true
         end
       end
