@@ -195,6 +195,10 @@ RSpec.describe CardTerminalConcerns, type: :model do
     end
   end
 
+  describe "#rmi" do
+    it { expect(ct.rmi).to be_kind_of CardTerminals::RMI }
+  end
+
   describe "#rebootable?" do
     it { expect(ct.rebootable?).to be_falsey }
   end
