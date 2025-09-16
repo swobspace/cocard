@@ -29,9 +29,16 @@ module ConnectorConcerns
     ( use_tls ) ? 443 : 80
   end
 
+  def rmi
+    @rmi ||= Connectors::RMI.new(connector: self)
+  end
+  
+  def supports_rmi? 
+    rmi.supported?
+  end
+  
   def rebootable?
-    @rebootable ||= Connectors::RMI.new(connector: self)
-                                   .available_actions.include?(:reboot)
+    @rebootable ||= rmi.available_actions.include?(:reboot)
   end
 
   def rebooted?

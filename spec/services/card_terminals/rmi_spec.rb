@@ -56,7 +56,6 @@ module CardTerminals
         )
       end
       before(:each) do
-        # allow(ct).to receive(:firmware_version).and_return('3.9.0')
         allow(ct).to receive(:identification).and_return('UNKNOWN-UNKNOWN')
         expect(CardTerminals::RMI::Null).to receive(:new).and_return(null)
       end

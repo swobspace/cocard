@@ -3,7 +3,7 @@ module Connectors
   # Remote Management Interface for Connectors
   #
   class RMI
-    attr_reader :connector, :rmi
+    attr_reader :connector
     #
     # rmi = Connectors::RMI.new(options)
     #
@@ -20,14 +20,26 @@ module Connectors
       rmi.available_actions
     end
 
-    def call(action, params = {})
-      unless rmi.available_actions.include?(action)
-        return
+    def supported?
+      rmi.supported?
+    end
+
+    def reboot
+      if supported? && available_actions.include?(:reboot)
+        result = rmi.reboot
+        if result.success?
+          yield Status.success(result.message)
+        else
+          yield Status.failure(result.message)
+        end
+      else
+        yield Status.unsupported
       end
-      rmi.send(action, params)
     end
 
   private
+    attr_reader :rmi
+
     def set_rmi
       case connector.identification
       when 'KOCOC-kocobox'

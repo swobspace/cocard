@@ -4,8 +4,6 @@ module Connectors
     # Base class
     #
     class Base
-      Result = ImmutableStruct.new(:success?, :response)
-
       attr_reader :connector
       #
       # mandantory options:
@@ -20,8 +18,8 @@ module Connectors
         []
       end
 
-      def call(*args)
-        raise RuntimeError, "Connectors::RMI::Base class called, don't use it directly!"
+      def supported?
+        false
       end
 
     end

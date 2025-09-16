@@ -4,8 +4,6 @@ module CardTerminals
     # Base class
     #
     class Base
-      RMIResult = ImmutableStruct.new(:success?, :response)
-
       attr_reader :card_terminal, :messages, :result
       #
       # mandantory options:
