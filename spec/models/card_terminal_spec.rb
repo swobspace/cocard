@@ -109,7 +109,7 @@ RSpec.describe CardTerminal, type: :model do
        :product_type_information=> {:product_type=>"KardTerm", :product_type_version=>"1.2.3.4"},
        :product_identification=> {
          :product_vendor_id=>"Heinrich GmbH",
-         :product_code=>nil,
+         :product_code=>"HEINER4711",
          :product_version=> { :local=>{:hw_version=>"5.6.7", :fw_version=>"8.9.1"}}
        },
        :product_miscellaneous=> {:product_vendor_name=>nil, :product_name=>nil}}
@@ -122,6 +122,10 @@ RSpec.describe CardTerminal, type: :model do
     it { expect(ct.product_information.product_type_information).to include(
            :product_type=>"KardTerm", :product_type_version=>"1.2.3.4"
          )}
+
+    describe "#identification" do
+      it { expect(ct.identification).to eq("Heinrich GmbH-HEINER4711") }
+    end
   end
 
 

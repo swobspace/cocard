@@ -7,7 +7,6 @@ module Connectors
       Result = ImmutableStruct.new(:success?, :response)
 
       attr_reader :connector
-      # rmi = Connectors::RMI::Base.new(options)
       #
       # mandantory options:
       # * :connector - object

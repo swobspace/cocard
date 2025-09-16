@@ -1,27 +1,27 @@
 module CardTerminals
-  module RMI
+  class RMI
     #
     # Remote Management Interface for Orga 6141 Version 1.03
     #
-    class OrgaV1
-      attr_reader :card_terminal, :valid, :session, :result
+    class OrgaV1 < Base
+      Result = Struct.new(:success?, :message, :value, keyword_init: true)
 
-      RMI_PORT = 443
+      def available_actions
+        if firmware_version == '3.9.0'
+          %i( verify_pin get_idle_message set_idle_message reboot )
+        elsif firmware_version >= '3.9.1'
+          %i( verify_pin get_idle_message set_idle_message reboot remote_pairing )
+        else
+          []
+        end
+      end
 
-      #
-      # rmi = CardTerminal::RMI::OrgaV1.new(options)
-      #
-      # mandantory options:
-      # * :card_terminal - card_terminal object
-      #
-      def initialize(options = {})
-        options.symbolize_keys
-        @card_terminal = options.fetch(:card_terminal)
-        @valid = check_terminal
-        @session = {}
-        @result = {}
-        @logger = ActiveSupport::Logger.new(File.join(Rails.root, 'log', 'card_terminals_rmi_orgav1.log'))
-
+      def supported?
+       if firmware_version >= '3.9.0'
+         true
+       else
+         false
+       end
       end
 
       #
@@ -131,6 +131,11 @@ module CardTerminals
             debug("<<< :closed <<<\n")
           end
         }
+        if @result['result'] == 'failure'
+          return Result.new(success?: false, message: @result['failure'])
+        else
+          return Result.new(success?: true, message: "PIN Verification complete")
+        end
       end
 
       #
@@ -203,8 +208,15 @@ module CardTerminals
             ws = nil
             EM.stop
             debug("<<< :closed <<<\n")
+
           end
         }
+        if @result['result'] == 'success'
+          Result.new(success?: true, message: "Get idle message complete",
+                     value: @result['idle_message'] )
+        else
+          Result.new(success?: false, message: @result['failure'])
+        end
       end
 
       #
@@ -275,8 +287,14 @@ module CardTerminals
             ws = nil
             EM.stop
             debug("<<< :closed <<<\n")
+
           end
         }
+        if @result['result'] == 'success'
+          return Result.new(success?: true, message: "Set idle message complete")
+        else
+          return Result.new(success?: false, message: @result['failure'])
+        end
       end
 
       #
@@ -339,19 +357,21 @@ module CardTerminals
             ws = nil
             EM.stop
             debug("<<< :closed <<<\n")
+
           end
         }
+        if @result['result'] == 'success'
+          return Result.new(success?: true, message: "Reboot initiated")
+        else
+          return Result.new(success?: false, message: @result['failure'])
+        end
       end
 
+      def remote_pairing
+      end
 
     private
       attr_reader :logger
-
-      def check_terminal
-        # card_terminal.pin_mode != 'off' &&
-        card_terminal.product_information&.product_code == "ORGA6100" &&
-        card_terminal.firmware_version >= '3.9.0'
-      end
 
       def generate_token(action)
         token = SecureRandom.uuid

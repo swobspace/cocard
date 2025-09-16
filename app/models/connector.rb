@@ -65,7 +65,7 @@ class Connector < ApplicationRecord
   end
 
   def identification
-    "#{product_information.product_vendor_id}-#{product_information.product_code}"
+    "#{product_information&.product_vendor_id}-#{product_information&.product_code}"
   end
 
   def service(svcname)

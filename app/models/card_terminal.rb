@@ -157,6 +157,10 @@ class CardTerminal < ApplicationRecord
     end
   end
 
+  def identification
+    "#{product_information&.product_vendor_id}-#{product_information&.product_code}"
+  end
+
 private
 
   def ensure_displayname
