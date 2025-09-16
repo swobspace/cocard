@@ -160,11 +160,20 @@
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre>rmi = Connectors::RMI.new(connector: connector)
+<pre>rmi = connector.rmi
 rmi.available_actions
-result = rmi.call(:reboot, params = {})
-result.success?
-result.response</pre>
+
+rmi.reboot() do |result|
+  result.on_success do |message|
+    ...
+  end
+  result.on_failure do |message|
+    ...
+  end
+  result.on_unsupported do
+    ...
+  end
+end----</pre>
 </div>
 </div>
 </div>

@@ -45,8 +45,5 @@ rmi <|.. rmi_null
 rmi_koco <|-- rmi_base
 rmi_null <|-- rmi_base
 
-note as n1
-supported? = available_actions.size > 0
-end note
 
 @enduml
