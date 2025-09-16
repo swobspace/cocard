@@ -29,6 +29,10 @@ RSpec.describe ConnectorConcerns, type: :model do
     end
   end
 
+  describe "#rmi" do
+    it { expect(connector.rmi).to be_kind_of Connectors::RMI }
+  end
+
   describe "#sds_port" do
     it { expect(connector.sds_port).to eq(80) }
   end
