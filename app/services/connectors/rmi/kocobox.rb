@@ -1,8 +1,14 @@
 module Connectors
   class RMI
     class Kocobox < Base
+      Result = Struct.new(:success?, :message, :value, keyword_init: true)
+
       def available_actions
         %i( reboot )
+      end
+
+      def supported?
+        true
       end
 
       def reboot(params = {})
@@ -11,7 +17,7 @@ module Connectors
         #
         if koco_admin.blank? or koco_passwd.blank?
           return Result.new(success?: false,
-                            response: "Fehlende Zugangsdaten: KOCO_PASSWD " +
+                            message: "Fehlende Zugangsdaten: KOCO_PASSWD " +
                                       "oder KOCO_ADMIN nicht gesetzt")
         end
         #
@@ -34,7 +40,7 @@ module Connectors
           end
         rescue Faraday::Error => e
           errmsg = "Login failed - #{e.response_body}"
-          return Result.new(success?: false, response: errmsg)
+          return Result.new(success?: false, message: errmsg)
         end
 
         #
@@ -44,7 +50,7 @@ module Connectors
           r2 = conn.get('/administration/start.htm')
         rescue Faraday::Error => e
           errmsg = "/administration/start.htm - #{e.response_body}"
-          return Result.new(success?: false, response: errmsg)
+          return Result.new(success?: false, message: errmsg)
         end
 
         #
@@ -56,11 +62,11 @@ module Connectors
           end
         rescue Faraday::Error => e
           errmsg = "Get X-TOKEN - #{e.response_body}"
-          return Result.new(success?: false, response: errmsg)
+          return Result.new(success?: false, message: errmsg)
         end
 
         if r3.status != 200
-          return Result.new(success?: false, response: r3.inspect)
+          return Result.new(success?: false, message: r3.inspect, value: r3.status)
         end
 
         begin
@@ -74,7 +80,7 @@ module Connectors
         #
         if Rails.env.test?
           connector.update(rebooted_at: Time.current)
-          return Result.new(success?: true, response: r3)
+          return Result.new(success?: true, message: r3, value: r3.status) 
         end
 
         #
@@ -87,9 +93,9 @@ module Connectors
 
         if r4.status == 200
           connector.update(rebooted_at: Time.current)
-          Result.new(success?: true, response: "Reboot ausgelöst, der Konnektor wird neu gestartet")
+          Result.new(success?: true, message: "Reboot ausgelöst, der Konnektor wird neu gestartet")
         else
-          Result.new(success?: false, response: r3.inspect)
+          Result.new(success?: false, message: r3.inspect)
         end
       end
 

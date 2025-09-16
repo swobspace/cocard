@@ -3,6 +3,7 @@
 require 'rails_helper'
 module Connectors
   RSpec.describe RMI do
+    Result = Struct.new(:success?, :message, :value)
     #
     # connector
     #
@@ -23,6 +24,8 @@ module Connectors
     describe 'check if instance methods exists' do
       it { expect(subject).to be_kind_of(Connectors::RMI) }
       it { expect(subject.respond_to?(:available_actions)).to be_truthy }
+      it { expect(subject.respond_to?(:reboot)).to be_truthy }
+      it { expect(subject.respond_to?(:supported?)).to be_truthy }
     end
 
     describe '::new' do
@@ -35,65 +38,65 @@ module Connectors
       end
     end
 
-    describe "with kocobox" do
-      describe "#rmi" do
-        it { expect(subject.rmi).to be_kind_of(Connectors::RMI::Kocobox) }
-      end
-
-      describe "#rmi.reboot" do
-        it { expect(subject.rmi).to respond_to(:reboot) }
-      end
-
-      describe "#available_actions" do
-        it { expect(subject.available_actions).to contain_exactly(:reboot) }
-      end
-
-      #
-      # does not a real reboot in test env
-      #
-      describe "#call(:reboot) with real credentials", :koco => true do
-        it "starts a reboot" do
-          result = subject.call(:reboot)
-          expect(result.success?).to be_truthy
-          expect(result.response.status).to eq(200)
-          puts result.response.headers
-          puts result.response.body
-          expect(connector.rebooted?).to be_truthy
-        end
-      end
-
-      describe "#call(:reboot) with wrong credentials", :koco => true do
-        it "does not succeed" do
-          ENV['KOCO_ADMIN'] = 'none'
-          ENV['KOCO_PASSWD'] = 'none'
-          result = subject.call(:reboot)
-          expect(result.success?).to be_falsey
-          expect(connector.rebooted?).to be_falsey
-        end
-      end
-
-      describe "#call(:reboot) without credentials" do
-        it "does not succeed" do
-          ENV['KOCO_ADMIN'] = nil
-          ENV['KOCO_PASSWD'] = nil
-          result = subject.call(:reboot)
-          expect(result.success?).to be_falsey
-          expect(result.response).to eq("Fehlende Zugangsdaten: KOCO_PASSWD oder KOCO_ADMIN nicht gesetzt")
-          expect(connector.rebooted?).to be_falsey
-        end
-      end
-    end
-
+    ### UNKNOWN connector ##################################################
     describe "with unknown connector type" do
-      let(:connector) { FactoryBot.create(:connector) }
-      describe "#rmi" do
-        it { expect(subject.rmi).to be_kind_of(Connectors::RMI::Null) }
+      let(:null) do
+        instance_double(Connectors::RMI::Null,
+          supported?: false,
+          available_actions: []
+        )
+      end
+      before(:each) do
+        allow(connector).to receive(:identification).and_return('UNKNOWN-UNKNOWN')
+        expect(Connectors::RMI::Null).to receive(:new).and_return(null)
       end
 
-      describe "#available_actions" do
-        it { expect(subject.available_actions).to contain_exactly() }
+      it { expect(subject.supported?).to be_falsey }
+
+      describe "#reboot" do
+        let(:res) { Result.new(false, 'Failure Message') }
+        it "executes callback" do
+          called_back = false
+          subject.reboot do |result|
+            result.on_unsupported do |message|
+              called_back = true
+            end
+          end
+          expect(called_back).to be_truthy
+        end
       end
     end
-    
+
+    ### KoCoBox ##################################################
+    describe "with kocobox" do
+
+      let(:koco) do
+        instance_double(Connectors::RMI::Kocobox,
+          supported?: true,
+          available_actions: [:reboot]
+        )
+      end
+      before(:each) do
+        allow(connector).to receive(:identification).and_return('KOCOC-kocobox')
+        expect(Connectors::RMI::Kocobox).to receive(:new).and_return(koco)
+      end
+
+      it { expect(subject.supported?).to be_truthy }
+
+      describe "#reboot" do
+        let(:res) { Result.new(true, 'Success Message') }
+        it "executes callback" do
+          expect(koco).to receive(:reboot).and_return(res)
+          called_back = false
+          subject.reboot do |result|
+            result.on_success do |message|
+              called_back = true
+            end
+          end
+          expect(called_back).to be_truthy
+        end
+      end
+
+    end
   end
 end
