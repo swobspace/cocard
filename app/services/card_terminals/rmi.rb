@@ -3,7 +3,7 @@ module CardTerminals
   # Remote Management Interface for CardTerminals
   #
   class RMI
-    attr_reader :card_terminal, :rmi
+    attr_reader :card_terminal
     #
     # rmi = CardTerminals::RMI.new(options)
     #
@@ -94,6 +94,8 @@ module CardTerminals
     end
 
   private
+    attr_reader :rmi
+
     def set_rmi
       case card_terminal.identification
       when 'INGHC-ORGA6100'
