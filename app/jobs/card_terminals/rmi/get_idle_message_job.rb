@@ -50,7 +50,9 @@ module CardTerminals
     private
       attr_reader :prefix
       def check_job_requirements(card_terminal)
-        if card_terminal.condition != Cocard::States::OK
+        if !card_terminal.supports_rmi?
+          false
+        elsif card_terminal.condition != Cocard::States::OK
           Rails.logger.warn(prefix + "CardTerminal condition must be OK, skipping" +
                             rmi.messages.join(', '))
           false

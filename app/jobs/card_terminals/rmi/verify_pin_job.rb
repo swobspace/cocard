@@ -6,20 +6,38 @@ module CardTerminals
       def perform(options = {})
         options = options.symbolize_keys
         card = options.fetch(:card)
+        card_terminal = card.card_terminal
         @prefix = "VerifyPinJob:: Card #{card.iccsn}:: ".freeze
-        if check_requirements(card)
-          @rmi.verify_pin(card.iccsn)
+        unless check_job_requirements(card)
+          Rails.logger.warn(@prefix + "not all requirements met")
+          return false
+        end
+
+        card_terminal.rmi.verify_pin(card.iccsn) do |result|
+          result.on_success do |message|
+            Rails.logger.info(@prefix + "completed")
+            return true
+          end
+          result.on_failure do |message|
+            Rails.logger.error(@prefix + "#{message}")
+            return false
+          end
+          result.on_unsupported do
+            Rails.logger.warn(@prefix + "Terminal or action not supported")
+            return false
+          end
         end
       end
 
     private
       attr_reader :prefix
-      def check_requirements(card)
-        if card.card_terminal.nil?
+      def check_job_requirements(card)
+        ct = card.card_terminal
+        if ct.nil?
           Rails.logger.warn(prefix + "Card has no card terminal assigned")
           return false
         end
-        if card.card_terminal.pin_mode == 'off'
+        if ct.pin_mode == 'off'
           Rails.logger.warn(prefix + "CardTerminal pin mode == off")
           return false
         end
@@ -28,13 +46,11 @@ module CardTerminals
           return false
         end
 
-        rmi = CardTerminals::RMI.new(card_terminal: card.card_terminal)
-        if !rmi.valid
+        if ct.supports_rmi?
           Rails.logger.warn(prefix + "CardTerminal does not meet requirements" + 
                             rmi.messages.join(', '))
           false
         else
-          @rmi = rmi.rmi
           true
         end
       end
