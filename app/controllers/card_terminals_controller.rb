@@ -1,5 +1,5 @@
 class CardTerminalsController < ApplicationController
-  before_action :set_card_terminal, only: [:show, :edit, :update, :destroy, 
+  before_action :set_card_terminal, only: [:show, :edit, :update, :destroy,
                                            :fetch_idle_message, :edit_idle_message,
                                            :update_idle_message]
   before_action :add_breadcrumb_show, only: [:show]
@@ -66,7 +66,7 @@ class CardTerminalsController < ApplicationController
   # POST /card_terminals
   def create
     @card_terminal = CardTerminal.new(card_terminal_params)
- 
+
     @card_terminal.save
     respond_with(@card_terminal)
   end
@@ -90,29 +90,21 @@ class CardTerminalsController < ApplicationController
   end
 
   def update_idle_message
-    _rmi = CardTerminals::RMI.new(card_terminal: @card_terminal)
-    if _rmi.valid
-      rmi = _rmi.rmi
-      rmi.set_idle_message(idle_message_params['idle_message'])
-      Rails.logger.debug("DEBUG:: update_idle_message: #{rmi.result}")
-      if rmi.result['result'] != 'success'
+    idle_message = idle_message_params['idle_message']
+
+    @card_terminal.rmi.set_idle_message(idle_message) do |result|
+      result.on_failure do |message|
         errormsg = "Setzen des Ruhebildschirms fehlgeschlagen!"
         Rails.logger.debug("DEBUG:: update_idle_message: #{errormsg}")
-      else
-        rmi.get_idle_message
-        Rails.logger.debug("DEBUG:: update_idle_message: #{rmi.result}")
-        if rmi.result['result'] != 'success'
-          errormsg = "Abfrage des Ruhebildschirms fehlgeschlagen!"
-          Rails.logger.debug("DEBUG:: update_idle_message: #{errormsg}")
-        else
-          @card_terminal.update(idle_message: rmi.result['idle_message'])
-          @card_terminal.reload
-        end
+        flash.now[:alert] = errormsg
+      end
+
+      result.on_success do |message|
+        @card_terminal.update(idle_message: idle_message)
+        @card_terminal.reload
       end
     end
-    if errormsg
-      flash.now[:alert] = errormsg
-    end
+
     respond_to do |format|
       format.turbo_stream {
         render turbo_stream: [
@@ -125,19 +117,20 @@ class CardTerminalsController < ApplicationController
   end
 
   def reboot
-    if @card_terminal.rebootable?
-      rmi = CardTerminals::RMI.new(card_terminal: @card_terminal).rmi
-      result = rmi.reboot
-      if result['result'] == 'success'
+    @card_terminal.rmi.reboot do |result|
+      result.on_success do |message|
         flash[:success] = "Reboot gestartet"
-      else
-        msg = "Reboot fehlgeschlagen: " + result['failure']
-        flash[:alert] = msg
       end
-      Note.create(notable: @card_terminal, user: current_user, message: msg)
-    else
-      flash[:warning] = "Reboot des Kartenterminals wird nicht unterstützt"
+
+      result.on_failure do |message|
+        flash[:alert] = "Reboot fehlgeschlagen: " + message
+      end
+
+      result.on_unsupported do
+        flash[:warning] = "Reboot des Kartenterminals wird nicht unterstützt"
+      end
     end
+
     respond_with(@card_terminal, action: :show)
   end
 
@@ -145,7 +138,7 @@ class CardTerminalsController < ApplicationController
   # DELETE /card_terminals/1
   def destroy
     unless @card_terminal.destroy
-      flash[:alert] = @card_terminal.errors.full_messages.join("; ") 
+      flash[:alert] = @card_terminal.errors.full_messages.join("; ")
     end
     respond_with(@card_terminal, location: polymorphic_path([@locatable, :card_terminals]))
   end
