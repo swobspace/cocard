@@ -46,9 +46,8 @@ module CardTerminals
           return false
         end
 
-        if ct.supports_rmi?
-          Rails.logger.warn(prefix + "CardTerminal does not meet requirements" + 
-                            rmi.messages.join(', '))
+        if !ct.supports_rmi?
+          Rails.logger.warn(prefix + "CardTerminal does not meet requirements")
           false
         else
           true
