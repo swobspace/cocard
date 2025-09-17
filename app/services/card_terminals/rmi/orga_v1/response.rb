@@ -29,11 +29,27 @@ module CardTerminals
         end
       end
 
+      def properties
+        if result.kind_of? String
+          nil
+        else
+          json.dig('response', 'result', 'properties') || {}
+        end
+      end
+
       def rmi_smcb_pin_enabled
         if result.kind_of? String
           nil
         else
           json.dig('response', 'result', 'properties', 'rmi_smcb_pinEnabled') || false
+        end
+      end
+
+      def rmi_pairingEHealthTerminal_enabled
+        if result.kind_of? String
+          nil
+        else
+          json.dig('response', 'result', 'properties', 'rmi_pairingEHealthTerminal_enabled') || false
         end
       end
 

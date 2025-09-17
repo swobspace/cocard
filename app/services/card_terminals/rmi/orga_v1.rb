@@ -41,18 +41,14 @@ module CardTerminals
 
           ws.on :open do |event|
             debug(">>> :open verify pin >>>")
-
-            ws.send(request_auth(generate_token(:authenticate)))
+            ws.send(request.authenticate(generate_token(:authenticate), 
+                                         ws_auth_user, ws_auth_pass))
           end
 
           ws.on :message do |event|
             debug("--- :message verify pin ---")
             response = parse_ws_response(event.data)
-            debug("Type: #{response.type}")
-            debug("Token: #{response.token}")
-            debug("Action: #{session[response.token]}")
-            debug("SessionId: #{session['id']}")
-            debug("JSON: #{response.json.inspect}")
+            debug2(response)
             unless response.success?
               @result['failure'] = response.json['failure']
               @result['result'] = 'failure'
@@ -65,7 +61,8 @@ module CardTerminals
 
             case session[response.token]
             when :authenticate
-              ws.send(request_get_property_pin_enabled(generate_token(:get_property)))
+              ws.send(request.get_property(generate_token(:get_property),
+                                           ["rmi_smcb_pinEnabled"]))
 
             when :get_property
               if response.rmi_smcb_pin_enabled
@@ -76,7 +73,7 @@ module CardTerminals
                   ws.close
                 end
                 debug("--- send subscription ---")
-                ws.send(request_subscription(generate_token(:subscribe), iccsn))
+                ws.send(request.subscribe_pin_verify(generate_token(:subscribe), iccsn))
               else
                 Turbo::StreamsChannel.broadcast_prepend_to(
                   'verify_pins',
@@ -107,7 +104,7 @@ module CardTerminals
                   message: "PIN-Anfrage vom Terminal erhalten, sende SMC-B PIN ..."
                 }
               )
-              ws.send(request_verify_pin(generate_token(:verify_pin), iccsn))
+              ws.send(request.verify_pin(generate_token(:verify_pin), iccsn))
 
             when :verify_pin
               # @timeout.cancel
@@ -141,10 +138,15 @@ module CardTerminals
       #
       # get_idle_message
       # 
-      # fetch idle message from card terminal
-      # and write result to @result['idle_message']
-      #
       def get_idle_message
+        ret = get_properties(["gui_idleMessage"])
+        if ret.success?
+          ret.value = ret.value["gui_idleMessage"]
+        end
+        ret
+      end
+
+      def get_properties(properties)
         EM.run {
           ws = Faye::WebSocket::Client.new(ws_url, [], {
                    ping: 15,
@@ -154,8 +156,8 @@ module CardTerminals
 
           ws.on :open do |event|
             debug(">>> :open get idle >>>")
-
-            ws.send(request_auth(generate_token(:authenticate)))
+            ws.send(request.authenticate(generate_token(:authenticate), 
+                                         ws_auth_user, ws_auth_pass))
             debug("--- starting timer ---")
             @timeout = EM::Timer.new(20) do
               debug("### TIMEOUT ###")
@@ -167,11 +169,7 @@ module CardTerminals
           ws.on :message do |event|
             debug("--- :message get idle ---")
             response = parse_ws_response(event.data)
-            debug("Type: #{response.type}")
-            debug("Token: #{response.token}")
-            debug("Action: #{session[response.token]}")
-            debug("SessionId: #{session['id']}")
-            debug("JSON: #{response.json.inspect}")
+            debug2(response)
             unless response.success?
               @result['failure'] = response.json['failure']
               @result['result'] = 'failure'
@@ -184,13 +182,14 @@ module CardTerminals
 
             case session[response.token]
             when :authenticate
-              ws.send(request_get_property_idle_message(generate_token(:get_property)))
+              ws.send(request.get_property(generate_token(:get_property),
+                                           properties))
 
             when :get_property
-              if response.gui_idle_message
+              if response.properties.any?
                 @timeout.cancel
-                debug("gui_idle_message: " + response.gui_idle_message.to_s)
-                @result['idle_message'] = response.gui_idle_message
+                debug("properties: " + response.properties.inspect)
+                @result['properties'] = response.properties
                 @result['result'] = 'success'
                 ws.close
               end
@@ -213,7 +212,7 @@ module CardTerminals
         }
         if @result['result'] == 'success'
           Result.new(success?: true, message: "Get idle message complete",
-                     value: @result['idle_message'] )
+                     value: @result['properties'] )
         else
           Result.new(success?: false, message: @result['failure'])
         end
@@ -222,12 +221,12 @@ module CardTerminals
       #
       # set_idle_message
       # 
-      # set idle message on card terminal
-      # and write result to @result['result']
-      # success means @result['result'] = 'success'
-      #
       def set_idle_message(idle_message)
         idle_message = clean_idle_message(idle_message)
+        set_properties({ "gui_idleMessage" => idle_message })
+      end
+
+      def set_properties(properties)
         EM.run {
           ws = Faye::WebSocket::Client.new(ws_url, [], {
                    ping: 15,
@@ -237,7 +236,8 @@ module CardTerminals
 
           ws.on :open do |event|
             debug(">>> :open set idle >>>")
-            ws.send(request_auth(generate_token(:authenticate)))
+            ws.send(request.authenticate(generate_token(:authenticate), 
+                                         ws_auth_user, ws_auth_pass))
             debug("--- starting timer ---")
             @timeout = EM::Timer.new(20) do
               debug("### TIMEOUT ###")
@@ -247,18 +247,14 @@ module CardTerminals
           end
 
           ws.on :message do |event|
-            debug("--- :message set idle ---")
+            debug("--- :message set properties ---")
             response = parse_ws_response(event.data)
-            debug("Type: #{response.type}")
-            debug("Token: #{response.token}")
-            debug("Action: #{session[response.token]}")
-            debug("SessionId: #{session['id']}")
-            debug("JSON: #{response.json.inspect}")
+            debug2(response)
             unless response.success?
               @result['failure'] = response.json['failure']
               @result['result'] = 'failure'
               debug("--- :message - closing on failure ---")
-              log_failure("Function: set_idle_message," +
+              log_failure("Function: set_properties," +
                           " Action: #{session[response.token]}," + 
                           " JSON: #{response.json.inspect}")
               ws.close
@@ -266,12 +262,12 @@ module CardTerminals
 
             case session[response.token]
             when :authenticate
-              ws.send(request_set_property_idle_message(generate_token(:set_property), idle_message))
+              ws.send(request.set_property(generate_token(:set_property), properties))
 
             when :set_property
               @timeout.cancel
               @result['result'] = (response.result.nil?) ? 'success' : 'failure'
-              debug("set gui_idle_message: " + @result['result'])
+              debug("set properties: " + @result['result'])
               ws.close
             end
           end
@@ -311,17 +307,14 @@ module CardTerminals
           ws.on :open do |event|
             debug(">>> :open get idle >>>")
 
-            ws.send(request_auth(generate_token(:authenticate)))
+            ws.send(request.authenticate(generate_token(:authenticate), 
+                                         ws_auth_user, ws_auth_pass))
           end
 
           ws.on :message do |event|
             debug("--- :message reboot ---")
             response = parse_ws_response(event.data)
-            debug("Type: #{response.type}")
-            debug("Token: #{response.token}")
-            debug("Action: #{session[response.token]}")
-            debug("SessionId: #{session['id']}")
-            debug("JSON: #{response.json.inspect}")
+            debug2(response)
             unless response.success?
               @result['failure'] = response.json['failure']
               @result['result'] = 'failure'
@@ -334,7 +327,7 @@ module CardTerminals
 
             case session[response.token]
             when :authenticate
-              ws.send(request_reboot(generate_token(:reboot)))
+              ws.send(request.reboot(generate_token(:reboot)))
 
             when :reboot
               debug("reboot done")
@@ -371,7 +364,11 @@ module CardTerminals
       end
 
     private
-      attr_reader :logger
+      attr_reader :logger, :request
+
+      def request
+        @request ||= Request.new(session)
+      end
 
       def generate_token(action)
         token = SecureRandom.uuid
@@ -403,127 +400,18 @@ module CardTerminals
         ENV['DEFAULT_SMCB_PIN']
       end
 
-      #
-      # Request/Response constructs
-      #
-
-      def request_auth(token)
-        {
-          "request" => {
-            "token": token,
-            "service": "Auth",
-            "method": {
-              "basicAuth": {
-                "user": ws_auth_user,
-                "credentials": ws_auth_pass
-              }
-            }
-          }
-        }.to_json
-      end
-
-      def request_get_property_pin_enabled(token)
-        {
-          "request" => {
-            "token": token,
-            "service": "Settings",
-            "method": {
-              "getProperties": {
-                "sessionId": session['id'],
-                "propertyIds": [
-                  "rmi_smcb_pinEnabled"
-                ]
-              }
-            }
-          }
-        }.to_json
-      end
-
-      def request_get_property_idle_message(token)
-        {
-          "request" => {
-            "token": token,
-            "service": "Settings",
-            "method": {
-              "getProperties": {
-                "sessionId": session['id'],
-                "propertyIds": [
-                  "gui_idleMessage"
-                ]
-              }
-            }
-          }
-        }.to_json
-      end
-
-      def request_set_property_idle_message(token, idle_message)
-        {
-          "request" => {
-            "token": token,
-            "service": "Settings",
-            "method": {
-              "setProperties": {
-                "sessionId": session['id'],
-                "properties": {
-                  "gui_idleMessage": "#{idle_message}"
-                }
-              }
-            }
-          }
-        }.to_json
-      end
-
-      def request_subscription(token, iccsn)
-        {
-          "subscription" => {
-            "token": token,
-            "service": "Smartcard",
-            "topic": {
-              "pinVerificationTopic": {
-                "sessionId": session['id'],
-                "iccsn": iccsn
-              }
-            }
-          }
-        }.to_json
-      end
-
-      def request_verify_pin(token, iccsn)
-        {
-          "request" => {
-            "token": token,
-            "service": "Smartcard",
-            "method": {
-              "verifyPin": {
-                "sessionId": session['id'],
-                "iccsn": iccsn,
-                "pinId": "SMCB-PIN",
-                "pin": smcb_pin
-              }
-            }
-          }
-        }.to_json
-      end
-
-      def request_reboot(token)
-        {
-          "request" => {
-            "token": token,
-            "service": "System",
-            "method": {
-              "reboot": {
-                "sessionId": session['id']
-              }
-            }
-          }
-        }.to_json
-      end
-
-
       def debug(message)
         logger.debug("CardTerminal(#{card_terminal.id})::RMI: #{message}")
       end
    
+      def debug2(response)
+        debug("Type: #{response.type}")
+        debug("Token: #{response.token}")
+        debug("Action: #{session[response.token]}")
+        debug("SessionId: #{session['id']}")
+        debug("JSON: #{response.json.inspect}")
+      end
+
       def log_failure(message)
         Rails.logger.warn("WARN:: CardTerminal(#{card_terminal.id})::RMI: #{message}")
       end
