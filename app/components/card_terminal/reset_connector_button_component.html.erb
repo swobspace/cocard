@@ -1,0 +1,12 @@
+<%= button_to("Reset", card_terminal,
+      method: 'patch',
+      class: 'btn btn-sm btn-warning ms-3',
+      title: t('card_terminals.reset_connector'),
+      form: {
+        data: {
+          "turbo-confirm": t('card_terminals.reset_connector') + '?'
+        }
+      },
+      params: {card_terminal: { connector_id: nil}}
+    )
+ %>
