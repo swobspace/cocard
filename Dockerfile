@@ -1,15 +1,12 @@
-# syntax = docker/dockerfile:1
+# Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
+ARG RUBY_VERSION=3.3
+FROM docker.io/library/ruby:$RUBY_VERSION-slim as base
 
 # Github Containers
 LABEL org.opencontainers.image.source=https://github.com/swobspace/cocard
 LABEL org.opencontainers.image.description="Cocard"
 LABEL org.opencontainers.image.licenses=MIT
 LABEL org.opencontainers.image.documentation="https://swobspace.github.io/cocard/cocard/index.html"
-
-
-# Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
-ARG RUBY_VERSION=3.3
-FROM docker.io/library/ruby:$RUBY_VERSION-slim as base
 
 # Rails app lives here
 WORKDIR /rails
