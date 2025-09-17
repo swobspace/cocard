@@ -148,18 +148,15 @@
 <div class="listingblock">
 <div class="title">Dockerfile</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-dockerfile hljs" data-lang="dockerfile"># syntax = docker/dockerfile:1
+<pre class="highlightjs highlight"><code class="language-dockerfile hljs" data-lang="dockerfile"># Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
+ARG RUBY_VERSION=3.3
+FROM docker.io/library/ruby:$RUBY_VERSION-slim as base
 
 # Github Containers
 LABEL org.opencontainers.image.source=https://github.com/swobspace/cocard
 LABEL org.opencontainers.image.description="Cocard"
 LABEL org.opencontainers.image.licenses=MIT
 LABEL org.opencontainers.image.documentation="https://swobspace.github.io/cocard/cocard/index.html"
-
-
-# Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
-ARG RUBY_VERSION=3.3
-FROM docker.io/library/ruby:$RUBY_VERSION-slim as base
 
 # Rails app lives here
 WORKDIR /rails
