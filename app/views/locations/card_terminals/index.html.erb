@@ -65,17 +65,15 @@
               <span style="visibility:hidden;"><%= card_terminal.condition %></span>
             </td>
             <td><%= card_terminal.condition_message %></td>
-            <td><%= link_to card_terminal.displayname, card_terminal_path(card_terminal),
-                            data: { "turbo-frame" => "_top" },
-                            class: 'primary-link'  %></td>
-            <td><%= link_to card_terminal.ct_id, card_terminal_path(card_terminal),
-                            data: { "turbo-frame" => "_top" },
-                            class: 'primary-link'  %></td>
-            <td><%= link_to(card_terminal.connector&.name,
-                            connector_path(card_terminal.connector),
-                            data: { "turbo-frame" => "_top" },
-                            class: 'primary-link'
-                           ) if card_terminal.connector %></td>
+            <td><%= render LinkToComponent.new(item: card_terminal,
+                                               label_method: :displayname)
+                 %></td>
+            <td><%= render LinkToComponent.new(item: card_terminal,
+                                               label_method: :ct_id)
+                 %></td>
+            <td><%= render LinkToComponent.new(item: card_terminal.connector,
+                                               label_method: :name)
+                 %></td>
             <td><%= card_terminal.name %></td>
             <td><%= card_terminal.mac %></td>
             <td><%= card_terminal.ip %></td>
