@@ -57,6 +57,8 @@ module CardTerminals
                               "%#{value}%")
         when :lid
           query = query.where("locations.lid ILIKE ?", "%#{value}%")
+        when :location_id
+          query = query.where(location_id: value.to_i)
         when :description
           query = query.with_description_containing(value)
         when :condition

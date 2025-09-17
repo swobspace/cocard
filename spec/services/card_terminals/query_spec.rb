@@ -267,6 +267,15 @@ module CardTerminals
       it_behaves_like "a card_terminal query"
     end
 
+    context "with :location_id" do
+      subject { Query.new(card_terminals, {location_id: ber.id}) }
+      before(:each) do
+        @matching = [ct1]
+        @nonmatching = [ct2, ct3]
+      end
+      it_behaves_like "a card_terminal query"
+    end
+
     context "with :tag" do
       subject { Query.new(card_terminals, {tag: 'my'}) }
       before(:each) do
