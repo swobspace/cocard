@@ -103,6 +103,10 @@ class CardTerminalsController < ApplicationController
         @card_terminal.update(idle_message: idle_message)
         @card_terminal.reload
       end
+
+      result.on_unsupported do
+        flash[:alert] = "Kartenterminal wird nicht unterstützt"
+      end
     end
 
     respond_to do |format|
