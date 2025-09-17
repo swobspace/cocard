@@ -146,6 +146,10 @@ module CardTerminals
         ret
       end
 
+      def get_info
+        get_properties(%w[rmi_smcb_pinEnabled rmi_pairingEHealthTerminal_enabled])
+      end
+
       def get_properties(properties)
         EM.run {
           ws = Faye::WebSocket::Client.new(ws_url, [], {
