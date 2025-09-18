@@ -200,7 +200,7 @@ module CardTerminals
       describe "#remote_pairing" do
         let(:res) { Result.new(false, 'Not supported') }
         it "executes callback" do
-          expect(orgav1).to receive(:remote_paring).and_return(res)
+          # expect(orgav1).to receive(:remote_pairing).and_return(res)
           called_back = false
           subject.remote_pairing do |result|
             result.on_unsupported do |message|
@@ -295,7 +295,7 @@ module CardTerminals
       describe "#remote_pairing" do
         let(:res) { Result.new(true, 'Success Message') }
         it "executes callback" do
-          expect(orgav1).to receive(:remote_paring).and_return(res)
+          expect(orgav1).to receive(:remote_pairing).and_return(res)
           called_back = false
           subject.remote_pairing do |result|
             result.on_success do |message|

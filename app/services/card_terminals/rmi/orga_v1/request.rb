@@ -91,6 +91,39 @@ module CardTerminals
         }.to_json
       end
 
+      def subscribe_pairing(token)
+        {
+          "subscription" => {
+            "token": token,
+            "service": "Dialog",
+            "topic": {
+              "dialogRequestTopic": {
+                "sessionId": session['id'],
+                "purposes": ["pairingEHealthTerminal"]
+              }
+            }
+          }
+        }.to_json
+      end
+
+      def do_pairing(token, dialog_id)
+        {
+          "request" => {
+            "token": token,
+            "service": "Dialog",
+            "method": {
+              "submit": {
+                "sessionId": session['id'],
+                "dialogSubmission": {
+                  "dialogId": dialog_id,
+                  "behaviour": "confirmed"
+                }
+              }
+            }
+          }
+        }.to_json
+      end
+
       def reboot(token)
         {
           "request" => {

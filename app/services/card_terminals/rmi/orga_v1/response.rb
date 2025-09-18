@@ -29,6 +29,14 @@ module CardTerminals
         end
       end
 
+      def dialog_id
+        if result.kind_of? String
+          nil
+        else
+          json.dig('notification', 'event', 'dialogPromptEvent', 'dialogId')
+        end
+      end
+
       def properties
         if result.kind_of? String
           nil
