@@ -75,7 +75,7 @@ module CardTerminals
                   ws.close
                 end
                 debug("--- send subscription ---")
-                ws.send(request.subscribe_pin_verify(generate_token(:subscribe), iccsn))
+                ws.send(request.subscribe_pin_verify(generate_token(:subscribe_pin), iccsn))
               else
                 Turbo::StreamsChannel.broadcast_prepend_to(
                   'verify_pins',
@@ -89,7 +89,7 @@ module CardTerminals
                 debug("rmi_smcb_pin_enabled: false")
               end
 
-            when :subscribe
+            when :subscribe_pin
               subscription_uuid = response.result
               debug("Subscription UUID: " + subscription_uuid.to_s)
               session[:subscription_uuid] = subscription_uuid
@@ -106,7 +106,7 @@ module CardTerminals
                   message: "PIN-Anfrage vom Terminal erhalten, sende SMC-B PIN ..."
                 }
               )
-              ws.send(request.verify_pin(generate_token(:verify_pin), iccsn))
+              ws.send(request.verify_pin(generate_token(:verify_pin), iccsn, smcb_pin))
 
             when :verify_pin
               # @timeout.cancel
@@ -414,7 +414,7 @@ module CardTerminals
                   ws.close
                 end
                 debug("--- send subscription ---")
-                ws.send(request.subscribe_pairing(generate_token(:subscribe)))
+                ws.send(request.subscribe_pairing(generate_token(:subscribe_pairing)))
               else
                 debug("rmi_pairingEHealthTerminal_enabled: false -> enabling")
                 ws.send(request.set_property(
@@ -430,9 +430,9 @@ module CardTerminals
                 debug("### TIMEOUT ###")
                 ws.close
               end
-              ws.send(request.subscribe_pairing(generate_token(:subscribe)))
+              ws.send(request.subscribe_pairing(generate_token(:subscribe_pairing)))
 
-            when :subscribe
+            when :subscribe_pairing
               subscription_uuid = response.result
               debug("Subscription UUID: " + subscription_uuid.to_s)
               session[:subscription_uuid] = subscription_uuid

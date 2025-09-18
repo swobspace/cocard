@@ -74,7 +74,7 @@ module CardTerminals
         }.to_json
       end
 
-      def verify_pin(token, iccsn)
+      def verify_pin(token, iccsn, smcb_pin)
         {
           "request" => {
             "token": token,
