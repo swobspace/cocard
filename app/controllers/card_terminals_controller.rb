@@ -120,6 +120,34 @@ class CardTerminalsController < ApplicationController
     end
   end
 
+  def remote_pairing
+    @card_terminal.rmi.remote_pairing do |result|
+      result.on_failure do |message|
+        errormsg = "Remote Pairing fehlgeschlagen"
+        Rails.logger.debug("DEBUG:: remote_pairing: #{errormsg}")
+        flash.now[:alert] = errormsg
+      end
+
+      result.on_success do |message|
+        flash[:success] = "Remote Pairing erfolgreich"
+      end
+
+      result.on_unsupported do
+        flash[:alert] = "Kartenterminal wird nicht unterstützt"
+      end
+    end
+
+    respond_to do |format|
+      format.turbo_stream {
+        render turbo_stream: [
+          turbo_stream.replace(@card_terminal, partial: "card_terminals/show",
+                                               locals: { card_terminal: @card_terminal }),
+          turbo_stream.update('flash',  partial: "shared/flash_alert")
+        ]
+      }
+    end
+  end
+
   def reboot
     @card_terminal.rmi.reboot do |result|
       result.on_success do |message|

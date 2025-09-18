@@ -69,6 +69,7 @@ Rails.application.routes.draw do
       get :edit_idle_message
       put :update_idle_message
       post :reboot
+      post :remote_pairing
     end
     resources :notes, module: :card_terminals
     resource :kt_proxy, module: :card_terminals

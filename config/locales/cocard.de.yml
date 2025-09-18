@@ -311,6 +311,8 @@ de:
       einige Zeit nicht verfügbar!
     check_connectivity: Verbindungstest
     reset_connector: Zuordnung zum Konnektor löschen
+    remote_pairing: Remote Pairing
+    do_remote_pairing: Remote Pairing durchführen
   cards:
     no_contexts_assigned: |
       ACHTUNG! Es ist noch kein Kontext zugeordnet!
