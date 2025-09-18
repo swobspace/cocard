@@ -55,18 +55,38 @@ module CardTerminals
       end
       it { expect(subject.supported?).to be_truthy }
 
-      describe "#verify_pin", :rmi => true do
-        it "verifies pin" do
-          result = subject.verify_pin(card.iccsn)
-          expect(result.success?).to be_truthy
-        end
-      end
-
-      describe "#get_idle_message", :rmi2 => true do
+      describe "#get_idle_message", :rmi => true do
         it "fetch idle message" do
           result = subject.get_idle_message
           expect(result.success?).to be_truthy
           expect(result.value).to eq('K03 0B692')
+        end
+      end
+
+      describe "#get_properties", :rmi => true do
+        it "returns properties" do
+          result = subject.get_properties(%w[rmi_sessionEnabled rmi_timeout])
+          expect(result.success?).to be_truthy
+          expect(result.value).to include("rmi_sessionEnabled" => true,
+                                                  "rmi_timeout" => 30)
+        end
+      end
+
+      describe "#get_info", :rmi => true do
+        it "returns info object" do
+          result = subject.get_info
+          expect(result.success?).to be_truthy
+          expect(result.value).to be_kind_of CardTerminals::RMI::OrgaV1::Info
+          expect(result.value.remote_pin_enabled).to be_truthy
+          expect(result.value.remote_pairing_enabled).to be_truthy
+        end
+      end
+
+
+      describe "#verify_pin", :rmi2 => true do
+        it "verifies pin" do
+          result = subject.verify_pin(card.iccsn)
+          expect(result.success?).to be_truthy
         end
       end
 

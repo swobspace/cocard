@@ -12,6 +12,7 @@ interface "CardTerminals::RMI" as rmi {
   +set_idle_message(message)
   +verify_pin(iccsn)
   +supported?()
+  +get_info()
 }
 
 class "CardTerminals::RMI::KoCoBox" as rmi_koco {
@@ -24,6 +25,7 @@ class "CardTerminals::RMI::KoCoBox" as rmi_koco {
   +verify_pin(iccsn)
   +remote_pairing()
   +supported?() -> true
+  +get_info()
 }
 
 class "CardTerminals::RMI::Null" as rmi_null {

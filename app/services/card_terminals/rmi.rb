@@ -41,6 +41,19 @@ module CardTerminals
       end
     end
 
+    def get_info
+      if supported? && available_actions.include?(:get_info)
+        result = rmi.get_info
+        if result.success?
+          yield Status.success(result.message, result.value)
+        else
+          yield Status.failure(result.message)
+        end
+      else
+        yield Status.unsupported
+      end
+    end
+
     def get_idle_message
       if supported? && available_actions.include?(:get_idle_message)
         result = rmi.get_idle_message

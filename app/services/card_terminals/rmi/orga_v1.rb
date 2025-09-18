@@ -8,9 +8,11 @@ module CardTerminals
 
       def available_actions
         if firmware_version == '3.9.0'
-          %i( verify_pin get_idle_message set_idle_message reboot )
+          %i[ verify_pin get_idle_message set_idle_message get_info 
+              get_properties set_properties reboot ]
         elsif firmware_version >= '3.9.1'
-          %i( verify_pin get_idle_message set_idle_message reboot remote_pairing )
+          %i[ verify_pin get_idle_message set_idle_message get_info
+              get_properties set_properties reboot remote_pairing ]
         else
           []
         end
@@ -147,7 +149,11 @@ module CardTerminals
       end
 
       def get_info
-        get_properties(%w[rmi_smcb_pinEnabled rmi_pairingEHealthTerminal_enabled])
+        ret = get_properties(%w[rmi_smcb_pinEnabled rmi_pairingEHealthTerminal_enabled])
+        if ret.success?
+          ret.value = Info.new(ret.value)
+        end
+        ret
       end
 
       def get_properties(properties)
@@ -159,7 +165,7 @@ module CardTerminals
                )
 
           ws.on :open do |event|
-            debug(">>> :open get idle >>>")
+            debug(">>> :open get properties >>>")
             ws.send(request.authenticate(generate_token(:authenticate), 
                                          ws_auth_user, ws_auth_pass))
             debug("--- starting timer ---")
@@ -171,14 +177,14 @@ module CardTerminals
           end
 
           ws.on :message do |event|
-            debug("--- :message get idle ---")
+            debug("--- :message get properties ---")
             response = parse_ws_response(event.data)
             debug2(response)
             unless response.success?
               @result['failure'] = response.json['failure']
               @result['result'] = 'failure'
               debug("--- :message - closing on failure ---")
-              log_failure("Function: get_idle_message," +
+              log_failure("Function: get_properties," +
                           " Action: #{session[response.token]}," + 
                           " JSON: #{response.json.inspect}")
               ws.close
@@ -215,7 +221,7 @@ module CardTerminals
           end
         }
         if @result['result'] == 'success'
-          Result.new(success?: true, message: "Get idle message complete",
+          Result.new(success?: true, message: "Get properties complete",
                      value: @result['properties'] )
         else
           Result.new(success?: false, message: @result['failure'])
@@ -239,7 +245,7 @@ module CardTerminals
                )
 
           ws.on :open do |event|
-            debug(">>> :open set idle >>>")
+            debug(">>> :open set properties >>>")
             ws.send(request.authenticate(generate_token(:authenticate), 
                                          ws_auth_user, ws_auth_pass))
             debug("--- starting timer ---")
@@ -291,7 +297,7 @@ module CardTerminals
           end
         }
         if @result['result'] == 'success'
-          return Result.new(success?: true, message: "Set idle message complete")
+          return Result.new(success?: true, message: "Set properties complete")
         else
           return Result.new(success?: false, message: @result['failure'])
         end
@@ -309,7 +315,7 @@ module CardTerminals
                )
 
           ws.on :open do |event|
-            debug(">>> :open get idle >>>")
+            debug(">>> :open reboot >>>")
 
             ws.send(request.authenticate(generate_token(:authenticate), 
                                          ws_auth_user, ws_auth_pass))

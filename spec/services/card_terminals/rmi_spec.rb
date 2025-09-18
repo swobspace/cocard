@@ -63,7 +63,7 @@ module CardTerminals
       it { expect(subject.supported?).to be_falsey }
       it { expect(subject.rmi_port).to eq(443) }
 
-      [:reboot, :get_idle_message, :remote_pairing].each do |action|
+      [:reboot, :get_info, :get_idle_message, :remote_pairing].each do |action|
         describe "##{action}" do
           let(:res) { Result.new(false, 'Failure Message') }
           it "executes callback" do
@@ -98,7 +98,8 @@ module CardTerminals
         instance_double(CardTerminals::RMI::OrgaV1, 
           supported?: true, 
           rmi_port: 443,
-          available_actions: [:reboot, :get_idle_message, :set_idle_message, :verify_pin]
+          available_actions: [:reboot, :get_info, :get_idle_message, 
+                              :set_idle_message, :verify_pin]
         )
       end
       before(:each) do
@@ -121,6 +122,30 @@ module CardTerminals
             end
           end
           expect(called_back).to be_truthy
+        end
+      end
+
+      describe "#get_info" do
+        let(:info) do
+          CardTerminals::RMI::OrgaV1::Info.new({
+            "rmi_smcb_pinEnabled" => true,
+            "rmi_pairingEHealthTerminal_enabled" => true
+          })
+        end
+        let(:res) { Result.new(true, 'Success Message', info) }
+        it "executes callback" do
+          expect(orgav1).to receive(:get_idle_message).and_return(res)
+          called_back = false
+          properties = nil
+          subject.get_idle_message do |result|
+            result.on_success do |message, value|
+              called_back = true
+              properties = value
+            end
+          end
+          expect(called_back).to be_truthy
+          expect(properties.remote_pin_enabled).to be_truthy
+          expect(properties.remote_pairing_enabled).to be_truthy
         end
       end
 
