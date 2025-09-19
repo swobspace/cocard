@@ -6,6 +6,7 @@
 * [experimental] Unterstützung für KT-Proxys (RISE TI-Gateway) 
 * Refactoring der RMI-Schnittstellen für Kartenterminals und Konnektoren
 * Kartenterminals: Reboot für Orga 6141 wieder hergestellt.
+* Kartenterminals: Remote Pairing für Orga 6141 ab Version 3.9.1
 
 == 0.8.5 - 2025-08-31
 

@@ -256,7 +256,89 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Die Kopfzeile enthält neben dem Namen den Gesamtstatus des Kartenterminals und weitere Aktionsbuttons.</p>
+<p>Die Kopfzeile enthält neben dem Namen den Gesamtstatus des Kartenterminals eine Aktionsschaltfläche.</p>
+</div>
+<div class="sect2">
+<h3 id="_aktionsschaltfläche_action_buttons"><a class="anchor" href="#_aktionsschaltfläche_action_buttons"></a>Aktionsschaltfläche (action buttons)</h3>
+<div class="paragraph">
+<p>Die angezeigten Button in der Aktionschaltfläche sind abhängig von Berechtigungen des Benutzers und vom Zustand des Kartenterminals.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/ct/card-terminal-action-buttons.png" alt="card terminal action buttons">
+</div>
+<div class="title">Abbildung 1. Aktionsschaltfläche - Buttons variieren je nach Zustand des Terminals</div>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Button</th>
+<th class="tableblock halign-left valign-top">Beschreibung</th>
+<th class="tableblock halign-left valign-top">Sichtbarkeit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="../_images/common/reboot-button.png" alt="reboot button">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reboot des Kartenterminals</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wenn ein Reboot für das Terminal unterstützt wird.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="../_images/common/remote-pairing-button.png" alt="remote pairing button">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Startet den Remote-Pairing-Vorgang. Anschließend muss der Pairing-Vorgang manuell am Konnektor gestartet werden.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wenn das Remote-Pairing vom Terminal unterstützt wird und das Terminal nicht mit einem Konnektor verbunden ist (Status&#8594;online == false)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="../_images/common/connection-test-button.png" alt="connection test button">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Verbindungstest: prüft Erreichbarkeit per Ping und die TCP-Ports für HTTPS, LDAP und SOAP.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="../_images/common/ack-button.png" alt="ack button">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Acknowledge-Button</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wenn ein Fehlerzustand vorliegt (WARNING, CRITICAL, UNKNOWN)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="../_images/common/edit-button.png" alt="edit button">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bearbeiten des Kartenterminals</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="../_images/common/delete.png" alt="delete">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Löschen des Kartenterminals</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect2">
 <h3 id="_allgemeine_information"><a class="anchor" href="#_allgemeine_information"></a>Allgemeine Information</h3>
@@ -392,7 +474,7 @@
 <div class="content">
 <img src="../_images/ct/ct-show-ip-missmatch.png" alt="ct show ip missmatch">
 </div>
-<div class="title">Abbildung 1. Kartenterminal mit IP Mismatch</div>
+<div class="title">Abbildung 2. Kartenterminal mit IP Mismatch</div>
 </div>
 <div class="paragraph">
 <p>Ein IP-Mismatch wird auch im Dashboard angezeigt:</p>
@@ -401,7 +483,7 @@
 <div class="content">
 <img src="../_images/dashboard/dashboard-ct-ip-missmatch.png" alt="dashboard ct ip missmatch">
 </div>
-<div class="title">Abbildung 2. Anzeige eines Kartenterminals mit IP-Mismatch im Dashboard</div>
+<div class="title">Abbildung 3. Anzeige eines Kartenterminals mit IP-Mismatch im Dashboard</div>
 </div>
 </div>
 </div>
@@ -427,7 +509,7 @@ Derzeit wird nur das nur ORGA 6141 online mit Firmware Version &gt;= 3.9.0 unter
 <div class="content">
 <img src="../_images/ct/card-terminal-show-idle-message.png" alt="card terminal show idle message">
 </div>
-<div class="title">Abbildung 3. Anzeige des Ruhebildschirms, sofern unterstützt</div>
+<div class="title">Abbildung 4. Anzeige des Ruhebildschirms, sofern unterstützt</div>
 </div>
 <div class="admonitionblock note">
 <table>

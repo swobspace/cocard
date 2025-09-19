@@ -1,6 +1,6 @@
 = Kartenterminal
 :author: Wolfgang Barth
-:revdate: 2025-03-08
+:revdate: 2025-09-19
 :imagesdir: ../../images
 :experimental: true
 
@@ -10,7 +10,45 @@ Die Anzeige eines Kartenterminals besteht aus 4 Bereichen: die allgemeine Inform
 
 image::ct/ct-show.png[]
 
-Die Kopfzeile enthält neben dem Namen den Gesamtstatus des Kartenterminals und weitere Aktionsbuttons.
+Die Kopfzeile enthält neben dem Namen den Gesamtstatus des Kartenterminals eine Aktionsschaltfläche.
+
+=== Aktionsschaltfläche (action buttons)
+
+Die angezeigten Button in der Aktionschaltfläche sind abhängig von Berechtigungen des Benutzers und vom Zustand des Kartenterminals.
+
+.Aktionsschaltfläche - Buttons variieren je nach Zustand des Terminals
+image::ct/card-terminal-action-buttons.png[]
+
+[%autowidth,cols="a,,"]
+|===
+|Button | Beschreibung | Sichtbarkeit
+
+|image::common/reboot-button.png[]
+|Reboot des Kartenterminals
+|Wenn ein Reboot für das Terminal unterstützt wird.
+
+|image::common/remote-pairing-button.png[]
+|Startet den Remote-Pairing-Vorgang. Anschließend muss der Pairing-Vorgang manuell am Konnektor gestartet werden.
+|Wenn das Remote-Pairing vom Terminal unterstützt wird und das Terminal nicht mit einem Konnektor verbunden ist (Status->online == false)
+
+|image::common/connection-test-button.png[]
+|Verbindungstest: prüft Erreichbarkeit per Ping und die TCP-Ports für HTTPS, LDAP und SOAP.
+|
+
+|image::common/ack-button.png[]
+|Acknowledge-Button
+|Wenn ein Fehlerzustand vorliegt (WARNING, CRITICAL, UNKNOWN)
+
+|image::common/edit-button.png[]
+|Bearbeiten des Kartenterminals
+|
+
+|image::common/delete.png[]
+|Löschen des Kartenterminals
+|
+
+|===
+
 
 === Allgemeine Information
 
