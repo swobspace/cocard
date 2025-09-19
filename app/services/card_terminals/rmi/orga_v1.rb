@@ -72,6 +72,8 @@ module CardTerminals
                 debug("--- starting timer ---")
                 @timeout = EM::Timer.new(60) do
                   debug("### TIMEOUT ###")
+                  @result['result'] = 'failure'
+                  @result['failure'] = '### TIMEOUT ###'
                   ws.close
                 end
                 debug("--- send subscription ---")
@@ -172,7 +174,8 @@ module CardTerminals
             @timeout = EM::Timer.new(20) do
               debug("### TIMEOUT ###")
               ws.close
-              @result['result'] == timeout
+              @result['result'] = 'failure'
+              @result['failure'] = '### TIMEOUT ###'
             end
           end
 
@@ -251,7 +254,8 @@ module CardTerminals
             debug("--- starting timer ---")
             @timeout = EM::Timer.new(20) do
               debug("### TIMEOUT ###")
-              @result['result'] == timeout
+              @result['result'] = 'failure'
+              @result['failure'] = '### TIMEOUT ###'
               ws.close
             end
           end
@@ -412,6 +416,7 @@ module CardTerminals
                 @timeout = EM::Timer.new(60) do
                   debug("### TIMEOUT ###")
                   @result['result'] = 'failure'
+                  @result['failure'] = '### TIMEOUT ###'
                   ws.close
                 end
                 debug("--- send subscription ---")
@@ -430,6 +435,7 @@ module CardTerminals
               @timeout = EM::Timer.new(60) do
                 debug("### TIMEOUT ###")
                 @result['result'] = 'failure'
+                @result['failure'] = '### TIMEOUT ###'
                 ws.close
               end
               ws.send(request.subscribe_pairing(generate_token(:subscribe_pairing)))

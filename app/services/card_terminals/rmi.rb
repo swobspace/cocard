@@ -32,9 +32,9 @@ module CardTerminals
       if supported? && available_actions.include?(:reboot)
         result = rmi.reboot
         if result.success?
-          yield Status.success(result.message)
+          yield Status.success(result.message.to_s)
         else
-          yield Status.failure(result.message)
+          yield Status.failure(result.message.to_s)
         end
       else
         yield Status.unsupported
@@ -45,9 +45,9 @@ module CardTerminals
       if supported? && available_actions.include?(:get_info)
         result = rmi.get_info
         if result.success?
-          yield Status.success(result.message, result.value)
+          yield Status.success(result.message.to_s, result.value)
         else
-          yield Status.failure(result.message)
+          yield Status.failure(result.message.to_s)
         end
       else
         yield Status.unsupported
@@ -58,9 +58,9 @@ module CardTerminals
       if supported? && available_actions.include?(:get_idle_message)
         result = rmi.get_idle_message
         if result.success?
-          yield Status.success(result.message, result.value)
+          yield Status.success(result.message.to_s, result.value)
         else
-          yield Status.failure(result.message)
+          yield Status.failure(result.message.to_s)
         end
       else
         yield Status.unsupported
@@ -71,9 +71,9 @@ module CardTerminals
       if supported? && available_actions.include?(:set_idle_message)
         result = rmi.set_idle_message(message)
         if result.success?
-          yield Status.success(result.message)
+          yield Status.success(result.message.to_s)
         else
-          yield Status.failure(result.message)
+          yield Status.failure(result.message.to_s)
         end
       else
         yield Status.unsupported
@@ -84,9 +84,9 @@ module CardTerminals
       if supported? && available_actions.include?(:verify_pin)
         result = rmi.verify_pin(iccsn)
         if result.success?
-          yield Status.success(result.message)
+          yield Status.success(result.message.to_s)
         else
-          yield Status.failure(result.message)
+          yield Status.failure(result.message.to_s)
         end
       else
         yield Status.unsupported
@@ -97,9 +97,9 @@ module CardTerminals
       if supported? && available_actions.include?(:remote_pairing)
         result = rmi.remote_pairing
         if result.success?
-          yield Status.success(result.message)
+          yield Status.success(result.message.to_s)
         else
-          yield Status.failure(result.message)
+          yield Status.failure(result.message.to_s)
         end
       else
         yield Status.unsupported

@@ -123,7 +123,7 @@ class CardTerminalsController < ApplicationController
   def remote_pairing
     @card_terminal.rmi.remote_pairing do |result|
       result.on_failure do |message|
-        errormsg = "Remote Pairing fehlgeschlagen"
+        errormsg = "Remote Pairing fehlgeschlagen - " + message
         Rails.logger.debug("DEBUG:: remote_pairing: #{errormsg}")
         flash.now[:alert] = errormsg
       end
