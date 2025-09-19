@@ -1,5 +1,6 @@
 class Connectors::ConnectivityCheckJob < ApplicationJob
   queue_as :default
+  LDAPS_PORT = 636
 
   #
   # Check Connector connectivity and broadcast a toast if problem found
@@ -33,6 +34,15 @@ class Connectors::ConnectivityCheckJob < ApplicationJob
       toaster(connector, :info, text)
     else
       text = "Port #{connector.soap_port} für SOAP nicht erreichbar, bitte TLS-Einstellungen und Konnektor prüfen!"
+      toaster(connector, :warning, text)
+    end
+
+    # LDAP SSL
+    if connector.tcp_port_open?(LDAPS_PORT)
+      text = "LDAP-Port #{LDAPS_PORT} ok"
+      toaster(connector, :info, text)
+    else
+      text = "Port #{LDAPS_PORT} für LDAP nicht erreichbar!"
       toaster(connector, :warning, text)
     end
   end
