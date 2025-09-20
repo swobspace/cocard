@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe "Reports", type: :request do
+  before(:each) do
+    login_admin
+  end
+
   describe "GET /duplicate_terminal_ips" do
     it "returns http success" do
       get "/reports/duplicate_terminal_ips"
