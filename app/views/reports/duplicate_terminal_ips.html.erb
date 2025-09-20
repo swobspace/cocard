@@ -1,0 +1,14 @@
+<h1>Kartenterminals mit doppelter IP</h1>
+
+<% @duplicate_ips.each do |dup| %>
+  <div class="row py-2">
+    <div class="col-lg-2 d-flex align-items-center text-center">
+      <p class="fw-bold flex-fill"><%= dup %></p>
+    </div>
+    <div class="col-lg-10 list-group">
+      <% CardTerminal.where(ip: dup).each do |ct| %>
+        <%= render ct %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

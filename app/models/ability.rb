@@ -22,6 +22,7 @@ class Ability
     # user has at least one role, perhaps more
     elsif @user.authorities.present?
       can [:read, :navigate], :all
+      can :manage, Report
       can :create, Note
       cannot [:read, :navigate], ClientCertificate
 

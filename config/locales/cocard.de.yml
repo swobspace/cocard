@@ -313,6 +313,7 @@ de:
     reset_connector: Zuordnung zum Konnektor löschen
     remote_pairing: Remote Pairing
     do_remote_pairing: Remote Pairing durchführen
+    duplicate_ips: Doppelte IPs
   cards:
     no_contexts_assigned: |
       ACHTUNG! Es ist noch kein Kontext zugeordnet!

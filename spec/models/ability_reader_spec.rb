@@ -24,6 +24,8 @@ RSpec.shared_examples "a Reader" do
   it { is_expected.not_to be_able_to(:verify_pin, Card.new) }
   it { is_expected.not_to be_able_to(:get_certificate, Card.new) }
   it { is_expected.not_to be_able_to(:get_card, Card.new) }
+
+  it { is_expected.to be_able_to(:duplicate_terminal_ips, Report) }
 end
 
 RSpec.describe "User", :type => :model do
