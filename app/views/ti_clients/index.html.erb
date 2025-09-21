@@ -37,7 +37,10 @@
                                 ti_client,
                                 class: 'primary-link'
                      %></td>
-                <td><%= ti_client.url %></td>
+                <td><%= link_to(ti_client.url,
+                                ti_client.url,
+                                class: 'primary-link') if ti_client.url.present?
+                     %></td>
                 <td class="text-nowrap">
             <%= show_link ti_client %>
             <%= edit_link ti_client %>

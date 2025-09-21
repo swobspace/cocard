@@ -5,7 +5,7 @@
     <div class="d-flex w-100 justify-content-between">
       <div>
         <span class="subtitle">
-          <%= t('activerecord.models.ti_client') %>: 
+          <%= t('activerecord.models.ti_client') %>:
           #<%= @ti_client.id %>
         </span>
         <h4 class="title"><%= @ti_client %></h4>
@@ -19,7 +19,7 @@
 
   <div class="card-body">
     <table class="table table-sm table-borderless">
-    
+
       <tr>
         <th class="w-10 pe-3"><%= t('attributes.connector')%>:</th>
         <td><%= link_to @ti_client.connector,
@@ -37,8 +37,8 @@
 
       <tr>
         <th class="w-10 pe-3"><%= t('attributes.url')%>:</th>
-        <td><%= link_to @ti_client.url, @ti_client.url, 
-                        class: 'primary-link', target: :_blank 
+        <td><%= link_to(@ti_client.url, @ti_client.url,
+                        class: 'primary-link', target: :_blank) if @ti_client.url.present?
              %></td>
 
       </tr>
