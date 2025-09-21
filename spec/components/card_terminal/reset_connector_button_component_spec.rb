@@ -24,6 +24,7 @@ RSpec.describe CardTerminal::ResetConnectorButtonComponent, type: :component do
     describe "#condition == OK" do
       it "does not show reset button"  do
         expect(ct).to receive(:condition).and_return(Cocard::States::OK)
+        expect(ct).to receive(:last_check).at_least(:once).and_return(Time.current)
         render_inline(described_class.new(card_terminal: ct))
         expect(page).not_to have_css('button[class="btn btn-sm btn-warning ms-3"]', text: 'Reset')
       end

@@ -7,7 +7,9 @@ class CardTerminal::ResetConnectorButtonComponent < ViewComponent::Base
   end
 
   def render?
-    connector.present? && card_terminal.condition != Cocard::States::OK
+    connector.present? && ( card_terminal.condition != Cocard::States::OK ||
+                            card_terminal.last_check.nil? ||
+                            card_terminal.last_check < 14.days.before(Date.current) )
   end
 
 private
