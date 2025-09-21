@@ -77,6 +77,12 @@ module CardTerminals
           result = subject.get_info
           expect(result.success?).to be_truthy
           expect(result.value).to be_kind_of CardTerminals::RMI::OrgaV1::Info
+          expect(result.value.terminalname).to eq("ORGA6100-0241000000B692")
+          expect(result.value.dhcp_enabled).to be_truthy
+          expect(result.value.macaddr).to eq("000DF80C8652")
+          expect(result.value.current_ip).to eq("10.200.149.235")
+          expect(result.value.static_ip).to eq("192.168.1.1")
+          expect(result.value.dhcp_ip).to eq("10.200.149.235")
           expect(result.value.remote_pin_enabled).to be_truthy
           expect(result.value.remote_pairing_enabled).to be_truthy
         end

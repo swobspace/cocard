@@ -151,7 +151,16 @@ module CardTerminals
       end
 
       def get_info
-        ret = get_properties(%w[rmi_smcb_pinEnabled rmi_pairingEHealthTerminal_enabled])
+        ret = get_properties(%w[
+                net_lan_macAddr
+                sys_terminalName
+                net_lan_dhcpEnabled
+                net_lan_ipAddr
+                net_lan_ipAddrStatic
+                net_lan_ipAddrDhcp
+                rmi_smcb_pinEnabled 
+                rmi_pairingEHealthTerminal_enabled
+              ])
         if ret.success?
           ret.value = Info.new(ret.value)
         end
