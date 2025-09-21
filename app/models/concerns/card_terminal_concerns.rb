@@ -125,4 +125,10 @@ module CardTerminalConcerns
     return false unless connector.present?
     connector.use_ticlient?
   end
+
+  def admin_url
+    return nil if ip.nil?
+    return nil if ip.to_s == '0.0.0.0'
+    "https://#{ip}"
+  end
 end
