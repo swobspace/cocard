@@ -17,6 +17,17 @@ module CardTerminalConcerns
     scope :with_description_containing, ->(query) { joins(:rich_text_description).merge(ActionText::RichText.where <<~SQL, "%" + query + "%") }
     body ILIKE ?
    SQL
+
+    def self.remove_for_duplicate_ips(card_terminal)
+      return if card_terminal.ip.nil?
+      return if card_terminal.ip.to_s == '0.0.0.0'
+      if card_terminal.ip == card_terminal.current_ip
+        CardTerminal.where(ip: card_terminal.ip).each do |ct|
+          next if ct.id == card_terminal.id
+          ct.update(ip: nil, current_ip: nil) 
+        end
+      end
+    end
   end
 
   def update_location_by_ip

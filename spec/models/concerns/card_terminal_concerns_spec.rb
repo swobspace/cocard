@@ -8,6 +8,7 @@ RSpec.describe CardTerminalConcerns, type: :model do
     FactoryBot.create(:card_terminal,
       mac: '000DF808F6AD',
       ip: '127.51.100.17',
+      current_ip: '127.51.100.17',
       ct_id: "CT_ID_4711",
       displayname: 'CARDTERMINAL 14',
       name: "Product 1704",
@@ -277,5 +278,24 @@ RSpec.describe CardTerminalConcerns, type: :model do
         end
       end
     end
+  end
+
+  describe "#remove_duplicate_ips" do
+    let!(:ct2) do
+      FactoryBot.create(:card_terminal, :with_mac, 
+        ip: '127.51.100.17',
+        #current_ip: '127.51.100.17'
+        current_ip: '0.0.0.0'
+      )
+    end
+
+    it "delete ip from other terminal" do
+      CardTerminal.remove_for_duplicate_ips(ct)
+      ct.reload
+      ct2.reload
+      expect(ct.ip.to_s).to eq("127.51.100.17")
+      expect(ct2.ip).to be_nil
+    end
+
   end
 end
