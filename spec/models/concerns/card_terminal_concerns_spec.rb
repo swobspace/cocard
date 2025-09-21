@@ -290,12 +290,23 @@ RSpec.describe CardTerminalConcerns, type: :model do
     end
 
     it "delete ip from other terminal" do
-      CardTerminal.remove_for_duplicate_ips(ct)
+      expect(ct).to receive(:condition).and_return(Cocard::States::OK)
+      CardTerminal.remove_duplicate_ips(ct)
       ct.reload
       ct2.reload
       expect(ct.ip.to_s).to eq("127.51.100.17")
       expect(ct2.ip).to be_nil
     end
+
+    it "does delete ip from other terminal" do
+      expect(ct).to receive(:condition).and_return(Cocard::States::UNKNOWN)
+      CardTerminal.remove_duplicate_ips(ct)
+      ct.reload
+      ct2.reload
+      expect(ct.ip.to_s).to eq("127.51.100.17")
+      expect(ct2.ip.to_s).to eq("127.51.100.17")
+    end
+
 
   end
 end

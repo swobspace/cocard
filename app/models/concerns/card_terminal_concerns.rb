@@ -18,9 +18,10 @@ module CardTerminalConcerns
     body ILIKE ?
    SQL
 
-    def self.remove_for_duplicate_ips(card_terminal)
+    def self.remove_duplicate_ips(card_terminal)
       return if card_terminal.ip.nil?
       return if card_terminal.ip.to_s == '0.0.0.0'
+      return if card_terminal.condition != Cocard::States::OK
       if card_terminal.ip == card_terminal.current_ip
         CardTerminal.where(ip: card_terminal.ip).each do |ct|
           next if ct.id == card_terminal.id
