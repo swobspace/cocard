@@ -2,20 +2,29 @@
   <div>
     <div class="d-flex justify-content-between">
       <span class="subtitle">
+        <%= card_terminal.location&.lid %> - 
         <%= t('activerecord.models.card_terminal') %>:
         #<%= card_terminal.id %>
       </span>
-      <div class="bg-warning-subtle"><%= render CardTerminal::NoProductInfoComponent.new(card_terminal: card_terminal) %></div>
+      <div class="bg-warning-subtle">
+        <%=render CardTerminal::NoProductInfoComponent.new(card_terminal: card_terminal)%>
       </div>
     </div>
     <div  class="row">
-    <div class="col-5"><%= card_terminal.displayname %></div>
-    <div class="col-2"><%= card_terminal.mac %></div>
-    <div class="col-2"><%= card_terminal.ip %></div>
-    <div class="col-2"><%= card_terminal.condition_message %></div>
-    <div class="col-1"><%= card_terminal.location&.lid %></div>
-  </div>
-  <div>
-    <%= render TagListComponent.new(item: card_terminal) %>
+      <div class="col-5"><%= card_terminal.displayname %></div>
+      <div class="col-2"><%= card_terminal.mac %></div>
+      <div class="col-2"><%= card_terminal.ip %></div>
+      <div class="col-1">
+        <%# card_terminal.condition_message %>
+        <%= render ConditionIconComponent.new(item: card_terminal, small: true) %>
+      </div>
+      <div class="col-2">
+        <%= t('attributes.last_ok') %>:
+        <%= render IsCurrentComponent.new(item: card_terminal, attr: :last_ok) %>
+      </div>
+    </div>
+    <div>
+      <%= render TagListComponent.new(item: card_terminal) %>
+    </div>
   </div>
 <% end %>
