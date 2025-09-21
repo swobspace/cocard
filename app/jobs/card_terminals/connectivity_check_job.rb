@@ -23,12 +23,44 @@ class CardTerminals::ConnectivityCheckJob < ApplicationJob
 
     # rmi port
     if card_terminal.supports_rmi?
+      # check rmi port
       if card_terminal.tcp_port_open?(card_terminal.rmi_port)
         text = "RMI-Port #{card_terminal.rmi_port} OK"
         toaster(card_terminal, :info, text)
       else
         text = "RMI-Port #{card_terminal.rmi_port} nicht erreichbar, kein Remote Management des Terminals möglich"
         toaster(card_terminal, :alert, text)
+      end
+
+      # get_info
+      card_terminal.rmi.get_info do |result|
+        result.on_success do |message, info|
+          if info.terminalname != card_terminal.name
+            text = "ACHTUNG: abweichender Terminalname: #{info.terminalname}"
+            toaster(card_terminal, :alert, text)
+          else
+            text = "Terminalname: #{info.terminalname}"
+            toaster(card_terminal, :info, text)
+          end
+
+          toaster(card_terminal, :info, "DHCP enabled: #{info.dhcp_enabled}")
+
+          if info.macaddr != card_terminal.mac
+            text = "ACHTUNG: abweichende MAC-Adresse zu Cocard: #{info.macaddr}"
+            toaster(card_terminal, :alert, text)
+          else
+            text = "MAC: #{info.macaddr}"
+            toaster(card_terminal, :info, text)
+          end
+        end
+        result.on_failure do |message|
+          text = "RMI-Abfrage fehlgeschlagen: #{message}"
+          toaster(card_terminal, :alert, text)
+        end
+        result.on_unsupported do 
+          text = "Kartenterminal unterstützt kein RMI"
+          toaster(card_terminal, :warning, text)
+        end
       end
     else
       text = "Kartenterminal unterstützt kein RMI"
