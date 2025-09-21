@@ -43,8 +43,6 @@ class CardTerminals::ConnectivityCheckJob < ApplicationJob
             toaster(card_terminal, :info, text)
           end
 
-          toaster(card_terminal, :info, "DHCP enabled: #{info.dhcp_enabled}")
-
           if info.macaddr != card_terminal.mac
             text = "ACHTUNG: abweichende MAC-Adresse zu Cocard: #{info.macaddr}"
             toaster(card_terminal, :alert, text)
@@ -52,6 +50,8 @@ class CardTerminals::ConnectivityCheckJob < ApplicationJob
             text = "MAC: #{info.macaddr}"
             toaster(card_terminal, :info, text)
           end
+
+          toaster(card_terminal, :info, "DHCP enabled: #{info.dhcp_enabled}")
         end
         result.on_failure do |message|
           text = "RMI-Abfrage fehlgeschlagen: #{message}"
