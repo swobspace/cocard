@@ -52,9 +52,8 @@ module CardTerminals
       def check_job_requirements(card_terminal)
         if !card_terminal.supports_rmi?
           false
-        elsif card_terminal.condition != Cocard::States::OK
-          Rails.logger.warn(prefix + "CardTerminal condition must be OK, skipping" +
-                            rmi.messages.join(', '))
+        elsif !card_terminal.rmi.available_actions.include?(:get_idle_message)
+          Rails.logger.warn(prefix + "action not supported")
           false
         else
           true
