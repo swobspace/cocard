@@ -412,11 +412,16 @@ RSpec.describe CardTerminal, type: :model do
   end
 
   describe "removing connector" do
+    before(:each) do 
+      ct.update(connected: true)
+      ct.reload
+    end
     it "resets ct_id and current_ip" do
       ct.update(connector_id: nil)
       ct.reload
       expect(ct.ct_id).to be_blank
       expect(ct.current_ip).to be_nil
+      expect(ct.connected).to be_falsey
     end
   end
 end

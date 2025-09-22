@@ -134,6 +134,7 @@ class CardTerminal < ApplicationRecord
     if connector_id.nil?
       self[:ct_id] = nil
       self[:current_ip] = nil
+      self[:connected] = false
     end
   end
 
