@@ -14,6 +14,9 @@ RSpec.shared_examples "a ConnectorManager" do
   it { is_expected.to be_able_to(:create, Connector.new) }
   it { is_expected.to be_able_to(:update, Connector.new) }
   it { is_expected.to be_able_to(:destroy, Connector.new) }
+  it { is_expected.to be_able_to(:reboot, Connector.new) }
+  it { is_expected.to be_able_to(:reboot, CardTerminal.new) }
+  it { is_expected.to be_able_to(:remote_pairing, CardTerminal.new) }
 
   [ CardTerminal, Card, Network, Location, OperationalState,
     Log, Workplace, Context, ClientCertificate,
