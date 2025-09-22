@@ -19,7 +19,7 @@ class Connectors::RebootJob < ApplicationJob
       else
         connector.rmi.reboot do |result|
           result.on_success do |message|
-            msg = result.response
+            msg = message
             Rails.logger.debug("DEBUG:: reboot connector #{connector.name} via cron: #{msg}")
             if Cocard.auto_reboot_connectors_note
               msg = "Via Cron: #{msg}"
@@ -28,7 +28,7 @@ class Connectors::RebootJob < ApplicationJob
           end
 
           result.on_failure do |message|
-            msg = "Reboot fehlgeschlagen: " + result.response
+            msg = "Reboot fehlgeschlagen: " + message
             Rails.logger.warn("WARN:: reboot connector #{connector.name} via cron failed: #{msg}")
           end
 

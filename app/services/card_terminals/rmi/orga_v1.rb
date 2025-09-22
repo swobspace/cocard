@@ -160,6 +160,11 @@ module CardTerminals
                 net_lan_ipAddrDhcp
                 rmi_smcb_pinEnabled 
                 rmi_pairingEHealthTerminal_enabled
+                sys_firmwareVersion
+                sys_firmwareBuildDate
+                sys_ntp_enabled
+                sys_ntp_serverIpAddr
+                sys_locale_timeZone
               ])
         if ret.success?
           ret.value = Info.new(ret.value)
@@ -467,6 +472,7 @@ module CardTerminals
                   message: "Pairing-Anfrage vom Terminal erhalten, sende OK"
                 }
               )
+              debug("Sende do_pairing: #{request.do_pairing(generate_token(:do_pairing), response.dialog_id)}")
               ws.send(request.do_pairing(generate_token(:do_pairing), response.dialog_id))
 
             when :do_pairing

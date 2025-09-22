@@ -116,7 +116,7 @@ module CardTerminals
                 "sessionId": session['id'],
                 "dialogSubmission": {
                   "dialogId": dialog_id,
-                  "behaviour": "confirmed"
+                  "behavior": "confirmed"
                 }
               }
             }
