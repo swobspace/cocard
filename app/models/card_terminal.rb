@@ -76,9 +76,9 @@ class CardTerminal < ApplicationRecord
       return set_condition( Cocard::States::NOTHING,
                      "Kein Konnektor zugewiesen" )
     end
-    if ip != current_ip
+    if ip != real_ip
         return set_condition( Cocard::States::UNKNOWN,
-                              "IP Mismatch: gefundene IP (#{current_ip}) und konfigurierte IP (#{ip}) weichen von einander ab" )
+                              "IP Mismatch: gefundene IP (#{real_ip}) und konfigurierte IP (#{ip}) weichen von einander ab" )
     end
     if reboot_active?
       return set_condition(Cocard::States::WARNING,
@@ -121,8 +121,8 @@ class CardTerminal < ApplicationRecord
   end
 
   def update_ip_and_location
-    if ip.nil? and current_ip.present?
-      self[:ip] = current_ip
+    if ip.nil? and real_ip.present?
+      self[:ip] = real_ip
     end
 
     if will_save_change_to_ip?
@@ -150,11 +150,11 @@ class CardTerminal < ApplicationRecord
     end
   end
 
-  def current_ip
+  def real_ip
     if use_ktproxy? and kt_proxy.present?
       kt_proxy.card_terminal_ip
     else
-      self[:current_ip]
+      current_ip
     end
   end
 

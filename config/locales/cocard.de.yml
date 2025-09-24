@@ -196,6 +196,7 @@ de:
     plugged_in: Netzwerk, Dose, Switch
     private_information: Geschützte Information
     product_information: Produktinformation
+    real_ip: reale IP
     room: Raum
     sds_url: SDS-URL
     search: Suche

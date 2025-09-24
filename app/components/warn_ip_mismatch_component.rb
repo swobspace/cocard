@@ -6,7 +6,7 @@ class WarnIpMismatchComponent < ViewComponent::Base
   end
 
   def render?
-    item.ip != item.current_ip
+    item.ip != item.real_ip
   end
 
 private
