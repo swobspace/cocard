@@ -4,6 +4,7 @@ module Cocard
     def initialize(options)
       @options  = options.symbolize_keys
       @card_terminal = options.fetch(:card_terminal)
+      @ti_client = options.fetch(:ti_client) { nil }
       @defaults = options.fetch(:defaults) { Cocard.ktproxy_defaults }
     end
 
@@ -24,7 +25,7 @@ module Cocard
     end
 
   private
-    attr_reader :defaults, :options, :card_terminal
+    attr_reader :defaults, :options, :card_terminal, :ti_client
 
     def new_incoming_port
       port = Cocard::KTProxy::Port.new(
@@ -58,7 +59,9 @@ module Cocard
     end
 
     def ti_client_id
-      if card_terminal.present? &&
+      if ti_client.present?
+        ti_client.id
+      elsif card_terminal.present? &&
          card_terminal.connector.present? && 
          card_terminal.connector.ti_client.present?
         card_terminal.connector.ti_client.id

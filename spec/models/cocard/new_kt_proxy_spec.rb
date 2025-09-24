@@ -30,11 +30,24 @@ module Cocard
       describe "#attributes" do
         let(:attributes) { subject.attributes }
         it { expect(attributes).to include(
+               ti_client_id: nil,
                name: 'My Card Terminal',
                wireguard_ip: "198.51.100.99",
                card_terminal_ip: '203.0.113.1',
                card_terminal_port: 4742
              )}
+      end
+    end
+
+    describe "with ti_client explicit set" do
+      let(:ticlient) { FactoryBot.create(:ti_client) }
+      let(:proxy) do
+        Cocard::NewKTProxy.new(
+          card_terminal: ct, 
+          ti_client: ticlient,
+          defaults: ktproxy_defaults
+        )
+        it { expect(subject.attributes[:ti_client_id]).to eq(ticlient.id) }
       end
     end
 
