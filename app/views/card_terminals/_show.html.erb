@@ -229,7 +229,15 @@
 
         <% if Cocard.enable_ticlient %>
           <div class="card-title border-bottom bg-light mt-2 pt-2 ps-2">
-            <h6>KT-Proxy (TI-Gateway)</h6>
+            <div class="d-flex justify-content-between">
+              <h6>KT-Proxy (TI-Gateway)</h6>
+              <div> 
+                <%= link_to(raw(%Q[<i class="fa-solid fa-pencil"></i>]),
+                            edit_kt_proxy_path(card_terminal.kt_proxy),
+                            class: 'primary-link') if card_terminal.kt_proxy.present? %>
+                             
+              </div>
+            </div>
           </div>
           <% if card_terminal.kt_proxy.present? %>
             <table class="table table-sm table-borderless">
