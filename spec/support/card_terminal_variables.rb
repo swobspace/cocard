@@ -48,6 +48,7 @@ shared_context "card_terminal variables" do
       mac: '11:22:33:44:55:66',
       supplier: 'ACME Ltd. International',
       connector: conn,
+      connected: true,
       last_ok: ts - 1.week,
       network: network,
       pin_mode: :on_demand,
