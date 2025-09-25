@@ -15,7 +15,7 @@ interface "CardTerminals::RMI" as rmi {
   +get_info()
 }
 
-class "CardTerminals::RMI::KoCoBox" as rmi_koco {
+class "CardTerminals::RMI::OrgaV1" as rmi_koco {
   card_terminal
   +available_actions()    
   +rmi_port()
@@ -26,6 +26,8 @@ class "CardTerminals::RMI::KoCoBox" as rmi_koco {
   +remote_pairing()
   +supported?() -> true
   +get_info()
+  +get_properties()
+  +set_properties()
 }
 
 class "CardTerminals::RMI::Null" as rmi_null {
