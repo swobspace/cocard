@@ -16,9 +16,9 @@
         <%= render CardTerminal::PairingButtonComponent
                    .new(card_terminal: card_terminal) if (can? :manage, card_terminal) %>
         <%= button_to(check_card_terminal_path(@card_terminal),
-                      title: t('card_terminals.check_connectivity'),
+                      title: t('card_terminals.health_check'),
                       class: 'btn btn-secondary me-1') do %>
-          <i class="fa-solid fa-fw fa-plug-circle-bolt"></i>
+          <i class="fa-solid fa-fw fa-heart-pulse"></i>
         <% end %>
 
         <%= render AcknowledgeButtonComponent.new(

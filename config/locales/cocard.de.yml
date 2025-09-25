@@ -304,6 +304,7 @@ de:
       Ohne Kontext kann der Konnektor keine Informationen abfragen
       (Ausnahme: Service Directory SDS)
     check_connectivity: Verbindungstest
+    health_check: Health-Check
   card_terminals:
     with_smcb: KT mit SMC-B
     update_ip_from_current: Vom Konnektor gemeldete IP übernehmen
@@ -311,6 +312,7 @@ de:
       Kartenterminal %{item} neu starten? Das Kartenterminal ist dann für
       einige Zeit nicht verfügbar!
     check_connectivity: Verbindungstest
+    health_check: Health-Check
     reset_connector: Zuordnung zum Konnektor löschen
     remote_pairing: Remote Pairing
     do_remote_pairing: Remote Pairing durchführen
