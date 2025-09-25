@@ -16,9 +16,9 @@
       <div role="toolbar" class="ms-auto pt-3">
         <%= render RebootButtonComponent.new(item: @connector) if can? :reboot, @connector %>
         <%= button_to(check_connector_path(@connector),
-                      title: t('connectors.check_connectivity'),
+                      title: t('connectors.health_check'),
                       class: 'btn btn-secondary me-1') do %>
-          <i class="fa-solid fa-fw fa-plug-circle-bolt"></i>
+          <i class="fa-solid fa-fw fa-heart-pulse"></i>
         <% end %>
         <%= button_to(t('cocard.fetch_sds'),
                       fetch_sds_connector_path(@connector),
