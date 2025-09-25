@@ -151,7 +151,7 @@ class CardTerminal < ApplicationRecord
   end
 
   def real_ip
-    if use_ktproxy? and kt_proxy.present?
+    if kt_proxy.present?
       kt_proxy.card_terminal_ip
     else
       current_ip
