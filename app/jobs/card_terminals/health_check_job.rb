@@ -26,6 +26,7 @@ class CardTerminals::HealthCheckJob < ApplicationJob
       else
         text = "RMI-Port #{card_terminal.rmi_port} nicht erreichbar, kein Remote Management des Terminals möglich"
         toaster(card_terminal, :alert, text)
+        return false
       end
 
       # get_info
