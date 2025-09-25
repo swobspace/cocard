@@ -5,7 +5,7 @@ class KTProxiesController < ApplicationController
   # GET /kt_proxies
   def index
     if @proxyable
-      @proxyable.kt_proxies
+      @kt_proxies = @proxyable.kt_proxies
     else
       @kt_proxies = KTProxy.all
     end
