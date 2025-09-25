@@ -31,7 +31,7 @@ module CardTerminalsDatatableHelper
       column << "RENDER"
       column << "RENDER"
 
-      column << "  " # dummy for action links
+      column << " RENDER  " # dummy for action links
     end
   end
 
@@ -59,6 +59,7 @@ RSpec.describe CardTerminalsDatatable, type: :model do
       card_terminal_path: "",
       connector_path: "",
       show_link: "",
+      check_card_terminal_path: "",
       edit_link: "",
       delete_link: "",
       render: "RENDER"

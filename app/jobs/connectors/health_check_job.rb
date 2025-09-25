@@ -1,11 +1,7 @@
-class Connectors::ConnectivityCheckJob < ApplicationJob
+class Connectors::HealthCheckJob < ApplicationJob
   queue_as :default
   LDAPS_PORT = 636
 
-  #
-  # Check Connector connectivity and broadcast a toast if problem found
-  # Connectors::ConnectivityCheckJob.perform_later(connector: connector)
-  #
   def perform(options = {})
     options.symbolize_keys!
     connector = options.fetch(:connector)

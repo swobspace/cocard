@@ -45,6 +45,7 @@ class CardTerminalsDatatable < ApplicationDatatable
 
         links = []
         links << show_link(ct)
+        links << render(HealthCheckButtonComponent.new(item: ct))
         links << edit_link(ct)
         links << delete_link(ct)
         column << links.join(' ')

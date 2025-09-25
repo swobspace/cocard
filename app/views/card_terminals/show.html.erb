@@ -1,6 +1,7 @@
 <%= render 'shared/turbo-cache-control' %>
 
 <%= turbo_stream_from @card_terminal %>
+<%= turbo_stream_from :card_terminal_check %>
 
 <%= render partial: 'show', locals: { card_terminal: @card_terminal } %>
 

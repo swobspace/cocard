@@ -1,10 +1,6 @@
-class CardTerminals::ConnectivityCheckJob < ApplicationJob
+class CardTerminals::HealthCheckJob < ApplicationJob
   queue_as :default
 
-  #
-  # Check CardTerminal Configuration and broadcast a toast if problem found
-  # CardTerminals::ConnectivityCheckJob.perform_later(card_terminal: card_terminal)
-  #
   def perform(options = {})
     options.symbolize_keys!
     card_terminal = options.fetch(:card_terminal)
@@ -73,7 +69,7 @@ private
   def toaster(card_terminal, status, message)
     unless status.nil?
       Turbo::StreamsChannel.broadcast_prepend_to(
-        card_terminal,
+        :card_terminal_check,
         target: 'toaster',
         partial: "shared/turbo_toast",
         locals: {status: status, message: message})

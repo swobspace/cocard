@@ -47,7 +47,7 @@ class CardTerminalsController < ApplicationController
   end
 
   def check
-    CardTerminals::ConnectivityCheckJob.perform_now(card_terminal: @card_terminal)
+    CardTerminals::HealthCheckJob.perform_now(card_terminal: @card_terminal)
     respond_with(@card_terminal) do |format|
       format.turbo_stream { head :ok }
     end

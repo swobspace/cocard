@@ -110,12 +110,7 @@
             <%= edit_link connector %>
             <%= delete_link connector %>
             <%= render RebootButtonComponent.new(item: connector) if can?(:reboot, connector)%>
-            <%= button_to(check_connector_path(connector),
-                          title: t('connectors.check_connectivity'),
-                          class: 'btn btn-secondary me-1') do %>
-              <i class="fa-solid fa-fw fa-plug-circle-bolt"></i>
-            <% end %>
-
+            <%= render HealthCheckButtonComponent.new(item: connector) %>
           </td>
         <% end %>
       <% end %>
