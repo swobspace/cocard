@@ -94,19 +94,19 @@ EOTMPL
   end
 
   def self.ntp_server
-    fetch_config('ntp_server', nil)
+    fetch_config('terminal_ntp_server', nil)
   end
 
   def self.ntp_enabled
-    fetch_config('ntp_enabled', true)
+    fetch_config('terminal_ntp_enabled', true)
   end
 
   def self.tftp_server
-    fetch_config('tftp_server', nil)
+    fetch_config('terminal_tftp_server', nil)
   end
 
   def self.tftp_file
-    fetch_config('tftp_file', nil)
+    fetch_config('terminal_tftp_file', nil)
   end
 
   Rails.application.routes.default_url_options = {
