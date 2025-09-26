@@ -48,6 +48,22 @@
     <div class="d-flex w-100">
       <div >
         <h4 class="title">
+          <%= t('controller.networks') %>
+        </h4>
+      </div>
+    </div>
+  </div>
+  <div class="m-2">
+    <%= turbo_frame_tag("networks", src: location_networks_path(@location),
+                                 refresh: "morph") %>
+  </div>
+</div>
+
+<div class="card my-3">
+  <div class="card-header">
+    <div class="d-flex w-100">
+      <div >
+        <h4 class="title">
           <%= t('controller.card_terminals') %>
         </h4>
       </div>

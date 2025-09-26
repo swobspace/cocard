@@ -241,6 +241,7 @@ de:
     locations/cards: Karten
     locations/card_terminals: Kartenterminals
     locations/connectors: Konnektoren
+    locations/networks: Netzwerke
     logs: Logs
     logs/notes: Notizen
     networks: Netzwerke

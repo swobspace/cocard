@@ -97,6 +97,7 @@ Rails.application.routes.draw do
     resources :connectors, only: [:index, :show, :destroy], module: :locations
     resources :card_terminals, only: [:index, :show, :destroy], module: :locations
     resources :cards, only: [:index, :show, :destroy], module: :locations
+    resources :networks, only: [:index, :show, :destroy], module: :locations
   end
   root to: 'home#index'
   get 'home/index'
