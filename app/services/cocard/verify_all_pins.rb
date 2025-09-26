@@ -28,7 +28,8 @@ module Cocard
     def call
       error_messages = []
       if card.card_terminal&.pin_mode == 'off'
-        error_messages = "SMC-B Auto-PIN-Mode ist off: keine Sammeleingabe von PINs. BittePIN-Verifizierung einzeln anstoßen"
+        error_messages = "SMC-B Auto-PIN-Mode am Kartenterminal ist off!"
+        toaster(card, :alert, error_message)
         return Result.new(success?: false, error_messages: error_messages)
       end
 
@@ -41,11 +42,7 @@ module Cocard
         status  = :alert
         message = (card.to_s + "<br/>" + "Kontext: #{card.contexts.first}<br/>ERROR:: " +
                    result.error_messages.join(', ')).html_safe
-        Turbo::StreamsChannel.broadcast_prepend_to(
-          'verify_pins',
-          target: 'toaster',
-          partial: "shared/turbo_toast",
-          locals: {status: status, message: message})
+        toaster(card, status, message)
       else
 
         #
@@ -76,11 +73,7 @@ module Cocard
                        result.error_messages.join(', ')).html_safe
 
           end
-          Turbo::StreamsChannel.broadcast_prepend_to(
-            'verify_pins',
-            target: 'toaster',
-            partial: "shared/turbo_toast",
-            locals: {status: status, message: message})
+          toaster(card, status, message)
           # update card pin status
           Cocard::GetPinStatus.new(card: card, context: cctx).call
         end
@@ -89,6 +82,17 @@ module Cocard
 
   private
     attr_reader :card
+
+    def toaster(card, status, message)
+      message = "#{card.name}: #{message}"
+      unless status.nil?
+        Turbo::StreamsChannel.broadcast_prepend_to(
+          'verify_pins',
+          target: 'toaster',
+          partial: "shared/turbo_toast",
+          locals: {status: status, message: message})
+      end
+    end
 
   end
 end

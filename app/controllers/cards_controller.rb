@@ -113,7 +113,14 @@ class CardsController < ApplicationController
   end
 
   def verify_pin
-    if set_context
+    ct = @card.card_terminal
+    if !set_context
+      status  = :alert
+      message = "No context assigned or context not found!"
+    elsif ct.pin_mode == 'off'
+      status  = :alert
+      message = "CardTerminal #{ct} pin mode == off"
+    else
       # start background rmi job
       CardTerminals::RMI::VerifyPinJob.perform_later(card: @card)
       # wait some time
@@ -131,10 +138,8 @@ class CardsController < ApplicationController
         message = (@card.to_s + "<br/>" + "Kontext: #{@context}<br/>" +
                    "VERIFY PIN successful").html_safe
       end
-    else
-      status  = :alert
-      message = "No context assigned or context not found!"
     end
+
     @card.save
     render turbo_stream: [
       turbo_stream.prepend("toaster", partial: "shared/turbo_toast",
