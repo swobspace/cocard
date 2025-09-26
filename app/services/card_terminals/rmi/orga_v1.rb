@@ -165,6 +165,8 @@ module CardTerminals
                 sys_ntp_enabled
                 sys_ntp_serverIpAddr
                 sys_locale_timeZone
+                update_serverIpAddr
+                update_fileName
               ])
         if ret.success?
           ret.value = Info.new(ret.value)

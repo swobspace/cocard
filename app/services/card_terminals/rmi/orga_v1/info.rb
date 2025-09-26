@@ -40,6 +40,22 @@ module CardTerminals
         properties['rmi_pairingEHealthTerminal_enabled']
       end
 
+      def tftp_server
+        properties['update_serverIpAddr']
+      end
+
+      def tftp_file
+        properties['update_fileName']
+      end
+
+      def ntp_server
+        properties['sys_ntp_serverIpAddr']
+      end
+
+      def ntp_enabled
+        properties['sys_ntp_enabled']
+      end
+
   private
       attr_reader :properties
     end

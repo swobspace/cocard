@@ -11,7 +11,11 @@ module CardTerminals
       "net_lan_ipAddrStatic" => "192.168.1.1",
       "net_lan_ipAddrDhcp" => "127.1.2.3",
       "rmi_smcb_pinEnabled" => true, 
-      "rmi_pairingEHealthTerminal_enabled" => true
+      "rmi_pairingEHealthTerminal_enabled" => true,
+      "update_serverIpAddr" => "192.0.2.10",
+      "update_fileName" => "somestuff.boot",
+      "sys_ntp_serverIpAddr" => '192.0.2.20',
+      "sys_ntp_enabled" => true 
     }}
 
     subject { CardTerminals::RMI::OrgaV1::Info.new(properties) }
@@ -24,5 +28,9 @@ module CardTerminals
     it { expect(subject.static_ip).to eq("192.168.1.1") }
     it { expect(subject.remote_pin_enabled).to eq(true) }
     it { expect(subject.remote_pairing_enabled).to eq(true) }
+    it { expect(subject.ntp_enabled).to eq(true) }
+    it { expect(subject.ntp_server).to eq("192.0.2.20") }
+    it { expect(subject.tftp_server).to eq("192.0.2.10") }
+    it { expect(subject.tftp_file).to eq("somestuff.boot") }
   end
 end
