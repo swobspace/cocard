@@ -43,67 +43,92 @@
 <%= back_link %>
 <%= new_link Location %>
 
-<div class="card my-3">
-  <div class="card-header">
-    <div class="d-flex w-100">
-      <div >
-        <h4 class="title">
-          <%= t('controller.networks') %>
-        </h4>
-      </div>
-    </div>
-  </div>
-  <div class="m-2">
-    <%= turbo_frame_tag("networks", src: location_networks_path(@location),
-                                 refresh: "morph") %>
-  </div>
-</div>
+<ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="networks-tab" data-bs-toggle="tab" data-bs-target="#networks-tab-pane" type="button" role="tab" aria-controls="networks-tab-pane" aria-selected="true">Netzwerke</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="card-terminals-tab" data-bs-toggle="tab" data-bs-target="#card-terminals-tab-pane" type="button" role="tab" aria-controls="card-terminals-tab-pane" aria-selected="false">Kartenterminals</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="cards-tab" data-bs-toggle="tab" data-bs-target="#cards-tab-pane" type="button" role="tab" aria-controls="cards-tab-pane" aria-selected="false">Karten</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="connectors-tab" data-bs-toggle="tab" data-bs-target="#connectors-tab-pane" type="button" role="tab" aria-controls="connectors-tab-pane" aria-selected="false">Konnektoren</button>
+  </li>
+</ul>
 
-<div class="card my-3">
-  <div class="card-header">
-    <div class="d-flex w-100">
-      <div >
-        <h4 class="title">
-          <%= t('controller.card_terminals') %>
-        </h4>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade" id="networks-tab-pane" role="tabpanel" aria-labelledby="networks-tab" tabindex="0">
+    <div class="card my-3">
+      <div class="card-header">
+        <div class="d-flex w-100">
+          <div >
+            <h4 class="title">
+              <%= t('controller.networks') %>
+            </h4>
+          </div>
+        </div>
+      </div>
+      <div class="m-2">
+        <%= turbo_frame_tag("networks", src: location_networks_path(@location),
+                                     refresh: "morph") %>
       </div>
     </div>
   </div>
-  <div class="m-2">
-    <%= turbo_frame_tag("card_terminals", src: location_card_terminals_path(@location),
+
+  <div class="tab-pane fade show active" id="card-terminals-tab-pane" role="tabpanel" aria-labelledby="card-terminals-tab" tabindex="0">
+    <div class="card my-3">
+      <div class="card-header">
+        <div class="d-flex w-100">
+          <div >
+            <h4 class="title">
+              <%= t('controller.card_terminals') %>
+            </h4>
+          </div>
+        </div>
+      </div>
+      <div class="m-2">
+        <%= turbo_frame_tag("card_terminals", src: location_card_terminals_path(@location),
+                                              refresh: "morph") %>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-pane fade" id="cards-tab-pane" role="tabpanel" aria-labelledby="cards-tab" tabindex="0">
+    <div class="card my-3">
+      <div class="card-header">
+        <div class="d-flex w-100">
+          <div >
+            <h4 class="title">
+              <%= t('controller.cards') %>
+            </h4>
+          </div>
+        </div>
+      </div>
+      <div class="m-2">
+        <%= turbo_frame_tag("cards", src: location_cards_path(@location),
+                                     refresh: "morph") %>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="tab-pane fade" id="connectors-tab-pane" role="tabpanel" aria-labelledby="connectors-tab" tabindex="0">
+    <div class="card my-3">
+      <div class="card-header">
+        <div class="d-flex w-100">
+          <div >
+            <h4 class="title">
+              <%= t('controller.connectors') %>
+            </h4>
+          </div>
+        </div>
+      </div>
+      <div class="m-2">
+        <%= turbo_frame_tag("connectors", src: location_connectors_path(@location),
                                           refresh: "morph") %>
-  </div>
-</div>
-
-<div class="card my-3">
-  <div class="card-header">
-    <div class="d-flex w-100">
-      <div >
-        <h4 class="title">
-          <%= t('controller.cards') %>
-        </h4>
       </div>
     </div>
   </div>
-  <div class="m-2">
-    <%= turbo_frame_tag("cards", src: location_cards_path(@location),
-                                 refresh: "morph") %>
-  </div>
-</div>
-
-<div class="card my-3">
-  <div class="card-header">
-    <div class="d-flex w-100">
-      <div >
-        <h4 class="title">
-          <%= t('controller.connectors') %>
-        </h4>
-      </div>
-    </div>
-  </div>
-  <div class="m-2">
-    <%= turbo_frame_tag("connectors", src: location_connectors_path(@location),
-                                      refresh: "morph") %>
-  </div>
-</div>
 
