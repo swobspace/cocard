@@ -48,7 +48,11 @@ class CardTerminals::HealthCheckJob < ApplicationJob
             toaster(card_terminal, :info, text)
           end
 
-          toaster(card_terminal, :info, "DHCP enabled: #{info.dhcp_enabled}")
+          check_value(card_terminal, info, :dhcp_enabled, nil)
+          check_value(card_terminal, info, :ntp_server, Cocard.ntp_server)
+          check_value(card_terminal, info, :ntp_enabled, Cocard.ntp_enabled)
+          check_value(card_terminal, info, :tftp_server, Cocard.tftp_server)
+          check_value(card_terminal, info, :tftp_file, Cocard.tftp_file)
         end
         result.on_failure do |message|
           text = "RMI-Abfrage fehlgeschlagen: #{message}"
@@ -76,4 +80,15 @@ private
         locals: {status: status, message: message})
     end
   end
+
+  def check_value(card_terminal, info, attrib, reference, status = :warning)
+    return unless reference.present?
+    value = info.send(attrib)
+    text = I18n.t('card_terminals.rmi.' + attrib.to_s) + ': ' + value.to_s
+    if value.to_s == reference.to_s
+      status = :info
+    end
+    toaster(card_terminal, status, text)
+  end
+
 end

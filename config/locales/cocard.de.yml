@@ -317,6 +317,12 @@ de:
     remote_pairing: Remote Pairing
     do_remote_pairing: Remote Pairing durchführen
     duplicate_ips: Doppelte IPs
+    rmi:
+      ntp_server: NTP-Server
+      ntp_enabled: NTP enabled?
+      tftp_server: TFTP-Server
+      tftp_file: TFTP-Dateiname
+      dhcp_enabled: DHCP enabled?
   cards:
     no_contexts_assigned: |
       ACHTUNG! Es ist noch kein Kontext zugeordnet!
