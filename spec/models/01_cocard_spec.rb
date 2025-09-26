@@ -10,6 +10,10 @@ RSpec.describe Cocard, type: :model do
       allow(Cocard::CONFIG).to receive(:[]).with('enable_ticlient').and_return(nil)
       allow(Cocard::CONFIG).to receive(:[]).with('ktproxy_defaults').and_return(nil)
       allow(Cocard::CONFIG).to receive(:[]).with('ktproxy_equal_ports').and_return(nil)
+      allow(Cocard::CONFIG).to receive(:[]).with('ntp_server').and_return(nil)
+      allow(Cocard::CONFIG).to receive(:[]).with('ntp_enabled').and_return(nil)
+      allow(Cocard::CONFIG).to receive(:[]).with('tftp_server').and_return(nil)
+      allow(Cocard::CONFIG).to receive(:[]).with('tftp_file').and_return(nil)
       allow(ENV).to receive(:[]).with('CRON_REBOOT_CONNECTORS').and_return(nil)
       allow(ENV).to receive(:[]).with('AUTO_REBOOT_CONNECTORS_NOTE').and_return(nil)
     end
@@ -19,6 +23,10 @@ RSpec.describe Cocard, type: :model do
     it { expect(Cocard.ktproxy_equal_ports).to be_falsey }
     it { expect(Cocard.cron_reboot_connectors).to eq('5 1 * * 1') }
     it { expect(Cocard.auto_reboot_connectors_note).to be_falsey }
+    it { expect(Cocard.ntp_enabled).to be_truthy }
+    it { expect(Cocard.ntp_server).to be_nil }
+    it { expect(Cocard.tftp_server).to be_nil }
+    it { expect(Cocard.tftp_file).to be_nil }
   end
 
   describe "with settings" do
@@ -33,9 +41,18 @@ RSpec.describe Cocard, type: :model do
       allow(Cocard::CONFIG).to receive(:[]).with('enable_ticlient').and_return(true)
       allow(Cocard::CONFIG).to receive(:[]).with('ktproxy_defaults').and_return({card_terminal_port: 4742})
       allow(Cocard::CONFIG).to receive(:[]).with('ktproxy_equal_ports').and_return(true)
+      allow(Cocard::CONFIG).to receive(:[]).with('ntp_enabled').and_return(true)
+      allow(Cocard::CONFIG).to receive(:[]).with('ntp_server').and_return('192.0.2.11')
+      allow(Cocard::CONFIG).to receive(:[]).with('tftp_server').and_return('192.0.2.22')
+      allow(Cocard::CONFIG).to receive(:[]).with('tftp_file').and_return('somestuff.dat')
+
       expect(Cocard.enable_ticlient).to be_truthy
       expect(Cocard.ktproxy_defaults).to include(card_terminal_port: 4742)
       expect(Cocard.ktproxy_equal_ports).to be_truthy
+      expect(Cocard.ntp_enabled).to be_truthy
+      expect(Cocard.ntp_server).to eq('192.0.2.11')
+      expect(Cocard.tftp_server).to eq('192.0.2.22')
+      expect(Cocard.tftp_file).to eq('somestuff.dat')
     end
 
     it "uses default if ENV not valid" do
