@@ -28,7 +28,39 @@ NOTE: Lose Sammlung von Snippets und Ideen zum TI-Gateway von RISE und dem TI-Cl
 }
 ----
 
+== Massengenerierung von KT-Proxies
+
+.Aufruf der Rails-Konsole
+[source,ruby]
+----
+podman exec -it cocard bin/rails console
+----
+
+.Auswahl des Konnektors
+[source,ruby]
+----
+conn = Connector.where(short_name: 'K26').first
+conn.card_terminals.count
+----
+
+.Auswahl des TI-Clients
+[source,ruby]
+----
+tic = TIClient.where("name like ?", '%05%').first
+----
+
+.KTProxies generieren
+[source,ruby]
+----
+conn.card_terminals.each do |ct|
+  attribs = Cocard::NewKTProxy.new(card_terminal: ct).attributes
+  tic.kt_proxies.create(attribs.merge(ti_client_id: tic.id))
+end
+----
+
 == Sequenzdiagramm
+
+IMPORTANT: Beim Diagramm handelt es sich um eine Planung, die noch nicht umgesetzt ist, weil das REST-Interface des RISE TI-Clients noch nicht zur Verfügung steht (Stand 27.09.2025)
 
 .Voraussetzungen
 * Konnektor ProductType == vKon
