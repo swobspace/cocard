@@ -87,6 +87,8 @@ private
     text = I18n.t('card_terminals.rmi.' + attrib.to_s) + ': ' + value.to_s
     if value.to_s == reference.to_s
       status = :info
+    else 
+      text += " \u2260 #{reference.to_s}!"
     end
     toaster(card_terminal, status, text)
   end
