@@ -190,8 +190,53 @@ Lose Sammlung von Snippets und Ideen zum TI-Gateway von RISE und dem TI-Client
 </div>
 </div>
 <div class="sect1">
+<h2 id="_massengenerierung_von_kt_proxies"><a class="anchor" href="#_massengenerierung_von_kt_proxies"></a>Massengenerierung von KT-Proxies</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="title">Aufruf der Rails-Konsole</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">podman exec -it cocard bin/rails console</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Auswahl des Konnektors</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">conn = Connector.where(short_name: 'K26').first
+conn.card_terminals.count</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Auswahl des TI-Clients</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">tic = TIClient.where("name like ?", '%05%').first</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">KTProxies generieren</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">conn.card_terminals.each do |ct|
+  attribs = Cocard::NewKTProxy.new(card_terminal: ct).attributes
+  tic.kt_proxies.create(attribs.merge(ti_client_id: tic.id))
+end</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_sequenzdiagramm"><a class="anchor" href="#_sequenzdiagramm"></a>Sequenzdiagramm</h2>
 <div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Beim Diagramm handelt es sich um eine Planung, die noch nicht umgesetzt ist, weil das REST-Interface des RISE TI-Clients noch nicht zur Verfügung steht (Stand 27.09.2025)
+</td>
+</tr>
+</table>
+</div>
 <div class="ulist">
 <div class="title">Voraussetzungen</div>
 <ul>
