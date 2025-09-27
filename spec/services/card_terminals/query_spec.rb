@@ -187,6 +187,15 @@ module CardTerminals
       it_behaves_like "a card_terminal query"
     end
 
+    context "with :connector_id" do
+      subject { Query.new(card_terminals, {connector_id: conn.id}) }
+      before(:each) do
+        @matching = [ct2]
+        @nonmatching = [ct1, ct3]
+      end
+      it_behaves_like "a card_terminal query"
+    end
+
     context "with :description" do
       subject { Query.new(card_terminals, {description: "more info"}) }
       before(:each) do

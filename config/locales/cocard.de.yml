@@ -232,6 +232,7 @@ de:
     client_certificates: Client-Zertifikate
     connectors: Konnektoren
     connectors/logs: Konnektoren/Logs
+    connectors/card_terminals: Kartenterminals
     contexts: Kontexte
     events: Ereignisse
     home: Home

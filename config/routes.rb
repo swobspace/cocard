@@ -77,7 +77,6 @@ Rails.application.routes.draw do
   end
   resources :contexts
   resources :connectors do
-    resources :logs, only: [:index, :show, :destroy], module: :connectors
     collection do
       get :sindex
     end
@@ -90,6 +89,8 @@ Rails.application.routes.draw do
       post :check
       post :reboot
     end
+    resources :logs, only: [:index, :show, :destroy], module: :connectors
+    resources :card_terminals, only: [:index, :show, :destroy], module: :connectors
     resources :notes, module: :connectors
     resource :ti_client, module: :connectors
   end

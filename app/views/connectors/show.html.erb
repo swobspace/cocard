@@ -250,10 +250,16 @@
 <div class="card my-3">
   <div class="card-header">
     <div class="d-flex w-100">
-      <div >
+      <div class="d-flex w-100 justify-content-between">
         <h4 class="title"> 
           <%= t('controller.card_terminals') %>
         </h4>
+        <div role="toolbar" class="pt-0">
+          <%= link_to raw(%Q[<i class="fas fa-table"></i>]),
+                connector_card_terminals_path(@connector),
+                class: 'btn btn-outline-secondary btn-sm'
+           %>
+        </div>
       </div>
     </div>
   </div>
