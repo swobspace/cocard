@@ -31,8 +31,8 @@ image::ct/card-terminal-action-buttons.png[]
 |Startet den Remote-Pairing-Vorgang. Anschließend muss der Pairing-Vorgang manuell am Konnektor gestartet werden.
 |Wenn das Remote-Pairing vom Terminal unterstützt wird und das Terminal nicht mit einem Konnektor verbunden ist (Status->online == false)
 
-|image::common/connection-test-button.png[]
-|Verbindungstest: prüft Erreichbarkeit per Ping und die TCP-Ports für HTTPS, LDAP und SOAP.
+|image::common/health-check-button.png[]
+|Health-Check: prüft Erreichbarkeit per Ping und die TCP-Ports für HTTPS. Unterstützt Cocard das RMI-Interface des Kartenterminals, werden zusätzlich MAC-Adresse und Terminalname überprüft.
 |
 
 |image::common/ack-button.png[]

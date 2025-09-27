@@ -4,6 +4,7 @@
 ** xref:user/conditions.adoc[]
 ** xref:user/connector.adoc[]
 ** xref:user/card-terminal.adoc[]
+*** xref:user/card-terminal-health-check.adoc[]
 ** xref:user/card.adoc[]
 ** xref:user/logs.adoc[]
 ** xref:user/acknowledges.adoc[]

@@ -36,3 +36,18 @@ ktproxy_defaults:
   outgoing_port_range: 10000:11000
   card_terminal_port: 4742
 ----
+
+=== Kartenterminals: Defaultwerte
+
+Folgende Default-Werte sind derzeit konfigurierbar:
+
+.cocard.yml: Default-Werte für Kartenterminals
+[source,yml]
+----
+terminal_ntp_enabled: true
+terminal_ntp_server: 10.255.190.1
+terminal_tftp_server: 10.200.149.49
+terminal_tftp_file: somestuff.dat
+terminal_dhcp_enabled: true
+----
+

@@ -9,6 +9,7 @@
 * Kartenterminals: Remote Pairing für Orga 6141 ab Version 3.9.1
 * Kartenterminals: Report Terminals mit doppelter IP
 * Kartenterminals: doppelte IPs werden entfernt, wenn ein Kartenterminal mit der gleichen IP aktuell als aktiv und OK über den Konnektor beim Scan gefunden wird.
+* Kartenterminals: Health-Check erweitert - prüft per RMI wenn möglich auch MAC-Adresse und Terminalname gegen die Cocard-Konfiguration.
 
 == 0.8.5 - 2025-08-31
 

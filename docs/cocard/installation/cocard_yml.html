@@ -61,7 +61,13 @@
     <a class="nav-link" href="../user/connector.html">Konnektor</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="../user/card-terminal.html">Kartenterminal</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../user/card-terminal-health-check.html">Health-Check</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../user/card.html">Karte</a>
@@ -287,6 +293,22 @@ ktproxy_defaults:
   outgoing_ip: 198.51.100.21
   outgoing_port_range: 10000:11000
   card_terminal_port: 4742</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_kartenterminals_defaultwerte"><a class="anchor" href="#_kartenterminals_defaultwerte"></a>Kartenterminals: Defaultwerte</h3>
+<div class="paragraph">
+<p>Folgende Default-Werte sind derzeit konfigurierbar:</p>
+</div>
+<div class="listingblock">
+<div class="title">cocard.yml: Default-Werte für Kartenterminals</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">terminal_ntp_enabled: true
+terminal_ntp_server: 10.255.190.1
+terminal_tftp_server: 10.200.149.49
+terminal_tftp_file: somestuff.dat
+terminal_dhcp_enabled: true</code></pre>
 </div>
 </div>
 </div>
