@@ -4,6 +4,7 @@
 * RMI
 ** xref:rmi/connectors_rmi.adoc[]
 ** xref:rmi/card_terminals_rmi.adoc[]
+*** xref:rmi/orga6141.adoc[]
 * xref:conditions.adoc[]
 * xref:healthcheck.adoc[]
 * xref:todo.adoc[]

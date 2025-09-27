@@ -1,0 +1,22 @@
+= CardTerminals::RMI::OrgaV1
+:navtitle: RMI::OrgaV1
+:author: Wolfgang Barth
+:revdate: 2025-09-27
+
+== Set Property
+
+Bei allen erreichbaren und RMI-fähigen Kartenterminals die TFTP-Server-IP setzen:
+
+.User poddy
+----
+podman exec -it cocard bin/rails console
+
+CardTerminal.where(condition: 0).each do |ct|
+  if ct.up? and ct.tcp_port_open?(443) and ct.supports_rmi?
+    rmi = CardTerminals::RMI::OrgaV1.new(card_terminal: ct)
+    rmi.set_properties({"update_serverIpAddr" => "10.200.149.49"})
+  end
+end
+----
+
+Die möglichen Properties finden sich im RMI-Manual zum Orga6141: https://worldline.com/content/dam/worldline/local/de-de/documents/Remote-Management-Interface-ORGA-6141-online.pdf
