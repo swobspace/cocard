@@ -141,7 +141,7 @@ module CardTerminals
     end
 
     def id_fields
-      [ :id ]
+      [ :id, :connector_id, :location_id ]
     end
 
     def to_boolean(value)

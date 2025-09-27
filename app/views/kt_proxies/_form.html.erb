@@ -1,0 +1,31 @@
+<%= simple_form_for(@kt_proxy) do |form| %>
+<%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
+
+  <div class="form-input">
+    <%= form.association :ti_client
+       %>
+    <%= form.association :card_terminal
+       %>
+    <%= form.input :uuid
+       %>
+    <%= form.input :name
+       %>
+    <%= form.input :wireguard_ip, as: :string
+       %>
+    <%= form.input :incoming_ip, as: :string
+       %>
+    <%= form.input :incoming_port
+       %>
+    <%= form.input :outgoing_ip, as: :string
+       %>
+    <%= form.input :outgoing_port
+       %>
+    <%= form.input :card_terminal_ip, as: :string
+       %>
+    <%= form.input :card_terminal_port
+       %>
+
+    <%= form.button :submit, class: 'btn btn-primary' %>
+    <%= cancel_button %>
+  </div>
+<% end %>

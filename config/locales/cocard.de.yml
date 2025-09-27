@@ -78,6 +78,7 @@ de:
     card_terminal_rmi_not_supported: Funktion wird vom Kartenterminal nicht unterstützt
     card_terminal_rmi_not_reachable: RMI nicht erreichbar
     set_idle_messages: Ruhebildschirme setzen
+    health_check: Health-Check
 
   activerecord:
     models:
@@ -87,6 +88,7 @@ de:
       context: Kontext
       connector: Konnektor
       connector_context: Konnektor Kontext
+      kt_proxy: KT-Proxy
       location: Standort
       log: Log
       network: Netzwerk
@@ -95,6 +97,7 @@ de:
       user: User
       tag: Tag
       tagging: Tagging
+      ti_client: TI-Client
       terminal_workplaces: Zugeordnete Arbeitsplätze
       workplace: Arbeitsplatz
 
@@ -112,6 +115,8 @@ de:
     card_holder_name: CardHolder
     card_terminal: Kartenterminal
     card_terminal_ids: Kartenterminals
+    card_terminal_ip: IP des Kartenterminals
+    card_terminal_port: Port des Kartenterminals
     card_type: Kartentyp
     certificate: Zertifikat
     cert: Zertifikat (PEM)
@@ -154,6 +159,8 @@ de:
     id_contract: Vertragsnummer
     id_product: Modellbezeichnung
     idle_message: Anzeige im Display
+    incoming_ip: Eingehende IP
+    incoming_port: Eingehender Port
     insert_time: eingesteckt seit
     ip: IP-Adresse
     is_valid: gültig?
@@ -182,12 +189,15 @@ de:
     object_system_version: ObjectSystemVersion
     operational: in Betrieb
     operational_state: Betriebszustand
+    outgoing_ip: Ausgehende IP
+    outgoing_port: Ausgehender Port
     passphrase: Passphrase
     pin_mode: SMC-B Auto-PIN-Mode
     pkey: Private Key (PEM)
     plugged_in: Netzwerk, Dose, Switch
     private_information: Geschützte Information
     product_information: Produktinformation
+    real_ip: reale IP
     room: Raum
     sds_url: SDS-URL
     search: Suche
@@ -202,11 +212,14 @@ de:
     tag: Tag
     tag_list_input: Tags
     telematikid: Telematik-ID
+    ti_client: TI-Client
     type: Typ
     updated_at: zuletzt aktualisiert
     username: Username
     use_tls: TLS verwenden
+    uuid: UUID
     vpnti_online: VPN TI Online
+    wireguard_ip: Wireguard IP
     workplace: Arbeitsplatz
     workplaces: Arbeitsplätze
 
@@ -215,17 +228,21 @@ de:
     cards/logs: Karten/Logs
     card_terminals: Kartenterminals
     card_terminals/logs: Kartenterminals/Logs
+    card_terminals/kt_proxies: KT-Proxys
     client_certificates: Client-Zertifikate
     connectors: Konnektoren
     connectors/logs: Konnektoren/Logs
+    connectors/card_terminals: Kartenterminals
     contexts: Kontexte
     events: Ereignisse
     home: Home
     idle_messages: Ruhebildschirme
+    kt_proxies: KT-Proxys
     locations: Standorte
     locations/cards: Karten
     locations/card_terminals: Kartenterminals
     locations/connectors: Konnektoren
+    locations/networks: Netzwerke
     logs: Logs
     logs/notes: Notizen
     networks: Netzwerke
@@ -234,6 +251,8 @@ de:
     searches: Suche
     situation_picture: Lagebild TI
     tags: Tags
+    ti_clients: TI-Clients
+    ti_clients/kt_proxies: KT-Proxys
     users: Benutzer
     verify_pins: PIN-Verifizierung
     workplaces: Arbeitsplätze
@@ -296,6 +315,15 @@ de:
       einige Zeit nicht verfügbar!
     check_connectivity: Verbindungstest
     reset_connector: Zuordnung zum Konnektor löschen
+    remote_pairing: Remote Pairing
+    do_remote_pairing: Remote Pairing durchführen
+    duplicate_ips: Doppelte IPs
+    rmi:
+      ntp_server: NTP-Server
+      ntp_enabled: NTP enabled?
+      tftp_server: TFTP-Server
+      tftp_file: TFTP-Dateiname
+      dhcp_enabled: DHCP enabled?
   cards:
     no_contexts_assigned: |
       ACHTUNG! Es ist noch kein Kontext zugeordnet!

@@ -31,7 +31,7 @@ module CardTerminalsDatatableHelper
       column << "RENDER"
       column << "RENDER"
 
-      column << "  " # dummy for action links
+      column << " RENDER  " # dummy for action links
     end
   end
 
@@ -59,6 +59,7 @@ RSpec.describe CardTerminalsDatatable, type: :model do
       card_terminal_path: "",
       connector_path: "",
       show_link: "",
+      check_card_terminal_path: "",
       edit_link: "",
       delete_link: "",
       render: "RENDER"
@@ -109,9 +110,8 @@ RSpec.describe CardTerminalsDatatable, type: :model do
     subject { datatable.to_json }
     it { expect(datatable).to be_a_kind_of CardTerminalsDatatable }
     it { expect(parse_json(subject, "recordsTotal")).to eq(3) }
-    it { expect(parse_json(subject, "recordsFiltered")).to eq(2) }
-    it { expect(parse_json(subject, "data/0")).to eq(card_terminal2array(ct2)) }
-    it { expect(parse_json(subject, "data/1")).to eq(card_terminal2array(ct3)) }
+    it { expect(parse_json(subject, "recordsFiltered")).to eq(1) }
+    it { expect(parse_json(subject, "data/0")).to eq(card_terminal2array(ct3)) }
   end 
 
   describe "column 1: condition_message " do
@@ -234,7 +234,7 @@ RSpec.describe CardTerminalsDatatable, type: :model do
     it { expect(datatable).to be_a_kind_of CardTerminalsDatatable }
     it { expect(parse_json(subject, "recordsTotal")).to eq(3) }
     it { expect(parse_json(subject, "recordsFiltered")).to eq(1) }
-    it { expect(parse_json(subject, "data/0")).to eq(card_terminal2array(ct1)) }
+    it { expect(parse_json(subject, "data/0")).to eq(card_terminal2array(ct2)) }
   end 
 
 

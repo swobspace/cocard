@@ -1,0 +1,53 @@
+@startuml
+top to bottom direction
+
+!theme cocard from ..
+
+interface "CardTerminals::RMI" as rmi {
+  card_terminal
+  +available_actions()
+  +rmi_port()
+  +reboot()
+  +get_idle_message()
+  +set_idle_message(message)
+  +verify_pin(iccsn)
+  +supported?()
+  +get_info()
+}
+
+class "CardTerminals::RMI::OrgaV1" as rmi_koco {
+  card_terminal
+  +available_actions()    
+  +rmi_port()
+  +reboot()
+  +get_idle_message()
+  +set_idle_message(message)
+  +verify_pin(iccsn)
+  +remote_pairing()
+  +supported?() -> true
+  +get_info()
+  +get_properties()
+  +set_properties()
+}
+
+class "CardTerminals::RMI::Null" as rmi_null {
+  card_terminal
+  +available_actions()
+  +rmi_port()
+  +supported?() -> false
+}
+
+abstract "CardTerminals::RMI::Base" as rmi_base {
+  card_terminal
+  #available_actions()
+  #rmi_port()
+  +supported?() -> false
+}
+
+rmi <|.. rmi_koco
+rmi <|.. rmi_null
+rmi_koco <|-- rmi_base
+rmi_null <|-- rmi_base
+
+
+@enduml

@@ -13,12 +13,9 @@
       </div>
       <div role="toolbar" class="ms-auto pt-3">
         <%= render RebootButtonComponent.new(item: card_terminal) if (can? :reboot, card_terminal) %>
-        <%= button_to(check_card_terminal_path(@card_terminal),
-                      title: t('card_terminals.check_connectivity'),
-                      class: 'btn btn-secondary me-1') do %>
-          <i class="fa-solid fa-fw fa-plug-circle-bolt"></i>
-        <% end %>
-
+        <%= render CardTerminal::PairingButtonComponent
+                   .new(card_terminal: card_terminal) if (can? :manage, card_terminal) %>
+        <%= render HealthCheckButtonComponent.new(item: card_terminal) %>
         <%= render AcknowledgeButtonComponent.new(
                      notable: card_terminal, small: false,
                      readonly: cannot?(:manage, card_terminal)
@@ -41,22 +38,11 @@
                            item: card_terminal.connector,
                            small: true) %>
               <%= render LinkToComponent.new(item: card_terminal.connector) %>
-              <% if can?(:update, card_terminal) and 
-                    card_terminal.condition != Cocard::States::OK and
-                    card_terminal.connector.presence %>
-                <%= button_to("Reset", card_terminal,
-                      method: 'patch',
-                      class: 'btn btn-sm btn-warning ms-3',
-                      title: t('card_terminals.reset_connector'),
-                      form: {
-                        data: {
-                          "turbo-confirm": t('card_terminals.reset_connector') + '?'
-                        }
-                      },
-                      params: {card_terminal: { connector_id: nil}}
-                    ) if card_terminal.condition > Cocard::States::OK
+
+              <%= render CardTerminal::ResetConnectorButtonComponent.new(
+                           card_terminal: card_terminal
+                         ) if can?(:update, card_terminal)
                  %>
-              <% end %>
             </td>
           </tr>
 
@@ -87,7 +73,9 @@
 
           <tr>
             <th class="w-25 pe-3"><%= t('attributes.ip')%>:</th>
-            <td><%= card_terminal.ip %></td>
+            <td><%= link_to(card_terminal.ip, card_terminal.admin_url,
+                            class: 'primary-link') if card_terminal.admin_url.present?
+                 %></td>
           </tr>
 
           <tr>
@@ -209,9 +197,9 @@
           </tr>
 
           <tr>
-            <th class="w-25 pe-3"><%= t('attributes.current_ip')%>:</th>
+            <th class="w-25 pe-3"><%= t('attributes.real_ip')%>:</th>
             <td>
-              <%= card_terminal.current_ip || "n/a" %>
+              <%= card_terminal.real_ip || "n/a" %>
               <%= render WarnIpMismatchComponent.new(item: card_terminal) %>
               <%= render UseCurrentIpComponent.new(item: card_terminal) if can? :manage, card_terminal %>
             </td>
@@ -233,6 +221,31 @@
           </tr>
 
         </table>
+
+        <% if Cocard.enable_ticlient %>
+          <div class="card-title border-bottom bg-light mt-2 pt-2 ps-2">
+            <div class="d-flex justify-content-between">
+              <h6>KT-Proxy (TI-Gateway)</h6>
+              <div> 
+                <%= link_to(raw(%Q[<i class="fa-solid fa-pencil"></i>]),
+                            edit_kt_proxy_path(card_terminal.kt_proxy),
+                            class: 'primary-link') if card_terminal.kt_proxy.present? %>
+                             
+              </div>
+            </div>
+          </div>
+          <% if card_terminal.kt_proxy.present? %>
+            <table class="table table-sm table-borderless">
+              <%= render partial: 'kt_proxies/kt_proxy', locals: {kt_proxy: card_terminal.kt_proxy} %>
+            </table>
+          <% else %>
+            <div class="text-end">
+            <%= link_to "KT-Proxy generieren", 
+                        new_card_terminal_kt_proxy_path(card_terminal),
+                        class: 'btn btn-warning' %>
+            </div>
+          <% end %>
+        <% end %>
 
         <div class="card-title border-bottom bg-light mt-2 pt-2 ps-2">
           <h6><%= t('attributes.product_information')%></h6>

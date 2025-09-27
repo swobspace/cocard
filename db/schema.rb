@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_07_12_081955) do
+ActiveRecord::Schema[7.2].define(version: 2025_09_10_115820) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -327,6 +327,27 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_12_081955) do
     t.index ["scheduled_at"], name: "index_good_jobs_on_scheduled_at", where: "(finished_at IS NULL)"
   end
 
+  create_table "kt_proxies", force: :cascade do |t|
+    t.bigint "card_terminal_id"
+    t.string "uuid", null: false
+    t.string "name", default: ""
+    t.inet "wireguard_ip"
+    t.inet "incoming_ip"
+    t.integer "incoming_port"
+    t.inet "outgoing_ip"
+    t.integer "outgoing_port"
+    t.inet "card_terminal_ip"
+    t.integer "card_terminal_port", default: 4742
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "ti_client_id", null: false
+    t.index ["card_terminal_id"], name: "index_kt_proxies_on_card_terminal_id"
+    t.index ["incoming_ip", "incoming_port"], name: "in_socket", unique: true
+    t.index ["outgoing_ip", "outgoing_port"], name: "out_socket", unique: true
+    t.index ["ti_client_id"], name: "index_kt_proxies_on_ti_client_id"
+    t.index ["uuid"], name: "index_kt_proxies_on_uuid", unique: true
+  end
+
   create_table "locations", force: :cascade do |t|
     t.string "lid", null: false
     t.string "description", default: ""
@@ -434,6 +455,15 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_12_081955) do
     t.index ["workplace_id"], name: "index_terminal_workplaces_on_workplace_id"
   end
 
+  create_table "ti_clients", force: :cascade do |t|
+    t.bigint "connector_id", null: false
+    t.string "name", null: false
+    t.string "url", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["connector_id"], name: "index_ti_clients_on_connector_id", unique: true
+  end
+
   create_table "wobauth_authorities", force: :cascade do |t|
     t.bigint "authorizable_id"
     t.string "authorizable_type"
@@ -517,9 +547,11 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_12_081955) do
   add_foreign_key "card_terminals", "locations"
   add_foreign_key "connector_contexts", "connectors"
   add_foreign_key "connector_contexts", "contexts"
+  add_foreign_key "kt_proxies", "ti_clients"
   add_foreign_key "networks", "locations"
   add_foreign_key "notes", "wobauth_users", column: "user_id"
   add_foreign_key "taggings", "tags"
   add_foreign_key "terminal_workplaces", "card_terminals"
   add_foreign_key "terminal_workplaces", "workplaces"
+  add_foreign_key "ti_clients", "connectors"
 end

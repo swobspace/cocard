@@ -4,7 +4,11 @@ class NetworksController < ApplicationController
 
   # GET /networks
   def index
-    @networks = Network.all
+    if @locatable
+      @networks =  @locatable.networks
+    else
+      @networks = Network.all
+    end
     respond_with(@networks)
   end
 

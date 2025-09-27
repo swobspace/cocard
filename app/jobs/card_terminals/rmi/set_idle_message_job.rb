@@ -1,11 +1,11 @@
 module CardTerminals
-  module RMI
+  class RMI
     class SetIdleMessageJob < ApplicationJob
       queue_as :rmi
 
       #
-      # perform() - all card terminals
-      # perform(card_terminal: ct) - specific card terminal
+      # perform(idle_message: idle_message) - all card terminals
+      # perform(card_terminal: ct, idle_message: idle_message) - specific card terminal
       #
       def perform(options = {})
         options = options.symbolize_keys
@@ -21,22 +21,27 @@ module CardTerminals
             end
           end
         else
+          # single card terminal
           @prefix = "SetIdleMessage:: card_terminal #{card_terminal}:: ".freeze
-          if check_requirements(card_terminal)
-            idle_message = prepare_message(card_terminal, idle_message)
-              @rmi.set_idle_message(idle_message)
-   
-            if @rmi.result['result'] == 'failure'
+          unless check_job_requirements(card_terminal)
+            Rails.logger.warn(@prefix + "not all requirements met")
+            return false
+          end
+          idle_message = prepare_message(card_terminal, idle_message)
+
+          card_terminal.rmi.set_idle_message(idle_message) do |result|
+            result.on_failure do |message|
               Rails.logger.warn("WARN:: #{card_terminal} - " +
-                                "could not set idle_message #{idle_message}")
+                                "could not set idle_message #{message}")
               Turbo::StreamsChannel.broadcast_prepend_to(
                 'set_idle_messages',
                 target: 'idle_messages',
                 partial: "idle_messages/idle_message",
                 locals: { card_terminal: card_terminal, success: false })
               return false
+            end
 
-            else
+            result.on_success do |message|
               Rails.logger.info("INFO:: #{card_terminal} - " +
                                 "idle_message set to #{idle_message}")
               card_terminal.update(idle_message: idle_message)
@@ -49,6 +54,10 @@ module CardTerminals
               return true
             end
 
+            result.on_unsupported do
+              Rails.logger.warn(@prefix + "Terminal or action not supported")
+              return false
+            end
           end
         end
       end
@@ -56,18 +65,13 @@ module CardTerminals
     private
       attr_reader :prefix
 
-      def check_requirements(card_terminal)
-        rmi = CardTerminals::RMI::Base.new(card_terminal: card_terminal)
-        if !rmi.valid
-          Rails.logger.warn(prefix + "CardTerminal does not meet requirements" + 
-                            rmi.messages.join(', '))
+      def check_job_requirements(card_terminal)
+        if !card_terminal.supports_rmi?
           false
-        elsif card_terminal.condition != Cocard::States::OK
-          Rails.logger.warn(prefix + "CardTerminal condition must be OK, skipping" + 
-                            rmi.messages.join(', '))
+        elsif !card_terminal.rmi.available_actions.include?(:get_idle_message)
+          Rails.logger.warn(prefix + "action not supported")
           false
         else
-          @rmi = rmi.rmi
           true
         end
       end

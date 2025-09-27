@@ -1,6 +1,6 @@
-= Konfiguration
+= Standard-Konfiguration
 :author: Wolfgang Barth
-:revdate: 2024-08-11
+:revdate: 2025-09-10
 
 NOTE: Die gesamte externe Konfiguration findet zum jetzigen Zeitpunkt als Umgebungsvariablen noch in `env.production` statt. In einer späteren Version werden ggf. einige Variablen in eine externe Konfigurationsdatei ausgelagert.
 

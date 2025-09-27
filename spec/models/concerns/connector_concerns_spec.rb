@@ -29,6 +29,10 @@ RSpec.describe ConnectorConcerns, type: :model do
     end
   end
 
+  describe "#rmi" do
+    it { expect(connector.rmi).to be_kind_of Connectors::RMI }
+  end
+
   describe "#sds_port" do
     it { expect(connector.sds_port).to eq(80) }
   end
@@ -72,6 +76,39 @@ RSpec.describe ConnectorConcerns, type: :model do
       connector.update(rebooted_at: 2.minutes.before(Time.current))
       connector.reload
       expect(connector.reboot_active?).to be_falsey
+    end
+  end
+
+  describe "#use_ticlient?" do
+    describe "with enable_ticlient disabled" do
+      it "returns false" do
+        expect(Cocard).to receive(:enable_ticlient).and_return(false)
+        expect(connector.use_ticlient?).to be_falsey
+      end
+    end
+
+    describe "with enable_ticlient enabled" do
+      before(:each) do
+        expect(Cocard).to receive(:enable_ticlient).and_return(true)
+      end
+
+      describe "with identification == KOKOSNUSS" do
+        before(:each) do
+          expect(connector).to receive(:identification).and_return("KOKOSNUSS")
+        end
+        it "returns false" do
+          expect(connector.use_ticlient?).to be_falsey
+        end
+      end
+
+      describe "with identification == RISEG-RHSK" do
+        before(:each) do
+          expect(connector).to receive(:identification).and_return("RISEG-RHSK")
+        end
+        it "returns false" do
+          expect(connector.use_ticlient?).to be_truthy
+        end
+      end
     end
   end
 end

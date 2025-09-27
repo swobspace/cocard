@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get "reports/duplicate_terminal_ips"
+  resources :ti_clients do
+    resources :kt_proxies, module: :ti_clients, only: [:index]
+  end
+  resources :kt_proxies
   get "idle_messages", to: "idle_messages#index", as: :idle_messages
   get "idle_messages/edit"
   put "idle_messages", to: "idle_messages#update"
@@ -65,12 +70,13 @@ Rails.application.routes.draw do
       get :edit_idle_message
       put :update_idle_message
       post :reboot
+      post :remote_pairing
     end
     resources :notes, module: :card_terminals
+    resource :kt_proxy, module: :card_terminals
   end
   resources :contexts
   resources :connectors do
-    resources :logs, only: [:index, :show, :destroy], module: :connectors
     collection do
       get :sindex
     end
@@ -83,12 +89,16 @@ Rails.application.routes.draw do
       post :check
       post :reboot
     end
+    resources :logs, only: [:index, :show, :destroy], module: :connectors
+    resources :card_terminals, only: [:index, :show, :destroy], module: :connectors
     resources :notes, module: :connectors
+    resource :ti_client, module: :connectors
   end
   resources :locations do
     resources :connectors, only: [:index, :show, :destroy], module: :locations
     resources :card_terminals, only: [:index, :show, :destroy], module: :locations
     resources :cards, only: [:index, :show, :destroy], module: :locations
+    resources :networks, only: [:index, :show, :destroy], module: :locations
   end
   root to: 'home#index'
   get 'home/index'

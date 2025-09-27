@@ -64,11 +64,11 @@ RSpec.describe CardTerminal, type: :model do
   end
 
   describe "#to_s" do
-    it { expect(ct.to_s).to match('ACME Term - CT_ID_0123 (ACX)') }
+    it { expect(ct.to_s).to match('ACME Term (ACX)') }
   end
 
   describe "#fullname" do
-    it { expect(ct.fullname).to match('K128: ACME Term - CT_ID_0123 (ACX)') }
+    it { expect(ct.fullname).to match('K128: ACME Term (ACX)') }
   end
 
   describe "on #save" do
@@ -109,7 +109,7 @@ RSpec.describe CardTerminal, type: :model do
        :product_type_information=> {:product_type=>"KardTerm", :product_type_version=>"1.2.3.4"},
        :product_identification=> {
          :product_vendor_id=>"Heinrich GmbH",
-         :product_code=>nil,
+         :product_code=>"HEINER4711",
          :product_version=> { :local=>{:hw_version=>"5.6.7", :fw_version=>"8.9.1"}}
        },
        :product_miscellaneous=> {:product_vendor_name=>nil, :product_name=>nil}}
@@ -122,6 +122,10 @@ RSpec.describe CardTerminal, type: :model do
     it { expect(ct.product_information.product_type_information).to include(
            :product_type=>"KardTerm", :product_type_version=>"1.2.3.4"
          )}
+
+    describe "#identification" do
+      it { expect(ct.identification).to eq("Heinrich GmbH-HEINER4711") }
+    end
   end
 
 
@@ -408,11 +412,16 @@ RSpec.describe CardTerminal, type: :model do
   end
 
   describe "removing connector" do
+    before(:each) do 
+      ct.update(connected: true)
+      ct.reload
+    end
     it "resets ct_id and current_ip" do
       ct.update(connector_id: nil)
       ct.reload
       expect(ct.ct_id).to be_blank
       expect(ct.current_ip).to be_nil
+      expect(ct.connected).to be_falsey
     end
   end
 end

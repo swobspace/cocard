@@ -35,6 +35,7 @@ module Cocard
                   client_system: con_ctx.context&.client_system,
                   workplaces: cct.workplaces
                 ).call
+                ::CardTerminal.remove_duplicate_ips(creator.card_terminal)
               end
             end
           else

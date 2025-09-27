@@ -61,6 +61,7 @@
       <div data-toggle-fields-target="hidden" data-value="clientcert">
         <%= form.input :client_certificate_ids, as: :select, 
                        collection: ClientCertificate.all,
+                       label_method: :to_s,
                        input_html: { multiple: true }
          %>
       </div>

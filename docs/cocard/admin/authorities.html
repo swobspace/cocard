@@ -13,6 +13,11 @@
   <nav class="navbar">
     <div class="navbar-brand">
       <a class="navbar-item" href="../..">Cocard</a>
+      <div class="navbar-item search hide-for-print">
+        <div id="search-field" class="field">
+          <input id="search-input" type="text" placeholder="Suche ...">
+        </div>
+      </div>
       <button class="navbar-burger" data-target="topbar-nav">
         <span></span>
         <span></span>
@@ -56,7 +61,13 @@
     <a class="nav-link" href="../user/connector.html">Konnektor</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="../user/card-terminal.html">Kartenterminal</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../user/card-terminal-health-check.html">Health-Check</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../user/card.html">Karte</a>
@@ -136,6 +147,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="ldap-authentication.html">LDAP-Authentifikation</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ti-gateway.html">TI-Client (RISE TI Gateway)</a>
+  </li>
 </ul>
   </li>
 </ul>
@@ -171,7 +185,16 @@
     <a class="nav-link" href="../installation/podman/reverse-proxy.html">Reverse Proxy</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../installation/configuration.html">Konfiguration</a>
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Konfiguration</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../installation/configuration.html">Standard-Konfiguration</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../installation/cocard_yml.html">Erweiterte Konfiguration</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../installation/checkmk.html">CheckMK Integration</a>
@@ -289,7 +312,10 @@ Bis auf die Rolle <code>Admin</code> können alle Rollen kombiniert werden.
 <p>Erstellen von Acknowledges für Logeinträge</p>
 </li>
 <li>
-<p>Reboot Connector</p>
+<p>Reboot Konnektor</p>
+</li>
+<li>
+<p>Reboot und Remote Pairing Kartenterminal</p>
 </li>
 </ul>
 </div>
@@ -350,7 +376,10 @@ Bis auf die Rolle <code>Admin</code> können alle Rollen kombiniert werden.
 <p>PinStatus prüfen und PinVerify ausführen (sowohl einzeln bei der Karte als auch über die Sammelübersicht zur Pin-Verifizierung)</p>
 </li>
 <li>
-<p>Reboot Connector</p>
+<p>Reboot Konnektor</p>
+</li>
+<li>
+<p>Reboot Kartenterminal</p>
 </li>
 </ul>
 </div>
@@ -421,5 +450,9 @@ Bis auf die Rolle <code>Admin</code> können alle Rollen kombiniert werden.
 <script async src="../../_/js/vendor/highlight.js"></script>
 <script src="../../_/js/vendor/medium-zoom.min.js"></script>
 <script>mediumZoom('img:not(.copy-icon');</script>
+<script src="../../_/js/vendor/lunr.js"></script>
+<script src="../../_/js/vendor/lunr-languages.js"></script>
+<script src="../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../.." data-snippet-length="100" data-stylesheet="../../_/css/search.css"></script>
+<script async src="../../search-index.js"></script>
   </body>
 </html>

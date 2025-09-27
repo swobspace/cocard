@@ -10,7 +10,7 @@
 ----
 mkdir /etc/ssl/telematik
 cd /etc/ssl/telematik
-mkdir certs crl newcerts private reqs
+mkdir certs crl newcerts private reqs p12
 chmod 700 private
 touch index.txt
 echo 1000 > serial
@@ -38,7 +38,7 @@ openssl ecparam -name brainpoolP256r1 \
 .EC-Parameterdatei zur Wiederverwendung generieren
 ----
 openssl genpkey -genparam -algorithm ec -out ec-params.pem \
-  -pkeyopt ec_paramgen_curve:brainpoolP256r1 \
+  -pkeyopt ec_paramgen_curve:P-256 \
   -pkeyopt ec_param_enc:named_curve
 ----
 

@@ -41,7 +41,7 @@ class ConnectorsController < ApplicationController
   end
 
   def check
-    Connectors::ConnectivityCheckJob.perform_now(connector: @connector)
+    Connectors::HealthCheckJob.perform_now(connector: @connector)
     respond_with(@connector) do |format|
       format.turbo_stream { head :ok }
     end
@@ -99,19 +99,22 @@ class ConnectorsController < ApplicationController
   end
 
   def reboot
-    if @connector.rebootable?
-      result = Connectors::RMI.new(connector: @connector).call(:reboot)
-      if result.success?
-        msg = result.response
-        flash[:success] = msg
-      else
-        msg = "Reboot fehlgeschlagen: " + result.response
+    @connector.rmi.reboot do |result|
+      result.on_success do |message|
+        flash[:success] = message
+        Note.create(notable: @connector, user: current_user, message: message)
+      end
+
+      result.on_failure do |message|
+        msg = "Reboot fehlgeschlagen: " + message
         flash[:alert] = msg
       end
-      Note.create(notable: @connector, user: current_user, message: msg)
-    else
-      flash[:warning] = "Reboot des Konnektors wird nicht unterstützt"
+
+      result.on_unsupported do
+        flash[:warning] = "Reboot des Konnektors wird nicht unterstützt"
+      end
     end
+
     respond_with(@connector) do |format|
       format.turbo_stream
     end

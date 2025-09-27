@@ -1,0 +1,17 @@
+<div class="card-title border-bottom bg-light pt-2 ps-2">
+  <h6><%= t('attributes.ti_client')%></h6>
+</div>
+<% if connector.ti_client.present? %>
+  <%= render partial: 'connectors/ti_client', locals: { ti_client: connector.ti_client } %>
+<% else %>
+  <% if !readonly %>
+    <div class="text-end">
+      <%= link_to "TI-Client hinzufügen", new_connector_ti_client_path(connector),
+                  class: 'btn btn-warning'
+       %>
+    </div>
+  <% else %>
+    Kein TI-Client vorhanden
+  <% end %>
+<% end %>
+

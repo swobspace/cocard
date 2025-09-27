@@ -6,7 +6,7 @@ module Cocard
     #  create fake response for Cocard::Soap::GetResourceInformation
     #
     let(:connector_yml) do
-      File.join(Rails.root, 'spec', 'fixtures', 'files', 'connector.sds')
+      File.join(Rails.root, 'spec', 'fixtures', 'files', 'connector_services.yaml')
     end
 
     let(:resource_yml) do

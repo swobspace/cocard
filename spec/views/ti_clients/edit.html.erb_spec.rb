@@ -1,0 +1,25 @@
+require 'rails_helper'
+
+RSpec.describe "ti_clients/edit", type: :view do
+  let(:ti_client) { FactoryBot.create(:ti_client) }
+  before(:each) do
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    @ability.can :manage, KTProxy
+    allow(controller).to receive(:current_ability) { @ability }
+    allow(controller).to receive(:controller_name) { 'ti_clients' }
+    allow(controller).to receive(:action_name) { 'edit' }
+
+    assign(:ti_client, ti_client)
+  end
+
+  it "renders the edit ti_client form" do
+    render
+
+    assert_select "form[action=?][method=?]", ti_client_path(ti_client), "post" do
+      assert_select "select[name=?]", "ti_client[connector_id]"
+      assert_select "input[name=?]", "ti_client[name]"
+      assert_select "input[name=?]", "ti_client[url]"
+    end
+  end
+end

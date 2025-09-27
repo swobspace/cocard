@@ -7,6 +7,7 @@ class Connector < ApplicationRecord
   include Taggable
 
   # -- associations
+  has_one :ti_client, dependent: :restrict_with_error
   has_many :logs, as: :loggable, dependent: :destroy
   has_and_belongs_to_many :locations
   has_and_belongs_to_many :client_certificates
@@ -64,7 +65,7 @@ class Connector < ApplicationRecord
   end
 
   def identification
-    "#{product_information.product_vendor_id}-#{product_information.product_code}"
+    "#{product_information&.product_vendor_id}-#{product_information&.product_code}"
   end
 
   def service(svcname)

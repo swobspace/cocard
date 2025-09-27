@@ -46,10 +46,10 @@ module CardTerminals
         description: "some more infos",
         ip: '127.51.100.17',
         current_ip: '127.51.100.17',
-        condition: 0,
+        condition: 1,
         condition_message: "Condition Message",
         idle_message: "Willkommen!",
-        connected: true,
+        connected: false,
         firmware_version: '5.3.4',
         location: ber,
         supplier: 'ACME Ltd. International',
@@ -68,11 +68,12 @@ module CardTerminals
         current_ip: '127.203.113.4',
         idle_message: "Willkommen!",
         ct_id: 'CT_ID_0124',
-        condition: 2,
+        condition: 0,
         firmware_version: '4.9.3',
         mac: '11:22:33:44:55:66',
         supplier: 'ACME Ltd. International',
         connector: conn,
+        connected: true,
         last_ok: ts - 1.week,
         last_check: 1.week.after(ts),
         network: network,
@@ -186,6 +187,15 @@ module CardTerminals
       it_behaves_like "a card_terminal query"
     end
 
+    context "with :connector_id" do
+      subject { Query.new(card_terminals, {connector_id: conn.id}) }
+      before(:each) do
+        @matching = [ct2]
+        @nonmatching = [ct1, ct3]
+      end
+      it_behaves_like "a card_terminal query"
+    end
+
     context "with :description" do
       subject { Query.new(card_terminals, {description: "more info"}) }
       before(:each) do
@@ -234,8 +244,8 @@ module CardTerminals
     context "with :last_ok" do
       subject { Query.new(card_terminals, {last_ok: '2025-03'}) }
       before(:each) do
-        @matching = [ct1, ct2]
-        @nonmatching = [ct3]
+        @matching = [ct1]
+        @nonmatching = [ct2, ct3]
       end
       it_behaves_like "a card_terminal query"
     end
@@ -260,6 +270,15 @@ module CardTerminals
 
     context "with :lid" do
       subject { Query.new(card_terminals, {lid: 'ber'}) }
+      before(:each) do
+        @matching = [ct1]
+        @nonmatching = [ct2, ct3]
+      end
+      it_behaves_like "a card_terminal query"
+    end
+
+    context "with :location_id" do
+      subject { Query.new(card_terminals, {location_id: ber.id}) }
       before(:each) do
         @matching = [ct1]
         @nonmatching = [ct2, ct3]
@@ -297,7 +316,7 @@ module CardTerminals
     end
 
     context "with :condition 0" do
-      subject { Query.new(card_terminals, {condition: 1}) }
+      subject { Query.new(card_terminals, {condition: 0}) }
       before(:each) do
         @matching = [ct2]
         @nonmatching = [ct1, ct3]
@@ -305,8 +324,8 @@ module CardTerminals
       it_behaves_like "a card_terminal query"
     end
 
-    context "with :condition 0" do
-      subject { Query.new(card_terminals, {condition: "WARN"}) }
+    context "with :condition OK" do
+      subject { Query.new(card_terminals, {condition: "OK"}) }
       before(:each) do
         @matching = [ct2]
         @nonmatching = [ct1, ct3]
@@ -335,8 +354,8 @@ module CardTerminals
     context "with :connected" do
       subject { Query.new(card_terminals, {connected: true}) }
       before(:each) do
-        @matching = [ct1]
-        @nonmatching = [ct2, ct3]
+        @matching = [ct2]
+        @nonmatching = [ct1, ct3]
       end
       it_behaves_like "a card_terminal query"
     end
@@ -393,7 +412,6 @@ module CardTerminals
         @nonmatching = [ct2, ct3]
         ct1.update_acknowledge_id; ct1.save
       end
-      it { puts CardTerminal.acknowledged }
       it_behaves_like "a card_terminal query"
     end
 
@@ -410,10 +428,10 @@ module CardTerminals
     context "with failed: true" do
       subject { Query.new(card_terminals, {failed: true}) }
       before(:each) do
-        @matching = [ct2]
-        @nonmatching = [ct1, ct3]
+        ct1.update(connector_id: conn.id)
+        @matching = [ct1]
+        @nonmatching = [ct2, ct3]
       end
-      it { puts CardTerminal.pluck(:condition) }
       it_behaves_like "a card_terminal query"
     end
 
@@ -461,7 +479,6 @@ module CardTerminals
 
         it "searches for mac" do
           search = Query.new(card_terminals, {search: '22:33:44'})
-          puts CardTerminal.pluck(:mac)
           expect(search.all).to contain_exactly(ct2)
         end
 

@@ -1,0 +1,79 @@
+<%= render 'shared/turbo-cache-control' %>
+
+<h1><%= t('controller.kt_proxies') %></h1>
+
+<div data-controller="datatables">
+  <%= content_tag :table, role: :datatable,
+        id: "kt_proxies_table",
+        class: "table table-bordered table-responsive-xl",
+        data: {
+          'datatables-target': 'datatable',
+          order: [[0, 'asc']].to_json
+        } do %>
+    <thead>
+      <tr>
+            <th><%= t('attributes.ti_client') %></th>
+            <th><%= t('attributes.card_terminal') %></th>
+            <th><%= t('attributes.uuid') %></th>
+            <th><%= t('attributes.name') %></th>
+            <th><%= t('attributes.wireguard_ip') %></th>
+            <th><%= t('attributes.incoming_ip') %></th>
+            <th><%= t('attributes.incoming_port') %></th>
+            <th><%= t('attributes.outgoing_ip') %></th>
+            <th><%= t('attributes.outgoing_port') %></th>
+            <th><%= t('attributes.card_terminal_ip') %></th>
+            <th><%= t('attributes.card_terminal_port') %></th>
+            <th class="nosort"><%= t('cocard.action') %></th>
+      </tr>
+    </thead>
+    <tfoot class="search">
+      <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th class="nosearch"></th>
+      </tr>
+    </tfoot>
+    <tbody>
+      <% @kt_proxies.each do |kt_proxy| %>
+        <%= content_tag(:tr, id: dom_id(kt_proxy), class: dom_class(kt_proxy)) do %>
+                <td><%= link_to(kt_proxy.ti_client,
+                                kt_proxy.ti_client,
+                                class: 'primary-link') if kt_proxy.ti_client.present?
+                     %></td>
+                <td><%= link_to(kt_proxy.card_terminal,
+                                kt_proxy.card_terminal,
+                                class: 'primary-link') if kt_proxy.card_terminal.present?
+                     %></td>
+                <td><%= kt_proxy.uuid %></td>
+                <td><%= kt_proxy.name %></td>
+                <td><%= kt_proxy.wireguard_ip %></td>
+                <td><%= kt_proxy.incoming_ip %></td>
+                <td><%= kt_proxy.incoming_port %></td>
+                <td><%= kt_proxy.outgoing_ip %></td>
+                <td><%= kt_proxy.outgoing_port %></td>
+                <td><%= kt_proxy.card_terminal_ip %></td>
+                <td><%= kt_proxy.card_terminal_port %></td>
+                <td class="text-nowrap">
+            <%= show_link kt_proxy %>
+            <%= edit_link kt_proxy %>
+            <%= delete_link kt_proxy %>
+          </td>
+        <% end %>
+      <% end %>
+    </tbody>
+  <% end %>
+</div>
+
+<br />
+
+<%= back_link %>
+<%= new_link KTProxy %>

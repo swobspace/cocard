@@ -11,22 +11,30 @@ class Connectors::RebootJob < ApplicationJob
         Connectors::RebootJob.perform_later(connector: conn)
       end
     else
+      # single connector
       if !connector.rebootable?
         Rails.logger.warn("WARN:: reboot connector #{connector.name} via cron not supported")
       elsif connector.boot_mode != 'cron'
         Rails.logger.warn("WARN:: reboot connector #{connector.name} not enabled")
       else
-        result = Connectors::RMI.new(connector: connector).call(:reboot)
-        if result.success?
-          msg = result.response
-          Rails.logger.debug("DEBUG:: reboot connector #{connector.name} via cron: #{msg}")
-        else
-          msg = "Reboot fehlgeschlagen: " + result.response
-          Rails.logger.warn("WARN:: reboot connector #{connector.name} via cron failed: #{msg}")
-        end
-        if Cocard.auto_reboot_connectors_note
-          msg = "Via Cron: #{msg}"
-          Note.create!(notable: connector, user: myadmin, message: msg)
+        connector.rmi.reboot do |result|
+          result.on_success do |message|
+            msg = message
+            Rails.logger.debug("DEBUG:: reboot connector #{connector.name} via cron: #{msg}")
+            if Cocard.auto_reboot_connectors_note
+              msg = "Via Cron: #{msg}"
+              Note.create!(notable: connector, user: myadmin, message: msg)
+            end
+          end
+
+          result.on_failure do |message|
+            msg = "Reboot fehlgeschlagen: " + message
+            Rails.logger.warn("WARN:: reboot connector #{connector.name} via cron failed: #{msg}")
+          end
+
+          result.on_unsupported do |result|
+            Rails.logger.warn("WARN:: reboot connector #{connector.name} not supported")
+          end
         end
       end
     end

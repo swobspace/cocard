@@ -81,6 +81,34 @@ EOTMPL
     fetch_config('enable_ldap_authentication', false)
   end
 
+  def self.enable_ticlient
+    fetch_config('enable_ticlient', false)
+  end
+
+  def self.ktproxy_defaults
+    Hash(fetch_config('ktproxy_defaults', {}))
+  end
+
+  def self.ktproxy_equal_ports
+    fetch_config('ktproxy_equal_ports', false)
+  end
+
+  def self.ntp_server
+    fetch_config('terminal_ntp_server', nil)
+  end
+
+  def self.ntp_enabled
+    fetch_config('terminal_ntp_enabled', true)
+  end
+
+  def self.tftp_server
+    fetch_config('terminal_tftp_server', nil)
+  end
+
+  def self.tftp_file
+    fetch_config('terminal_tftp_file', nil)
+  end
+
   Rails.application.routes.default_url_options = {
     host: (ENV['URL_HOST'] || 'localhost'),
     port: (ENV['URL_PORT'] || '3000'),

@@ -15,6 +15,7 @@ class CardTerminal < ApplicationRecord
   belongs_to :network, optional: true
   has_many :card_terminal_slots, dependent: :destroy
   has_many :cards, through: :card_terminal_slots
+  has_one :kt_proxy
 
   # -- configuration
   broadcasts_refreshes
@@ -46,7 +47,7 @@ class CardTerminal < ApplicationRecord
 
   # -- common methods
   def to_s
-    "#{name} - #{ct_id} (#{location&.lid})"
+    "#{name} (#{location&.lid})"
   end
 
   def fullname
@@ -75,9 +76,9 @@ class CardTerminal < ApplicationRecord
       return set_condition( Cocard::States::NOTHING,
                      "Kein Konnektor zugewiesen" )
     end
-    if ip != current_ip
+    if ip != real_ip
         return set_condition( Cocard::States::UNKNOWN,
-                              "IP Mismatch: gefundene IP (#{current_ip}) und konfigurierte IP (#{ip}) weichen von einander ab" )
+                              "IP Mismatch: gefundene IP (#{real_ip}) und konfigurierte IP (#{ip}) weichen von einander ab" )
     end
     if reboot_active?
       return set_condition(Cocard::States::WARNING,
@@ -120,8 +121,8 @@ class CardTerminal < ApplicationRecord
   end
 
   def update_ip_and_location
-    if ip.nil? and current_ip.present?
-      self[:ip] = current_ip
+    if ip.nil? and real_ip.present?
+      self[:ip] = real_ip
     end
 
     if will_save_change_to_ip?
@@ -133,6 +134,7 @@ class CardTerminal < ApplicationRecord
     if connector_id.nil?
       self[:ct_id] = nil
       self[:current_ip] = nil
+      self[:connected] = false
     end
   end
 
@@ -148,6 +150,17 @@ class CardTerminal < ApplicationRecord
     end
   end
 
+  def real_ip
+    if kt_proxy.present?
+      kt_proxy.card_terminal_ip
+    else
+      current_ip
+    end
+  end
+
+  def identification
+    "#{product_information&.product_vendor_id}-#{product_information&.product_code}"
+  end
 
 private
 

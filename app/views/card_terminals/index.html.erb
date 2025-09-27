@@ -1,6 +1,8 @@
 <%= render 'shared/turbo-cache-control' %>
+<%= turbo_stream_from :card_terminal_check %>
 
 <h1><%= t('controller.card_terminals') %></h1>
+<p><%= @locatable %></p>
 
 <div id="card_terminals">
   <div data-controller="datatables"

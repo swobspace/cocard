@@ -32,6 +32,11 @@
               main_app.idle_messages_edit_path,
               class: "dropdown-item" %>
       <% end %>
+      <div class="dropdown-divider"></div>
+      <%= link_to raw('<span class="fa-solid fw fa-triangle-exclamation" aria-hidden="true"></span> ' +
+                      t('card_terminals.duplicate_ips')),
+            main_app.reports_duplicate_terminal_ips_path,
+            class: "dropdown-item" %>
     </div>
   </li>
 <% end %>

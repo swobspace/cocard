@@ -1,0 +1,69 @@
+= KT-Proxy Stuff (RISE TI-Gateway)
+:author: Wolfgang Barth
+:navdate: 2025-09-08
+:imagesdir: ../images
+
+#work in progress#
+
+NOTE: Lose Sammlung von Snippets und Ideen zum TI-Gateway von RISE und dem TI-Client
+
+
+./opt/rise/tic*/config/stores/cardterminal_proxies.json
+[source,json]
+----
+{
+    "proxies": [
+        {
+            "id": "09178083-c453-4c5c-911e-45cf49f2ee4f",
+            "name": "KT Aufnahme 01",
+            "wireguardIp": "172.16.55.29",
+            "incomingIp": "10.255.200.166",
+            "incomingPort": 8101,
+            "outgoingIp": "10.255.200.165",
+            "outgoingPort": 8101,
+            "cardTerminalIp": "10.200.149.78",
+            "cardTerminalPort": 4742
+        }
+    ]
+}
+----
+
+== Massengenerierung von KT-Proxies
+
+.Aufruf der Rails-Konsole
+[source,ruby]
+----
+podman exec -it cocard bin/rails console
+----
+
+.Auswahl des Konnektors
+[source,ruby]
+----
+conn = Connector.where(short_name: 'K26').first
+conn.card_terminals.count
+----
+
+.Auswahl des TI-Clients
+[source,ruby]
+----
+tic = TIClient.where("name like ?", '%05%').first
+----
+
+.KTProxies generieren
+[source,ruby]
+----
+conn.card_terminals.each do |ct|
+  attribs = Cocard::NewKTProxy.new(card_terminal: ct).attributes
+  tic.kt_proxies.create(attribs.merge(ti_client_id: tic.id))
+end
+----
+
+== Sequenzdiagramm
+
+IMPORTANT: Beim Diagramm handelt es sich um eine Planung, die noch nicht umgesetzt ist, weil das REST-Interface des RISE TI-Clients noch nicht zur Verfügung steht (Stand 27.09.2025)
+
+.Voraussetzungen
+* Konnektor ProductType == vKon
+
+.Sequenzdiagramm
+image::kt-proxy.svg[]

@@ -17,5 +17,13 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.acronym "CSV"
   inflect.acronym "RMI"
   inflect.acronym "TI"
+  inflect.acronym "KT"
   inflect.irregular "single_picture", "situation_picture"
+end
+
+Rails.autoloaders.each do |autoloader|
+  autoloader.inflector.inflect(
+    "kt_proxy" => "KTProxy",
+    "ti_client" => "TIClient",
+  )
 end

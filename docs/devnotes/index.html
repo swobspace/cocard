@@ -13,6 +13,11 @@
   <nav class="navbar">
     <div class="navbar-brand">
       <a class="navbar-item" href="..">Cocard</a>
+      <div class="navbar-item search hide-for-print">
+        <div id="search-field" class="field">
+          <input id="search-input" type="text" placeholder="Suche ...">
+        </div>
+      </div>
       <button class="navbar-burger" data-target="topbar-nav">
         <span></span>
         <span></span>
@@ -47,6 +52,24 @@
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="cocard-services.html">Cocard::Services</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">RMI</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rmi/connectors_rmi.html">Connectors::RMI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="rmi/card_terminals_rmi.html">CardTerminals::RMI</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="rmi/orga6141.html">RMI::OrgaV1</a>
+  </li>
+</ul>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="conditions.html">Zustände</a>
@@ -139,5 +162,9 @@
 <script async src="../_/js/vendor/highlight.js"></script>
 <script src="../_/js/vendor/medium-zoom.min.js"></script>
 <script>mediumZoom('img:not(.copy-icon');</script>
+<script src="../_/js/vendor/lunr.js"></script>
+<script src="../_/js/vendor/lunr-languages.js"></script>
+<script src="../_/js/search-ui.js" id="search-ui-script" data-site-root-path=".." data-snippet-length="100" data-stylesheet="../_/css/search.css"></script>
+<script async src="../search-index.js"></script>
   </body>
 </html>

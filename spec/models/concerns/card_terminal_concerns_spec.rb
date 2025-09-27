@@ -8,6 +8,7 @@ RSpec.describe CardTerminalConcerns, type: :model do
     FactoryBot.create(:card_terminal,
       mac: '000DF808F6AD',
       ip: '127.51.100.17',
+      current_ip: '127.51.100.17',
       ct_id: "CT_ID_4711",
       displayname: 'CARDTERMINAL 14',
       name: "Product 1704",
@@ -183,18 +184,20 @@ RSpec.describe CardTerminalConcerns, type: :model do
     end
 
     describe "with supported terminal" do
-      let(:product_information) { instance_double(Cocard::ProductInformation) }
       let(:ct) do
         FactoryBot.create(:card_terminal, :with_mac,
           firmware_version: '3.9.1'
         )
       end
       it "supports_rmi? is true" do
-        expect(ct).to receive(:product_information).at_least(:once).and_return(product_information)
-        expect(product_information).to receive(:product_code).at_least(:once).and_return('ORGA6100')
+        allow(ct).to receive(:identification).and_return('INGHC-ORGA6100')
         expect(ct.supports_rmi?).to be_truthy
       end
     end
+  end
+
+  describe "#rmi" do
+    it { expect(ct.rmi).to be_kind_of CardTerminals::RMI }
   end
 
   describe "#rebootable?" do
@@ -237,5 +240,73 @@ RSpec.describe CardTerminalConcerns, type: :model do
       ct.reload
       expect(ct.reboot_active?).to be_falsey
     end
+  end
+
+  describe "#use_ktproxy?" do
+    describe "with enabled_ticlient disabled" do
+      it "returns false" do
+        expect(Cocard).to receive(:enable_ticlient).at_least(:once).and_return(false)
+        expect(ct.use_ktproxy?).to be_falsey
+      end
+    end
+
+    describe "with enabled_ticlient enabled" do
+      before(:each) do
+        expect(Cocard).to receive(:enable_ticlient).at_least(:once).and_return(true)
+      end
+
+      describe "with kt_proxy present" do
+        it "returns true" do
+          expect(ct).to receive(:kt_proxy).and_return(instance_double(KTProxy))
+          expect(ct.use_ktproxy?).to be_truthy
+        end
+      end
+
+      describe "without connector" do
+        it "returns true" do
+          expect(ct).to receive(:connector).and_return(nil)
+          expect(ct.use_ktproxy?).to be_falsey
+        end
+      end
+
+      describe "with connector.use_ticlient? == true" do
+        it "returns true" do
+          conn = instance_double(Connector)
+          expect(ct).to receive(:connector).at_least(:once).and_return(conn)
+          expect(conn).to receive(:use_ticlient?).and_return(true)
+          expect(ct.use_ktproxy?).to be_truthy
+        end
+      end
+    end
+  end
+
+  describe "#remove_duplicate_ips" do
+    let!(:ct2) do
+      FactoryBot.create(:card_terminal, :with_mac, 
+        ip: '127.51.100.17',
+        #current_ip: '127.51.100.17'
+        current_ip: '0.0.0.0'
+      )
+    end
+
+    it "delete ip from other terminal" do
+      expect(ct).to receive(:condition).and_return(Cocard::States::OK)
+      CardTerminal.remove_duplicate_ips(ct)
+      ct.reload
+      ct2.reload
+      expect(ct.ip.to_s).to eq("127.51.100.17")
+      expect(ct2.ip).to be_nil
+    end
+
+    it "does delete ip from other terminal" do
+      expect(ct).to receive(:condition).and_return(Cocard::States::UNKNOWN)
+      CardTerminal.remove_duplicate_ips(ct)
+      ct.reload
+      ct2.reload
+      expect(ct.ip.to_s).to eq("127.51.100.17")
+      expect(ct2.ip.to_s).to eq("127.51.100.17")
+    end
+
+
   end
 end

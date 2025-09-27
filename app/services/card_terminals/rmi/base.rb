@@ -1,13 +1,10 @@
 module CardTerminals
-  module RMI
+  class RMI
     #
-    # Remote Management Interface for Orga 6141 Version 1.03
+    # Base class
     #
     class Base
-      attr_reader :card_terminal, :valid, :messages, :rmi
-
-      #
-      # rmi = CardTerminal::RMI::Base.new(options)
+      attr_reader :card_terminal, :messages, :result
       #
       # mandantory options:
       # * :card_terminal - card_terminal object
@@ -16,27 +13,31 @@ module CardTerminals
         options = options.symbolize_keys
         @card_terminal = options.fetch(:card_terminal)
         @messages = []
-        @valid, @rmi = check_terminal
+        @session = {}
+        @result = {}
+        @logger = ActiveSupport::Logger.new(
+                    File.join(Rails.root, 'log', 'card_terminals_rmi.log')
+                  )
+      end
+
+      def available_actions
+        []
+      end
+
+      def rmi_port
+        443
+      end
+
+      def supported?
+        false
+      end
+
+      def firmware_version
+        card_terminal.firmware_version
       end
 
     private
-
-      def check_terminal
-        # if card_terminal.pin_mode == 'off'
-        #   @messages << "CardTerminal pin mode == 'off', please check settings"
-        #   return [false, nil]
-        # end
-
-        pc = card_terminal.product_information&.product_code
-        fw = card_terminal.firmware_version
-        if pc == "ORGA6100" && fw >= '3.9.0'
-           [true, CardTerminals::RMI::OrgaV1.new(card_terminal: card_terminal)]
-        else
-           @messages << "CardTerminal #{pc} with firmware #{fw} is not supported"
-           [false, nil]
-        end
-      end
-
+      attr_reader :session, :logger
     end
   end
 end

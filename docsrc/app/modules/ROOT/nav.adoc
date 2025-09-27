@@ -4,6 +4,7 @@
 ** xref:user/conditions.adoc[]
 ** xref:user/connector.adoc[]
 ** xref:user/card-terminal.adoc[]
+*** xref:user/card-terminal-health-check.adoc[]
 ** xref:user/card.adoc[]
 ** xref:user/logs.adoc[]
 ** xref:user/acknowledges.adoc[]
@@ -29,3 +30,4 @@
 ** xref:admin/client-certificates.adoc[]
 // *** xref:certs/telematik-ca.adoc[]
 ** xref:admin/ldap-authentication.adoc[]
+** xref:admin/ti-gateway.adoc[]

@@ -1,0 +1,12 @@
+<%= button_to(raw(%Q[<i class="fa-solid fa-fw fa-handshake"></i>]), 
+              remote_pairing_card_terminal_path(card_terminal),
+      method: 'post',
+      class: button_class,
+      title: title,
+      form: {
+        data: {
+          "turbo-confirm": confirmation
+        }
+      }
+    )
+ %>

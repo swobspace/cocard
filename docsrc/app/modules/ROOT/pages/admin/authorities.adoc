@@ -20,7 +20,8 @@ Ein Administrator hat alle Zugriffsrechte. Sofern die Rolle vorhanden ist, werde
 ** Connector#id_contract (Vertragsinformationen) lesen
 * Vollzugriff auf Konnektoren
 * Erstellen von Acknowledges für Logeinträge
-* Reboot Connector
+* Reboot Konnektor
+* Reboot und Remote Pairing Kartenterminal
 
 
 == Rolle CardTerminalManager
@@ -40,7 +41,8 @@ Ein Administrator hat alle Zugriffsrechte. Sofern die Rolle vorhanden ist, werde
 
 * Alles Lesen (*)
 * PinStatus prüfen und PinVerify ausführen (sowohl einzeln bei der Karte als auch über die Sammelübersicht zur Pin-Verifizierung)
-* Reboot Connector
+* Reboot Konnektor
+* Reboot Kartenterminal
 
 == Rolle Support
 

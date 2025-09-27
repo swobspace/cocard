@@ -22,6 +22,7 @@ class Ability
     # user has at least one role, perhaps more
     elsif @user.authorities.present?
       can [:read, :navigate], :all
+      can :manage, Report
       can :create, Note
       cannot [:read, :navigate], ClientCertificate
 
@@ -31,6 +32,7 @@ class Ability
 
       if @user.role?(:connector_manager)
         can :manage, Connector
+        can [:reboot, :remote_pairing], CardTerminal
         can :manage, Note, notable_type: ['Log', 'Connector']
       else
         cannot [:read], Connector, :id_contract
@@ -53,7 +55,7 @@ class Ability
       if @user.role?(:verify_pin)
         can [:read, :verify], VerifyPin
         can [:get_pin_status, :verify_pin], Card
-        can [:reboot], Connector
+        can [:reboot], [ Connector, CardTerminal ]
       elsif !@user.role?(:card_manager)
         cannot [:read, :verify], VerifyPin
       end

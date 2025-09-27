@@ -1,5 +1,16 @@
 = Changelog
 
+== 0.9.0 - 2025-09-27
+
+* Suchfunktion für die Online-Dokumentation
+* [experimental] Unterstützung für KT-Proxys (RISE TI-Gateway) 
+* Refactoring der RMI-Schnittstellen für Kartenterminals und Konnektoren
+* Kartenterminals: Reboot für Orga 6141 wieder hergestellt.
+* Kartenterminals: Remote Pairing für Orga 6141 ab Version 3.9.1
+* Kartenterminals: Report Terminals mit doppelter IP
+* Kartenterminals: doppelte IPs werden entfernt, wenn ein Kartenterminal mit der gleichen IP aktuell als aktiv und OK über den Konnektor beim Scan gefunden wird.
+* Kartenterminals: Health-Check erweitert - prüft per RMI wenn möglich auch MAC-Adresse und Terminalname gegen die Cocard-Konfiguration.
+
 == 0.8.5 - 2025-08-31
 
 * Kartenterminal: trennt man den Konnektor, wird die CT_ID und die vom Konnektor gefundene IP gelöscht.

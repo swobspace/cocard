@@ -6,7 +6,7 @@ module Cocard
     #  create fake response for Cocard::Soap::VerifyPin
     #
     let(:connector_yml) do
-      File.join(Rails.root, 'spec', 'fixtures', 'files', 'connector.sds')
+      File.join(Rails.root, 'spec', 'fixtures', 'files', 'connector_services.yaml')
     end
 
     let(:verifypin_yml) do

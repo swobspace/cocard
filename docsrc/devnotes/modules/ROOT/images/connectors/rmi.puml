@@ -1,0 +1,37 @@
+@startuml
+top to bottom direction
+
+!theme cocard from ..
+
+interface "Connector::RMI" as rmi {
+  connector
+  +available_actions()
+  +supported?()
+  +reboot()
+}
+
+class "Connector::RMI::KoCoBox" as rmi_koco {
+  connector
+  +available_actions()    
+  +supported?()
+  +reboot()
+}
+class "Connector::RMI::Null" as rmi_null {
+  connector
+  +available_actions()
+  +supported?()
+}
+
+abstract "Connector::RMI::Base" as rmi_base {
+  connector
+  #available_actions()
+  +supported?()   
+}
+
+rmi <|.. rmi_koco
+rmi <|.. rmi_null
+rmi_koco <|-- rmi_base
+rmi_null <|-- rmi_base
+
+
+@enduml

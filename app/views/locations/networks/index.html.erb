@@ -1,0 +1,46 @@
+<%= turbo_frame_tag 'networks' do %>
+  <div data-controller="datatables">
+    <%= content_tag :table, role: :datatable,
+          id: "networks_table",
+          class: "table table-bordered table-responsive",
+          data: {
+            'datatables-target': 'datatable',
+            order: [[0, 'asc']].to_json
+          } do %>
+      <thead>
+        <tr>
+              <th><%= t('attributes.netzwerk') %></th>
+              <th><%= t('attributes.description') %></th>
+              <th><%= t('attributes.accessibility') %></th>
+              <th class="nosort"><%= t('cocard.action') %></th>
+        </tr>
+      </thead>
+      <tfoot class="search">
+        <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th class="nosearch"></th>
+        </tr>
+      </tfoot>
+      <tbody>
+        <% @networks.each do |network| %>
+          <%= content_tag(:tr, id: dom_id(network), class: dom_class(network)) do %>
+                  <td><%= network.to_cidr_s %></td>
+                  <td><%= network.description %></td>
+                  <td><%= t(network.accessibility, scope: :accessibility) %></td>
+                  <td class="text-nowrap">
+              <%= show_link network,
+                            class: 'btn btn-sm btn-secondary',
+                            data: { "turbo-frame" => "_top" }
+               %>
+              <%= delete_link [@locatable, network],
+                              class: 'btn btn-sm btn-danger'
+               %>
+            </td>
+          <% end %>
+        <% end %>
+      </tbody>
+    <% end %>
+  </div>
+<% end %>

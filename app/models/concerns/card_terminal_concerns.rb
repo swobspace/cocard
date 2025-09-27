@@ -17,6 +17,18 @@ module CardTerminalConcerns
     scope :with_description_containing, ->(query) { joins(:rich_text_description).merge(ActionText::RichText.where <<~SQL, "%" + query + "%") }
     body ILIKE ?
    SQL
+
+    def self.remove_duplicate_ips(card_terminal)
+      return if card_terminal.ip.nil?
+      return if card_terminal.ip.to_s == '0.0.0.0'
+      return if card_terminal.condition != Cocard::States::OK
+      if card_terminal.ip == card_terminal.real_ip
+        CardTerminal.where(ip: card_terminal.ip).each do |ct|
+          next if ct.id == card_terminal.id
+          ct.update(ip: nil, current_ip: nil) 
+        end
+      end
+    end
   end
 
   def update_location_by_ip
@@ -71,17 +83,16 @@ module CardTerminalConcerns
     }
   end
 
+  def rmi
+    @rmi ||= CardTerminals::RMI.new(card_terminal: self)
+  end
+
   def supports_rmi?
-   CardTerminals::RMI::Base.new(card_terminal: self).valid
+    rmi.supported?
   end
 
   def rebootable?
-    rmi = CardTerminals::RMI::Base.new(card_terminal: self)
-    if rmi.nil?
-      false
-    else
-      rmi.respond_to?(:reboot)
-    end
+    @rebootable ||= rmi.available_actions.include?(:reboot)
   end
 
   def rebooted?
@@ -105,12 +116,19 @@ module CardTerminalConcerns
 
   # get default port from rmi class
   def default_rmi_port
-    rmi = CardTerminals::RMI::Base.new(card_terminal: self)
-    if rmi.nil? || !rmi.valid
-      0
-    else
-      rmi.rmi.class::RMI_PORT
-    end
+    rmi.rmi_port || 443
   end
 
+  def use_ktproxy?
+    return false unless Cocard.enable_ticlient
+    return true if kt_proxy.present? 
+    return false unless connector.present?
+    connector.use_ticlient?
+  end
+
+  def admin_url
+    return nil if ip.nil?
+    return nil if ip.to_s == '0.0.0.0'
+    "https://#{ip}"
+  end
 end

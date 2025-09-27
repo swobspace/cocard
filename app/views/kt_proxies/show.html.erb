@@ -1,0 +1,46 @@
+<div class="card mb-3">
+  <div class="card-header">
+    <div class="d-flex w-100 justify-content-between">
+      <div>
+        <span class="subtitle">
+          <%= t('activerecord.models.kt_proxy') %>: 
+          #<%= @kt_proxy.id %>
+        </span>
+        <h4 class="title"><%= @kt_proxy %></h4>
+      </div>
+      <div role="toolbar" class="pt-3">
+        <%= edit_link(@kt_proxy) %>
+        <%= delete_link(@kt_proxy) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <div class="row">
+      <div class="col-lg-6">
+        <table class="table table-sm table-borderless">
+        
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.card_terminal')%>:</th>
+            <td><%= link_to(@kt_proxy.card_terminal,
+                            @kt_proxy.card_terminal,
+                            class: 'primary-link') if @kt_proxy.card_terminal.present?
+                 %></td>
+          </tr>
+
+          <%= render partial: 'kt_proxy', locals: {kt_proxy: @kt_proxy} %>
+
+        </table>
+      </div>
+      <div class="col-lg-6">
+        <div class="card-title border-bottom bg-light pt-2 ps-2">
+          <h6>Konfiguration</h6>
+        </div>
+          <%= @kt_proxy.to_builder.target! %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= back_link %>
+<%= new_link KTProxy %>

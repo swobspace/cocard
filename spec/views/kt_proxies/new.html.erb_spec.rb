@@ -1,0 +1,32 @@
+require 'rails_helper'
+
+RSpec.describe "kt_proxies/new", type: :view do
+  before(:each) do
+    assign(:kt_proxy, FactoryBot.build(:kt_proxy))
+
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    @ability.can :manage, KTProxy
+    allow(controller).to receive(:current_ability) { @ability }
+    allow(controller).to receive(:controller_name) { 'kt_proxies' }
+    allow(controller).to receive(:action_name) { 'new' }
+  end
+
+  it "renders new kt_proxy form" do
+    render
+
+    assert_select "form[action=?][method=?]", kt_proxies_path, "post" do
+      assert_select "select[name=?]", "kt_proxy[ti_client_id]"
+      assert_select "select[name=?]", "kt_proxy[card_terminal_id]"
+      assert_select "input[name=?]", "kt_proxy[uuid]"
+      assert_select "input[name=?]", "kt_proxy[name]"
+      assert_select "input[name=?]", "kt_proxy[wireguard_ip]"
+      assert_select "input[name=?]", "kt_proxy[incoming_ip]"
+      assert_select "input[name=?]", "kt_proxy[incoming_port]"
+      assert_select "input[name=?]", "kt_proxy[outgoing_ip]"
+      assert_select "input[name=?]", "kt_proxy[outgoing_port]"
+      assert_select "input[name=?]", "kt_proxy[card_terminal_ip]"
+      assert_select "input[name=?]", "kt_proxy[card_terminal_port]"
+    end
+  end
+end

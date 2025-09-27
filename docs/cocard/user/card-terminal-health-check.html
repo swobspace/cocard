@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Kartenterminal: Health-Check :: Cocard</title>
+    <meta name="generator" content="Antora 3.1.12">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">Cocard</a>
+      <div class="navbar-item search hide-for-print">
+        <div id="search-field" class="field">
+          <input id="search-input" type="text" placeholder="Suche ...">
+        </div>
+      </div>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="abstand">
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+          <div class="navbar-item dark">Cocard</div>
+           <a class="navbar-item" href="../../devnotes/index.html">DevNotes</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="cocard" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Cocard</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Cocard</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="dashboard.html">Dashboard</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="common.html">Allgemeines zur Oberfläche</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="conditions.html">Zustände</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="connector.html">Konnektor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="card-terminal.html">Kartenterminal</a>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="card-terminal-health-check.html">Health-Check</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="card.html">Karte</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="logs.html">Event Logs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="acknowledges.html">Notizen und Acknowledges</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ti-lagebild.html">TI-Lagebild</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="verify-pin.html">PIN-Verifizierung</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="workplaces.html">Arbeitsplätze</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="tags.html">Tags</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Administration</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Konnektor</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../admin/connector-edit.html">Konnektor anlegen/bearbeiten</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../admin/connector-autoreboot.html">Automatischer Reboot</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../admin/card-terminal-edit.html">Kartenterminal anlegen/bearbeiten</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../admin/idle-messages-edit.html">Ruhebildschirme setzen</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/card-new.html">Karte anlegen/bearbeiten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/contexts.html">Kontexte</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/locations.html">Standorte</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/networks.html">Netzwerke</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/operational_states.html">Betriebszustände</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/jobs.html">Jobverwaltung</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/authorities.html">Berechtigungen</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/smcb-remote-pin.html">Remote PIN für SMC-B Karten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/client-certificates.html">Client-Zertifikate</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/ldap-authentication.html">LDAP-Authentifikation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/ti-gateway.html">TI-Client (RISE TI Gateway)</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../installation/index.html">Installation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../installation/podman/quickstart.html">Quickstart: podman pods</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../first-steps.html">Erste Schritte</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../installation/podman/podman-compose.html">Quickstart: docker-compose</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../first-steps.html">Erste Schritte</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/podman/podman-systemd.html">Systemd und Quadlets</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/podman/reverse-proxy.html">Reverse Proxy</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Konfiguration</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../installation/configuration.html">Standard-Konfiguration</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../installation/cocard_yml.html">Erweiterte Konfiguration</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/checkmk.html">CheckMK Integration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Cocard</span>
+    <span class="version">default</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Cocard</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../devnotes/index.html">DevNotes</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../devnotes/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Cocard</a></li>
+    <li><a href="card-terminal.html">Kartenterminal</a></li>
+    <li><a href="card-terminal-health-check.html">Health-Check</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Kartenterminal: Health-Check</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Der Health-Check führt einige Prüfungen über das Remote-Management-Interface (RMI) des Kartenterminals durch. Cocard unterstützt RMI bisher nur für das Orga6141 ab Version 3.9.0.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/ct/card-terminal-action-buttons.png" alt="card terminal action buttons">
+</div>
+<div class="title">Abbildung 1. Aktionschaltfläche eines Kartenterminals</div>
+</div>
+<div class="paragraph">
+<p>Mit dem Button <span class="image"><img src="../_images/common/health-check-button.png" alt="health check button"></span> führt Cocard einen Health-Check des Kartenterminals durch.</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Was</th>
+<th class="tableblock halign-left valign-top">Voraussetzung</th>
+<th class="tableblock halign-left valign-top">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ping</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Erreichbarkeit per Ping</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TCP/443</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Erreichbarkeit des RMI-Interfaces und der Weboberfläche des Kartenteminals</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Terminalname</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RMI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stimmt der Name des Terminals in Cocard mit dem auf dem Terminal überein?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MAC-Adresse</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RMI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stimmt die MAC-Adresse am Terminal mit der MAC-Adresse in Cocard überein? Falls nicht, ist sehr wahrscheinlich die in Cocard eingetragene IP-Adresse falsch und es wird ein anderes Terminal geprüft.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Darüber hinaus werden per RMI weitere Werte geprüft, wenn in <a href="../installation/cocard_yml.html" class="xref page"><code>cocard.yml</code></a> Defaultwerte gesetzt wurden. Die Konfiguration in <code>cocard.yml</code> ist komplett optional.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_beispiel_ausgaben"><a class="anchor" href="#_beispiel_ausgaben"></a>Beispiel-Ausgaben</h2>
+<div class="sectionbody">
+<div class="sect3">
+<h4 id="_erfolgreicher_check"><a class="anchor" href="#_erfolgreicher_check"></a>Erfolgreicher Check</h4>
+<div class="paragraph">
+<p>Im ersten Beispiel können Werte per RMI vom Kartenterminal abgefragt werden. MAC-Adresse und Name stimmen mit der Cocard-Konfiguration überein, die IP-Adresse in Cocard ist daher korrekt. Darüber hinaus sind Defaultwerte für NTP und TFTP gesetzt, der NTP-Server stimmt überein, der Eintrag für den TFTP-Server am Kartenterminal weicht vom Default ab.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/ct/ct-health-check-ok.png" alt="ct health check ok">
+</div>
+<div class="title">Abbildung 2. Erfolgreicher Check: MAC und Terminalname stimmen mit der Cocard-Konfiguration überein.</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_falsche_ip_adresse_in_cocard"><a class="anchor" href="#_falsche_ip_adresse_in_cocard"></a>Falsche IP-Adresse in Cocard</h3>
+<div class="paragraph">
+<p>In diesem Beispiel meldet das Kartenterminal eine andere MAC-Adresse zurück als in Cocard hinterlegt. Daher ist hier sehr wahrscheinlich die in Cocard hinterlegte IP-Adresse falsch und Cocard fragt ein anderes Kartenterminal. In Umgebungen mit per DHCP vergebener dynamischer IP-Adresse können IP-Wechsel schon mal vorkommen.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/ct/ct-health-check-wrong-ip.png" alt="ct health check wrong ip">
+</div>
+<div class="title">Abbildung 3. MAC-Adressen stimmen nicht überein! Cocard prüft vermutlich das falsche Terminal (IP-Adresse in Cocard ist falsch)</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ping_nicht_möglich"><a class="anchor" href="#_ping_nicht_möglich"></a>Ping nicht möglich</h3>
+<div class="paragraph">
+<p>Ist ein Ping gar nicht möglich, sollte man im Abschnitt <em>Status</em> prüfen, ob das Terminal doch ggf. mit einem Konnektor verbunden ist. Falls ja, ist hier auch die in Cocard hinterlegte IP-Adresse nicht mehr aktuell.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/ct/ct-health-check-ping-failed.png" alt="ct health check ping failed">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_rmi_port_nicht_erreichbar"><a class="anchor" href="#_rmi_port_nicht_erreichbar"></a>RMI-Port nicht erreichbar</h3>
+<div class="paragraph">
+<p>Wenn der Port TCP/443 nicht erreichbar ist, Ping aber durchaus funktioniert wird die Verbindung möglicherweise durch eine Firewall gefiltert.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/ct/ct-health-check-rmi-port-error.png" alt="ct health check rmi port error">
+</div>
+<div class="title">Abbildung 4. RMI-Port TCP/443 nicht erreichbar</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_zeitsperre_aktiv"><a class="anchor" href="#_zeitsperre_aktiv"></a>Zeitsperre aktiv</h3>
+<div class="paragraph">
+<p>Bei zu vielen Fehlversuchen - etwa wenn die verwendete Admin-PIN falsch ist - sperrt das Kartenterminal den Zugriff für einige Zeit.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/ct/ct-health-check-guard-time-active.png" alt="ct health check guard time active">
+</div>
+<div class="title">Abbildung 5. Guard time active: zu viele Fehler beim Login - Zeitsperre aktiv</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_kartenterminal_in_einem_nicht_erreichbaren_netzwerk"><a class="anchor" href="#_kartenterminal_in_einem_nicht_erreichbaren_netzwerk"></a>Kartenterminal in einem nicht erreichbaren Netzwerk</h3>
+<div class="paragraph">
+<p>Wenn Cocard und Konnektor in unterschiedlichen Netzwerken stehen, ist es denkbar, dass der Konnektor zwar mit dem Kartenterminal sprechen kann, aber Cocard keinen direkten Zugriff darauf hat. In diesem Falle kann man in Cocard beim Netzwerk in den Einstellungen Ping deaktivieren. Beim Health-Check gibt Cocard dann eine entsprechende Info aus:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/ct/ct-health-check-ping-deactivated.png" alt="ct health check ping deactivated">
+</div>
+<div class="title">Abbildung 6. Ping für das Netzwerk des Kartenterminals deaktiviert</div>
+</div>
+<div class="paragraph">
+<p>Cocard verzichtet dann auch bei den periodischen Abfragen des Kartenterminals auf einen Ping und verlässt sich ausschließlich auf den Zustand, den der Konnektor vermeldet.</p>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <span>Wolfgang Barth (C) 2024-2025</span>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/vendor/medium-zoom.min.js"></script>
+<script>mediumZoom('img:not(.copy-icon');</script>
+<script src="../../_/js/vendor/lunr.js"></script>
+<script src="../../_/js/vendor/lunr-languages.js"></script>
+<script src="../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../.." data-snippet-length="100" data-stylesheet="../../_/css/search.css"></script>
+<script async src="../../search-index.js"></script>
+  </body>
+</html>
