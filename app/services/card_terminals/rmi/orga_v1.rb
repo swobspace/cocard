@@ -151,23 +151,7 @@ module CardTerminals
       end
 
       def get_info
-        ret = get_properties(%w[
-                net_lan_macAddr
-                sys_terminalName
-                net_lan_dhcpEnabled
-                net_lan_ipAddr
-                net_lan_ipAddrStatic
-                net_lan_ipAddrDhcp
-                rmi_smcb_pinEnabled 
-                rmi_pairingEHealthTerminal_enabled
-                sys_firmwareVersion
-                sys_firmwareBuildDate
-                sys_ntp_enabled
-                sys_ntp_serverIpAddr
-                sys_locale_timeZone
-                update_serverIpAddr
-                update_fileName
-              ])
+        ret = get_properties(info_properties)
         if ret.success?
           ret.value = Info.new(ret.value)
         end
@@ -563,6 +547,28 @@ module CardTerminals
         msg.gsub(/[^ 0-9A-Za-zÄÖÜäöüß!?#$&_\/*+.,;'-]/, '_')
       end
 
+      def info_properties
+        props = %w[
+                    net_lan_macAddr
+                    sys_terminalName
+                    net_lan_dhcpEnabled
+                    net_lan_ipAddr
+                    net_lan_ipAddrStatic
+                    net_lan_ipAddrDhcp
+                    rmi_smcb_pinEnabled 
+                    sys_firmwareVersion
+                    sys_firmwareBuildDate
+                    sys_ntp_enabled
+                    sys_ntp_serverIpAddr
+                    sys_locale_timeZone
+                    update_serverIpAddr
+                    update_fileName
+                  ]
+        if firmware_version >= '3.9.1'
+          props << "rmi_pairingEHealthTerminal_enabled"
+        end
+        props
+      end
     end
   end
 end
