@@ -32,23 +32,23 @@ class ConditionIconComponent < ViewComponent::Base
     case item.condition
       when Cocard::States::CRITICAL
         @color = "danger"
-        @icon = "fa-solid fa-circle-exclamation"
+        @icon = "fa-solid fa-fw fa-circle-exclamation"
         @text = "CRITICAL"
       when Cocard::States::UNKNOWN
         @color = "info"
-        @icon = "fa-solid fa-circle-question #{textcolor}"
+        @icon = "fa-solid fa-fw fa-circle-question #{textcolor}"
         @text = "UNKNOWN"
       when Cocard::States::WARNING
         @color = "warning"
-        @icon = "fa-solid fa-triangle-exclamation #{textcolor}"
+        @icon = "fa-solid fa-fw fa-triangle-exclamation #{textcolor}"
         @text = "WARNING"
       when Cocard::States::OK
         @color = "success"
-        @icon = "fa-solid fa-circle-check"
+        @icon = "fa-solid fa-fw fa-circle-check"
         @text = "OK"
       else
         @color = "secondary"
-        @icon = "fa-solid fa-circle-xmark"
+        @icon = "fa-solid fa-fw fa-circle-xmark"
         @text = "NOTHING"
     end
   end

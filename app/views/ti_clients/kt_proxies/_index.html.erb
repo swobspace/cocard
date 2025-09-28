@@ -1,3 +1,5 @@
+<%= turbo_stream_from :card_terminal_check %>
+
 <%= turbo_frame_tag('kt_proxies') do %>
   <div class="card mt-3">
     <div class="card-header">
@@ -26,6 +28,8 @@
           <thead>
             <tr>
                   <th><%= t('attributes.card_terminal') %></th>
+                  <th class="text-center"><%= t('attributes.condition') %></th>
+                  <th><%= t('attributes.condition_message') %></th>
                   <th><%= t('attributes.uuid') %></th>
                   <th><%= t('attributes.name') %></th>
                   <th><%= t('attributes.wireguard_ip') %></th>
@@ -50,27 +54,37 @@
                   <th></th>
                   <th></th>
                   <th></th>
+                  <th></th>
+                  <th></th>
                   <th class="nosearch"></th>
             </tr>
           </tfoot>
           <tbody>
             <% kt_proxies.each do |kt_proxy| %>
               <%= content_tag(:tr, id: dom_id(kt_proxy), class: dom_class(kt_proxy)) do %>
-                      <td><%= link_to(kt_proxy.card_terminal,
-                                      kt_proxy.card_terminal,
-                                      data: { "turbo-frame": "_top" },
-                                      class: 'primary-link') if kt_proxy.card_terminal.present?
-                           %></td>
-                      <td><%= kt_proxy.uuid %></td>
-                      <td><%= kt_proxy.name %></td>
-                      <td><%= kt_proxy.wireguard_ip %></td>
-                      <td><%= kt_proxy.incoming_ip %></td>
-                      <td><%= kt_proxy.incoming_port %></td>
-                      <td><%= kt_proxy.outgoing_ip %></td>
-                      <td><%= kt_proxy.outgoing_port %></td>
-                      <td><%= kt_proxy.card_terminal_ip %></td>
-                      <td><%= kt_proxy.card_terminal_port %></td>
-                      <td class="text-nowrap">
+                <td><%= link_to(kt_proxy.card_terminal,
+                                kt_proxy.card_terminal,
+                                data: { "turbo-frame": "_top" },
+                                class: 'primary-link') if kt_proxy.card_terminal.present?
+                     %></td>
+                <td class="text-center">
+                  <%= render ConditionIconComponent.new(item: kt_proxy.card_terminal, 
+                                                        small: true) %>
+                  <%= render HealthCheckButtonComponent.new(item: kt_proxy.card_terminal,
+                                                            variant: :small) %>
+
+                </td>
+                <td><%= kt_proxy.card_terminal&.condition_message %></td>
+                <td><%= kt_proxy.uuid %></td>
+                <td><%= kt_proxy.name %></td>
+                <td><%= kt_proxy.wireguard_ip %></td>
+                <td><%= kt_proxy.incoming_ip %></td>
+                <td><%= kt_proxy.incoming_port %></td>
+                <td><%= kt_proxy.outgoing_ip %></td>
+                <td><%= kt_proxy.outgoing_port %></td>
+                <td><%= kt_proxy.card_terminal_ip %></td>
+                <td><%= kt_proxy.card_terminal_port %></td>
+                <td class="text-nowrap">
                   <%= show_link kt_proxy, data: { "turbo-frame" => "_top" } %>
                   <%= edit_link kt_proxy, data: { "turbo-frame" => "_top" } %>
                   <%= delete_link kt_proxy %>
