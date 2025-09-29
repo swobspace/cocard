@@ -12,9 +12,10 @@ Bei allen erreichbaren und RMI-fähigen Kartenterminals die TFTP-Server-IP setze
 podman exec -it cocard bin/rails console
 
 CardTerminal.where(condition: 0).each do |ct|
-  if ct.up? and ct.tcp_port_open?(443) and ct.supports_rmi?
+  if ct.tcp_port_open?(443) and ct.supports_rmi?
     rmi = CardTerminals::RMI::OrgaV1.new(card_terminal: ct)
-    rmi.set_properties({"update_serverIpAddr" => "10.200.149.49"})
+    rmi.set_properties({"update_serverIpAddr" => "10.200.149.49",
+                        "update_fileName" => "mctfirmware.dfu" })
   end
 end
 ----
