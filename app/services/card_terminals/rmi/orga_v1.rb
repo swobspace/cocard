@@ -34,6 +34,10 @@ module CardTerminals
       # send pin if requested until timeout
       #
       def verify_pin(iccsn)
+        unless rmi_port_reachable?
+          return Result.new(success?:false,message:"RMI-Port #{rmi_port} unreachable!")
+       end
+
         EM.run {
           ws = Faye::WebSocket::Client.new(ws_url, [], {
                    ping: 15,
@@ -159,6 +163,10 @@ module CardTerminals
       end
 
       def get_properties(properties)
+        unless rmi_port_reachable?
+          return Result.new(success?:false,message:"RMI-Port #{rmi_port} unreachable!")
+       end
+
         EM.run {
           ws = Faye::WebSocket::Client.new(ws_url, [], {
                    ping: 15,
@@ -240,6 +248,10 @@ module CardTerminals
       end
 
       def set_properties(properties)
+        unless rmi_port_reachable?
+          return Result.new(success?:false,message:"RMI-Port #{rmi_port} unreachable!")
+       end
+
         EM.run {
           ws = Faye::WebSocket::Client.new(ws_url, [], {
                    ping: 15,
@@ -311,6 +323,10 @@ module CardTerminals
       # reboot
       #
       def reboot
+        unless rmi_port_reachable?
+          return Result.new(success?:false,message:"RMI-Port #{rmi_port} unreachable!")
+       end
+
         EM.run {
           ws = Faye::WebSocket::Client.new(ws_url, [], {
                    ping: 15,
@@ -378,6 +394,10 @@ module CardTerminals
       # remote pairing
       #
       def remote_pairing
+        unless rmi_port_reachable?
+          return Result.new(success?:false,message:"RMI-Port #{rmi_port} unreachable!")
+       end
+
         EM.run {
           ws = Faye::WebSocket::Client.new(ws_url, [], {
                    ping: 15,
@@ -555,7 +575,7 @@ module CardTerminals
                     net_lan_ipAddr
                     net_lan_ipAddrStatic
                     net_lan_ipAddrDhcp
-                    rmi_smcb_pinEnabled 
+                    rmi_smcb_pinEnabled
                     sys_firmwareVersion
                     sys_firmwareBuildDate
                     sys_ntp_enabled
@@ -568,6 +588,10 @@ module CardTerminals
           props << "rmi_pairingEHealthTerminal_enabled"
         end
         props
+      end
+
+      def rmi_port_reachable?
+        card_terminal.tcp_port_open?(card_terminal.rmi_port)
       end
     end
   end
