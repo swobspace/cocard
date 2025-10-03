@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>CardTerminals::RMI::OrgaV1 :: Cocard</title>
-    <meta name="generator" content="Antora 3.1.12">
+    <meta name="generator" content="Antora 3.1.13">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
   </head>
@@ -164,9 +164,10 @@
 <pre>podman exec -it cocard bin/rails console
 
 CardTerminal.where(condition: 0).each do |ct|
-  if ct.up? and ct.tcp_port_open?(443) and ct.supports_rmi?
+  if ct.tcp_port_open?(443) and ct.supports_rmi?
     rmi = CardTerminals::RMI::OrgaV1.new(card_terminal: ct)
-    rmi.set_properties({"update_serverIpAddr" =&gt; "10.200.149.49"})
+    rmi.set_properties({"update_serverIpAddr" =&gt; "10.200.149.49",
+                        "update_fileName" =&gt; "mctfirmware.dfu" })
   end
 end</pre>
 </div>

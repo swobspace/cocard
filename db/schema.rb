@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_09_10_115820) do
+ActiveRecord::Schema[7.2].define(version: 2025_10_03_074926) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -108,6 +108,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_09_10_115820) do
     t.string "idle_message", default: ""
     t.datetime "rebooted_at", precision: nil
     t.datetime "last_check", precision: nil
+    t.string "admin_pin"
+    t.string "identification", default: ""
     t.index ["condition"], name: "index_card_terminals_on_condition"
     t.index ["connector_id"], name: "index_card_terminals_on_connector_id"
     t.index ["location_id"], name: "index_card_terminals_on_location_id"
