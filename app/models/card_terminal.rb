@@ -125,7 +125,7 @@ class CardTerminal < ApplicationRecord
       self[:ip] = real_ip
     end
 
-    if will_save_change_to_ip?
+    if will_save_change_to_ip? || network_id.blank?
       update_location_by_ip
     end
   end
