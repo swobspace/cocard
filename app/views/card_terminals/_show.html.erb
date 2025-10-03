@@ -220,6 +220,10 @@
             <td><%= card_terminal.firmware_version %></td>
           </tr>
 
+          <tr>
+            <th class="w-25 pe-3"><%= t('attributes.identification')%>:</th>
+            <td><%= card_terminal.identification %></td>
+          </tr>
         </table>
 
         <% if Cocard.enable_ticlient %>

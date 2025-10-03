@@ -110,6 +110,8 @@ module CardTerminals
           it { expect(ct.ip).to eq("10.200.149.235")}
           it { expect(ct.location_id).to eq(location.id) }
           it { expect(ct.slots).to eq(4)}
+          it { expect(ct.firmware_version).to eq("3.8.2")}
+          it { expect(ct.identification).to eq("INGHC-ORGA6100")}
           # it { expect(ct.is_physical).to be_truthy }
           it { expect(ct.connected).to be_truthy }
         end
