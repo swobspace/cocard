@@ -324,6 +324,15 @@ de:
       tftp_server: TFTP-Server
       tftp_file: TFTP-Dateiname
       dhcp_enabled: DHCP enabled?
+    edit_identification: |
+      ACHTUNG: die Bearbeitung der Identifikation ist nur für Fälle gedacht,
+      bei denen keine aktuelle Produktinformation vom Kartenterminal über den
+      Konnektor abgerufen werden kann. Etwa wenn das Kartenterminal noch nie 
+      mit einem Konnektor verbunden war und Cocard daher die Information nicht 
+      abrufen konnte. Oder wenn die Information in Cocard veraltet ist, weil das 
+      Kartenterminal länger außer Betrieb war.
+      Sobald das Kartenterminal über den Konnektor abgefragt wird, werden die 
+      hier gesetzten Informationen wieder überschrieben.
   cards:
     no_contexts_assigned: |
       ACHTUNG! Es ist noch kein Kontext zugeordnet!
