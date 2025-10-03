@@ -31,7 +31,7 @@ module CardTerminalsDatatableHelper
       column << "RENDER"
       column << "RENDER"
 
-      column << " RENDER  " # dummy for action links
+      column << "  " # dummy for action links
     end
   end
 

@@ -74,7 +74,7 @@ private
   def toaster(card_terminal, status, message)
     unless status.nil?
       Turbo::StreamsChannel.broadcast_prepend_to(
-        :card_terminal_check,
+        card_terminal,
         target: 'toaster',
         partial: "shared/turbo_toast",
         locals: {status: status, message: message})

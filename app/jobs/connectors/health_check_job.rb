@@ -52,7 +52,7 @@ private
     end
     unless status.nil?
       Turbo::StreamsChannel.broadcast_prepend_to(
-        :connector_check,
+        connector,
         target: 'toaster',
         partial: "shared/turbo_toast",
         locals: {status: status, message: message})
