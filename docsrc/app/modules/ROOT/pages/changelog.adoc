@@ -3,6 +3,7 @@
 == 0.9.1 - unreleased
 
 * Bugfix Health-Check bei Orga6141 mit Firmware 3.9.0
+* Kartenterminals: Firmware-Version und Identifikation editierbar, falls Kartenterminal neu in Betrieb genommen wird und noch keine Produkt-Identifikation über den Konnektor vorliegt. Cocard benötigt die Identifikation des Terminals für das Anstoßen des Pairings.
 
 == 0.9.0 - 2025-09-27
 
