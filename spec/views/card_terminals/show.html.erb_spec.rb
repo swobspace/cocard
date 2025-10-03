@@ -49,7 +49,8 @@ RSpec.describe "card_terminals/show", type: :view do
       last_ok: 1.day.before(ts),
       last_check: ts,
       pin_mode: 'on_demand',
-      network: network
+      network: network,
+      identification: "Heinrich-x4711"
     )
     allow(@card_terminal).to receive(:supports_rmi?).and_return(true)
   end
@@ -80,7 +81,7 @@ RSpec.describe "card_terminals/show", type: :view do
     expect(rendered).to match(/2023-12-14/)
     expect(rendered).to match(/ACME Ltd/)
     expect(rendered).to match(/3.1.9/)
-    expect(rendered).to match(/Heinrich GmbH-x4711/)
+    expect(rendered).to match(/Heinrich-x4711/)
     expect(rendered).to match(/ORGA6141/)
     expect(rendered).to match(/11122277634/)
     expect(rendered).to match(/11122277634/)

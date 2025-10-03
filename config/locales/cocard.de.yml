@@ -158,6 +158,7 @@ de:
     iccsn: ICCSN
     id_contract: Vertragsnummer
     id_product: Modellbezeichnung
+    identification: Identifikation
     idle_message: Anzeige im Display
     incoming_ip: Eingehende IP
     incoming_port: Eingehender Port
