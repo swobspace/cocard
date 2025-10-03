@@ -57,7 +57,10 @@
       
       </div>
 
-      <div class"row mb-3">
+      <%= form.input :ip, as: :string
+         %>
+      <hr>
+      <div class="row mb-3 mt-3">
         <div class="col-sm-9 offset-sm-3 alert alert-warning" role="alert">
           <%= t('cocard.new_card_terminal_manual_warning') %>
         </div>
@@ -69,11 +72,7 @@
           disabled: !can?(:update, @card_terminal, :mac)
      %>
     <% if can? :manage, @card_terminal %>
-      <%= form.input :ip, as: :string
-         %>
       <%= form.input :slots
-         %>
-      <%= form.input :firmware_version
          %>
       <%= form.association :connector
          %>
