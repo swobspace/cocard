@@ -251,7 +251,7 @@ RSpec.describe CardTerminal, type: :model do
       before(:each) do
         ct.update(network_id: nil)
       end
-      it { expect(ct.condition).to eq(Cocard::States::CRITICAL) }
+      it { expect(ct.condition).to eq(Cocard::States::WARNING) }
 
       describe "without connector" do
         it "-> NOTHING" do
