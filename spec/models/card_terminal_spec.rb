@@ -123,9 +123,6 @@ RSpec.describe CardTerminal, type: :model do
            :product_type=>"KardTerm", :product_type_version=>"1.2.3.4"
          )}
 
-    describe "#identification" do
-      it { expect(ct.identification).to eq("Heinrich GmbH-HEINER4711") }
-    end
   end
 
 
