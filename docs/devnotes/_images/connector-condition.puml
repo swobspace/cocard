@@ -13,6 +13,7 @@ OK: VPNTI-Status "Online"
 state CRITICAL #orangered
 CRITICAL: Connector nicht erreichbar
 CRITICAL: VPNTI-Status "Offline"
+CRITICAL: Zertifikat abgelaufen
 
 'state WARNING #Yellow
 'WARNING: Zertifikat des Konnektors läuft bald ab

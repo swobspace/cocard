@@ -11,7 +11,7 @@
       </div>
       <div class="ms-3 pt-3">
         <%= render ConditionIconComponent.new(item: @connector) %>
-        <%= render CertExpirationButtonComponent.new(expiration_date: @connector.expiration_date) %>
+        <%# render CertExpirationButtonComponent.new(expiration_date: @connector.expiration_date) %>
       </div>
       <div role="toolbar" class="ms-auto pt-3">
         <%= render RebootButtonComponent.new(item: @connector) if can? :reboot, @connector %>

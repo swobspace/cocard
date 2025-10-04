@@ -80,6 +80,9 @@ class Connector < ApplicationRecord
           (rebooted? and (!up? or !soap_request_success or !vpnti_online))
       set_condition(Cocard::States::WARNING,
                     "Reboot um #{rebooted_at.localtime.to_s}, stay tuned...")
+    elsif expiration_date.present? and (expiration_date <= Date.current)
+      set_condition( Cocard::States::CRITICAL,
+                     "Das Zertifikat des Konnektors ist abgelaufen!" )
     elsif !up?
       set_condition(Cocard::States::CRITICAL,
                     "Konnektor nicht erreichbar, Ping fehlgeschlagen")
@@ -89,9 +92,6 @@ class Connector < ApplicationRecord
     elsif !vpnti_online
       set_condition(Cocard::States::CRITICAL,
                     "Konnektor erreichbar (Ping), aber TI offline!")
-    # elsif expiration_date.present? and (expiration_date <= 3.month.after(Date.current))
-    #   set_condition( Cocard::States::WARNING,
-    #                  "Das Zertifikat des Konnektors läuft bald ab: #{expiration_date.to_s} (<= 3 month)" )
     else
       set_condition(Cocard::States::OK,
                     "Konnektor online")

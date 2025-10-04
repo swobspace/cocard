@@ -53,6 +53,29 @@ class ConditionIconComponent < ViewComponent::Base
     end
   end
 
+  def cert_badge
+    return unless item.kind_of? Connector
+    return unless item.respond_to?(:expiration_date)
+    return unless item.expiration_date.present?
+    return if item.expiration_date > 90.days.after(Date.current)
+    if item.expiration_date <= Date.current
+      color = "danger"
+      title = "Das Zertifikat ist abgelaufen!"
+    else 
+      color = "warning"
+      title = "Das Zertifikat läuft in #{(item.expiration_date - Date.current).to_i} Tagen ab!"
+
+    end
+    badge =<<~EOFBADGE
+      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-#{color}"
+            title="#{title}"
+      > 
+        <i class="fa-solid fa-fw fa-sim-card"></i>
+      </span>
+EOFBADGE
+    badge = badge.html_safe
+  end
+
 private
   attr_reader :item, :color, :icon, :period, :as_text, :text, :size
 
