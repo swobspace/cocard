@@ -36,3 +36,10 @@ application.register("toggle-fields", ToggleFieldsController)
 
 import PolymorphicSelectController from "@swobspace/stimulus-polymorphic-select"
 application.register("polymorphic-select", PolymorphicSelectController)
+
+import PopoverController from "./popover_controller"
+application.register("popover", PopoverController)
+
+import TooltipController from "./tooltip_controller"
+application.register("tooltip", TooltipController)
+
