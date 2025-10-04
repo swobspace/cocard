@@ -30,7 +30,6 @@ module Cocard
         connector_services: YAML.load_file(connector_yml)
       )
     end
-    it {puts connector_yml}
 
     let(:context) { FactoryBot.create(:context) }
 

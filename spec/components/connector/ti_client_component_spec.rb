@@ -12,7 +12,7 @@ RSpec.describe Connector::TIClientComponent, type: :component do
     end
     it "don't render" do
       render_inline(described_class.new(connector: connector, readonly: false))
-      puts "/#{rendered_content}/"
+      # puts "/#{rendered_content}/"
       expect(rendered_content).to eq("")
     end
   end
