@@ -25,6 +25,7 @@ class Ability
       can :manage, Report
       can :create, Note
       cannot [:read, :navigate], ClientCertificate
+      cannot [:read], DuckTerminal
 
       if @user.role?(:reader)
         # nothing for now
@@ -50,6 +51,7 @@ class Ability
         can :manage, CardTerminal
         can :update, CardTerminal, :description
         can :manage, Note, notable_type: ['Log', 'CardTerminal']
+        can :manage, DuckTerminal
       end
 
       if @user.role?(:verify_pin)
