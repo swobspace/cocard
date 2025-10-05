@@ -49,18 +49,24 @@
   </div>
 </div>
 
-<br />
 <%= back_link %>
 <%= link_to "Neue Prüfung", new_duck_terminal_path,
     class: 'btn btn-secondary' %>
-<br />
+
+<div class="mt-3">
+  <h4>Kartenterminals mit der IP <%= @ducky.ip %></h4>
+</div>
 
 <div class="list-group">
   <% CardTerminal.where(ip: @ducky.ip).each do |ct| %>
     <%= render partial: 'card_terminal', 
                locals: { 
                  card_terminal: ct,  
-                 color: (@value.macaddr == ct.mac) ? 'bg-success' : 'bg-danger'
+                 color: if @value.present?
+                          (@value&.macaddr == ct.mac) ? 'bg-success' : 'bg-danger'
+                        else
+                          'bg-light'
+                        end
                }
      %>
   <% end %>

@@ -1,10 +1,7 @@
 class DuckTerminalsController < ApplicationController
   def new
-    @ducky = DuckTerminal.new
+    @ducky = DuckTerminal.new(new_duck_params)
     respond_with(@ducky)
-  end
-
-  def create
   end
 
   def show
@@ -43,5 +40,9 @@ class DuckTerminalsController < ApplicationController
     def duck_terminal_params
       params.require(:duck_terminal)
             .permit(:identification, :firmware_version, :ip)
+    end
+
+    def new_duck_params
+      params.permit(:identification, :firmware_version, :ip)
     end
 end

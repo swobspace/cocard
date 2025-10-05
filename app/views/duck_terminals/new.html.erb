@@ -6,7 +6,7 @@
       <%= form.label :identification, t('attributes.identification'),
                       class: 'col-sm-2 col-form-label' %>
       <div class="col-sm-10">
-        <%= form.select :identification, %w( INGHC-ORGA6100 ),
+        <%= form.select :identification, CardTerminals::RMI::SUPPORTED_IDENTIFICATIONS,
               { include_blank: false },
               { class: "form-control" } %>
        </div>
@@ -16,14 +16,18 @@
       <%= form.label :firmware_version, t('attributes.firmware_version'), 
                      class: 'col-sm-2 col-form-label' %>
       <div class="col-sm-10">
-        <%= form.text_field :firmware_version, class: "form-control" %>
+        <%= form.text_field :firmware_version, 
+                            value: params['firmware_version'],
+                            class: "form-control" %>
       </div>
     </div>
 
     <div class="row mb-3">
       <%= form.label :ip, t('attributes.ip'), class: 'col-sm-2 col-form-label' %>
       <div class="col-sm-10">
-        <%= form.text_field :ip, class: "form-control" %>
+        <%= form.text_field :ip, 
+                            value: params['ip'],
+                            class: "form-control" %>
       </div>
     </div>
 
