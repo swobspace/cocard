@@ -1,0 +1,35 @@
+<%= render FormComponent.new(title: 'CardTerminal via IP testen') do %>
+
+  <%= form_with scope: :duck_terminal, url: duck_terminal_path, method: :get do |form| %>
+
+    <div class="row mb-3">
+      <%= form.label :identification, t('attributes.identification'),
+                      class: 'col-sm-2 col-form-label' %>
+      <div class="col-sm-10">
+        <%= form.select :identification, %w( INGHC-ORGA6100 ),
+              { include_blank: false },
+              { class: "form-control" } %>
+       </div>
+    </div>
+
+    <div class="row mb-3">
+      <%= form.label :firmware_version, t('attributes.firmware_version'), 
+                     class: 'col-sm-2 col-form-label' %>
+      <div class="col-sm-10">
+        <%= form.text_field :firmware_version, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <%= form.label :ip, t('attributes.ip'), class: 'col-sm-2 col-form-label' %>
+      <div class="col-sm-10">
+        <%= form.text_field :ip, class: "form-control" %>
+      </div>
+    </div>
+
+      <%= form.button 'Terminal prüfen', class: 'btn btn-primary' %>
+      <%= cancel_button %>
+  <% end %>
+
+<% end %>
+

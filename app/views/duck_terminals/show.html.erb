@@ -1,0 +1,57 @@
+<div class="card mb-3" id="<%= dom_id(@card_terminal) %>">
+  <div class="card-header">
+    <div class="d-flex w-100">
+      <div>
+        <span class="subtitle">
+          <%= t('activerecord.models.card_terminal') %>:
+          #<%= @card_terminal.id %>
+        </span>
+        <h4 class="title"><%= @card_terminal %></h4>
+      </div>
+      <div class="ms-3 pt-3">
+        <%= render ConditionIconComponent.new(item: @card_terminal) %>
+      </div>
+      <div role="toolbar" class="ms-auto pt-3">
+        <%= render RebootButtonComponent.new(item: @card_terminal) if (can? :reboot, @card_terminal) %>
+        <%= render CardTerminal::PairingButtonComponent
+                   .new(card_terminal: @card_terminal) if (can? :manage, @card_terminal) %>
+        <%= render HealthCheckButtonComponent.new(item: @card_terminal) %>
+        <%= render AcknowledgeButtonComponent.new(
+                     notable: @card_terminal, small: false,
+                     readonly: cannot?(:manage, @card_terminal)
+                   )
+         %>
+        <%= edit_link(@card_terminal) %>
+        <%= delete_link(@card_terminal) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <table class="table autowidth">
+      <thead>
+      </thead>
+      <tbody>
+        <% @value.class::ATTRIBUTES.each do |attr| %>
+          <tr>
+            <th class="w-25"><%= t(attr, scope: 'rmi') %> </th>
+            <td><%= @value.send(attr) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<br />
+
+<div class="list-group">
+  <% CardTerminal.where(ip: @ducky.ip).each do |ct| %>
+    <%= render partial: 'card_terminal', 
+               locals: { 
+                 card_terminal: ct,  
+                 color: (@value.macaddr == ct.mac) ? 'bg-success' : 'bg-danger'
+               }
+     %>
+  <% end %>
+</div>

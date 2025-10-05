@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resource :duck_terminal, only: [:new, :create, :show]
   get "reports/duplicate_terminal_ips"
   resources :ti_clients do
     resources :kt_proxies, module: :ti_clients, only: [:index]
