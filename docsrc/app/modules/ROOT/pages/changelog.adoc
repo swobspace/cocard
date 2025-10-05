@@ -4,6 +4,7 @@
 
 * Bugfix Health-Check bei Orga6141 mit Firmware 3.9.0
 * Kartenterminals: Firmware-Version und Identifikation editierbar, falls Kartenterminal neu in Betrieb genommen wird und noch keine Produkt-Identifikation über den Konnektor vorliegt. Cocard benötigt die Identifikation des Terminals für das Anstoßen des Pairings.
+* Konnektor: ein Zertifikatsablauf in weniger als 90 Tagen geht nicht mehr in den Gesamtzustand ein, sondern wird separat dargestellt. Nur ein abgelaufenes Zertifikat wird beim Gesamtzustand berücksichtigt.
 
 == 0.9.0 - 2025-09-27
 

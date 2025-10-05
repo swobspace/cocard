@@ -13,10 +13,11 @@ OK: VPNTI-Status "Online"
 state CRITICAL #orangered
 CRITICAL: Connector nicht erreichbar
 CRITICAL: VPNTI-Status "Offline"
+CRITICAL: Zertifikat abgelaufen
 
-state WARNING #Yellow
-WARNING: Zertifikat des Konnektors läuft bald ab
-WARNING: Reboot angestoßen
+'state WARNING #Yellow
+'WARNING: Zertifikat des Konnektors läuft bald ab
+'WARNING: Reboot angestoßen
 
 state UNKNOWN #LightSkyBlue
 UNKNOWN: Connector erreichbar
@@ -29,6 +30,7 @@ NOTHING: Manuelles Update aktiviert;
 
 NOTHING --> UNKNOWN
 UNKNOWN --> CRITICAL
-CRITICAL --> WARNING
-WARNING --> OK
+'CRITICAL --> WARNING
+'WARNING --> OK
+CRITICAL --> OK
 @enduml

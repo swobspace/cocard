@@ -48,7 +48,6 @@ module Connectors
       describe "#reboot with real credentials", :koco => true do
         it "starts a reboot" do
           result = subject.reboot
-          puts result.message.inspect
           expect(result.success?).to be_truthy
           expect(result.value).to eq(200)
           expect(connector.rebooted?).to be_truthy

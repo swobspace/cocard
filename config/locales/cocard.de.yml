@@ -147,6 +147,7 @@ de:
     context_ids: Kontexte
     created_at: Erstellt
     creator: Ersteller
+    ct_id: CT_ID
     current_ip: Gefundene IP
     delivery_date: Lieferdatum
     description: Beschreibung

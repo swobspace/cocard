@@ -150,7 +150,7 @@
 
           <tr>
             <th class="w-25 pe-3"><%= t('attributes.expiration_date')%>:</th>
-            <td><%= @connector.expiration_date %></td>
+            <td><%= render ExpirationDateComponent.new(item: @connector) %></td>
           </tr>
 
           <tr>

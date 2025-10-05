@@ -1,9 +1,12 @@
 <% if as_text %>
-  <span class="badge text-bg-<%= color %>"><%= text %></span>
+  <span class="badge text-bg-<%= color %> position-relative"><%= text %>
+    <%= cert_badge %>
+  </span>
 <% else %>
-  <button type="button" class="<%= size %> <%= btn %>-<%= color %>" 
+  <button type="button" class="position-relative <%= size %> <%= btn %>-<%= color %>" 
           title="<%= item.condition_message %>">
       <i class="<%= icon %>"></i>
+      <%= cert_badge %>
   </button>
 <% end %>
 

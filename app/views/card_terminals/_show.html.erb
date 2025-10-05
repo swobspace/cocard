@@ -132,7 +132,7 @@
 
           <tr>
             <th class="w-25 pe-3">SMC-KT <%= t('attributes.expiration_date')%>:</th>
-            <td><%= render Card::ExpirationDateComponent.new(card: card_terminal.smckt) %></td>
+            <td><%= render ExpirationDateComponent.new(item: card_terminal.smckt) %></td>
           </tr>
         </table>
 
