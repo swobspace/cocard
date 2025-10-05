@@ -1,4 +1,5 @@
-<div class="card mb-3" id="<%= dom_id(@card_terminal) %>">
+<div class="card mb-3">
+ <% if @card_terminal %>
   <div class="card-header">
     <div class="d-flex w-100">
       <div>
@@ -26,8 +27,10 @@
       </div>
     </div>
   </div>
+ <% end %>
 
   <div class="card-body">
+   <% if @value.present? %>
     <table class="table autowidth">
       <thead>
       </thead>
@@ -40,9 +43,16 @@
         <% end %>
       </tbody>
     </table>
+   <% else %>
+     <%= @message %>
+   <% end %>
   </div>
 </div>
 
+<br />
+<%= back_link %>
+<%= link_to "Neue Prüfung", new_duck_terminal_path,
+    class: 'btn btn-secondary' %>
 <br />
 
 <div class="list-group">
