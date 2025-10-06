@@ -17,6 +17,7 @@ class DuckTerminalsController < ApplicationController
 
       result.on_success do |message, value|
         @value = value
+        @decorated = CardTerminals::RMI::InfoDecorator.new(@value)
         @message = message
         @card_terminal = CardTerminal.find_or_create_by(mac: value.macaddr) do |c|
                            c.ip = value.current_ip

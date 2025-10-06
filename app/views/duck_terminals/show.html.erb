@@ -36,10 +36,8 @@
       </thead>
       <tbody>
         <% @value.class::ATTRIBUTES.each do |attr| %>
-          <tr>
-            <th class="w-25"><%= t(attr, scope: 'rmi') %> </th>
-            <td><%= @value.send(attr) %></td>
-          </tr>
+          <%= render DuckTerminalTrComponent.new(card_terminal: @card_terminal, 
+                                                 info: @value, attrib: attr) %>
         <% end %>
       </tbody>
     </table>
