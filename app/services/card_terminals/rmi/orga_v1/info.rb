@@ -16,10 +16,15 @@ module CardTerminals
         tftp_file
         firmware_version
         firmware_builddate
+        serial
       ]
 
       def initialize(properties)
         @properties = properties
+      end
+
+      def serial
+        properties['vendor_serialNumber']
       end
 
       def firmware_version

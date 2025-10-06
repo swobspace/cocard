@@ -583,6 +583,7 @@ module CardTerminals
                     sys_locale_timeZone
                     update_serverIpAddr
                     update_fileName
+                    vendor_serialNumber
                   ]
         if firmware_version >= '3.9.1'
           props << "rmi_pairingEHealthTerminal_enabled"

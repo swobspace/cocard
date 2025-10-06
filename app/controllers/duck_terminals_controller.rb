@@ -25,6 +25,7 @@ class DuckTerminalsController < ApplicationController
                            c.name = value.terminalname
                            c.identification = @ducky.identification
                            c.firmware_version = value.firmware_version
+                           c.serial = value.serial
                          end
       end
 

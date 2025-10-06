@@ -22,7 +22,8 @@ module CardTerminals
       "update_serverIpAddr" => "192.0.2.10",
       "update_fileName" => "firmware.dat",
       "sys_ntp_serverIpAddr" => '192.0.2.20',
-      "sys_ntp_enabled" => true 
+      "sys_ntp_enabled" => true,
+      "vendor_serialNumber" => "SERIAL1234" 
     }}
 
     let(:info) { CardTerminals::RMI::OrgaV1::Info.new(properties) }
@@ -40,13 +41,12 @@ module CardTerminals
     it { expect(subject.ntp_server).to eq("192.0.2.20") }
     it { expect(subject.tftp_server).to eq("192.0.2.10") }
     it { expect(subject.tftp_file).to eq("firmware.dat") }
+    it { expect(subject.serial).to eq("SERIAL1234") }
 
     describe "with some defaults" do
       before(:each) do
         allow(Cocard).to receive(:card_terminal_defaults).and_return(ct_defaults)
       end
-
-      it { puts Cocard.card_terminal_defaults }
 
       it { expect(subject.terminalname_default).to be_nil }
       it { expect(subject.dhcp_enabled_default).to be_nil }
