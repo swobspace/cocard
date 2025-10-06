@@ -9,6 +9,8 @@ RSpec.shared_examples "a CardTerminalManager" do
   it { is_expected.not_to be_able_to(:navigate, ClientCertificate.new) }
   it { is_expected.not_to be_able_to(:read, Connector.new, :id_contract) }
   it { is_expected.not_to be_able_to(:read, Card.new, :private_information) }
+  it { is_expected.to be_able_to(:read, DuckTerminal.new) }
+  it { is_expected.to be_able_to(:create, DuckTerminal.new) }
 
   it { is_expected.to be_able_to(:manage, CardTerminal.new) }
   it { is_expected.to be_able_to(:create, CardTerminal.new) }

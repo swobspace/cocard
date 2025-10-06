@@ -335,6 +335,7 @@ de:
       Kartenterminal länger außer Betrieb war.
       Sobald das Kartenterminal über den Konnektor abgefragt wird, werden die 
       hier gesetzten Informationen wieder überschrieben.
+    rmi_check: Prüfung via IP
   cards:
     no_contexts_assigned: |
       ACHTUNG! Es ist noch kein Kontext zugeordnet!
@@ -345,3 +346,18 @@ de:
     expired_in_use: Abgelaufene Karten in Benutzung
     deleted: Gelöschte Karten
     reset_card_terminal: Zuordnung zum Kartenterminal löschen
+  rmi:
+    terminalname: Terminalname
+    dhcp_enabled: DHCP enabled
+    macaddr: MAC Adresse
+    current_ip: Aktuelle IP
+    static_ip: Statische IP
+    dhcp_ip: DHCP IP
+    remote_pin_enabled: Remote SMC-B PIN enabled
+    remote_pairing_enabled: Remote Pairing enabled
+    ntp_enabled: NTP enabled
+    ntp_server: NTP-Server
+    tftp_server: FTP-Server
+    tftp_file: TFTP-File
+    firmware_version: Firmware-Version
+    firmware_duilddate: Datum der Firmware

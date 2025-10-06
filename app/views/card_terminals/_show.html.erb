@@ -176,9 +176,16 @@
           <div class="d-flex justify-content-between">
             <h6><%= t('cocard.card_terminal_data')%></h6>
             <div> 
+              <%= link_to(raw(%Q[<i class="fa-solid fw fa-circle-check"></i>]),
+                          new_duck_terminal_path(
+                            identification: card_terminal.identification,
+                            firmware_version: card_terminal.firmware_version,
+                            ip: card_terminal.ip
+                          ),
+                          class: "primary-link me-2") if can? :manage, DuckTerminal %>
               <%= link_to(raw(%Q[<i class="fa-solid fa-pencil"></i>]),
                           edit_identification_card_terminal_path(card_terminal),
-                          class: 'primary-link'
+                          class: 'primary-link me-2'
                          ) if can?(:manage, card_terminal)
                %>
                            
