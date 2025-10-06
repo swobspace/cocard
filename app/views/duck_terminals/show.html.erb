@@ -40,6 +40,19 @@
                                                  info: @value, attrib: attr) %>
         <% end %>
       </tbody>
+      <tfoot>
+        <th class="bg-secondary bg-opacity-25">Legende</th>
+        <td class="bg-secondary bg-opacity-25">
+            Grün: Wert entspricht dem Default; 
+            Gelb: Wert weicht vom Default ab;
+            Rot: MAC-Adresse/Terminalname abweichend vom den Daten in Cocard - 
+                 bitte prüfen und korrigieren!
+            Weiß: kein Defaultwert vorhanden oder Vergleich nicht sinnvoll 
+                  (z.B. bei IP-Adressen)
+            <%= link_to '[ Zur Konfiguration ]', 'docs/cocard/installation/cocard_yml.html',
+                        class: 'primary-link' %>
+        </td>
+      </tfoot>
     </table>
    <% else %>
      <%= @message %>

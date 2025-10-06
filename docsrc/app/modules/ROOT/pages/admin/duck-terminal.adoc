@@ -1,0 +1,20 @@
+= Kartenterminal über IP-Adresse prüfen
+:author: Wolfgang Barth
+:revdate: 2025-10-06
+:imagesdir: ../../images
+:experimental: true
+
+Kartenterminals mit einem Remote-Management-Interface (RMI) kann man auch über die IP-Adresse prüfen, ohne das das Kartenterminal vorher in Cocard angelegt oder über eine Konnektor gefunden wurde. Ist das Kartenterminal mit der MAC-Adresse aus der Prüfung noch nicht in Cocard vorhanden, wird es neu angelegt.
+
+IMPORTANT:: Voraussetzung ist, dass das Kartenterminal von Cocard unterstützt wird (derzeit nur Orga6141 ab Firmware-Version 3.9.0), die Administration per Web freigeschaltet wurde und die Admin-PIN Cocard bekannt ist.
+
+TIP:: Eine einfache Prüfung über die IP mit den im Screenshot unten angegebenen Werten für Identifikation und Firmware-Version gibt zurück, ob das Kartenterminal per RMI abgefragt werden kann.
+
+.Prüfung Kartenterminal via IP
+image::ct/duck-terminal-menu.png[]
+
+.Erforderliche Angaben: Identifikation, Firmware-Version und IP-Adresse des Kartenterminals
+image::ct/duck-terminal-form.png[]
+
+.Ergebnis der Prüfung
+image::ct/duck-terminal-show.png[]

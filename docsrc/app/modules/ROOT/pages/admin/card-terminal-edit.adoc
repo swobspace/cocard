@@ -4,12 +4,11 @@
 :imagesdir: ../../images
 :experimental: true
 
-Kartenterminals, die mit einem Konnektor verbunden sind, werden automatisch erkannt und angelegt. Eine Neuanlage von Kartenterminals ist nur dann notwendig, wenn das Kartenterminal noch nicht angeschlossen ist, aber bereits inventarisiert werden soll. Oder wenn es sich um ein mobiles Gerät handelt, das keine permanente Online-Verbindung zum Konnektor aufrecht erhält.
+Kartenterminals, die mit einem Konnektor verbunden sind, werden automatisch erkannt und angelegt. Eine Neuanlage von Kartenterminals ist nur dann notwendig, wenn das Kartenterminal noch nicht angeschlossen ist, aber bereits inventarisiert werden soll. Oder wenn es sich um ein mobiles Gerät handelt, das keine permanente Online-Verbindung zum Konnektor aufrecht erhält. Alternativ kann man das Kartenterminal auch über einen Check via IP in Cocard aufnehmen, sofern das Kartenterminal dafür unterstützt wird. Details siehe xref:admin/duck-terminal.adoc[]
 
 Für die Neuanlage genügt die MAC-Adresse oder alternativ die Seriennummer. Alle anderen Felder sind optional.
 
 IMPORTANT: Wenn Kartenterminals vorab zur Inventarisierung erfasst werden, bitte immer die MAC-Adresse als Identifikationsmerkmal mit angeben. Dann kann Cocard später, wenn das Kartenterminal erstmals online geht, das Terminal korrekt zuordnen und weitere Daten ergänzen.
-
 
 image::ct/card-terminal-edit.png[]
 

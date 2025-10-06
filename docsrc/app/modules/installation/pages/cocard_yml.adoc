@@ -44,10 +44,14 @@ Folgende Default-Werte sind derzeit konfigurierbar:
 .cocard.yml: Default-Werte für Kartenterminals
 [source,yml]
 ----
-terminal_ntp_enabled: true
-terminal_ntp_server: 10.255.190.1
-terminal_tftp_server: 10.200.149.49
-terminal_tftp_file: somestuff.dat
-terminal_dhcp_enabled: true
+card_terminals:
+  ntp_enabled: true
+  ntp_server: 10.255.190.1
+  tftp_server: 10.200.149.49
+  tftp_file: somestuff.dat
+  dhcp_enabled: true
+  remote_pin_enabled: true
+  remote_pairing_enabled: true
+  firmware_version: 3.9.1
 ----
 
