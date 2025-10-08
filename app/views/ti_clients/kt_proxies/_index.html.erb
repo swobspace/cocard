@@ -28,6 +28,7 @@
           <thead>
             <tr>
                   <th><%= t('attributes.card_terminal') %></th>
+                  <th class="nosort notvisible">Health</th>
                   <th class="text-center"><%= t('attributes.condition') %></th>
                   <th><%= t('attributes.condition_message') %></th>
                   <th><%= t('attributes.uuid') %></th>
@@ -45,6 +46,7 @@
           <tfoot class="search">
             <tr>
                   <th></th>
+                  <th class="nosearch"></th>
                   <th></th>
                   <th></th>
                   <th></th>
@@ -67,15 +69,18 @@
                                 data: { "turbo-frame": "_top" },
                                 class: 'primary-link') if kt_proxy.card_terminal.present?
                      %></td>
-                <td class="text-center">
-                  <%= render ConditionIconComponent.new(item: kt_proxy.card_terminal, 
-                                                        small: true) %>
+                <td>
                   <%= render HealthCheckButtonComponent.new(item: kt_proxy.card_terminal,
                                                             variant: :small) %>
+                </td>
+                <td class="text-center">
+                  <%= render ConditionIconComponent.new(item: kt_proxy.card_terminal, 
+                                                        as_text: true,
+                                                        small: true) %>
 
                 </td>
                 <td><%= kt_proxy.card_terminal&.condition_message %></td>
-                <td><%= kt_proxy.uuid %></td>
+                <td><%= render LinkToComponent.new(item: kt_proxy, label_method: :uuid) %></td>
                 <td><%= kt_proxy.name %></td>
                 <td><%= kt_proxy.wireguard_ip %></td>
                 <td><%= kt_proxy.incoming_ip %></td>
