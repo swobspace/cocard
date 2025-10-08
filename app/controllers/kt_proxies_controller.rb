@@ -9,7 +9,14 @@ class KTProxiesController < ApplicationController
     else
       @kt_proxies = KTProxy.all
     end
-    respond_with(@kt_proxies)
+    respond_with(@kt_proxies) do |format|
+      format.json do
+        data = render_to_string 'ti_clients/kt_proxies/index'
+        send_data data, filename: 'cardterminal_proxies.json',
+                        type: :json,
+                        disposition: 'attachment'
+      end
+    end
   end
 
   # GET /kt_proxies/1
