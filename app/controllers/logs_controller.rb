@@ -1,6 +1,6 @@
 class LogsController < ApplicationController
   before_action :set_log, only: [:show, :destroy]
-  before_action :add_breadcrumb_show, only: [:show]
+  # before_action :add_breadcrumb_show, only: [:show]
 
   # GET /logs
   def index

@@ -7,9 +7,9 @@ module CardTerminals
       @loggable = CardTerminal.find(params[:card_terminal_id])
     end
 
-#    def add_breadcrumb_show
-#      add_breadcrumb_for([set_loggable, @log])
-#    end
+   def add_breadcrumb_show
+     # add_breadcrumb_for([set_loggable, @log])
+   end
 
   end
 end
