@@ -59,4 +59,15 @@ module ConnectorConcerns
     return false unless Cocard.enable_ticlient
     identification == 'RISEG-RHSK'    
   end
+
+  def can_authenticate?(client = nil)
+    case authentication
+    when "noauth"
+      return true
+    when "basicauth"
+      return true if (auth_user.present? and auth_password.present?)
+    when "clientcert"
+      client_certificates.where(client_system: client).any?
+    end
+  end
 end
