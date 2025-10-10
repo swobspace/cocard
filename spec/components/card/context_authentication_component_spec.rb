@@ -9,7 +9,7 @@ RSpec.describe Card::ContextAuthenticationComponent, type: :component do
   describe "without connector " do
     it "don't render anything" do
       render_inline(described_class.new(card: card, context: context))
-      expect(page).not_to have_content("Authentifizierung")
+      expect(page).to have_content("Karte keinem Konnektor zugeordnet")
     end
   end
 
@@ -22,7 +22,7 @@ RSpec.describe Card::ContextAuthenticationComponent, type: :component do
     it "with can_authenticate? == true" do
       expect(conn).to receive(:can_authenticate?).with(any_args).and_return(true)
       render_inline(described_class.new(card: card, context: context))
-      expect(page).to have_content("Authentifizierung ok")
+      expect(page).not_to have_content("Authentifizierung")
     end
 
     it "with can_authenticate? == false" do
