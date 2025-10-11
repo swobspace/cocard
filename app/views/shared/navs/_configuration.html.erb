@@ -30,6 +30,11 @@
                     main_app.workplaces_path, class: "dropdown-item",
                     "data-turbo-prefetch": false
          %>
+        <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
+                         t('controller.terminal_workplaces')),
+                    main_app.terminal_workplaces_path, class: "dropdown-item",
+                    "data-turbo-prefetch": false
+         %>
         <%= link_to raw(Cocard::States.flag(Cocard::States::WARNING) + 
                         ' Veraltete Arbeitsplätze'),
                     main_app.workplaces_path(outdated: true), 

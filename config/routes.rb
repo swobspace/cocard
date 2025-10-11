@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :terminal_workplaces, only: [:index]
   resource :duck_terminal, only: [:new, :show]
   get "reports/duplicate_terminal_ips"
   resources :ti_clients do
