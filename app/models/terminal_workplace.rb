@@ -16,4 +16,6 @@ class TerminalWorkplace < ApplicationRecord
       scope: [:workplace_id, :mandant, :client_system], allow_blank: false 
     }
 
+
+  scope :active, -> { where("updated_at > ?", 2.week.before(Time.current)) }
 end
