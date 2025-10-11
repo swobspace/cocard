@@ -13,7 +13,10 @@
         } do %>
     <thead>
       <tr>
+        <th class="text-center"><%= t('attributes.location') %></th>
+        <th class="text-center"><%= t('attributes.condition') %></th>
         <th><%= t('attributes.card_terminal') %></th>
+        <th><%= t('attributes.ip') %></th>
         <th><%= t('attributes.workplace') %></th>
         <th><%= t('attributes.description') %></th>
         <th><%= t('attributes.mandant') %></th>
@@ -27,16 +30,21 @@
         <th></th>
         <th></th>
         <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
       </tr>
     </tfoot>
     <tbody>
       <% @terminal_workplaces.each do |twp| %>
         <%= content_tag(:tr, id: dom_id(twp)) do %>
+          <td class="text-center"><%= twp.card_terminal&.location&.lid %></td>
+          <td class="text-center"><%= render ConditionIconComponent.new(item: twp.card_terminal, as_text: true) %>
           <td>
-            <%= render LinkToComponent.new(item: twp.card_terminal) %>
+            <%= render LinkToComponent.new(item: twp.card_terminal, label_method: :name) %>
           </td>
-          <td><%= link_to twp.workplace, twp.workplace, 
-                          class: 'primary-link' %></td>
+          <td><%= twp.card_terminal&.ip %></td>
+          <td><%= render LinkToComponent.new(item: twp.workplace) %>
           <td><%= truncate(twp.workplace.description.to_plain_text, length: 300) %></td>
           <td><%= twp.mandant %></td>
           <td><%= twp.client_system %></td>
