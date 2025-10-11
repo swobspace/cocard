@@ -6,6 +6,9 @@ class WarnIpMismatchComponent < ViewComponent::Base
   end
 
   def render?
+    if item.kind_of? CardTerminal
+      return if item.connector.nil?
+    end
     item.ip != item.real_ip
   end
 

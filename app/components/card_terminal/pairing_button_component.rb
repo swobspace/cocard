@@ -34,7 +34,8 @@ class CardTerminal::PairingButtonComponent < ViewComponent::Base
 
   def render?
     !card_terminal.connected &&
-    card_terminal.supports_rmi? 
+    card_terminal.supports_rmi? && 
+    supports_pairing?
   end
 
 private

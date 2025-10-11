@@ -1,5 +1,6 @@
 class CardTerminalsController < ApplicationController
   before_action :set_card_terminal, only: [:show, :edit, :update, :destroy,
+                                           :edit_identification,
                                            :fetch_idle_message, :edit_idle_message,
                                            :update_idle_message]
   before_action :add_breadcrumb_show, only: [:show]
@@ -77,13 +78,16 @@ class CardTerminalsController < ApplicationController
     respond_with(@card_terminal)
   end
 
+  def edit_identification
+    respond_with(@card_terminal)
+  end
+
   def fetch_idle_message
     unless CardTerminals::RMI::GetIdleMessageJob.perform_now(card_terminal: @card_terminal)
       flash[:alert] = "Abfrage des Ruhebildschirms fehlgeschlagen!"
     end
     redirect_to @card_terminal
   end
-
 
   def edit_idle_message
     respond_with(@card_terminal)

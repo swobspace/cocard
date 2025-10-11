@@ -34,6 +34,10 @@ module CardTerminals
       # send pin if requested until timeout
       #
       def verify_pin(iccsn)
+        unless rmi_port_reachable?
+          return Result.new(success?:false,message:"RMI-Port #{rmi_port} unreachable!")
+       end
+
         EM.run {
           ws = Faye::WebSocket::Client.new(ws_url, [], {
                    ping: 15,
@@ -151,23 +155,7 @@ module CardTerminals
       end
 
       def get_info
-        ret = get_properties(%w[
-                net_lan_macAddr
-                sys_terminalName
-                net_lan_dhcpEnabled
-                net_lan_ipAddr
-                net_lan_ipAddrStatic
-                net_lan_ipAddrDhcp
-                rmi_smcb_pinEnabled 
-                rmi_pairingEHealthTerminal_enabled
-                sys_firmwareVersion
-                sys_firmwareBuildDate
-                sys_ntp_enabled
-                sys_ntp_serverIpAddr
-                sys_locale_timeZone
-                update_serverIpAddr
-                update_fileName
-              ])
+        ret = get_properties(info_properties)
         if ret.success?
           ret.value = Info.new(ret.value)
         end
@@ -175,6 +163,10 @@ module CardTerminals
       end
 
       def get_properties(properties)
+        unless rmi_port_reachable?
+          return Result.new(success?:false,message:"RMI-Port #{rmi_port} unreachable!")
+       end
+
         EM.run {
           ws = Faye::WebSocket::Client.new(ws_url, [], {
                    ping: 15,
@@ -256,6 +248,10 @@ module CardTerminals
       end
 
       def set_properties(properties)
+        unless rmi_port_reachable?
+          return Result.new(success?:false,message:"RMI-Port #{rmi_port} unreachable!")
+       end
+
         EM.run {
           ws = Faye::WebSocket::Client.new(ws_url, [], {
                    ping: 15,
@@ -327,6 +323,10 @@ module CardTerminals
       # reboot
       #
       def reboot
+        unless rmi_port_reachable?
+          return Result.new(success?:false,message:"RMI-Port #{rmi_port} unreachable!")
+       end
+
         EM.run {
           ws = Faye::WebSocket::Client.new(ws_url, [], {
                    ping: 15,
@@ -394,6 +394,10 @@ module CardTerminals
       # remote pairing
       #
       def remote_pairing
+        unless rmi_port_reachable?
+          return Result.new(success?:false,message:"RMI-Port #{rmi_port} unreachable!")
+       end
+
         EM.run {
           ws = Faye::WebSocket::Client.new(ws_url, [], {
                    ping: 15,
@@ -563,6 +567,33 @@ module CardTerminals
         msg.gsub(/[^ 0-9A-Za-zÄÖÜäöüß!?#$&_\/*+.,;'-]/, '_')
       end
 
+      def info_properties
+        props = %w[
+                    net_lan_macAddr
+                    sys_terminalName
+                    net_lan_dhcpEnabled
+                    net_lan_ipAddr
+                    net_lan_ipAddrStatic
+                    net_lan_ipAddrDhcp
+                    rmi_smcb_pinEnabled
+                    sys_firmwareVersion
+                    sys_firmwareBuildDate
+                    sys_ntp_enabled
+                    sys_ntp_serverIpAddr
+                    sys_locale_timeZone
+                    update_serverIpAddr
+                    update_fileName
+                    vendor_serialNumber
+                  ]
+        if firmware_version >= '3.9.1'
+          props << "rmi_pairingEHealthTerminal_enabled"
+        end
+        props
+      end
+
+      def rmi_port_reachable?
+        card_terminal.tcp_port_open?(card_terminal.rmi_port)
+      end
     end
   end
 end

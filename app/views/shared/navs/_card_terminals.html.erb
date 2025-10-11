@@ -25,6 +25,11 @@
       <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
             t('card_terminals.with_smcb')),
           main_app.card_terminals_path(with_smcb: 1), class: "dropdown-item" %>
+      <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
+                       t('controller.terminal_workplaces')),
+                  main_app.terminal_workplaces_path, class: "dropdown-item",
+                  "data-turbo-prefetch": false
+       %>
       <div class="dropdown-divider"></div>
       <% if can? :manage, CardTerminal %>
         <%= link_to raw('<span class="fa-solid fa-fw fa-message" aria-hidden="true"></span> ' +
@@ -37,8 +42,14 @@
                       t('card_terminals.duplicate_ips')),
             main_app.reports_duplicate_terminal_ips_path,
             class: "dropdown-item" %>
+      
+      <% if can? :manage, DuckTerminal %>
+        <%= link_to raw(%Q[<span class="fa-solid fw fa-circle-check" 
+                                 aria-hidden="true">
+                           </span> ] + t('card_terminals.rmi_check')),
+                    main_app.new_duck_terminal_path,
+                    class: "dropdown-item" %>
+      <% end %>
     </div>
   </li>
 <% end %>
-
-

@@ -15,7 +15,8 @@ module CardTerminals
       "update_serverIpAddr" => "192.0.2.10",
       "update_fileName" => "somestuff.boot",
       "sys_ntp_serverIpAddr" => '192.0.2.20',
-      "sys_ntp_enabled" => true 
+      "sys_ntp_enabled" => true,
+      "vendor_serialNumber" => "SERIAL1234"
     }}
 
     subject { CardTerminals::RMI::OrgaV1::Info.new(properties) }
@@ -32,5 +33,6 @@ module CardTerminals
     it { expect(subject.ntp_server).to eq("192.0.2.20") }
     it { expect(subject.tftp_server).to eq("192.0.2.10") }
     it { expect(subject.tftp_file).to eq("somestuff.boot") }
+    it { expect(subject.serial).to eq("SERIAL1234") }
   end
 end

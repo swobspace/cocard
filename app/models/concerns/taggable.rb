@@ -21,6 +21,8 @@ module Taggable
   end
 
   def set_tags_from_input
+    # check if tag_list_input exists to avoid tag deletion in background updates
+    return if self.tag_list_input.nil?
     new_tags = JSON.parse(self.tag_list_input.presence || "[]").map { |h| h["value"] }
     # self.tags.delete_all
     tags_to_remove = tag_list - new_tags

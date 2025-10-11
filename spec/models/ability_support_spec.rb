@@ -9,6 +9,7 @@ RSpec.shared_examples "a Support" do
   it { is_expected.not_to be_able_to(:navigate, ClientCertificate.new) }
   it { is_expected.not_to be_able_to(:read, Connector.new, :id_contract) }
   it { is_expected.not_to be_able_to(:read, Card.new, :private_information) }
+  it { is_expected.not_to be_able_to(:read, DuckTerminal.new) }
 
   [ Card, Connector, Network, Location, OperationalState,
     Log, Workplace, Context, ClientCertificate,

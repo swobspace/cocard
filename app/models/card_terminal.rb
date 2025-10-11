@@ -125,7 +125,7 @@ class CardTerminal < ApplicationRecord
       self[:ip] = real_ip
     end
 
-    if will_save_change_to_ip?
+    if will_save_change_to_ip? || network_id.blank?
       update_location_by_ip
     end
   end
@@ -156,10 +156,6 @@ class CardTerminal < ApplicationRecord
     else
       current_ip
     end
-  end
-
-  def identification
-    "#{product_information&.product_vendor_id}-#{product_information&.product_code}"
   end
 
 private

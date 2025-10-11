@@ -34,7 +34,7 @@ RSpec.describe "connectors/index", type: :view do
         soap_request_success: true,
         condition_message: "Quark",
         iccsn: "8027600355000099999",
-        expiration_date: "2025-12-31"
+        expiration_date: "2029-12-31"
       ),
       Connector.create!(
         name: "Name",
@@ -55,7 +55,7 @@ RSpec.describe "connectors/index", type: :view do
         vpnti_online: false,
         condition_message: "Quark",
         iccsn: "8027600355000099999",
-        expiration_date: "2025-12-31"
+        expiration_date: "2029-12-31"
       )
     ])
   end
@@ -86,7 +86,7 @@ RSpec.describe "connectors/index", type: :view do
     assert_select cell_selector, text: Regexp.new("via Cron".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("OK Konnektor online".to_s), count: 1
     assert_select cell_selector, text: Regexp.new("UNKNOWN SOAP-Abfrage fehlgeschlagen, Konfigurationsproblem, Port nicht erreichbar oder Konnektor funktioniert nicht richtig".to_s), count: 1
-    assert_select cell_selector, text: Regexp.new("2025-12-31".to_s), count: 2
+    assert_select cell_selector, text: Regexp.new("2029-12-31".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("8027600355000099999".to_s), count: 2
   end
 end

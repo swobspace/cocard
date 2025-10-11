@@ -15,4 +15,15 @@ RSpec.describe TerminalWorkplace, type: :model do
                  .scoped_to([:workplace_id, :mandant, :client_system])
   end
 
+  describe "#active" do
+    let!(:twp1) do
+      FactoryBot.create(:terminal_workplace, updated_at: 3.week.before(Time.current))
+    end
+    let!(:twp2) do
+      FactoryBot.create(:terminal_workplace, updated_at: Time.current)
+    end
+
+    it { expect(TerminalWorkplace.active).to contain_exactly(twp2) }
+  end
+
 end

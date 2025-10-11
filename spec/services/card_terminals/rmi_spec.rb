@@ -15,6 +15,8 @@ module CardTerminals
         iccsn: ENV['CARD_ICCSN'],
       )
     end
+
+    it { expect(CardTerminals::RMI::SUPPORTED_IDENTIFICATIONS).to contain_exactly('INGHC-ORGA6100') }
   
     subject { CardTerminals::RMI.new(card_terminal: ct) }
 

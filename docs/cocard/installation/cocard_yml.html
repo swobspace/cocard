@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Erweiterte Konfiguration :: Cocard</title>
-    <meta name="generator" content="Antora 3.1.12">
+    <meta name="generator" content="Antora 3.1.14">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
   </head>
@@ -114,6 +114,9 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../admin/idle-messages-edit.html">Ruhebildschirme setzen</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../admin/duck-terminal.html">Kartenterminal über IP-Adresse prüfen</a>
   </li>
 </ul>
   </li>
@@ -304,11 +307,15 @@ ktproxy_defaults:
 <div class="listingblock">
 <div class="title">cocard.yml: Default-Werte für Kartenterminals</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">terminal_ntp_enabled: true
-terminal_ntp_server: 10.255.190.1
-terminal_tftp_server: 10.200.149.49
-terminal_tftp_file: somestuff.dat
-terminal_dhcp_enabled: true</code></pre>
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">card_terminals:
+  ntp_enabled: true
+  ntp_server: 10.255.190.1
+  tftp_server: 10.200.149.49
+  tftp_file: somestuff.dat
+  dhcp_enabled: true
+  remote_pin_enabled: true
+  remote_pairing_enabled: true
+  firmware_version: 3.9.1</code></pre>
 </div>
 </div>
 </div>

@@ -103,7 +103,7 @@
           <td><%= card_terminal.description %></td>
           <td><%= t(card_terminal.pin_mode, scope: 'pin_modes') %></td>
           <td><%= card_terminal.smckt&.iccsn %></td>
-          <td><%= render Card::ExpirationDateComponent.new(card: card_terminal.smckt) %></td>
+          <td><%= render ExpirationDateComponent.new(item: card_terminal.smckt) %></td>
           <td><%= render IsCurrentComponent.new(item: card_terminal, attr: :last_check) %></td>
           <td><%= render IsCurrentComponent.new(item: card_terminal, attr: :last_ok) %></td>
           <td class="text-nowrap">

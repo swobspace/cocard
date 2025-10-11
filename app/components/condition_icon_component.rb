@@ -32,25 +32,48 @@ class ConditionIconComponent < ViewComponent::Base
     case item.condition
       when Cocard::States::CRITICAL
         @color = "danger"
-        @icon = "fa-solid fa-circle-exclamation"
+        @icon = "fa-solid fa-fw fa-circle-exclamation"
         @text = "CRITICAL"
       when Cocard::States::UNKNOWN
         @color = "info"
-        @icon = "fa-solid fa-circle-question #{textcolor}"
+        @icon = "fa-solid fa-fw fa-circle-question #{textcolor}"
         @text = "UNKNOWN"
       when Cocard::States::WARNING
         @color = "warning"
-        @icon = "fa-solid fa-triangle-exclamation #{textcolor}"
+        @icon = "fa-solid fa-fw fa-triangle-exclamation #{textcolor}"
         @text = "WARNING"
       when Cocard::States::OK
         @color = "success"
-        @icon = "fa-solid fa-circle-check"
+        @icon = "fa-solid fa-fw fa-circle-check"
         @text = "OK"
       else
         @color = "secondary"
-        @icon = "fa-solid fa-circle-xmark"
+        @icon = "fa-solid fa-fw fa-circle-xmark"
         @text = "NOTHING"
     end
+  end
+
+  def cert_badge
+    return unless item.kind_of? Connector
+    return unless item.respond_to?(:expiration_date)
+    return unless item.expiration_date.present?
+    return if item.expiration_date > 90.days.after(Date.current)
+    if item.expiration_date <= Date.current
+      color = "danger"
+      title = "Das Zertifikat ist abgelaufen!"
+    else 
+      color = "warning"
+      title = "Das Zertifikat läuft in #{(item.expiration_date - Date.current).to_i} Tagen ab!"
+
+    end
+    badge =<<~EOFBADGE
+      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-#{color}"
+            title="#{title}"
+      > 
+        <i class="fa-solid fa-fw fa-sim-card"></i>
+      </span>
+EOFBADGE
+    badge = badge.html_safe
   end
 
 private

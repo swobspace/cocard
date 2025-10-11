@@ -1,5 +1,4 @@
 <%= render 'shared/turbo-cache-control' %>
-<%= turbo_stream_from :connector_check %>
 
 <h1><%= t('controller.connectors') %></h1>
 
@@ -110,7 +109,6 @@
             <%= edit_link connector %>
             <%= delete_link connector %>
             <%= render RebootButtonComponent.new(item: connector) if can?(:reboot, connector)%>
-            <%= render HealthCheckButtonComponent.new(item: connector) %>
           </td>
         <% end %>
       <% end %>

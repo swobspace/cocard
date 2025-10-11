@@ -1,0 +1,19 @@
+<%= render FormComponent.new(title: 'Identifikation bearbeiten') do %>
+
+  <%= simple_form_for(@card_terminal) do |form| %> 
+    <%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
+
+    <div class="form-input">
+      <div class"row mb-3">
+        <div class="col-sm-9 offset-sm-3 alert alert-warning" role="alert">
+          <%= t('card_terminals.edit_identification') %>
+        </div>
+      </div>
+
+      <%= form.input :firmware_version %>
+      <%= form.input :identification %>
+      <%= form.button :submit, class: 'btn btn-primary' %>
+    <div>
+  <% end %>
+<% end %>
+

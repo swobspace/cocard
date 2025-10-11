@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Changelog :: Cocard</title>
-    <meta name="generator" content="Antora 3.1.12">
+    <meta name="generator" content="Antora 3.1.14">
     <link rel="stylesheet" href="../_/css/site.css">
     <script>var uiRootPath = '../_'</script>
   </head>
@@ -114,6 +114,9 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="admin/idle-messages-edit.html">Ruhebildschirme setzen</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="admin/duck-terminal.html">Kartenterminal über IP-Adresse prüfen</a>
   </li>
 </ul>
   </li>
@@ -250,6 +253,36 @@
 </aside>
 <article class="doc">
 <h1 class="page">Changelog</h1>
+<div class="sect1">
+<h2 id="_0_9_1_2025_10_11"><a class="anchor" href="#_0_9_1_2025_10_11"></a>0.9.1 - 2025-10-11</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Bugfix Health-Check bei Orga6141 mit Firmware 3.9.0</p>
+</li>
+<li>
+<p>Kartenterminals: Firmware-Version und Identifikation editierbar, falls Kartenterminal neu in Betrieb genommen wird und noch keine Produkt-Identifikation über den Konnektor vorliegt. Cocard benötigt die Identifikation des Terminals für das Anstoßen des Pairings.</p>
+</li>
+<li>
+<p>Konnektor: ein Zertifikatsablauf in weniger als 90 Tagen geht nicht mehr in den Gesamtzustand ein, sondern wird separat dargestellt. Nur ein abgelaufenes Zertifikat wird beim Gesamtzustand berücksichtigt.</p>
+</li>
+<li>
+<p>Kartenterminal: Check über IP-Adresse möglich, wenn RMI für das Terminal unterstützt wird. Ist noch kein Kartenterminal mit der MAC-Adresse vorhanden, wird das Terminal neu angelegt.</p>
+</li>
+<li>
+<p>Zuordnung Terminals - Arbeitsplätze jetzt ein einer einzigen Tabelle. Bisher wurden Arbeitsplätze nur einzeln beim jeweiligen Kartenterminal angezeigt.</p>
+</li>
+<li>
+<p>PIN-Verifizierung: Hinweis im Kontext, falls die Authentifikation nicht vollständig gepflegt ist (z.B. wenn beim Konnektor kein passendes Zertifikat zum Clientsystem hinterlegt ist)</p>
+</li>
+<li>
+<p>Bugfix: Tags wurden durch Hintergrundjobs gelöscht und gingen verloren; Fehler ist behoben</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
 <div class="sect1">
 <h2 id="_0_9_0_2025_09_27"><a class="anchor" href="#_0_9_0_2025_09_27"></a>0.9.0 - 2025-09-27</h2>
 <div class="sectionbody">

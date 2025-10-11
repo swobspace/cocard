@@ -52,6 +52,7 @@ module CardTerminals
       # Update firmware version from product info
       #
       @card_terminal.firmware_version = @card_terminal.product_information&.firmware_version
+      @card_terminal.identification = product_identification(@card_terminal)
 
       @card_terminal.last_check = Time.current
 
@@ -73,6 +74,12 @@ module CardTerminals
     private
 
     attr_reader :cct, :connector
+
+    def product_identification(ct)
+      return unless ct.product_information.present?
+      "#{ct.product_information&.product_vendor_id}" +
+      "-#{ct.product_information&.product_code}"
+    end
 
   end
 end

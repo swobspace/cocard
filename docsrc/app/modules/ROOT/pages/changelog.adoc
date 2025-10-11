@@ -1,5 +1,16 @@
 = Changelog
 
+== 0.9.1 - 2025-10-11
+
+* Bugfix Health-Check bei Orga6141 mit Firmware 3.9.0
+* Kartenterminals: Firmware-Version und Identifikation editierbar, falls Kartenterminal neu in Betrieb genommen wird und noch keine Produkt-Identifikation über den Konnektor vorliegt. Cocard benötigt die Identifikation des Terminals für das Anstoßen des Pairings.
+* Konnektor: ein Zertifikatsablauf in weniger als 90 Tagen geht nicht mehr in den Gesamtzustand ein, sondern wird separat dargestellt. Nur ein abgelaufenes Zertifikat wird beim Gesamtzustand berücksichtigt.
+* Kartenterminal: Check über IP-Adresse möglich, wenn RMI für das Terminal unterstützt wird. Ist noch kein Kartenterminal mit der MAC-Adresse vorhanden, wird das Terminal neu angelegt.
+* Zuordnung Terminals - Arbeitsplätze jetzt ein einer einzigen Tabelle. Bisher wurden Arbeitsplätze nur einzeln beim jeweiligen Kartenterminal angezeigt.
+* PIN-Verifizierung: Hinweis im Kontext, falls die Authentifikation nicht vollständig gepflegt ist (z.B. wenn beim Konnektor kein passendes Zertifikat zum Clientsystem hinterlegt ist)
+* Bugfix: Tags wurden durch Hintergrundjobs gelöscht und gingen verloren; Fehler ist behoben
+
+
 == 0.9.0 - 2025-09-27
 
 * Suchfunktion für die Online-Dokumentation

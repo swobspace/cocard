@@ -7,9 +7,9 @@ module Cards
       @loggable = Card.find(params[:card_id])
     end
 
-#    def add_breadcrumb_show
-#      add_breadcrumb_for([set_loggable, @log])
-#    end
+   def add_breadcrumb_show
+     # add_breadcrumb_for([set_loggable, @log])
+   end
 
   end
 end

@@ -127,7 +127,7 @@
           </tr>
           <tr>
             <th class="w-25 pe-3"><%= t('attributes.expiration_date')%>:</th>
-            <td><%= render Card::ExpirationDateComponent.new(card: card) %></td>
+            <td><%= render ExpirationDateComponent.new(item: card) %></td>
           </tr>
           <tr>
             <th class="w-25 pe-3"><%= t('attributes.object_system_version')%>:</th>

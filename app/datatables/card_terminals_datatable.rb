@@ -39,13 +39,12 @@ class CardTerminalsDatatable < ApplicationDatatable
         column <<  ct.description.to_plain_text
         column << I18n.t(ct.pin_mode, scope: 'pin_modes').to_s
         column <<  ct.smckt&.iccsn.to_s
-        column << render(Card::ExpirationDateComponent.new(card: ct.smckt))
+        column << render(ExpirationDateComponent.new(item: ct.smckt))
         column << render(IsCurrentComponent.new(item: ct, attr: :last_check))
         column << render(IsCurrentComponent.new(item: ct, attr: :last_ok))
 
         links = []
         links << show_link(ct)
-        links << render(HealthCheckButtonComponent.new(item: ct))
         links << edit_link(ct)
         links << delete_link(ct)
         column << links.join(' ')

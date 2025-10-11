@@ -1,9 +1,38 @@
 module CardTerminals
   class RMI       
     class OrgaV1::Info
+      ATTRIBUTES = %i[
+        terminalname
+        dhcp_enabled
+        macaddr
+        current_ip
+        static_ip
+        dhcp_ip
+        remote_pin_enabled
+        remote_pairing_enabled
+        ntp_enabled
+        ntp_server
+        tftp_server
+        tftp_file
+        firmware_version
+        firmware_builddate
+        serial
+      ]
 
       def initialize(properties)
         @properties = properties
+      end
+
+      def serial
+        properties['vendor_serialNumber']
+      end
+
+      def firmware_version
+        properties['sys_firmwareVersion']
+      end
+
+      def firmware_builddate
+        properties['sys_firmwareBuildDate']
       end
 
       def terminalname

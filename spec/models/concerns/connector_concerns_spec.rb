@@ -111,4 +111,57 @@ RSpec.describe ConnectorConcerns, type: :model do
       end
     end
   end
+
+  describe "can_authenticate?" do
+    describe "with authentication == :noauth" do
+      before(:each) do
+        expect(connector).to receive(:authentication).and_return('noauth')
+      end
+      it { expect(connector.can_authenticate?('iMedOne')).to be_truthy }
+      it { expect(connector.can_authenticate?(nil)).to be_truthy }
+    end
+
+    describe "with authentication == :basicauth" do
+      before(:each) do
+        expect(connector).to receive(:authentication).and_return('basicauth')
+      end
+
+      describe "auth_user/auth_password NOT set" do
+        it { expect(connector.can_authenticate?('iMedOne')).to be_falsey }
+        it { expect(connector.can_authenticate?(nil)).to be_falsey }
+      end
+
+      describe "auth_user/auth_password set" do
+        before(:each) do
+          expect(connector).to receive(:auth_user).and_return('dummy')
+          expect(connector).to receive(:auth_password).and_return('geheim')
+        end
+        it { expect(connector.can_authenticate?('iMedOne')).to be_truthy }
+        it { expect(connector.can_authenticate?(nil)).to be_truthy }
+      end
+    end
+
+    describe "with authentication == :clientcert" do
+      before(:each) do
+        expect(connector).to receive(:authentication).and_return('clientcert')
+      end
+
+      describe "no client cert available" do
+        it { expect(connector.can_authenticate?('iMedOne')).to be_falsey }
+        it { expect(connector.can_authenticate?(nil)).to be_falsey }
+      end
+
+      describe "with client_cert intern available" do
+        let(:cert) { FactoryBot.create(:client_certificate) }
+        before(:each) do
+          connector.client_certificates << cert
+          connector.reload
+        end
+        it { expect(connector.can_authenticate?('intern')).to be_truthy }
+        it { expect(connector.can_authenticate?('jibbetnich')).to be_falsey }
+      end
+    end
+
+  end
+
 end

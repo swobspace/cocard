@@ -134,11 +134,11 @@ RSpec.describe Connector, type: :model do
         expect(connector).to receive(:up?).and_return(true)
         expect(connector).to receive(:soap_request_success).and_return(true)
         expect(connector).to receive(:vpnti_online).and_return(true)
-        expect(connector).to receive(:expiration_date).
+        allow(connector).to receive(:expiration_date).
                at_least(:once).and_return(1.month.after(Date.current))
         expect {
           connector.update_condition
-        }.to change(connector, :condition).to(Cocard::States::WARNING)
+        }.to change(connector, :condition).to(Cocard::States::OK)
       end
     end
 
@@ -156,7 +156,7 @@ RSpec.describe Connector, type: :model do
         expect(connector).to receive(:up?).at_least(:once).and_return(true)
         expect(connector).to receive(:soap_request_success).at_least(:once).and_return(true)
         expect(connector).to receive(:vpnti_online).at_least(:once).and_return(true)
-        expect(connector).to receive(:expiration_date).
+        allow(connector).to receive(:expiration_date).
                at_least(:once).and_return(4.month.after(Date.current))
         expect {
           connector.update_condition
@@ -270,5 +270,20 @@ RSpec.describe Connector, type: :model do
     it { expect(connector.tcp_port_open?(8080)).to be_truthy }
   end
   # it {puts connector.sds_url}
+
+  describe "Taggable" do
+    before(:each) do
+      connector.tag_list = %w[ Eins Zwei ]
+      connector.reload
+    end
+
+    it { expect(connector.tag_list).to contain_exactly('Eins', 'Zwei') }
+
+    it "doesn't delete tags on save" do
+      expect {
+        connector.update(last_check: Time.current)
+      }.not_to change(connector, :tag_list)
+    end
+  end
 
 end

@@ -147,6 +147,7 @@ de:
     context_ids: Kontexte
     created_at: Erstellt
     creator: Ersteller
+    ct_id: CT_ID
     current_ip: Gefundene IP
     delivery_date: Lieferdatum
     description: Beschreibung
@@ -158,6 +159,7 @@ de:
     iccsn: ICCSN
     id_contract: Vertragsnummer
     id_product: Modellbezeichnung
+    identification: Identifikation
     idle_message: Anzeige im Display
     incoming_ip: Eingehende IP
     incoming_port: Eingehender Port
@@ -251,6 +253,7 @@ de:
     searches: Suche
     situation_picture: Lagebild TI
     tags: Tags
+    terminal_workplaces: Kartenterminals-Arbeitsplätze
     ti_clients: TI-Clients
     ti_clients/kt_proxies: KT-Proxys
     users: Benutzer
@@ -324,6 +327,16 @@ de:
       tftp_server: TFTP-Server
       tftp_file: TFTP-Dateiname
       dhcp_enabled: DHCP enabled?
+    edit_identification: |
+      ACHTUNG: die Bearbeitung der Identifikation ist nur für Fälle gedacht,
+      bei denen keine aktuelle Produktinformation vom Kartenterminal über den
+      Konnektor abgerufen werden kann. Etwa wenn das Kartenterminal noch nie 
+      mit einem Konnektor verbunden war und Cocard daher die Information nicht 
+      abrufen konnte. Oder wenn die Information in Cocard veraltet ist, weil das 
+      Kartenterminal länger außer Betrieb war.
+      Sobald das Kartenterminal über den Konnektor abgefragt wird, werden die 
+      hier gesetzten Informationen wieder überschrieben.
+    rmi_check: Prüfung via IP
   cards:
     no_contexts_assigned: |
       ACHTUNG! Es ist noch kein Kontext zugeordnet!
@@ -334,3 +347,18 @@ de:
     expired_in_use: Abgelaufene Karten in Benutzung
     deleted: Gelöschte Karten
     reset_card_terminal: Zuordnung zum Kartenterminal löschen
+  rmi:
+    terminalname: Terminalname
+    dhcp_enabled: DHCP enabled
+    macaddr: MAC Adresse
+    current_ip: Aktuelle IP
+    static_ip: Statische IP
+    dhcp_ip: DHCP IP
+    remote_pin_enabled: Remote SMC-B PIN enabled
+    remote_pairing_enabled: Remote Pairing enabled
+    ntp_enabled: NTP enabled
+    ntp_server: NTP-Server
+    tftp_server: FTP-Server
+    tftp_file: TFTP-File
+    firmware_version: Firmware-Version
+    firmware_duilddate: Datum der Firmware

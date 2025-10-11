@@ -93,20 +93,8 @@ EOTMPL
     fetch_config('ktproxy_equal_ports', false)
   end
 
-  def self.ntp_server
-    fetch_config('terminal_ntp_server', nil)
-  end
-
-  def self.ntp_enabled
-    fetch_config('terminal_ntp_enabled', true)
-  end
-
-  def self.tftp_server
-    fetch_config('terminal_tftp_server', nil)
-  end
-
-  def self.tftp_file
-    fetch_config('terminal_tftp_file', nil)
+  def self.card_terminal_defaults
+    Hash(fetch_config('card_terminal_defaults', {})).symbolize_keys
   end
 
   Rails.application.routes.default_url_options = {

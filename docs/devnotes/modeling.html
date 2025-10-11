@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Modeling cocard :: Cocard</title>
-    <meta name="generator" content="Antora 3.1.12">
+    <meta name="generator" content="Antora 3.1.14">
     <link rel="stylesheet" href="../_/css/site.css">
     <script>var uiRootPath = '../_'</script>
   </head>
@@ -295,6 +295,7 @@ bin/rails g migration AddInternalToCardTerminal \
   connector:belongs_to \
   network:belongs_to \
   firmware_version:string \
+  identification:string \
   acknowledge_id:bigint \
   rebooted_at:timestamp</code></pre>
 </div>
@@ -366,7 +367,7 @@ bin/rails g migration AddCertificateToCard \
   cert_subject_sn:string \
   cert_subject_givenname:string \
   cert_subject_street:string \
-  cert_subject_postalcode:string \
+  cert_subject_postalcode:strin096040g \
   cert_subject_l:string \
   cert_subject_o:string
 

@@ -18,6 +18,7 @@
 *** xref:admin/connector-autoreboot.adoc[]
 ** xref:admin/card-terminal-edit.adoc[]
 *** xref:admin/idle-messages-edit.adoc[]
+*** xref:admin/duck-terminal.adoc[]
 ** xref:admin/card-new.adoc[]
 ** xref:admin/contexts.adoc[]
 ** xref:admin/locations.adoc[]

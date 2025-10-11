@@ -129,6 +129,13 @@ RSpec.describe "/connectors", type: :request do
         expect(connector.tags.map(&:name)).to contain_exactly("MyTag")
       end
 
+      it "an empty tag_list removes the tags" do
+        connector = Connector.create! valid_attributes
+        patch connector_url(connector), params: { connector: {tag_list: ""} }
+        connector.reload
+        expect(connector.tag_list).to eq([])
+      end
+
       it "redirects to the connector" do
         connector = Connector.create! valid_attributes
         patch connector_url(connector), params: { connector: new_attributes }

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :terminal_workplaces, only: [:index]
+  resource :duck_terminal, only: [:new, :show]
   get "reports/duplicate_terminal_ips"
   resources :ti_clients do
     resources :kt_proxies, module: :ti_clients, only: [:index]
@@ -71,6 +73,7 @@ Rails.application.routes.draw do
       put :update_idle_message
       post :reboot
       post :remote_pairing
+      get :edit_identification
     end
     resources :notes, module: :card_terminals
     resource :kt_proxy, module: :card_terminals

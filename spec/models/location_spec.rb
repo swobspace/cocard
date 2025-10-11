@@ -20,4 +20,20 @@ RSpec.describe Location, type: :model do
   describe "#to_s" do
     it { expect(location.to_s).to match('BER') }
   end
+
+  describe "Taggable" do
+    before(:each) do
+      location.tag_list = %w[ Eins Zwei ]
+      location.reload
+    end
+  
+    it { expect(location.tag_list).to contain_exactly('Eins', 'Zwei') }
+  
+    it "doesn't delete tags on save" do
+      expect {
+        location.update(updated_at: Time.current)
+      }.not_to change(location, :tag_list)
+    end
+  end
+
 end

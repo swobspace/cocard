@@ -1,0 +1,34 @@
+= Kartenterminal über IP-Adresse prüfen
+:author: Wolfgang Barth
+:revdate: 2025-10-06
+:imagesdir: ../../images
+:experimental: true
+
+Kartenterminals mit einem Remote-Management-Interface (RMI) kann man auch über die IP-Adresse prüfen, ohne dass das Kartenterminal vorher in Cocard angelegt oder über einen Konnektor gefunden wurde. Ist das Kartenterminal mit der MAC-Adresse aus der IP-Prüfung noch nicht in Cocard vorhanden, wird es neu angelegt.
+
+IMPORTANT:: Voraussetzung ist, dass das Kartenterminal von Cocard unterstützt wird (derzeit nur Orga6141 ab Firmware-Version 3.9.0), die Administration per Web freigeschaltet wurde und die Admin-PIN Cocard bekannt ist.
+
+TIP:: Eine einfache Prüfung über die IP mit den im Screenshot unten angegebenen Werten für Identifikation und Firmware-Version gibt zurück, ob das Kartenterminal per RMI abgefragt werden kann.
+
+.Prüfung Kartenterminal via IP
+image::ct/duck-terminal-menu.png[]
+
+Im Formular zur IP-Prüfung sind folgende Angaben erforderlich:
+
+* Identifikation: derzeit ist nur `INGHC-ORGA6100` möglich.
+* Firmware-Version: wenn die Firmware-Version nicht bekannt ist, sollte man die kleinstmögliche wählen, für die RMI unterstützt wird. Beim Orga6141 ist das `3.9.0`
+* IP-Adresse des Kartenterminals
+
+.Erforderliche Angaben: Identifikation, Firmware-Version und IP-Adresse des Kartenterminals
+image::ct/duck-terminal-form.png[]
+
+Nach dem Absenden des Formulars fragt Cocard das Kartenterminal per RMI ab und vergleicht die erhaltenen Werte mit Default-Werten (konfigurierbar unter xref:installation:cocard_yml.adoc[]) und Name/MAC-Adresse der Daten aus Cocard, falls das Kartenterminal bereits in Cocard angelegt wurde.
+
+.Ergebnis der Prüfung
+image::ct/duck-terminal-show.png[]
+
+Im unteren Abschnitt _Kartenterminals mit der IP ..._ werden alle Kartenterminals angezeigt, die in Cocard die bei der Abfrage verwendete IP konfiguriert haben. Falls mehr als ein Eintrag erscheint ist die IP-Adresse in Cocard mehr als einmal vorhanden. Bei einem rot hinterlegten Kartenterminal ist sehr wahrscheinlich die in Cocard hinterlegte IP-Adresse falsch.
+
+Ist das Kartenterminal bereits in Cocard vorhanden, kann man auch aus der Anzeige heraus die IP-Prüfung starten (Pfeil). IP-Adresse, Identifikation und Firmware-Version werden in das Formular übernommen, dabei kann die Firmware-Version bei Bedarf noch angepasst werden, z.B. wenn die Angabe zur Firmware-Version in Cocard veraltet ist.
+
+image::ct/duck-terminal-from-ct.png[]

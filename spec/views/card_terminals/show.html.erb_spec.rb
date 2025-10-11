@@ -10,7 +10,7 @@ RSpec.describe "card_terminals/show", type: :view do
      :product_type_information=> {:product_type=>"KardTerm", :product_type_version=>"1.2.3.4"},
      :product_identification=> {
        :product_vendor_id=>"Heinrich GmbH",
-       :product_code=>nil,
+       :product_code=> "x4711",
        :product_version=> { :local=>{:hw_version=>"5.6.7", :fw_version=>"8.9.1"}}
      },
      :product_miscellaneous=> {:product_vendor_name=>nil, :product_name=>nil}}
@@ -49,7 +49,8 @@ RSpec.describe "card_terminals/show", type: :view do
       last_ok: 1.day.before(ts),
       last_check: ts,
       pin_mode: 'on_demand',
-      network: network
+      network: network,
+      identification: "Heinrich-x4711"
     )
     allow(@card_terminal).to receive(:supports_rmi?).and_return(true)
   end
@@ -80,6 +81,7 @@ RSpec.describe "card_terminals/show", type: :view do
     expect(rendered).to match(/2023-12-14/)
     expect(rendered).to match(/ACME Ltd/)
     expect(rendered).to match(/3.1.9/)
+    expect(rendered).to match(/Heinrich-x4711/)
     expect(rendered).to match(/ORGA6141/)
     expect(rendered).to match(/11122277634/)
     expect(rendered).to match(/11122277634/)

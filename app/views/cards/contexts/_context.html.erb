@@ -3,6 +3,7 @@
   <div class="row">
     <div class="col-12 col-lg-8 handle pt-1">
       <%= link_to context.to_s, context, class: 'primary-link' %>
+      <%= render Card::ContextAuthenticationComponent.new(card: card, context: context) %>
     </div>
     <% if card.card_type == 'SMC-B' %>
       <div class="col-12 col-lg-4 text-muted text-end">
