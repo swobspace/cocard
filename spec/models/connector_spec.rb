@@ -271,4 +271,19 @@ RSpec.describe Connector, type: :model do
   end
   # it {puts connector.sds_url}
 
+  describe "Taggable" do
+    before(:each) do
+      connector.tag_list = %w[ Eins Zwei ]
+      connector.reload
+    end
+
+    it { expect(connector.tag_list).to contain_exactly('Eins', 'Zwei') }
+
+    it "doesn't delete tags on save" do
+      expect {
+        connector.update(last_check: Time.current)
+      }.not_to change(connector, :tag_list)
+    end
+  end
+
 end
