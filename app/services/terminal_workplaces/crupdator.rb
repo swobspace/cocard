@@ -31,12 +31,13 @@ module TerminalWorkplaces
     def call
       @workplaces = find_or_create_workplaces_by_name(wp_names)
       @workplaces.each do |wp|
-        TerminalWorkplace.find_or_create_by(
+        twp = TerminalWorkplace.find_or_create_by(
           card_terminal_id: card_terminal.id,
           mandant: mandant,
           client_system: client_system,
           workplace_id: wp.id
         )
+        twp.touch
       end
       obsolete = obsolete_terminal_workplaces(@workplaces)
       TerminalWorkplace.destroy(obsolete.map(&:id))
