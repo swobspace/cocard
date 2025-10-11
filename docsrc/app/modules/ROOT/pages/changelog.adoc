@@ -6,6 +6,8 @@
 * Kartenterminals: Firmware-Version und Identifikation editierbar, falls Kartenterminal neu in Betrieb genommen wird und noch keine Produkt-Identifikation über den Konnektor vorliegt. Cocard benötigt die Identifikation des Terminals für das Anstoßen des Pairings.
 * Konnektor: ein Zertifikatsablauf in weniger als 90 Tagen geht nicht mehr in den Gesamtzustand ein, sondern wird separat dargestellt. Nur ein abgelaufenes Zertifikat wird beim Gesamtzustand berücksichtigt.
 * Kartenterminal: Check über IP-Adresse möglich, wenn RMI für das Terminal unterstützt wird. Ist noch kein Kartenterminal mit der MAC-Adresse vorhanden, wird das Terminal neu angelegt.
+* Zuordnung Terminals - Arbeitsplätze jetzt ein einer einzigen Tabelle. Bisher wurden Arbeitsplätze nur einzeln beim jeweiligen Kartenterminal angezeigt.
+* PIN-Verifizierung: Hinweis im Kontext, falls die Authentifikation nicht vollständig gepflegt ist (z.B. wenn beim Konnektor kein passendes Zertifikat zum Clientsystem hinterlegt ist)
 
 == 0.9.0 - 2025-09-27
 
