@@ -421,4 +421,20 @@ RSpec.describe CardTerminal, type: :model do
       expect(ct.connected).to be_falsey
     end
   end
+
+  describe "Taggable" do
+    before(:each) do
+      ct.tag_list = %w[ Eins Zwei ]
+      ct.reload
+    end
+  
+    it { expect(ct.tag_list).to contain_exactly('Eins', 'Zwei') }
+  
+    it "doesn't delete tags on save" do
+      expect {
+        ct.update(last_check: Time.current)
+      }.not_to change(ct, :tag_list)
+    end
+  end
+
 end

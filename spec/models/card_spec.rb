@@ -308,6 +308,21 @@ RSpec.describe Card, type: :model do
         card.destroy
       }.to change(CardTerminalSlot, :count).by(0)
     end
-    
   end
+
+  describe "Taggable" do
+    before(:each) do
+      card.tag_list = %w[ Eins Zwei ]
+      card.reload
+    end
+  
+    it { expect(card.tag_list).to contain_exactly('Eins', 'Zwei') }
+  
+    it "doesn't delete tags on save" do
+      expect {
+        card.update(last_check: Time.current)
+      }.not_to change(card, :tag_list)
+    end
+  end
+
 end
