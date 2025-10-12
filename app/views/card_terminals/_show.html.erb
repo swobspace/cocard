@@ -261,11 +261,16 @@
               <%= render partial: 'kt_proxies/kt_proxy', locals: {kt_proxy: card_terminal.kt_proxy} %>
             </table>
           <% else %>
-            <div class="text-end">
-            <%= link_to "KT-Proxy generieren", 
-                        new_card_terminal_kt_proxy_path(card_terminal),
-                        class: 'btn btn-warning' %>
+           <div class="d-flex justify-content-between">
+            <div class="text-start">
+              Kein KT-Proxy vorhanden
             </div>
+            <div class="text-end">
+            <%= link_to("KT-Proxy generieren", 
+                        new_card_terminal_kt_proxy_path(card_terminal),
+                        class: 'btn btn-warning') if can?(:create, KTProxy) %>
+            </div>
+           </div>
           <% end %>
         <% end %>
 
