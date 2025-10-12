@@ -358,7 +358,7 @@ de:
     remote_pairing_enabled: Remote Pairing enabled
     ntp_enabled: NTP enabled
     ntp_server: NTP-Server
-    tftp_server: FTP-Server
+    tftp_server: TFTP-Server
     tftp_file: TFTP-File
     firmware_version: Firmware-Version
     firmware_duilddate: Datum der Firmware
