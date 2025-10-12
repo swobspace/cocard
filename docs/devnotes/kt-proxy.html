@@ -206,6 +206,15 @@ conn.card_terminals.count</code></pre>
 </div>
 </div>
 <div class="listingblock">
+<div class="title">Cleanup von nicht aktiven KTs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby"># Je Konnektor
+conn.card_terminals.where(condition: Cocard::States::NOTHING).update_all(connector_id: nil)
+# alternativ alle
+CardTerminal.where(condition: Cocard::States::NOTHING).update_all(connector_id: nil)</code></pre>
+</div>
+</div>
+<div class="listingblock">
 <div class="title">Auswahl des TI-Clients</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">tic = TIClient.where("name like ?", '%05%').first</code></pre>

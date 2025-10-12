@@ -43,6 +43,17 @@ conn = Connector.where(short_name: 'K26').first
 conn.card_terminals.count
 ----
 
+
+.Cleanup von nicht aktiven KTs
+[source,ruby]
+----
+# Je Konnektor
+conn.card_terminals.where(condition: Cocard::States::NOTHING).update_all(connector_id: nil)
+# alternativ alle
+CardTerminal.where(condition: Cocard::States::NOTHING).update_all(connector_id: nil)
+----
+
+
 .Auswahl des TI-Clients
 [source,ruby]
 ----
