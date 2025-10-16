@@ -48,11 +48,11 @@ class CardTerminals::HealthCheckJob < ApplicationJob
             toaster(card_terminal, :info, text)
           end
 
-          check_value(card_terminal, info, :dhcp_enabled)
-          check_value(card_terminal, info, :ntp_server)
-          check_value(card_terminal, info, :ntp_enabled)
-          check_value(card_terminal, info, :tftp_server)
-          check_value(card_terminal, info, :tftp_file)
+          # check_value(card_terminal, info, :dhcp_enabled)
+          # check_value(card_terminal, info, :ntp_server)
+          # check_value(card_terminal, info, :ntp_enabled)
+          # check_value(card_terminal, info, :tftp_server)
+          # check_value(card_terminal, info, :tftp_file)
         end
         result.on_failure do |message|
           text = "RMI-Abfrage fehlgeschlagen: #{message}"
