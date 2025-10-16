@@ -1,6 +1,6 @@
 class SearchesController < ApplicationController
   def index
-    @results = (connectors + card_terminals + cards + workplaces)
+    @results = (connectors + card_terminals + cards + workplaces + kt_proxies)
     if @results.count > 20
       @results = @results.first(20)
       @info = I18n.t('cocard.to_much_results')
@@ -32,6 +32,12 @@ private
 
   def workplaces
     Workplace.where("workplaces.name ILIKE ?", query).all
+  end
+
+  def kt_proxies
+    return [] unless Cocard.enable_ticlient
+    relation = KTProxy.all
+    KTProxies::Query.new(relation, searchopts).all.distinct
   end
 
   def query

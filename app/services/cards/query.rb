@@ -112,7 +112,7 @@ module Cards
             search_string << "CAST(cards.#{key} AS VARCHAR) ILIKE :search" 
           end
         else
-          raise ArgumentError, "unknown search option #{key}" unless Rails.env.production?
+          query = query.none
         end
       end
       if search_value

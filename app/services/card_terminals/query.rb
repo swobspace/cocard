@@ -107,7 +107,7 @@ module CardTerminals
           end
           search_string << "replace(card_terminals.mac::varchar, ':', '') ILIKE :search"
         else
-          raise ArgumentError, "unknown search option #{key}" unless Rails.env.production?
+          query = query.none
         end
       end
       if search_value
