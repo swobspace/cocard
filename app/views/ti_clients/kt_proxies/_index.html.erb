@@ -63,7 +63,13 @@
           </tfoot>
           <tbody>
             <% kt_proxies.each do |kt_proxy| %>
-              <%= content_tag(:tr, id: dom_id(kt_proxy), class: dom_class(kt_proxy)) do %>
+              <%= content_tag(:tr, id: dom_id(kt_proxy), 
+                                class: if kt_proxy.card_terminal.nil?
+                                         "#{dom_class(kt_proxy)} bg-CRITICAL"
+                                       else
+                                         "#{dom_class(kt_proxy)}"
+                                       end
+                             ) do %>
                 <td><%= link_to(kt_proxy.card_terminal,
                                 kt_proxy.card_terminal,
                                 data: { "turbo-frame": "_top" },

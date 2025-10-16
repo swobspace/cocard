@@ -163,7 +163,8 @@ table.connector.table.table-sm > :not(caption) > * > * {
 .bg-WARNING {
   background-color:  #FFFF80 !important;
 }
-.bg-CRITICAL {
+.bg-CRITICAL,
+table tbody tr.bg-CRITICAL td {
   background-color: #FF8080 !important;
 }
 .bg-UNKNOWN {
