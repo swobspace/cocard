@@ -123,6 +123,15 @@ module KTProxies
       it_behaves_like "a kt_proxy query"
     end
 
+    context "with :card_terminal_ip" do
+      subject { Query.new(kt_proxys, {card_terminal_ip: '192.168.1.2'}) }
+      before(:each) do
+        @matching = [kt_proxy2]
+        @nonmatching = [kt_proxy1, kt_proxy3]
+      end
+      it_behaves_like "a kt_proxy query"
+    end
+
     context "with :name" do
       subject { Query.new(kt_proxys, {name: "name1"}) }
       before(:each) do
@@ -143,8 +152,8 @@ module KTProxies
 
     describe "#all" do
       context "using :search'" do
-        it "searches for name" do
-          search = Query.new(kt_proxys, {search: 8103})
+        it "searches for ip" do
+          search = Query.new(kt_proxys, {search: '192.168.1.3'})
           expect(search.all).to contain_exactly(kt_proxy3)
         end
 

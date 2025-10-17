@@ -61,8 +61,6 @@ module KTProxies
         when :limit
           @limit = value.to_i
         when :search
-          search_string << "kt_proxies.incoming_port = :isearch"
-          search_string << "kt_proxies.outgoing_port = :isearch"
           string_fields.each do |term|
             search_string << "kt_proxies.#{term} ILIKE :search"
           end
@@ -75,8 +73,7 @@ module KTProxies
       end
       if search_value
         query = query.where(search_string.join(' or '), 
-                            search: "%#{search_value}%",
-                            isearch: search_value.to_i)
+                            search: "%#{search_value}%")
        end
       if limit > 0
         query.limit(limit)
@@ -89,7 +86,7 @@ module KTProxies
   private
 
     def cast_fields
-      [ ]
+      [ :card_terminal_ip, :outgoing_ip, :incoming_ip ]
     end
 
     def string_fields
