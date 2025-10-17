@@ -257,9 +257,7 @@
             </div>
           </div>
           <% if card_terminal.kt_proxy.present? %>
-            <table class="table table-sm table-borderless">
               <%= render partial: 'kt_proxies/kt_proxy', locals: {kt_proxy: card_terminal.kt_proxy} %>
-            </table>
           <% else %>
            <div class="d-flex justify-content-between">
             <div class="text-start">

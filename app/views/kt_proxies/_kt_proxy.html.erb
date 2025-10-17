@@ -1,33 +1,33 @@
 <%= link_to kt_proxy_path(kt_proxy), class: 'list-group-item list-group-item-action' do %>
   <div>
     <div class="row subtitle">
-      <div class="col-3">
+      <div class="col-lg-4">
         <%= kt_proxy.ti_client %> -
         <%= t('activerecord.models.kt_proxy') %>:
         #<%= kt_proxy.id %>
       </div>
-      <div class="col-2">
+      <div class="col">
+        card terminal
+      </div>
+      <div class="col">
         incoming
       </div>
-      <div class="col-2">
+      <div class="col">
         outgoing
-      </div>
-      <div class="col-2">
-        card terminal
       </div>
     </div>
     <div  class="row">
-      <div class="col-3">
-        <%= kt_proxy.name %>
+      <div class="col-lg-4">
+        <%= truncate(kt_proxy.name, length: 50) %>
       </div>
-      <div class="col-2">
+      <div class="col">
+        <%= kt_proxy.card_terminal_ip %> : <%= kt_proxy.card_terminal_port %>
+      </div>
+      <div class="col">
         <%= kt_proxy.incoming_ip %> : <%= kt_proxy.incoming_port %>
       </div>
-      <div class="col-2">
+      <div class="col">
         <%= kt_proxy.outgoing_ip %> : <%= kt_proxy.outgoing_port %>
-      </div>
-      <div class="col-2">
-        <%= kt_proxy.card_terminal_ip %> : <%= kt_proxy.card_terminal_port %>
       </div>
     </div>
   </div>
