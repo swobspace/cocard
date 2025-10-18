@@ -31,7 +31,12 @@ module CardTerminals
     let(:ts)  { Time.parse("2025-03-11 12:00:00") }
     let(:ber) { FactoryBot.create(:location, lid: 'BER') }
     let(:network) { FactoryBot.create(:network, netzwerk: '127.51.0.0/16', location: ber) }
-    let(:conn) { FactoryBot.create(:connector, name: 'TIK-127') }
+    let(:conn) do 
+      c = FactoryBot.create(:connector, name: 'TIK-127')
+      c.update_column(:condition, Cocard::States::OK)
+      c
+    end
+
     let(:card) do
       FactoryBot.create(:card, 
         card_type: 'SMC-KT', 
@@ -39,6 +44,7 @@ module CardTerminals
         expiration_date: '2025-11-27',
       )
     end
+
     let!(:ct1) do
       FactoryBot.create(:card_terminal, :with_mac,
         displayname: 'QUORA - test',
@@ -133,7 +139,7 @@ module CardTerminals
       it { expect(subject.respond_to? :include?).to be_truthy }
     end
 
-   context "with unknown option :fasel" do
+    context "with unknown option :fasel" do
       subject { Query.new(card_terminals, {fasel: 'blubb'}) }
       describe "#all" do
         it "does not raise an error" do
