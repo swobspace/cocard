@@ -74,7 +74,9 @@
           <tr>
             <th class="w-25 pe-3"><%= t('attributes.ip')%>:</th>
             <td><%= link_to(card_terminal.ip, card_terminal.admin_url,
-                            class: 'primary-link') if card_terminal.admin_url.present?
+                            class: 'primary-link',
+                            target: '_blank'
+                           ) if card_terminal.admin_url.present?
                  %></td>
           </tr>
 
