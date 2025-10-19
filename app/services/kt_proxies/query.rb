@@ -1,27 +1,19 @@
 ##
-# Query for Connectors
+# Query for KTProxy
 #
-module Connectors
+module KTProxies
   class Query
     attr_reader :search_options, :query
 
     ##
     # possible search options:
     # * :name - string
-    # * :description - string
     # * :ip - string
-    # * :admin_url - string
-    # * :sds_url - string
-    # * :manual_update - boolean
-    # * :condition - integer
-    # * :soap_request_success - boolean
-    # * :vpnti_online - boolean
-    # * :firmware_version - string
-    # * :lid - string
-    # * :search - string
     # * :id - integer
+    # * :card_terminal_id - integer
+    # * :port - integer
+    # * :search - string
     # * :limit - limit result (integer)
-    #
     #
     def initialize(relation, search_options = {})
       @relation       = relation
@@ -57,40 +49,31 @@ module Connectors
       search_options.each do |key,value|
         case key 
         when *string_fields
-          query = query.where("connectors.#{key} ILIKE ?", "%#{value}%")
+          query = query.where("kt_proxies.#{key} ILIKE ?", "%#{value}%")
         when *cast_fields
-          query = query.where("CAST(connectors.#{key} AS VARCHAR) ILIKE ?", "%#{value}%")
+          query = query.where("CAST(kt_proxies.#{key} AS VARCHAR) ILIKE ?", "%#{value}%")
         when *id_fields
           query = query.where(key.to_sym => value)
-        when :lid
-          query = query.joins(:locations).where("locations.lid ILIKE ?", "%#{value}%")
-        when :tag
-          query = query.joins(taggings: :tag).where("tags.name ILIKE ?", "%#{value}%")
-        when :description
-          query = query.with_description_containing(value)
-        when :condition
-          query = query.where(condition: value.to_i)
-        when :manual_update
-          query = query.where(manual_update: to_boolean(value))
-        when :soap_request_success
-          query = query.where(soap_request_success: to_boolean(value))
-        when :vpnti_online
-          query = query.where(vpnti_online: to_boolean(value))
+        when :port
+          query = query.where("kt_proxies.outgoing_port = :port OR " +
+                              "kt_proxies.incoming_port = :port", 
+                               port: value.to_i)
         when :limit
           @limit = value.to_i
         when :search
           string_fields.each do |term|
-            search_string << "connectors.#{term} ILIKE :search"
+            search_string << "kt_proxies.#{term} ILIKE :search"
           end
           cast_fields.each do |key|
-            search_string << "CAST(connectors.#{key} AS VARCHAR) ILIKE :search" 
+            search_string << "CAST(kt_proxies.#{key} AS VARCHAR) ILIKE :search" 
           end
         else
           query = query.none
         end
       end
       if search_value
-        query = query.where(search_string.join(' or '), search: "%#{search_value}%")
+        query = query.where(search_string.join(' or '), 
+                            search: "%#{search_value}%")
        end
       if limit > 0
         query.limit(limit)
@@ -103,15 +86,15 @@ module Connectors
   private
 
     def cast_fields
-      [ :ip ]
+      [ :card_terminal_ip, :outgoing_ip, :incoming_ip ]
     end
 
     def string_fields
-      [ :short_name, :name, :admin_url, :sds_url, :serial, :firmware_version]
+      [ :name, :uuid ]
     end
 
     def id_fields
-      [:id]
+      [ :id, :card_terminal_id ]
     end
 
     def to_boolean(value)

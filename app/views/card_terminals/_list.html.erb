@@ -10,21 +10,25 @@
         } do %>
     <thead>
       <tr>
-            <th class="text-center"><%= t('attributes.condition') %></th>
+            <th class="text-start"><%= t('attributes.condition') %></th>
             <th><%= t('attributes.displayname') %></th>
+            <th class="text-center">SMC-B?</th>
             <th class="notvisible"><%= t('attributes.connector') %></th>
             <th><%= t('attributes.ct_id') %></th>
             <th><%= t('attributes.mac') %></th>
-            <th><%= t('attributes.serial') %></th>
+            <th class="notvisible"><%= t('attributes.serial') %></th>
             <th><%= t('attributes.ip') %></th>
             <th><%= t('attributes.connected') %></th>
             <th><%= t('attributes.location') %></th>
             <th><%= t('attributes.room') %></th>
             <th><%= t('attributes.plugged_in') %></th>
+            <th class="notvisible"><%= t('attributes.last_check') %></th>
       </tr>
     </thead>
     <tfoot class="search">
       <tr>
+            <th></th>
+            <th></th>
             <th></th>
             <th></th>
             <th></th>
@@ -41,11 +45,15 @@
     <tbody>
       <% card_terminals.each do |card_terminal| %>
         <%= content_tag(:tr, id: dom_id(card_terminal), class: dom_class(card_terminal)) do %>
-          <td class="text-center">
-            <%= render ConditionIconComponent.new(item: card_terminal, small: true) %>
+          <td class="text-start">
+            <%= render ConditionIconComponent.new(item: card_terminal, as_text: true) %>
             <span style="visibility:hidden;"><%= card_terminal.condition %></span>
           </td>
-          <td><%= card_terminal.displayname %></td>
+          <td><%= truncate(card_terminal.displayname, length: 50) %></td>
+          <td class="text-center">
+            <%= render BooleanComponent.new(value: card_terminal.has_smcb?, 
+                                            text: :unicode) %>
+          </td>
           <td><%= render LinkToComponent.new(item: card_terminal.connector) %></td>
           <td><%= link_to card_terminal.ct_id, 
                           card_terminal_path(card_terminal),
@@ -55,10 +63,14 @@
           <td><%= card_terminal.mac %></td>
           <td><%= card_terminal.serial %></td>
           <td><%= card_terminal.ip %></td>
-          <td><%= card_terminal.connected %></td>
+          <td class="text-center">
+            <%= render BooleanComponent.new(value: card_terminal.connected, 
+                                            text: :unicode) %>
+          </td>
           <td><%= card_terminal.location&.lid %></td>
           <td><%= card_terminal.room %></td>
           <td><%= card_terminal.plugged_in %></td>
+          <td><%= render IsCurrentComponent.new(item: card_terminal, attr: :last_check) %></td>
         <% end %>
       <% end %>
     </tbody>

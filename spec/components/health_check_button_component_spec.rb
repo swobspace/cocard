@@ -3,13 +3,40 @@
 require "rails_helper"
 
 RSpec.describe HealthCheckButtonComponent, type: :component do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:ct) { FactoryBot.create(:card_terminal, :with_mac) }
 
-  # it "renders something useful" do
-  #   expect(
-  #     render_inline(described_class.new(attr: "value")) { "Hello, components!" }.css("p").to_html
-  #   ).to include(
-  #     "Hello, components!"
-  #   )
-  # end
+  describe "without ip" do
+    it "does not show button" do
+      render_inline(described_class.new(item: ct))
+      expect(page).not_to have_css('form[class="button_to"]')
+      expect(rendered_content).to be_blank
+    end
+  end
+
+  describe "with ip 0.0.0.0" do
+    it "does not show button" do
+      expect(ct).to receive(:ip).at_least(:once).and_return('0.0.0.0')
+      render_inline(described_class.new(item: ct))
+      expect(page).not_to have_css('form[class="button_to"]')
+      expect(rendered_content).to be_blank
+    end
+  end
+
+  describe "with item.nil?" do
+    it "does not show button" do
+      render_inline(described_class.new(item: nil))
+      expect(page).not_to have_css('form[class="button_to"]')
+      expect(rendered_content).to be_blank
+    end
+  end
+
+  describe "with valid ip" do
+    it "does not show button" do
+      expect(ct).to receive(:ip).at_least(:once).and_return('198.51.100.4')
+      render_inline(described_class.new(item: ct))
+      expect(page).to have_css('form[class="button_to"]')
+    end
+  end
+
+
 end

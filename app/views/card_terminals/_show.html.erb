@@ -74,7 +74,9 @@
           <tr>
             <th class="w-25 pe-3"><%= t('attributes.ip')%>:</th>
             <td><%= link_to(card_terminal.ip, card_terminal.admin_url,
-                            class: 'primary-link') if card_terminal.admin_url.present?
+                            class: 'primary-link',
+                            target: '_blank'
+                           ) if card_terminal.admin_url.present?
                  %></td>
           </tr>
 
@@ -257,15 +259,18 @@
             </div>
           </div>
           <% if card_terminal.kt_proxy.present? %>
-            <table class="table table-sm table-borderless">
               <%= render partial: 'kt_proxies/kt_proxy', locals: {kt_proxy: card_terminal.kt_proxy} %>
-            </table>
           <% else %>
-            <div class="text-end">
-            <%= link_to "KT-Proxy generieren", 
-                        new_card_terminal_kt_proxy_path(card_terminal),
-                        class: 'btn btn-warning' %>
+           <div class="d-flex justify-content-between">
+            <div class="text-start">
+              Kein KT-Proxy vorhanden
             </div>
+            <div class="text-end">
+            <%= link_to("KT-Proxy generieren", 
+                        new_card_terminal_kt_proxy_path(card_terminal),
+                        class: 'btn btn-warning') if can?(:create, KTProxy) %>
+            </div>
+           </div>
           <% end %>
         <% end %>
 

@@ -84,9 +84,10 @@ module Connectors
    context "with unknown option :fasel" do
       subject { Query.new(connectors, {fasel: 'blubb'}) }
       describe "#all" do
-        it "raises a argument error" do
-          expect { subject.all }.to raise_error(ArgumentError)
+        it "does not raise an error" do
+          expect { subject.all }.not_to raise_error
         end
+        it { expect(subject.all).to be_empty }
       end
     end
 

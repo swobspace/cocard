@@ -85,8 +85,13 @@ class CardTerminal < ApplicationRecord
                            "Reboot um #{rebooted_at.localtime.to_s}, stay tuned...")
     end
     if online?
-      return set_condition( Cocard::States::OK,
-                     "Kartenterminal online" )
+      if connector.condition == Cocard::States::OK
+        return set_condition( Cocard::States::OK,
+                       "Kartenterminal online" )
+      else
+        return set_condition( Cocard::States::UNKNOWN,
+                       "Kartenterminal online, aber Konnektor nicht OK?" )
+      end
     end
     if last_ok.blank?
       return set_condition( Cocard::States::NOTHING,

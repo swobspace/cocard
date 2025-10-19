@@ -4,15 +4,17 @@ class KTProxiesController < ApplicationController
 
   # GET /kt_proxies
   def index
+    filename = "cardterminal_proxies.json"
     if @proxyable
       @kt_proxies = @proxyable.kt_proxies
+      filename = "#{@proxyable.to_s}_cardterminal_proxies.json"
     else
       @kt_proxies = KTProxy.all
     end
     respond_with(@kt_proxies) do |format|
       format.json do
         data = render_to_string 'ti_clients/kt_proxies/index'
-        send_data data, filename: 'cardterminal_proxies.json',
+        send_data data, filename: filename,
                         type: :json,
                         disposition: 'attachment'
       end

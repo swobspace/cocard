@@ -218,6 +218,7 @@ RSpec.describe CardTerminal, type: :model do
         end
 
         it "-> OK" do
+          connector.update_column(:condition, Cocard::States::OK)
           ct.update(acknowledge_id: ack.id)
           ct.reload
           expect(ct.acknowledge).to eq(ack)
@@ -278,6 +279,7 @@ RSpec.describe CardTerminal, type: :model do
       describe "with connected online" do
         it "-> OK" do
           expect(ct).to receive(:connected).and_return(true)
+          expect(connector).to receive(:condition).and_return(Cocard::States::OK)
           expect {
             ct.update_condition
           }.to change(ct, :condition).to(Cocard::States::OK)

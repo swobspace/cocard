@@ -115,8 +115,8 @@ de:
     card_holder_name: CardHolder
     card_terminal: Kartenterminal
     card_terminal_ids: Kartenterminals
-    card_terminal_ip: IP des Kartenterminals
-    card_terminal_port: Port des Kartenterminals
+    card_terminal_ip: IP des Terminals
+    card_terminal_port: Port des Terminals
     card_type: Kartentyp
     certificate: Zertifikat
     cert: Zertifikat (PEM)
@@ -358,7 +358,7 @@ de:
     remote_pairing_enabled: Remote Pairing enabled
     ntp_enabled: NTP enabled
     ntp_server: NTP-Server
-    tftp_server: FTP-Server
+    tftp_server: TFTP-Server
     tftp_file: TFTP-File
     firmware_version: Firmware-Version
     firmware_duilddate: Datum der Firmware
