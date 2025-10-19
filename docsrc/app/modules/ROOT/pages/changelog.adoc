@@ -1,7 +1,11 @@
 = Changelog
 
-== 0.9.2 - unreleased
+== 0.9.2 - 2025-10-19
 
+* Bugfixe und Layout-Anpassungen
+* Arbeitsplätze: _zuletzt gesehen_ ergänzt
+* Tabelle Terminals - Arbeitsplätze jetzt mit _zuletzt aktualisiert_
+ 
 == 0.9.1 - 2025-10-11
 
 * Bugfix Health-Check bei Orga6141 mit Firmware 3.9.0
