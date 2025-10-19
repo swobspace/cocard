@@ -37,6 +37,7 @@ module RISE
         it { expect(subject.token_type).to eq("Bearer") }
         it { expect(subject.token).to eq("eyJraWQiOiJkZGUyMDZiYi1lMDgz") }
         it { expect(subject.valid_until > 265.seconds.after(Time.current)).to be_truthy }
+        it { expect(subject.valid?).to be_truthy }
         it "set token = nil after expiration" do
           # ticltok = RISE::TIClient::Token.new(json_token) 
           token1 = subject.token
@@ -44,6 +45,7 @@ module RISE
           travel 10.minutes
           token2 = subject.token
           expect(token2).to be_nil
+          expect(subject.valid?).to be_falsey
         end
       end
     end

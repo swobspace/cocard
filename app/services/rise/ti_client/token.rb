@@ -10,11 +10,15 @@ module RISE
     end
 
     def token
-      if Time.current <= valid_until
+      if valid?
         json['access_token']
       else
         nil
       end
+    end
+
+    def valid?
+      Time.current <= valid_until
     end
 
   private
