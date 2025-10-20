@@ -126,8 +126,17 @@ module RISE
           ]
         end
 
-        expect(subject.get_card_terminal_proxies).to be_kind_of(Hash)
-        expect(subject.get_card_terminal_proxies).to include(JSON.parse(card_terminal_proxies_body))
+        called_back = false 
+        subject.get_card_terminal_proxies do |result|
+          result.on_success do |message, value|
+            called_back = :success
+            expect(value).to include(JSON.parse(card_terminal_proxies_body))
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:success)
       end
 
       it "failure: no content" do
@@ -139,7 +148,17 @@ module RISE
           ]
         end
 
-        expect(subject.get_card_terminal_proxies).to be_nil
+        called_back = false 
+        subject.get_card_terminal_proxies do |result|
+          result.on_success do |message, value|
+            called_back = :success
+            expect(value).to include(JSON.parse(card_terminal_proxies_body))
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:failure)
       end
     end
   end
