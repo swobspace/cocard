@@ -1,14 +1,44 @@
 module RISE
   class TIClient
-    attr_reader :ti_client
+    attr_reader :ti_client, :errors
 
     def initialize(options = {})
       options = options.symbolize_keys
       @ti_client = options.fetch(:ti_client)
+      @errors = []
+    end
+
+    def get_card_terminal_proxies
+      @errors = []
+      token = api_token
+      if token.nil?
+        return nil
+      end
+      begin
+        response = connection.get('/api/v1/manager/card-terminals/proxies',
+                     {},
+                     { 'Content-Type': 'application/json',
+                       'authorization': "Bearer #{token}" }
+                   )
+        unless response.success?
+          @errors << "#{response.status}: #{response.body}"
+          return nil
+        end
+      rescue Faraday::Error => e
+        err = []
+        err << e.response_status
+        err << e.response_headers
+        err << e.response_body
+        err << e.message
+        err.compact!
+        @errors << err.join("; ")
+        return nil
+      end
+      json = JSON.parse(response.body)
     end
 
     def api_token
-      authorization.token
+      authorization&.token
     end
 
     def authorization
@@ -20,29 +50,36 @@ module RISE
     end
 
     def authenticate
+      @errors = []
       begin
-        conn_options = faraday_options.merge(tls_options)
-        conn = Faraday.new(conn_options)
-        response = conn.post('/oauth2/token', 
-                               client_id: ENV['TIC_APP'],
-                               client_secret: ENV['TIC_SECRET'],
-                               scope: 'API',
-                               grant_type: 'client_credentials'
-                            )
+        response = connection.post('/oauth2/token', 
+                     client_id: ENV['TIC_APP'],
+                     client_secret: ENV['TIC_SECRET'],
+                     scope: 'API',
+                     grant_type: 'client_credentials'
+                   )
         unless response.success?
-          # log something
-          # return failure
+          @errors << "#{response.status}: #{response.body}"
           return nil
         end
       rescue Faraday::Error => e
-        # log something
-        # return failure
+        err = []
+        err << e.response_status
+        err << e.response_headers
+        err << e.response_body
+        err << e.message
+        err.compact!
+        @errors << err.join("; ")
         return nil
       end
       token = RISE::TIClient::Token.new(response.body)
     end
 
   private
+    def connection
+      @connection ||= Faraday.new(faraday_options.merge(tls_options))
+    end
+
     def tls_options
       { ssl:{ verify: false } }
     end
