@@ -3,8 +3,26 @@ module TIClients
     before_action :set_proxyable
 
     def fetch
+      @kt_proxies = []
+      @err_proxies = []
       rtic = RISE::TIClient.new(ti_client: @proxyable)
-      proxies = rtic.get_card_terminal_proxies['proxies'] || []
+      rtic.get_card_terminal_proxies do |result|
+        result.on_success do |message, value|
+          proxies = value['proxies'] || []
+          proxies.each do |proxy|
+            ktp = KTProxies::Crupdator.new(ti_client: @proxyable, proxy_hash: proxy)
+            if ktp.save
+              @kt_proxies << ktp.kt_proxy
+            else
+              @err_proxies << proxy
+            end
+          end
+        end
+        result.on_failure do |message|
+          flash[:alert] = message
+        end
+      end
+      respond_with(@kt_proxies)
     end
 
     private
