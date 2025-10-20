@@ -1,0 +1,22 @@
+= RISE::CardTerminalProxies
+:author: Wolfgang Barth
+:revdate: 2025-10-20
+:imagesdir: ../../images
+
+== KTProxy::Crupdator
+
+image:::rise/ktproxy-crupdator.svg[]
+
+== Debugging Snippets
+
+[source,ruby]
+----
+tic01 = TIClient.first
+rtic = rtic = RISE::TIClient.new(ti_client: tic01)
+proxies = rtic.get_card_terminal_proxies['proxies']
+
+proxy = proxies.first
+
+ktp = KTProxy.where(uuid: proxy['id'])
+----
+
