@@ -15,8 +15,12 @@ tic01 = TIClient.first
 rtic = rtic = RISE::TIClient.new(ti_client: tic01)
 proxies = rtic.get_card_terminal_proxies['proxies']
 
-proxy = proxies.first
-
-ktp = KTProxy.where(uuid: proxy['id'])
+proxies.each do |proxy|
+  ktp = KTProxies::Crupdator.new(ti_client: tic01, proxy_hash: proxy)
+  unless ktp.save
+    puts proxy.inspect
+    puts ktp.kt_proxy.errors.full_messages
+  end
+end
 ----
 

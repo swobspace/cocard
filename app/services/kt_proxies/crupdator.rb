@@ -6,7 +6,7 @@ module KTProxies
   # creates or updates a kt_proxy if kt_proxy.present?
   #
   class Crupdator
-    attr_reader :proxy_hash, :ti_client
+    attr_reader :proxy_hash, :ti_client, :kt_proxy
 
     # crupd = KTProxies::Crupdator(options)
     #
@@ -18,6 +18,7 @@ module KTProxies
       options.symbolize_keys
       @ti_client  = options.fetch(:ti_client)
       @proxy_hash = options.fetch(:proxy_hash)
+      @kt_proxy = nil
     end
 
     # rubocop:disable Metrics/AbcSize, Rails/SkipsModelValidations
@@ -33,7 +34,7 @@ module KTProxies
         by_ip.update(common_attributes.merge(uuid: uuid,
                                                      name: name))
       else
-        KTProxy.create(common_attributes
+        @kt_proxy = KTProxy.create(common_attributes
                        .merge(uuid: uuid, name: name, 
                               card_terminal_ip: card_terminal_ip)
                        .merge(card_terminal_via_ip)
@@ -46,7 +47,7 @@ module KTProxies
     def by_uuid
       ktp = KTProxy.where(uuid: uuid)
       if ktp.size == 1
-        ktp.first
+        @kt_proxy = ktp.first
       elsif ktp.size > 1
         raise RuntimeError, "duplicate uuid, should not possible!"
       else
@@ -57,7 +58,7 @@ module KTProxies
     def by_name_and_ip
       ktp = KTProxy.where(name: name, card_terminal_ip: card_terminal_ip)
       if ktp.size == 1
-        ktp.first
+        @kt_proxy = ktp.first
       elsif ktp.size > 1
         raise RuntimeError, "duplicate ktproxy, should not possible!"
       else
@@ -68,7 +69,7 @@ module KTProxies
     def by_ip
       ktp = KTProxy.where(card_terminal_ip: card_terminal_ip)
       if ktp.size == 1
-        ktp.first
+        @kt_proxy = ktp.first
       elsif ktp.size > 1
         # more than one ktproxy with same ip found
         puts ktp.size

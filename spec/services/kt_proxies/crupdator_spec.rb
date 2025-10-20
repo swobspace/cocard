@@ -34,9 +34,20 @@ module KTProxies
             Crupdator.new()
           end.to raise_error(KeyError)
         end
+      end
+    end
+
+    describe '#save' do
+      context 'without existing ktproxy' do
+        it 'creates new ktproxy' do
+          expect do
+            subject.save
+          end.to change(KTProxy, :count).by(1)
+        end
 
         it 'creates a new ktproxy' do
-          kt_proxy = subject.save
+          subject.save
+          kt_proxy = subject.kt_proxy
           expect(kt_proxy.ti_client).to eq(tic)
           expect(kt_proxy.card_terminal).to eq(ct2)
           expect(kt_proxy.uuid).to eq("e47789b6-ad96-11f0-ade2-c025a5b36994")
@@ -48,16 +59,6 @@ module KTProxies
           expect(kt_proxy.outgoing_port).to eq(8123)
           expect(kt_proxy.card_terminal_ip).to eq("192.0.2.100")
           expect(kt_proxy.card_terminal_port).to eq(4742)
-        end
-      end
-    end
-
-    describe '#save' do
-      context 'without existing ktproxy' do
-        it 'creates new ktproxy' do
-          expect do
-            subject.save
-          end.to change(KTProxy, :count).by(1)
         end
       end
 
@@ -78,7 +79,7 @@ module KTProxies
 
         it 'updates attributes' do
           subject.save
-          kt_proxy.reload
+          kt_proxy = subject.kt_proxy
           expect(kt_proxy.ti_client).to eq(tic)
           expect(kt_proxy.card_terminal).to eq(ct1)
           expect(kt_proxy.uuid).to eq("e47789b6-ad96-11f0-ade2-c025a5b36994")
@@ -111,7 +112,7 @@ module KTProxies
 
         it 'updates attributes' do
           subject.save
-          kt_proxy.reload
+          kt_proxy = subject.kt_proxy
           expect(kt_proxy.ti_client).to eq(tic)
           expect(kt_proxy.card_terminal).to eq(ct1)
           expect(kt_proxy.uuid).to eq("e47789b6-ad96-11f0-ade2-c025a5b36994")
@@ -143,7 +144,7 @@ module KTProxies
 
         it 'updates attributes' do
           subject.save
-          kt_proxy.reload
+          kt_proxy = subject.kt_proxy
           expect(kt_proxy.ti_client).to eq(tic)
           expect(kt_proxy.card_terminal).to eq(ct2)
           expect(kt_proxy.uuid).to eq("e47789b6-ad96-11f0-ade2-c025a5b36994")
