@@ -55,6 +55,8 @@ class TIClientsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def ti_client_params
-      params.require(:ti_client).permit(:connector_id, :name, :url, :client_secret)
+      params.require(:ti_client)
+            .permit(:connector_id, :name, :url, :client_secret)
+            .reject { |k, v| k == 'client_secret' && v.blank? }
     end
 end
