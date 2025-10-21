@@ -1,0 +1,25 @@
+@startuml
+start
+:cardterminal_proxy;
+note right
+  Hash aus 
+  RISE::TIClient#get_card_terminal_proxies
+end note
+if (match uuid?) then (yes)
+  :update;
+elseif (match :name + :ip?) then (yes)
+  :update + uuid;
+elseif (match :ip?) then (yes)
+  :update + name + uuid;
+else (no)
+  :create new ktproxy;
+endif
+
+if (card_terminal.present?) then (no)
+  :search and assign\ncard_terminal;
+else (yes)
+endif 
+
+stop
+
+@enduml

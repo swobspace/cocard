@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_10_03_075413) do
+ActiveRecord::Schema[7.2].define(version: 2025_10_21_092207) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -463,6 +463,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_03_075413) do
     t.string "url", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "client_secret"
     t.index ["connector_id"], name: "index_ti_clients_on_connector_id", unique: true
   end
 

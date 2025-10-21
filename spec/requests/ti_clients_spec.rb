@@ -89,6 +89,7 @@ RSpec.describe "/ti_clients", type: :request do
     context "with valid parameters" do
       let(:new_attributes) {{
         name: "a new name",
+        client_secret: 'StrengGeheim'
       }}
 
       it "updates the requested ti_client" do
@@ -96,6 +97,7 @@ RSpec.describe "/ti_clients", type: :request do
         patch ti_client_url(ti_client), params: { ti_client: new_attributes }
         ti_client.reload
         expect(ti_client.name).to eq("a new name")
+        expect(ti_client.client_secret).to eq("StrengGeheim")
       end
 
       it "redirects to the ti_client" do

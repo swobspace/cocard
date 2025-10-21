@@ -46,6 +46,17 @@
              %></td>
 
       </tr>
+
+      <tr>
+        <th class="w-10 pe-3">Client-ID:</th>
+        <td><%= @ti_client.client_id  %></td>
+
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.client_secret')%>:</th>
+        <td><%= (@ti_client.client_secret.present? ? "vorhanden" : "nicht vorhanden")  %></td>
+
+      </tr>
     </table>
   </div>
 </div>

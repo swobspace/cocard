@@ -57,8 +57,8 @@ module RISE
       @errors = []
       begin
         response = connection.post('/oauth2/token', 
-                     client_id: ENV['TIC_APP'],
-                     client_secret: ENV['TIC_SECRET'],
+                     client_id: ti_client.client_id,
+                     client_secret: ti_client.client_secret,
                      scope: 'API',
                      grant_type: 'client_credentials'
                    )

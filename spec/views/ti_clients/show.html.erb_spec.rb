@@ -13,7 +13,8 @@ RSpec.describe "ti_clients/show", type: :view do
     assign(:ti_client, TIClient.create!(
       connector: conn,
       name: "Name",
-      url: "Url"
+      url: "Url",
+      client_secret: "StrengGeheim"
     ))
   end
 
@@ -22,5 +23,6 @@ RSpec.describe "ti_clients/show", type: :view do
     expect(rendered).to match(/Konn1/)
     expect(rendered).to match(/Name/)
     expect(rendered).to match(/Url/)
+    expect(rendered).to match(/vorhanden/)
   end
 end

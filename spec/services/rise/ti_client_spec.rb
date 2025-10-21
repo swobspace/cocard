@@ -44,8 +44,8 @@ module RISE
       let(:stubs)  { Faraday::Adapter::Test::Stubs.new }
       let(:conn)   { Faraday.new { |b| b.adapter(:test, stubs) } }
       let(:auth_param) {{
-        client_id: ENV['TIC_APP'],
-        client_secret: ENV['TIC_SECRET'],
+        client_id: tic.client_id,
+        client_secret: tic.client_secret,
         scope: 'API',
         grant_type: 'client_credentials'
       }}

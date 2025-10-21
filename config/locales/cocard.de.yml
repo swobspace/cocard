@@ -133,6 +133,7 @@ de:
     client_ids: Mandanten
     client_certificate: Client-Zertifikat
     client_certificate_ids: Client-Zertifikate
+    client_secret: Client-Secret
     client_system: Clientsystem
     condition: Zustand
     condition_message: Zustandsinfo

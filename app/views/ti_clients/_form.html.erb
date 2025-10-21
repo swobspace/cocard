@@ -8,6 +8,10 @@
        %>
     <%= form.input :url
        %>
+    <%= form.input :client_id, as: :string, disabled: true
+       %>
+    <%= form.input :client_secret, as: :password
+       %>
 
     <%= form.button :submit, class: 'btn btn-primary' %>
     <%= cancel_button %>

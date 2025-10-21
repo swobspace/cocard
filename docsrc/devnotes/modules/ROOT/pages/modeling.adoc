@@ -344,6 +344,7 @@ bin/rails g scaffold TIClient \
   connector:belongs_to \
   name:string \
   url:string \
+  client_secret:string \
   --no-stylesheets --no-javascripts --no-helper
 ----
 
