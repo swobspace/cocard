@@ -8,11 +8,7 @@
           <h4 class="me-4 pt-1"><%= t('controller.kt_proxies')%></h4>
         </div>
         <div role="toolbar" class="pt-0">
-          <%= button_to(t('ti_clients.fetch_kt_proxies'),
-                      fetch_ti_client_kt_proxies_path(@ti_client),
-                      method: :put,
-                      data: { "turbo": false },
-                      class: 'btn btn-warning me-1') if can? :manage, @ti_client
+          <%= render TIClient::FetchButtonComponent.new(ti_client: @ti_client) if can?(:manage, @ti_client)
            %>
           <%= link_to "cardterminal_proxies.json",
                       ti_client_kt_proxies_path(@ti_client, format: :json),
