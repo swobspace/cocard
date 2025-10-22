@@ -3,6 +3,7 @@
 :revdate: 2025-10-20
 :imagesdir: ../../images
 
+
 == KTProxy::Crupdator
 
 image:::rise/ktproxy-crupdator.svg[]

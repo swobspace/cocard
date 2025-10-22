@@ -69,6 +69,20 @@ conn.card_terminals.each do |ct|
 end
 ----
 
+=== Analysis
+
+[source,ruby]
+----
+ok_terminals = CardTerminal
+               .where(condition: Cocard::States::OK)
+               .where("last_check > ?", 1.hour.before(Time.current))
+cts_with_missing_proxies = ok_terminals.where.missing(:kt_proxy)
+
+connectors = cts_with_missing_proxies.join(:connector).distinct
+connectors.pluck(:short_name)
+----
+
+
 == Sequenzdiagramm
 
 IMPORTANT: Beim Diagramm handelt es sich um eine Planung, die noch nicht umgesetzt ist, weil das REST-Interface des RISE TI-Clients noch nicht zur Verfügung steht (Stand 27.09.2025)
