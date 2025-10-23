@@ -70,4 +70,9 @@ module ConnectorConcerns
       client_certificates.where(client_system: client).any?
     end
   end
+
+  def smcbs
+    card_terminals.joins(card_terminal_slots: :card)
+    .where("cards.card_type = 'SMC-B'")
+  end
 end

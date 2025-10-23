@@ -267,6 +267,9 @@
   </div>
 </div>
 
+<%= turbo_frame_tag("cards", src: connector_cards_path(@connector),
+                            refresh: "morph") %>
+
 <%= turbo_frame_tag("logs", src: connector_logs_path(@connector, valid: 1),
                             refresh: "morph") %>
 

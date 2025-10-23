@@ -98,6 +98,7 @@ Rails.application.routes.draw do
     end
     resources :logs, only: [:index, :show, :destroy], module: :connectors
     resources :card_terminals, only: [:index, :show, :destroy], module: :connectors
+    resources :cards, only: [:index, :show, :destroy], module: :connectors
     resources :notes, module: :connectors
     resource :ti_client, module: :connectors
   end

@@ -1,0 +1,146 @@
+<%= turbo_frame_tag('cards') do %>
+<h1><%= t('controller.cards') %></h1>
+
+<div data-controller="datatables">
+  <%= content_tag :table, role: :datatable,
+        id: "cards_table",
+        class: "table table-bordered table-responsive",
+        data: {
+          'datatables-target': 'datatable',
+          order: [[0, 'asc']].to_json
+        } do %>
+    <thead>
+      <tr>
+        <th><%= t('attributes.condition') %></th>
+        <th class="notvisible"><%= t('attributes.condition_message') %></th>
+        <th><%= t('attributes.card_type') %></th>
+        <th><%= t('attributes.name') %></th>
+        <th><%= t('attributes.iccsn') %></th>
+        <th><%= t('attributes.connector') %></th>
+        <th><%= t('attributes.card_terminal') %></th>
+        <th><%= t('attributes.card_terminal') %></th>
+        <th><%= t('attributes.mac') %></th>
+        <th class="text-center notvisible"><%= t('attributes.slotid') %></th>
+        <th class="notvisible"><%= t('attributes.card_handle') %></th>
+        <th class="notvisible"><%= t('attributes.description') %></th>
+        <th class="notvisible"><%= t('attributes.insert_time') %></th>
+        <th><%= t('attributes.card_holder_name') %></th>
+        <th><%= t('attributes.expiration_date') %></th>
+        <th class="notvisible"><%= t('attributes.object_system_version') %></th>
+        <th><%= t('attributes.operational_state') %></th>
+        <th><%= t('attributes.location') %></th>
+        <th><%= t('controller.tags') %></th>
+        <th><%= t('attributes.lanr') %></th>
+        <th><%= t('attributes.bsnr') %></th>
+        <th><%= t('attributes.telematikid') %></th>
+        <th><%= t('attributes.fachrichtung') %></th>
+        <th class="notvisible"><%= t('attributes.cert_subject_cn') %></th>
+        <th class="notvisible"><%= t('attributes.cert_subject_title') %></th>
+        <th class="notvisible"><%= t('attributes.cert_subject_sn') %></th>
+        <th class="notvisible"><%= t('attributes.cert_subject_givenname') %></th>
+        <th class="notvisible"><%= t('attributes.cert_subject_street') %></th>
+        <th class="notvisible"><%= t('attributes.cert_subject_postalcode') %></th>
+        <th class="notvisible"><%= t('attributes.cert_subject_l') %></th>
+        <th class="notvisible"><%= t('attributes.cert_subject_o') %></th>
+        <th class="notvisible"><%= t('attributes.last_check') %></th>
+        <th class="notvisible"><%= t('attributes.last_ok') %></th>
+        <th class="nosort"><%= t('cocard.action') %></th>
+      </tr>
+    </thead>
+    <tfoot class="search">
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th class="nosearch"></th>
+      </tr>
+    </tfoot>
+    <tbody>
+      <% @cards.each do |card| %>
+        <%= content_tag(:tr, id: dom_id(card)) do %>
+          <td class="text-center">
+            <%= render ConditionIconComponent.new(item: card, small: true, as_text: true) %>
+            <span style="visibility:hidden;"><%= card.condition %></span>
+          </td>
+          <td><%= card.condition_message %></td>
+          <td><%= card.card_type %></td>
+          <td><%= card.name %></td>
+          <td><%= link_to card.iccsn, card_path(card), class: 'primary-link' %></td>
+          <td><%= link_to(card.card_terminal&.connector&.name, 
+                          connector_path(card.card_terminal&.connector),
+                          class: 'primary-link'
+                         ) if card.card_terminal&.connector %></td>
+          <td><%= link_to( "#{card.card_terminal&.ct_id}/" + 
+                           "#{card.slotid}",
+                           card_terminal_path(card.card_terminal),
+                           class: 'primary-link'
+                         ) if card.card_terminal %></td>
+          <td><%= card.card_terminal&.name %></td>
+          <td class="text-center"><%= card.card_terminal&.mac&.gsub(/:/, '') %></td>
+          <td class="text-center"><%= card.slotid %></td>
+          <td><%= card.card_handle %></td>
+          <td><%= card.description %></td>
+          <td><%= card.insert_time&.localtime %></td>
+          <td><%= card.card_holder_name %></td>
+          <td><%= render ExpirationDateComponent.new(item: card) %></td>
+          <td><%= card.object_system_version %></td>
+          <td><%= card.operational_state %></td>
+          <td><%= card.location %></td>
+          <td>
+            <%= render TagListComponent.new(item: card) %>
+          </td>
+          <td><%= card.lanr %></td>
+          <td><%= card.bsnr %></td>
+          <td><%= card.telematikid %></td>
+          <td><%= card.fachrichtung %></td>
+          <td><%= card.cert_subject_cn %></td>
+          <td><%= card.cert_subject_title %></td>
+          <td><%= card.cert_subject_sn %></td>
+          <td><%= card.cert_subject_givenname %></td>
+          <td><%= card.cert_subject_street %></td>
+          <td><%= card.cert_subject_postalcode %></td>
+          <td><%= card.cert_subject_l %></td>
+          <td><%= card.cert_subject_o %></td>
+          <td><%= card.last_check&.localtime %></td>
+          <td><%= card.last_ok&.localtime %></td>
+          <td class="text-nowrap">
+            <%= show_link card %>
+            <%= edit_link card %>
+            <%= delete_link card %>
+          </td>
+        <% end %>
+      <% end %>
+    </tbody>
+  <% end %>
+</div>
+<% end %>
