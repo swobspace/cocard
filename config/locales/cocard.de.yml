@@ -152,6 +152,7 @@ de:
     current_ip: Gefundene IP
     delivery_date: Lieferdatum
     description: Beschreibung
+    description_ap: Beschreibung AP
     displayname: Anzeigename
     expiration_date: Ablaufdatum
     fachrichtung: Fachrichtung
@@ -180,6 +181,7 @@ de:
     loggable: Log für
     loggable_type: Typ
     mac: MAC
+    mac6: MAC6
     mandant: Mandant
     manual_update: manuelles Update
     message: Nachricht
