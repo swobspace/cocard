@@ -6,7 +6,7 @@ module Connectors
     def index
       @cards = []
       terminals = @locatable.card_terminals.joins(card_terminal_slots: :card)
-                            .where("cards.card_type = 'SMC-B'")
+                            .where("cards.card_type = 'SMC-B'").distinct
       terminals.each do |term|
          @cards << term.cards.where(card_type: 'SMC-B')
       end
