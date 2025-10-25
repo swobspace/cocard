@@ -3,6 +3,8 @@
 == 0.9.3-dev - unreleased
 
 * (experimentell) Abgleich KT-Proxys über RISE TI-Client-API
+* Anzeige Konnektor: zugeordnete SMC-Bs aufgenommen und Layout überarbeitet
+* Tabelle Zuordung Terminals - Arbeitsplätze erweitert
 
 == 0.9.2 - 2025-10-19
 
