@@ -12,10 +12,12 @@
         <th><%= t('attributes.description') %></th>
         <th><%= t('attributes.mandant') %></th>
         <th><%= t('attributes.client_system') %></th>
+        <th class="text-center"><%= t('attributes.updated_at') %></th>
       </tr>
     </thead>
     <tfoot class="search">
       <tr>
+        <th></th>
         <th></th>
         <th></th>
         <th></th>
@@ -30,6 +32,10 @@
           <td><%= truncate(twp.workplace.description.to_plain_text, length: 300) %></td>
           <td><%= twp.mandant %></td>
           <td><%= twp.client_system %></td>
+          <td class="text-center">
+            <%= render IsCurrentComponent.new(item: twp, attr: :updated_at,
+                                              relative: true)%>
+          </td>
         <% end %>
       <% end %>
     </tbody>
