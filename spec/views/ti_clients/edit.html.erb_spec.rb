@@ -20,6 +20,7 @@ RSpec.describe "ti_clients/edit", type: :view do
       assert_select "select[name=?]", "ti_client[connector_id]"
       assert_select "input[name=?]", "ti_client[name]"
       assert_select "input[name=?]", "ti_client[url]"
+      assert_select "input[name=?]", "ti_client[client_secret]"
     end
   end
 end

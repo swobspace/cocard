@@ -2,6 +2,8 @@
 
 == 0.9.3-dev - unreleased
 
+* (experimentell) Abgleich KT-Proxys über RISE TI-Client-API
+
 == 0.9.2 - 2025-10-19
 
 * Bugfixe und Layout-Anpassungen

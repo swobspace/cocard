@@ -133,6 +133,7 @@ de:
     client_ids: Mandanten
     client_certificate: Client-Zertifikat
     client_certificate_ids: Client-Zertifikate
+    client_secret: Client-Secret
     client_system: Clientsystem
     condition: Zustand
     condition_message: Zustandsinfo
@@ -151,6 +152,7 @@ de:
     current_ip: Gefundene IP
     delivery_date: Lieferdatum
     description: Beschreibung
+    description_ap: Beschreibung AP
     displayname: Anzeigename
     expiration_date: Ablaufdatum
     fachrichtung: Fachrichtung
@@ -179,6 +181,7 @@ de:
     loggable: Log für
     loggable_type: Typ
     mac: MAC
+    mac6: MAC6
     mandant: Mandant
     manual_update: manuelles Update
     message: Nachricht
@@ -188,7 +191,7 @@ de:
     netzwerk: Netzwerk
     notable: Notiz für
     note: Notiz
-    object_system_version: ObjectSystemVersion
+    object_system_version: ObjSysVer
     operational: in Betrieb
     operational_state: Betriebszustand
     outgoing_ip: Ausgehende IP
@@ -234,6 +237,7 @@ de:
     client_certificates: Client-Zertifikate
     connectors: Konnektoren
     connectors/logs: Konnektoren/Logs
+    connectors/cards: Karten
     connectors/card_terminals: Kartenterminals
     contexts: Kontexte
     events: Ereignisse

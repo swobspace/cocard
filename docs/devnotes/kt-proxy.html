@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>KT-Proxy Stuff (RISE TI-Gateway) :: Cocard</title>
-    <meta name="generator" content="Antora 3.1.14">
+    <meta name="generator" content="Antora 3.1.12">
     <link rel="stylesheet" href="../_/css/site.css">
     <script>var uiRootPath = '../_'</script>
   </head>
@@ -227,6 +227,20 @@ CardTerminal.where(condition: Cocard::States::NOTHING).update_all(connector_id: 
   attribs = Cocard::NewKTProxy.new(card_terminal: ct).attributes
   tic.kt_proxies.create(attribs.merge(ti_client_id: tic.id))
 end</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_analysis"><a class="anchor" href="#_analysis"></a>Analysis</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">ok_terminals = CardTerminal
+               .where(condition: Cocard::States::OK)
+               .where("last_check &gt; ?", 1.hour.before(Time.current))
+cts_with_missing_proxies = ok_terminals.where.missing(:kt_proxy)
+
+connectors = cts_with_missing_proxies.join(:connector).distinct
+connectors.pluck(:short_name)</code></pre>
+</div>
 </div>
 </div>
 </div>

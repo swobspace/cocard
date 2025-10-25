@@ -219,6 +219,7 @@ class KTProxy {
 Class TIClient {
   name: string
   url: string
+  client_secret: string
   connector_id
 }
 

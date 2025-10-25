@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Standard-Konfiguration :: Cocard</title>
-    <meta name="generator" content="Antora 3.1.14">
+    <meta name="generator" content="Antora 3.1.12">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
   </head>
@@ -310,7 +310,11 @@ KOCO_ADMIN=koco-root
 KOCO_PASSWD=verystrongsecret
 
 CRON_REBOOT_CONNECTORS="30 6 * * 1,4"
-AUTO_REBOOT_CONNECTORS_NOTE=yes</code></pre>
+AUTO_REBOOT_CONNECTORS_NOTE=yes
+
+ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY=******
+ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY=******
+ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT=******</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -401,6 +405,12 @@ AUTO_REBOOT_CONNECTORS_NOTE=yes</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>AUTO_REBOOT_CONNECTORS_NOTE</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Soll bei einem Auto-Reboot eine Notiz erzeugt werden? Mögliche Werte: yes, no. Default: no.
 (siehe auch <a href="../admin/connector-autoreboot.html" class="xref page">Automatischer Reboot von Konnektoren</a>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY,
+ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY,
+ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Secrets für die datenbankinterne Verschlüsselung von einzelnen Feldern. Werte können mit <code>podman exec cocard bin/rake db:encryption:init</code> generiert werden. Analog mit <code>docker</code>.</p></td>
 </tr>
 </tbody>
 </table>

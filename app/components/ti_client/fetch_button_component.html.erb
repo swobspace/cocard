@@ -1,0 +1,6 @@
+<%= button_to(t('ti_clients.fetch_kt_proxies'),
+              fetch_ti_client_kt_proxies_path(ti_client),
+              method: :put,
+              data: { "turbo": false },
+              class: 'btn btn-warning me-1') 
+ %>

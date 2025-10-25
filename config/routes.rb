@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   resource :duck_terminal, only: [:new, :show]
   get "reports/duplicate_terminal_ips"
   resources :ti_clients do
-    resources :kt_proxies, module: :ti_clients, only: [:index]
+    resources :kt_proxies, module: :ti_clients, only: [:index] do
+      collection do
+        put :fetch
+      end
+    end
   end
   resources :kt_proxies
   get "idle_messages", to: "idle_messages#index", as: :idle_messages
@@ -94,6 +98,7 @@ Rails.application.routes.draw do
     end
     resources :logs, only: [:index, :show, :destroy], module: :connectors
     resources :card_terminals, only: [:index, :show, :destroy], module: :connectors
+    resources :cards, only: [:index, :show, :destroy], module: :connectors
     resources :notes, module: :connectors
     resource :ti_client, module: :connectors
   end

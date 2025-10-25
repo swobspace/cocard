@@ -12,12 +12,13 @@
 
 # These inflection rules are supported but not enabled by default:
 ActiveSupport::Inflector.inflections(:en) do |inflect|
+  inflect.acronym "CSV"
+  inflect.acronym "KT"
+  inflect.acronym "RISE"
+  inflect.acronym "RMI"
   inflect.acronym "SDS"
   inflect.acronym "SOAP"
-  inflect.acronym "CSV"
-  inflect.acronym "RMI"
   inflect.acronym "TI"
-  inflect.acronym "KT"
   inflect.irregular "single_picture", "situation_picture"
 end
 
