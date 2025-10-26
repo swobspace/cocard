@@ -118,6 +118,185 @@ module RISE
         expect(called_back).to eq(:failure)
       end
     end
+
+    describe '#get_proxy' do
+      let(:kt_proxy) do
+        FactoryBot.create(:kt_proxy,
+          uuid: "bf11726a-ad8f-11f0-8247-c025a5b36994",
+          name: "ORGA6100-02412345678910",
+          wireguard_ip: "198.52.100.1",
+          incoming_ip: "192.0.2.1",
+          incoming_port: 8080,
+          outgoing_ip: "192.0.2.2",
+          outgoing_port: 8080,
+          card_terminal_ip: "192.0.2.100",
+          card_terminal_port: 4742
+        )
+      end
+
+      let(:proxy_body) do
+        json =<<~EOKTPG
+          {
+            "id": "bf11726a-ad8f-11f0-8247-c025a5b36994",
+            "name": "ORGA6100-02412345678910",
+            "wireguardIp": "198.52.100.1",
+            "incomingIp": "192.0.2.1",
+            "incomingPort": 8080,
+            "outgoingIp": "192.0.2.2",
+            "outgoingPort": 8080,
+            "cardTerminalIp": "192.0.2.100",
+            "cardTerminalPort": 4742
+          }
+        EOKTPG
+      end
+      let(:stubs)  { Faraday::Adapter::Test::Stubs.new }
+      let(:conn)   { Faraday.new { |b| b.adapter(:test, stubs) } }
+      before(:each) do
+        allow(Faraday).to receive(:new).and_return(conn)
+        expect(subject).to receive(:api_token).at_least(:once)
+                                              .and_return('eyJraWQiOiJkZGUyMDZiYi1lMDgz')
+      end
+
+      after(:each) do
+        Faraday.default_connection = nil
+      end
+
+      it "success: gets proxy" do
+        stubs.get('api/v1/manager/card-terminals/proxies/bf11726a-ad8f-11f0-8247-c025a5b36994') do
+          [
+            200, 
+            {'Content-Type': 'application/json;charset=UTF-8'},
+            proxy_body
+          ]
+        end
+
+        called_back = false 
+        subject.get_proxy(kt_proxy) do |result|
+          result.on_success do |message, value|
+            called_back = :success
+            expect(value).to include(JSON.parse(proxy_body))
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:success)
+      end
+
+      it "failure: no content" do
+        stubs.get('api/v1/manager/card-terminals/proxies/bf11726a-ad8f-11f0-8247-c025a5b36994') do
+          [
+            401, 
+            {'Content-Type': 'application/json;charset=UTF-8'},
+            ''
+          ]
+        end
+
+        called_back = false 
+        subject.get_proxy(kt_proxy) do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:failure)
+      end
+    end
+
+    describe '#create_proxy' do
+      let(:kt_proxy) do
+        FactoryBot.create(:kt_proxy,
+          uuid: "bf11726a-ad8f-11f0-8247-c025a5b36994",
+          name: "ORGA6100-02412345678910",
+          wireguard_ip: "198.52.100.1",
+          incoming_ip: "192.0.2.1",
+          incoming_port: 8080,
+          outgoing_ip: "192.0.2.2",
+          outgoing_port: 8080,
+          card_terminal_ip: "192.0.2.100",
+          card_terminal_port: 4742
+        )
+      end
+
+      let(:proxy_body) do
+        json =<<~EOKTPC.gsub(/[ \n]/, '')
+          {
+            "id": "bf11726a-ad8f-11f0-8247-c025a5b36994",
+            "name": "ORGA6100-02412345678910",
+            "wireguardIp": "198.52.100.1",
+            "incomingIp": "192.0.2.1",
+            "incomingPort": 8080,
+            "outgoingIp": "192.0.2.2",
+            "outgoingPort": 8080,
+            "cardTerminalIp": "192.0.2.100",
+            "cardTerminalPort": 4742
+          }
+        EOKTPC
+      end
+      let(:stubs)  { Faraday::Adapter::Test::Stubs.new }
+      let(:conn)   { Faraday.new { |b| b.adapter(:test, stubs) } }
+      before(:each) do
+        allow(Faraday).to receive(:new).and_return(conn)
+        expect(subject).to receive(:api_token).at_least(:once)
+                                              .and_return('eyJraWQiOiJkZGUyMDZiYi1lMDgz')
+      end
+
+      after(:each) do
+        Faraday.default_connection = nil
+      end
+
+      it "success: creates proxy" do
+        stubs.post(
+          'api/v1/manager/card-terminals/proxies',
+          proxy_body,
+          "Content-Type" => "application/json"
+        ) do
+          [
+            200, 
+            {'Content-Type': 'application/json;charset=UTF-8'},
+            proxy_body
+          ]
+        end
+
+        called_back = false 
+        subject.create_proxy(kt_proxy) do |result|
+          result.on_success do |message, value|
+            called_back = :success
+            expect(value).to include(JSON.parse(proxy_body))
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:success)
+      end
+
+      it "failure: no content" do
+        stubs.post(
+          'api/v1/manager/card-terminals/proxies',
+          proxy_body,
+          "Content-Type" => "application/json"
+        ) do
+          [
+            401, 
+            {'Content-Type': 'application/json;charset=UTF-8'},
+            ''
+          ]
+        end
+
+        called_back = false 
+        subject.create_proxy(kt_proxy) do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:failure)
+      end
+    end
   end
 end
-
