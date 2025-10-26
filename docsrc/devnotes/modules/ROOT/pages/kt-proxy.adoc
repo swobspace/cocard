@@ -1,11 +1,13 @@
 = KT-Proxy Stuff (RISE TI-Gateway)
 :author: Wolfgang Barth
-:navdate: 2025-09-08
+:navdate: 2025-10-26
 :imagesdir: ../images
 
 #work in progress#
 
-NOTE: Lose Sammlung von Snippets und Ideen zum TI-Gateway von RISE und dem TI-Client
+Lose Sammlung von Snippets und Ideen zum TI-Gateway von RISE und dem TI-Client
+
+CAUTION: Die nachstehenden Snippets sind für DevOps gedacht, die die Auswirkung der ausgeführten Befehle verstehen und deren Folgen einschätzen können. Einfaches Copy & Paste führt mit Sicherheit zur Zerstörung vorhandener Daten!
 
 
 ./opt/rise/tic*/config/stores/cardterminal_proxies.json
@@ -85,7 +87,7 @@ connectors.pluck(:short_name)
 
 == Sequenzdiagramm
 
-IMPORTANT: Beim Diagramm handelt es sich um eine Planung, die noch nicht umgesetzt ist, weil das REST-Interface des RISE TI-Clients noch nicht zur Verfügung steht (Stand 27.09.2025)
+#work in progress#
 
 .Voraussetzungen
 * Konnektor ProductType == vKon

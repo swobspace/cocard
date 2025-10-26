@@ -19,73 +19,30 @@ module RISE
       }'
     end
 
-    subject { RISE::TIClient.new(ti_client: tic) }
+    subject { RISE::TIClient::CardTerminals.new(ti_client: tic) }
 
     # check for instance methods
     describe 'check if instance methods exists' do
-      it { expect(subject).to be_kind_of(RISE::TIClient) }
+      it { expect(subject).to be_kind_of(RISE::TIClient::CardTerminals) }
       it { expect(subject.respond_to?(:ti_client)).to be_truthy }
-      it { expect(subject.respond_to?(:api_token)).to be_truthy }
-      it { expect(subject.respond_to?(:authorization)).to be_truthy }
-      it { expect(subject.respond_to?(:authenticate)).to be_truthy }
+      it { expect(subject.respond_to?(:get_proxies)).to be_truthy }
+      it { expect(subject.respond_to?(:get_proxy)).to be_truthy }
+      it { expect(subject.respond_to?(:create_proxy)).to be_truthy }
+      it { expect(subject.respond_to?(:update_proxy)).to be_truthy }
+      it { expect(subject.respond_to?(:destroy_proxy)).to be_truthy }
     end
 
     describe '::new' do
       context 'without argument' do
         it 'raises a KeyError' do
           expect do
-            RISE::TIClient::Token.new()
-          end.to raise_error(ArgumentError)
+            RISE::TIClient::CardTerminals.new()
+          end.to raise_error(KeyError)
         end
       end
     end
 
-    describe '#authenticate' do
-      let(:stubs)  { Faraday::Adapter::Test::Stubs.new }
-      let(:conn)   { Faraday.new { |b| b.adapter(:test, stubs) } }
-      let(:auth_param) {{
-        client_id: tic.client_id,
-        client_secret: tic.client_secret,
-        scope: 'API',
-        grant_type: 'client_credentials'
-      }}
-
-      before(:each) do
-        allow(Faraday).to receive(:new).and_return(conn)
-      end
-
-      after(:each) do
-        Faraday.default_connection = nil
-      end
-
-      it "success: gets bearer token" do
-        stubs.post('oauth2/token', auth_param) do
-          [
-            200, 
-            {'Content-Type': 'application/json;charset=UTF-8'},
-            json_token
-          ]
-        end
-
-        expect(subject.authorization).to be_kind_of(RISE::TIClient::Token)
-        expect(subject.api_token).to eq("eyJraWQiOiJkZGUyMDZiYi1lMDgz")
-      end
-
-      it "failure: no bearer token" do
-        stubs.post('oauth2/token', auth_param) do
-          [
-            401, 
-            {'Content-Type': 'application/json;charset=UTF-8'},
-            '{ "error": "invalid_client" }'
-          ]
-        end
-
-        expect(subject.authorization).to be_nil
-        expect(subject.api_token).to be_nil
-      end
-    end
-
-    describe '#get_card_terminal_proxies' do
+    describe '#get_proxies' do
       let(:card_terminal_proxies_body) do
         json =<<~EOKTPB
           {
@@ -127,7 +84,7 @@ module RISE
         end
 
         called_back = false 
-        subject.get_card_terminal_proxies do |result|
+        subject.get_proxies do |result|
           result.on_success do |message, value|
             called_back = :success
             expect(value).to include(JSON.parse(card_terminal_proxies_body))
@@ -149,7 +106,7 @@ module RISE
         end
 
         called_back = false 
-        subject.get_card_terminal_proxies do |result|
+        subject.get_proxies do |result|
           result.on_success do |message, value|
             called_back = :success
             expect(value).to include(JSON.parse(card_terminal_proxies_body))

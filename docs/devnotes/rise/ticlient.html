@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Podman for Production :: Cocard</title>
+    <title>RISE::TIClient Classes :: Cocard</title>
     <meta name="generator" content="Antora 3.1.14">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -80,15 +80,15 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../todo.html">Todos</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="production.html">Podman</a>
+    <a class="nav-link" href="../podman/production.html">Podman</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="dockerfile-prod.html">Dockerfile for Production</a>
+    <a class="nav-link" href="../podman/dockerfile-prod.html">Dockerfile for Production</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="network.html">Network</a>
+    <a class="nav-link" href="../podman/network.html">Network</a>
   </li>
 </ul>
   </li>
@@ -109,10 +109,10 @@
     <a class="nav-link" href="../kt-proxy.html">KT-Proxy Stuff (RISE TI-Gateway)</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../rise/cardterminal_proxies.html">RISE::CardTerminalProxies</a>
+    <a class="nav-link" href="cardterminal_proxies.html">RISE::CardTerminalProxies</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../rise/ticlient.html">RISE::TIClient Classes</a>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="ticlient.html">RISE::TIClient Classes</a>
   </li>
 </ul>
   </li>
@@ -155,7 +155,8 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">DevNotes</a></li>
-    <li><a href="production.html">Podman</a></li>
+    <li>RISE</li>
+    <li><a href="ticlient.html">RISE::TIClient Classes</a></li>
   </ul>
 </nav>
 </div>
@@ -164,127 +165,10 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Podman for Production</h1>
-<div id="preamble">
-<div class="sectionbody">
-<div class="paragraph">
-<p>Just a memo for todos and code snippets &#8230;&#8203;</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_handling_images"><a class="anchor" href="#_handling_images"></a>Handling Images</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_update_ruby"><a class="anchor" href="#_update_ruby"></a>Update Ruby</h3>
-<div class="listingblock">
-<div class="title">Update ruby base image</div>
+<h1 class="page">RISE::TIClient Classes</h1>
+<div class="imageblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">podman pull docker.io/library/ruby:3.3-slim</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_build_image"><a class="anchor" href="#_build_image"></a>Build Image</h3>
-<div class="listingblock">
-<div class="title">Build</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">podman build -t cocard .</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Inspect image</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">podman run --rm -it cocard /bin/bash</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_tag_image"><a class="anchor" href="#_tag_image"></a>Tag Image</h3>
-<div class="listingblock">
-<div class="title">Tag image</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">podman tag cocard ghcr.io/swobspace/cocard:0.8.0
-podman tag cocard ghcr.io/swobspace/cocard:stable
-podman tag cocard ghcr.io/swobspace/cocard:latest</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_push_image"><a class="anchor" href="#_push_image"></a>Push Image</h3>
-<div class="listingblock">
-<div class="title">Push image</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">export CR_PAT=YOUR_TOKEN
-echo $CR_PAT | podman login ghcr.io -u swobspace --password-stdin
-podman push ghcr.io/swobspace/cocard:0.8.0
-podman push ghcr.io/swobspace/cocard:stable
-podman push ghcr.io/swobspace/cocard:latest</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_ghcr_io"><a class="anchor" href="#_ghcr_io"></a>ghcr.io</h3>
-<div class="paragraph">
-<p><a href="https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry" class="bare">https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry</a></p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_variables"><a class="anchor" href="#_variables"></a>Variables</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="title">env.production.example</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-cfg hljs" data-lang="cfg"># ~/.env.development.local.example
-# Timezone, Locale
-TZ=Europe/Berlin
-LOCALE=en
-
-# generate key with bin/rails secret
-# SecureRandom.hex(64)
-SECRET_KEY_BASE=****
-
-# -- redis
-REDIS_URL=redis://localhost:6379
-
-# -- postgres
-POSTGRES_USER=cocard
-# SecureRandom.base64(32)
-POSTGRES_PASSWORD=****
-POSTGRES_HOST=localhost
-
-# URL building
-URL_HOST=example.com
-URL_PORT=8443
-URL_PROTOCOL=https
-
-# card terminal websocket and SMC-B pin
-DEFAULT_WS_AUTH_USER=admin
-DEFAULT_WS_AUTH_PASS=strenggeheim
-DEFAULT_SMCB_PIN=11111111
-
-# CRON_REBOOT_CONNECTORS="5 5 1 1 *"
-
-ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY=****
-ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY=****
-ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT=*****</code></pre>
-</div>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 1. Some Hints</caption>
-<colgroup>
-<col style="width: 40%;">
-<col style="width: 60%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Hint</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-</table>
+<img src="../_images/rise/ticlient.svg" alt="ticlient">
 </div>
 </div>
 </article>

@@ -1,5 +1,5 @@
 module RISE
-  class TIClient
+  module TIClient
     class Status
       def self.success(*args) new(:success, *args) end
       def self.unsupported() new(:unsupported) end
