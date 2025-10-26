@@ -73,6 +73,7 @@ Rails.application.routes.draw do
       get :ping
       post :check
       post :fetch_idle_message
+      post :fetch_proxy
       get :edit_idle_message
       put :update_idle_message
       post :reboot

@@ -50,6 +50,10 @@ RSpec.describe CardTerminalsController, type: :routing do
       expect(post: "/card_terminals/1/fetch_idle_message").to route_to("card_terminals#fetch_idle_message", id: "1")
     end
 
+    it "routes to #fetch_proxy via PUT" do
+      expect(post: "/card_terminals/1/fetch_proxy").to route_to("card_terminals#fetch_proxy", id: "1")
+    end
+
     it "routes to #edit_idle_message via GET" do
       expect(get: "/card_terminals/1/edit_idle_message").to route_to("card_terminals#edit_idle_message", id: "1")
     end

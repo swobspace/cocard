@@ -27,12 +27,16 @@ module KTProxies
         by_uuid.update(common_attributes.merge(
                                            name: name, 
                                            card_terminal_ip: card_terminal_ip)
-                                         )
+                                        .merge(card_terminal_via_ip)
+                      )
       elsif by_name_and_ip
-        by_name_and_ip.update(common_attributes.merge(uuid: uuid))
+        by_name_and_ip.update(common_attributes.merge(uuid: uuid)
+                                               .merge(card_terminal_via_ip)
+                             )
       elsif by_ip
-        by_ip.update(common_attributes.merge(uuid: uuid,
-                                                     name: name))
+        by_ip.update(common_attributes.merge(uuid: uuid, name: name)
+                                      .merge(card_terminal_via_ip)
+                    )
       else
         @kt_proxy = KTProxy.create(common_attributes
                        .merge(uuid: uuid, name: name, 

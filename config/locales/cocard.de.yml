@@ -341,6 +341,7 @@ de:
       Sobald das Kartenterminal über den Konnektor abgefragt wird, werden die 
       hier gesetzten Informationen wieder überschrieben.
     rmi_check: Prüfung via IP
+    fetch_proxy: Hole Proxy vom TIClient
   cards:
     no_contexts_assigned: |
       ACHTUNG! Es ist noch kein Kontext zugeordnet!
@@ -366,3 +367,5 @@ de:
     tftp_file: TFTP-File
     firmware_version: Firmware-Version
     firmware_duilddate: Datum der Firmware
+  ti_clients:
+    fetch_kt_proxies: Proxies vom TIClient holen

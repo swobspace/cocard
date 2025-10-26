@@ -1,0 +1,6 @@
+<%= button_to(t('card_terminals.fetch_proxy'),
+              fetch_proxy_card_terminal_path(card_terminal),
+              method: :post,
+              data: { "turbo": false },
+              class: 'btn btn-warning me-1') 
+ %>

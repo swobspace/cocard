@@ -81,7 +81,7 @@ module KTProxies
           subject.save
           kt_proxy = subject.kt_proxy
           expect(kt_proxy.ti_client).to eq(tic)
-          expect(kt_proxy.card_terminal).to eq(ct1)
+          expect(kt_proxy.card_terminal).to eq(ct2)
           expect(kt_proxy.uuid).to eq("e47789b6-ad96-11f0-ade2-c025a5b36994")
           expect(kt_proxy.name).to eq("ORGA6100-01234567890000")
           expect(kt_proxy.wireguard_ip).to eq("203.0.113.7")
@@ -114,7 +114,7 @@ module KTProxies
           subject.save
           kt_proxy = subject.kt_proxy
           expect(kt_proxy.ti_client).to eq(tic)
-          expect(kt_proxy.card_terminal).to eq(ct1)
+          expect(kt_proxy.card_terminal).to eq(ct2)
           expect(kt_proxy.uuid).to eq("e47789b6-ad96-11f0-ade2-c025a5b36994")
           expect(kt_proxy.name).to eq("ORGA6100-01234567890000")
           expect(kt_proxy.wireguard_ip).to eq("203.0.113.7")
@@ -131,6 +131,37 @@ module KTProxies
         let!(:kt_proxy) do
           FactoryBot.create(:kt_proxy, 
             card_terminal_id: ct2.id,
+            ti_client_id: tic.id,
+            card_terminal_ip: '192.0.2.100'
+          )
+        end
+
+        it 'does not create a kt_proxy' do
+          expect do
+            subject.save
+          end.to change(KTProxy, :count).by(0)
+        end
+
+        it 'updates attributes' do
+          subject.save
+          kt_proxy = subject.kt_proxy
+          expect(kt_proxy.ti_client).to eq(tic)
+          expect(kt_proxy.card_terminal).to eq(ct2)
+          expect(kt_proxy.uuid).to eq("e47789b6-ad96-11f0-ade2-c025a5b36994")
+          expect(kt_proxy.name).to eq("ORGA6100-01234567890000")
+          expect(kt_proxy.wireguard_ip).to eq("203.0.113.7")
+          expect(kt_proxy.incoming_ip).to eq("198.51.100.1")
+          expect(kt_proxy.incoming_port).to eq(8123)
+          expect(kt_proxy.outgoing_ip).to eq("198.51.100.2")
+          expect(kt_proxy.outgoing_port).to eq(8123)
+          expect(kt_proxy.card_terminal_ip).to eq("192.0.2.100")
+          expect(kt_proxy.card_terminal_port).to eq(4742)
+        end
+      end
+
+      context "with kt_proxy, no card terminal and matching ip" do
+        let!(:kt_proxy) do
+          FactoryBot.create(:kt_proxy, 
             ti_client_id: tic.id,
             card_terminal_ip: '192.0.2.100'
           )
