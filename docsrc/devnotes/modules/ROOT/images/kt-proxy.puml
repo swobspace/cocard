@@ -1,31 +1,27 @@
 @startuml
-participant CardTerminal as ct #gold
-participant KTProxy as ktproxy #gold
-participant "TIClient" as ticlient #gold
-participant "TIClient::RMI" as ticrmi
 
-ct -> ktproxy : find_or_create\n(ct, vkonn)
-activate ktproxy
-ktproxy -> ticlient : find_or_create_ktproxy\n(ktproxy)
-activate ticlient
-ticlient -> ticrmi : find\n(ktproxy)
-ticrmi ->] : GET /v1/manager/card-terminals/proxies
-]--> ticrmi : result (REST)
+participant "KTProxy" as ktproxy #gold
+participant "RISE::TIClient::CardTerminals" as ticlient #gold
 
-alt #LightGreen ktproxy exists
-  ticrmi -> ticlient : ktproxy.json
-  note right : single ktproxy match by ip or uuid
-else #lightpink ktproxy missing
-  ticrmi --> ticlient : not found
-  ticlient -> ticrmi : create\n(ktproxy)
-  ticrmi ->] : POST /v1/manager/card-terminals/proxies
-  ]--> ticrmi : Response
-  ticrmi --> ticlient : ktproxy.json
-end
 
-ticlient --> ktproxy: find_or_create\n(Cocard::NewKTProxy.new)
-deactivate ticlient
+ktproxy -> ticlient : get_proxy\n(ktproxy)
+ticlient ->] : GET /v1/manager/card-terminals/proxies/{id}
+]--> ticlient : Response (cardterminal_proxies.json)
+ticlient -> ktproxy : ktproxy.json
 
-ktproxy -> ktproxy : update\n(ct_id)
+ktproxy -> ticlient : create_proxy\n(ktproxy)
+ticlient ->] : POST /v1/manager/card-terminals/proxies
+]--> ticlient : Response (proxy.json)
+ticlient --> ktproxy : ktproxy.json
+
+ktproxy -> ticlient : update_proxy\n(ktproxy)
+ticlient ->] : POST /v1/manager/card-terminals/proxies/{id}
+]--> ticlient : Response (status)
+ticlient --> ktproxy : true/false
+
+ktproxy -> ticlient : destroy_proxy\n(ktproxy)
+ticlient ->] : POST /v1/manager/card-terminals/proxies/{id}
+]--> ticlient : Response (status)
+ticlient --> ktproxy : true/false
 
 @enduml

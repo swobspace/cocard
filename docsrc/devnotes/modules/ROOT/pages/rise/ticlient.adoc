@@ -1,0 +1,6 @@
+= RISE::TIClient Classes
+:author: Wolfgang Barth
+:revdate: 2025-10-26
+:imagesdir: ../../images
+
+image::rise/ticlient.svg[]

@@ -1,44 +1,11 @@
 module RISE
-  class TIClient
+  class TIClient::Base
     attr_reader :ti_client, :errors
 
     def initialize(options = {})
       options = options.symbolize_keys
       @ti_client = options.fetch(:ti_client)
       @errors = []
-    end
-
-    def get_card_terminal_proxies
-      token = api_token
-      if token.nil?
-        @errors << "Authentifikation fehlgeschlagen"
-      else
-        @errors = []
-        begin
-          response = connection.get('/api/v1/manager/card-terminals/proxies',
-                       {},
-                       { 'Content-Type': 'application/json',
-                         'authorization': "Bearer #{token}" }
-                     )
-          unless response.success?
-            @errors << "#{response.status}: #{response.body}"
-          end
-        rescue Faraday::Error => e
-          err = []
-          err << e.response_status
-          err << e.response_headers
-          err << e.response_body
-          err << e.message
-          err.compact!
-          @errors << err.join("; ")
-        end
-      end
-      if @errors.any?
-        yield Status.failure(@errors.join("; "))
-      else
-        json = JSON.parse(response.body)
-        yield Status.success("#{response.status}: Success", json)
-      end
     end
 
     def api_token
@@ -79,15 +46,17 @@ module RISE
       token = RISE::TIClient::Token.new(response.body)
     end
 
-  private
+  protected
+
     def connection
       @connection ||= Faraday.new(faraday_options.merge(tls_options))
     end
 
+  private
+
     def tls_options
       { ssl:{ verify: false } }
     end
-
         
     def faraday_options
       { 

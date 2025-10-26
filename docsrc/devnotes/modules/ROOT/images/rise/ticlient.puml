@@ -1,0 +1,22 @@
+@startuml
+top to bottom direction
+
+!theme cocard from ..
+
+class "RISE::TIClient::CardTerminals" as rise {
+  ticlient
+  +get_proxies()
+  +get_proxy(ktproxy)
+  +create_proxy(ktproxy)
+  +update_proxy(ktproxy)
+  +destroy_proxy(ktproxy)
+}
+
+abstract "RISE::TIClient::Base" as rise_base {
+  ticlient
+  #api_token()
+  #authorization()
+  #connection()   
+}
+
+rise <|-- rise_base
