@@ -3,6 +3,7 @@
 == 0.9.3-dev - unreleased
 
 * (experimentell) Abgleich KT-Proxys über RISE TI-Client-API
+* (experimentell) Anlage eines Proxys auf dem RISE TI-Client bei Anlage eines KTProxy
 * Anzeige Konnektor: zugeordnete SMC-Bs aufgenommen und Layout überarbeitet
 * Tabelle Zuordung Terminals - Arbeitsplätze erweitert
 
