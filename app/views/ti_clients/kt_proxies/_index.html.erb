@@ -35,13 +35,13 @@
                   <th><%= t('attributes.condition_message') %></th>
                   <th><%= t('attributes.uuid') %></th>
                   <th><%= t('attributes.name') %></th>
-                  <th><%= t('attributes.wireguard_ip') %></th>
+                  <th><%= t('attributes.card_terminal_ip') %></th>
+                  <th class="text-center"><%= t('attributes.card_terminal_port') %></th>
                   <th><%= t('attributes.incoming_ip') %></th>
                   <th class="text-center"><%= t('attributes.incoming_port') %></th>
                   <th><%= t('attributes.outgoing_ip') %></th>
                   <th class="text-center"><%= t('attributes.outgoing_port') %></th>
-                  <th><%= t('attributes.card_terminal_ip') %></th>
-                  <th class="text-center"><%= t('attributes.card_terminal_port') %></th>
+                  <th><%= t('attributes.wireguard_ip') %></th>
                   <th class="nosort"><%= t('cocard.action') %></th>
             </tr>
           </thead>
@@ -90,13 +90,13 @@
                 <td><%= kt_proxy.card_terminal&.condition_message %></td>
                 <td><%= render LinkToComponent.new(item: kt_proxy, label_method: :uuid) %></td>
                 <td><%= kt_proxy.name %></td>
-                <td><%= kt_proxy.wireguard_ip %></td>
+                <td><%= kt_proxy.card_terminal_ip %></td>
+                <td class="text-center"><%= kt_proxy.card_terminal_port %></td>
                 <td><%= kt_proxy.incoming_ip %></td>
                 <td class="text-center"><%= kt_proxy.incoming_port %></td>
                 <td><%= kt_proxy.outgoing_ip %></td>
                 <td class="text-center"><%= kt_proxy.outgoing_port %></td>
-                <td><%= kt_proxy.card_terminal_ip %></td>
-                <td class="text-center"><%= kt_proxy.card_terminal_port %></td>
+                <td><%= kt_proxy.wireguard_ip %></td>
                 <td class="text-nowrap">
                   <%= show_link kt_proxy, data: { "turbo-frame" => "_top" } %>
                   <%= edit_link kt_proxy, data: { "turbo-frame" => "_top" } %>
