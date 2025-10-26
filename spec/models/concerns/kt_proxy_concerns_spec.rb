@@ -22,11 +22,11 @@ RSpec.describe KTProxyConcerns, type: :model do
       expect(json["name"]).to eq("ORGA6100-02412345678910")
       expect(json["wireguardIp"]).to eq("198.52.100.1")
       expect(json["incomingIp"]).to eq("192.0.2.1")
-      expect(json["incomingPort"]).to eq("8080")
+      expect(json["incomingPort"]).to eq(8080)
       expect(json["outgoingIp"]).to eq("192.0.2.2")
-      expect(json["outgoingPort"]).to eq("8080")
+      expect(json["outgoingPort"]).to eq(8080)
       expect(json["cardTerminalIp"]).to eq("192.0.2.100")
-      expect(json["cardTerminalPort"]).to eq("4742")
+      expect(json["cardTerminalPort"]).to eq(4742)
       expect(json.keys).to contain_exactly(
         "id",
         "name",
