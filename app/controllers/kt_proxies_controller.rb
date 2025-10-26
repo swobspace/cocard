@@ -43,8 +43,21 @@ class KTProxiesController < ApplicationController
   # POST /kt_proxies
   def create
     @kt_proxy = KTProxy.new(kt_proxy_params)
+    if @kt_proxy.save
+      # create proxy on RISE TIClient
+      rtic = RISE::TIClient::CardTerminals.new(ti_client: @kt_proxy.ti_client)
+      rtic.create_proxy(@kt_proxy) do |result|
+        result.on_success do |message, value|
+          flash[:success] = "KTProxy auf TIClient erfolgreich angelegt"
+        end
+        result.on_failure do |message|
+          flash[:alert] = "KTProxy in Cocard angelegt, aber Anlage auf TIClient fehlgeschlagen!in Cocard angelegt, aber Anlage auf TIClient fehlgeschlagen!"
+        end
+      end
 
-    @kt_proxy.save
+    else
+      flash[:alert] = "KTProxy konnte nicht angelegt werden"
+    end
     respond_with(@kt_proxy)
   end
 
