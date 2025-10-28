@@ -29,8 +29,8 @@
             <th class="notvisible"><%= t('attributes.card_type') %></th>
             <th><%= t('attributes.name') %></th>
             <th class="text-start"><%= t('attributes.iccsn') %></th>
-            <th><%= t('attributes.connector') %></th>
-            <th><%= t('attributes.card_terminal') %></th>
+            <th class="notvisible"><%= t('attributes.connector') %></th>
+            <th><%= t('attributes.ct_id_and_slot') %></th>
             <th><%= t('attributes.card_terminal') %></th>
             <th><%= t('attributes.mac') %></th>
             <th class="text-center notvisible"><%= t('attributes.slotid') %></th>
@@ -106,15 +106,20 @@
               <td><%= card.condition_message %></td>
               <td><%= card.card_type %></td>
               <td><%= card.name %></td>
-              <td><%= link_to card.iccsn, card_path(card), class: 'primary-link' %></td>
+              <td><%= link_to card.iccsn, card_path(card), 
+                              class: 'primary-link',
+                              data: { 'turbo-frame' => '_top', 'turbo-prefetch' => true }
+                   %></td>
               <td><%= link_to(card.card_terminal&.connector&.name, 
                               connector_path(card.card_terminal&.connector),
-                              class: 'primary-link'
+                              class: 'primary-link',
+                              data: { 'turbo-frame' => '_top', 'turbo-prefetch' => true }
                              ) if card.card_terminal&.connector %></td>
               <td><%= link_to( "#{card.card_terminal&.ct_id}/" + 
                                "#{card.slotid}",
                                card_terminal_path(card.card_terminal),
-                               class: 'primary-link'
+                               class: 'primary-link',
+                              data: { 'turbo-frame' => '_top', 'turbo-prefetch' => true }
                              ) if card.card_terminal %></td>
               <td><%= card.card_terminal&.name %></td>
               <td class="text-center"><%= card.card_terminal&.mac&.gsub(/:/, '') %></td>

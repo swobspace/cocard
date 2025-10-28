@@ -149,6 +149,7 @@ de:
     created_at: Erstellt
     creator: Ersteller
     ct_id: CT_ID
+    ct_id_and_slot: CT_ID/Slot
     current_ip: Gefundene IP
     delivery_date: Lieferdatum
     description: Beschreibung
