@@ -16,7 +16,13 @@ module CardTerminals
       "update_fileName" => "somestuff.boot",
       "sys_ntp_serverIpAddr" => '192.0.2.20',
       "sys_ntp_enabled" => true,
-      "vendor_serialNumber" => "SERIAL1234"
+      "vendor_serialNumber" => "SERIAL1234",
+      "sys_uptime_durationTotal" => "340",
+      "sys_uptime_durationSinceBoot" => "12",
+      "card_slot1_plugCycles" => "101",
+      "card_slot2_plugCycles" => "102",
+      "card_slot3_plugCycles" => "103",
+      "card_slot4_plugCycles" => "104",
     }}
 
     subject { CardTerminals::RMI::OrgaV1::Info.new(properties) }
@@ -34,5 +40,11 @@ module CardTerminals
     it { expect(subject.tftp_server).to eq("192.0.2.10") }
     it { expect(subject.tftp_file).to eq("somestuff.boot") }
     it { expect(subject.serial).to eq("SERIAL1234") }
+    it { expect(subject.uptime_total).to eq("340") }
+    it { expect(subject.uptime_reboot).to eq("12") }
+    it { expect(subject.slot1_plug_cycles).to eq("101") }
+    it { expect(subject.slot2_plug_cycles).to eq("102") }
+    it { expect(subject.slot3_plug_cycles).to eq("103") }
+    it { expect(subject.slot4_plug_cycles).to eq("104") }
   end
 end

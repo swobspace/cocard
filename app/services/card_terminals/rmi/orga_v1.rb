@@ -584,6 +584,12 @@ module CardTerminals
                     update_serverIpAddr
                     update_fileName
                     vendor_serialNumber
+                    sys_uptime_durationTotal
+                    sys_uptime_durationSinceBoot
+                    card_slot1_plugCycles
+                    card_slot2_plugCycles
+                    card_slot3_plugCycles
+                    card_slot4_plugCycles
                   ]
         if firmware_version >= '3.9.1'
           props << "rmi_pairingEHealthTerminal_enabled"
