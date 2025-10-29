@@ -8,7 +8,9 @@ module Cocard
                                     message
                                   ].compact.join(' ')
       if state == Cocard::States::OK
-        if respond_to?(:last_ok) and respond_to?(:last_check) and
+        if respond_to?(:last_ok) and 
+           respond_to?(:last_check) and
+           last_check.present? and
            last_check >= Cocard.grace_period.before(Time.current)
           self[:last_ok] = Time.current
         end
