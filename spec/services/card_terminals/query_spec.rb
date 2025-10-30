@@ -251,8 +251,8 @@ module CardTerminals
     context "with :last_ok" do
       subject { Query.new(card_terminals, {last_ok: '2025-03'}) }
       before(:each) do
-        @matching = [ct1]
-        @nonmatching = [ct2, ct3]
+        @matching = [ct1, ct2]
+        @nonmatching = [ct3]
       end
       it_behaves_like "a card_terminal query"
     end
