@@ -42,6 +42,15 @@ RSpec.describe ClientCertificate, type: :model do
     it { expect(client_certificate.valid_until.localtime).to eq("2051-11-09 10:08:47 +0100") }
   end
 
+  describe "#save" do
+    it "updates :expiration_date" do
+      client_certificate.update_column(:expiration_date, nil)
+      expect {
+        client_certificate.save
+      }.to change(client_certificate, :expiration_date).to client_certificate.valid_until.to_date
+    end
+  end
+
   describe "ClientCertificate::p12_to_params" do
     let(:p12) { File.read(File.join(Rails.root, 'spec/fixtures/files', 'demo.p12')) }
     subject { ClientCertificate.p12_to_params(p12, 'justfortesting') }

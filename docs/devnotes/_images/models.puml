@@ -182,6 +182,7 @@ Class ClientCertificate {
   cert: text
   pkey: text
   passphrase: string
+  valid_until: timestamp
   cn()
 }
 

@@ -2,6 +2,8 @@ module ClientCertificateConcerns
   extend ActiveSupport::Concern
 
   included do
+    scope :active, -> { where("expiration_date >= ?", Date.current) }
+    scope :expired, -> { where("expiration_date < ?", Date.current) }
   end
 
   def to_text
