@@ -231,12 +231,8 @@
         <div class="card-title border-bottom bg-light pt-2 ps-2">
           <h6><%= t('cocard.assigned_certificates')%></h6>
         </div>
-        <% @connector.client_certificates.each do |cert| %>
-          <div>
-            <%=link_to(cert.to_s, client_certificate_path(cert), class: 'primary-link')%>
-            <%= render TagListComponent.new(item: cert) %>
-          </div>
-        <% end %>
+        <%= render partial: 'connectors/client_certificates/client_certificate', 
+                   collection: @connector.client_certificates, as: :cert %>
       </div>
     </div>
   </div>
