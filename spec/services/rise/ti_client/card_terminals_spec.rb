@@ -280,7 +280,8 @@ module RISE
           [
             200, 
             {'Content-Type': 'application/json;charset=UTF-8'},
-            proxy_body
+            proxy_body.gsub(/bf11726a-ad8f-11f0-8247-c025a5b36994/, 
+                            'f7da0dce-b70c-11f0-b4b0-c025a5b36994')
           ]
         end
 
@@ -288,13 +289,15 @@ module RISE
         subject.create_proxy(kt_proxy) do |result|
           result.on_success do |message, value|
             called_back = :success
-            expect(value).to include(JSON.parse(proxy_body))
+            expect(value).to include(JSON.parse(proxy_body.gsub(/bf11726a-ad8f-11f0-8247-c025a5b36994/, 'f7da0dce-b70c-11f0-b4b0-c025a5b36994')))
           end
           result.on_failure do |message|
             called_back = :failure
           end
         end
         expect(called_back).to eq(:success)
+        kt_proxy.reload
+        expect(kt_proxy.uuid).to eq('f7da0dce-b70c-11f0-b4b0-c025a5b36994')
       end
 
       it "failure: no content" do
@@ -366,7 +369,7 @@ module RISE
       end
 
       it "success: update proxy" do
-        stubs.post('api/v1/manager/card-terminals/proxies/bf11726a-ad8f-11f0-8247-c025a5b36994') do
+        stubs.put('api/v1/manager/card-terminals/proxies/bf11726a-ad8f-11f0-8247-c025a5b36994') do
           [ 204, {}, {} ]
         end
 
@@ -383,7 +386,7 @@ module RISE
       end
 
       it "failure: 404 not found" do
-        stubs.post('api/v1/manager/card-terminals/proxies/bf11726a-ad8f-11f0-8247-c025a5b36994') do
+        stubs.put('api/v1/manager/card-terminals/proxies/bf11726a-ad8f-11f0-8247-c025a5b36994') do
           [ 404, {}, {} ]
         end
 
@@ -403,7 +406,7 @@ module RISE
       end
 
       it "failure: 500 internal server error" do
-        stubs.post('api/v1/manager/card-terminals/proxies/bf11726a-ad8f-11f0-8247-c025a5b36994') do
+        stubs.put('api/v1/manager/card-terminals/proxies/bf11726a-ad8f-11f0-8247-c025a5b36994') do
           [ 500, {}, {} ]
         end
 

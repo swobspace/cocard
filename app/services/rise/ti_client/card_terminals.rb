@@ -83,6 +83,7 @@ module RISE
         yield RISE::TIClient::Status.failure(@errors.join("; "))
       else
         json = JSON.parse(response.body)
+        kt_proxy.update(uuid: json['id'])
         yield RISE::TIClient::Status.success("#{response.status}: Success", json)
       end
     end
@@ -95,7 +96,7 @@ module RISE
       else
         @errors = []
         begin
-          response = connection.post("/api/v1/manager/card-terminals/proxies/#{uuid}",
+          response = connection.put("/api/v1/manager/card-terminals/proxies/#{uuid}",
                        kt_proxy.to_builder.target!,
                        { 'Content-Type': 'application/json',
                          'authorization': "Bearer #{token}" }
