@@ -23,6 +23,7 @@ RSpec.describe "kt_proxies/show", type: :view do
       card_terminal_ip: "192.0.2.91",
       card_terminal_port: 4742
     ))
+    @rise_proxy = {}
   end
 
   it "renders attributes in <p>" do
