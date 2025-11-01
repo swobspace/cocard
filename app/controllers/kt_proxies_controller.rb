@@ -23,6 +23,21 @@ class KTProxiesController < ApplicationController
 
   # GET /kt_proxies/1
   def show
+    # get proxy from RISE TIClient
+    rtic = RISE::TIClient::CardTerminals.new(ti_client: @kt_proxy.ti_client)
+    rtic.get_proxy(@kt_proxy) do |result|
+      result.on_success do |message, value|
+        @rise_proxy = value
+      end
+      result.on_notfound do
+        flash[:warning] = "KTProxy gelöscht, aber auf TIClient nicht gefunden," +
+                          " bitte TIClient prüfen!"
+      end
+      result.on_failure do |message|
+        flash[:alert] = "KTProxy in Cocard gelöscht, aber Löschen auf " +
+                        "TIClient fehlgeschlagen!" + message
+      end
+    end
     respond_with(@kt_proxy)
   end
 
