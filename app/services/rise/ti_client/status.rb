@@ -4,6 +4,7 @@ module RISE
       def self.success(*args) new(:success, *args) end
       def self.unsupported() new(:unsupported) end
       def self.failure(error) new(:failure, error) end
+      def self.notfound(*args) new(:notfound, *args) end
 
       attr_reader :message, :value
 
@@ -19,6 +20,10 @@ module RISE
 
       def on_unsupported
         yield if @status == :unsupported
+      end
+
+      def on_notfound
+        yield(message) if @status == :notfound
       end
 
       def on_failure
