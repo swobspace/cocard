@@ -29,7 +29,7 @@ module RISE
       it { expect(subject.respond_to?(:get_proxy)).to be_truthy }
       it { expect(subject.respond_to?(:create_proxy)).to be_truthy }
       it { expect(subject.respond_to?(:update_proxy)).to be_truthy }
-      it { expect(subject.respond_to?(:destroy_proxy)).to be_truthy }
+      it { expect(subject.respond_to?(:delete_proxy)).to be_truthy }
     end
 
     describe '::new' do
@@ -412,6 +412,88 @@ module RISE
 
         called_back = false 
         subject.update_proxy(kt_proxy) do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:failure)
+      end
+    end
+
+    describe '#delete_proxy' do
+      let(:kt_proxy) do
+        FactoryBot.create(:kt_proxy,
+          uuid: "bf11726a-ad8f-11f0-8247-c025a5b36994",
+          name: "ORGA6100-02412345678910",
+          wireguard_ip: "198.52.100.1",
+          incoming_ip: "192.0.2.1",
+          incoming_port: 8080,
+          outgoing_ip: "192.0.2.2",
+          outgoing_port: 8080,
+          card_terminal_ip: "192.0.2.100",
+          card_terminal_port: 4742
+        )
+      end
+
+      let(:stubs)  { Faraday::Adapter::Test::Stubs.new }
+      let(:conn)   { Faraday.new { |b| b.adapter(:test, stubs) } }
+      before(:each) do
+        allow(Faraday).to receive(:new).and_return(conn)
+        expect(subject).to receive(:api_token).at_least(:once)
+                                              .and_return('eyJraWQiOiJkZGUyMDZiYi1lMDgz')
+      end
+
+      after(:each) do
+        Faraday.default_connection = nil
+      end
+
+      it "success: delete proxy" do
+        stubs.delete('api/v1/manager/card-terminals/proxies/bf11726a-ad8f-11f0-8247-c025a5b36994') do
+          [ 204, {}, {} ]
+        end
+
+        called_back = false 
+        subject.delete_proxy(kt_proxy) do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:success)
+      end
+
+      it "failure: 404 not found" do
+        stubs.delete('api/v1/manager/card-terminals/proxies/bf11726a-ad8f-11f0-8247-c025a5b36994') do
+          [ 404, {}, {} ]
+        end
+
+        called_back = false 
+        subject.delete_proxy(kt_proxy) do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_notfound do |message|
+            called_back = :notfound
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:notfound)
+      end
+
+      it "failure: 500 internal server error" do
+        stubs.delete('api/v1/manager/card-terminals/proxies/bf11726a-ad8f-11f0-8247-c025a5b36994') do
+          [ 500, {}, {} ]
+        end
+
+        called_back = false 
+        subject.delete_proxy(kt_proxy) do |result|
           result.on_success do |message, value|
             called_back = :success
           end
