@@ -52,6 +52,16 @@ module RISE
       @connection ||= Faraday.new(faraday_options.merge(tls_options))
     end
 
+    def faraday_error(e)
+      err = []
+      err << e.response_status
+      err << e.response_headers
+      err << e.response_body
+      err << e.message
+      err.compact!
+      err.join("; ")
+    end
+
   private
 
     def tls_options
