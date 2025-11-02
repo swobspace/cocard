@@ -244,7 +244,7 @@ GEM
     immutable-struct (2.5.0)
     immutable_struct (1.2.0)
     io-console (0.8.1)
-    irb (1.15.2)
+    irb (1.15.3)
       pp (>= 0.6.0)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
@@ -290,7 +290,7 @@ GEM
     multi_json (1.17.0)
     mutex_m (0.3.0)
     nenv (0.3.0)
-    net-http (0.7.0)
+    net-http (0.6.0)
       uri
     net-http-persistent (4.0.6)
       connection_pool (~> 2.2, >= 2.2.4)
@@ -523,7 +523,7 @@ DEPENDENCIES
   eventmachine (~> 1.2)
   factory_bot_rails
   faker (~> 3.3)
-  faraday (~> 2.9)
+  faraday
   faraday-cookie_jar (~> 0.0.7)
   faraday-net_http_persistent (~> 2.3)
   faye-websocket (~> 0.12.0)
@@ -538,6 +538,7 @@ DEPENDENCIES
   json_spec
   launchy
   liquid (~> 5.5)
+  net-http (= 0.6.0)
   net-ping (~> 2.0)
   nori (~> 2.7)
   pagy (~> 9.0)
