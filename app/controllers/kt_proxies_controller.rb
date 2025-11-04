@@ -58,7 +58,8 @@ class KTProxiesController < ApplicationController
 
   # POST /kt_proxies
   def create
-    @kt_proxy = KTProxy.new(kt_proxy_params)
+    uuid = "JIBBETNICH-#{SecureRandom.uuid}"
+    @kt_proxy = KTProxy.new(kt_proxy_params.merge(uuid: uuid))
     if @kt_proxy.save
       # create proxy on RISE TIClient
       rtic = RISE::TIClient::CardTerminals.new(ti_client: @kt_proxy.ti_client)
@@ -73,7 +74,8 @@ class KTProxiesController < ApplicationController
       end
 
     else
-      flash[:alert] = "KTProxy konnte nicht angelegt werden"
+      flash[:alert] = "KTProxy konnte nicht angelegt werden: " +
+                      @kt_proxy.errors.full_messages.join("; ")
     end
     respond_with(@kt_proxy)
   end

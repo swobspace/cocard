@@ -96,7 +96,7 @@ module KTProxies
 
       context "with kt_proxy and matching name/ip" do
         let!(:kt_proxy) do
-          FactoryBot.create(:kt_proxy, 
+          FactoryBot.create(:kt_proxy, :with_uuid,
             card_terminal_id: ct1.id,
             ti_client_id: tic.id,
             name: "ORGA6100-01234567890000",
@@ -129,7 +129,7 @@ module KTProxies
 
       context "with kt_proxy and matching ip" do
         let!(:kt_proxy) do
-          FactoryBot.create(:kt_proxy, 
+          FactoryBot.create(:kt_proxy, :with_uuid,
             card_terminal_id: ct2.id,
             ti_client_id: tic.id,
             card_terminal_ip: '192.0.2.100'
@@ -161,7 +161,7 @@ module KTProxies
 
       context "with kt_proxy, no card terminal and matching ip" do
         let!(:kt_proxy) do
-          FactoryBot.create(:kt_proxy, 
+          FactoryBot.create(:kt_proxy, :with_uuid,
             ti_client_id: tic.id,
             card_terminal_ip: '192.0.2.100'
           )

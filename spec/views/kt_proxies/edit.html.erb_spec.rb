@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "kt_proxies/edit", type: :view do
-  let(:kt_proxy) { FactoryBot.create(:kt_proxy) }
+  let(:kt_proxy) { FactoryBot.create(:kt_proxy, :with_uuid) }
 
   before(:each) do
     @ability = Object.new

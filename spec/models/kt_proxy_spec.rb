@@ -13,8 +13,8 @@ RSpec.describe KTProxy, type: :model do
   
 
   it 'should get plain factory working' do
-    f = FactoryBot.create(:kt_proxy)
-    g = FactoryBot.create(:kt_proxy)
+    f = FactoryBot.create(:kt_proxy, :with_uuid)
+    g = FactoryBot.create(:kt_proxy, :with_uuid)
     expect(f).to be_valid
     expect(g).to be_valid
     expect(f).to validate_uniqueness_of(:uuid)
@@ -24,12 +24,12 @@ RSpec.describe KTProxy, type: :model do
   end
 
   describe "#to_s" do
-    let(:kt_proxy) { FactoryBot.create(:kt_proxy, card_terminal_ip: "192.0.2.117") }
+    let(:kt_proxy) { FactoryBot.create(:kt_proxy, :with_uuid, card_terminal_ip: "192.0.2.117") }
     it { expect(kt_proxy.to_s).to eq("KT-Proxy 192.0.2.117") }
   end
 
   describe "#to_builder" do
-    let(:kt_proxy) { FactoryBot.create(:kt_proxy) }
+    let(:kt_proxy) { FactoryBot.create(:kt_proxy, :with_uuid)  }
     let(:json) { kt_proxy.to_builder.target! }
 
     it { expect(parse_json(json, "id")).to eq(kt_proxy.uuid) }

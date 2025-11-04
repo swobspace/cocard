@@ -8,6 +8,10 @@ RSpec.describe "/kt_proxies", type: :request do
   let(:rip) { instance_double(RISE::TIClient::CardTerminals) }
   let(:tic) { FactoryBot.create(:ti_client) }
   let(:valid_attributes) {
+    FactoryBot.attributes_for(:kt_proxy, :with_uuid, ti_client_id: tic.id )
+  }
+
+  let(:post_attributes) {
     FactoryBot.attributes_for(:kt_proxy, ti_client_id: tic.id )
   }
 
@@ -61,12 +65,12 @@ RSpec.describe "/kt_proxies", type: :request do
     context "with valid parameters" do
       it "creates a new KTProxy" do
         expect {
-          post kt_proxies_url, params: { kt_proxy: valid_attributes }
+          post kt_proxies_url, params: { kt_proxy: post_attributes }
         }.to change(KTProxy, :count).by(1)
       end
 
       it "redirects to the created kt_proxy" do
-        post kt_proxies_url, params: { kt_proxy: valid_attributes }
+        post kt_proxies_url, params: { kt_proxy: post_attributes }
         expect(response).to redirect_to(kt_proxy_url(KTProxy.last))
       end
     end
