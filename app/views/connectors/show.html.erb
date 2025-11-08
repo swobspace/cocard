@@ -89,7 +89,11 @@
           </tr>
           <tr>
             <th class="w-25 pe-3"><%= t('attributes.locations')%>:</th>
-            <td><%= @connector.locations.map(&:to_s).join(' - ') %></td>
+            <td>
+              <% @connector.locations.each do |location| %>
+                <%= render LinkToComponent.new(item: location) %><br/>
+              <% end %>
+            </td>
           </tr>
           <tr>
             <th class="w-25 pe-3"><%= t('controller.tags')%>:</th>
