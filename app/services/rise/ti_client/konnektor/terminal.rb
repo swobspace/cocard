@@ -23,6 +23,14 @@ module RISE
           @json['HOSTNAME']
         end
 
+        def tcp_port
+          @json['TCP_PORT']
+        end
+
+        def card_terminal
+          CardTerminal.where("CAST(mac AS VARCHAR) ILIKE :search", search: mac).first
+        end
+
       end
     end
   end

@@ -146,6 +146,7 @@ de:
     context: Kontext
     contexts: Kontexte
     context_ids: Kontexte
+    correlation: Beziehung
     created_at: Erstellt
     creator: Ersteller
     ct_id: CT_ID
@@ -201,6 +202,7 @@ de:
     pin_mode: SMC-B Auto-PIN-Mode
     pkey: Private Key (PEM)
     plugged_in: Netzwerk, Dose, Switch
+    port: Port
     private_information: Geschützte Information
     product_information: Produktinformation
     real_ip: reale IP
@@ -260,7 +262,8 @@ de:
     tags: Tags
     terminal_workplaces: Kartenterminals-Arbeitsplätze
     ti_clients: TI-Clients
-    ti_clients/kt_proxies: KT-Proxys
+    ti_clients/kt_proxies: KT-Proxys auf dem TI-Client (RISE)
+    ti_clients/terminals: Kartenterminals auf dem Konnektor (RISE)
     users: Benutzer
     verify_pins: PIN-Verifizierung
     workplaces: Arbeitsplätze

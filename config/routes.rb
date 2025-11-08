@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resource :duck_terminal, only: [:new, :show]
   get "reports/duplicate_terminal_ips"
   resources :ti_clients do
+    resources :terminals, module: :ti_clients, only: [:index]
     resources :kt_proxies, module: :ti_clients, only: [:index] do
       collection do
         put :fetch

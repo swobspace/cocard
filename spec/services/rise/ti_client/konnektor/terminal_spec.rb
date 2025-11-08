@@ -3,6 +3,7 @@
 require 'rails_helper'
 module RISE
   RSpec.describe TIClient::Konnektor::Terminal do
+    let!(:ct) { FactoryBot.create(:card_terminal, mac: '00:0D:F8:08:77:76') }
     let(:bekannt) {{
       "ACTIVEROLE" => nil,
       "ADMIN_USERNAME" => "admin",
@@ -77,6 +78,8 @@ module RISE
         it { expect(subject.ct_id).to eq("00:0D:F8:08:77:76") }
         it { expect(subject.mac).to eq("00:0D:F8:08:77:76") }
         it { expect(subject.name).to eq("ORGA6100-0142000000DABD") }
+        it { expect(subject.tcp_port).to eq(8273) }
+        it { expect(subject.card_terminal.id).to eq(ct.id) }
       end
     end
   end
