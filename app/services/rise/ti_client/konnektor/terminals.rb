@@ -20,7 +20,9 @@ module RISE
         end
       end
 
-      if @errors.any?
+      if response.status == 403
+        yield RISE::TIClient::Status.access_denied(@errors.join("; "))
+      elsif @errors.any?
         yield RISE::TIClient::Status.failure(@errors.join("; "))
       else
         json = JSON.parse(response.body)

@@ -98,6 +98,7 @@ module RISE
           }
         EOKTS
       end
+
       let(:stubs)  { Faraday::Adapter::Test::Stubs.new }
       let(:conn)   { Faraday.new { |b| b.adapter(:test, stubs) } }
       before(:each) do
@@ -130,6 +131,30 @@ module RISE
           end
         end
         expect(called_back).to eq(:success)
+      end
+
+      it "failure: not activated" do
+        stubs.get('api/v1/konnektor/default/api/v1/ctm/state') do
+          [
+            403, 
+            {'Content-Type': 'application/json;charset=UTF-8'},
+            ''
+          ]
+        end
+
+        called_back = false 
+        subject.get_terminals do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_access_denied do |message|
+            called_back = :access_denied
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:access_denied)
       end
 
       it "failure: no content" do

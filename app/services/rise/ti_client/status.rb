@@ -3,6 +3,7 @@ module RISE
     class Status
       def self.success(*args) new(:success, *args) end
       def self.unsupported() new(:unsupported) end
+      def self.access_denied(error) new(:access_denied, error) end
       def self.failure(error) new(:failure, error) end
       def self.notfound(*args) new(:notfound, *args) end
 
@@ -28,6 +29,10 @@ module RISE
 
       def on_failure
         yield(message) if @status == :failure
+      end
+
+      def on_access_denied
+        yield(message) if @status == :access_denied
       end
 
     end
