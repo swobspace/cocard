@@ -6,7 +6,7 @@ module TIClients
     def index
       success = true
       @terminals = []
-      rtic = RISE::TIClient::Konnektor::Terminals.new(ti_client: @ticlient)
+      rtic = RISE::TIClient::Konnektor::Terminals.new(ti_client: @ti_client)
       rtic.get_terminals do |result|
         result.on_success do |message, value|
           terminals = value['CTM_CT_LIST'] || []
@@ -23,7 +23,7 @@ module TIClients
 
   private
     def set_ticlient
-      @ticlient = TIClient.find(params[:ti_client_id])
+      @ti_client = TIClient.find(params[:ti_client_id])
     end
   end
 end

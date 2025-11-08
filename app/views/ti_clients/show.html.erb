@@ -64,5 +64,23 @@
 <%= back_link %>
 <%= new_link TIClient %>
 
-<%= render 'ti_clients/kt_proxies/index', kt_proxies: @ti_client.kt_proxies %>
+<ul class="nav nav-tabs mt-3" id="myTab" role="tablist" data-turbo-permanent>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="kt-proxies-tab" data-bs-toggle="tab" data-bs-target="#kt-proxies-tab-pane" type="button" role="tab" aria-controls="kt-proxies-tab-pane" aria-selected="false"><%= t('controller.kt_proxies') %></button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="terminals-tab" data-bs-toggle="tab" data-bs-target="#terminals-tab-pane" type="button" role="tab" aria-controls="terminals-tab-pane" aria-selected="false"><%= t('controller.ti_clients/terminals') %></button>
+  </li>
+</ul>
+
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="kt-proxies-tab-pane" role="tabpanel" aria-labelledby="kt-proxies-tab" tabindex="0">
+    <%= render 'ti_clients/kt_proxies/index', kt_proxies: @ti_client.kt_proxies %>
+  </div>
+  <div class="tab-pane fade" id="terminals-tab-pane" role="tabpanel" aria-labelledby="terminals-tab" tabindex="0">
+  <%= turbo_frame_tag("ticlient_terminals", src: ti_client_terminals_path(@ti_client),
+                                            refresh: "morph") %>
+
+  </div>
+</div>
 
