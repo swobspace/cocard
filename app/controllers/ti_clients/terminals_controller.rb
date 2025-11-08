@@ -25,5 +25,9 @@ module TIClients
     def set_ticlient
       @ti_client = TIClient.find(params[:ti_client_id])
     end
+
+    def add_breadcrumb_index
+    end
+
   end
 end
