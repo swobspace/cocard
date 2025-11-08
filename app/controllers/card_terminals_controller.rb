@@ -1,6 +1,6 @@
 class CardTerminalsController < ApplicationController
   before_action :set_card_terminal, only: [:show, :edit, :update, :destroy,
-                                           :edit_identification,
+                                           :edit_identification, :fetch_proxy,
                                            :fetch_idle_message, :edit_idle_message,
                                            :update_idle_message]
   before_action :add_breadcrumb_show, only: [:show]
@@ -168,6 +168,37 @@ class CardTerminalsController < ApplicationController
     end
 
     respond_with(@card_terminal, action: :show)
+  end
+
+  def fetch_proxy
+    ti_client = @card_terminal&.connector&.ti_client
+    if ti_client.present?
+      rtic = RISE::TIClient::CardTerminals.new(ti_client: ti_client)
+      rtic.get_proxies do |result|
+        result.on_success do |message, value|
+          proxies = value['proxies'] || []
+          proxies.each do |proxy|
+            if proxy['cardTerminalIp'] == @card_terminal.ip.to_s
+              ktp = KTProxies::Crupdator.new(ti_client: ti_client, proxy_hash: proxy)
+              if ktp.save
+                flash[:success] = "KT-Proxy zugeordnet"
+              else
+                flash[:alert] = "KT-Proxy konnte nicht angelegt/aktualisiert werden!"
+              end
+              break
+            else
+              next
+            end
+          end
+        end
+        result.on_failure do |message|
+          flash[:alert] = message
+        end
+      end
+    else
+      flash[:warning] = "Kein TIClient zugewiesen, kein Abgleich möglich!"
+    end
+    respond_with(@card_terminal)
   end
 
 

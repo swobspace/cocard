@@ -15,7 +15,11 @@ class CardTerminal::PairingButtonComponent < ViewComponent::Base
 
   def button_class
     if supports_pairing?
-      "btn btn-warning me-1"
+      if card_terminal.connected
+        "btn btn-danger me-1"
+      else
+        "btn btn-warning me-1"
+      end
     else
       "btn btn-outline-warning me-1"
     end
@@ -24,8 +28,14 @@ class CardTerminal::PairingButtonComponent < ViewComponent::Base
 
   def confirmation
     if supports_pairing?
-      I18n.t('card_terminals.do_remote_pairing') + '?' +
-      " - danach bitte Pairingvorgang am Konnektor manuell starten"
+      if card_terminal.connected
+        I18n.t('card_terminals.do_remote_pairing') + '?' +
+        " ACHTUNG: das Kartenterminal ist derzeit online!"+
+        " - trotzdem Pairing starten?"
+      else
+        I18n.t('card_terminals.do_remote_pairing') + '?' +
+        " - danach bitte Pairingvorgang am Konnektor manuell starten"
+      end
     else
       I18n.t('card_terminals.do_remote_pairing') + '?' +
       " !Remote-Pairing wird vom Terminal ggf. nicht unterstützt!"
@@ -33,7 +43,6 @@ class CardTerminal::PairingButtonComponent < ViewComponent::Base
   end
 
   def render?
-    !card_terminal.connected &&
     card_terminal.supports_rmi? && 
     supports_pairing?
   end

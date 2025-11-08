@@ -15,10 +15,15 @@
       <tr>
         <th class="text-center"><%= t('attributes.location') %></th>
         <th class="text-center"><%= t('attributes.condition') %></th>
+        <th><%= t('attributes.connector') %></th>
         <th><%= t('attributes.card_terminal') %></th>
+        <th><%= t('attributes.mac6') %></th>
+        <th><%= t('attributes.room') %></th>
+        <th><%= t('attributes.contact') %></th>
+        <th><%= t('attributes.plugged_in') %></th>
         <th><%= t('attributes.ip') %></th>
         <th><%= t('attributes.workplace') %></th>
-        <th><%= t('attributes.description') %></th>
+        <th><%= t('attributes.description_ap') %></th>
         <th><%= t('attributes.mandant') %></th>
         <th><%= t('attributes.client_system') %></th>
         <th><%= t('attributes.updated_at') %></th>
@@ -35,6 +40,11 @@
         <th></th>
         <th></th>
         <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
       </tr>
     </tfoot>
     <tbody>
@@ -42,9 +52,17 @@
         <%= content_tag(:tr, id: dom_id(twp)) do %>
           <td class="text-center"><%= twp.card_terminal&.location&.lid %></td>
           <td class="text-center"><%= render ConditionIconComponent.new(item: twp.card_terminal, as_text: true) %>
+          <td><%= render LinkToComponent.new(item: twp.card_terminal&.connector,
+                                               label_method: :name)
+               %>
+          </td>
           <td>
             <%= render LinkToComponent.new(item: twp.card_terminal, label_method: :name) %>
           </td>
+          <td><%= twp.card_terminal&.mac[6,6] %></td>
+          <td><%= twp.card_terminal&.room %></td>
+          <td><%= twp.card_terminal&.contact %></td>
+          <td><%= twp.card_terminal&.plugged_in %></td>
           <td><%= twp.card_terminal&.ip %></td>
           <td><%= render LinkToComponent.new(item: twp.workplace) %>
           <td><%= truncate(twp.workplace.description.to_plain_text, length: 300) %></td>

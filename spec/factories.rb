@@ -83,13 +83,15 @@ FactoryBot.define do
 
   factory :kt_proxy do
     ti_client
-    uuid { SecureRandom.uuid }
     card_terminal_ip { generate(:local_ip) }
     wireguard_ip { "192.0.2.1" }
     incoming_ip { "192.0.2.2" }
     outgoing_ip { "192.0.2.3" }
     incoming_port {generate(:port) }
     outgoing_port {generate(:port) }
+    trait :with_uuid do
+      uuid { SecureRandom.uuid }
+    end
   end
 
   factory :location do

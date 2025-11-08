@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   include Wobapphelpers::Breadcrumbs
   # before_action :add_breadcrumb_index, only: [:index]
   before_action :add_breadcrumb_index,
-                :if => proc {|c| !devise_controller? && c.action_name == 'index' && c.controller_name !~ /logs/ }
+                :if => proc {|c| !devise_controller? && c.action_name == 'index' && c.controller_name !~ /(logs|\/)/ }
 
   # before_action :set_paper_trail_whodunnit
 

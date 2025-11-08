@@ -101,6 +101,21 @@
   </li>
 </ul>
   </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">RISE</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="kt-proxy.html">KT-Proxy Stuff (RISE TI-Gateway)</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rise/cardterminal_proxies.html">RISE::CardTerminalProxies</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rise/ticlient.html">RISE::TIClient Classes</a>
+  </li>
+</ul>
+  </li>
 </ul>
   </li>
 </ul>
@@ -478,6 +493,7 @@ bin/rails g migration AddNameToWorkplace \
   cert:text \
   pkey:text \
   passphrase:string \
+  expiration_date:date \
   --no-stylesheets --no-javascripts --no-helper</code></pre>
 </div>
 </div>
@@ -560,6 +576,7 @@ bin/rails g migration AddNameToWorkplace \
   connector:belongs_to \
   name:string \
   url:string \
+  client_secret:string \
   --no-stylesheets --no-javascripts --no-helper</code></pre>
 </div>
 </div>

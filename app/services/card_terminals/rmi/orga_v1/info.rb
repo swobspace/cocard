@@ -17,6 +17,12 @@ module CardTerminals
         firmware_version
         firmware_builddate
         serial
+        uptime_total
+        uptime_reboot
+        slot1_plug_cycles
+        slot2_plug_cycles
+        slot3_plug_cycles
+        slot4_plug_cycles
       ]
 
       def initialize(properties)
@@ -83,6 +89,30 @@ module CardTerminals
 
       def ntp_enabled
         properties['sys_ntp_enabled']
+      end
+
+      def uptime_total
+        properties['sys_uptime_durationTotal']
+      end
+
+      def uptime_reboot
+        properties['sys_uptime_durationSinceBoot']
+      end
+
+      def slot1_plug_cycles
+        properties['card_slot1_plugCycles']
+      end
+
+      def slot2_plug_cycles
+        properties['card_slot2_plugCycles']
+      end
+
+      def slot3_plug_cycles
+        properties['card_slot3_plugCycles']
+      end
+
+      def slot4_plug_cycles
+        properties['card_slot4_plugCycles']
       end
 
   private

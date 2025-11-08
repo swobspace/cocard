@@ -7,7 +7,8 @@ RSpec.describe Connector, type: :model do
   let(:connector) do 
     FactoryBot.create(:connector, 
       ip: '127.1.2.3',
-      connector_services: YAML.load_file(yaml)
+      connector_services: YAML.load_file(yaml),
+      last_check: Time.current
     )
   end
   it { is_expected.to have_many(:logs) }

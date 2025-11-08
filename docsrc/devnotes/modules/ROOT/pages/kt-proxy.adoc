@@ -1,11 +1,13 @@
 = KT-Proxy Stuff (RISE TI-Gateway)
 :author: Wolfgang Barth
-:navdate: 2025-09-08
+:navdate: 2025-10-26
 :imagesdir: ../images
 
 #work in progress#
 
-NOTE: Lose Sammlung von Snippets und Ideen zum TI-Gateway von RISE und dem TI-Client
+Lose Sammlung von Snippets und Ideen zum TI-Gateway von RISE und dem TI-Client
+
+CAUTION: Die nachstehenden Snippets sind für DevOps gedacht, die die Auswirkung der ausgeführten Befehle verstehen und deren Folgen einschätzen können. Einfaches Copy & Paste führt mit Sicherheit zur Zerstörung vorhandener Daten!
 
 
 ./opt/rise/tic*/config/stores/cardterminal_proxies.json
@@ -69,9 +71,23 @@ conn.card_terminals.each do |ct|
 end
 ----
 
+=== Analysis
+
+[source,ruby]
+----
+ok_terminals = CardTerminal
+               .where(condition: Cocard::States::OK)
+               .where("last_check > ?", 1.hour.before(Time.current))
+cts_with_missing_proxies = ok_terminals.where.missing(:kt_proxy)
+
+connectors = cts_with_missing_proxies.join(:connector).distinct
+connectors.pluck(:short_name)
+----
+
+
 == Sequenzdiagramm
 
-IMPORTANT: Beim Diagramm handelt es sich um eine Planung, die noch nicht umgesetzt ist, weil das REST-Interface des RISE TI-Clients noch nicht zur Verfügung steht (Stand 27.09.2025)
+#work in progress#
 
 .Voraussetzungen
 * Konnektor ProductType == vKon

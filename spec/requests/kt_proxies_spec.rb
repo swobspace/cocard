@@ -5,8 +5,13 @@ RSpec.describe "/kt_proxies", type: :request do
   # This should return the minimal set of attributes required to create a valid
   # KTProxy. As you add validations to KTProxy, be sure to
   # adjust the attributes here as well.
+  let(:rip) { instance_double(RISE::TIClient::CardTerminals) }
   let(:tic) { FactoryBot.create(:ti_client) }
   let(:valid_attributes) {
+    FactoryBot.attributes_for(:kt_proxy, :with_uuid, ti_client_id: tic.id )
+  }
+
+  let(:post_attributes) {
     FactoryBot.attributes_for(:kt_proxy, ti_client_id: tic.id )
   }
 
@@ -28,6 +33,8 @@ RSpec.describe "/kt_proxies", type: :request do
 
   describe "GET /show" do
     it "renders a successful response" do
+      expect(RISE::TIClient::CardTerminals).to receive(:new).and_return(rip)
+      expect(rip).to receive(:get_proxy)
       kt_proxy = KTProxy.create! valid_attributes
       get kt_proxy_url(kt_proxy)
       expect(response).to be_successful
@@ -50,15 +57,20 @@ RSpec.describe "/kt_proxies", type: :request do
   end
 
   describe "POST /create" do
+    before(:each) do
+      allow(RISE::TIClient::CardTerminals).to receive(:new).and_return(rip)
+      allow(rip).to receive(:create_proxy)
+    end
+
     context "with valid parameters" do
       it "creates a new KTProxy" do
         expect {
-          post kt_proxies_url, params: { kt_proxy: valid_attributes }
+          post kt_proxies_url, params: { kt_proxy: post_attributes }
         }.to change(KTProxy, :count).by(1)
       end
 
       it "redirects to the created kt_proxy" do
-        post kt_proxies_url, params: { kt_proxy: valid_attributes }
+        post kt_proxies_url, params: { kt_proxy: post_attributes }
         expect(response).to redirect_to(kt_proxy_url(KTProxy.last))
       end
     end
@@ -78,6 +90,11 @@ RSpec.describe "/kt_proxies", type: :request do
   end
 
   describe "PATCH /update" do
+    before(:each) do
+      allow(RISE::TIClient::CardTerminals).to receive(:new).and_return(rip)
+      allow(rip).to receive(:update_proxy)
+    end
+
     context "with valid parameters" do
       let(:new_attributes) {{
         name: "my buddy kt",
@@ -110,6 +127,11 @@ RSpec.describe "/kt_proxies", type: :request do
   end
 
   describe "DELETE /destroy" do
+    before(:each) do
+      allow(RISE::TIClient::CardTerminals).to receive(:new).and_return(rip)
+      allow(rip).to receive(:delete_proxy)
+    end
+
     it "destroys the requested kt_proxy" do
       kt_proxy = KTProxy.create! valid_attributes
       expect {

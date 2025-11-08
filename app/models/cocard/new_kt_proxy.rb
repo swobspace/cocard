@@ -12,7 +12,7 @@ module Cocard
       {
         ti_client_id: ti_client_id,
         card_terminal_id: card_terminal&.id,
-        uuid: SecureRandom.uuid,
+        uuid: "JIBBETNICH-#{SecureRandom.uuid}",
         name: card_terminal&.displayname,
         wireguard_ip: defaults['wireguard_ip'],
         incoming_ip: defaults['incoming_ip'],

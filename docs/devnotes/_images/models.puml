@@ -182,6 +182,7 @@ Class ClientCertificate {
   cert: text
   pkey: text
   passphrase: string
+  expiration_date: date
   cn()
 }
 
@@ -219,6 +220,7 @@ class KTProxy {
 Class TIClient {
   name: string
   url: string
+  client_secret: string
   connector_id
 }
 

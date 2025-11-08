@@ -12,6 +12,7 @@ class ClientCertificate < ApplicationRecord
   validates :name, :cert, :pkey, presence: true
   validate :must_be_valid_cert_and_pkey
   before_save :update_client_system
+  before_save :update_expiration_date
 
   # -- common methods
   def to_s
@@ -43,6 +44,10 @@ class ClientCertificate < ApplicationRecord
     certificate.not_after
   end
 
+  def expired?
+    expiration_date < Date.current
+  end
+
   def self.p12_to_params(p12, exportpass)
     pkcs12 = OpenSSL::PKCS12.new(p12, exportpass)
     cert = pkcs12.certificate.to_pem
@@ -63,6 +68,10 @@ private
 
   def update_client_system
     self[:client_system] = cn
+  end
+
+  def update_expiration_date
+    self[:expiration_date] = valid_until
   end
 
   def must_be_valid_cert_and_pkey

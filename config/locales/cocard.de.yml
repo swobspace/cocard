@@ -133,6 +133,7 @@ de:
     client_ids: Mandanten
     client_certificate: Client-Zertifikat
     client_certificate_ids: Client-Zertifikate
+    client_secret: Client-Secret
     client_system: Clientsystem
     condition: Zustand
     condition_message: Zustandsinfo
@@ -148,9 +149,11 @@ de:
     created_at: Erstellt
     creator: Ersteller
     ct_id: CT_ID
+    ct_id_and_slot: CT_ID/Slot
     current_ip: Gefundene IP
     delivery_date: Lieferdatum
     description: Beschreibung
+    description_ap: Beschreibung AP
     displayname: Anzeigename
     expiration_date: Ablaufdatum
     fachrichtung: Fachrichtung
@@ -179,6 +182,7 @@ de:
     loggable: Log für
     loggable_type: Typ
     mac: MAC
+    mac6: MAC6
     mandant: Mandant
     manual_update: manuelles Update
     message: Nachricht
@@ -188,7 +192,7 @@ de:
     netzwerk: Netzwerk
     notable: Notiz für
     note: Notiz
-    object_system_version: ObjectSystemVersion
+    object_system_version: ObjSysVer
     operational: in Betrieb
     operational_state: Betriebszustand
     outgoing_ip: Ausgehende IP
@@ -234,6 +238,7 @@ de:
     client_certificates: Client-Zertifikate
     connectors: Konnektoren
     connectors/logs: Konnektoren/Logs
+    connectors/cards: Karten
     connectors/card_terminals: Kartenterminals
     contexts: Kontexte
     events: Ereignisse
@@ -337,6 +342,7 @@ de:
       Sobald das Kartenterminal über den Konnektor abgefragt wird, werden die 
       hier gesetzten Informationen wieder überschrieben.
     rmi_check: Prüfung via IP
+    fetch_proxy: Hole Proxy vom TIClient
   cards:
     no_contexts_assigned: |
       ACHTUNG! Es ist noch kein Kontext zugeordnet!
@@ -362,3 +368,5 @@ de:
     tftp_file: TFTP-File
     firmware_version: Firmware-Version
     firmware_duilddate: Datum der Firmware
+  ti_clients:
+    fetch_kt_proxies: Proxies vom TIClient holen

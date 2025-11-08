@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "kt_proxies/edit", type: :view do
-  let(:kt_proxy) { FactoryBot.create(:kt_proxy) }
+  let(:kt_proxy) { FactoryBot.create(:kt_proxy, :with_uuid) }
 
   before(:each) do
     @ability = Object.new
@@ -20,7 +20,6 @@ RSpec.describe "kt_proxies/edit", type: :view do
     assert_select "form[action=?][method=?]", kt_proxy_path(kt_proxy), "post" do
       assert_select "select[name=?]", "kt_proxy[ti_client_id]"
       assert_select "select[name=?]", "kt_proxy[card_terminal_id]"
-      assert_select "input[name=?]", "kt_proxy[uuid]"
       assert_select "input[name=?]", "kt_proxy[name]"
       assert_select "input[name=?]", "kt_proxy[wireguard_ip]"
       assert_select "input[name=?]", "kt_proxy[incoming_port]"

@@ -5,16 +5,16 @@ module KTProxyConcerns
   end
 
   def to_builder
-    Jbuilder.new do |j|
-      j.set! 'id', uuid
-      j.set! 'name', name
-      j.set! 'wireguardIp', wireguard_ip
-      j.set! 'incomingIp', incoming_ip
-      j.set! 'incomingPort', incoming_port
-      j.set! 'outgoingIp', outgoing_ip
-      j.set! 'outgoingPort', outgoing_port
-      j.set! 'cardTerminalIp', card_terminal_ip
-      j.set! 'cardTerminalPort', card_terminal_port
+    Jbuilder.new do |kt|
+      kt.set! 'id', uuid
+      kt.set! 'name', name
+      kt.set! 'wireguardIp', wireguard_ip.to_s
+      kt.set! 'incomingIp', incoming_ip.to_s
+      kt.set! 'incomingPort', incoming_port
+      kt.set! 'outgoingIp', outgoing_ip.to_s
+      kt.set! 'outgoingPort', outgoing_port
+      kt.set! 'cardTerminalIp', card_terminal_ip.to_s
+      kt.set! 'cardTerminalPort', card_terminal_port
     end
   end
 

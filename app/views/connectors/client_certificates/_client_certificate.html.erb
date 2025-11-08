@@ -1,0 +1,14 @@
+<div>
+  <% if cert.expired? %>
+    <span title="Zertifikat abgelaufen">
+      <%= Cocard::States.flag(Cocard::States::CRITICAL) %>
+    </span>
+  <% else %>
+    <span title="Zertifikat gültig">
+      <%= Cocard::States.flag(Cocard::States::OK) %>
+    </span>
+  <% end %>
+  <%=link_to(cert.to_s, client_certificate_path(cert), class: 'primary-link')%>
+  <%= render TagListComponent.new(item: cert) %>
+</div>
+

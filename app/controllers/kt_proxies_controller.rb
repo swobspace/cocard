@@ -23,6 +23,22 @@ class KTProxiesController < ApplicationController
 
   # GET /kt_proxies/1
   def show
+    # get proxy from RISE TIClient
+    @rise_proxy = {}
+    rtic = RISE::TIClient::CardTerminals.new(ti_client: @kt_proxy.ti_client)
+    rtic.get_proxy(@kt_proxy) do |result|
+      result.on_success do |message, value|
+        @rise_proxy = value || {}
+      end
+      result.on_notfound do
+        flash[:warning] = "KTProxy gelöscht, aber auf TIClient nicht gefunden," +
+                          " bitte TIClient prüfen!"
+      end
+      result.on_failure do |message|
+        flash[:alert] = "KTProxy in Cocard gelöscht, aber Löschen auf " +
+                        "TIClient fehlgeschlagen!" + message
+      end
+    end
     respond_with(@kt_proxy)
   end
 
@@ -42,21 +58,75 @@ class KTProxiesController < ApplicationController
 
   # POST /kt_proxies
   def create
-    @kt_proxy = KTProxy.new(kt_proxy_params)
+    uuid = "JIBBETNICH-#{SecureRandom.uuid}"
+    @kt_proxy = KTProxy.new(kt_proxy_params.merge(uuid: uuid))
+    if @kt_proxy.save
+      # create proxy on RISE TIClient
+      rtic = RISE::TIClient::CardTerminals.new(ti_client: @kt_proxy.ti_client)
+      rtic.create_proxy(@kt_proxy) do |result|
+        result.on_success do |message, value|
+          flash[:success] = "KTProxy auf TIClient erfolgreich angelegt"
+        end
+        result.on_failure do |message|
+          flash[:alert] = "KTProxy in Cocard angelegt, aber Anlage auf " +
+                          "TIClient fehlgeschlagen!" + message
+        end
+      end
 
-    @kt_proxy.save
+    else
+      flash[:alert] = "KTProxy konnte nicht angelegt werden: " +
+                      @kt_proxy.errors.full_messages.join("; ")
+    end
     respond_with(@kt_proxy)
   end
 
   # PATCH/PUT /kt_proxies/1
   def update
-    @kt_proxy.update(kt_proxy_params)
+    if @kt_proxy.update(kt_proxy_params)
+      # update proxy on RISE TIClient
+      rtic = RISE::TIClient::CardTerminals.new(ti_client: @kt_proxy.ti_client)
+      rtic.update_proxy(@kt_proxy) do |result|
+        result.on_success do |message, value|
+          flash[:success] = "KTProxy auf TIClient erfolgreich aktualisiert"
+        end
+        result.on_notfound do
+          flash[:warning] = "KTProxy aktualisiert, aber auf TIClient nicht gefunden," +
+                            " bitte TIClient prüfen!"
+        end
+        result.on_failure do |message|
+          flash[:alert] = "KTProxy in Cocard aktualisiert, aber Update auf " +
+                          "TIClient fehlgeschlagen!" + message
+        end
+      end
+
+    else
+      flash[:alert] = "KTProxy konnte nicht aktualisiert werden"
+    end
     respond_with(@kt_proxy)
   end
 
   # DELETE /kt_proxies/1
   def destroy
-    @kt_proxy.destroy!
+    if @kt_proxy.destroy
+      # delete proxy on RISE TIClient
+      rtic = RISE::TIClient::CardTerminals.new(ti_client: @kt_proxy.ti_client)
+      rtic.delete_proxy(@kt_proxy) do |result|
+        result.on_success do |message, value|
+          flash[:success] = "KTProxy auf TIClient erfolgreich gelöscht"
+        end
+        result.on_notfound do
+          flash[:warning] = "KTProxy gelöscht, aber auf TIClient nicht gefunden," +
+                            " bitte TIClient prüfen!"
+        end
+        result.on_failure do |message|
+          flash[:alert] = "KTProxy in Cocard gelöscht, aber Löschen auf " +
+                          "TIClient fehlgeschlagen!" + message
+        end
+      end
+
+    else
+      flash[:alert] = "KTProxy konnte nicht gelöscht werden"
+    end
     respond_with(@kt_proxy)
   end
 

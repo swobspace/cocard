@@ -151,17 +151,30 @@ RSpec.describe ConnectorConcerns, type: :model do
         it { expect(connector.can_authenticate?(nil)).to be_falsey }
       end
 
-      describe "with client_cert intern available" do
+      describe "with valid client_cert intern" do
         let(:cert) { FactoryBot.create(:client_certificate) }
         before(:each) do
+          cert.tag_list= %w[ jibbetdoch ]
           connector.client_certificates << cert
           connector.reload
         end
         it { expect(connector.can_authenticate?('intern')).to be_truthy }
+        it { expect(connector.can_authenticate?('jibbetdoch')).to be_truthy }
         it { expect(connector.can_authenticate?('jibbetnich')).to be_falsey }
       end
-    end
 
+      describe "with expired client_cert intern" do
+        let(:cert) { FactoryBot.create(:client_certificate) }
+        before(:each) do
+          cert.update_column(:expiration_date, 1.day.before(Date.current))
+          cert.tag_list= %w[ jibbetdoch ]
+          connector.client_certificates << cert
+          connector.reload
+        end
+        it { expect(connector.can_authenticate?('intern')).to be_falsey }
+        it { expect(connector.can_authenticate?('jibbetdoch')).to be_falsey }
+      end
+    end
   end
 
 end

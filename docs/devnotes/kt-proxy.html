@@ -101,6 +101,21 @@
   </li>
 </ul>
   </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">RISE</span>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="kt-proxy.html">KT-Proxy Stuff (RISE TI-Gateway)</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rise/cardterminal_proxies.html">RISE::CardTerminalProxies</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rise/ticlient.html">RISE::TIClient Classes</a>
+  </li>
+</ul>
+  </li>
 </ul>
   </li>
 </ul>
@@ -140,6 +155,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">DevNotes</a></li>
+    <li>RISE</li>
     <li><a href="kt-proxy.html">KT-Proxy Stuff (RISE TI-Gateway)</a></li>
   </ul>
 </nav>
@@ -155,14 +171,17 @@
 <div class="paragraph">
 <p><mark>work in progress</mark></p>
 </div>
-<div class="admonitionblock note">
+<div class="paragraph">
+<p>Lose Sammlung von Snippets und Ideen zum TI-Gateway von RISE und dem TI-Client</p>
+</div>
+<div class="admonitionblock caution">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
-Lose Sammlung von Snippets und Ideen zum TI-Gateway von RISE und dem TI-Client
+Die nachstehenden Snippets sind für DevOps gedacht, die die Auswirkung der ausgeführten Befehle verstehen und deren Folgen einschätzen können. Einfaches Copy &amp; Paste führt mit Sicherheit zur Zerstörung vorhandener Daten!
 </td>
 </tr>
 </table>
@@ -229,22 +248,27 @@ CardTerminal.where(condition: Cocard::States::NOTHING).update_all(connector_id: 
 end</code></pre>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_analysis"><a class="anchor" href="#_analysis"></a>Analysis</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">ok_terminals = CardTerminal
+               .where(condition: Cocard::States::OK)
+               .where("last_check &gt; ?", 1.hour.before(Time.current))
+cts_with_missing_proxies = ok_terminals.where.missing(:kt_proxy)
+
+connectors = cts_with_missing_proxies.join(:connector).distinct
+connectors.pluck(:short_name)</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_sequenzdiagramm"><a class="anchor" href="#_sequenzdiagramm"></a>Sequenzdiagramm</h2>
 <div class="sectionbody">
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-Beim Diagramm handelt es sich um eine Planung, die noch nicht umgesetzt ist, weil das REST-Interface des RISE TI-Clients noch nicht zur Verfügung steht (Stand 27.09.2025)
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p><mark>work in progress</mark></p>
 </div>
 <div class="ulist">
 <div class="title">Voraussetzungen</div>

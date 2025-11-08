@@ -48,6 +48,10 @@ KOCO_PASSWD=verystrongsecret
 
 CRON_REBOOT_CONNECTORS="30 6 * * 1,4"
 AUTO_REBOOT_CONNECTORS_NOTE=yes
+
+ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY=******
+ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY=******
+ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT=******
 ----
 
 [cols="1m,4"]
@@ -111,5 +115,13 @@ AUTO_REBOOT_CONNECTORS_NOTE=yes
 |AUTO_REBOOT_CONNECTORS_NOTE
 |Soll bei einem Auto-Reboot eine Notiz erzeugt werden? Mögliche Werte: yes, no. Default: no.
 (siehe auch xref:ROOT:admin/connector-autoreboot.adoc[])
+
+|
+ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY,
+ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY,
+ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT
+
+|Secrets für die datenbankinterne Verschlüsselung von einzelnen Feldern. Werte können mit `podman exec cocard bin/rake db:encryption:init` generiert werden. Analog mit `docker`.
+
 
 |===

@@ -11,7 +11,10 @@
     <thead>
       <tr>
             <th class="text-start"><%= t('attributes.condition') %></th>
-            <th><%= t('attributes.displayname') %></th>
+            <th class="notvisible"><%= t('attributes.condition_message') %></th>
+            <th><%= t('attributes.name') %></th>
+            <th class="notvisible"><%= t('attributes.displayname') %></th>
+            <th class="notvisible"><%= t('attributes.kt_proxy') %></th>
             <th class="text-center">SMC-B?</th>
             <th class="notvisible"><%= t('attributes.connector') %></th>
             <th><%= t('attributes.ct_id') %></th>
@@ -21,12 +24,24 @@
             <th><%= t('attributes.connected') %></th>
             <th><%= t('attributes.location') %></th>
             <th><%= t('attributes.room') %></th>
-            <th><%= t('attributes.plugged_in') %></th>
+            <th class="notvisible"><%= t('attributes.plugged_in') %></th>
+            <th><%= t('attributes.last_ok') %></th>
             <th class="notvisible"><%= t('attributes.last_check') %></th>
+            <th class="nosort notvisible">SMC-KT <%= t('attributes.iccsn') %></th>
+            <th class="nosort notvisible">SMC-KT <%= t('attributes.expiration_date') %></th>
+            <th class="nosort notvisible">SMC-KT <%= t('attributes.object_system_version') %></th>
+
       </tr>
     </thead>
     <tfoot class="search">
       <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
             <th></th>
             <th></th>
             <th></th>
@@ -49,7 +64,12 @@
             <%= render ConditionIconComponent.new(item: card_terminal, as_text: true) %>
             <span style="visibility:hidden;"><%= card_terminal.condition %></span>
           </td>
+          <td><%= card_terminal.condition_message %></td>
+          <td><%= card_terminal.name %></td>
           <td><%= truncate(card_terminal.displayname, length: 50) %></td>
+          <td><%= render LinkToComponent.new(item: card_terminal.kt_proxy,
+                                             label_method: :incoming_port)
+               %></td>
           <td class="text-center">
             <%= render BooleanComponent.new(value: card_terminal.has_smcb?, 
                                             text: :unicode) %>
@@ -70,7 +90,13 @@
           <td><%= card_terminal.location&.lid %></td>
           <td><%= card_terminal.room %></td>
           <td><%= card_terminal.plugged_in %></td>
-          <td><%= render IsCurrentComponent.new(item: card_terminal, attr: :last_check) %></td>
+          <td><%= render IsCurrentComponent.new(item: card_terminal, attr: :last_ok, 
+                                                relative: true) %></td>
+          <td><%= render IsCurrentComponent.new(item: card_terminal, attr: :last_check,
+                                                relative: true) %></td>
+          <td><%= card_terminal.smckt&.iccsn.to_s %></td>
+          <td><%= render ExpirationDateComponent.new(item: card_terminal.smckt) %></td>
+          <td><%= card_terminal.smckt&.object_system_version %></td>
         <% end %>
       <% end %>
     </tbody>

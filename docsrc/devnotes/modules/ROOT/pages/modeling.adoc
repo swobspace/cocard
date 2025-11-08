@@ -277,6 +277,7 @@ bin/rails g scaffold ClientCertificate \
   cert:text \
   pkey:text \
   passphrase:string \
+  expiration_date:date \
   --no-stylesheets --no-javascripts --no-helper
 ----
 
@@ -344,6 +345,7 @@ bin/rails g scaffold TIClient \
   connector:belongs_to \
   name:string \
   url:string \
+  client_secret:string \
   --no-stylesheets --no-javascripts --no-helper
 ----
 

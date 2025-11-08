@@ -67,7 +67,15 @@ module ConnectorConcerns
     when "basicauth"
       return true if (auth_user.present? and auth_password.present?)
     when "clientcert"
-      client_certificates.where(client_system: client).any?
+      client_certificates.active.where(client_system: client).any? ||
+      ClientCertificate.active.tagged_with(client)
+                       .joins(:connectors).where(connectors: {id: self.id})
+                       .any?
     end
+  end
+
+  def smcbs
+    card_terminals.joins(card_terminal_slots: :card)
+    .where("cards.card_type = 'SMC-B'")
   end
 end

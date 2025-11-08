@@ -17,6 +17,12 @@ RSpec.describe TIClient, type: :model do
     expect(f).to validate_uniqueness_of(:connector_id)
   end
 
+  it "client_secret is encrypted" do
+    ticlient.update(client_secret: "StrengGeheim")
+    ticlient.reload
+    expect(ticlient.encrypted_attribute?(:client_secret)).to be_truthy
+  end
+
   describe "#to_s" do
     it { expect(ticlient.to_s).to match('TIClient_01') }
   end

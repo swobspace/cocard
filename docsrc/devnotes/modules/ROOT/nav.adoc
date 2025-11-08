@@ -13,3 +13,7 @@
 ** xref:podman/network.adoc[]
 * Card Terminal
 ** xref:orga-rmi.adoc[]
+* RISE
+** xref:kt-proxy.adoc[]
+** xref:rise/cardterminal_proxies.adoc[]
+** xref:rise/ticlient.adoc[]
