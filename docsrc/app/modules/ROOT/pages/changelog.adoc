@@ -1,11 +1,13 @@
 = Changelog
 
-== 0.9.3-dev - unreleased
+== 0.9.3 - 2025-11-08
 
 * (experimentell) Abgleich KT-Proxys über RISE TI-Client-API
-* (experimentell) Anlage eines Proxys auf dem RISE TI-Client bei Anlage eines KTProxy
+* (experimentell) Create/update/delete eines Proxys auf dem RISE TI-Client bei Anlage eines KTProxy in Cocard.
 * Anzeige Konnektor: zugeordnete SMC-Bs aufgenommen und Layout überarbeitet
 * Tabelle Zuordung Terminals - Arbeitsplätze erweitert
+* Status Kartenterminal ist jetzt UNNKOWN, wenn es online ist, aber der Konnektor nicht OK.
+* kleinere Bugfixe
 
 == 0.9.2 - 2025-10-19
 
