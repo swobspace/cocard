@@ -2,6 +2,9 @@
 
 == 0.9.4-dev - unreleased
 
+* (experimentell) Abfrage der Kartenterminals und deren Zustände am Konnektor über die Proxy-Funktion des TI-Clients - erfordert Aktivierung (z.Z. nur manuell z.B. via Bruno möglich)
+* Kontext-Check zum Konnektor: Abfrage eines beliebigen Kontextes beim Konnektor über GetResourceInformation.
+
 == 0.9.3 - 2025-11-08
 
 * (experimentell) Abgleich KT-Proxys über RISE TI-Client-API
