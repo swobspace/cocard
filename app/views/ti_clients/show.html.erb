@@ -22,42 +22,49 @@
   </div>
 
   <div class="card-body">
-    <table class="table table-sm table-borderless">
+    <div class="row">
+      <div class="col-6">
+        <table class="table table-sm table-borderless">
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.connector')%>:</th>
+            <td><%= link_to @ti_client.connector,
+                            @ti_client.connector,
+                            class: 'primary-link'
+                 %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.name')%>:</th>
+            <td><%= link_to @ti_client.name, @ti_client, class: 'primary-link'
+                 %></td>
 
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.connector')%>:</th>
-        <td><%= link_to @ti_client.connector,
-                        @ti_client.connector,
-                        class: 'primary-link'
-             %></td>
-      </tr>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.url')%>:</th>
+            <td><%= link_to(@ti_client.url, @ti_client.url,
+                            class: 'primary-link', target: :_blank) if @ti_client.url.present?
+                 %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3">Client-ID:</th>
+            <td><%= @ti_client.client_id  %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.client_secret')%>:</th>
+            <td><%= (@ti_client.client_secret.present? ? "vorhanden" : "nicht vorhanden")  %></td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-6">
+        <table class="table table-sm table-borderless">
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.task_scheduler')%>:</th>
+            <td><%= @scheduler_state
+                 %></td>
+          </tr>
+        </table>
 
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.name')%>:</th>
-        <td><%= link_to @ti_client.name, @ti_client, class: 'primary-link'
-             %></td>
-
-      </tr>
-
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.url')%>:</th>
-        <td><%= link_to(@ti_client.url, @ti_client.url,
-                        class: 'primary-link', target: :_blank) if @ti_client.url.present?
-             %></td>
-
-      </tr>
-
-      <tr>
-        <th class="w-10 pe-3">Client-ID:</th>
-        <td><%= @ti_client.client_id  %></td>
-
-
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.client_secret')%>:</th>
-        <td><%= (@ti_client.client_secret.present? ? "vorhanden" : "nicht vorhanden")  %></td>
-
-      </tr>
-    </table>
+      </div>
+    </div>
   </div>
 </div>
 

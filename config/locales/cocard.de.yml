@@ -219,6 +219,7 @@ de:
     supplier: Lieferant
     tag: Tag
     tag_list_input: Tags
+    task_scheduler: Hintergrundaufgaben
     telematikid: Telematik-ID
     ti_client: TI-Client
     type: Typ
