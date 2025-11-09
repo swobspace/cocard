@@ -110,9 +110,9 @@ class ConnectorsController < ApplicationController
                                             context: context)
     result = ri.call
     if result.success?
-      flash[:success] = "Abfrage erfolgreich - " + result.error_messages.join("; ")
+      flash[:success] = "Kontext-Test erfolgreich: " + context.to_s 
     else
-      flash[:alert] = "Abfrage fehlgeschlagen! " + result.error_messages.join("; ")
+      flash[:alert] = "Kontext-Test fehlgeschlagen! " + result.error_messages.join("; ")
     end
     respond_with(@connector)
   end

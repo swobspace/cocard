@@ -5,8 +5,22 @@
 >
   <div class="row">
     <div class="col handle"><%= connector_context.context %></div>
-    <div class="col-sm-3 text-muted text-end">
-      <%=connector_context.position %>
+    <div class="col-sm-1">
+        <%= button_to(test_context_connector_path(connector_context.connector),
+                     method: :post,
+                     title: "Test eines Kontextes",
+                     class: "btn btn-secondary btn-sm",
+                     params: {
+                       context: {
+                         mandant: connector_context.context.mandant,
+                         client_system: connector_context.context.client_system,
+                         workplace: connector_context.context.workplace
+                       }
+                     }
+            ) do %>
+        <i class="fa-solid fa-fw fa-clipboard-question"></i>
+      <% end %>
+
     </div>
   </div>
 
