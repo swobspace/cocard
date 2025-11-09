@@ -1,0 +1,19 @@
+<%= render FormComponent.new(title: "Test Kontext") do %>
+  <%= simple_form_for(@context, url: test_context_connector_path(@connector)) do |form| %>
+    <%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
+
+    <div class="form-input">
+      <%= form.input :mandant
+         %>
+      <%= form.input :client_system
+         %>
+      <%= form.input :workplace
+         %>
+
+      <%= form.button :submit, class: 'btn btn-primary' %>
+      <%= cancel_button %>
+    </div>
+  <% end %>
+
+
+<% end %>

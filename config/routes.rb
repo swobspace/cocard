@@ -97,6 +97,8 @@ Rails.application.routes.draw do
       get :ping
       post :check
       post :reboot
+      get :test_context_form
+      post :test_context
     end
     resources :logs, only: [:index, :show, :destroy], module: :connectors
     resources :card_terminals, only: [:index, :show, :destroy], module: :connectors

@@ -13,6 +13,12 @@
         <%= render ConditionIconComponent.new(item: @connector) %>
       </div>
       <div role="toolbar" class="ms-auto pt-3">
+        <%= link_to(raw(%Q[<i class="fa-solid fa-fw fa-clipboard-question"></i>]),
+                    test_context_form_connector_path(@connector),
+                    title: "Test eines Kontextes",
+                    class: 'btn btn-secondary me-1') if can? :manage, @connector
+                 
+         %>
         <%= render RebootButtonComponent.new(item: @connector) if can? :reboot, @connector %>
         <%= render HealthCheckButtonComponent.new(item: @connector) %>
         <%= button_to(t('cocard.fetch_sds'),
