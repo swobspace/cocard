@@ -1,6 +1,8 @@
 module TIClients
   class TerminalsController < ApplicationController
     skip_load_and_authorize_resource
+    load_and_authorize_resource :ti_client
+
     before_action :set_ticlient
 
     def index
