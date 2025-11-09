@@ -21,6 +21,8 @@ class TIClientsController < ApplicationController
           flash[:warning] = msg
         end
       end
+    else
+      @scheduler_state = "Client-Secret fehlt, keine Abfrage möglich"
     end
     
     respond_with(@ti_client)
