@@ -1,5 +1,6 @@
 <%= render 'shared/turbo-cache-control' %>
 <%= turbo_frame_tag('ticlient_terminals') do %>
+  <%= render partial: 'shared/flash_alert' %>
   <div class="card mt-3">
     <div class="card-header">
       <div class="d-flex justify-content-between">

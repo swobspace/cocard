@@ -6,18 +6,24 @@ module TIClients
     def index
       success = true
       @terminals = []
-      rtic = RISE::TIClient::Konnektor::Terminals.new(ti_client: @ti_client)
-      rtic.get_terminals do |result|
-        result.on_success do |message, value|
-          terminals = value['CTM_CT_LIST'] || []
-          terminals.each do |terminal|
-            @terminals << RISE::TIClient::Konnektor::Terminal.new(terminal)
+
+      if @ti_client.client_secret.present?
+        rtic = RISE::TIClient::Konnektor::Terminals.new(ti_client: @ti_client)
+        rtic.get_terminals do |result|
+          result.on_success do |message, value|
+            terminals = value['CTM_CT_LIST'] || []
+            terminals.each do |terminal|
+              @terminals << RISE::TIClient::Konnektor::Terminal.new(terminal)
+            end
+          end
+          result.on_failure do |message|
+            flash[:alert] = message
           end
         end
-        result.on_failure do |message|
-          flash[:alert] = message
-        end
-      end
+       else
+         flash[:warning] = "Kein Client-Secret hinterlegt, keine Abfrage möglich"
+       end
+
       respond_with(@terminals)
     end
 
