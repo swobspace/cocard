@@ -178,5 +178,62 @@ module RISE
         expect(called_back).to eq(:failure)
       end
     end
+
+    describe '#discover' do
+      let(:stubs)  { Faraday::Adapter::Test::Stubs.new }
+      let(:conn)   { Faraday.new { |b| b.adapter(:test, stubs) } }
+
+      before(:each) do
+        allow(Faraday).to receive(:new).and_return(conn)
+        expect(subject).to receive(:api_token).at_least(:once)
+                                              .and_return('eyJraWQiOiJkZGUyMDZiYi1lMDgz')
+      end
+
+      after(:each) do
+        Faraday.default_connection = nil
+      end
+
+      it "success: returns 200" do
+        stubs.post('api/v1/konnektor/default/api/v1/ctm/terminals/discover') do
+          [
+            200,
+            {'Content-Type': 'application/json;charset=UTF-8'},
+            ''
+          ]
+        end
+
+        called_back = false 
+        subject.discover do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:success)
+      end
+
+      it "failure" do
+        stubs.post('api/v1/konnektor/default/api/v1/ctm/terminals/discover') do
+          [
+            401, 
+            {'Content-Type': 'application/json;charset=UTF-8'},
+            ''
+          ]
+        end
+
+        called_back = false 
+        subject.discover do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:failure)
+      end
+    end
   end
 end

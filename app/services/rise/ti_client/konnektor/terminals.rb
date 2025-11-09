@@ -29,5 +29,32 @@ module RISE
         yield RISE::TIClient::Status.success("#{response.status}: Success", json)
       end
     end
+
+    def discover
+      token = api_token
+      if token.nil?
+        @errors << "Authentifikation fehlgeschlagen"
+      else
+        @errors = []
+        begin
+          response = connection.post(
+                       '/api/v1/konnektor/default/api/v1/ctm/terminals/discover',
+                       '',
+                       { }
+                     )
+          unless response.success?
+            @errors << "#{response.status}: #{response.body}"
+          end
+        rescue Faraday::Error => e
+          @errors << faraday_error(e)
+        end
+      end
+
+      if @errors.any?
+        yield RISE::TIClient::Status.failure(@errors.join("; "))
+      else
+        yield RISE::TIClient::Status.success("#{response.status}: Success")
+      end
+    end
   end
 end
