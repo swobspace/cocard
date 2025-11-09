@@ -49,7 +49,7 @@ module RISE
         end
       end
 
-      if response.status == 404
+      if response.present? && response.status == 404
         yield RISE::TIClient::Status.notfound(@errors.join("; "))
       elsif @errors.any?
         yield RISE::TIClient::Status.failure(@errors.join("; "))
@@ -109,7 +109,7 @@ module RISE
         end
       end
 
-      if response.status == 404
+      if response.present? && response.status == 404
         yield RISE::TIClient::Status.notfound(@errors.join("; "))
       elsif @errors.any?
         yield RISE::TIClient::Status.failure(@errors.join("; "))
@@ -139,7 +139,7 @@ module RISE
         end
       end
 
-      if response.status == 404
+      if response.present? && response.status == 404
         yield RISE::TIClient::Status.notfound(@errors.join("; "))
       elsif @errors.any?
         yield RISE::TIClient::Status.failure(@errors.join("; "))

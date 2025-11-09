@@ -177,6 +177,23 @@ module RISE
         end
         expect(called_back).to eq(:failure)
       end
+
+      it "failure: FaradayError" do
+        stubs.get('api/v1/konnektor/default/api/v1/ctm/state') do
+          raise Faraday::ConnectionFailed
+        end
+
+        called_back = false 
+        subject.get_terminals do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:failure)
+      end
     end
 
     describe '#discover' do
@@ -214,13 +231,30 @@ module RISE
         expect(called_back).to eq(:success)
       end
 
-      it "failure" do
+      it "failure: 401" do
         stubs.post('api/v1/konnektor/default/api/v1/ctm/terminals/discover') do
           [
             401, 
             {'Content-Type': 'application/json;charset=UTF-8'},
             ''
           ]
+        end
+
+        called_back = false 
+        subject.discover do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:failure)
+      end
+
+      it "failure: FaradayError" do
+        stubs.post('api/v1/konnektor/default/api/v1/ctm/terminals/discover') do
+          raise Faraday::ConnectionFailed
         end
 
         called_back = false 

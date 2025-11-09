@@ -117,6 +117,23 @@ module RISE
         end
         expect(called_back).to eq(:failure)
       end
+
+      it "failure: FaradayError" do
+        stubs.get('api/v1/manager/card-terminals/proxies') do
+          raise Faraday::ConnectionFailed
+        end
+
+        called_back = false 
+        subject.get_proxies do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:failure)
+      end
     end
 
     describe '#get_proxy' do
@@ -227,6 +244,23 @@ module RISE
         end
         expect(called_back).to eq(:failure)
       end
+
+      it "failure: FaradayError" do
+        stubs.get('api/v1/manager/card-terminals/proxies/bf11726a-ad8f-11f0-8247-c025a5b36994') do
+          raise Faraday::ConnectionFailed
+        end
+
+        called_back = false 
+        subject.get_proxy(kt_proxy) do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:failure)
+      end
     end
 
     describe '#create_proxy' do
@@ -311,6 +345,27 @@ module RISE
             {'Content-Type': 'application/json;charset=UTF-8'},
             ''
           ]
+        end
+
+        called_back = false 
+        subject.create_proxy(kt_proxy) do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:failure)
+      end
+
+      it "failure: FaradayError" do
+        stubs.post(
+          'api/v1/manager/card-terminals/proxies',
+          proxy_body,
+          "Content-Type" => "application/json"
+        ) do
+          raise Faraday::ConnectionFailed
         end
 
         called_back = false 
@@ -421,6 +476,23 @@ module RISE
         end
         expect(called_back).to eq(:failure)
       end
+
+      it "failure: FaradayError" do
+        stubs.put('api/v1/manager/card-terminals/proxies/bf11726a-ad8f-11f0-8247-c025a5b36994') do
+          raise Faraday::ConnectionFailed
+        end
+
+        called_back = false 
+        subject.update_proxy(kt_proxy) do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:failure)
+      end
     end
 
     describe '#delete_proxy' do
@@ -490,6 +562,23 @@ module RISE
       it "failure: 500 internal server error" do
         stubs.delete('api/v1/manager/card-terminals/proxies/bf11726a-ad8f-11f0-8247-c025a5b36994') do
           [ 500, {}, {} ]
+        end
+
+        called_back = false 
+        subject.delete_proxy(kt_proxy) do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:failure)
+      end
+
+      it "failure: FaradayError" do
+        stubs.delete('api/v1/manager/card-terminals/proxies/bf11726a-ad8f-11f0-8247-c025a5b36994') do
+          raise Faraday::ConnectionFailed
         end
 
         called_back = false 
