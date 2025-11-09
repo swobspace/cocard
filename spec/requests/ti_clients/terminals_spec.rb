@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "TIClients::Terminals", type: :request do
-  let(:tic) { FactoryBot.create(:ti_client, url: 'http://127.1.2.3') }
+  let(:tic) { FactoryBot.create(:ti_client, url: 'http://127.1.2.3', client_secret: "bla") }
   let(:rtic) { instance_double(RISE::TIClient::Konnektor::Terminals) }
   let(:terminals_body) do
     json =<<~EOKTS
