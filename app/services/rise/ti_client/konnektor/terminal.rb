@@ -11,6 +11,10 @@ module RISE
           @json['CORRELATION']
         end
 
+        def connected
+          @json['CONNECTED']
+        end
+
         def mac
           @json['MAC_ADDRESS']
         end

@@ -40,10 +40,12 @@
               <th class="bg-success-subtle"><%= t('attributes.mac') %></th>
               <th class="text-center bg-success-subtle"><%= t('attributes.port') %></th>
               <th class="bg-success-subtle"><%= t('attributes.correlation') %></th>
+              <th class="bg-success-subtle"><%= t('attributes.connected') %></th>
             </tr>
           </thead>
           <tfoot class="search">
             <tr>
+              <th></th>
               <th></th>
               <th></th>
               <th></th>
@@ -74,6 +76,7 @@
                 <td><%= terminal.mac %></td>
                 <td class="text-center"><%= terminal.tcp_port %></td>
                 <td><%= terminal.correlation %></td>
+                <td><%= render BooleanComponent.new(value: terminal.connected) %></td>
               </tr>
             <% end %>
           </tbody>

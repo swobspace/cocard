@@ -59,6 +59,7 @@ module RISE
     describe 'check if instance methods exists' do
       it { expect(subject).to be_kind_of(RISE::TIClient::Konnektor::Terminal) }
       it { expect(subject.respond_to?(:correlation)).to be_truthy }
+      it { expect(subject.respond_to?(:connected)).to be_truthy }
       it { expect(subject.respond_to?(:mac)).to be_truthy }
       it { expect(subject.respond_to?(:ct_id)).to be_truthy }
       it { expect(subject.respond_to?(:name)).to be_truthy }
@@ -75,6 +76,7 @@ module RISE
 
       context "with data" do
         it { expect(subject.correlation).to eq("BEKANNT") }
+        it { expect(subject.connected).to be_falsey }
         it { expect(subject.ct_id).to eq("00:0D:F8:08:77:76") }
         it { expect(subject.mac).to eq("00:0D:F8:08:77:76") }
         it { expect(subject.name).to eq("ORGA6100-0142000000DABD") }
