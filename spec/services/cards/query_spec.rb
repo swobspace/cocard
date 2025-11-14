@@ -32,10 +32,12 @@ module Cards
     let(:conn) { FactoryBot.create(:connector) }
     let(:ct)  { FactoryBot.create(:card_terminal, :with_mac, connector: conn) }
     let(:opsta) { FactoryBot.create(:operational_state, name: 'in Betrieb', operational: true) }
+    let(:ctx) { FactoryBot.create(:context) }
     let!(:card1) do
       FactoryBot.create(:card,
         name: 'SMC-B 0001',
         description: "some more infos",
+        card_type: 'SMC-B',
         location: ber,
         object_system_version: '4.4.0',
         iccsn: '9990001',
@@ -49,6 +51,7 @@ module Cards
     let!(:card2) do
       FactoryBot.create(:card,
         name: 'SMC-KT 0002',
+        card_type: 'SMC-KT',
         iccsn: '9980002',
         object_system_version: '4.3.0',
         expiration_date: 1.month.after(Date.current),
@@ -59,6 +62,7 @@ module Cards
     let!(:card3) do
       FactoryBot.create(:card,
         name: 'SMC-KT 0003',
+        card_type: 'SMC-KT',
         iccsn: '9980003',
         object_system_version: '4.3.1',
         operational_state: opsta,
@@ -136,17 +140,18 @@ module Cards
     context "with :connector_id" do
       let(:conn2) { FactoryBot.create(:connector) }
       let(:ct2)   { FactoryBot.create(:card_terminal, :with_mac, connector: conn2) }
-      let(:card4) { FactoryBot.create(:card, card_terminal: ct2) }
-      let(:card5) { FactoryBot.create(:card, card_terminal: ct2) }
-      subject { Query.new(cards, {location_id: ber.id}) }
+      let(:card5) { FactoryBot.create(:card, card_terminal: ct2, card_type: 'SMC-B') }
+      let(:card6) { FactoryBot.create(:card, card_terminal: ct, card_type: 'SMC-KT') }
+      subject { Query.new(cards, {connector_id: conn.id}) }
       before(:each) do
-        card1.update_column(:card_type, 'SMC-B')
-        card4.update_column(:card_type, 'SMC-B')
-        card5.update_column(:card_type, 'SMC-KT')
+        card1.contexts << ctx
+        card1.reload
         @matching = [card1]
-        @nonmatching = [card2, card3, card4, card5]
+        @nonmatching = [card2, card3, card5, card6]
       end
       it_behaves_like "a card query"
+      it { puts card1.card_type }
+      it { puts card5.card_type }
     end
 
     context "with :location_id" do
@@ -156,6 +161,7 @@ module Cards
         @nonmatching = [card2, card3]
       end
       it_behaves_like "a card query"
+      it { puts card1.location }
     end
 
     context "with :lid" do
@@ -163,6 +169,7 @@ module Cards
       before(:each) do
         @matching = [card1]
         @nonmatching = [card2, card3]
+        card1.reload; card2.reload; card3.reload
       end
       it_behaves_like "a card query"
     end
