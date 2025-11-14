@@ -5,11 +5,11 @@ class CardTerminalSlot < ApplicationRecord
   # -- configuration
   # -- validations and callbacks
   validates_uniqueness_of :slotid, scope: :card_terminal_id
-  after_save :update_card_location
+  after_commit :update_card_location
   # -- common methods
 
   def update_card_location
-    if card and ['SMC-B', 'SMC-KT'].include?(card.card_type)
+    if card&.persisted? and ['SMC-B', 'SMC-KT'].include?(card.card_type)
       card.update_column(:location_id, card_terminal&.location_id)
     end
   end
