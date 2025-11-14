@@ -40,7 +40,8 @@ module RISE
           response = connection.post(
                        '/api/v1/konnektor/default/api/v1/ctm/terminals/discover',
                        '',
-                       { }
+                       { 'Transfer-Encoding': 'chunked',
+                         'authorization': "Bearer #{token}" }
                      )
           unless response.success?
             @errors << "#{response.status}: #{response.body}"
