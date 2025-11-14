@@ -55,9 +55,9 @@ private
   def searchopts
     search_opts = {}
     # process named options first
-    opts = quarry.select{|x| x =~ /:/}
+    opts = quarry.select{|x| x =~ /=/}
     opts.each do |opt|
-      (k,v) = opt.split(/:/)
+      (k,v) = opt.split(/=/)
       search_opts[k.downcase] = v
     end
     # add search for simple string
