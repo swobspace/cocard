@@ -5,7 +5,7 @@ class CardTerminalSlot < ApplicationRecord
   # -- configuration
   # -- validations and callbacks
   validates_uniqueness_of :slotid, scope: :card_terminal_id
-  before_save :update_card_location
+  after_save :update_card_location
   # -- common methods
 
   def update_card_location
