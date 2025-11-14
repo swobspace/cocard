@@ -11,6 +11,9 @@ require 'shoulda/matchers'
 require 'factory_bot_rails'
 require 'view_component/test_helpers'
 require 'capybara/rspec'
+require 'webmock/rspec'
+
+WebMock.allow_net_connect!
 
 Capybara.register_driver :chrome_headless do |app|
   # url = "http://#{ENV['SELENIUM_REMOTE_HOST']}:4444/wd/hub"
@@ -88,6 +91,9 @@ RSpec.configure do |config|
     Capybara.server_port = "43447"
     session_server       = Capybara.current_session.server
     Capybara.app_host    = "http://#{session_server.host}:#{session_server.port}"
+  end
+
+  config.before :each, type: :feature do
   end
 
   config.after(:suite) do

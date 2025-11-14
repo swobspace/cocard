@@ -37,17 +37,16 @@ module RISE
       else
         @errors = []
         begin
-          response = connection.post(
-                       '/api/v1/konnektor/default/api/v1/ctm/terminals/discover',
-                       '',
-                       { 'Transfer-Encoding': 'chunked',
-                         'authorization': "Bearer #{token}" }
-                     )
-          unless response.success?
-            @errors << "#{response.status}: #{response.body}"
+          response = HTTP.headers('Transfer-Encoding': 'chunked')
+                         .auth("Bearer #{token}")
+                         .post(ti_client.url +
+                              '/api/v1/konnektor/default/api/v1/ctm/terminals/discover',
+                              ssl_context: ssl_verify_none)
+          unless response.status.success?
+            @errors << response.status.to_s
           end
-        rescue Faraday::Error => e
-          @errors << faraday_error(e)
+        rescue => e
+          @errors << e.to_s
         end
       end
 

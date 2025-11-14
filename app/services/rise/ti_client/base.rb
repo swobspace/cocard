@@ -62,6 +62,12 @@ module RISE
       err.join("; ")
     end
 
+    def ssl_verify_none
+      ctx = OpenSSL::SSL::SSLContext.new
+      ctx.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      ctx
+    end
+
   private
 
     def tls_options
