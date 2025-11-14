@@ -133,6 +133,22 @@ module Cards
       it_behaves_like "a card query"
     end # :description
 
+    context "with :connector_id" do
+      let(:conn2) { FactoryBot.create(:connector) }
+      let(:ct2)   { FactoryBot.create(:card_terminal, :with_mac, connector: conn2) }
+      let(:card4) { FactoryBot.create(:card, card_terminal: ct2) }
+      let(:card5) { FactoryBot.create(:card, card_terminal: ct2) }
+      subject { Query.new(cards, {location_id: ber.id}) }
+      before(:each) do
+        card1.update_column(:card_type, 'SMC-B')
+        card4.update_column(:card_type, 'SMC-B')
+        card5.update_column(:card_type, 'SMC-KT')
+        @matching = [card1]
+        @nonmatching = [card2, card3, card4, card5]
+      end
+      it_behaves_like "a card query"
+    end
+
     context "with :location_id" do
       subject { Query.new(cards, {location_id: ber.id}) }
       before(:each) do
