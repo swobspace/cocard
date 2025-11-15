@@ -50,8 +50,38 @@ module TIClients
       card_terminal = CardTerminal.find(params[:card_terminal_id])
       CardTerminals::RMI::RemotePairingJob.perform_later(card_terminal: card_terminal)
 
-      # start connector pairing mode
-      #   -> finalize connector pairing mode
+      Rails.logger.debug("PAIRING:: ctId: #{card_terminal.rawmac.upcase}")
+      # -> start connector pairing mode
+      if @rtic.present?
+        @rtic.initialize_pairing(card_terminal.rawmac.upcase) do |init|
+          init.on_success do |message, value|
+            Rails.logger.debug("PAIRING:: initialize successful, starting finalize with #{value}")
+            sleep(2)
+            # -> finalize connector pairing mode
+            @rtic.finalize_pairing(value) do |fin|
+              fin.on_success do |message|
+                flash.now[:success] = "Finalize pairing successful: #{message}"
+              end
+
+              fin.on_failure do |message|
+                flash.now[:alert] = "Finalize pairing failed: #{message}"
+                Rails.logger.debug("PAIRING:: finalize failed: #{message}")
+              end
+            end
+          end
+
+          init.on_failure do |message|
+            flash.now[:alert] = "Initialize pairing failed: #{message}"
+            Rails.logger.debug("PAIRING:: initialize failed: #{message}")
+          end
+        end
+       else
+         flash.now[:warning] = "Kein Client-Secret hinterlegt"
+       end
+       respond_with(@ti_client) do |format|
+         format.turbo_stream
+       end
+
     end
 
   private
