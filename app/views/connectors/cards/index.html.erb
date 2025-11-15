@@ -25,8 +25,8 @@
   <div class="m-2">
     <div data-controller="datatables">
       <%= content_tag :table, role: :datatable,
-            id: "cards_table",
-            class: "table table-bordered table-responsive",
+            id: "connector_cards_table",
+            class: "table table-sm table-responsive",
             data: {
               'datatables-target': 'datatable',
               order: [[0, 'asc']].to_json
@@ -36,7 +36,7 @@
             <th><%= t('attributes.condition') %></th>
             <th class="notvisible"><%= t('attributes.condition_message') %></th>
             <th class="notvisible"><%= t('attributes.card_type') %></th>
-            <th><%= t('attributes.name') %></th>
+            <th class="notvisible"><%= t('attributes.name') %></th>
             <th class="text-start"><%= t('attributes.iccsn') %></th>
             <th class="notvisible"><%= t('attributes.connector') %></th>
             <th><%= t('attributes.ct_id_and_slot') %></th>
