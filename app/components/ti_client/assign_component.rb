@@ -38,7 +38,7 @@ class TIClient::AssignComponent < ViewComponent::Base
                                     )
     elsif zugewiesen
       pairing_ti_client_terminal_path(id: ti_client.id, method: :post,
-                                     params: {ct_id: terminal.ct_id}
+                                     params: {card_terminal_id: terminal.card_terminal.id}
                                     )
     end
   end

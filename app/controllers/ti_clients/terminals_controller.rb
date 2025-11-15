@@ -46,6 +46,12 @@ module TIClients
     end
 
     def pairing
+      # start pairing job
+      card_terminal = CardTerminal.find(params[:card_terminal_id])
+      CardTerminals::RMI::RemotePairingJob.perform_later(card_terminal: card_terminal)
+
+      # start connector pairing mode
+      #   -> finalize connector pairing mode
     end
 
   private
