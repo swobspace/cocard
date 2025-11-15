@@ -237,7 +237,50 @@ module RISE
         end
         expect(called_back).to eq(:failure)
       end
-
     end
+
+    describe '#assign' do
+      let(:url) { tic.url + '/api/v1/konnektor/default/api/v1/ctm/terminals/assign' }
+      before(:each) do
+        WebMock.disable_net_connect!
+        expect(subject).to receive(:api_token).at_least(:once)
+                                              .and_return('eyJraWQiOiJkZGUyMDZiYi1lMDgz')
+      end
+
+      after(:each) do
+        WebMock.allow_net_connect!
+      end
+
+      it "success: returns 200" do
+        stub_request(:any, url).to_return(status: 200)
+
+        called_back = false 
+        subject.assign('11:22:33:44:55:66') do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:success)
+      end
+
+      it "failure: 422" do
+        stub_request(:any, url).to_return(status: 422)
+
+        called_back = false 
+        subject.assign(nil) do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:failure)
+      end
+    end
+
   end
 end
