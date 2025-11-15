@@ -197,27 +197,19 @@ module RISE
     end
 
     describe '#discover' do
-      let(:stubs)  { Faraday::Adapter::Test::Stubs.new }
-      let(:conn)   { Faraday.new { |b| b.adapter(:test, stubs) } }
-
+      let(:url) { tic.url + '/api/v1/konnektor/default/api/v1/ctm/terminals/discover' }
       before(:each) do
-        allow(Faraday).to receive(:new).and_return(conn)
+        WebMock.disable_net_connect!
         expect(subject).to receive(:api_token).at_least(:once)
                                               .and_return('eyJraWQiOiJkZGUyMDZiYi1lMDgz')
       end
 
       after(:each) do
-        Faraday.default_connection = nil
+        WebMock.allow_net_connect!
       end
 
-      it "success: returns 200" do
-        stubs.post('api/v1/konnektor/default/api/v1/ctm/terminals/discover') do
-          [
-            200,
-            {'Content-Type': 'application/json;charset=UTF-8'},
-            ''
-          ]
-        end
+      it "success: returns 204" do
+        stub_request(:any, url).to_return(status: 204)
 
         called_back = false 
         subject.discover do |result|
@@ -232,30 +224,7 @@ module RISE
       end
 
       it "failure: 401" do
-        stubs.post('api/v1/konnektor/default/api/v1/ctm/terminals/discover') do
-          [
-            401, 
-            {'Content-Type': 'application/json;charset=UTF-8'},
-            ''
-          ]
-        end
-
-        called_back = false 
-        subject.discover do |result|
-          result.on_success do |message, value|
-            called_back = :success
-          end
-          result.on_failure do |message|
-            called_back = :failure
-          end
-        end
-        expect(called_back).to eq(:failure)
-      end
-
-      it "failure: FaradayError" do
-        stubs.post('api/v1/konnektor/default/api/v1/ctm/terminals/discover') do
-          raise Faraday::ConnectionFailed
-        end
+        stub_request(:any, url).to_return(status: 401)
 
         called_back = false 
         subject.discover do |result|
@@ -269,5 +238,49 @@ module RISE
         expect(called_back).to eq(:failure)
       end
     end
+
+    describe '#assign' do
+      let(:url) { tic.url + '/api/v1/konnektor/default/api/v1/ctm/terminals/assign' }
+      before(:each) do
+        WebMock.disable_net_connect!
+        expect(subject).to receive(:api_token).at_least(:once)
+                                              .and_return('eyJraWQiOiJkZGUyMDZiYi1lMDgz')
+      end
+
+      after(:each) do
+        WebMock.allow_net_connect!
+      end
+
+      it "success: returns 200" do
+        stub_request(:any, url).to_return(status: 200)
+
+        called_back = false 
+        subject.assign('11:22:33:44:55:66') do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:success)
+      end
+
+      it "failure: 422" do
+        stub_request(:any, url).to_return(status: 422)
+
+        called_back = false 
+        subject.assign(nil) do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:failure)
+      end
+    end
+
   end
 end

@@ -32,26 +32,29 @@ RSpec.describe "/cards", type: :request do
   describe "GET /index with search params" do
     let!(:card1) do
       FactoryBot.create(:card, 
-        expiration_date: 1.day.before(Date.current), 
-        card_terminal: ct
+        name: 'MyCard',
+        iccsn: '12345678',
+        card_type: 'SMC-B',
+        expiration_date: 1.day.before(Date.current),
+        card_terminal_slot: cts
       )
     end
     it "renders a successful response (1)" do
       get cards_url(expired: true)
       expect(response).to be_successful
-      expect(response.body).to include("#{card1.name}")
+      expect(response.body).to include("12345678")
     end
 
     it "renders a successful response (2)" do
       get cards_url(connector_id: conn.id)
       expect(response).to be_successful
-      expect(response.body).to include("#{card1.name}")
+      expect(response.body).to include("12345678")
     end
 
-    it "renders a successful response (2)" do
+    it "renders a successful response (3)" do
       get cards_url(connector_id: conn.id + 1)
       expect(response).to be_successful
-      expect(response.body).not_to include("#{card1.name}")
+      expect(response.body).not_to include("12345678")
     end
   end
 

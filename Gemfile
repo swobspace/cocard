@@ -84,6 +84,7 @@ group :test do
   gem 'selenium-webdriver'
   gem 'webdriver'
   gem 'launchy'
+  gem 'webmock'
 end
 # --- TEMPLATE END ---
 
@@ -119,6 +120,8 @@ gem "eventmachine", "~> 1.2"
 gem "faraday-cookie_jar", "~> 0.0.7"
 
 gem "faraday-net_http_persistent", "~> 2.3"
+
+gem "http"
 
 gem "csv"
 

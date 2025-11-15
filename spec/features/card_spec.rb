@@ -26,6 +26,7 @@ RSpec.describe "Card", type: :feature, js: true do
   before(:each) do
     login_user(role: 'Admin')
     visit card_path(card)
+    WebMock.allow_net_connect!
   end
 
   it "visit card_path" do

@@ -37,17 +37,44 @@ module RISE
       else
         @errors = []
         begin
-          response = connection.post(
-                       '/api/v1/konnektor/default/api/v1/ctm/terminals/discover',
-                       '',
-                       { 'Transfer-Encoding': 'chunked',
-                         'authorization': "Bearer #{token}" }
-                     )
-          unless response.success?
-            @errors << "#{response.status}: #{response.body}"
+          response = HTTP.headers('Transfer-Encoding': 'chunked')
+                         .auth("Bearer #{token}")
+                         .post(ti_client.url +
+                              '/api/v1/konnektor/default/api/v1/ctm/terminals/discover',
+                              ssl_context: ssl_verify_none)
+          unless response.status.success?
+            @errors << response.status.to_s
           end
-        rescue Faraday::Error => e
-          @errors << faraday_error(e)
+        rescue => e
+          @errors << e.to_s
+        end
+      end
+
+      if @errors.any?
+        yield RISE::TIClient::Status.failure(@errors.join("; "))
+      else
+        yield RISE::TIClient::Status.success("#{response.status}: Success")
+      end
+    end
+
+    def assign(ct_id)
+      token = api_token
+      if token.nil?
+        @errors << "Authentifikation fehlgeschlagen"
+      else
+        @errors = []
+        begin
+          response = HTTP.headers('Transfer-Encoding': 'chunked')
+                         .auth("Bearer #{token}")
+                         .post(ti_client.url +
+                              '/api/v1/konnektor/default/api/v1/ctm/terminals/assign',
+                              ssl_context: ssl_verify_none,
+                              json: {"ctId": "#{ct_id}"})
+          unless response.status.success?
+            @errors << response.status.to_s
+          end
+        rescue => e
+          @errors << e.to_s
         end
       end
 
