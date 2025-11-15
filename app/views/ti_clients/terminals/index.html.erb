@@ -41,10 +41,12 @@
               <th class="text-center bg-success-subtle"><%= t('attributes.port') %></th>
               <th class="bg-success-subtle"><%= t('attributes.correlation') %></th>
               <th class="bg-success-subtle"><%= t('attributes.connected') %></th>
+              <th class="bg-success-subtle"><%= t('cocard.action') %></th>
             </tr>
           </thead>
           <tfoot class="search">
             <tr>
+              <th></th>
               <th></th>
               <th></th>
               <th></th>
@@ -77,6 +79,11 @@
                 <td class="text-center"><%= terminal.tcp_port %></td>
                 <td><%= terminal.correlation %></td>
                 <td><%= render BooleanComponent.new(value: terminal.connected) %></td>
+                <td>
+                  <%= render TIClient::AssignComponent.new(
+                               ti_client: @ti_client,
+                               terminal: terminal) if can? :manage, @ti_client %>
+                </td>
               </tr>
             <% end %>
           </tbody>
