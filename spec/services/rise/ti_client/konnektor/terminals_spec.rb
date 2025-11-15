@@ -252,7 +252,8 @@ module RISE
       end
 
       it "success: returns 200" do
-        stub_request(:any, url).to_return(status: 200)
+        stub_request(:any, url).with(body: { "ctId": "11:22:33:44:55:66" }.to_json)
+                               .to_return(status: 200)
 
         called_back = false 
         subject.assign('11:22:33:44:55:66') do |result|
@@ -271,6 +272,113 @@ module RISE
 
         called_back = false 
         subject.assign(nil) do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:failure)
+      end
+    end
+
+    describe '#initialize_pairing' do
+      let(:url) do
+         tic.url + '/api/v1/konnektor/default/api/v1/ctm/terminals/pairing/initialize'
+      end
+      let(:session_data) {{
+        "ctId" => "11:22:33:44:55:66",
+        "fingerprint" => "ABCDEFGHIJKLMNOPQRST",
+        "tlsSessionId" => "f6dc287a-c239-11f0-83ec-c025a5b36994"
+      }}
+      before(:each) do
+        WebMock.disable_net_connect!
+        expect(subject).to receive(:api_token).at_least(:once)
+                                              .and_return('eyJraWQiOiJkZGUyMDZiYi1lMDgz')
+      end
+
+      after(:each) do
+        WebMock.allow_net_connect!
+      end
+
+      it "success: returns 200" do
+        stub_request(:any, url)
+          .with(body: { "ctId": "11:22:33:44:55:66" }.to_json)
+          .to_return(status: 200, body: session_data.to_json)
+
+        called_back = false 
+        subject.initialize_pairing('11:22:33:44:55:66') do |result|
+          result.on_success do |message, value|
+            called_back = :success
+            expect(value).to eq(session_data)
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:success)
+      end
+
+      it "failure: 422" do
+        stub_request(:any, url).to_return(status: 422)
+
+        called_back = false 
+        subject.initialize_pairing(nil) do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:failure)
+      end
+    end
+
+    describe '#finalize_pairing' do
+      let(:url) do
+        tic.url + '/api/v1/konnektor/default/api/v1/ctm/terminals/pairing/finalize'
+      end
+      let(:session_data) {{
+        "ctId" => "11:22:33:44:55:66",
+        "fingerprint" => "ABCDEFGHIJKLMNOPQRST",
+        "tlsSessionId" => "f6dc287a-c239-11f0-83ec-c025a5b36994"
+      }}
+
+      before(:each) do
+        WebMock.disable_net_connect!
+        expect(subject).to receive(:api_token).at_least(:once)
+                                              .and_return('eyJraWQiOiJkZGUyMDZiYi1lMDgz')
+      end
+
+      after(:each) do
+        WebMock.allow_net_connect!
+      end
+
+      it "success: returns 200" do
+        stub_request(:any, url)
+          .with(body: session_data.to_json)
+          .to_return(status: 200, body: { "success" => true }.to_json)
+
+        called_back = false 
+        subject.finalize_pairing(session_data) do |result|
+          result.on_success do |message, value|
+            called_back = :success
+            value = { "success" => true }
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:success)
+      end
+
+      it "failure: 422" do
+        stub_request(:any, url).to_return(status: 422)
+
+        called_back = false 
+        subject.finalize_pairing(nil) do |result|
           result.on_success do |message, value|
             called_back = :success
           end

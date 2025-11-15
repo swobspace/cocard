@@ -111,7 +111,8 @@ module RISE
       if @errors.any?
         yield RISE::TIClient::Status.failure(@errors.join("; "))
       else
-        yield RISE::TIClient::Status.success("#{response.status}: Success")
+        json = JSON.parse(response.body)
+        yield RISE::TIClient::Status.success("#{response.status}: Success", json)
       end
     end
 
@@ -140,7 +141,8 @@ module RISE
       if @errors.any?
         yield RISE::TIClient::Status.failure(@errors.join("; "))
       else
-        yield RISE::TIClient::Status.success("#{response.status}: Success")
+        json = JSON.parse(response.body.to_s)
+        yield RISE::TIClient::Status.success("#{response.status}: Success", json)
       end
     end
   end
