@@ -56,8 +56,5 @@ module TIClients
       end
     end
 
-    def add_breadcrumb_index
-    end
-
   end
 end
