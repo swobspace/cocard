@@ -82,7 +82,7 @@ module RISE
     end   
 
     def uri_base
-      ti_client.url
+      ti_client&.url
     end
 
 
