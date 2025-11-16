@@ -112,7 +112,8 @@ module TIClients
               .link_to("Kartenterminal aktualisieren",
                        new_duck_terminal_path(
                        identification: ct.identification,
-                       firmware_version: ct.firmware_version,
+                       firmware_version:
+                         (ct.firmware_version.blank? ? '3.9.0' : ct.firmeware_version),
                        ip: ct.ip))
       msg.html_safe
     end

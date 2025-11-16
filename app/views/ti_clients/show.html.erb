@@ -78,6 +78,9 @@
   <li class="nav-item" role="presentation">
     <button class="nav-link" id="terminals-tab" data-bs-toggle="tab" data-bs-target="#terminals-tab-pane" type="button" role="tab" aria-controls="terminals-tab-pane" aria-selected="false"><%= t('controller.ti_clients/terminals') %></button>
   </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="pinplus-tab" data-bs-toggle="tab" data-bs-target="#pinplus-tab-pane" type="button" role="tab" aria-controls="pinplus-tab-pane" aria-selected="false"><%= t('controller.ti_clients/remote_pin_plus') %></button>
+  </li>
 </ul>
 
 <div class="tab-content" id="TIClientTabContent" data-turbo-permanent>
@@ -85,9 +88,14 @@
     <%= render 'ti_clients/kt_proxies/index', kt_proxies: @ti_client.kt_proxies %>
   </div>
   <div class="tab-pane fade" id="terminals-tab-pane" role="tabpanel" aria-labelledby="terminals-tab" tabindex="0">
-  <%= turbo_frame_tag("ticlient_terminals", src: ti_client_terminals_path(@ti_client),
-                                            refresh: "morph") %>
-
+    <%= turbo_frame_tag("ticlient_terminals",
+                        src: ti_client_terminals_path(@ti_client),
+                        refresh: "morph") %>
+  </div>
+  <div class="tab-pane fade" id="pinplus-tab-pane" role="tabpanel" aria-labelledby="pinplus-tab" tabindex="0">
+    <%= turbo_frame_tag("ticlient_remote_pin_plus",
+                        src: ti_client_remote_pin_plus_path(@ti_client),
+                        refresh: "morph") %>
   </div>
 </div>
 
