@@ -43,7 +43,7 @@ module RISE
                               '/api/v1/konnektor/default/api/v1/ctm/terminals/discover',
                               ssl_context: ssl_verify_none)
           unless response.status.success?
-            @errors << response.status.to_s
+            @errors << "#{response.status.to_s}: #{response.body.to_s}"
           end
         rescue => e
           @errors << e.to_s
@@ -72,7 +72,7 @@ module RISE
                               ssl_context: ssl_verify_none,
                               json: {"ctId": "#{ct_id}"})
           unless response.status.success?
-            @errors << response.status.to_s
+            @errors << "#{response.status.to_s}: #{response.body.to_s}"
           end
         rescue => e
           @errors << e.to_s
@@ -101,7 +101,7 @@ module RISE
                               ssl_context: ssl_verify_none,
                               json: {"ctId": "#{ct_id}"})
           unless response.status.success?
-            @errors << response.status.to_s
+            @errors << "#{response.status.to_s}: #{response.body.to_s}"
           end
         rescue => e
           @errors << e.to_s
@@ -131,7 +131,7 @@ module RISE
                               ssl_context: ssl_verify_none,
                               json: session_data)
           unless response.status.success?
-            @errors << response.status.to_s
+            @errors << "#{response.status.to_s}: #{response.body.to_s}"
           end
         rescue => e
           @errors << e.to_s
