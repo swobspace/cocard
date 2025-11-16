@@ -67,7 +67,15 @@
 
     <tr>
       <th class="w-25 pe-3"><%= t('attributes.card_terminal_ip')%>:</th>
-      <td><%= kt_proxy.card_terminal_ip %></td>
+      <td>
+        <span class="me-2"><%= kt_proxy.card_terminal_ip %></span>
+        <%= link_to(raw(%Q[<i class="fa-solid fw fa-circle-info"></i>]),
+                    new_duck_terminal_path(
+                      firmware_version: '3.9.0',
+                      ip: kt_proxy.card_terminal_ip
+                    ),
+                    class: "primary-link me-2") if can? :manage, DuckTerminal %>
+      </td>
       <td><%= rise['cardTerminalIp'] %></td>
     </tr>
 
