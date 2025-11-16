@@ -1,3 +1,5 @@
+<%= turbo_frame_tag("ticlient_terminals", src: ti_client_terminals_path(@ti_client),
+                                           refresh: "morph") %>
 <%= turbo_stream.update('flash') do %>
   <%= render "shared/flash_alert" %>
 <% end %>
