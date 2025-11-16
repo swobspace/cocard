@@ -151,23 +151,23 @@ table.connector.table.table-sm > :not(caption) > * > * {
   display: none !important;
 }
 
-.bg-alert, .bg-ALERT {
+.bg-alert, .bg-ALERT, .bg-ERROR {
   background-color: #B800FF !important;
   color: white !important;
   font-weight: bold;
 }
 
-.bg-OK {
+.bg-OK, .bg-ACTIVE {
   background-color: #E6FFE6 !important;
 }
-.bg-WARNING {
+.bg-WARNING, .bg-MISSING {
   background-color:  #FFFF80 !important;
 }
 .bg-CRITICAL,
 table tbody tr.bg-CRITICAL td {
   background-color: #FF8080 !important;
 }
-.bg-UNKNOWN {
+.bg-UNKNOWN, .bg-PENDING {
   background-color: #D507D6 !important;
 }
 
