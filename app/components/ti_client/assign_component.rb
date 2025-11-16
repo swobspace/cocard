@@ -10,7 +10,7 @@ class TIClient::AssignComponent < ViewComponent::Base
   end
 
   def render?
-    terminal.present? and ti_client.present? and assignable
+    terminal.present? and ti_client.present? and (assignable || aktiv)
   end
 
   def icon
@@ -18,6 +18,8 @@ class TIClient::AssignComponent < ViewComponent::Base
       raw(%Q[<i class="fa-solid fa-fw fa-plus"></i>])
     elsif zugewiesen
       raw(%Q[<i class="fa-solid fa-fw fa-link"></i>])
+    elsif aktiv
+      raw(%Q[<i class="fa-solid fa-fw fa-check"></i>])
     else
       ""
     end
@@ -28,6 +30,8 @@ class TIClient::AssignComponent < ViewComponent::Base
       "Terminal am Konnektor zuweisen"
     elsif zugewiesen
       "Pairing-Vorgang am Konnektor und Terminal starten"
+    elsif aktiv
+      "Terminal aktiv"
     end
   end
 
@@ -40,6 +44,18 @@ class TIClient::AssignComponent < ViewComponent::Base
       pairing_ti_client_terminal_path(id: ti_client.id, method: :post,
                                      params: {card_terminal_id: terminal.card_terminal.id}
                                     )
+    else
+      nil
+    end
+  end
+
+  def button_class
+    if bekannt
+      "btn btn-sm btn-warning me-1"
+    elsif zugewiesen
+      "btn btn-sm btn-warning me-1"
+    elsif aktiv
+      "btn btn-sm btn-success me-1"
     end
   end
 
@@ -54,8 +70,12 @@ private
     terminal.correlation == "ZUGEWIESEN"
   end
   
+  def aktiv
+    terminal.correlation == "AKTIV"
+  end
+  
   def assignable
-    bekannt || zugewiesen
+    bekannt || zugewiesen || aktiv
   end
   
 end
