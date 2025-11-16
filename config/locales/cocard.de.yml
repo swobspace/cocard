@@ -215,12 +215,14 @@ de:
     since: seit
     slotid: Schachtnummer
     sn: Nachname
+    state: Status
     status: Status
     supplier: Lieferant
     tag: Tag
     tag_list_input: Tags
     task_scheduler: Hintergrundaufgaben
     telematikid: Telematik-ID
+    terminal_name: Terminal-Name
     ti_client: TI-Client
     type: Typ
     updated_at: zuletzt aktualisiert
@@ -264,6 +266,7 @@ de:
     terminal_workplaces: Kartenterminals-Arbeitsplätze
     ti_clients: TI-Clients
     ti_clients/kt_proxies: KT-Proxys auf dem TI-Client (RISE)
+    ti_clients/remote_pin_plus: Remote PIN Plus auf dem TI-Client (RISE)
     ti_clients/terminals: Kartenterminals auf dem Konnektor (RISE)
     users: Benutzer
     verify_pins: PIN-Verifizierung

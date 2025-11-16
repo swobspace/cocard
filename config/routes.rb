@@ -3,10 +3,11 @@ Rails.application.routes.draw do
   resource :duck_terminal, only: [:new, :show]
   get "reports/duplicate_terminal_ips"
   resources :ti_clients do
+    resources :remote_pin_plus, module: :ti_clients, only: [:index] 
     resources :terminals, module: :ti_clients, only: [:index] do
       member do
-        post :assign, module: :ti_clients
-        post :pairing, module: :ti_clients
+        post :assign
+        post :pairing
       end
     end
     resources :kt_proxies, module: :ti_clients, only: [:index] do

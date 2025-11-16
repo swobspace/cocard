@@ -1,0 +1,69 @@
+<%= render 'shared/turbo-cache-control' %>
+<%= turbo_frame_tag('ticlient_remote_pin_plus') do %>
+  <%= render partial: 'shared/flash_alert' %>
+  <div class="card mt-3">
+    <div class="card-header">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h4 class="me-4 pt-1"><%= t('controller.ti_clients/remote_pin_plus')%></h4>
+        </div>
+        <div role="toolbar" class="pt-0">
+          <%= link_to t('activerecord.models.ti_client'),
+                      ti_client_path(@ti_client),
+                      class: 'btn btn-outline-secondary btn-sm',
+                      data: { "turbo-frame": "_top" }
+           %>
+          <%= link_to raw(%Q[<i class="fas fa-table"></i>]),
+                      ti_client_remote_pin_plus_path(@ti_client),
+                      class: 'btn btn-outline-secondary btn-sm',
+                      data: { "turbo-frame": "_top" }
+          %>
+        </div>
+      </div>
+    </div>
+    <div class="p-2">
+      <div data-controller="datatables">
+        <%= content_tag :table, role: :datatable,
+              id: "remote_pin_plus_table",
+              class: "table table-sm table-responsive-xl",
+              data: {
+                'datatables-target': 'datatable',
+                order: [[0, 'asc']].to_json
+              } do %>
+          <thead>
+            <tr>
+              <th class="text-center"><%= t('attributes.iccsn') %></th>
+              <th class=""><%= t('attributes.card_holder_name') %></th>
+              <th class=""><%= t('attributes.ct_id') %></th>
+              <th class=""><%= t('attributes.terminal_name') %></th>
+              <th class=""><%= t('attributes.card_type') %></th>
+              <th class=""><%= t('attributes.state') %></th>
+            </tr>
+          </thead>
+          <tfoot class="search">
+            <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </tfoot>
+          <tbody>
+            <% @cards.each do |card| %>
+              <tr>
+                <td class="text-center"><%= card.iccsn %></td>
+                <td><%= card.card_holder %></td>
+                <td><%= card.terminal_id %></td>
+                <td><%= card.terminal_name %></td>
+                <td><%= card.card_type %></td>
+                <td><%= card.state %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
