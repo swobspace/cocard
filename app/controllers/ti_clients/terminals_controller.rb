@@ -22,7 +22,7 @@ module TIClients
           end
         end
        else
-         flash[:warning] = "Kein Client-Secret hinterlegt, keine Abfrage möglich"
+         flash[:warning] = "Zugriff nicht möglich (bitte Einstellungen des TI-Clients prüfen)"
        end
 
       respond_with(@terminals)
@@ -39,7 +39,7 @@ module TIClients
           end
         end
        else
-         flash[:warning] = "Kein Client-Secret hinterlegt"
+         flash[:warning] = "Zugriff nicht möglich (bitte Einstellungen des TI-Clients prüfen)"
        end
 
       redirect_to ti_client_terminals_path(@ti_client)
@@ -47,25 +47,31 @@ module TIClients
 
     def pairing
       # start pairing job
-      card_terminal = CardTerminal.find(params[:card_terminal_id])
-      CardTerminals::RMI::RemotePairingJob.perform_later(card_terminal: card_terminal)
-
-      Rails.logger.debug("PAIRING:: ctId: #{card_terminal.rawmac.upcase}")
-      # -> start connector pairing mode
-      if @rtic.present?
-        @rtic.initialize_pairing(card_terminal.rawmac.upcase) do |init|
+      ct = CardTerminal.find(params[:card_terminal_id])
+      if !ct.supports_rmi?
+        flash.now[:warning] = unsupported_terminal(ct)
+      elsif !ct.tcp_port_open?(ct.rmi_port)
+        flash.now[:warning] = rmi_port_unreachable(ct)
+      elsif @rtic.present?
+        CardTerminals::RMI::RemotePairingJob.perform_later(card_terminal: ct)
+        Rails.logger.debug("PAIRING:: ctId: #{ct.rawmac.upcase}")
+        # -> start connector pairing mode
+        @rtic.initialize_pairing(ct.rawmac.upcase) do |init|
           init.on_success do |message, value|
             Rails.logger.debug("PAIRING:: initialize successful, starting finalize with #{value}")
             sleep(2)
             # -> finalize connector pairing mode
             @rtic.finalize_pairing(value) do |fin|
               fin.on_success do |message|
-                flash.now[:success] = "Finalize pairing successful: #{message}"
+                msg = "Finalize pairing successful: #{message}"
+                flash.now[:success] = msg
+                Rails.logger.debug(msg)
               end
 
               fin.on_failure do |message|
-                flash.now[:alert] = "Finalize pairing failed: #{message}"
-                Rails.logger.debug("PAIRING:: finalize failed: #{message}")
+                msg = "PAIRING:: finalize failed: #{message}"
+                flash.now[:alert] = msg
+                Rails.logger.debug(msg)
               end
             end
           end
@@ -75,13 +81,12 @@ module TIClients
             Rails.logger.debug("PAIRING:: initialize failed: #{message}")
           end
         end
-       else
-         flash.now[:warning] = "Kein Client-Secret hinterlegt"
-       end
-       respond_with(@ti_client) do |format|
-         format.turbo_stream
-       end
-
+      else
+        flash[:warning] = "Zugriff nicht möglich (bitte Einstellungen des TI-Clients prüfen)"
+      end
+      respond_with(@ti_client) do |format|
+        format.turbo_stream
+      end
     end
 
   private
@@ -90,6 +95,26 @@ module TIClients
       if @ti_client&.client_secret.present?
         @rtic = RISE::TIClient::Konnektor::Terminals.new(ti_client: @ti_client)
       end
+    end
+
+    def rmi_port_unreachable(ct)
+      msg = "Der RMI-Port des Kartenterminals #{ct.name} ist nicht erreichbar." +
+            " Ein Pairing über diese Funktion hier ist nicht möglich." +
+            " Bitte Kartenterminal überprüfen und Pairing ggf. über den klassischen" +
+            " Weg durchführen: Start Pairing am Konnektor und Eingabe der PIN vor Ort."
+    end
+
+    def unsupported_terminal(ct)
+      msg = "Laut Cocard unterstützt das Kartenterminal #{ct.name}" +
+            " kein Remote-Pairing." +
+            " Bitte prüfen Sie das Terminal erneut mit: " +
+            ::ActionController::Base.helpers
+              .link_to("Kartenterminal aktualisieren",
+                       new_duck_terminal_path(
+                       identification: ct.identification,
+                       firmware_version: ct.firmware_version,
+                       ip: ct.ip))
+      msg.html_safe
     end
 
   end
