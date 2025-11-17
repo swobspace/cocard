@@ -58,8 +58,7 @@
         <table class="table table-sm table-borderless">
           <tr>
             <th class="w-10 pe-3"><%= t('attributes.task_scheduler')%>:</th>
-            <td><%= @scheduler_state
-                 %></td>
+            <td><%= render TIClient::SchedulerComponent.new(ti_client: @ti_client) %></td>
           </tr>
         </table>
 

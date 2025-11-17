@@ -15,11 +15,13 @@
             <th><%= t('attributes.name') %></th>
             <th><%= t('attributes.url') %></th>
             <th><%= t('attributes.connector') %></th>
+            <th><%= t('attributes.task_scheduler') %></th>
             <th class="nosort"><%= t('cocard.action') %></th>
       </tr>
     </thead>
     <tfoot class="search">
       <tr>
+            <th></th>
             <th></th>
             <th></th>
             <th></th>
@@ -29,19 +31,20 @@
     <tbody>
       <% @ti_clients.each do |ti_client| %>
         <%= content_tag(:tr, id: dom_id(ti_client), class: dom_class(ti_client)) do %>
-                <td><%= link_to ti_client.name,
-                                ti_client,
-                                class: 'primary-link'
-                     %></td>
-                <td><%= link_to(ti_client.url,
-                                ti_client.url,
-                                class: 'primary-link') if ti_client.url.present?
-                     %></td>
-                <td><%= link_to ti_client.connector,
-                                ti_client.connector,
-                                class: 'primary-link'
-                     %></td>
-                <td class="text-nowrap">
+          <td><%= link_to ti_client.name,
+                          ti_client,
+                          class: 'primary-link'
+               %></td>
+          <td><%= link_to(ti_client.url,
+                          ti_client.url,
+                          class: 'primary-link') if ti_client.url.present?
+               %></td>
+          <td><%= link_to ti_client.connector,
+                          ti_client.connector,
+                          class: 'primary-link'
+               %></td>
+          <td><%= render TIClient::SchedulerComponent.new(ti_client: ti_client) %></td>
+          <td class="text-nowrap">
             <%= show_link ti_client %>
             <%= edit_link ti_client %>
             <%= delete_link ti_client %>

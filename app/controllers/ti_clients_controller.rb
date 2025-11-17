@@ -10,21 +10,6 @@ class TIClientsController < ApplicationController
 
   # GET /ti_clients/1
   def show
-    @scheduler_state = "UNKNOWN"
-    if @ti_client.client_secret.present?
-      rtic = RISE::TIClient::System.new(ti_client: @ti_client)
-      rtic.get_scheduler do |result|
-        result.on_success do |msg, value|
-          @scheduler_state = value['state']
-        end
-        result.on_failure do |msg|
-          flash[:warning] = msg
-        end
-      end
-    else
-      @scheduler_state = "Client-Secret fehlt, keine Abfrage möglich"
-    end
-    
     respond_with(@ti_client)
   end
 
