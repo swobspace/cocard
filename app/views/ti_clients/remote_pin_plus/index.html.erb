@@ -53,46 +53,65 @@
           <tbody>
             <% @cards.each do |card| %>
               <tr>
-                <td class="text-center"><%= card.iccsn %></td>
+                <td class="text-center">
+                  <%= link_to card.iccsn, card.card,
+                              class: 'primary-link',
+                              data: { "turbo-frame": "_top" }
+                   %>
+                </td>
                 <td><%= card.card_holder %></td>
                 <td><%= card.terminal_id %></td>
                 <td><%= card.terminal_name %></td>
                 <td><%= card.card_type %></td>
-                <td class="bg-<%=card.state%>"><%= card.state %></td>
+                <td><%= render TIClient::RemotePinPlusStateComponent.new(card: card)
+                     %></td>
               </tr>
             <% end %>
           </tbody>
         <% end %>
       </div>
 
-      <table class="table table-striped table-sm w-75 mt-3">
-        <tbody>
-          <tr>
-            <th>Status</th>
-            <th>Beschreibung</th>
-          </tr>
-          <tr>
-            <td>ACTIVE</td>
-            <td>Die Verifizierung war erfolgreich. Die PIN+-Konfiguration ist aktiv.</td>
-          </tr>
-          <tr>
-            <td>PENDING</td>
-            <td>Die initiale Verifizierung nach Erstellung der PIN+-Konfiguration wurde noch nicht abgeschlossen. Abhängig vom Ergebnis geht der Status anschließend in ACTIVE oder ERROR über.</td>
-          </tr>
-          <tr>
-            <td>ERROR</td>
-            <td>Die Verifizierung ist fehlgeschlagen. Eine erneute Prüfung erfolgt erst nach manueller Fehlerbehebung.</td>
-          </tr>
-          <tr>
-            <td>MISSING</td>
-            <td>Die Karte konnte aktuell am vKonnektor nicht gefunden werden. Dies ist kein endgültiger Status und bedeutet nicht zwangsläufig, dass die Verifizierung zu einem späteren Zeitpunkt nicht möglich ist. Es sollte zusätzlich geprüft werden, ob das Kartenterminal verbunden und die Karte korrekt gesteckt ist.</td>
-          </tr>
-          <tr>
-            <td>CONFIGURABLE</td>
-            <td>Es gibt keine Remote-PIN-Plus-Konfiguration für diese Karte, kann aber erstellt werden.</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="row mt-3">
+        <div class="col-xl-2"></div>
+        <div class="col-xl-8">
+          <table class="table table-striped table-sm mt-3 border-top">
+            <tbody>
+              <tr>
+                <th>Status</th>
+                <th>Beschreibung</th>
+              </tr>
+              <tr>
+                <td>ACTIVE</td>
+                <td>Die Verifizierung war erfolgreich. Die PIN+-Konfiguration ist aktiv.</td>
+              </tr>
+              <tr>
+                <td>PENDING</td>
+                <td>Die initiale Verifizierung nach Erstellung der PIN+-Konfiguration wurde noch nicht abgeschlossen. Abhängig vom Ergebnis geht der Status anschließend in ACTIVE oder ERROR über.</td>
+              </tr>
+              <tr>
+                <td>ERROR</td>
+                <td>Die Verifizierung ist fehlgeschlagen. Eine erneute Prüfung erfolgt erst nach manueller Fehlerbehebung.</td>
+              </tr>
+              <tr>
+                <td>MISSING</td>
+                <td>Die Karte konnte aktuell am vKonnektor nicht gefunden werden. Dies ist kein endgültiger Status und bedeutet nicht zwangsläufig, dass die Verifizierung zu einem späteren Zeitpunkt nicht möglich ist. Es sollte zusätzlich geprüft werden, ob das Kartenterminal verbunden und die Karte korrekt gesteckt ist.</td>
+              </tr>
+              <tr>
+                <td>CONFIGURABLE</td>
+                <td>Es gibt keine Remote-PIN-Plus-Konfiguration für diese Karte, kann aber erstellt werden.</td>
+              </tr>
+              <tr>
+                <td>CT_NOT_SUPPORTED</td>
+                <td>Das Kartenterminal wird für Remote-PIN-Plus nicht unterstützt</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>HINWEIS: Remote-PIN-Plus ist nur für SMC-B-Karten möglich, 
+             die einem Kontext zugeordnet sind. Nur SMC-B-Karten mit Kontext erscheinen
+             in der Übersicht.</p>
+        </div>
+        <div class="col-xl-2"></div>
+      </div>
     </div>
   </div>
 <% end %>

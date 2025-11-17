@@ -34,6 +34,10 @@ module RISE
         @state = new_state
       end
 
+      def card
+        Card.where(iccsn: iccsn).first
+      end
+
     end
   end
 end
