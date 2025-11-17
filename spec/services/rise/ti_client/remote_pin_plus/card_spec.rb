@@ -25,6 +25,7 @@ module RISE
       it { expect(subject.respond_to?(:terminal_name)).to be_truthy }
       it { expect(subject.respond_to?(:card_type)).to be_truthy }
       it { expect(subject.respond_to?(:state)).to be_truthy }
+      it { expect(subject.respond_to?(:state=)).to be_truthy }
     end
 
     describe '::new' do
@@ -43,6 +44,11 @@ module RISE
         it { expect(subject.terminal_name).to eq("ORGA6100-01400123456789") }
         it { expect(subject.card_type).to eq("SMCB") }
         it { expect(subject.state).to eq("ACTIVE") }
+
+        it "updates state" do
+          subject.state = "OTHER"
+          expect(subject.state).to eq("OTHER")
+        end
       end
     end
   end

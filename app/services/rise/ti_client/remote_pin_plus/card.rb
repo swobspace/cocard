@@ -27,9 +27,12 @@ module RISE
       end
 
       def state
-       @json.dig('status')  || @json.dig('state')
+        @state ||= @json.dig('status')  || @json.dig('state')
       end
 
+      def state=(new_state)
+        @state = new_state
+      end
 
     end
   end
