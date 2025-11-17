@@ -101,5 +101,68 @@ module RISE
       end
     end
 
+    describe '#supported_cards' do
+      let(:supported_cards_body) do
+        json =<<~EOKTS
+          {
+            "cards": [
+              {
+                "card": {
+                  "iccsn": "80276001731001234567",
+                  "cardHolder": "Irgend eine Einrichtung",
+                  "terminalId": "00:0D:F8:07:2C:B0",
+                  "terminalHostname": "ORGA6100-01400123456789",
+                  "cardType": "SMCB"
+                },
+                "state": "CONFIGURABLE"
+              }
+            ]
+          }
+        EOKTS
+      end
+
+      let(:url) { tic.url + '/api/v1/premium/pin-plus/supported-cards' }
+      before(:each) do
+        WebMock.disable_net_connect!
+        expect(subject).to receive(:api_token).at_least(:once)
+                                              .and_return('eyJraWQiOiJkZGUyMDZiYi1lMDgz')
+      end
+
+      after(:each) do
+        WebMock.allow_net_connect!
+      end
+
+      it "success: returns 200" do
+        stub_request(:any, url).to_return(status: 200, body: supported_cards_body)
+
+        called_back = false 
+        subject.supported_cards do |result|
+          result.on_success do |message, value|
+            called_back = :success
+            expect(value).to eq(JSON.parse(supported_cards_body))
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:success)
+      end
+
+      it "failure: 401" do
+        stub_request(:any, url).to_return(status: 401)
+
+        called_back = false 
+        subject.supported_cards do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:failure)
+      end
+    end
+
   end
 end
