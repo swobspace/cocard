@@ -37,13 +37,11 @@ class TIClient::AssignComponent < ViewComponent::Base
 
   def action
     if bekannt
-      assign_ti_client_terminal_path(id: ti_client.id, method: :post,
-                                     params: {ct_id: terminal.ct_id}
-                                    )
+      assign_ti_client_terminal_path(ti_client_id: ti_client.id,
+                                     id:terminal.ct_id)
     elsif zugewiesen
-      pairing_ti_client_terminal_path(id: ti_client.id, method: :post,
-                                     params: {card_terminal_id: terminal.card_terminal.id}
-                                    )
+      pairing_ti_client_terminal_path(ti_client_id: ti_client.id,
+                                      id: terminal.ct_id)
     else
       nil
     end
@@ -65,17 +63,17 @@ private
   def bekannt
     terminal.correlation == "BEKANNT"
   end
-  
+
   def zugewiesen
     terminal.correlation == "ZUGEWIESEN"
   end
-  
+
   def aktiv
     terminal.correlation == "AKTIV"
   end
-  
+
   def assignable
     bekannt || zugewiesen || aktiv
   end
-  
+
 end

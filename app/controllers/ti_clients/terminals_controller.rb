@@ -30,7 +30,7 @@ module TIClients
 
     def assign
       if @rtic.present?
-        @rtic.assign(params[:ct_id]) do |result|
+        @rtic.assign(params[:id]) do |result|
           result.on_success do |message, value|
             flash[:success] = message
             if card_terminal.present?
@@ -50,7 +50,7 @@ module TIClients
 
     def pairing
       # start pairing job
-      ct = CardTerminal.find(params[:card_terminal_id])
+      ct = card_terminal
       if !ct.supports_rmi?
         flash.now[:warning] = unsupported_terminal(ct)
       elsif !ct.tcp_port_open?(ct.rmi_port)
@@ -116,14 +116,14 @@ module TIClients
                        new_duck_terminal_path(
                        identification: ct.identification,
                        firmware_version:
-                         (ct.firmware_version.blank? ? '3.9.0' : ct.firmeware_version),
+                         (ct.firmware_version.blank? ? '3.9.0' : ct.firmware_version),
                        ip: ct.ip))
       msg.html_safe
     end
 
     def card_terminal
-      if params[:ct_id]
-        CardTerminal.where(mac: params[:ct_id]).first
+      if params[:id]
+        CardTerminal.where(mac: params[:id]).first
       end
     end
 
