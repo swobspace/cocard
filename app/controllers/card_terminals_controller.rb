@@ -39,6 +39,19 @@ class CardTerminalsController < ApplicationController
 
   # GET /card_terminals/1
   def show
+    if @card_terminal&.kt_proxy&.ti_client&.client_secret.present?
+      rtic = RISE::TIClient::Konnektor::Terminals.new(
+               ti_client: @card_terminal.kt_proxy.ti_client
+             )
+      rtic.get_terminal(@card_terminal.rawmac.upcase) do |result|
+        result.on_success do |msg, value|
+          @terminal = RISE::TIClient::Konnektor::Terminal.new(value)
+        end
+        result.on_failure do |msg|
+        end
+      end
+    end
+
     respond_with(@card_terminal)
   end
 

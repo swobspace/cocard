@@ -274,6 +274,35 @@
             </div>
            </div>
           <% end %>
+
+          <% if @terminal.present? %>
+            <div class="card-title border-bottom bg-light mt-2 pt-2 ps-2">
+              <div class="d-flex justify-content-between">
+                <h6>Konnektor (TI-Gateway)</h6>
+                <div> 
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-9">
+                <table class="table table-sm table-borderless">
+                  <tr>
+                    <th class="w-25 pe-3"><%= t('attributes.correlation')%>:</th>
+                    <td><%= @terminal.correlation %></td>
+                  </tr>
+                  <tr>
+                    <th class="w-25 pe-3"><%= t('attributes.connected')%>:</th>
+                    <td><%= render BooleanComponent.new(value: @terminal.connected) %></td>
+                  </tr>
+                </table>
+              </div>
+              <div class="col-xl-3">
+                <%= render TIClient::AssignComponent.new(
+                             ti_client: @card_terminal.kt_proxy.ti_client,
+                             terminal: @terminal) if can? :manage, @card_terminal.kt_proxy.ti_client %>
+              </div>
+            </div>
+          <% end %>
         <% end %>
 
         <div class="card-title border-bottom bg-light mt-2 pt-2 ps-2">
