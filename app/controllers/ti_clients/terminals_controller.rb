@@ -33,6 +33,9 @@ module TIClients
         @rtic.assign(params[:ct_id]) do |result|
           result.on_success do |message, value|
             flash[:success] = message
+            if card_terminal.present?
+              card_terminal.update(connector_id: @ti_client.connector_id)
+            end
           end
           result.on_failure do |message|
             flash[:alert] = message
@@ -116,6 +119,12 @@ module TIClients
                          (ct.firmware_version.blank? ? '3.9.0' : ct.firmeware_version),
                        ip: ct.ip))
       msg.html_safe
+    end
+
+    def card_terminal
+      if params[:ct_id]
+        CardTerminal.where(mac: params[:ct_id]).first
+      end
     end
 
   end
