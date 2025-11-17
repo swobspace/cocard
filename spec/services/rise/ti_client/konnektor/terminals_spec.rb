@@ -196,6 +196,74 @@ module RISE
       end
     end
 
+    describe '#get_terminal' do
+      let(:terminal_body) do
+        json =<<~EOKTB
+          {
+            "ACTIVEROLE": null,
+            "ADMIN_USERNAME": "admin",
+            "CONNECTED": false,
+            "CORRELATION": "BEKANNT",
+            "CTID": "00:0D:F8:08:77:76",
+            "EHEALTH_INTERFACE_VERSION": "1.0.0",
+            "HOSTNAME": "ORGA6100-0142000000DABD",
+            "IP_ADDRESS": "172.16.55.29",
+            "IS_PHYSICAL": true,
+            "MAC_ADDRESS": "00:0D:F8:08:77:76",
+            "PRODUCTINFORMATION": null,
+            "SLOTCOUNT": 4,
+            "SLOTS_USED": [],
+            "SMKT_AUT": null,
+            "TCP_PORT": 8273,
+            "VALID_VERSION": true
+          }
+        EOKTB
+      end
+
+      let(:url) do
+         tic.url + "/api/v1/konnektor/default/api/v1/ctm/state/00:0D:F8:08:77:76"
+      end
+      before(:each) do
+        WebMock.disable_net_connect!
+        expect(subject).to receive(:api_token).at_least(:once)
+                                              .and_return('eyJraWQiOiJkZGUyMDZiYi1lMDgz')
+      end
+
+      after(:each) do
+        WebMock.allow_net_connect!
+      end
+
+      it "success: returns 200" do
+        stub_request(:any, url).to_return(status: 200, body: terminal_body)
+
+        called_back = false 
+        subject.get_terminal('00:0D:F8:08:77:76') do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:success)
+      end
+
+      it "failure: 422" do
+        stub_request(:any, url).to_return(status: 422)
+
+        called_back = false 
+        subject.get_terminal('00:0D:F8:08:77:76') do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:failure)
+      end
+    end
+
     describe '#discover' do
       let(:url) { tic.url + '/api/v1/konnektor/default/api/v1/ctm/terminals/discover' }
       before(:each) do
