@@ -39,7 +39,9 @@ class CardTerminalsController < ApplicationController
 
   # GET /card_terminals/1
   def show
-    if @card_terminal&.kt_proxy&.ti_client&.client_secret.present?
+    @kt_proxy  = @card_terminal.kt_proxy
+    @ti_client = @card_terminal.kt_proxy&.ti_client
+    if @ti_client and @ti_client.client_secret.present?
       rtic = RISE::TIClient::Konnektor::Terminals.new(
                ti_client: @card_terminal.kt_proxy.ti_client
              )

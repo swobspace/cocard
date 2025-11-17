@@ -246,63 +246,20 @@
         </table>
 
         <% if Cocard.enable_ticlient %>
-          <div class="card-title border-bottom bg-light mt-2 pt-2 ps-2">
-            <div class="d-flex justify-content-between">
-              <h6>KT-Proxy (TI-Gateway)</h6>
-              <div> 
-                <%= link_to(raw(%Q[<i class="fa-solid fa-pencil"></i>]),
-                            edit_kt_proxy_path(card_terminal.kt_proxy),
-                            class: 'primary-link') if card_terminal.kt_proxy.present? and can?(:manage, card_terminal)
-                 %>
-                             
-              </div>
-            </div>
-          </div>
-          <% if card_terminal.kt_proxy.present? %>
-              <%= render partial: 'kt_proxies/kt_proxy', locals: {kt_proxy: card_terminal.kt_proxy} %>
+         <div class="border border-primary-subtle rounded-2">
+          <% if @kt_proxy.present? %>
+            <%= render partial: 'show_kt_proxy', 
+                       locals: { card_terminal: @card_terminal,
+                                 kt_proxy:      @kt_proxy,
+                                 ti_client:     @ti_client,
+                                 terminal:      @terminal }
+             %>
           <% else %>
-           <div class="d-flex justify-content-between">
-            <div class="text-start">
-              Kein KT-Proxy vorhanden
-            </div>
-            <div class="text-end">
-          <%= render CardTerminal::FetchButtonComponent.new(card_terminal: card_terminal) if can?(:manage, card_terminal)
-           %>
-            <%= link_to("KT-Proxy generieren", 
-                        new_card_terminal_kt_proxy_path(card_terminal),
-                        class: 'btn btn-warning') if can?(:create, KTProxy) %>
-            </div>
-           </div>
+            <%= render partial: 'new_kt_proxy', 
+                       locals: { card_terminal: @card_terminal }
+             %>
           <% end %>
-
-          <% if @terminal.present? %>
-            <div class="card-title border-bottom bg-light mt-2 pt-2 ps-2">
-              <div class="d-flex justify-content-between">
-                <h6>Konnektor (TI-Gateway)</h6>
-                <div> 
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-xl-9">
-                <table class="table table-sm table-borderless">
-                  <tr>
-                    <th class="w-25 pe-3"><%= t('attributes.correlation')%>:</th>
-                    <td><%= @terminal.correlation %></td>
-                  </tr>
-                  <tr>
-                    <th class="w-25 pe-3"><%= t('attributes.connected')%>:</th>
-                    <td><%= render BooleanComponent.new(value: @terminal.connected) %></td>
-                  </tr>
-                </table>
-              </div>
-              <div class="col-xl-3">
-                <%= render TIClient::AssignComponent.new(
-                             ti_client: @card_terminal.kt_proxy.ti_client,
-                             terminal: @terminal) if can? :manage, @card_terminal.kt_proxy.ti_client %>
-              </div>
-            </div>
-          <% end %>
+         </div>
         <% end %>
 
         <div class="card-title border-bottom bg-light mt-2 pt-2 ps-2">
