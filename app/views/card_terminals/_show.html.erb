@@ -262,12 +262,14 @@
          </div>
         <% end %>
 
-        <div class="card-title border-bottom bg-light mt-2 pt-2 ps-2">
-          <h6><%= t('attributes.product_information')%></h6>
+        <div class="card-title border-bottom bg-light mt-3 pt-2 ps-2">
+          <h6 data-bs-toggle="collapse" href="#collapseProductInfo"><%= t('attributes.product_information')%> <i class="fa-solid fa-fw fa-caret-down"></i></h6>
         </div>
-        <pre>
+        <div class="collapse" id="collapseProductInfo">
+          <pre>
 <%= card_terminal.product_information&.to_s %>
-        </pre>
+          </pre>
+        </div>
       </div>
     </div>
   </div>
