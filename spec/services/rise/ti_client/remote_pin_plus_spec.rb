@@ -85,6 +85,21 @@ module RISE
         expect(called_back).to eq(:success)
       end
 
+      it "empty: returns 200" do
+        stub_request(:any, url).to_return(status: 200, body: "")
+
+        called_back = false 
+        subject.get_configurations do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:success)
+      end
+
       it "failure: 401" do
         stub_request(:any, url).to_return(status: 401)
 
@@ -140,6 +155,21 @@ module RISE
           result.on_success do |message, value|
             called_back = :success
             expect(value).to eq(JSON.parse(supported_cards_body))
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:success)
+      end
+
+      it "empty: returns 200" do
+        stub_request(:any, url).to_return(status: 200, body: "")
+
+        called_back = false 
+        subject.supported_cards do |result|
+          result.on_success do |message, value|
+            called_back = :success
           end
           result.on_failure do |message|
             called_back = :failure

@@ -4,7 +4,7 @@ module RISE
       attr_reader :scope, :token_type, :valid_until
 
       def initialize(json_string)
-        @json = JSON.parse(json_string)
+        @json = begin JSON.parse(json_string) rescue {} end
         @scope = json['scope']
         @token_type = json['token_type']
         @valid_until = set_expiration

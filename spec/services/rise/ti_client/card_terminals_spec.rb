@@ -96,6 +96,27 @@ module RISE
         expect(called_back).to eq(:success)
       end
 
+      it "empty: gets card terminal proxies" do
+        stubs.get('api/v1/manager/card-terminals/proxies') do
+          [
+            200, 
+            {'Content-Type': 'application/json;charset=UTF-8'},
+            ""
+          ]
+        end
+
+        called_back = false 
+        subject.get_proxies do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:success)
+      end
+
       it "failure: no content" do
         stubs.get('api/v1/manager/card-terminals/proxies') do
           [
@@ -192,6 +213,27 @@ module RISE
           result.on_success do |message, value|
             called_back = :success
             expect(value).to include(JSON.parse(proxy_body))
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:success)
+      end
+
+      it "empty: gets proxy" do
+        stubs.get('api/v1/manager/card-terminals/proxies/bf11726a-ad8f-11f0-8247-c025a5b36994') do
+          [
+            200, 
+            {'Content-Type': 'application/json;charset=UTF-8'},
+            ""
+          ]
+        end
+
+        called_back = false 
+        subject.get_proxy(kt_proxy) do |result|
+          result.on_success do |message, value|
+            called_back = :success
           end
           result.on_failure do |message|
             called_back = :failure
@@ -332,6 +374,31 @@ module RISE
         expect(called_back).to eq(:success)
         kt_proxy.reload
         expect(kt_proxy.uuid).to eq('f7da0dce-b70c-11f0-b4b0-c025a5b36994')
+      end
+
+      it "empty: creates proxy" do
+        stubs.post(
+          'api/v1/manager/card-terminals/proxies',
+          proxy_body,
+          "Content-Type" => "application/json"
+        ) do
+          [
+            200, 
+            {'Content-Type': 'application/json;charset=UTF-8'},
+            ""
+          ]
+        end
+
+        called_back = false 
+        subject.create_proxy(kt_proxy) do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:success)
       end
 
       it "failure: no content" do

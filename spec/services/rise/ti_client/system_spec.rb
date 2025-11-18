@@ -80,6 +80,27 @@ module RISE
         expect(called_back).to eq(:success)
       end
 
+      it "empty: get scheduler status " do
+        stubs.get('/api/v1/manager/konnektor/default/task-scheduler') do
+          [
+            200, 
+            {'Content-Type': 'application/json;charset=UTF-8'},
+            ""
+          ]
+        end
+
+        called_back = false 
+        subject.get_scheduler do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:success)
+      end
+
       it "failure: no content" do
         stubs.get('/api/v1/manager/konnektor/default/task-scheduler') do
           [

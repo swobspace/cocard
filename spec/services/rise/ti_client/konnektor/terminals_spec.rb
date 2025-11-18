@@ -133,6 +133,28 @@ module RISE
         expect(called_back).to eq(:success)
       end
 
+      it "empty: gets card terminal proxies" do
+        stubs.get('api/v1/konnektor/default/api/v1/ctm/state') do
+          [
+            200, 
+            {'Content-Type': 'application/json;charset=UTF-8'},
+            ""
+          ]
+        end
+
+        called_back = false 
+        subject.get_terminals do |result|
+          result.on_success do |message, value|
+            called_back = :success
+            expect(value).to include({})
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:success)
+      end
+
       it "failure: not activated" do
         stubs.get('api/v1/konnektor/default/api/v1/ctm/state') do
           [
@@ -235,6 +257,21 @@ module RISE
 
       it "success: returns 200" do
         stub_request(:any, url).to_return(status: 200, body: terminal_body)
+
+        called_back = false 
+        subject.get_terminal('00:0D:F8:08:77:76') do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:success)
+      end
+
+      it "empty: returns 200" do
+        stub_request(:any, url).to_return(status: 200, body: "")
 
         called_back = false 
         subject.get_terminal('00:0D:F8:08:77:76') do |result|
@@ -388,6 +425,23 @@ module RISE
         expect(called_back).to eq(:success)
       end
 
+      it "empty: returns 200" do
+        stub_request(:any, url)
+          .with(body: { "ctId": "11:22:33:44:55:66" }.to_json)
+          .to_return(status: 200, body: "")
+
+        called_back = false 
+        subject.initialize_pairing('11:22:33:44:55:66') do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:success)
+      end
+
       it "failure: 422" do
         stub_request(:any, url).to_return(status: 422)
 
@@ -428,6 +482,24 @@ module RISE
         stub_request(:any, url)
           .with(body: session_data.to_json)
           .to_return(status: 200, body: { "success" => true }.to_json)
+
+        called_back = false 
+        subject.finalize_pairing(session_data) do |result|
+          result.on_success do |message, value|
+            called_back = :success
+            value = { "success" => true }
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:success)
+      end
+
+      it "empty: returns 200" do
+        stub_request(:any, url)
+          .with(body: session_data.to_json)
+          .to_return(status: 200, body: "")
 
         called_back = false 
         subject.finalize_pairing(session_data) do |result|

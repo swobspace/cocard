@@ -25,7 +25,7 @@ module RISE
       elsif @errors.any?
         yield RISE::TIClient::Status.failure(@errors.join("; "))
       else
-        json = JSON.parse(response.body)
+        json = begin JSON.parse(response.body) rescue {} end
         yield RISE::TIClient::Status.success("#{response.status}: Success", json)
       end
     end
@@ -53,7 +53,7 @@ module RISE
       if @errors.any?
         yield RISE::TIClient::Status.failure(@errors.join("; "))
       else
-        json = JSON.parse(response.body)
+        json = begin JSON.parse(response.body) rescue {} end
         yield RISE::TIClient::Status.success("#{response.status}: Success", json)
       end
     end
@@ -139,7 +139,7 @@ module RISE
       if @errors.any?
         yield RISE::TIClient::Status.failure(@errors.join("; "))
       else
-        json = JSON.parse(response.body)
+        json = begin JSON.parse(response.body) rescue {} end
         yield RISE::TIClient::Status.success("#{response.status}: Success", json)
       end
     end
@@ -169,7 +169,7 @@ module RISE
       if @errors.any?
         yield RISE::TIClient::Status.failure(@errors.join("; "))
       else
-        json = JSON.parse(response.body.to_s)
+        json = begin JSON.parse(response.body.to_s) rescue {} end
         yield RISE::TIClient::Status.success("#{response.status}: Success", json)
       end
     end
