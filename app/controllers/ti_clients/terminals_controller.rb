@@ -45,7 +45,10 @@ module TIClients
          flash[:warning] = "Zugriff nicht möglich (bitte Einstellungen des TI-Clients prüfen)"
        end
 
-      redirect_to ti_client_terminals_path(@ti_client)
+      # redirect_to ti_client_terminals_path(@ti_client)
+      respond_with(@ti_client) do |format|
+        format.turbo_stream
+      end
     end
 
     def pairing
