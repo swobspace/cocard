@@ -335,6 +335,160 @@ module RISE
         expect(called_back).to eq(:failure)
       end
     end
+    describe '#begin_session' do
+      let(:url) do
+         tic.url + '/api/v1/konnektor/default/api/v1/ctm/terminals/begin-session'
+      end
+
+      it "success: returns 200" do
+        stub_request(:any, url).with(body: { "ctId": "11:22:33:44:55:66" }.to_json)
+                               .to_return(status: 200)
+
+        called_back = false 
+        subject.begin_session('11:22:33:44:55:66') do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:success)
+      end
+
+      it "failure: 422" do
+        stub_request(:any, url).to_return(status: 422)
+
+        called_back = false 
+        subject.begin_session(nil) do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:failure)
+      end
+    end
+    describe '#end_session' do
+      let(:url) do
+        tic.url + '/api/v1/konnektor/default/api/v1/ctm/terminals/end-session'
+      end
+
+      it "success: returns 200" do
+        stub_request(:any, url).with(body: { "ctId": "11:22:33:44:55:66" }.to_json)
+                               .to_return(status: 200)
+
+        called_back = false 
+        subject.end_session('11:22:33:44:55:66') do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:success)
+      end
+
+      it "failure: 422" do
+        stub_request(:any, url).to_return(status: 422)
+
+        called_back = false 
+        subject.end_session(nil) do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:failure)
+      end
+    end
+    describe '#add' do
+      let(:kt_proxy) do
+        FactoryBot.create(:kt_proxy,
+          uuid: SecureRandom.uuid,
+          wireguard_ip: "127.1.2.3",
+          incoming_port: 8888
+        )
+      end
+
+      let(:url) { tic.url + '/api/v1/konnektor/default/api/v1/ctm/terminals/add' }
+      let(:add_body) do
+        { 
+          "ipAddress": kt_proxy.wireguard_ip.to_s,
+          "tcpPort": kt_proxy.incoming_port
+        }.to_json
+      end
+
+      it "success: returns 200" do
+        stub_request(:any, url).with(body: add_body)
+                               .to_return(status: 200)
+
+        called_back = false 
+        subject.add(kt_proxy) do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:success)
+      end
+
+      it "failure: 422" do
+        stub_request(:any, url).to_return(status: 422)
+
+        called_back = false 
+        subject.add(nil) do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:failure)
+      end
+    end
+    describe '#change_correlation' do
+      let(:url) { tic.url + '/api/v1/konnektor/default/api/v1/ctm/terminals/change-correlation' }
+
+      it "success: returns 200" do
+        stub_request(:any, url).with(body: { "ctId": "11:22:33:44:55:66" }.to_json)
+                               .to_return(status: 200)
+
+        called_back = false 
+        subject.change_correlation('11:22:33:44:55:66') do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:success)
+      end
+
+      it "failure: 422" do
+        stub_request(:any, url).to_return(status: 422)
+
+        called_back = false 
+        subject.change_correlation(nil) do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:failure)
+      end
+    end
 
     describe '#initialize_pairing' do
       let(:url) do
