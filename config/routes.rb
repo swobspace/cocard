@@ -8,6 +8,10 @@ Rails.application.routes.draw do
       member do
         post :assign
         post :pairing
+        post :begin_session
+        post :end_session
+        post :add
+        post :change_correlation
       end
     end
     resources :kt_proxies, module: :ti_clients, only: [:index] do

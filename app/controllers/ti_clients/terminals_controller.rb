@@ -44,8 +44,42 @@ module TIClients
        else
          flash[:warning] = "Zugriff nicht möglich (bitte Einstellungen des TI-Clients prüfen)"
        end
+      respond_with(@ti_client) do |format|
+        format.turbo_stream
+      end
+    end
 
-      # redirect_to ti_client_terminals_path(@ti_client)
+    def begin_session
+      if @rtic.present?
+        @rtic.begin_session(params[:id]) do |result|
+          result.on_success do |message, value|
+            flash[:success] = message
+          end
+          result.on_failure do |message|
+            flash[:alert] = message
+          end
+        end
+       else
+         flash[:warning] = "Zugriff nicht möglich (bitte Einstellungen des TI-Clients prüfen)"
+       end
+      respond_with(@ti_client) do |format|
+        format.turbo_stream
+      end
+    end
+
+    def end_session
+      if @rtic.present?
+        @rtic.end_session(params[:id]) do |result|
+          result.on_success do |message, value|
+            flash[:success] = message
+          end
+          result.on_failure do |message|
+            flash[:alert] = message
+          end
+        end
+       else
+         flash[:warning] = "Zugriff nicht möglich (bitte Einstellungen des TI-Clients prüfen)"
+       end
       respond_with(@ti_client) do |format|
         format.turbo_stream
       end
