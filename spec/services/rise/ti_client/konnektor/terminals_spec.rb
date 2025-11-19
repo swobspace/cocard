@@ -19,6 +19,16 @@ module RISE
       }'
     end
 
+    before(:each) do
+      WebMock.disable_net_connect!
+      allow(subject).to receive(:api_token).at_least(:once)
+                                           .and_return('eyJraWQiOiJkZGUyMDZiYi1lMDgz')
+    end
+
+    after(:each) do
+      WebMock.allow_net_connect!
+    end
+
     subject { RISE::TIClient::Konnektor::Terminals.new(ti_client: tic) }
 
     # check for instance methods
@@ -39,6 +49,10 @@ module RISE
     end
 
     describe '#get_terminals' do
+      let(:url) do
+         tic.url + "/api/v1/konnektor/default/api/v1/ctm/state"
+      end
+
       let(:terminals_body) do
         json =<<~EOKTS
           {
@@ -99,26 +113,8 @@ module RISE
         EOKTS
       end
 
-      let(:stubs)  { Faraday::Adapter::Test::Stubs.new }
-      let(:conn)   { Faraday.new { |b| b.adapter(:test, stubs) } }
-      before(:each) do
-        allow(Faraday).to receive(:new).and_return(conn)
-        expect(subject).to receive(:api_token).at_least(:once)
-                                              .and_return('eyJraWQiOiJkZGUyMDZiYi1lMDgz')
-      end
-
-      after(:each) do
-        Faraday.default_connection = nil
-      end
-
       it "success: gets card terminal proxies" do
-        stubs.get('api/v1/konnektor/default/api/v1/ctm/state') do
-          [
-            200, 
-            {'Content-Type': 'application/json;charset=UTF-8'},
-            terminals_body
-          ]
-        end
+        stub_request(:any, url).to_return(status: 200, body: terminals_body)
 
         called_back = false 
         subject.get_terminals do |result|
@@ -134,13 +130,7 @@ module RISE
       end
 
       it "empty: gets card terminal proxies" do
-        stubs.get('api/v1/konnektor/default/api/v1/ctm/state') do
-          [
-            200, 
-            {'Content-Type': 'application/json;charset=UTF-8'},
-            ""
-          ]
-        end
+        stub_request(:any, url).to_return(status: 200, body: "")
 
         called_back = false 
         subject.get_terminals do |result|
@@ -156,13 +146,7 @@ module RISE
       end
 
       it "failure: not activated" do
-        stubs.get('api/v1/konnektor/default/api/v1/ctm/state') do
-          [
-            403, 
-            {'Content-Type': 'application/json;charset=UTF-8'},
-            ''
-          ]
-        end
+        stub_request(:any, url).to_return(status: 403, body: "")
 
         called_back = false 
         subject.get_terminals do |result|
@@ -180,13 +164,7 @@ module RISE
       end
 
       it "failure: no content" do
-        stubs.get('api/v1/konnektor/default/api/v1/ctm/state') do
-          [
-            401, 
-            {'Content-Type': 'application/json;charset=UTF-8'},
-            ''
-          ]
-        end
+        stub_request(:any, url).to_return(status: 401, body: "")
 
         called_back = false 
         subject.get_terminals do |result|
@@ -200,10 +178,8 @@ module RISE
         expect(called_back).to eq(:failure)
       end
 
-      it "failure: FaradayError" do
-        stubs.get('api/v1/konnektor/default/api/v1/ctm/state') do
-          raise Faraday::ConnectionFailed
-        end
+      it "failure: RuntimeError" do
+        stub_request(:any, url).to_raise(RuntimeError)
 
         called_back = false 
         subject.get_terminals do |result|
@@ -245,16 +221,6 @@ module RISE
       let(:url) do
          tic.url + "/api/v1/konnektor/default/api/v1/ctm/state/00:0D:F8:08:77:76"
       end
-      before(:each) do
-        WebMock.disable_net_connect!
-        expect(subject).to receive(:api_token).at_least(:once)
-                                              .and_return('eyJraWQiOiJkZGUyMDZiYi1lMDgz')
-      end
-
-      after(:each) do
-        WebMock.allow_net_connect!
-      end
-
       it "success: returns 200" do
         stub_request(:any, url).to_return(status: 200, body: terminal_body)
 
@@ -303,15 +269,6 @@ module RISE
 
     describe '#discover' do
       let(:url) { tic.url + '/api/v1/konnektor/default/api/v1/ctm/terminals/discover' }
-      before(:each) do
-        WebMock.disable_net_connect!
-        expect(subject).to receive(:api_token).at_least(:once)
-                                              .and_return('eyJraWQiOiJkZGUyMDZiYi1lMDgz')
-      end
-
-      after(:each) do
-        WebMock.allow_net_connect!
-      end
 
       it "success: returns 204" do
         stub_request(:any, url).to_return(status: 204)
@@ -346,15 +303,6 @@ module RISE
 
     describe '#assign' do
       let(:url) { tic.url + '/api/v1/konnektor/default/api/v1/ctm/terminals/assign' }
-      before(:each) do
-        WebMock.disable_net_connect!
-        expect(subject).to receive(:api_token).at_least(:once)
-                                              .and_return('eyJraWQiOiJkZGUyMDZiYi1lMDgz')
-      end
-
-      after(:each) do
-        WebMock.allow_net_connect!
-      end
 
       it "success: returns 200" do
         stub_request(:any, url).with(body: { "ctId": "11:22:33:44:55:66" }.to_json)
@@ -397,15 +345,6 @@ module RISE
         "fingerprint" => "ABCDEFGHIJKLMNOPQRST",
         "tlsSessionId" => "f6dc287a-c239-11f0-83ec-c025a5b36994"
       }}
-      before(:each) do
-        WebMock.disable_net_connect!
-        expect(subject).to receive(:api_token).at_least(:once)
-                                              .and_return('eyJraWQiOiJkZGUyMDZiYi1lMDgz')
-      end
-
-      after(:each) do
-        WebMock.allow_net_connect!
-      end
 
       it "success: returns 200" do
         stub_request(:any, url)
@@ -467,16 +406,6 @@ module RISE
         "fingerprint" => "ABCDEFGHIJKLMNOPQRST",
         "tlsSessionId" => "f6dc287a-c239-11f0-83ec-c025a5b36994"
       }}
-
-      before(:each) do
-        WebMock.disable_net_connect!
-        expect(subject).to receive(:api_token).at_least(:once)
-                                              .and_return('eyJraWQiOiJkZGUyMDZiYi1lMDgz')
-      end
-
-      after(:each) do
-        WebMock.allow_net_connect!
-      end
 
       it "success: returns 200" do
         stub_request(:any, url)

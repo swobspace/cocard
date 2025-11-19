@@ -7,16 +7,16 @@ module RISE
       else
         @errors = []
         begin
-          response = connection.get('/api/v1/konnektor/default/api/v1/ctm/state',
-                       {},
-                       { 'Content-Type': 'application/json',
-                         'authorization': "Bearer #{token}" }
-                     )
-          unless response.success?
-            @errors << "#{response.status}: #{response.body}"
+          apiurl  = ti_client&.url
+          apiurl += "/api/v1/konnektor/default/api/v1/ctm/state"
+          response = HTTP.auth("Bearer #{token}")
+                         .get(apiurl,
+                              ssl_context: ssl_verify_none)
+          unless response.status.success?
+            @errors << "#{response.status.to_s}: #{response.body.to_s}"
           end
-        rescue Faraday::Error => e
-          @errors << faraday_error(e)
+        rescue => e
+          @errors << e.to_s
         end
       end
 
