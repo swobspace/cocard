@@ -54,7 +54,7 @@
         </tr>
       </table>
     </div>
-    <div class="col-xl-3">
+    <div class="col-xl-3 text-end">
       <%= render TIClient::AssignComponent.new(
                    ti_client: card_terminal.kt_proxy.ti_client,
                    terminal: terminal) if can? :manage, card_terminal.kt_proxy.ti_client %>
