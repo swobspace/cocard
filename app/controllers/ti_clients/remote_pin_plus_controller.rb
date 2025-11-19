@@ -52,7 +52,10 @@ module TIClients
 
     def update_state(cards, cfg)
       iccsn = cfg.iccsn
-      cards.select{|c| c.iccsn == iccsn}.first.state = cfg.state
+      card = cards.select{|c| c.iccsn == iccsn}.first
+      if card.present?
+        card.state = cfg.state
+      end
     end
 
   end
