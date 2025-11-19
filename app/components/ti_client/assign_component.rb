@@ -20,6 +20,8 @@ class TIClient::AssignComponent < ViewComponent::Base
       raw(%Q[<i class="fa-solid fa-fw fa-link"></i>])
     elsif aktiv
       raw(%Q[<i class="fa-solid fa-fw fa-check"></i>])
+    elsif getrennt
+      raw(%Q[<i class="fa-solid fa-fw fa-check"></i>])
     else
       ""
     end
@@ -32,16 +34,22 @@ class TIClient::AssignComponent < ViewComponent::Base
       "Pairing-Vorgang am Konnektor und Terminal starten"
     elsif aktiv
       "Terminal aktiv"
+    elsif getrennt
+      "Terminal nicht verbunden"
     end
   end
 
   def action
+    return nil if (ti_client.nil? or terminal&.ct_id.blank?)
     if bekannt
       assign_ti_client_terminal_path(ti_client_id: ti_client.id,
-                                     id:terminal.ct_id)
+                                     id: terminal.ct_id)
     elsif zugewiesen
       pairing_ti_client_terminal_path(ti_client_id: ti_client.id,
                                       id: terminal.ct_id)
+    elsif getrennt
+      begin_session_ti_client_terminal_path(ti_client_id: ti_client.id,
+                                            id: terminal.ct_id)
     else
       nil
     end
@@ -54,6 +62,8 @@ class TIClient::AssignComponent < ViewComponent::Base
       "btn btn-sm btn-warning me-1"
     elsif aktiv
       "btn btn-sm btn-success me-1"
+    elsif getrennt
+      "btn btn-sm btn-warning me-1"
     end
   end
 
@@ -69,11 +79,15 @@ private
   end
 
   def aktiv
-    terminal.correlation == "AKTIV"
+    terminal.correlation == "AKTIV" and terminal.connected == true
+  end
+
+  def getrennt
+    terminal.correlation == "AKTIV" and terminal.connected == false
   end
 
   def assignable
-    bekannt || zugewiesen || aktiv
+    bekannt || zugewiesen || aktiv || getrennt
   end
 
 end
