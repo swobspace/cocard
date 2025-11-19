@@ -45,7 +45,6 @@ module Cocard
           end
         end
         Turbo::StreamsChannel.broadcast_refresh_later_to(:home)
-        Turbo::StreamsChannel.broadcast_refresh_later_to(:connector)
       end
     end
 
