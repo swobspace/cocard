@@ -1,3 +1,5 @@
+<%= render 'shared/turbo-cache-control' %>
+
 <%= turbo_stream_from @connector %>
 <div class="card mb-3" id="<%= dom_id(@connector) %>">
   <div class="card-header">
