@@ -433,7 +433,7 @@ module CardTerminals
               if response.rmi_pairingEHealthTerminal_enabled
                 debug("rmi_pairingEHealthTerminal_enabled: true")
                 debug("--- starting timer ---")
-                @timeout = EM::Timer.new(60) do
+                @timeout = EM::Timer.new(30) do
                   debug("### TIMEOUT ###")
                   @result['result'] = 'failure'
                   @result['failure'] = '### TIMEOUT ###'
@@ -452,7 +452,7 @@ module CardTerminals
             when :set_property
               @result['result'] = (response.result.nil?) ? 'success' : 'failure'
               debug("set properties: " + @result['result'])
-              @timeout = EM::Timer.new(60) do
+              @timeout = EM::Timer.new(30) do
                 debug("### TIMEOUT ###")
                 @result['result'] = 'failure'
                 @result['failure'] = '### TIMEOUT ###'
