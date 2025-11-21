@@ -7,8 +7,18 @@
   <%= render "shared/flash_alert" %>
 <% end %>
 
-<%= turbo_stream.replace(terminal_assign_button_id(@terminal.ct_id)) do %>
+<%= turbo_stream.replace(terminal_button_id(@terminal.ct_id, :assign)) do %>
   <%= render TIClient::AssignComponent.new(
                ti_client: @ti_client,
                terminal: @terminal) if can? :manage, @ti_client %>
+<% end %>
+
+<%= turbo_stream.replace(terminal_button_id(@terminal.ct_id, :correlation)) do %>
+  <%= render Terminal::StateComponent.new(terminal: @terminal,
+                                           attribute: :correlation) %>
+<% end %>
+
+<%= turbo_stream.replace(terminal_button_id(@terminal.ct_id, :connected)) do %>
+  <%= render Terminal::StateComponent.new(terminal: @terminal,
+                                           attribute: :connected) %>
 <% end %>

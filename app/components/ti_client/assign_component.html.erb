@@ -1,4 +1,4 @@
-<div id="<%= helpers.terminal_assign_button_id(terminal.ct_id) %>">
+<div id="<%= helpers.terminal_button_id(terminal.ct_id, :assign) %>">
   <% if action.present? %>
     <%= button_to(action,
                   method: :post,

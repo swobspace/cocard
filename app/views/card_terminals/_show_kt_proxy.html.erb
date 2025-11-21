@@ -46,11 +46,13 @@
       <table class="table table-sm table-borderless">
         <tr>
           <th class="w-25 pe-3"><%= t('attributes.correlation')%>:</th>
-          <td><%= terminal.correlation %></td>
+          <td><%= render Terminal::StateComponent.new(terminal: terminal,
+                                                      attribute: :correlation) %></td>
         </tr>
         <tr>
           <th class="w-25 pe-3"><%= t('attributes.connected')%>:</th>
-          <td><%= render BooleanComponent.new(value: terminal.connected) %></td>
+          <td><%= render Terminal::StateComponent.new(terminal: terminal,
+                                                      attribute: :connected) %></td>
         </tr>
       </table>
     </div>

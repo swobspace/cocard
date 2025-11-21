@@ -90,8 +90,11 @@
                 <td><%= terminal.ct_id %></td>
                 <td><%= terminal.mac %></td>
                 <td class="text-center"><%= terminal.tcp_port %></td>
-                <td><%= terminal.correlation %></td>
-                <td><%= render BooleanComponent.new(value: terminal.connected) %></td>
+                <td><%= render Terminal::StateComponent.new(terminal: terminal,
+                                                            attribute: :correlation) %>
+                </td>
+                <td><%= render Terminal::StateComponent.new(terminal: terminal,
+                                                            attribute: :connected) %></td>
                 <td>
                   <%= render TIClient::AssignComponent.new(
                                ti_client: @ti_client,
