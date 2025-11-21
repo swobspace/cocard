@@ -84,6 +84,24 @@ connectors = cts_with_missing_proxies.join(:connector).distinct
 connectors.pluck(:short_name)
 ----
 
+== Kartenterminals aus KT-Proxy am Konnektor hinzufügen
+
+[source,ruby]
+----
+tic = TIClient.where("name like ?", "%02-BNA%").first
+rtic = RISE::TIClient::Konnektor::Terminals.new(ti_client: tic)
+tic.kt_proxies.each do |ktp|
+  rtic.add(ktp) do |result|
+    result.on_success do |message, value|
+      puts message
+    end
+    result.on_failure do |message|
+      puts message
+    end
+  end
+end; nil
+----
+
 
 == Sequenzdiagramm
 
