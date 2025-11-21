@@ -5,7 +5,7 @@ Rails.application.configure do
   config.good_job = {
     execution_mode: :external,
     enable_cron: true,
-    max_threads: 8,
+    max_threads: 12,
     poll_interval: 30,
     retry_on_unhandled_error: false,
     preserve_job_records: true,
