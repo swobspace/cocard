@@ -1,5 +1,7 @@
 <%= render 'shared/turbo-cache-control' %>
 <%= turbo_stream_from 'remote_pairing' %>
+<%= turbo_stream_from "card_terminal_check_ti_client_#{@ti_client.id}" %>
+
 <%= turbo_frame_tag('ticlient_terminals') do %>
   <%# render partial: 'shared/flash_alert' %>
   <div class="card mt-3">
@@ -34,6 +36,7 @@
           <thead>
             <tr>
               <th class="bg-info-subtle"><%= t('attributes.card_terminal') %></th>
+              <th class="nosort notvisible">Health</th>
               <th class="bg-info-subtle notvisible"><%= t('attributes.location') %></th>
               <th class="text-start bg-info-subtle"><%= t('attributes.condition') %></th>
               <th class="bg-info-subtle"><%= t('attributes.last_ok') %></th>
@@ -59,6 +62,7 @@
               <th></th>
               <th></th>
               <th></th>
+              <th></th>
             </tr>
           </tfoot>
           <tbody>
@@ -67,6 +71,10 @@
                 <td>
                   <%= render LinkToComponent.new(item: terminal.card_terminal,
                                                  label_method: :name) %>
+                </td>
+                <td>
+                  <%= render HealthCheckButtonComponent.new(item: terminal.card_terminal,
+                                                            variant: :small) %>
                 </td>
                 <td> <%= terminal.card_terminal&.location&.lid %> </td>
                 <td>
