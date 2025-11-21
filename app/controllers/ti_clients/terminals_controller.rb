@@ -41,9 +41,10 @@ module TIClients
             flash[:alert] = message
           end
         end
-       else
-         flash[:warning] = "Zugriff nicht möglich (bitte Einstellungen des TI-Clients prüfen)"
-       end
+      else
+        flash[:warning] = "Zugriff nicht möglich (bitte Einstellungen des TI-Clients prüfen)"
+      end
+      fetch_terminal 
       respond_with(@ti_client) do |format|
         format.turbo_stream
       end
@@ -59,9 +60,10 @@ module TIClients
             flash[:alert] = message
           end
         end
-       else
-         flash[:warning] = "Zugriff nicht möglich (bitte Einstellungen des TI-Clients prüfen)"
-       end
+      else
+        flash[:warning] = "Zugriff nicht möglich (bitte Einstellungen des TI-Clients prüfen)"
+      end
+      fetch_terminal 
       respond_with(@ti_client) do |format|
         format.turbo_stream
       end
@@ -77,9 +79,10 @@ module TIClients
             flash[:alert] = message
           end
         end
-       else
-         flash[:warning] = "Zugriff nicht möglich (bitte Einstellungen des TI-Clients prüfen)"
-       end
+      else
+        flash[:warning] = "Zugriff nicht möglich (bitte Einstellungen des TI-Clients prüfen)"
+      end
+      fetch_terminal 
       respond_with(@ti_client) do |format|
         format.turbo_stream
       end
@@ -124,6 +127,7 @@ module TIClients
       else
         flash[:warning] = "Zugriff nicht möglich (bitte Einstellungen des TI-Clients prüfen)"
       end
+      fetch_terminal 
       respond_with(@ti_client) do |format|
         format.turbo_stream
       end
@@ -134,6 +138,16 @@ module TIClients
       @ti_client = TIClient.find(params[:ti_client_id])
       if @ti_client&.client_secret.present?
         @rtic = RISE::TIClient::Konnektor::Terminals.new(ti_client: @ti_client)
+      end
+    end
+
+    def fetch_terminal
+      if @rtic.present?
+        @rtic.get_terminal(params[:id]) do |result|
+          result.on_success do |msg, value|
+            @terminal = RISE::TIClient::Konnektor::Terminal.new(value)
+          end
+        end
       end
     end
 

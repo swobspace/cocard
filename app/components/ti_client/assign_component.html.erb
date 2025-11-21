@@ -1,13 +1,15 @@
-<% if action.present? %>
-  <%= button_to(action,
-                method: :post,
-                title: title,
-                class: button_class ) do %>
-    <%= icon %>
+<div id="<%= helpers.terminal_assign_button_id(terminal.ct_id) %>">
+  <% if action.present? %>
+    <%= button_to(action,
+                  method: :post,
+                  title: title,
+                  class: button_class ) do %>
+      <%= icon %>
+    <% end %>
+  <% else %>
+    <button type="button" class="<%= button_class %>" disabled>
+      <%= icon %>
+    </button>
   <% end %>
-<% else %>
-  <button type="button" class="<%= button_class %>" disabled>
-    <%= icon %>
-  </button>
-<% end %>
+</div>
 
