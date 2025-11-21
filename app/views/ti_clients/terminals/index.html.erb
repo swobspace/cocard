@@ -38,6 +38,7 @@
               <th class="bg-info-subtle"><%= t('attributes.card_terminal') %></th>
               <th class="nosort notvisible">Health</th>
               <th class="bg-info-subtle notvisible"><%= t('attributes.location') %></th>
+              <th class="bg-info-subtle notvisible"><%= t('attributes.room') %></th>
               <th class="text-start bg-info-subtle"><%= t('attributes.condition') %></th>
               <th class="bg-info-subtle"><%= t('attributes.last_ok') %></th>
               <th class="bg-success-subtle"><%= t('attributes.name') %></th>
@@ -51,6 +52,7 @@
           </thead>
           <tfoot class="search">
             <tr>
+              <th></th>
               <th></th>
               <th></th>
               <th></th>
@@ -77,6 +79,7 @@
                                                             variant: :small) %>
                 </td>
                 <td> <%= terminal.card_terminal&.location&.lid %> </td>
+                <td> <%= terminal.card_terminal&.room %> </td>
                 <td>
                   <%= render ConditionIconComponent.new(item: terminal.card_terminal, 
                                                         as_text: true) %>
