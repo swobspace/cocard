@@ -1,9 +1,5 @@
 <%= render 'shared/turbo-cache-control' %>
 
-<% @ti_client.card_terminals.each do |ct| %>
-  <%= turbo_stream_from ct %>
-<% end %>
-
 <div class="card mb-3">
   <div class="card-header">
     <div class="d-flex w-100 justify-content-between">

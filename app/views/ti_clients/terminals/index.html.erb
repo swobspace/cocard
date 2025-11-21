@@ -1,6 +1,4 @@
 <%= render 'shared/turbo-cache-control' %>
-<%= turbo_stream_from 'remote_pairing' %>
-<%= turbo_stream_from "card_terminal_check_ti_client_#{@ti_client.id}" %>
 
 <%= turbo_frame_tag('ticlient_terminals') do %>
   <%# render partial: 'shared/flash_alert' %>

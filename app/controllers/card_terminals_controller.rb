@@ -63,7 +63,8 @@ class CardTerminalsController < ApplicationController
   end
 
   def check
-    CardTerminals::HealthCheckJob.perform_now(card_terminal: @card_terminal)
+    CardTerminals::HealthCheckJob.perform_now(card_terminal: @card_terminal,
+                                              user: current_user)
     respond_with(@card_terminal) do |format|
       format.turbo_stream { head :ok }
     end

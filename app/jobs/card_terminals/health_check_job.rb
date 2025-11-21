@@ -4,6 +4,7 @@ class CardTerminals::HealthCheckJob < ApplicationJob
   def perform(options = {})
     options.symbolize_keys!
     card_terminal = options.fetch(:card_terminal)
+    @user         = options.fetch(:user)
     status = nil
 
     if card_terminal.is_accessible?
@@ -74,7 +75,7 @@ private
   def toaster(card_terminal, status, message)
     unless status.nil?
       Turbo::StreamsChannel.broadcast_prepend_to(
-        card_terminal,
+        @user,
         target: 'toaster',
         partial: "shared/turbo_toast",
         locals: {status: status, message: message})

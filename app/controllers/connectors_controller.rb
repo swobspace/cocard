@@ -42,7 +42,8 @@ class ConnectorsController < ApplicationController
   end
 
   def check
-    Connectors::HealthCheckJob.perform_now(connector: @connector)
+    Connectors::HealthCheckJob.perform_now(connector: @connector,
+                                           user: current_user)
     respond_with(@connector) do |format|
       format.turbo_stream { head :ok }
     end
