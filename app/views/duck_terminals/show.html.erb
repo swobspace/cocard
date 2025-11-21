@@ -4,10 +4,9 @@
     <div class="d-flex w-100">
       <div>
         <span class="subtitle">
-          <%= t('activerecord.models.card_terminal') %>:
-          #<%= @card_terminal.id %>
+          <%= render LinkToComponent.new(item: @card_terminal.connector) %>
         </span>
-        <h4 class="title"><%= @card_terminal %></h4>
+        <h4 class="title"><%= render LinkToComponent.new(item: @card_terminal) %></h4>
       </div>
       <div class="ms-3 pt-3">
         <%= render ConditionIconComponent.new(item: @card_terminal) %>
