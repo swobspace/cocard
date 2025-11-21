@@ -96,7 +96,8 @@ module TIClients
       elsif !ct.tcp_port_open?(ct.rmi_port)
         flash.now[:warning] = rmi_port_unreachable(ct)
       elsif @rtic.present?
-        CardTerminals::RMI::RemotePairingJob.perform_later(card_terminal: ct)
+        CardTerminals::RMI::RemotePairingJob.perform_later(card_terminal: ct,
+                                                           user: current_user)
         Rails.logger.debug("PAIRING:: ctId: #{ct.rawmac.upcase}")
         # -> start connector pairing mode
         @rtic.initialize_pairing(ct.rawmac.upcase) do |init|

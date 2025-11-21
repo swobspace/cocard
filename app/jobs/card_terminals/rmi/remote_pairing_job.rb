@@ -6,6 +6,7 @@ module CardTerminals
       def perform(options = {})
         options = options.symbolize_keys
         card_terminal = options.fetch(:card_terminal)
+        @user         = options.fetch(:user)
         @prefix = "RemotePairingJob:: CardTerminal ".freeze
         unless check_job_requirements(card_terminal)
           msg = @prefix + "not all requirements met"
@@ -51,7 +52,7 @@ module CardTerminals
         message = "#{card_terminal}: #{message}"
         unless status.nil?
           Turbo::StreamsChannel.broadcast_prepend_to(
-            'remote_pairing', 
+            @user,
             target: 'toaster',
             partial: "shared/turbo_toast",
             locals: {status: status, message: message})
