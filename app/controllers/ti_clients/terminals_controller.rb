@@ -21,10 +21,55 @@ module TIClients
             flash[:alert] = message
           end
         end
-       else
-         flash[:warning] = "Zugriff nicht möglich (bitte Einstellungen des TI-Clients prüfen)"
-       end
+      else
+        flash[:warning] = "Zugriff nicht möglich (bitte Einstellungen des TI-Clients prüfen)"
+      end
 
+      respond_with(@terminals)
+    end
+
+    def reconnect_all
+      @terminals = []
+      if @rtic.present?
+        @rtic.get_terminals do |rt|
+          rt.on_success do |message, value|
+            terminals = value['CTM_CT_LIST'] || []
+            terminals.each do |terminal|
+              @terminals << RISE::TIClient::Konnektor::Terminal.new(terminal)
+            end
+            @terminals.each do |terminal|
+              next if terminal.correlation != 'AKTIV' and terminal.connected
+              if @rtic.present? 
+                @rtic.begin_session(terminal.ct_id) do |r|
+                  r1.on_success do |message, value|
+                    toaster(@ti_client, :success, 
+                            "#{terminal.name} erfolgreich verbunden")
+                  end
+                  r1.on_failure do |message|
+                    unless message =~ /open ct session found/
+                      @rtic.begin_session(terminal.ct_id) do |r2|
+                        r2.on_success do |message, value|
+                          toaster(@ti_client, :success, 
+                                  "#{terminal.name} erfolgreich verbunden")
+                        end
+                        r2.on_failure do |message, value|
+                          toaster(@ti_client, :alert, 
+                                  "#{terminal.name} konnte nicht verbunden werden")
+                        end
+                      end
+                    end
+                  end
+                end
+              end
+            end
+          end
+          rt.on_failure do |message|
+            flash[:alert] = message
+          end
+        end 
+      else
+        flash[:warning] = "Zugriff nicht möglich (bitte Einstellungen des TI-Clients prüfen)"
+      end  
       respond_with(@terminals)
     end
 
@@ -176,6 +221,16 @@ module TIClients
     def card_terminal
       if params[:id]
         CardTerminal.where(mac: params[:id]).first
+      end
+    end
+
+    def toaster(ti_client, status, message)
+      unless status.nil?
+        Turbo::StreamsChannel.broadcast_prepend_to(
+          ti_client,
+          target: 'toaster',
+          partial: "shared/turbo_toast",
+          locals: {status: status, message: message})
       end
     end
 

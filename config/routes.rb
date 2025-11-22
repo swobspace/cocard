@@ -13,6 +13,9 @@ Rails.application.routes.draw do
         post :add
         post :change_correlation
       end
+      collection do
+        post :reconnect_all
+      end
     end
     resources :kt_proxies, module: :ti_clients, only: [:index] do
       collection do

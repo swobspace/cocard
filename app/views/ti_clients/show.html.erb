@@ -56,6 +56,22 @@
             <th class="w-10 pe-3"><%= t('attributes.task_scheduler')%>:</th>
             <td><%= render TIClient::SchedulerComponent.new(ti_client: @ti_client) %></td>
           </tr>
+          <tr>
+            <th class="w-10 pe-3">Sammelaktionen:</th>
+            <td>
+              <%= button_to(
+                    reconnect_all_ti_client_terminals_path(@ti_client),
+                    method: :post,
+                    class: "btn btn-warning",
+                     form: {
+                       data: {
+                         "turbo-confirm": "Alle aktiven Terminals erneut verbinden"
+                       }
+                     }) do %>
+                <i class="fa-solid fa-hammer"></i> Alle aktiven, nicht verbundenen Terminals erneut verbinden
+              <% end %>
+            </td>
+          </tr>
         </table>
 
       </div>
