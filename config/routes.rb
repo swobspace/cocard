@@ -15,6 +15,8 @@ Rails.application.routes.draw do
       end
       collection do
         post :reconnect_all
+        post :assign_all
+        post :pairing_all
       end
     end
     resources :kt_proxies, module: :ti_clients, only: [:index] do

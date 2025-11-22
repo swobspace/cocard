@@ -38,9 +38,10 @@ module TIClients
               @terminals << RISE::TIClient::Konnektor::Terminal.new(terminal)
             end
             @terminals.each do |terminal|
-              next if terminal.correlation != 'AKTIV' and terminal.connected
+              next if terminal.correlation != 'AKTIV' 
+              next if terminal.connected
               if @rtic.present? 
-                @rtic.begin_session(terminal.ct_id) do |r|
+                @rtic.begin_session(terminal.ct_id) do |r1|
                   r1.on_success do |message, value|
                     toaster(@ti_client, :success, 
                             "#{terminal.name} erfolgreich verbunden")
@@ -70,6 +71,48 @@ module TIClients
       else
         flash[:warning] = "Zugriff nicht möglich (bitte Einstellungen des TI-Clients prüfen)"
       end  
+      respond_with(@terminals)
+    end
+
+    def assign_all
+      @terminals = []
+      if @rtic.present?
+        @rtic.get_terminals do |rt|
+          rt.on_success do |message, value|
+            terminals = value['CTM_CT_LIST'] || []
+            terminals.each do |terminal|
+              @terminals << RISE::TIClient::Konnektor::Terminal.new(terminal)
+            end
+            @terminals.each do |terminal|
+              next if terminal.correlation != 'BEKANNT'
+              if @rtic.present? 
+                @rtic.assign(terminal.ct_id) do |r1|
+                  r1.on_success do |message, value|
+                    toaster(@ti_client, :success, 
+                            "#{terminal.name} erfolgreich zugewiesen")
+                  end
+                  r1.on_failure do |message|
+                    toaster(@ti_client, :alert, 
+                            "#{terminal.name} konnte nicht zugewiesen werden")
+                  end
+                end
+              end
+            end
+          end
+          rt.on_failure do |message|
+            flash[:alert] = message
+          end
+        end 
+      else
+        flash[:warning] = "Zugriff nicht möglich (bitte Einstellungen des TI-Clients prüfen)"
+      end  
+      respond_with(@terminals)
+    end
+
+    def pairing_all
+      @terminals = []
+      message = "Funktion noch nicht implementiert, stay tuned ..."
+      toaster(@ti_client, :info, message)
       respond_with(@terminals)
     end
 
@@ -224,10 +267,10 @@ module TIClients
       end
     end
 
-    def toaster(ti_client, status, message)
+    def toaster(target, status, message)
       unless status.nil?
         Turbo::StreamsChannel.broadcast_prepend_to(
-          ti_client,
+          target,
           target: 'toaster',
           partial: "shared/turbo_toast",
           locals: {status: status, message: message})

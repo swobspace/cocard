@@ -379,3 +379,9 @@ de:
     firmware_duilddate: Datum der Firmware
   ti_clients:
     fetch_kt_proxies: Proxies vom TIClient holen
+    hint_all: |
+      Hinweis: Die Sammelaktionen können sehr lange dauern und ggf. einige Funktionen
+      von Cocard blockieren - insbesondere dann, wenn einige Terminals nicht reagieren.
+    reconnect_all: Alle aktiven, nicht verbundenen Terminals erneut verbinden
+    assign_all: Alle bekannten Terminals zuweisen
+    pairing_all: Alle zugewiesenen Terminals pairen

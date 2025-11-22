@@ -1,5 +1,8 @@
 <%= render 'shared/turbo-cache-control' %>
 
+<%= turbo_stream_from @ti_client %>
+
+
 <div class="card mb-3">
   <div class="card-header">
     <div class="d-flex w-100 justify-content-between">
@@ -20,7 +23,7 @@
   <div class="card-body">
     <div class="row">
       <div class="col-6">
-        <table class="table table-sm table-borderless">
+        <table class="table table-sm table-borderless mb-0">
           <tr>
             <th class="w-10 pe-3"><%= t('attributes.connector')%>:</th>
             <td><%= link_to @ti_client.connector,
@@ -51,27 +54,64 @@
         </table>
       </div>
       <div class="col-6">
-        <table class="table table-sm table-borderless">
+        <table class="table table-sm table-borderless mb-0">
           <tr>
             <th class="w-10 pe-3"><%= t('attributes.task_scheduler')%>:</th>
             <td><%= render TIClient::SchedulerComponent.new(ti_client: @ti_client) %></td>
           </tr>
+         <% if can? :manage, @ti_client %>
           <tr>
             <th class="w-10 pe-3">Sammelaktionen:</th>
             <td>
+              <div class="alert alert-warning">
+                <%= t('ti_clients.hint_all') %>
+              </div>
+
               <%= button_to(
                     reconnect_all_ti_client_terminals_path(@ti_client),
                     method: :post,
-                    class: "btn btn-warning",
+                    class: "btn btn-warning mb-2",
                      form: {
                        data: {
-                         "turbo-confirm": "Alle aktiven Terminals erneut verbinden"
+                         "turbo-confirm": t('ti_clients.hint_all') +
+                                          "Wollen Sie trotzdem fortfahren?"
                        }
                      }) do %>
-                <i class="fa-solid fa-hammer"></i> Alle aktiven, nicht verbundenen Terminals erneut verbinden
+                <i class="fa-solid fa-fw fa-arrow-rotate-right me-1"></i>
+                <%= t('ti_clients.reconnect_all') %>
+              <% end %>
+              <br/>
+              <%= button_to(
+                    assign_all_ti_client_terminals_path(@ti_client),
+                    method: :post,
+                    class: "btn btn-warning mb-2",
+                     form: {
+                       data: {
+                         "turbo-confirm": t('ti_clients.hint_all') +
+                                          "Wollen Sie trotzdem fortfahren?"
+                       }
+                     }) do %>
+                <i class="fa-solid fa-fw fa-plus me-1"></i>
+                <%= t('ti_clients.assign_all') %>
+              <% end %>
+              <br/>
+              <%= button_to(
+                    pairing_all_ti_client_terminals_path(@ti_client),
+                    method: :post,
+                    class: "btn btn-outline-warning mb-2",
+                    title: "not yet implemented, stay tuned ...",
+                     form: {
+                       data: {
+                         "turbo-confirm": t('ti_clients.hint_all') +
+                                          "Wollen Sie trotzdem fortfahren?"
+                       }
+                     }) do %>
+                <i class="fa-solid fa-fw fa-link me-1"></i>
+                <%= t('ti_clients.pairing_all') %>
               <% end %>
             </td>
           </tr>
+         <% end %>
         </table>
 
       </div>
