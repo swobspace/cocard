@@ -95,7 +95,7 @@
                 <%= t('ti_clients.assign_all') %>
               <% end %>
               <br/>
-              <%= button_to(
+              <%# button_to(
                     pairing_all_ti_client_terminals_path(@ti_client),
                     method: :post,
                     class: "btn btn-outline-warning mb-2",
@@ -106,9 +106,11 @@
                                           "Wollen Sie trotzdem fortfahren?"
                        }
                      }) do %>
-                <i class="fa-solid fa-fw fa-link me-1"></i>
-                <%= t('ti_clients.pairing_all') %>
-              <% end %>
+              <!-- 
+                <i class="fa-solid fa-fw fa-link me-1"></i> 
+               -->
+                <%# t('ti_clients.pairing_all') %>
+              <%# end %>
             </td>
           </tr>
          <% end %>
