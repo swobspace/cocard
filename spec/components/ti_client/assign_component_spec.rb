@@ -27,6 +27,14 @@ RSpec.describe TIClient::AssignComponent, type: :component do
     end
   end
 
+  describe "with correlation GEPAIRT" do
+    it "shows play button" do
+      expect(terminal).to receive(:correlation).at_least(:once).and_return('GEPAIRT')
+      render_inline(described_class.new(ti_client: ti_client, terminal: terminal))
+      expect(page).to have_css('i[class="fa-solid fa-fw fa-play"]')
+    end
+  end
+
   describe "with correlation AKTIV, connected == true" do
     it "shows plus button" do
       expect(terminal).to receive(:correlation).at_least(:once).and_return('AKTIV')

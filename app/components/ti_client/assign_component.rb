@@ -10,7 +10,7 @@ class TIClient::AssignComponent < ViewComponent::Base
   end
 
   def render?
-    terminal.present? and ti_client.present? and (assignable || aktiv)
+    terminal.present? and ti_client.present? and assignable
   end
 
   def icon
@@ -18,6 +18,8 @@ class TIClient::AssignComponent < ViewComponent::Base
       raw(%Q[<i class="fa-solid fa-fw fa-plus"></i>])
     elsif zugewiesen
       raw(%Q[<i class="fa-solid fa-fw fa-link"></i>])
+    elsif gepairt
+      raw(%Q[<i class="fa-solid fa-fw fa-play"></i>])
     elsif aktiv
       raw(%Q[<i class="fa-solid fa-fw fa-check"></i>])
     elsif getrennt
@@ -32,6 +34,8 @@ class TIClient::AssignComponent < ViewComponent::Base
       "Terminal am Konnektor zuweisen"
     elsif zugewiesen
       "Pairing-Vorgang am Konnektor und Terminal starten"
+    elsif gepairt
+      "Terminal in den Zustand aktiv setzen"
     elsif aktiv
       "Terminal aktiv"
     elsif getrennt
@@ -47,6 +51,10 @@ class TIClient::AssignComponent < ViewComponent::Base
     elsif zugewiesen
       pairing_ti_client_terminal_path(ti_client_id: ti_client.id,
                                       id: terminal.ct_id)
+    elsif gepairt
+      change_correlation_ti_client_terminal_path(ti_client_id: ti_client.id,
+                                                 id: terminal.ct_id,
+                                                 correlation: "AKTIV")
     elsif getrennt
       begin_session_ti_client_terminal_path(ti_client_id: ti_client.id,
                                             id: terminal.ct_id)
@@ -59,6 +67,8 @@ class TIClient::AssignComponent < ViewComponent::Base
     if bekannt
       "btn btn-sm btn-warning me-1"
     elsif zugewiesen
+      "btn btn-sm btn-warning me-1"
+    elsif gepairt
       "btn btn-sm btn-warning me-1"
     elsif aktiv
       "btn btn-sm btn-success me-1"
@@ -78,6 +88,10 @@ private
     terminal.correlation == "ZUGEWIESEN"
   end
 
+  def gepairt
+    terminal.correlation == "GEPAIRT"
+  end
+
   def aktiv
     terminal.correlation == "AKTIV" and terminal.connected == true
   end
@@ -87,7 +101,7 @@ private
   end
 
   def assignable
-    bekannt || zugewiesen || aktiv || getrennt
+    bekannt || zugewiesen || gepairt || aktiv || getrennt
   end
 
 end
