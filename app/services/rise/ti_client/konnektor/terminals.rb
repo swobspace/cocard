@@ -206,9 +206,12 @@ module RISE
     end
 
     def change_correlation(ct_id, correlation)
+      allowed_correlations = %w[ BEKANNT ZUGEWIESEN GEPAIRT AKTIV AKTUALISIEREND ]
       token = api_token
       if token.nil?
         @errors << "Authentifikation fehlgeschlagen"
+      elsif !allowed_correlations.include?(correlation)
+        @errors << "Wert #{correlation} für neuen Korrelationszustand nicht erlaubt"
       else
         @errors = []
         begin
