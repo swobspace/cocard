@@ -1,0 +1,37 @@
+= TI-Client: REST-API aktivieren
+:navtitle: REST-API aktivieren
+:author: Wolfgang Barth
+:revdate: 2025-11-24
+:imagesdir: ../../../images
+
+== Aktivierung API TI-Client
+
+Im Auslieferungszustand ist der TI-Client per Weboberfläche nur von `localhost` aus erreichbar. Ab Version 2.6.1 legt man in der Benutzerverwaltung mindestens einen Benutzer an. Der Benutzer hat als Administrator volle Zugriffsrechte via Weboberfläche wie wenn die Adminoberfläche per `localhost` aufgerufen wird.
+
+.Benutzerverwaltung auf dem TI-Client
+image::ti-client/ti-client-users.png[]
+
+Mit der Anlage des ersten Benutzers aktiviert man gleichzeitig das REST-API des TI-Clients. Danach legt man die Applikation `cocard` an. Das dabei kurz angezeigte Client-Secret notiert man und trägt es in Cocard beim TI-Client zusammen mit der Zugriffs-URL ein.
+
+.Verwaltung von Applikationen
+image::ti-client/ti-client-applications.png[]
+
+.TI-Client in Cocard anlegen/bearbeiten
+image::ti-client/ti-client-edit.png[]
+
+
+
+
+== Aktivierung vKonnektor-Proxy
+
+#FIXME#
+
+----
+PUT /v1/manager/konnektor/default/proxy-activation
+
+body:
+{
+  "username": "superadmin",
+  "password": "strenggeheim;-)"
+}
+----

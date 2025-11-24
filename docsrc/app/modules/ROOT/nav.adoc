@@ -31,4 +31,5 @@
 ** xref:admin/client-certificates.adoc[]
 // *** xref:certs/telematik-ca.adoc[]
 ** xref:admin/ldap-authentication.adoc[]
-** xref:admin/ti-gateway.adoc[]
+** xref:admin/ti-client/index.adoc[]
+*** xref:admin/ti-client/activate-api.adoc[]
