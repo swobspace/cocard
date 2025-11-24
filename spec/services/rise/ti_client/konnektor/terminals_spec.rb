@@ -459,11 +459,12 @@ module RISE
       let(:url) { tic.url + '/api/v1/konnektor/default/api/v1/ctm/terminals/change-correlation' }
 
       it "success: returns 200" do
-        stub_request(:any, url).with(body: { "ctId": "11:22:33:44:55:66" }.to_json)
+        stub_request(:any, url).with(body: { "ctId": "11:22:33:44:55:66",
+                                             "correlation": "AKTIV" }.to_json)
                                .to_return(status: 200)
 
         called_back = false 
-        subject.change_correlation('11:22:33:44:55:66') do |result|
+        subject.change_correlation('11:22:33:44:55:66', "AKTIV") do |result|
           result.on_success do |message, value|
             called_back = :success
           end
@@ -478,7 +479,7 @@ module RISE
         stub_request(:any, url).to_return(status: 422)
 
         called_back = false 
-        subject.change_correlation(nil) do |result|
+        subject.change_correlation(nil, nil) do |result|
           result.on_success do |message, value|
             called_back = :success
           end

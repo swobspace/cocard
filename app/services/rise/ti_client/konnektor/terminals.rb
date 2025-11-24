@@ -205,7 +205,7 @@ module RISE
       end
     end
 
-    def change_correlation(ct_id)
+    def change_correlation(ct_id, correlation)
       token = api_token
       if token.nil?
         @errors << "Authentifikation fehlgeschlagen"
@@ -218,7 +218,7 @@ module RISE
                          .auth("Bearer #{token}")
                          .post(apiurl,
                               ssl_context: ssl_verify_none,
-                              json: {"ctId": "#{ct_id}"})
+                              json: {"ctId": "#{ct_id}", "correlation": correlation})
           unless response.status.success?
             @errors << "#{response.status.to_s}: #{response.body.to_s}"
           end
