@@ -2,7 +2,7 @@
   <div data-controller="datatables">
     <%= content_tag :table, role: :datatable,
           id: "location_cards_table",
-          class: "table table-bordered table-responsive",
+          class: "table table-sm table-responsive",
           data: {
             'datatables-target': 'datatable',
             order: [[0, 'asc']].to_json
