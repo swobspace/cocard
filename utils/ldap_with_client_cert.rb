@@ -8,14 +8,19 @@ require "#{File.dirname(__FILE__)}/../config/environment.rb"
 connector = Connector.where("name ILIKE ?", '%01-Spielwiese').first
 client_certificate = ClientCertificate.where(client_system: 'cocard').first
 
-cert_store = OpenSSL::X509::Store.new
-cert_store.add_file "./utils/cacert.pem"
+# fetch server cert
+
+# server_cert = Net::HTTP.start(connector.ip.to_s, '443', use_ssl: true) { |http| http.peer_cert }
+
+# cert_store = OpenSSL::X509::Store.new
+# cert_store.add_cert server_cert
 
 tls_options = {
   cert: client_certificate.certificate,
   key: client_certificate.private_key,
-  cert_store: cert_store,
-  verify_mode: (OpenSSL::SSL::VERIFY_PEER | OpenSSL::SSL::VERIFY_FAIL_IF_NO_PEER_CERT),
+  # cert_store: cert_store,
+  # verify_mode: (OpenSSL::SSL::VERIFY_PEER | OpenSSL::SSL::VERIFY_FAIL_IF_NO_PEER_CERT),
+  verify_mode: OpenSSL::SSL::VERIFY_NONE, 
   verify_hostname: false
 }
 
