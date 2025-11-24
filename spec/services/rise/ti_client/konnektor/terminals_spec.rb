@@ -479,12 +479,13 @@ module RISE
         stub_request(:any, url).to_return(status: 422)
 
         called_back = false 
-        subject.change_correlation(nil, nil) do |result|
+        subject.change_correlation(nil, "XXX") do |result|
           result.on_success do |message, value|
             called_back = :success
           end
           result.on_failure do |message|
             called_back = :failure
+            expect(message).to match(/Wert XXX für neuen Korrelationszustand nicht erlaubt/)
           end
         end
         expect(called_back).to eq(:failure)

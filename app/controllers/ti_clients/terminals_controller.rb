@@ -138,6 +138,28 @@ module TIClients
       end
     end
 
+    def change_correlation
+      if @rtic.present?
+        @rtic.change_correlation(params[:id], params[:correlation]) do |result|
+          result.on_success do |message, value|
+            flash[:success] = message
+            if card_terminal.present?
+              card_terminal.update(connector_id: @ti_client.connector_id)
+            end
+          end
+          result.on_failure do |message|
+            flash[:alert] = message
+          end
+        end
+      else
+        flash[:warning] = "Zugriff nicht möglich (bitte Einstellungen des TI-Clients prüfen)"
+      end
+      fetch_terminal 
+      respond_with(@ti_client) do |format|
+        format.turbo_stream
+      end
+    end
+
     def begin_session
       if @rtic.present?
         @rtic.begin_session(params[:id]) do |result|
