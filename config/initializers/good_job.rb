@@ -28,6 +28,11 @@ Rails.application.configure do
         class: "Cocard::GetCardTerminalsJob",
         description: "Get card terminals from connector"
       },
+      get_card_terminal_info: {
+        cron: '55 03 * * *',
+        class: "CardTerminals::RMI::GetInfoJob",
+        description: "Fetch card terminal infos via RMI"
+      },
       ti_lagebild: {
         cron: '*/5 * * * *',
         class: "TI::GetSituationPictureJob",
