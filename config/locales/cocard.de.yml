@@ -336,19 +336,36 @@ de:
     do_remote_pairing: Remote Pairing durchführen
     duplicate_ips: Doppelte IPs
     rmi:
+      terminalname: Terminalname
+      dhcp_enabled: DHCP enabled
+      macaddr: MAC Adresse
+      current_ip: Aktuelle IP
+      static_ip: Statische IP
+      dhcp_ip: DHCP IP
+      remote_pin_enabled: Remote SMC-B PIN enabled
+      remote_pairing_enabled: Remote Pairing enabled
+      ntp_enabled: NTP enabled
       ntp_server: NTP-Server
-      ntp_enabled: NTP enabled?
       tftp_server: TFTP-Server
-      tftp_file: TFTP-Dateiname
-      dhcp_enabled: DHCP enabled?
+      tftp_file: TFTP-File
+      firmware_version: Firmware-Version
+      firmware_builddate: Datum der Firmware
+      serial: Seriennummer
+      uptime_total: Betriebsstunden total
+      uptime_reboot: Uptime (hh:mm)
+      slot1_plug_cycles: Steckzyklen Slot1
+      slot2_plug_cycles: Steckzyklen Slot2
+      slot3_plug_cycles: Steckzyklen Slot3
+      slot4_plug_cycles: Steckzyklen Slot4
+      identification: Identifikation
     edit_identification: |
       ACHTUNG: die Bearbeitung der Identifikation ist nur für Fälle gedacht,
       bei denen keine aktuelle Produktinformation vom Kartenterminal über den
-      Konnektor abgerufen werden kann. Etwa wenn das Kartenterminal noch nie 
-      mit einem Konnektor verbunden war und Cocard daher die Information nicht 
-      abrufen konnte. Oder wenn die Information in Cocard veraltet ist, weil das 
+      Konnektor abgerufen werden kann. Etwa wenn das Kartenterminal noch nie
+      mit einem Konnektor verbunden war und Cocard daher die Information nicht
+      abrufen konnte. Oder wenn die Information in Cocard veraltet ist, weil das
       Kartenterminal länger außer Betrieb war.
-      Sobald das Kartenterminal über den Konnektor abgefragt wird, werden die 
+      Sobald das Kartenterminal über den Konnektor abgefragt wird, werden die
       hier gesetzten Informationen wieder überschrieben.
     rmi_check: Prüfung via IP
     fetch_proxy: Hole Proxy vom TIClient
@@ -362,21 +379,6 @@ de:
     expired_in_use: Abgelaufene Karten in Benutzung
     deleted: Gelöschte Karten
     reset_card_terminal: Zuordnung zum Kartenterminal löschen
-  rmi:
-    terminalname: Terminalname
-    dhcp_enabled: DHCP enabled
-    macaddr: MAC Adresse
-    current_ip: Aktuelle IP
-    static_ip: Statische IP
-    dhcp_ip: DHCP IP
-    remote_pin_enabled: Remote SMC-B PIN enabled
-    remote_pairing_enabled: Remote Pairing enabled
-    ntp_enabled: NTP enabled
-    ntp_server: NTP-Server
-    tftp_server: TFTP-Server
-    tftp_file: TFTP-File
-    firmware_version: Firmware-Version
-    firmware_duilddate: Datum der Firmware
   ti_clients:
     fetch_kt_proxies: Proxies vom TIClient holen
     hint_all: |
