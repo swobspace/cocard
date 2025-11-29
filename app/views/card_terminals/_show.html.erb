@@ -15,6 +15,14 @@
         <%= render RebootButtonComponent.new(item: card_terminal) if (can? :reboot, card_terminal) %>
         <%= render CardTerminal::PairingButtonComponent
                    .new(card_terminal: card_terminal) if (can? :manage, card_terminal) %>
+        <%= link_to(raw(%Q[<i class="fa-solid fw fa-info-circle"></i>]),
+                    new_duck_terminal_path(
+                      identification: card_terminal.identification,
+                      firmware_version: card_terminal.firmware_version,
+                      ip: card_terminal.ip
+                    ),
+                    title: t('card_terminals.rmi_info'),
+                    class: "btn btn-secondary me-1") if can? :manage, CardTerminal %>
         <%= render HealthCheckButtonComponent.new(item: card_terminal) %>
         <%= render AcknowledgeButtonComponent.new(
                      notable: card_terminal, small: false,
@@ -178,13 +186,6 @@
           <div class="d-flex justify-content-between">
             <h6><%= t('cocard.card_terminal_data')%></h6>
             <div> 
-              <%= link_to(raw(%Q[<i class="fa-solid fw fa-circle-info"></i>]),
-                          new_duck_terminal_path(
-                            identification: card_terminal.identification,
-                            firmware_version: card_terminal.firmware_version,
-                            ip: card_terminal.ip
-                          ),
-                          class: "primary-link me-2") if can? :manage, DuckTerminal %>
               <%= link_to(raw(%Q[<i class="fa-solid fa-pencil"></i>]),
                           edit_identification_card_terminal_path(card_terminal),
                           class: 'primary-link me-2'
@@ -260,6 +261,15 @@
              %>
           <% end %>
          </div>
+        <% end %>
+
+        <% if @card_terminal.supports_rmi? %>
+          <div class="card-title border-bottom bg-light mt-3 pt-2 ps-2">
+            <h6 data-bs-toggle="collapse" href="#collapseStatistics"><%= t('card_terminals.statistics')%> <i class="fa-solid fa-fw fa-caret-down"></i></h6>
+          </div>
+          <div class="collapse.show" id="collapseStatistics">
+            <%= render partial: 'statistics', locals: { card_terminal: @card_terminal } %>
+          </div>
         <% end %>
 
         <div class="card-title border-bottom bg-light mt-3 pt-2 ps-2">

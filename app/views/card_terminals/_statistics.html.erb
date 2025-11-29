@@ -1,0 +1,11 @@
+<table class="table table-sm table-borderless">
+  <% %w[ uptime_total uptime_reboot slot1_plug_cycles slot2_plug_cycles 
+         slot3_plug_cycles slot4_plug_cycles].each do |attr| %>
+    <tr>
+      <th class="w-25 pe-3"><%= t('attributes.' + attr)%>:</th>
+      <td><%= card_terminal.send(attr) %></td>
+    </tr>
+
+  <% end %>
+</table>
+
