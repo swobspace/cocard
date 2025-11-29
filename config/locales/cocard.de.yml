@@ -215,10 +215,10 @@ de:
     short: Kurz
     short_name: Kurzbezeichnung
     since: seit
-    slot1_plug_cycles: Steckzyklen Slot1
-    slot2_plug_cycles: Steckzyklen Slot2
-    slot3_plug_cycles: Steckzyklen Slot3
-    slot4_plug_cycles: Steckzyklen Slot4
+    slot1_plug_cycles: Steckzyklen Slot 1
+    slot2_plug_cycles: Steckzyklen Slot 2
+    slot3_plug_cycles: Steckzyklen Slot 3
+    slot4_plug_cycles: Steckzyklen Slot 4
     slotid: Schachtnummer
     sn: Nachname
     state: Status
@@ -359,10 +359,10 @@ de:
       serial: Seriennummer
       uptime_total: Betriebsstunden total
       uptime_reboot: Uptime (hh:mm)
-      slot1_plug_cycles: Steckzyklen Slot1
-      slot2_plug_cycles: Steckzyklen Slot2
-      slot3_plug_cycles: Steckzyklen Slot3
-      slot4_plug_cycles: Steckzyklen Slot4
+      slot1_plug_cycles: Steckzyklen Slot 1
+      slot2_plug_cycles: Steckzyklen Slot 2
+      slot3_plug_cycles: Steckzyklen Slot 3
+      slot4_plug_cycles: Steckzyklen Slot 4
       identification: Identifikation
     rmi_info: RMI-Abfrage der Terminal-Eigenschaften
     statistics: Statistische Daten
