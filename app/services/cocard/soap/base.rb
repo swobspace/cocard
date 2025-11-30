@@ -5,6 +5,8 @@ module Cocard::SOAP
   class Base
     Result = ImmutableStruct.new(:success?, :error_messages, :response)
 
+    attr_reader :options
+
     # service = Cocard::SOAP::Base.new(options)
     #
     # mandantory options:
