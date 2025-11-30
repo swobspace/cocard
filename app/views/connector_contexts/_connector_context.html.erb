@@ -3,7 +3,11 @@
      data-sortable-target="item" 
      data-url="<%= connector_context_path(connector_context) %>" 
 >
-  <div class="row">
+  <div class="row
+    <%= 'fw-bold' if connector_context.position == 1 %>">
+    <div class="col-sm-1">
+      <%= connector_context.position %>
+    </div>
     <div class="col handle"><%= connector_context.context %></div>
     <div class="col-sm-1">
         <%= button_to(test_context_connector_path(connector_context.connector),

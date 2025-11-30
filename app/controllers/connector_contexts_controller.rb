@@ -4,6 +4,9 @@ class ConnectorContextsController < ApplicationController
 
   def update
     @connector_context.update(connector_context_params)
+    respond_with(@connector_context) do |format|
+      format.turbo_stream
+    end
   end
 
   private

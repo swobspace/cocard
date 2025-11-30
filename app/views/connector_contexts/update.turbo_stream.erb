@@ -1,0 +1,3 @@
+<%= turbo_stream.update('list_contexts') do %>
+  <%= render partial: 'connector_contexts/list', locals: { connector: @connector_context.connector } %>
+<% end %>
