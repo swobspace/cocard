@@ -115,7 +115,9 @@ class ConnectorsController < ApplicationController
     else
       flash[:alert] = "Kontext-Test fehlgeschlagen! " + result.error_messages.join("; ")
     end
-    respond_with(@connector)
+    respond_with(@connector) do |format|
+      format.turbo_stream
+    end
   end
 
 
