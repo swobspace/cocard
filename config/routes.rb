@@ -95,6 +95,8 @@ Rails.application.routes.draw do
       post :reboot
       post :remote_pairing
       get :edit_identification
+      get :test_context_form
+      post :test_context
     end
     resources :notes, module: :card_terminals
     resource :kt_proxy, module: :card_terminals

@@ -26,6 +26,7 @@ module Cocard::SOAP
       opera = soap_operation
       @options       = options
       @connector     = options.fetch(:connector)
+      @mandant_wide  = options.fetch(:mandant_wide, true)
       if @connector.connector_services.nil?
         @valid = false
       else

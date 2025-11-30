@@ -2,7 +2,8 @@ class CardTerminalsController < ApplicationController
   before_action :set_card_terminal, only: [:show, :edit, :update, :destroy,
                                            :edit_identification, :fetch_proxy,
                                            :fetch_idle_message, :edit_idle_message,
-                                           :update_idle_message]
+                                           :update_idle_message,
+                                           :test_context_form, :test_context]
   before_action :add_breadcrumb_show, only: [:show]
 
   # GET /card_terminals
@@ -218,6 +219,36 @@ class CardTerminalsController < ApplicationController
   end
 
 
+  def test_context_form
+    @context = Context.new
+    respond_with(@card_terminal)
+  end
+
+  def test_context
+    if @card_terminal.connector.present?
+      context = Context.new(test_context_params)
+      ri = Cocard::GetCardTerminals.new(connector: @card_terminal.connector,
+                                              context: context,
+                                              mandant_wide: false)
+      result = ri.call
+      if result.success?
+        if result.card_terminals.select{|ct| ct.ct_id == @card_terminal.ct_id}.any?
+          flash[:success] = "Kontext-Test erfolgreich: " + context.to_s
+        else
+          flash[:warning] = "Kontext-Test nur teilweise erfolgreich: Kontext gültig, aber Kartenterminal nicht dem Arbeitplatz zugewiesen"
+        end
+      else
+        flash[:alert] = "Kontext-Test fehlgeschlagen! " + result.error_messages.join("; ")
+      end
+    else
+      flash[:alert] = "Kein Konnektor zugewiesen, kein Kontext-Test möglich"
+    end
+    respond_with(@connector) do |format|
+      format.turbo_stream
+    end
+  end
+
+
   # DELETE /card_terminals/1
   def destroy
     unless @card_terminal.destroy
@@ -264,4 +295,8 @@ class CardTerminalsController < ApplicationController
     end
 
 
+    def test_context_params
+      params.require(:context)
+            .permit(:mandant, :client_system, :workplace)
+    end
 end

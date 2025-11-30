@@ -20,6 +20,9 @@ module Cocard
       @mandant   = @context.mandant
       @client_system  = @context.client_system
       @workplace = @context.workplace
+      @ct_id = options.fetch(:ct_id, nil)
+      @slotid = options.fetch(:slotid, nil)
+      @iccsn = options.fetch(:iccsn, nil)
     end
 
     # service.call()
@@ -27,11 +30,20 @@ module Cocard
     def call
       connector.touch(:last_check)
       error_messages = []
-      result = Cocard::SOAP::GetResourceInformation.new(
-                 connector: connector,
+      params = { connector: connector,
                  mandant: mandant,
                  client_system: client_system,
-                 workplace: workplace).call
+                 workplace: workplace }
+      if @ct_id
+        params.merge!(ct_id: @ct_id)
+      end
+      if @slotid
+        params.merge!(slotid: @slotid)
+      end
+      if @iccsn
+        params.merge!(ct_id: @iccsn)
+      end
+      result = Cocard::SOAP::GetResourceInformation.new(params).call
       if result.success?
         resource_information = Cocard::ResourceInformation.new(result.response[:get_resource_information_response])
         connector.soap_request_success = true
