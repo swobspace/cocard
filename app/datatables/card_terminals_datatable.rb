@@ -42,6 +42,12 @@ class CardTerminalsDatatable < ApplicationDatatable
         column << render(ExpirationDateComponent.new(item: ct.smckt))
         column << render(IsCurrentComponent.new(item: ct, attr: :last_check))
         column << render(IsCurrentComponent.new(item: ct, attr: :last_ok))
+        column <<  ct.uptime_total
+        column <<  ct.uptime_reboot
+        column <<  ct.slot1_plug_cycles
+        column <<  ct.slot2_plug_cycles
+        column <<  ct.slot3_plug_cycles
+        column <<  ct.slot4_plug_cycles
 
         links = []
         links << show_link(ct)
@@ -116,6 +122,12 @@ class CardTerminalsDatatable < ApplicationDatatable
         ""
         card_terminals.last_check
         card_terminals.last_ok
+        card_terminals.uptime_total
+        card_terminals.uptime_reboot
+        card_terminals.slot1_plug_cycles
+        card_terminals.slot2_plug_cycles
+        card_terminals.slot3_plug_cycles
+        card_terminals.slot4_plug_cycles
       ]
   end
 
@@ -146,6 +158,12 @@ class CardTerminalsDatatable < ApplicationDatatable
         expiration_date
         last_check
         last_ok
+        uptime_total
+        uptime_reboot
+        slot1_plug_cycles
+        slot2_plug_cycles
+        slot3_plug_cycles
+        slot4_plug_cycles
      ]
   end
 end
