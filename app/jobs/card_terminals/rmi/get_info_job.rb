@@ -28,17 +28,17 @@ module CardTerminals
 
           card_terminal.rmi.get_info do |result|
             result.on_success do |message, info|
-            creator = CardTerminals::RMI::Creator.new(info: info)
-            if creator.save
-              Rails.logger.debug(@prefix + "Update des Kartenterminals erfolgreich")
-            else
-              Rails.logger.warn(@prefix + "Update des Kartenterminals fehlgeschlagen")
-            end
+              creator = CardTerminals::RMI::Creator.new(info: info)
+              if creator.save
+                Rails.logger.debug(@prefix + "Update des Kartenterminals erfolgreich")
+              else
+                Rails.logger.warn(@prefix + "Update des Kartenterminals fehlgeschlagen")
+              end
               return true
             end
 
             result.on_failure do |message|
-              Rails.logger.error(@prefix + "#{message}")
+              Rails.logger.error(@prefix + "RMI-Abfrage fehlgeschlagen: #{message}")
               return false
             end
 
