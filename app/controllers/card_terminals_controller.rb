@@ -42,18 +42,8 @@ class CardTerminalsController < ApplicationController
   def show
     @kt_proxy  = @card_terminal.kt_proxy
     @ti_client = @card_terminal.kt_proxy&.ti_client
-    if @ti_client and @ti_client.client_secret.present?
-      rtic = RISE::TIClient::Konnektor::Terminals.new(
-               ti_client: @card_terminal.kt_proxy.ti_client
-             )
-      rtic.get_terminal(@card_terminal.rawmac.upcase) do |result|
-        result.on_success do |msg, value|
-          @terminal = RISE::TIClient::Konnektor::Terminal.new(value)
-        end
-        result.on_failure do |msg|
-        end
-      end
-    end
+    fetch_terminal
+    check_default_context
 
     respond_with(@card_terminal)
   end
@@ -299,4 +289,48 @@ class CardTerminalsController < ApplicationController
       params.require(:context)
             .permit(:mandant, :client_system, :workplace)
     end
+
+    # 
+    # RISE TIClient only: fetch terminal
+    #
+
+    def fetch_terminal
+      @terminal = nil
+      if @ti_client and @ti_client.client_secret.present?
+        rtic = RISE::TIClient::Konnektor::Terminals.new(
+                 ti_client: @card_terminal.kt_proxy.ti_client
+               )
+        rtic.get_terminal(@card_terminal.rawmac.upcase) do |result|
+          result.on_success do |msg, value|
+            @terminal = RISE::TIClient::Konnektor::Terminal.new(value)
+          end
+          result.on_failure do |msg|
+          end
+        end
+      end
+    end
+
+    def check_default_context
+      return unless @card_terminal.connector.present? 
+      return if  @card_terminal.last_check.nil?
+      return if  @card_terminal.last_check > 15.minutes.before(Time.current)
+
+      context = @card_terminal.connector.contexts.first
+      ri = Cocard::GetCardTerminals.new(connector: @card_terminal.connector,
+                                        context: context, mandant_wide: false)
+      result = ri.call
+      if result.success?
+        if result.card_terminals.select{|ct| ct.ct_id == @card_terminal.ct_id}.empty?
+          flash[:warning] =<<~EOCTX
+            Cocard konnte das Kartenterminal nicht in dem Standard-Kontext
+            /#{context.plain}/ finden. Prüfen Sie, ob das Kartenterminal
+            mit dem Konnektor gepairt und das Kartenterminal dem
+            Arbeitplatz und der Arbeitsplatz dem Mandatenen und Client zugewiesen ist.
+        EOCTX
+        end
+      else
+        flash[:alert] = "Kontext-Test fehlgeschlagen! " + result.error_messages.join("; ")
+      end
+    end
+
 end
