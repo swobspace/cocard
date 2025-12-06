@@ -14,12 +14,9 @@ module CardTerminals
 
         card_terminals.each do |card_terminal|
           if card_terminal.condition == Cocard::States::OK and card_terminal.supports_rmi?
-            # slow down
-            sleep 3
             @prefix = "GetInfo:: card_terminal #{card_terminal}:: ".freeze
             unless check_job_requirements(card_terminal)
               Rails.logger.debug(@prefix + "not all requirements met")
-              return false
             end
 
             card_terminal.rmi.get_info do |result|
@@ -30,19 +27,18 @@ module CardTerminals
                 else
                   Rails.logger.warn(@prefix + "Update des Kartenterminals fehlgeschlagen")
                 end
-                return true
               end
 
               result.on_failure do |message|
                 Rails.logger.error(@prefix + "RMI-Abfrage fehlgeschlagen: #{message}")
-                return false
               end
 
               result.on_unsupported do
                 Rails.logger.warn(@prefix + "Terminal or action not supported")
-                return false
               end
             end
+          else
+            Rails.logger.debug(@prefix + "skipping")
           end
         end
       end
