@@ -55,4 +55,13 @@ RSpec.describe TIClient::AssignComponent, type: :component do
     end
   end
 
+  describe "with correlation NOTFOUND" do
+    it "shows file button" do
+      expect(terminal).to receive(:correlation).at_least(:once).and_return('NOTFOUND')
+      render_inline(described_class.new(ti_client: ti_client, terminal: terminal))
+      expect(page).to have_css('i[class="fa-solid fa-fw fa-right-long"]')
+    end
+  end
+
+
 end

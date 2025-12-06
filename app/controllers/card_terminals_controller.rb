@@ -302,6 +302,11 @@ class CardTerminalsController < ApplicationController
                )
         rtic.get_terminal(@card_terminal.rawmac.upcase) do |result|
           result.on_success do |msg, value|
+            if value.empty?
+              value = { 'CORRELATION' => 'NOTFOUND', 
+                        'MAC_ADDRESS' => @card_terminal.rawmac.upcase,
+                        'CTID'        => @card_terminal.rawmac.upcase }
+            end
             @terminal = RISE::TIClient::Konnektor::Terminal.new(value)
           end
           result.on_failure do |msg|

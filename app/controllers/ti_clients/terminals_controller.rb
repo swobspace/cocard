@@ -116,6 +116,29 @@ module TIClients
       respond_with(@terminals)
     end
 
+    def add
+      if @rtic.present?
+        kt_proxy = card_terminal&.kt_proxy
+        @rtic.add(kt_proxy) do |result|
+          result.on_success do |message, value|
+            flash[:success] = message
+            if card_terminal.present?
+              card_terminal.update(connector_id: @ti_client.connector_id)
+            end
+          end
+          result.on_failure do |message|
+            flash[:alert] = message
+          end
+        end
+      else
+        flash[:warning] = "Zugriff nicht möglich (bitte Einstellungen des TI-Clients prüfen)"
+      end
+      fetch_terminal 
+      respond_with(@ti_client) do |format|
+        format.turbo_stream
+      end
+    end
+
     def assign
       if @rtic.present?
         @rtic.assign(params[:id]) do |result|
@@ -256,7 +279,16 @@ module TIClients
       if @rtic.present?
         @rtic.get_terminal(params[:id]) do |result|
           result.on_success do |msg, value|
-            @terminal = RISE::TIClient::Konnektor::Terminal.new(value)
+            if value.empty? and card_terminal.present?
+              value = { 'CORRELATION' => 'NOTFOUND', 
+                        'MAC_ADDRESS' => card_terminal.rawmac.upcase,
+                        'CTID'        => card_terminal.rawmac.upcase }
+            end
+            if value.empty?
+              @terminal = nil
+            else
+              @terminal = RISE::TIClient::Konnektor::Terminal.new(value)
+            end
           end
         end
       end
