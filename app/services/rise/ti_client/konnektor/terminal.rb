@@ -8,7 +8,7 @@ module RISE
         end
 
         def correlation
-          @json['CORRELATION']
+          @json['CORRELATION'] || 'NOTFOUND'
         end
 
         def connected

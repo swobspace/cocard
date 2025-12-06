@@ -84,6 +84,13 @@ module RISE
         it { expect(subject.card_terminal.id).to eq(ct.id) }
       end
     end
+
+    
+    describe "with terminal not found on connector" do
+      subject { RISE::TIClient::Konnektor::Terminal.new({}) }
+
+      it { expect(subject.correlation).to eq("NOTFOUND") }
+    end
   end
 end
 
