@@ -1,6 +1,10 @@
 = Changelog
 
-== 0.9.4 - 2025-12-06
+== 0.9.6-dev - unreleased
+
+* RISE TIClient: Kartenterminal dem Konnektor hinzufügen (wenn der Konnektor trotz vorhandenem KTProxy das Kartenterminal nicht sieht)
+
+== 0.9.5 - 2025-12-06
 
 * Kontext-Check zum Konnektor: Abfrage eines beliebigen Kontextes beim Konnektor über GetResourceInformation.
 * RISE TIClient: Abfrage der Kartenterminals und deren Zustände am Konnektor über die Proxy-Funktion des TI-Clients - erfordert Aktivierung (z.Z. nur manuell z.B. via Bruno möglich)
