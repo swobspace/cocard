@@ -50,5 +50,10 @@ module ApplicationHelper
     end
   end
 
+  def terminal_button_id(unique_id, action)
+    return "" if unique_id.nil?
+    new_id = unique_id.to_s.gsub(/:/, '')
+    "terminal_#{action.to_s}_button_#{new_id}"
+  end
 
 end

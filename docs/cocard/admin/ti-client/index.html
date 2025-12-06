@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>TI-Client (RISE TI Gateway) :: Cocard</title>
+    <meta name="generator" content="Antora 3.1.14">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../..">Cocard</a>
+      <div class="navbar-item search hide-for-print">
+        <div id="search-field" class="field">
+          <input id="search-input" type="text" placeholder="Suche ...">
+        </div>
+      </div>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="abstand">
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+          <div class="navbar-item dark">Cocard</div>
+           <a class="navbar-item" href="../../../devnotes/index.html">DevNotes</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="cocard" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../../index.html">Cocard</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../index.html">Cocard</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../user/dashboard.html">Dashboard</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../user/common.html">Allgemeines zur Oberfläche</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../user/conditions.html">Zustände</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../user/connector.html">Konnektor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../user/card-terminal.html">Kartenterminal</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../user/card-terminal-health-check.html">Health-Check</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../user/card.html">Karte</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../user/logs.html">Event Logs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../user/acknowledges.html">Notizen und Acknowledges</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../user/ti-lagebild.html">TI-Lagebild</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../user/verify-pin.html">PIN-Verifizierung</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../user/workplaces.html">Arbeitsplätze</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../user/tags.html">Tags</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Administration</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Konnektor</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../connector-edit.html">Konnektor anlegen/bearbeiten</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../connector-autoreboot.html">Automatischer Reboot</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../card-terminal-edit.html">Kartenterminal anlegen/bearbeiten</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../idle-messages-edit.html">Ruhebildschirme setzen</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../duck-terminal.html">Kartenterminal über IP-Adresse prüfen</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../card-new.html">Karte anlegen/bearbeiten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contexts.html">Kontexte</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../locations.html">Standorte</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../networks.html">Netzwerke</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../operational_states.html">Betriebszustände</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../jobs.html">Jobverwaltung</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../authorities.html">Berechtigungen</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../smcb-remote-pin.html">Remote PIN für SMC-B Karten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client-certificates.html">Client-Zertifikate</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ldap-authentication.html">LDAP-Authentifikation</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">TI-Client (RISE TI Gateway)</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="activate-api.html">REST-API aktivieren</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../changelog.html">Changelog</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../installation/index.html">Installation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../installation/podman/quickstart.html">Quickstart: podman pods</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../first-steps.html">Erste Schritte</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../installation/podman/podman-compose.html">Quickstart: docker-compose</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../first-steps.html">Erste Schritte</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../installation/podman/podman-systemd.html">Systemd und Quadlets</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../installation/podman/reverse-proxy.html">Reverse Proxy</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Konfiguration</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../installation/configuration.html">Standard-Konfiguration</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../installation/cocard_yml.html">Erweiterte Konfiguration</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../installation/checkmk.html">CheckMK Integration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Cocard</span>
+    <span class="version">default</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../../index.html">Cocard</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../../devnotes/index.html">DevNotes</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../devnotes/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">Cocard</a></li>
+    <li>Administration</li>
+    <li><a href="index.html">TI-Client (RISE TI Gateway)</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">TI-Client (RISE TI Gateway)</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Der klassische Zugriff von Primärsystemen (KIS, PVS, Cocard, etc.) erfolgt über die von der Gematik definierten SOAP-Schnittstellen. Die Art des Konnektors spielt hierbei keine Rolle - Einbox-Konnektor, High-Speed-Konnektor oder virtueller Konnektor eines TI-Gateways - werden gleichermaßen durch die SOAP-Schnittstelle unterstützt.</p>
+</div>
+<div class="paragraph">
+<p>Ein TI-Gateway wie das von RISE bringt zusätzliche Herausforderungen bei der Anbindung von Kartenterminals mit sich: der Konnektor kennt die IP-Adresse des Kartenterminals selbst nicht mehr und kann es nicht direkt erreichen. Die Verbindung läuft über einen Kartenterminal-Proxy (KT-Proxy) - in beide Richtungen. Die folgende Abbildung zeigt das prinzipielle Schema der Anbindung:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../_images/ti-client/schema.svg" alt="schema">
+</div>
+</div>
+<div class="paragraph">
+<p>Der KT-Proxy läuft auf einem sogenannten <em>TI-Client</em>. Jeder virtuelle Konnektor hat genau einen TI-Client. Auf jedem TI-Client laufen mehrere KT-Proxys, für jedes Kartenterminal genau ein KT-Proxy. In größeren Umgebungen läuft der TI-Client technisch gesehen als Docker-Container auf einem Host (meist ein Linux-Host).</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../_images/ti-client/ticlient.svg" alt="ticlient">
+</div>
+</div>
+<div class="paragraph">
+<p>Das Konstrukt ist wesentlich komplexer als wenn Kartenterminal und Einbox-Konnektor im gleichen Netzwerk sitzen. Und damit auch anfälliger gegen Störeinflüsse. Cocard unterstützt in diesem Szenario über die SOAP-Schnittstelle hinaus weitere Funktionen und nutzt damit das REST-API von RISE.</p>
+</div>
+<div class="paragraph">
+<p>Die Nutzung dieser Funktionen ist komplett optional. Einzige Einschränkung: beim TI-Gateway meldet der Konnektor über die SOAP-Abfrage immer nur die Wireguard-IP als IP des Kartenterminals. In Cocard erscheint in diesem Falle eine Warnung, das "gemeldete" und "tatsächliche" IP des Kartenterminals von einander abweichen.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_unterstützte_funktionen_und_abhängigkeiten"><a class="anchor" href="#_unterstützte_funktionen_und_abhängigkeiten"></a>Unterstützte Funktionen und Abhängigkeiten</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Legende zu den Stufen</caption>
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Stufe</th>
+<th class="tableblock halign-left valign-top">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Basis</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cocard-interne Funktionen ohne REST-API</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stufe 2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nutzung REST-API für Funktionen auf dem TI-Client. Dazu aktiviert man die Benutzerverwaltung am TI-Client und generiert ein Applikationszugang mit der Applikation 'cocard'.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stufe 3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nutzung des TI-Clients als Konnektor-Proxy, um mit dem REST-API auch den Konnektor ansprechen/steuern zu können. Die Konnektor-Proxy-Funktion muss per REST einmal aktiviert werden.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 62.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Funktion</th>
+<th class="tableblock halign-left valign-top">Basis</th>
+<th class="tableblock halign-left valign-top">Stufe 2</th>
+<th class="tableblock halign-left valign-top">Stufe 3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">KT-Proxy in Cocard anlegen/pflegen und manuell auf den TI-Client übertragen</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">KT-Proxy in Cocard anlegen/pflegen. Dabei wir der KT-Proxy auf dem TI-Client automatisch angelegt/aktualisiert.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alle KT-Proxys des TI-Clients abfragen und bei Bedarf in Cocard anlegen</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Abfrage des Schedulers: <em>Hindergrundaufgaben</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Remote-PIN+: Abfrage der verfügbaren SMB-Cs und Anzeige des Remote-PIN+ Status falls Remote-PIN+ für die SMC-B konfiguriert wurde</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Anzeige aller dem Konnektor bekannten Kartenterminals und deren Zustand (z.B. AKTIV, nicht verbunden)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kartenterminal dem Konnektor zuweisen (Wechsel von BEKANNT &#8594; ZUGEWIESEN). Diese Funktion ist auch als Sammelaktion für alle Kartenterminals verfügbar, die derzeit nur BEKANNT sind.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kartenterminal pairen: dabei startet Cocard den Pairing-Vorgang am Konnektor, danach wird das Kartenterminal in den Pairing-Modus versetzt. Cocard sendet dann das Finalisieren an den Konnektor. Sobald die PIN-Abfrage am Kartenterminal erscheint, sendet Cocard das OK an das Kartenterminal und der Konnektor schließt den Vorgang ab (ZUGEWIESEN &#8594; AKTIV)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kartenterminal erneut verbinden, wenn das Kartenterminal zwar im Zustand AKTIV ist, aber derzeit nicht mit dem Konnektor verbunden. Diese Funktion ist auch als Sammelaktion für alle Terminals verfügbar, die im Zustand (AKTIV, nicht verbunden) sind.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Aktivierung eines Kartenterminals, das sich im Zustand GEPAIRT befindet (GEPAIRT&#8594;AKTIV)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅</p></td>
+</tr>
+</tbody>
+</table>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">NOTE</dt>
+<dd>
+<p>Die Version des TI-Clients muss &gt;= 2.6.1 sein. Mit älteren Versionen ist das REST-API nicht vorhanden/nutzbar.</p>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_aktivierung_rest_api_ti_client"><a class="anchor" href="#_aktivierung_rest_api_ti_client"></a>Aktivierung REST-API TI-Client</h3>
+<div class="paragraph">
+<p>Für die Aktivierung des REST-API siehe <a href="activate-api.html" class="xref page">TI-Client: REST-API aktivieren</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installation_und_konfiguration"><a class="anchor" href="#_installation_und_konfiguration"></a>Installation und Konfiguration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="../../installation/cocard_yml.html" class="xref page">Aktivierung und Konfiguration</a></p>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <span>Wolfgang Barth (C) 2024-2025</span>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script src="../../../_/js/vendor/medium-zoom.min.js"></script>
+<script>mediumZoom('img:not(.copy-icon');</script>
+<script src="../../../_/js/vendor/lunr.js"></script>
+<script src="../../../_/js/vendor/lunr-languages.js"></script>
+<script src="../../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../../.." data-snippet-length="100" data-stylesheet="../../../_/css/search.css"></script>
+<script async src="../../../search-index.js"></script>
+  </body>
+</html>

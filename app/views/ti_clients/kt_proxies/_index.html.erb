@@ -1,5 +1,3 @@
-<%= turbo_stream_from :card_terminal_check %>
-
 <%= turbo_frame_tag('kt_proxies') do %>
   <div class="card mt-3">
     <div class="card-header">
@@ -76,7 +74,16 @@
                                 kt_proxy.card_terminal,
                                 data: { "turbo-frame": "_top" },
                                 class: 'primary-link') if kt_proxy.card_terminal.present?
-                     %></td>
+                     %>
+                    <%= link_to(raw(%Q[<i class="fa-solid fw fa-circle-info"></i>]),
+                                new_duck_terminal_path(
+                                  firmware_version: '3.9.0',
+                                  ip: kt_proxy.card_terminal_ip
+                                ),
+                                data: { "turbo-frame": "_top" },
+                                class: "btn btn-sm btn-warning me-2") if can?(:manage, DuckTerminal)and kt_proxy.card_terminal.nil? %>
+
+                </td>
                 <td>
                   <%= render HealthCheckButtonComponent.new(item: kt_proxy.card_terminal,
                                                             variant: :small) %>

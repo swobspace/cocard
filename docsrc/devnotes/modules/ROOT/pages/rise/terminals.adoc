@@ -1,0 +1,44 @@
+= RISE::TIClient::Konnektor::Terminals
+:author: Wolfgang Barth
+:revdate: 2025-11-22
+:imagesdir: ../../images
+
+[source,ruby]
+----
+@terminals = []
+@ti_client = TIClient.where("name like ?", '%06-MKM').first
+
+@rtic = RISE::TIClient::Konnektor::Terminals.new(ti_client: @ti_client)
+
+if @rtic.present?
+  @rtic.get_terminals do |result|
+    result.on_success do |message, value|
+      terminals = value['CTM_CT_LIST'] || []
+      terminals.each do |terminal|
+        @terminals << RISE::TIClient::Konnektor::Terminal.new(terminal)
+      end
+      @terminals.each do |terminal|
+        next if terminal.correlation != 'AKTIV' and terminal.connected
+        if @rtic.present? 
+          @rtic.begin_session(terminal.ct_id) do |result|
+            result.on_success do |message, value|
+            end
+            result.on_failure do |message|
+              unless message =~ /open ct session found/
+                @rtic.begin_session(terminal.ct_id) do |result|
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+    result.on_failure do |message|
+      flash[:alert] = message
+    end
+  end 
+end   
+
+
+
+ ---- 

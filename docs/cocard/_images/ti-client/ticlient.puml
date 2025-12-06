@@ -1,0 +1,19 @@
+@startuml
+top to bottom direction
+
+!theme cocard from ..
+
+skinparam nodesep 80
+skinparam ranksep 80
+
+skinparam DefaultTextAlignment left
+
+rectangle "<< ticlient >>\n(VM, Linux)" as rzticlient #white {
+  rectangle "TIClient_01\n(Docker)" as tic01 #LightYellow {
+    collections "KT-Proxy" as ktproxy1 #lightblue
+  }
+}
+
+
+
+@enduml

@@ -7,12 +7,32 @@
     </div>
     <% if card.card_type == 'SMC-B' %>
       <div class="col-12 col-lg-4 text-muted text-end">
+        <% if can?(:manage, card) and card.card_terminal&.connector.present? %>
+          <%= button_to(test_context_connector_path(card.card_terminal.connector),
+                       method: :post,
+                       title: "Test eines Kontextes",
+                       class: "btn btn-secondary me-1",
+                       params: {
+                         context: {
+                           mandant: context.mandant,
+                           client_system: context.client_system,
+                           workplace: context.workplace
+                         },
+                         iccsn: card.iccsn
+                       }
+              ) do %>
+            <i class="fa-solid fa-list-check"></i>
+          <% end %>
+        <% end %>
+
         <% if can? :verify_pin, card %>
           <%= render Card::VerifyPinComponent.new(card: card, context: context) %>
         <% end %>
+
         <% if can? :get_card, card %>
           <%= render Card::GetCardButtonComponent.new(card: card, context: context, force: true) %>
         <% end %>
+
         <% if can? :get_pin_status, card %>
           <%= render Card::GetPinStatusComponent.new(card: card, context: context) %>
         <% end %>

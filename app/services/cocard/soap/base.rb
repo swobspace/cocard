@@ -5,6 +5,8 @@ module Cocard::SOAP
   class Base
     Result = ImmutableStruct.new(:success?, :error_messages, :response)
 
+    attr_reader :options
+
     # service = Cocard::SOAP::Base.new(options)
     #
     # mandantory options:
@@ -24,6 +26,7 @@ module Cocard::SOAP
       opera = soap_operation
       @options       = options
       @connector     = options.fetch(:connector)
+      @mandant_wide  = options.fetch(:mandant_wide, true)
       if @connector.connector_services.nil?
         @valid = false
       else

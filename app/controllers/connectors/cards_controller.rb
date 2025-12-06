@@ -1,21 +1,15 @@
 module Connectors
   class CardsController < CardsController
-    before_action :set_locatable
+    before_action :set_connector
 
 
     def index
-      @cards = []
-      terminals = @locatable.card_terminals.joins(card_terminal_slots: :card)
-                            .where("cards.card_type = 'SMC-B'").distinct
-      terminals.each do |term|
-         @cards << term.cards.where(card_type: 'SMC-B')
-      end
-      @cards = @cards.flatten
+      @cards = Cards::Query.new(Card.all, connector_id: @connector.id).all
     end
 
   private
-    def set_locatable
-      @locatable = Connector.find(params[:connector_id])
+    def set_connector
+      @connector = Connector.find(params[:connector_id])
     end
 
    def add_breadcrumb_show

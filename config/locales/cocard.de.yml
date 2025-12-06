@@ -1,4 +1,6 @@
 de:
+  yes: Ja
+  no: Nein
   true: Ja
   false: Nein
   cocard:
@@ -146,6 +148,7 @@ de:
     context: Kontext
     contexts: Kontexte
     context_ids: Kontexte
+    correlation: Beziehung
     created_at: Erstellt
     creator: Ersteller
     ct_id: CT_ID
@@ -201,6 +204,7 @@ de:
     pin_mode: SMC-B Auto-PIN-Mode
     pkey: Private Key (PEM)
     plugged_in: Netzwerk, Dose, Switch
+    port: Port
     private_information: Geschützte Information
     product_information: Produktinformation
     real_ip: reale IP
@@ -211,16 +215,25 @@ de:
     short: Kurz
     short_name: Kurzbezeichnung
     since: seit
+    slot1_plug_cycles: Steckzyklen Slot 1
+    slot2_plug_cycles: Steckzyklen Slot 2
+    slot3_plug_cycles: Steckzyklen Slot 3
+    slot4_plug_cycles: Steckzyklen Slot 4
     slotid: Schachtnummer
     sn: Nachname
+    state: Status
     status: Status
     supplier: Lieferant
     tag: Tag
     tag_list_input: Tags
+    task_scheduler: Hintergrundaufgaben
     telematikid: Telematik-ID
+    terminal_name: Terminal-Name
     ti_client: TI-Client
     type: Typ
     updated_at: zuletzt aktualisiert
+    uptime_total: Betriebsstunden total
+    uptime_reboot: Uptime (h)
     username: Username
     use_tls: TLS verwenden
     uuid: UUID
@@ -260,7 +273,9 @@ de:
     tags: Tags
     terminal_workplaces: Kartenterminals-Arbeitsplätze
     ti_clients: TI-Clients
-    ti_clients/kt_proxies: KT-Proxys
+    ti_clients/kt_proxies: KT-Proxys auf dem TI-Client (RISE)
+    ti_clients/remote_pin_plus: Remote PIN Plus auf dem TI-Client (RISE)
+    ti_clients/terminals: Kartenterminals auf dem Konnektor (RISE)
     users: Benutzer
     verify_pins: PIN-Verifizierung
     workplaces: Arbeitsplätze
@@ -327,19 +342,38 @@ de:
     do_remote_pairing: Remote Pairing durchführen
     duplicate_ips: Doppelte IPs
     rmi:
+      terminalname: Terminalname
+      dhcp_enabled: DHCP enabled
+      macaddr: MAC Adresse
+      current_ip: Aktuelle IP
+      static_ip: Statische IP
+      dhcp_ip: DHCP IP
+      remote_pin_enabled: Remote SMC-B PIN enabled
+      remote_pairing_enabled: Remote Pairing enabled
+      ntp_enabled: NTP enabled
       ntp_server: NTP-Server
-      ntp_enabled: NTP enabled?
       tftp_server: TFTP-Server
-      tftp_file: TFTP-Dateiname
-      dhcp_enabled: DHCP enabled?
+      tftp_file: TFTP-File
+      firmware_version: Firmware-Version
+      firmware_builddate: Datum der Firmware
+      serial: Seriennummer
+      uptime_total: Betriebsstunden total
+      uptime_reboot: Uptime (hh:mm)
+      slot1_plug_cycles: Steckzyklen Slot 1
+      slot2_plug_cycles: Steckzyklen Slot 2
+      slot3_plug_cycles: Steckzyklen Slot 3
+      slot4_plug_cycles: Steckzyklen Slot 4
+      identification: Identifikation
+    rmi_info: RMI-Abfrage der Terminal-Eigenschaften
+    statistics: Statistische Daten
     edit_identification: |
       ACHTUNG: die Bearbeitung der Identifikation ist nur für Fälle gedacht,
       bei denen keine aktuelle Produktinformation vom Kartenterminal über den
-      Konnektor abgerufen werden kann. Etwa wenn das Kartenterminal noch nie 
-      mit einem Konnektor verbunden war und Cocard daher die Information nicht 
-      abrufen konnte. Oder wenn die Information in Cocard veraltet ist, weil das 
+      Konnektor abgerufen werden kann. Etwa wenn das Kartenterminal noch nie
+      mit einem Konnektor verbunden war und Cocard daher die Information nicht
+      abrufen konnte. Oder wenn die Information in Cocard veraltet ist, weil das
       Kartenterminal länger außer Betrieb war.
-      Sobald das Kartenterminal über den Konnektor abgefragt wird, werden die 
+      Sobald das Kartenterminal über den Konnektor abgefragt wird, werden die
       hier gesetzten Informationen wieder überschrieben.
     rmi_check: Prüfung via IP
     fetch_proxy: Hole Proxy vom TIClient
@@ -353,20 +387,11 @@ de:
     expired_in_use: Abgelaufene Karten in Benutzung
     deleted: Gelöschte Karten
     reset_card_terminal: Zuordnung zum Kartenterminal löschen
-  rmi:
-    terminalname: Terminalname
-    dhcp_enabled: DHCP enabled
-    macaddr: MAC Adresse
-    current_ip: Aktuelle IP
-    static_ip: Statische IP
-    dhcp_ip: DHCP IP
-    remote_pin_enabled: Remote SMC-B PIN enabled
-    remote_pairing_enabled: Remote Pairing enabled
-    ntp_enabled: NTP enabled
-    ntp_server: NTP-Server
-    tftp_server: TFTP-Server
-    tftp_file: TFTP-File
-    firmware_version: Firmware-Version
-    firmware_duilddate: Datum der Firmware
   ti_clients:
     fetch_kt_proxies: Proxies vom TIClient holen
+    hint_all: |
+      Hinweis: Die Sammelaktionen können sehr lange dauern und ggf. einige Funktionen
+      von Cocard blockieren - insbesondere dann, wenn einige Terminals nicht reagieren.
+    reconnect_all: Alle aktiven, nicht verbundenen Terminals erneut verbinden
+    assign_all: Alle bekannten Terminals zuweisen
+    pairing_all: Alle zugewiesenen Terminals pairen

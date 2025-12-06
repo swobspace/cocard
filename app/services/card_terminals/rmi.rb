@@ -95,12 +95,19 @@ module CardTerminals
     end
 
     def remote_pairing
+      timeout = 30
       if supported? && available_actions.include?(:remote_pairing)
-        result = rmi.remote_pairing
-        if result.success?
-          yield Status.success(result.message.to_s)
-        else
-          yield Status.failure(result.message.to_s)
+        begin
+          result = Timeout::timeout(timeout) { rmi.remote_pairing }
+          if result.success?
+            yield Status.success(result.message.to_s)
+          else
+            yield Status.failure(result.message.to_s)
+          end
+        rescue
+          message = "Timeout nach #{timeout} sec," +
+                    " Terminal antwortet nicht oder Anfrage vom Konnektor kam zu spät!"
+          yield Status.failure(message)
         end
       else
         yield Status.unsupported

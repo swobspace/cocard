@@ -122,7 +122,7 @@ RSpec.describe Card, type: :model do
 
     describe "with expired certificate" do
       it "-> CRITICAL" do
-        card.update(condition: Cocard::States::OK)
+        card.update_column(:condition, Cocard::States::OK)
         card.reload
         expect(card).to receive(:expiration_date).at_least(:once).and_return(1.day.before(Date.current))
         expect {
@@ -133,7 +133,7 @@ RSpec.describe Card, type: :model do
 
     describe "SMC-B PIN not verified" do
       it "-> CRITICAL" do
-        card.update(condition: Cocard::States::OK)
+        card.update_column(:condition, Cocard::States::OK)
         card.reload
         expect(card).to receive(:pin_status).and_return(Cocard::States::CRITICAL)
         expect(card).to receive(:card_type).at_least(:once).and_return('SMC-B')
@@ -145,9 +145,9 @@ RSpec.describe Card, type: :model do
 
     describe "with certificate expiration <= 3 month" do
       it "-> WARNING" do
-        card.update(condition: Cocard::States::OK)
-        card.reload
         expect(card).to receive(:expiration_date).at_least(:once).and_return(1.month.after(Date.current))
+        card.update_column(:condition, Cocard::States::OK)
+        card.reload
         expect {
           card.update_condition
         }.to change(card, :condition).to(Cocard::States::WARNING)

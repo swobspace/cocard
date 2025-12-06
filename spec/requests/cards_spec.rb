@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "/cards", type: :request do
-  let(:ct) { FactoryBot.create(:card_terminal, :with_mac) }
+  let(:conn) { FactoryBot.create(:connector) }
+  let(:ct) { FactoryBot.create(:card_terminal, :with_mac, connector: conn) }
   let(:cts) do 
     FactoryBot.create(:card_terminal_slot, card_terminal: ct, slotid: 4)
   end
@@ -29,10 +30,31 @@ RSpec.describe "/cards", type: :request do
   end
 
   describe "GET /index with search params" do
-    let!(:card1) { FactoryBot.create(:card, expiration_date: 1.day.before(Date.current)) }
-    it "renders a successful response" do
+    let!(:card1) do
+      FactoryBot.create(:card, 
+        name: 'MyCard',
+        iccsn: '12345678',
+        card_type: 'SMC-B',
+        expiration_date: 1.day.before(Date.current),
+        card_terminal_slot: cts
+      )
+    end
+    it "renders a successful response (1)" do
       get cards_url(expired: true)
       expect(response).to be_successful
+      expect(response.body).to include("12345678")
+    end
+
+    it "renders a successful response (2)" do
+      get cards_url(connector_id: conn.id)
+      expect(response).to be_successful
+      expect(response.body).to include("12345678")
+    end
+
+    it "renders a successful response (3)" do
+      get cards_url(connector_id: conn.id + 1)
+      expect(response).to be_successful
+      expect(response.body).not_to include("12345678")
     end
   end
 
@@ -84,7 +106,7 @@ RSpec.describe "/cards", type: :request do
 
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
         post cards_url, params: { card: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
 
     end
@@ -166,7 +188,7 @@ RSpec.describe "/cards", type: :request do
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
         card = Card.create! valid_attributes
         patch card_url(card), params: { card: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
     
     end

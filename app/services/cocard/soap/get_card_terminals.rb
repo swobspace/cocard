@@ -5,7 +5,7 @@ module Cocard::SOAP
     end
 
     def soap_operation_attributes
-      { "mandant-wide": true }
+      { "mandant-wide": @mandant_wide }
     end
   end
 end

@@ -23,6 +23,8 @@ module CardTerminals
       "card_slot2_plugCycles" => "102",
       "card_slot3_plugCycles" => "103",
       "card_slot4_plugCycles" => "104",
+      "vendor_deviceManufacturerId" => 'INGHC',
+      "vendor_deviceModelName" => 'ORGA6100',
     }}
 
     subject { CardTerminals::RMI::OrgaV1::Info.new(properties) }
@@ -46,5 +48,37 @@ module CardTerminals
     it { expect(subject.slot2_plug_cycles).to eq("102") }
     it { expect(subject.slot3_plug_cycles).to eq("103") }
     it { expect(subject.slot4_plug_cycles).to eq("104") }
+    it { expect(subject.product_vendor_id).to eq("INGHC") }
+    it { expect(subject.product_code).to eq("ORGA6100") }
+    it { expect(subject.identification).to eq("INGHC-ORGA6100") }
+
+    it "contains all attributes" do
+      expect(CardTerminals::RMI::OrgaV1::Info::ATTRIBUTES).to contain_exactly(
+        *%i[
+          terminalname
+          dhcp_enabled
+          macaddr
+          current_ip
+          static_ip
+          dhcp_ip
+          remote_pin_enabled
+          remote_pairing_enabled
+          ntp_enabled
+          ntp_server
+          tftp_server
+          tftp_file
+          firmware_version
+          firmware_builddate
+          serial
+          uptime_total
+          uptime_reboot
+          slot1_plug_cycles
+          slot2_plug_cycles
+          slot3_plug_cycles
+          slot4_plug_cycles
+          identification
+        ]
+      )
+    end
   end
 end

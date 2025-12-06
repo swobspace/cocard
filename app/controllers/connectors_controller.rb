@@ -1,5 +1,6 @@
 class ConnectorsController < ApplicationController
-  before_action :set_connector, only: [:show, :edit, :update, :destroy, :reboot]
+  before_action :set_connector, only: [:show, :edit, :update, :destroy, :reboot,
+                                       :test_context_form, :test_context]
   before_action :add_breadcrumb_show, only: [:show]
 
   # GET /connectors
@@ -41,7 +42,8 @@ class ConnectorsController < ApplicationController
   end
 
   def check
-    Connectors::HealthCheckJob.perform_now(connector: @connector)
+    Connectors::HealthCheckJob.perform_now(connector: @connector,
+                                           user: current_user)
     respond_with(@connector) do |format|
       format.turbo_stream { head :ok }
     end
@@ -98,6 +100,27 @@ class ConnectorsController < ApplicationController
     respond_with(@connector, action: :show)
   end
 
+  def test_context_form
+    @context = Context.new
+    respond_with(@connector)
+  end
+
+  def test_context
+    context = Context.new(test_context_params)
+    ri = Cocard::GetResourceInformation.new(connector: @connector,
+                                            context: context)
+    result = ri.call
+    if result.success?
+      flash[:success] = "Kontext-Test erfolgreich: " + context.to_s 
+    else
+      flash[:alert] = "Kontext-Test fehlgeschlagen! " + result.error_messages.join("; ")
+    end
+    respond_with(@connector) do |format|
+      format.turbo_stream
+    end
+  end
+
+
   def reboot
     @connector.rmi.reboot do |result|
       result.on_success do |message|
@@ -147,5 +170,10 @@ class ConnectorsController < ApplicationController
                     ])
             .reject { |k, v| k == 'auth_password' && v.blank? }
 
+    end
+
+    def test_context_params
+      params.require(:context)
+            .permit(:mandant, :client_system, :workplace)
     end
 end

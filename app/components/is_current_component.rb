@@ -9,6 +9,10 @@ class IsCurrentComponent < ViewComponent::Base
     @icon = icon
   end
 
+  def render?
+    item.present?
+  end
+
   def message
     if !icon
       show_time.to_s

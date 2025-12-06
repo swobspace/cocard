@@ -8,15 +8,20 @@ module Cocard::SOAP
       @mandant       = options.fetch(:mandant)
       @client_system = options.fetch(:client_system)
       @workplace     = options.fetch(:workplace)
+      @userid        = options.fetch(:userid, nil)
     end
 
     def soap_message
-      { 
-        "CCTX:Context" => {
-          "CONN:MandantId"      => @mandant,
-          "CONN:ClientSystemId" => @client_system,
-          "CONN:WorkplaceId"    => @workplace  }
-      }
+      soap_msg =  { 
+                    "CCTX:Context" => {
+                    "CONN:MandantId"      => @mandant,
+                    "CONN:ClientSystemId" => @client_system,
+                    "CONN:WorkplaceId"    => @workplace }
+                  }
+      if @userid.present?
+        soap_msg["CCTX:Context"].merge("CONN:UserId" => @userid)
+      end
+      soap_msg
     end
 
     def wsdl_content

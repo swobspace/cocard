@@ -5,6 +5,7 @@ class Connectors::HealthCheckJob < ApplicationJob
   def perform(options = {})
     options.symbolize_keys!
     connector = options.fetch(:connector)
+    @user     = options.fetch(:user)
     status = nil
 
     if connector.up?
@@ -52,7 +53,7 @@ private
     end
     unless status.nil?
       Turbo::StreamsChannel.broadcast_prepend_to(
-        connector,
+        @user,
         target: 'toaster',
         partial: "shared/turbo_toast",
         locals: {status: status, message: message})

@@ -1,5 +1,16 @@
 = Changelog
 
+== 0.9.4 - 2025-12-06
+
+* Kontext-Check zum Konnektor: Abfrage eines beliebigen Kontextes beim Konnektor über GetResourceInformation.
+* RISE TIClient: Abfrage der Kartenterminals und deren Zustände am Konnektor über die Proxy-Funktion des TI-Clients - erfordert Aktivierung (z.Z. nur manuell z.B. via Bruno möglich)
+* RISE TIClient: Terminal dem Konnektor zuweisen (BEKANNT->ZUGEWIESEN)
+* RISE TIClient: Terminal pairen. Dabei startet Cocard das Pairing auf einem Orga6141 und führt das Pairing am Konnektor durch
+* RISE TIClient: Anzeige von Remote PIN Plus Konfigurationen
+* Orga6141: Ausgabe statistischer Informationen (Steckzyklen, Uptime, Laufzeit gesamt)
+* Konnektor-Kontexte: Sortierung per Drag and Drop möglich
+* Kartenterminal: Kontext-Check, ob das Kartenterminal mit dem Default-Kontext des Konnektors von Cocard abgefragt werden kann. Falls nicht, erscheint eine Warnung in der Einzelanzeige des Kartenterminals.
+
 == 0.9.3 - 2025-11-08
 
 * (experimentell) Abgleich KT-Proxys über RISE TI-Client-API

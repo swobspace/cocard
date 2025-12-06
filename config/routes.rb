@@ -3,6 +3,22 @@ Rails.application.routes.draw do
   resource :duck_terminal, only: [:new, :show]
   get "reports/duplicate_terminal_ips"
   resources :ti_clients do
+    resources :remote_pin_plus, module: :ti_clients, only: [:index] 
+    resources :terminals, module: :ti_clients, only: [:index] do
+      member do
+        post :assign
+        post :pairing
+        post :begin_session
+        post :end_session
+        post :add
+        post :change_correlation
+      end
+      collection do
+        post :reconnect_all
+        post :assign_all
+        post :pairing_all
+      end
+    end
     resources :kt_proxies, module: :ti_clients, only: [:index] do
       collection do
         put :fetch
@@ -79,11 +95,14 @@ Rails.application.routes.draw do
       post :reboot
       post :remote_pairing
       get :edit_identification
+      get :test_context_form
+      post :test_context
     end
     resources :notes, module: :card_terminals
     resource :kt_proxy, module: :card_terminals
   end
   resources :contexts
+  resources :connector_contexts, only: [:show, :update]
   resources :connectors do
     collection do
       get :sindex
@@ -96,6 +115,8 @@ Rails.application.routes.draw do
       get :ping
       post :check
       post :reboot
+      get :test_context_form
+      post :test_context
     end
     resources :logs, only: [:index, :show, :destroy], module: :connectors
     resources :card_terminals, only: [:index, :show, :destroy], module: :connectors

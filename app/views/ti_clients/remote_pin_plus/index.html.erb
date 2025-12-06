@@ -1,0 +1,117 @@
+<%= render 'shared/turbo-cache-control' %>
+<%= turbo_frame_tag('ticlient_remote_pin_plus') do %>
+  <%= render partial: 'shared/flash_alert' %>
+  <div class="card mt-3">
+    <div class="card-header">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h4 class="me-4 pt-1"><%= t('controller.ti_clients/remote_pin_plus')%></h4>
+        </div>
+        <div role="toolbar" class="pt-0">
+          <%= link_to t('activerecord.models.ti_client'),
+                      ti_client_path(@ti_client),
+                      class: 'btn btn-outline-secondary btn-sm',
+                      data: { "turbo-frame": "_top" }
+           %>
+          <%= link_to raw(%Q[<i class="fas fa-table"></i>]),
+                      ti_client_remote_pin_plus_path(@ti_client),
+                      class: 'btn btn-outline-secondary btn-sm',
+                      data: { "turbo-frame": "_top" }
+          %>
+        </div>
+      </div>
+    </div>
+    <div class="p-2">
+      <div data-controller="datatables">
+        <%= content_tag :table, role: :datatable,
+              id: "remote_pin_plus_table",
+              class: "table table-sm table-responsive-xl",
+              data: {
+                'datatables-target': 'datatable',
+                order: [[0, 'asc']].to_json
+              } do %>
+          <thead>
+            <tr>
+              <th class="text-center"><%= t('attributes.iccsn') %></th>
+              <th class=""><%= t('attributes.card_holder_name') %></th>
+              <th class=""><%= t('attributes.ct_id') %></th>
+              <th class=""><%= t('attributes.terminal_name') %></th>
+              <th class=""><%= t('attributes.card_type') %></th>
+              <th class=""><%= t('attributes.state') %></th>
+            </tr>
+          </thead>
+          <tfoot class="search">
+            <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </tfoot>
+          <tbody>
+            <% @cards.each do |card| %>
+              <tr>
+                <td class="text-center">
+                  <%= link_to card.iccsn, card.card,
+                              class: 'primary-link',
+                              data: { "turbo-frame": "_top" }
+                   %>
+                </td>
+                <td><%= card.card_holder %></td>
+                <td><%= card.terminal_id %></td>
+                <td><%= card.terminal_name %></td>
+                <td><%= card.card_type %></td>
+                <td><%= render TIClient::RemotePinPlusStateComponent.new(card: card)
+                     %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        <% end %>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-xl-2"></div>
+        <div class="col-xl-8">
+          <table class="table table-striped table-sm mt-3 border-top">
+            <tbody>
+              <tr>
+                <th>Status</th>
+                <th>Beschreibung</th>
+              </tr>
+              <tr>
+                <td>ACTIVE</td>
+                <td>Die Verifizierung war erfolgreich. Die PIN+-Konfiguration ist aktiv.</td>
+              </tr>
+              <tr>
+                <td>PENDING</td>
+                <td>Die initiale Verifizierung nach Erstellung der PIN+-Konfiguration wurde noch nicht abgeschlossen. Abhängig vom Ergebnis geht der Status anschließend in ACTIVE oder ERROR über.</td>
+              </tr>
+              <tr>
+                <td>ERROR</td>
+                <td>Die Verifizierung ist fehlgeschlagen. Eine erneute Prüfung erfolgt erst nach manueller Fehlerbehebung.</td>
+              </tr>
+              <tr>
+                <td>MISSING</td>
+                <td>Die Karte konnte aktuell am vKonnektor nicht gefunden werden. Dies ist kein endgültiger Status und bedeutet nicht zwangsläufig, dass die Verifizierung zu einem späteren Zeitpunkt nicht möglich ist. Es sollte zusätzlich geprüft werden, ob das Kartenterminal verbunden und die Karte korrekt gesteckt ist.</td>
+              </tr>
+              <tr>
+                <td>CONFIGURABLE</td>
+                <td>Es gibt keine Remote-PIN-Plus-Konfiguration für diese Karte, kann aber erstellt werden.</td>
+              </tr>
+              <tr>
+                <td>CT_NOT_SUPPORTED</td>
+                <td>Das Kartenterminal wird für Remote-PIN-Plus nicht unterstützt</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>HINWEIS: Remote-PIN-Plus ist nur für SMC-B-Karten möglich, 
+             die einem Kontext zugeordnet sind. Nur SMC-B-Karten mit Kontext erscheinen
+             in der Übersicht.</p>
+        </div>
+        <div class="col-xl-2"></div>
+      </div>
+    </div>
+  </div>
+<% end %>

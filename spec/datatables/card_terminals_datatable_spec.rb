@@ -30,6 +30,12 @@ module CardTerminalsDatatableHelper
       column << "RENDER"
       column << "RENDER"
       column << "RENDER"
+      column <<  ct.uptime_total
+      column <<  ct.uptime_reboot
+      column <<  ct.slot1_plug_cycles
+      column <<  ct.slot2_plug_cycles
+      column <<  ct.slot3_plug_cycles
+      column <<  ct.slot4_plug_cycles
 
       column << "  " # dummy for action links
     end

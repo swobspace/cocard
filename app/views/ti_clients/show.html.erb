@@ -1,8 +1,7 @@
 <%= render 'shared/turbo-cache-control' %>
 
-<% @ti_client.card_terminals.each do |ct| %>
-  <%= turbo_stream_from ct %>
-<% end %>
+<%= turbo_stream_from @ti_client %>
+
 
 <div class="card mb-3">
   <div class="card-header">
@@ -22,47 +21,134 @@
   </div>
 
   <div class="card-body">
-    <table class="table table-sm table-borderless">
+    <div class="row">
+      <div class="col-6">
+        <table class="table table-sm table-borderless mb-0">
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.connector')%>:</th>
+            <td><%= link_to @ti_client.connector,
+                            @ti_client.connector,
+                            class: 'primary-link'
+                 %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.name')%>:</th>
+            <td><%= link_to @ti_client.name, @ti_client, class: 'primary-link'
+                 %></td>
 
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.connector')%>:</th>
-        <td><%= link_to @ti_client.connector,
-                        @ti_client.connector,
-                        class: 'primary-link'
-             %></td>
-      </tr>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.url')%>:</th>
+            <td><%= link_to(@ti_client.url, @ti_client.url,
+                            class: 'primary-link', target: :_blank) if @ti_client.url.present?
+                 %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3">Client-ID:</th>
+            <td><%= @ti_client.client_id  %></td>
+          </tr>
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.client_secret')%>:</th>
+            <td><%= (@ti_client.client_secret.present? ? "vorhanden" : "nicht vorhanden")  %></td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-6">
+        <table class="table table-sm table-borderless mb-0">
+          <tr>
+            <th class="w-10 pe-3"><%= t('attributes.task_scheduler')%>:</th>
+            <td><%= render TIClient::SchedulerComponent.new(ti_client: @ti_client) %></td>
+          </tr>
+         <% if can? :manage, @ti_client %>
+          <tr>
+            <th class="w-10 pe-3">Sammelaktionen:</th>
+            <td>
+              <div class="alert alert-warning">
+                <%= t('ti_clients.hint_all') %>
+              </div>
 
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.name')%>:</th>
-        <td><%= link_to @ti_client.name, @ti_client, class: 'primary-link'
-             %></td>
+              <%= button_to(
+                    reconnect_all_ti_client_terminals_path(@ti_client),
+                    method: :post,
+                    class: "btn btn-warning mb-2",
+                     form: {
+                       data: {
+                         "turbo-confirm": t('ti_clients.hint_all') +
+                                          "Wollen Sie trotzdem fortfahren?"
+                       }
+                     }) do %>
+                <i class="fa-solid fa-fw fa-arrow-rotate-right me-1"></i>
+                <%= t('ti_clients.reconnect_all') %>
+              <% end %>
+              <br/>
+              <%= button_to(
+                    assign_all_ti_client_terminals_path(@ti_client),
+                    method: :post,
+                    class: "btn btn-warning mb-2",
+                     form: {
+                       data: {
+                         "turbo-confirm": t('ti_clients.hint_all') +
+                                          "Wollen Sie trotzdem fortfahren?"
+                       }
+                     }) do %>
+                <i class="fa-solid fa-fw fa-plus me-1"></i>
+                <%= t('ti_clients.assign_all') %>
+              <% end %>
+              <br/>
+              <%# button_to(
+                    pairing_all_ti_client_terminals_path(@ti_client),
+                    method: :post,
+                    class: "btn btn-outline-warning mb-2",
+                    title: "not yet implemented, stay tuned ...",
+                     form: {
+                       data: {
+                         "turbo-confirm": t('ti_clients.hint_all') +
+                                          "Wollen Sie trotzdem fortfahren?"
+                       }
+                     }) do %>
+              <!-- 
+                <i class="fa-solid fa-fw fa-link me-1"></i> 
+               -->
+                <%# t('ti_clients.pairing_all') %>
+              <%# end %>
+            </td>
+          </tr>
+         <% end %>
+        </table>
 
-      </tr>
-
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.url')%>:</th>
-        <td><%= link_to(@ti_client.url, @ti_client.url,
-                        class: 'primary-link', target: :_blank) if @ti_client.url.present?
-             %></td>
-
-      </tr>
-
-      <tr>
-        <th class="w-10 pe-3">Client-ID:</th>
-        <td><%= @ti_client.client_id  %></td>
-
-
-      <tr>
-        <th class="w-10 pe-3"><%= t('attributes.client_secret')%>:</th>
-        <td><%= (@ti_client.client_secret.present? ? "vorhanden" : "nicht vorhanden")  %></td>
-
-      </tr>
-    </table>
+      </div>
+    </div>
   </div>
 </div>
 
 <%= back_link %>
 <%= new_link TIClient %>
 
-<%= render 'ti_clients/kt_proxies/index', kt_proxies: @ti_client.kt_proxies %>
+<ul class="nav nav-tabs mt-3" id="TIClientTab" role="tablist" data-turbo-permanent>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="kt-proxies-tab" data-bs-toggle="tab" data-bs-target="#kt-proxies-tab-pane" type="button" role="tab" aria-controls="kt-proxies-tab-pane" aria-selected="false"><%= t('controller.kt_proxies') %></button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="terminals-tab" data-bs-toggle="tab" data-bs-target="#terminals-tab-pane" type="button" role="tab" aria-controls="terminals-tab-pane" aria-selected="false"><%= t('controller.ti_clients/terminals') %></button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="pinplus-tab" data-bs-toggle="tab" data-bs-target="#pinplus-tab-pane" type="button" role="tab" aria-controls="pinplus-tab-pane" aria-selected="false"><%= t('controller.ti_clients/remote_pin_plus') %></button>
+  </li>
+</ul>
+
+<div class="tab-content" id="TIClientTabContent" data-turbo-permanent>
+  <div class="tab-pane fade show active" id="kt-proxies-tab-pane" role="tabpanel" aria-labelledby="kt-proxies-tab" tabindex="0">
+    <%= render 'ti_clients/kt_proxies/index', kt_proxies: @ti_client.kt_proxies %>
+  </div>
+  <div class="tab-pane fade" id="terminals-tab-pane" role="tabpanel" aria-labelledby="terminals-tab" tabindex="0">
+    <%= turbo_frame_tag("ticlient_terminals",
+                        src: ti_client_terminals_path(@ti_client),
+                        refresh: "morph") %>
+  </div>
+  <div class="tab-pane fade" id="pinplus-tab-pane" role="tabpanel" aria-labelledby="pinplus-tab" tabindex="0">
+    <%= turbo_frame_tag("ticlient_remote_pin_plus",
+                        src: ti_client_remote_pin_plus_path(@ti_client),
+                        refresh: "morph") %>
+  </div>
+</div>
 

@@ -96,6 +96,27 @@ module RISE
         expect(called_back).to eq(:success)
       end
 
+      it "empty: gets card terminal proxies" do
+        stubs.get('api/v1/manager/card-terminals/proxies') do
+          [
+            200, 
+            {'Content-Type': 'application/json;charset=UTF-8'},
+            ""
+          ]
+        end
+
+        called_back = false 
+        subject.get_proxies do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:success)
+      end
+
       it "failure: no content" do
         stubs.get('api/v1/manager/card-terminals/proxies') do
           [
@@ -110,6 +131,23 @@ module RISE
           result.on_success do |message, value|
             called_back = :success
             expect(value).to include(JSON.parse(card_terminal_proxies_body))
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:failure)
+      end
+
+      it "failure: FaradayError" do
+        stubs.get('api/v1/manager/card-terminals/proxies') do
+          raise Faraday::ConnectionFailed
+        end
+
+        called_back = false 
+        subject.get_proxies do |result|
+          result.on_success do |message, value|
+            called_back = :success
           end
           result.on_failure do |message|
             called_back = :failure
@@ -183,6 +221,27 @@ module RISE
         expect(called_back).to eq(:success)
       end
 
+      it "empty: gets proxy" do
+        stubs.get('api/v1/manager/card-terminals/proxies/bf11726a-ad8f-11f0-8247-c025a5b36994') do
+          [
+            200, 
+            {'Content-Type': 'application/json;charset=UTF-8'},
+            ""
+          ]
+        end
+
+        called_back = false 
+        subject.get_proxy(kt_proxy) do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:success)
+      end
+
       it "failure: 404 not found" do
         stubs.get('api/v1/manager/card-terminals/proxies/bf11726a-ad8f-11f0-8247-c025a5b36994') do
           [
@@ -214,6 +273,23 @@ module RISE
             {'Content-Type': 'application/json;charset=UTF-8'},
             ''
           ]
+        end
+
+        called_back = false 
+        subject.get_proxy(kt_proxy) do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:failure)
+      end
+
+      it "failure: FaradayError" do
+        stubs.get('api/v1/manager/card-terminals/proxies/bf11726a-ad8f-11f0-8247-c025a5b36994') do
+          raise Faraday::ConnectionFailed
         end
 
         called_back = false 
@@ -300,6 +376,31 @@ module RISE
         expect(kt_proxy.uuid).to eq('f7da0dce-b70c-11f0-b4b0-c025a5b36994')
       end
 
+      it "empty: creates proxy" do
+        stubs.post(
+          'api/v1/manager/card-terminals/proxies',
+          proxy_body,
+          "Content-Type" => "application/json"
+        ) do
+          [
+            200, 
+            {'Content-Type': 'application/json;charset=UTF-8'},
+            ""
+          ]
+        end
+
+        called_back = false 
+        subject.create_proxy(kt_proxy) do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:success)
+      end
+
       it "failure: no content" do
         stubs.post(
           'api/v1/manager/card-terminals/proxies',
@@ -311,6 +412,27 @@ module RISE
             {'Content-Type': 'application/json;charset=UTF-8'},
             ''
           ]
+        end
+
+        called_back = false 
+        subject.create_proxy(kt_proxy) do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:failure)
+      end
+
+      it "failure: FaradayError" do
+        stubs.post(
+          'api/v1/manager/card-terminals/proxies',
+          proxy_body,
+          "Content-Type" => "application/json"
+        ) do
+          raise Faraday::ConnectionFailed
         end
 
         called_back = false 
@@ -421,6 +543,23 @@ module RISE
         end
         expect(called_back).to eq(:failure)
       end
+
+      it "failure: FaradayError" do
+        stubs.put('api/v1/manager/card-terminals/proxies/bf11726a-ad8f-11f0-8247-c025a5b36994') do
+          raise Faraday::ConnectionFailed
+        end
+
+        called_back = false 
+        subject.update_proxy(kt_proxy) do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:failure)
+      end
     end
 
     describe '#delete_proxy' do
@@ -490,6 +629,23 @@ module RISE
       it "failure: 500 internal server error" do
         stubs.delete('api/v1/manager/card-terminals/proxies/bf11726a-ad8f-11f0-8247-c025a5b36994') do
           [ 500, {}, {} ]
+        end
+
+        called_back = false 
+        subject.delete_proxy(kt_proxy) do |result|
+          result.on_success do |message, value|
+            called_back = :success
+          end
+          result.on_failure do |message|
+            called_back = :failure
+          end
+        end
+        expect(called_back).to eq(:failure)
+      end
+
+      it "failure: FaradayError" do
+        stubs.delete('api/v1/manager/card-terminals/proxies/bf11726a-ad8f-11f0-8247-c025a5b36994') do
+          raise Faraday::ConnectionFailed
         end
 
         called_back = false 

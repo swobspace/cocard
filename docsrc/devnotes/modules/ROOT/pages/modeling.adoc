@@ -128,7 +128,13 @@ bin/rails g migration AddInternalToCardTerminal \
   firmware_version:string \
   identification:string \
   acknowledge_id:bigint \
-  rebooted_at:timestamp
+  rebooted_at:timestamp \
+  uptime_total:integer \
+  uptime_reboot:integer \
+  slot1_plug_cycles:integer \
+  slot2_plug_cycles:integer \
+  slot3_plug_cycles:integer \
+  slot4_plug_cycles:integer
 ----
 
 ----

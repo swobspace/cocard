@@ -57,6 +57,8 @@ export default class extends Controller {
 
   // search fields for each column
   setInputFields(dtable) {
+    this.element.querySelectorAll('table tfoot th:not(.nosearch) input')
+        .forEach(f => {f.remove()})
     this.element.querySelectorAll("table tfoot th:not(.nosearch)")
         .forEach((th, idx) => {
           let col = th.getAttribute("data-dt-column")

@@ -1,0 +1,22 @@
+@startuml
+top to bottom direction
+
+!theme cocard from ..
+
+skinparam nodesep 80
+skinparam ranksep 80
+
+skinparam DefaultTextAlignment left
+
+rectangle "RISE vKonn" as vkonn #gold
+rectangle "KT-Proxy" as ktproxy #lightblue
+rectangle "Karten-\nterminal" as klg #gold
+
+vkonn --# "incoming_ip\nincoming_port" ktproxy
+note right on link
+VPN-Tunnel
+end note
+
+ktproxy "outgoing_ip\noutgoing_port" #-- "4742" klg
+
+@enduml

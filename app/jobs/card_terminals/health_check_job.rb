@@ -4,6 +4,7 @@ class CardTerminals::HealthCheckJob < ApplicationJob
   def perform(options = {})
     options.symbolize_keys!
     card_terminal = options.fetch(:card_terminal)
+    @user         = options.fetch(:user)
     status = nil
 
     if card_terminal.is_accessible?
@@ -53,7 +54,15 @@ class CardTerminals::HealthCheckJob < ApplicationJob
           # check_value(card_terminal, info, :ntp_enabled)
           # check_value(card_terminal, info, :tftp_server)
           # check_value(card_terminal, info, :tftp_file)
+
+          #
+          # Update card terminal
+          #
+          
+          creator = CardTerminals::RMI::Creator.new(info: info)
+          creator.save
         end
+
         result.on_failure do |message|
           text = "RMI-Abfrage fehlgeschlagen: #{message}"
           toaster(card_terminal, :alert, text)
@@ -74,7 +83,7 @@ private
   def toaster(card_terminal, status, message)
     unless status.nil?
       Turbo::StreamsChannel.broadcast_prepend_to(
-        card_terminal,
+        @user,
         target: 'toaster',
         partial: "shared/turbo_toast",
         locals: {status: status, message: message})

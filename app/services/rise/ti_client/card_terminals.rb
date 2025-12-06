@@ -23,7 +23,7 @@ module RISE
       if @errors.any?
         yield RISE::TIClient::Status.failure(@errors.join("; "))
       else
-        json = JSON.parse(response.body)
+        json = begin JSON.parse(response.body) rescue {} end
         yield RISE::TIClient::Status.success("#{response.status}: Success", json)
       end
     end
@@ -49,12 +49,12 @@ module RISE
         end
       end
 
-      if response.status == 404
+      if response.present? && response.status == 404
         yield RISE::TIClient::Status.notfound(@errors.join("; "))
       elsif @errors.any?
         yield RISE::TIClient::Status.failure(@errors.join("; "))
       else
-        json = JSON.parse(response.body)
+        json = begin JSON.parse(response.body) rescue {} end
         yield RISE::TIClient::Status.success("#{response.status}: Success", json)
       end
     end
@@ -82,7 +82,7 @@ module RISE
       if @errors.any?
         yield RISE::TIClient::Status.failure(@errors.join("; "))
       else
-        json = JSON.parse(response.body)
+        json = begin JSON.parse(response.body) rescue {} end
         kt_proxy.update(uuid: json['id'])
         yield RISE::TIClient::Status.success("#{response.status}: Success", json)
       end
@@ -109,7 +109,7 @@ module RISE
         end
       end
 
-      if response.status == 404
+      if response.present? && response.status == 404
         yield RISE::TIClient::Status.notfound(@errors.join("; "))
       elsif @errors.any?
         yield RISE::TIClient::Status.failure(@errors.join("; "))
@@ -139,7 +139,7 @@ module RISE
         end
       end
 
-      if response.status == 404
+      if response.present? && response.status == 404
         yield RISE::TIClient::Status.notfound(@errors.join("; "))
       elsif @errors.any?
         yield RISE::TIClient::Status.failure(@errors.join("; "))

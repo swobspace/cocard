@@ -1,0 +1,71 @@
+<div class="card-title border-bottom bg-light pt-2 rounded-2 px-2">
+  <div class="d-flex justify-content-between">
+    <h6>TI-Gateway: KT-Proxy auf <%= render LinkToComponent.new(item: ti_client )%></h6>
+    <div> 
+      <%= link_to(raw(%Q[<i class="fa-solid fa-eye"></i>]),
+                  kt_proxy_path(kt_proxy),
+                  class: 'primary-link me-2',
+                  data: { "turbo-frame": "_top" })
+       %> 
+      <%= link_to(raw(%Q[<i class="fa-solid fa-pencil"></i>]),
+                  edit_kt_proxy_path(card_terminal.kt_proxy),
+                  class: 'primary-link me-2',
+                  data: { "turbo-frame": "_top" }) if can?(:manage, ti_client)
+       %>
+                   
+    </div>
+  </div>
+</div>
+<div class="px-2">
+  <table class="table table-sm table-borderless">
+    <tr>
+      <th class="w-25 pe-3"><%= t('attributes.card_terminal_ip')%>:</th>
+      <td><%= kt_proxy.card_terminal_ip %> : <%= kt_proxy.card_terminal_port %></td>
+    </tr>
+    <tr>
+      <th class="w-25 pe-3"><%= t('attributes.incoming_ip')%>:</th>
+      <td><%= kt_proxy.incoming_ip %> : <%= kt_proxy.incoming_port %></td>
+    </tr>
+    <tr>
+      <th class="w-25 pe-3"><%= t('attributes.outgoing_ip')%>:</th>
+      <td><%= kt_proxy.outgoing_ip %> : <%= kt_proxy.outgoing_port %></td>
+    </tr>
+  </table>
+</div>
+
+<% if terminal.present? %>
+  <div class="card-title border-bottom bg-light mt-2 pt-2 px-2">
+    <div class="d-flex justify-content-between">
+      <h6>TI-Gateway: Konnektor <%= render LinkToComponent.new(item: ti_client.connector,
+                                                               label_method: :name) %>
+      </h6>
+    </div>
+  </div>
+  <div class="row px-2">
+    <div class="col-xl-9">
+      <table class="table table-sm table-borderless">
+        <tr>
+          <th class="w-25 pe-3"><%= t('attributes.correlation')%>:</th>
+          <td><%= render Terminal::StateComponent.new(terminal: terminal,
+                                                      attribute: :correlation) %></td>
+        </tr>
+        <tr>
+          <th class="w-25 pe-3"><%= t('attributes.connected')%>:</th>
+          <td><%= render Terminal::StateComponent.new(terminal: terminal,
+                                                      attribute: :connected) %></td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-xl-3 text-end">
+      <%= render TIClient::AssignComponent.new(
+                   ti_client: card_terminal.kt_proxy.ti_client,
+                   terminal: terminal) if can? :manage, card_terminal.kt_proxy.ti_client %>
+    </div>
+  </div>
+  <% if card_terminal.connector and ( card_terminal.connector != ti_client.connector) %>
+    <div class="alert alert-warning mx-2">
+      Achtung: der aktuelle Konnektor des Kartenterminals weicht vom Konnektor des 
+               TI-Clients ab!
+    </div>
+  <% end %>
+<% end %>

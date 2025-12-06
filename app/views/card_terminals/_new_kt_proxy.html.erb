@@ -1,0 +1,17 @@
+<div class="card-title border-bottom bg-light pt-2 rounded-top-2 px-2">
+  <h6>KT-Proxy (TI-Gateway)</h6>
+</div>
+<div class="d-flex justify-content-between px-2">
+  <div class="text-start">
+    Kein KT-Proxy vorhanden
+  </div>
+  <div class="text-end pb-2">
+    <%= render CardTerminal::FetchButtonComponent.new(
+                 card_terminal: card_terminal
+               ) if can?(:manage, card_terminal)
+     %>
+    <%= link_to("KT-Proxy generieren", 
+                new_card_terminal_kt_proxy_path(card_terminal),
+                class: 'btn btn-warning') if can?(:create, KTProxy) %>
+  </div>
+</div>

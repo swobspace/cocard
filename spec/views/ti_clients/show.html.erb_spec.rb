@@ -16,6 +16,7 @@ RSpec.describe "ti_clients/show", type: :view do
       url: "Url",
       client_secret: "StrengGeheim"
     ))
+    expect(TIClient::SchedulerComponent).to receive(:new).and_return(:plain => "")
   end
 
   it "renders attributes in <p>" do

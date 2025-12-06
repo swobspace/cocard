@@ -30,4 +30,8 @@ RSpec.describe Context, type: :model do
   describe "#to_s" do
     it { expect(context.to_s).to match("ACME - KIS - Konnektor - Doctor Who's Universe") }
   end
+
+  describe "#plain" do
+    it { expect(context.plain).to match("ACME - KIS - Konnektor") }
+  end
 end

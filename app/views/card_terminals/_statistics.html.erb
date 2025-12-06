@@ -1,0 +1,19 @@
+<table class="table table-sm table-borderless">
+  <tbody>
+    <% %w[ uptime_total uptime_reboot slot1_plug_cycles slot2_plug_cycles 
+           slot3_plug_cycles slot4_plug_cycles].each do |attr| %>
+      <tr>
+        <th class="w-25 pe-3"><%= t('attributes.' + attr)%>:</th>
+        <td><%= card_terminal.send(attr) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th class="bg-secondary-subtle">Hinweis:</th>
+      <td class="bg-secondary-subtle">Die Daten werden 1x pro Tag aktualisiert. Außerdem erfolgt eine Aktualisierung 
+          bei jedem Health-Check </td>
+    </tr>
+  </tfoot>
+</table>
+

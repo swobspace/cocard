@@ -1,6 +1,7 @@
 class SearchesController < ApplicationController
   def index
-    @results = (connectors + card_terminals + cards + workplaces + kt_proxies)
+    @results = (connectors + ti_clients + card_terminals + 
+                cards + workplaces + kt_proxies)
     if @results.count > 20
       @results = @results.first(20)
       @info = I18n.t('cocard.to_much_results')
@@ -15,6 +16,10 @@ private
     # Connectors::Query.new(Connector.all, search: searchstring).all
     relation = Connector.all
     Connectors::Query.new(relation, searchopts).all.distinct
+  end
+
+  def ti_clients
+    TIClient.where("ti_clients.name ILIKE ?", query).all
   end
 
   def card_terminals
@@ -55,9 +60,9 @@ private
   def searchopts
     search_opts = {}
     # process named options first
-    opts = quarry.select{|x| x =~ /:/}
+    opts = quarry.select{|x| x =~ /=/}
     opts.each do |opt|
-      (k,v) = opt.split(/:/)
+      (k,v) = opt.split(/=/)
       search_opts[k.downcase] = v
     end
     # add search for simple string

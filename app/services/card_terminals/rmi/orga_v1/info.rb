@@ -23,6 +23,7 @@ module CardTerminals
         slot2_plug_cycles
         slot3_plug_cycles
         slot4_plug_cycles
+        identification
       ]
 
       def initialize(properties)
@@ -113,6 +114,18 @@ module CardTerminals
 
       def slot4_plug_cycles
         properties['card_slot4_plugCycles']
+      end
+
+      def product_vendor_id
+        properties['vendor_deviceManufacturerId']
+      end
+
+      def product_code
+        properties['vendor_deviceModelName']
+      end
+
+      def identification
+        "#{product_vendor_id}-#{product_code}"
       end
 
   private

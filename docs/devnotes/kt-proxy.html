@@ -265,6 +265,27 @@ connectors.pluck(:short_name)</code></pre>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_kartenterminals_aus_kt_proxy_am_konnektor_hinzufügen"><a class="anchor" href="#_kartenterminals_aus_kt_proxy_am_konnektor_hinzufügen"></a>Kartenterminals aus KT-Proxy am Konnektor hinzufügen</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">tic = TIClient.where("name like ?", "%02-BNA%").first
+rtic = RISE::TIClient::Konnektor::Terminals.new(ti_client: tic)
+tic.kt_proxies.each do |ktp|
+  rtic.add(ktp) do |result|
+    result.on_success do |message, value|
+      puts message
+    end
+    result.on_failure do |message|
+      puts message
+    end
+  end
+end; nil</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_sequenzdiagramm"><a class="anchor" href="#_sequenzdiagramm"></a>Sequenzdiagramm</h2>
 <div class="sectionbody">
 <div class="paragraph">

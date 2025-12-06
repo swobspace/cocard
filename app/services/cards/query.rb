@@ -64,6 +64,11 @@ module Cards
           query = query.where("locations.lid ILIKE ?", "%#{value}%")
         when :location_id
           query = query.where("locations.id = ?", value.to_i)
+        # searching for smcbs
+        when :connector_id
+          query = query.joins(card_terminal_slot: :card_terminal)
+                       .where("cards.card_type = ?", 'SMC-B',)
+                       .where("card_terminals.connector_id = ?", value.to_i)
         when :tag
           query = query.joins(taggings: :tag).where("tags.name ILIKE ?", "%#{value}%")
         when :operational_state

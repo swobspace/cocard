@@ -1,4 +1,5 @@
 class TIClient < ApplicationRecord
+  include TIClientConcerns
   # -- associations
   belongs_to :connector, optional: false
   has_many :kt_proxies, dependent: :restrict_with_error

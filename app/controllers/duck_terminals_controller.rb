@@ -19,14 +19,14 @@ class DuckTerminalsController < ApplicationController
         @value = value
         @decorated = CardTerminals::RMI::InfoDecorator.new(@value)
         @message = message
-        @card_terminal = CardTerminal.find_or_create_by(mac: value.macaddr) do |c|
-                           c.ip = value.current_ip
-                           # c.current_ip = value.current_ip
-                           c.name = value.terminalname
-                           c.identification = @ducky.identification
-                           c.firmware_version = value.firmware_version
-                           c.serial = value.serial
-                         end
+        creator = CardTerminals::RMI::Creator.new(info: @value)
+
+        if creator.save
+          flash[:success] = "Update des Kartenterminals erfolgreich"
+        else
+          flash[:warning] = "Update des Kartenterminals fehlgeschlagen"
+        end
+        @card_terminal = creator.card_terminal
       end
 
       result.on_unsupported do

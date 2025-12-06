@@ -48,6 +48,12 @@ module RISE
           expect(subject.valid?).to be_falsey
         end
       end
+
+      it "with invalid json" do
+        expect {
+          RISE::TIClient::Token.new("")
+        }.not_to raise_error
+      end
     end
   end
 end

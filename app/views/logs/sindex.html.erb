@@ -24,11 +24,7 @@
             <td><%= render ErrorLevelBadgeComponent.new(level: log.level) %></td>
             <td><%= log.loggable_type %></td>
             <td>
-              <%= link_to log.loggable,
-                          polymorphic_path(log.loggable),
-                          class: 'primary-link',
-                          data: { 'turbo-frame' => '_top', 'turbo-prefetch' => true }
-               %>
+              <%= render LinkToComponent.new(item: log.loggable) %>
             </td>
             <td><%= log.action %></td>
             <td><%= log.message %></td>
