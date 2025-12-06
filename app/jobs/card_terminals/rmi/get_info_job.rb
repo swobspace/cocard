@@ -12,8 +12,8 @@ module CardTerminals
         card_terminals = options.fetch(:card_terminal) { CardTerminal.ok.to_a }
         card_terminals = Array(card_terminals)
 
-        if ct.condition == Cocard::States::OK and ct.supports_rmi?
-          card_terminals.each do |card_terminal|
+        card_terminals.each do |card_terminal|
+          if card_terminal.condition == Cocard::States::OK and card_terminal.supports_rmi?
             # slow down
             sleep 3
             @prefix = "GetInfo:: card_terminal #{card_terminal}:: ".freeze
