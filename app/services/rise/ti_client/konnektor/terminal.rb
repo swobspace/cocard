@@ -12,7 +12,7 @@ module RISE
         end
 
         def connected
-          @json['CONNECTED']
+          @json['CONNECTED'] || false
         end
 
         def mac

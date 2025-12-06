@@ -90,6 +90,7 @@ module RISE
       subject { RISE::TIClient::Konnektor::Terminal.new({}) }
 
       it { expect(subject.correlation).to eq("NOTFOUND") }
+      it { expect(subject.connected).to be_falsey }
     end
   end
 end
