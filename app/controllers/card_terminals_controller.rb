@@ -223,15 +223,15 @@ class CardTerminalsController < ApplicationController
       result = ri.call
       if result.success?
         if result.card_terminals.select{|ct| ct.ct_id == @card_terminal.ct_id}.any?
-          flash[:success] = "Kontext-Test erfolgreich: " + context.to_s
+          flash.now[:success] = "Kontext-Test erfolgreich: " + context.to_s
         else
-          flash[:warning] = "Kontext-Test nur teilweise erfolgreich: Kontext gültig, aber Kartenterminal nicht dem Arbeitplatz zugewiesen"
+          flash.now[:warning] = "Kontext-Test nur teilweise erfolgreich: Kontext gültig, aber Kartenterminal nicht dem Arbeitplatz zugewiesen"
         end
       else
-        flash[:alert] = "Kontext-Test fehlgeschlagen! " + result.error_messages.join("; ")
+        flash.now[:alert] = "Kontext-Test fehlgeschlagen! " + result.error_messages.join("; ")
       end
     else
-      flash[:alert] = "Kein Konnektor zugewiesen, kein Kontext-Test möglich"
+      flash.now[:alert] = "Kein Konnektor zugewiesen, kein Kontext-Test möglich"
     end
     respond_with(@connector) do |format|
       format.turbo_stream
