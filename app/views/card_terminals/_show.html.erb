@@ -26,7 +26,7 @@
         <%= link_to(raw(%Q[<i class="fa-solid fa-fw fa-list-check"></i>]),
                     test_context_form_card_terminal_path(card_terminal),
                     title: "Test eines Kontextes",
-                    class: 'btn btn-secondary me-1')
+                    class: 'btn btn-secondary me-1') if card_terminal.connector.present?
          %>
         <%= render HealthCheckButtonComponent.new(item: card_terminal) %>
         <%= render AcknowledgeButtonComponent.new(
