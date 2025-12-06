@@ -210,7 +210,7 @@ class CardTerminalsController < ApplicationController
 
 
   def test_context_form
-    @context = Context.new
+    @context = @card_terminal.connector&.contexts&.first&.dup || Context.new
     respond_with(@card_terminal)
   end
 
