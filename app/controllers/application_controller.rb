@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
   end
 
   def access_denied(exception)
-    if @current_user.nil?
+    if current_user.nil?
       redirect_to wobauth.login_path
     else
       flash.now[:error] = 'Keine Berechtigung für diese Aktion!'

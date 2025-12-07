@@ -2,7 +2,7 @@
 <%= turbo_stream_from :notes %>
 <%= turbo_stream_from :verify_pins %>
 
-<% if @current_user.present? %>
+<% if current_user.present? %>
   <div class="container-fluid">
     <div class="row">
       <% unless Note.object_notes.active.current.count > 0 %>

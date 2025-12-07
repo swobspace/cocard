@@ -22,7 +22,7 @@
       <%= link_to raw( '<span class="fa-solid fa-fw fa-trash" aria-hidden="true"></span> ' +
             t('cards.expired_and_outdated')), main_app.cards_path(expired: true, outdated:true), 
             class: "dropdown-item" %>
-      <% if @current_user&.is_admin? %>
+      <% if current_user&.is_admin? %>
         <%= link_to raw( '<span class="fa-solid fa-fw fa-trash" aria-hidden="true"></span> ' +
               t('cards.deleted')), main_app.cards_path(deleted: true), 
               class: "dropdown-item" %>
