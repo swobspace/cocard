@@ -1,5 +1,7 @@
 class CardsController < ApplicationController
+  skip_load_and_authorize_resource
   before_action :set_card, only: [:show, :edit, :update, :destroy]
+  authorize_resource
   before_action :add_breadcrumb_show, only: [:show]
 
   # GET /cards
@@ -176,7 +178,7 @@ class CardsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_card
-      @card = Card.find(params[:id])
+      @card = Card.with_deleted.find(params[:id])
     end
 
     def set_context
