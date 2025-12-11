@@ -37,11 +37,12 @@ ldap_options = {
 ldap = Wobaduser::LDAP.new(ldap_options: ldap_options)
 
 search = Wobaduser::User.search(ldap: ldap, 
-                                filter: '(mail=chirurgie.sls@marienhaus.kim.telematik)')
+                                filter: '(mail=intensiv.wnd@marienhaus.kim.telematik)')
 puts search.success?
 puts search.entries.count
 
 entry = search.entries.first
-puts entry.inspect
+puts entry.entry.telematikid
+puts entry.entry.mail
 
 
