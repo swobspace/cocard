@@ -1,6 +1,8 @@
 class CardsController < ApplicationController
   skip_load_and_authorize_resource
-  before_action :set_card, only: [:show, :edit, :update, :destroy]
+  before_action :set_card, only: %i[show edit update destroy
+                                    copy get_certificate get_pin_status
+                                    verify_pin get_card]
   authorize_resource
   before_action :add_breadcrumb_show, only: [:show]
 
