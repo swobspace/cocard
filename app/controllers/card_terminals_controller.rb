@@ -316,7 +316,7 @@ class CardTerminalsController < ApplicationController
     end
 
     def check_default_context
-      return unless @card_terminal.connector.present? 
+      return unless @card_terminal.connector.present? and @card_terminal.connector.up?
       return if  @card_terminal.last_check.nil?
       return if  @card_terminal.last_check > 15.minutes.before(Time.current)
 
