@@ -24,11 +24,11 @@ class CardsController < ApplicationController
 
   def sindex
     if params[:condition]
-      @cards = Card.condition(params[:condition])
+      @cards = Card.current.condition(params[:condition])
     elsif params[:acknowledged]
       @cards = Card.acknowledged
     else
-      @cards = Card.failed.not_acknowledged
+      @cards = Card.current.failed.not_acknowledged
     end
     ordered = @cards
     @pagy, @cards = pagy(ordered, count: ordered.count)

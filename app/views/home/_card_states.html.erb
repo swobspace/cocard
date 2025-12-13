@@ -1,35 +1,35 @@
 <div class="me-2">
   <%= render ConditionBadgeComponent
              .new(state: Cocard::States::OK,
-                  count: Card.ok.count,
+                  count: Card.ok.current.count,
                   link:  sindex_cards_path(condition: Cocard::States::OK),
                   myframe: 'cards') %>
 </div>
 <div class="me-2">
   <%= render ConditionBadgeComponent
              .new(state: Cocard::States::WARNING,
-                  count: Card.warning.count,
+                  count: Card.warning.current.count,
                   link:  sindex_cards_path(condition: Cocard::States::WARNING),
                   myframe: 'cards') %>
 </div>
 <div class="me-2">
   <%= render ConditionBadgeComponent
              .new(state: Cocard::States::CRITICAL,
-                  count: Card.critical.count,
+                  count: Card.critical.current.count,
                   link:  sindex_cards_path(condition: Cocard::States::CRITICAL),
                   myframe: 'cards') %>
 </div>
 <div class="me-2">
   <%= render ConditionBadgeComponent
              .new(state: Cocard::States::UNKNOWN,
-                  count: Card.unknown.count,
+                  count: Card.unknown.current.count,
                   link:  sindex_cards_path(condition: Cocard::States::UNKNOWN),
                   myframe: 'cards') %>
 </div>
 <div class="me-2">
   <%= render ConditionBadgeComponent
              .new(state: Cocard::States::NOTHING,
-                  count: Card.nothing.count,
+                  count: Card.nothing.current.count,
                   link:  sindex_cards_path(condition: Cocard::States::NOTHING),
                   myframe: 'cards') %>
 </div>

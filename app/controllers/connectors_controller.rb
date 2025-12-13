@@ -17,11 +17,11 @@ class ConnectorsController < ApplicationController
 
   def sindex
     if params[:condition]
-      @connectors = Connector.condition(params[:condition])
+      @connectors = Connector.current.condition(params[:condition])
     elsif params[:acknowledged]
       @connectors = Connector.acknowledged
     else
-      @connectors = Connector.failed.not_acknowledged
+      @connectors = Connector.current.failed.not_acknowledged
     end
     ordered = @connectors.order(:name)
     @pagy, @connectors = pagy(ordered, count: ordered.count)

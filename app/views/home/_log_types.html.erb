@@ -2,7 +2,7 @@
   <%= link_to sindex_logs_path(type: 'Connector'),
               class: 'btn btn-outline-secondary',
               "data-turbo-frame": 'logs' do %>
-    Connectors
+    Konnektoren
     <span class="badge text-bg-secondary">
       <%= Log.valid.not_acknowledged.where(loggable_type: 'Connector').count %>
     </span>
@@ -13,7 +13,7 @@
   <%= link_to sindex_logs_path(type: 'CardTerminal'),
               class: 'btn btn-outline-secondary',
               "data-turbo-frame": 'logs' do %>
-    Card Terminals
+    Kartenterminals
     <span class="badge text-bg-secondary">
       <%= Log.valid.not_acknowledged.where(loggable_type: 'CardTerminal').count %>
     </span>
@@ -24,7 +24,7 @@
   <%= link_to sindex_logs_path(type: 'Card'),
               class: 'btn btn-outline-secondary',
               "data-turbo-frame": 'logs' do %>
-    Cards
+    Karten
     <span class="badge text-bg-secondary">
       <%= Log.valid.not_acknowledged.where(loggable_type: 'Card').count %>
     </span>

@@ -12,6 +12,8 @@ module CardConcerns
     scope :nothing, -> { condition(Cocard::States::NOTHING) }
     scope :failed, -> { where("cards.condition > ?", Cocard::States::OK) }
 
+    scope :current, -> { where("cards.last_check > ?", 7.days.before(Time.current)) }
+
     scope :verifiable, -> do
       joins(:card_contexts, :operational_state)
       .where("card_contexts.pin_status = 'VERIFIABLE'")

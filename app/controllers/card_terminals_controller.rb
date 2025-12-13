@@ -27,11 +27,11 @@ class CardTerminalsController < ApplicationController
 
   def sindex
     if params[:condition]
-      @card_terminals = CardTerminal.condition(params[:condition])
+      @card_terminals = CardTerminal.current.condition(params[:condition])
     elsif params[:acknowledged]
       @card_terminals = CardTerminal.acknowledged
     else
-      @card_terminals = CardTerminal.failed.not_acknowledged
+      @card_terminals = CardTerminal.current.failed.not_acknowledged
     end
     ordered = @card_terminals.order('last_ok desc NULLS LAST')
     @pagy, @card_terminals = pagy(ordered, count: ordered.count)
