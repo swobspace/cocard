@@ -199,6 +199,18 @@ RSpec.describe Card, type: :model do
         }.not_to change(card, :condition)
       end
     end
+
+    describe "with last check > 1 day" do
+      it "-> NOTHING" do
+        card.update(condition: Cocard::States::OK)
+        card.reload
+        allow(card).to receive(:last_check).at_least(:once).and_return(25.hours.before(Time.current))
+        expect {
+          card.update_condition
+        }.to change(card, :condition).to(Cocard::States::NOTHING)
+        expect(card.condition_message).to match(/Keine aktuellen Daten verfügbar/)
+      end
+    end
   end
 
 

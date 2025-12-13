@@ -75,6 +75,9 @@ class CardTerminal < ApplicationRecord
     if connector.nil?
       return set_condition( Cocard::States::NOTHING,
                      "Kein Konnektor zugewiesen" )
+    elsif last_check.present? and last_check < 1.days.before(Time.current)
+      return set_condition( Cocard::States::NOTHING,
+                     "Keine aktuellen Daten verfügbar, letzter Check > 1d" )
     end
     if ip != real_ip
         return set_condition( Cocard::States::UNKNOWN,

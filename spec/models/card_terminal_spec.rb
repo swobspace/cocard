@@ -155,6 +155,16 @@ RSpec.describe CardTerminal, type: :model do
         end
       end
 
+      describe "with last_check > 1d" do
+        it "-> NOTHING" do
+          expect(ct).to receive(:last_check).at_least(:once).and_return(25.hours.before(Time.current))
+          expect {
+            ct.update_condition
+          }.to change(ct, :condition).to(Cocard::States::NOTHING)
+          expect(ct.condition_message).to match(/Keine aktuellen Daten verfügbar/)
+        end
+      end
+
       describe "with ping failed, not connected" do
         it "-> CRITICAL" do
           expect(ct).to receive(:connected).and_return(false)
