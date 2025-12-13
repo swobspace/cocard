@@ -29,7 +29,8 @@ RSpec.describe CardTerminal, type: :model do
       location: location,
       network: network,
       connected: false,
-      last_ok: Time.current
+      last_ok: Time.current,
+      last_check: Time.current
     )
   end
 

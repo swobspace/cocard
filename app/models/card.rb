@@ -53,7 +53,7 @@ class Card < ApplicationRecord
     elsif expiration_date.nil?
       set_condition( Cocard::States::NOTHING,
                      "Kein Ablaufdatum - UNUSED" )
-    elsif last_check.present? and last_check < 1.days.before(Time.current)
+    elsif last_check.nil? or last_check < 1.days.before(Time.current)
       return set_condition( Cocard::States::NOTHING,
                      "Keine aktuellen Daten verfügbar, letzter Check > 1d" )
     elsif (card_type == 'SMC-B' and contexts.empty?)

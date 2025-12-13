@@ -19,7 +19,8 @@ RSpec.describe Card, type: :model do
       expiration_date: 2.years.after(Date.current),
       updated_at: Time.current,
       operational_state: opsta,
-      certificate: "some string"
+      certificate: "some string",
+      last_check: Time.current
     )
   end
   it { is_expected.to have_many(:logs) }
