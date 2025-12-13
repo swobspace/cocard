@@ -1,35 +1,35 @@
 <div class="me-2">
   <%= render ConditionBadgeComponent
              .new(state: Cocard::States::OK,
-                  count: Connector.ok.current.count,
+                  count: Connector.ok.count,
                   link:  sindex_connectors_path(condition: Cocard::States::OK),
                   myframe: 'connectors') %>
 </div>
 <div class="me-2">
   <%= render ConditionBadgeComponent
              .new(state: Cocard::States::WARNING,
-                  count: Connector.warning.current.count,
+                  count: Connector.warning.count,
                   link:  sindex_connectors_path(condition: Cocard::States::WARNING),
                   myframe: 'connectors') %>
 </div>
 <div class="me-2">
   <%= render ConditionBadgeComponent
              .new(state: Cocard::States::CRITICAL,
-                  count: Connector.critical.current.count,
+                  count: Connector.critical.count,
                   link:  sindex_connectors_path(condition: Cocard::States::CRITICAL),
                   myframe: 'connectors') %>
 </div>
 <div class="me-2">
   <%= render ConditionBadgeComponent
              .new(state: Cocard::States::UNKNOWN,
-                  count: Connector.unknown.current.count,
+                  count: Connector.unknown.count,
                   link:  sindex_connectors_path(condition: Cocard::States::UNKNOWN),
                   myframe: 'connectors') %>
 </div>
 <div class="me-2">
   <%= render ConditionBadgeComponent
              .new(state: Cocard::States::NOTHING,
-                  count: Connector.nothing.current.count,
+                  count: Connector.nothing.count,
                   link:  sindex_connectors_path(condition: Cocard::States::NOTHING),
                   myframe: 'connectors') %>
 </div>

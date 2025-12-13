@@ -27,7 +27,7 @@ class CardTerminalsController < ApplicationController
 
   def sindex
     if params[:condition]
-      @card_terminals = CardTerminal.current.condition(params[:condition])
+      @card_terminals = CardTerminal.condition(params[:condition])
     elsif params[:acknowledged]
       @card_terminals = CardTerminal.acknowledged
     else
