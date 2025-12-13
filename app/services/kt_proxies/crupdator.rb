@@ -27,6 +27,7 @@ module KTProxies
         by_uuid.update(common_attributes.merge(
                                            name: name, 
                                            card_terminal_ip: card_terminal_ip)
+                                        .merge(card_terminal_via_name)
                                         .merge(card_terminal_via_ip)
                       )
       elsif by_name_and_ip
@@ -109,6 +110,15 @@ module KTProxies
 
     def card_terminal_via_ip
       cts = CardTerminal.where(ip: card_terminal_ip)
+      if cts.count == 1
+        { card_terminal_id: cts.first.id }
+      else
+        { }
+      end
+    end
+
+    def card_terminal_via_name
+      cts = CardTerminal.where(name: name)
       if cts.count == 1
         { card_terminal_id: cts.first.id }
       else

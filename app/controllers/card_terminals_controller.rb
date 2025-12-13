@@ -185,7 +185,9 @@ class CardTerminalsController < ApplicationController
         result.on_success do |message, value|
           proxies = value['proxies'] || []
           proxies.each do |proxy|
-            if proxy['cardTerminalIp'] == @card_terminal.ip.to_s
+            if proxy['cardTerminalIp'] == @card_terminal.ip.to_s ||
+               proxy['name'] == @card_terminal.name
+               Rails.logger.debug("DEBUG:: fetch_proxy: #{proxy} matches #{@card_terminal}")
               ktp = KTProxies::Crupdator.new(ti_client: ti_client, proxy_hash: proxy)
               if ktp.save
                 flash[:success] = "KT-Proxy zugeordnet"
