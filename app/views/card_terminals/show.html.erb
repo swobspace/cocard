@@ -7,39 +7,41 @@
 
 <%= back_link %>
 
-<div class="card my-3">
-  <div class="card-header">
-    <div class="d-flex w-100">
-      <div >
-        <h4 class="title"> 
-          <%= t('controller.cards') %>
-        </h4>
+<% unless @card_terminal.deleted_at %>
+  <div class="card my-3">
+    <div class="card-header">
+      <div class="d-flex w-100">
+        <div >
+          <h4 class="title"> 
+            <%= t('controller.cards') %>
+          </h4>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="m-2">
-    <%= render 'cards', cards: @card_terminal.cards.order(:slotid) %>
-  </div>
-</div>
-
-<div class="card my-3">
-  <div class="card-header">
-    <div class="d-flex w-100">
-      <div >
-        <h4 class="title"> 
-          <%= t('controller.workplaces') %>
-        </h4>
-      </div>
+    <div class="m-2">
+      <%= render 'cards', cards: @card_terminal.cards.order(:slotid) %>
     </div>
   </div>
-  <div class="m-2">
-    <%= render 'terminal_workplaces', terminal_workplaces: @card_terminal.terminal_workplaces %>
+
+  <div class="card my-3">
+    <div class="card-header">
+      <div class="d-flex w-100">
+        <div >
+          <h4 class="title"> 
+            <%= t('controller.workplaces') %>
+          </h4>
+        </div>
+      </div>
+    </div>
+    <div class="m-2">
+      <%= render 'terminal_workplaces', terminal_workplaces: @card_terminal.terminal_workplaces %>
+    </div>
   </div>
-</div>
 
-<%= turbo_frame_tag("logs", src: card_terminal_logs_path(@card_terminal, valid: 1),
-                            refresh: "morph") %>
+  <%= turbo_frame_tag("logs", src: card_terminal_logs_path(@card_terminal, valid: 1),
+                              refresh: "morph") %>
 
-<%= turbo_frame_tag("notes", src: polymorphic_path([@card_terminal, :notes], active: 1),
-                             refresh: "morph") %>
+  <%= turbo_frame_tag("notes", src: polymorphic_path([@card_terminal, :notes], active: 1),
+                               refresh: "morph") %>
 
+<% end %>

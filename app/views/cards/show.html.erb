@@ -5,9 +5,11 @@
 
 <%= back_link %>
 
-<%= turbo_frame_tag("logs", src: card_logs_path(@card, valid: 1), 
-                            refresh: "morph") %>
+<% unless @card.deleted_at %>
+  <%= turbo_frame_tag("logs", src: card_logs_path(@card, valid: 1), 
+                              refresh: "morph") %>
 
-<%= turbo_frame_tag("notes", src: polymorphic_path([@card, :notes], active: 1),
-                             refresh: "morph") %>
+  <%= turbo_frame_tag("notes", src: polymorphic_path([@card, :notes], active: 1),
+                               refresh: "morph") %>
+<% end %>
 

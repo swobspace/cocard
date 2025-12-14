@@ -252,59 +252,61 @@
 <%= back_link %>
 <%= new_link Connector %>
 
-<ul class="nav nav-tabs mt-3" id="ConnectorsTab" role="tablist" data-turbo-permanent>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="card-terminals-tab" data-bs-toggle="tab" data-bs-target="#card-terminals-tab-pane" type="button" role="tab" aria-controls="card-terminals-tab-pane" aria-selected="false">Kartenterminals</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="cards-tab" data-bs-toggle="tab" data-bs-target="#cards-tab-pane" type="button" role="tab" aria-controls="cards-tab-pane" aria-selected="false">SMC-Bs</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="logs-tab" data-bs-toggle="tab" data-bs-target="#logs-tab-pane" type="button" role="tab" aria-controls="logs-tab-pane" aria-selected="true">Logs</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="notes-tab" data-bs-toggle="tab" data-bs-target="#notes-tab-pane" type="button" role="tab" aria-controls="notes-tab-pane" aria-selected="false">Notizen</button>
-  </li>
-</ul>
+<% unless @connector.deleted_at %>
+  <ul class="nav nav-tabs mt-3" id="ConnectorsTab" role="tablist" data-turbo-permanent>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="card-terminals-tab" data-bs-toggle="tab" data-bs-target="#card-terminals-tab-pane" type="button" role="tab" aria-controls="card-terminals-tab-pane" aria-selected="false">Kartenterminals</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="cards-tab" data-bs-toggle="tab" data-bs-target="#cards-tab-pane" type="button" role="tab" aria-controls="cards-tab-pane" aria-selected="false">SMC-Bs</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="logs-tab" data-bs-toggle="tab" data-bs-target="#logs-tab-pane" type="button" role="tab" aria-controls="logs-tab-pane" aria-selected="true">Logs</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="notes-tab" data-bs-toggle="tab" data-bs-target="#notes-tab-pane" type="button" role="tab" aria-controls="notes-tab-pane" aria-selected="false">Notizen</button>
+    </li>
+  </ul>
 
-<div class="tab-content" id="ConnectorsTabContent" data-turbo-permanent>
-  <div class="tab-pane fade show active" id="card-terminals-tab-pane" role="tabpanel" aria-labelledby="card-terminals-tab" tabindex="0">
-    <div class="card my-3">
-      <div class="card-header">
-        <div class="d-flex w-100">
-          <div class="d-flex w-100 justify-content-between">
-            <h4 class="title"> 
-              <%= t('controller.card_terminals') %>
-            </h4>
-            <div role="toolbar" class="pt-0">
-              <%= link_to raw(%Q[<i class="fas fa-table"></i>]),
-                    connector_card_terminals_path(@connector),
-                    class: 'btn btn-outline-secondary btn-sm',
-                    data: { "turbo-frame" => "_top" }
-               %>
+  <div class="tab-content" id="ConnectorsTabContent" data-turbo-permanent>
+    <div class="tab-pane fade show active" id="card-terminals-tab-pane" role="tabpanel" aria-labelledby="card-terminals-tab" tabindex="0">
+      <div class="card my-3">
+        <div class="card-header">
+          <div class="d-flex w-100">
+            <div class="d-flex w-100 justify-content-between">
+              <h4 class="title"> 
+                <%= t('controller.card_terminals') %>
+              </h4>
+              <div role="toolbar" class="pt-0">
+                <%= link_to raw(%Q[<i class="fas fa-table"></i>]),
+                      connector_card_terminals_path(@connector),
+                      class: 'btn btn-outline-secondary btn-sm',
+                      data: { "turbo-frame" => "_top" }
+                 %>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="m-2">
-        <%= render 'card_terminals/list', card_terminals: @connector.card_terminals %>
+        <div class="m-2">
+          <%= render 'card_terminals/list', card_terminals: @connector.card_terminals %>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="tab-pane fade" id="cards-tab-pane" role="tabpanel" aria-labelledby="cards-tab" tabindex="0">
-    <%= turbo_frame_tag("connector_cards", src: connector_cards_path(@connector),
-                                refresh: "morph") %>
-  </div>
+    <div class="tab-pane fade" id="cards-tab-pane" role="tabpanel" aria-labelledby="cards-tab" tabindex="0">
+      <%= turbo_frame_tag("connector_cards", src: connector_cards_path(@connector),
+                                  refresh: "morph") %>
+    </div>
 
-  <div class="tab-pane fade" id="logs-tab-pane" role="tabpanel" aria-labelledby="logs-tab" tabindex="0">
-    <%= turbo_frame_tag("logs", src: connector_logs_path(@connector, valid: 1),
-                                refresh: "morph") %>
-  </div>
+    <div class="tab-pane fade" id="logs-tab-pane" role="tabpanel" aria-labelledby="logs-tab" tabindex="0">
+      <%= turbo_frame_tag("logs", src: connector_logs_path(@connector, valid: 1),
+                                  refresh: "morph") %>
+    </div>
 
-  <div class="tab-pane fade" id="notes-tab-pane" role="tabpanel" aria-labelledby="notes-tab" tabindex="0">
-    <%= turbo_frame_tag("notes", src: polymorphic_path([@connector, :notes], active: 1),
-                                 refresh: "morph") %>
+    <div class="tab-pane fade" id="notes-tab-pane" role="tabpanel" aria-labelledby="notes-tab" tabindex="0">
+      <%= turbo_frame_tag("notes", src: polymorphic_path([@connector, :notes], active: 1),
+                                   refresh: "morph") %>
 
+    </div>
   </div>
-</div>
+<% end %>
