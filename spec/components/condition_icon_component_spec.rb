@@ -53,5 +53,15 @@ RSpec.describe ConditionIconComponent, type: :component do
         expect(page).to have_css('button[class="position-relative btn btn-info"]')
       end
     end
+
+    describe "with deleted connector" do
+      it "shows trash button" do
+        expect(connector).to receive(:deleted_at).at_least(:once)
+                                                .and_return(1.minute.before(Time.current))
+        render_inline(described_class.new(item: connector))
+        expect(page).to have_css('button[class="position-relative btn btn-secondary"]')
+      end
+    end
+
   end
 end
