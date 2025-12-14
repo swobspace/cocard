@@ -177,6 +177,12 @@ class CardsController < ApplicationController
     respond_with(@card, location: polymorphic_path([@locatable, :cards]))
   end
 
+  def delete_expired
+    @cards = Card.where("expiration_date < ?", 4.weeks.before(Time.current))
+    @cards.update_all(deleted_at: Time.current)
+    redirect_to cards_path(expired: true)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_card

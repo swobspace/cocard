@@ -67,6 +67,7 @@ Rails.application.routes.draw do
     resources :logs, only: [:index, :show, :destroy], module: :cards
     collection do
       get :sindex
+      delete :delete_expired
     end
     member do
       get :copy
