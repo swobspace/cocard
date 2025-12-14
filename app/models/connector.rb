@@ -4,6 +4,7 @@ class Connector < ApplicationRecord
   include ConnectorConcerns
   include Cocard::Condition
   include NotableConcerns
+  include SoftDeletion
   include Taggable
 
   # -- associations

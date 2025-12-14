@@ -87,16 +87,16 @@ Rails.application.routes.draw do
       get :sindex
     end
     member do
-      get :ping
       post :check
+      get  :edit_identification
+      get  :edit_idle_message
       post :fetch_idle_message
       post :fetch_proxy
-      get :edit_idle_message
-      put :update_idle_message
+      put  :update_idle_message
+      get  :ping
       post :reboot
       post :remote_pairing
-      get :edit_identification
-      get :test_context_form
+      get  :test_context_form
       post :test_context
     end
     resources :notes, module: :card_terminals
@@ -109,12 +109,12 @@ Rails.application.routes.draw do
       get :sindex
     end
     member do
+      post :check
       post :fetch_sds
       post :get_resource_information
       post :get_card_terminals
       post :get_cards
       get :ping
-      post :check
       post :reboot
       get :test_context_form
       post :test_context

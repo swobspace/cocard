@@ -4,6 +4,7 @@ class CardTerminal < ApplicationRecord
   include CardTerminalConcerns
   include Cocard::Condition
   include NotableConcerns
+  include SoftDeletion
   include Taggable
 
   # -- associations

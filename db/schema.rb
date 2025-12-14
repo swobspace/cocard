@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_11_29_105333) do
+ActiveRecord::Schema[7.2].define(version: 2025_12_14_153855) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -116,6 +116,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_11_29_105333) do
     t.integer "slot2_plug_cycles", default: 0
     t.integer "slot3_plug_cycles", default: 0
     t.integer "slot4_plug_cycles", default: 0
+    t.datetime "deleted_at", precision: nil
     t.index ["condition"], name: "index_card_terminals_on_condition"
     t.index ["connector_id"], name: "index_card_terminals_on_connector_id"
     t.index ["location_id"], name: "index_card_terminals_on_location_id"
@@ -226,6 +227,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_11_29_105333) do
     t.datetime "rebooted_at", precision: nil
     t.string "short_name", default: ""
     t.integer "boot_mode", default: 0
+    t.datetime "deleted_at", precision: nil
     t.index ["boot_mode"], name: "index_connectors_on_boot_mode"
     t.index ["condition"], name: "index_connectors_on_condition"
   end

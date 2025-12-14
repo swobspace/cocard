@@ -105,6 +105,12 @@ module CardTerminals
       )
     end
 
+    let!(:ct4) do
+      FactoryBot.create(:card_terminal, :with_mac, 
+        deleted_at: 1.minute.before(Time.current)
+      )
+    end
+
     let!(:card_slot) do
       FactoryBot.create(:card_terminal_slot, 
         slotid: 4,
@@ -439,6 +445,15 @@ module CardTerminals
         ct3.update(connector_id: conn.id)
         @matching = [ct3]
         @nonmatching = [ct1, ct2]
+      end
+      it_behaves_like "a card_terminal query"
+    end
+
+    context "with deleted: true" do
+      subject { Query.new(card_terminals, {deleted: true}) }
+      before(:each) do
+        @matching = [ct4]
+        @nonmatching = [ct1, ct2, ct3]
       end
       it_behaves_like "a card_terminal query"
     end

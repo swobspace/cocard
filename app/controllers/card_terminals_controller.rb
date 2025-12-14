@@ -1,9 +1,13 @@
 class CardTerminalsController < ApplicationController
-  before_action :set_card_terminal, only: [:show, :edit, :update, :destroy,
-                                           :edit_identification, :fetch_proxy,
-                                           :fetch_idle_message, :edit_idle_message,
-                                           :update_idle_message,
-                                           :test_context_form, :test_context]
+  skip_load_and_authorize_resource
+  before_action :set_card_terminal, only: %i[show edit update destroy
+                                             check edit_identification 
+                                             edit_idle_message 
+                                             fetch_idle_message fetch_proxy
+                                             update_idle_message
+                                             ping reboot remote_pairing
+                                             test_context_form test_context]
+  authorize_resource
   before_action :add_breadcrumb_show, only: [:show]
 
   # GET /card_terminals
@@ -243,7 +247,7 @@ class CardTerminalsController < ApplicationController
 
   # DELETE /card_terminals/1
   def destroy
-    unless @card_terminal.destroy
+    unless @card_terminal.soft_delete
       flash[:alert] = @card_terminal.errors.full_messages.join("; ")
     end
     respond_with(@card_terminal, location: polymorphic_path([@locatable, :card_terminals]))
@@ -252,7 +256,7 @@ class CardTerminalsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_card_terminal
-      @card_terminal = CardTerminal.find(params[:id])
+      @card_terminal = CardTerminal.with_deleted.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
@@ -271,7 +275,7 @@ class CardTerminalsController < ApplicationController
 
     def search_params
       searchparms = params.permit(*submit_parms, CardTerminal.attribute_names,
-                                  :acknowledged, :with_smcb, :failed,
+                                  :acknowledged, :with_smcb, :failed, :deleted,
                                   :limit).to_h
       searchparms.reject do |k, v|
         v.blank? || submit_parms.include?(k) || non_search_params.include?(k)

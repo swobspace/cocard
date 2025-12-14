@@ -67,6 +67,7 @@ bin/rails g migration AddReadonlyToConnector \
   sds_updated_at: \
   connector_services:jsonb \
   last_check:timestamp last_ok:timestamp \
+  deleted_at:timestamp \
   condition:integer:index \
   condition_message:string  \
   soap_request_success:boolean \
@@ -123,6 +124,7 @@ bin/rails g migration AddInternalToCardTerminal \
   condition:integer \
   condition_message:string  \
   last_ok:timestamp last_check:timestamp \
+  deleted_at:timestamp \
   connector:belongs_to \
   network:belongs_to \
   firmware_version:string \
@@ -184,6 +186,7 @@ bin/rails g migration AddInternalToCard \
   insert_time:timestamp \
   card_holder_name:string \
   expiration_date:date \
+  last_check:timestamp last_ok:timestamp \
   condition:integer \
   condition_message:string  \
   last_check:timestamp last_ok:timestamp \

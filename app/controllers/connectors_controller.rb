@@ -1,6 +1,10 @@
 class ConnectorsController < ApplicationController
-  before_action :set_connector, only: [:show, :edit, :update, :destroy, :reboot,
-                                       :test_context_form, :test_context]
+  skip_load_and_authorize_resource
+  before_action :set_connector, only: %i[show edit update destroy 
+                                         check fetch_sds get_resource_information
+                                         get_card_terminals get_cards ping reboot
+                                         test_context_form test_context]
+  authorize_resource
   before_action :add_breadcrumb_show, only: [:show]
 
   # GET /connectors
@@ -145,7 +149,7 @@ class ConnectorsController < ApplicationController
 
   # DELETE /connectors/1
   def destroy
-    unless @connector.destroy
+    unless @connector.soft_delete
       flash[:alert] = @connectors.errors.full_messages.join("; ")
     end
     respond_with(@connector, location: polymorphic_path([@locatable, :connectors]))
@@ -154,7 +158,7 @@ class ConnectorsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_connector
-      @connector = Connector.find(params[:id])
+      @connector = Connector.with_deleted.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
