@@ -13,6 +13,8 @@ class ConnectorsController < ApplicationController
       @connectors = @locatable.connectors
     elsif params[:acknowledged]
       @connectors = Connector.acknowledged
+    elsif params[:deleted]
+      @connectors = Connector.only_deleted
     else
       @connectors = Connector.all
     end

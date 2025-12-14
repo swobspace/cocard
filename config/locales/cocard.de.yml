@@ -330,6 +330,7 @@ de:
       Ohne Kontext kann der Konnektor keine Informationen abfragen
       (Ausnahme: Service Directory SDS)
     check_connectivity: Verbindungstest
+    deleted: Gelöschte Konnektoren
   card_terminals:
     with_smcb: KT mit SMC-B
     update_ip_from_current: Vom Konnektor gemeldete IP übernehmen
@@ -377,6 +378,7 @@ de:
       hier gesetzten Informationen wieder überschrieben.
     rmi_check: Prüfung via IP
     fetch_proxy: Hole Proxy vom TIClient
+    deleted: Gelöschte Kartenterminals
   cards:
     no_contexts_assigned: |
       ACHTUNG! Es ist noch kein Kontext zugeordnet!
