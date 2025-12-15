@@ -1,0 +1,39 @@
+= ARP-IP Abgleich von Kartenterminals
+:author: Wolfgang Barth
+:revdate: 2025-12-15
+:imagesdir: ../images
+
+.Ab
+[source,sh]
+----
+nmap -p 443 <network vlan kt>
+arp -an -i <vlan kt> | cut -d " " -f 2,4 | sed 's/[()]//g'
+...
+10.2xx.1xx.59 00:0d:f8:07:1e:91
+10.2xx.1xx.36 00:0d:f8:05:cc:0f
+...
+----
+
+----
+arp =<<~EOARP
+...
+10.2xx.1xx.59 00:0d:f8:07:1e:91
+10.2xx.1xx.36 00:0d:f8:05:cc:0f
+...
+EOARP
+
+entries = arp.strip.split(/\n/)
+entries.map{|x| x.split(/\s+/)}.each do |ip,mac|
+  next if mac.downcase !~ /[0-9a-f]{2}:/
+  ct = CardTerminal.where(mac: mac).first
+  if ct.present? and ct.ip.to_s == ip.to_s
+   # puts "CT #{ct.mac} found, IP #{ip} matches"
+  elsif ct.present?
+    puts "CT #{ct.mac} found, but ip #{ip} doesn't match cocard (#{ct.ip})"
+  elsif CardTerminal.where(ip: ip).any?
+    puts "CT #{mac} not found, but ip #{ip} exists in cocard"
+  else
+    puts "CT #{mac} not found, IP #{ip} not found"
+  end
+end;nil
+----
