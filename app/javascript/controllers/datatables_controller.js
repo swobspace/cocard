@@ -17,10 +17,10 @@ export default class extends Controller {
     // datatables doesn't really work with morph
     // set turbo-refresh-method to replace on each page with datatables
     // otherwise leave turbo-refresh-method untouched
-    const turborefresh = document.querySelector('head meta[name="turbo-refresh-method"]')
-    if (turborefresh) {
-      turborefresh.setAttribute("content", "replace")
-    }
+    // const turborefresh = document.querySelector('head meta[name="turbo-refresh-method"]')
+    // if (turborefresh) {
+      // turborefresh.setAttribute("content", "replace")
+    // }
 
     let _this = this
     let dtOptions = {}
