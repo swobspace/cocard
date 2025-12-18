@@ -28,6 +28,8 @@ module CardTerminals
             Cocard::States::NOTHING
           elsif default == send(attr)
             Cocard::States::OK
+          elsif alert_methods.include?(attr)
+            Cocard::States::CRITICAL
           else
             Cocard::States::WARNING
           end
@@ -40,6 +42,13 @@ module CardTerminals
           reference == send(attr)
         end
       end
+    end
+
+    def alert_methods
+      %i[
+        macaddr
+        smckt_slot
+      ]
     end
   end
 end

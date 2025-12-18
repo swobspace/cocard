@@ -49,6 +49,11 @@ class CardTerminals::HealthCheckJob < ApplicationJob
             toaster(card_terminal, :info, text)
           end
 
+          if info.smckt_slot == 0
+            text = "ACHTUNG: keine SMC-KT erkannt, bitte Terminal prüfen"
+            toaster(card_terminal, :alert, text)
+          end
+
           # check_value(card_terminal, info, :dhcp_enabled)
           # check_value(card_terminal, info, :ntp_server)
           # check_value(card_terminal, info, :ntp_enabled)

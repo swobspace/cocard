@@ -30,6 +30,13 @@ module CardTerminals
       "card_slot2_plugCycles" => "102",
       "card_slot3_plugCycles" => "103",
       "card_slot4_plugCycles" => "104",
+      "card_smkt_iccsn" => '80276123456789011111',
+      "card_smkt_version" => '4.4.1',
+      "card_smkt_slotNum" => '4',
+      "card_smkt_autType" => 'RSA',
+      "card_smkt_autCxd" => '2026-11-11',
+      "card_smkt_aut2Type" => 'ECC',
+      "card_smkt_aut2Cxd" => '2030-08-30',
     }}
 
     let(:info) { CardTerminals::RMI::OrgaV1::Info.new(properties) }
@@ -54,6 +61,13 @@ module CardTerminals
     it { expect(subject.slot2_plug_cycles).to eq("102") }
     it { expect(subject.slot3_plug_cycles).to eq("103") }
     it { expect(subject.slot4_plug_cycles).to eq("104") }
+    it { expect(subject.smckt_iccsn).to eq("80276123456789011111") }
+    it { expect(subject.smckt_version).to eq("4.4.1") }
+    it { expect(subject.smckt_slot).to eq("4") }
+    it { expect(subject.smckt_auth1_type).to eq("RSA") }
+    it { expect(subject.smckt_auth1_expiration).to eq("2026-11-11") }
+    it { expect(subject.smckt_auth2_type).to eq("ECC") }
+    it { expect(subject.smckt_auth2_expiration).to eq("2030-08-30") }
 
     describe "with some defaults" do
       before(:each) do
