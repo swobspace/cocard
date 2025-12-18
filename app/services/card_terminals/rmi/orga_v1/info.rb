@@ -24,13 +24,13 @@ module CardTerminals
         slot3_plug_cycles
         slot4_plug_cycles
         identification
-        card_smkt_iccsn
-        card_smkt_version
-        card_smkt_slotNum
-        card_smkt_autType
-        card_smkt_autCxd
-        card_smkt_aut2Type
-        card_smkt_aut2Cxd
+        smckt_iccsn
+        smckt_version
+        smckt_slot
+        smckt_auth1_type
+        smckt_auth1_expiration
+        smckt_auth2_type
+        smckt_auth2_expiration
       ]
 
       def initialize(properties)
