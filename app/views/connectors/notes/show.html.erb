@@ -1,4 +1,4 @@
-<%= render ModalComponent.new(title: t(@note.type, scope: :notes)) do %>
+<%= render ModalComponent.new(title: "#{t(@note.type, scope: :notes)} vom #{@note.created_at.to_date}") do %>
 
   <table class="table table-sm table-borderless">
   
