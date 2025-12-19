@@ -29,9 +29,9 @@ module CardTerminals
       "card_smkt_version" => '4.4.1',
       "card_smkt_slotNum" => '4',
       "card_smkt_autType" => 'RSA',
-      "card_smkt_autCxd" => '2026-11-11',
+      "card_smkt_autCxd" => '11.11.2026',
       "card_smkt_aut2Type" => 'ECC',
-      "card_smkt_aut2Cxd" => '2030-08-30',
+      "card_smkt_aut2Cxd" => '30.08.2030',
     }}
 
     subject { CardTerminals::RMI::OrgaV1::Info.new(properties) }
@@ -62,9 +62,11 @@ module CardTerminals
     it { expect(subject.smckt_version).to eq("4.4.1") }
     it { expect(subject.smckt_slot).to eq("4") }
     it { expect(subject.smckt_auth1_type).to eq("RSA") }
-    it { expect(subject.smckt_auth1_expiration).to eq("2026-11-11") }
+    it { expect(subject.smckt_auth1_expiration).to eq("2026-11-11".to_date) }
+    it { expect(subject.smckt_auth1_expiration).to be_kind_of(Date) }
     it { expect(subject.smckt_auth2_type).to eq("ECC") }
-    it { expect(subject.smckt_auth2_expiration).to eq("2030-08-30") }
+    it { expect(subject.smckt_auth2_expiration).to eq("2030-08-30".to_date) }
+    it { expect(subject.smckt_auth2_expiration).to be_kind_of(Date) }
 
     it "contains all attributes" do
       expect(CardTerminals::RMI::OrgaV1::Info::ATTRIBUTES).to contain_exactly(

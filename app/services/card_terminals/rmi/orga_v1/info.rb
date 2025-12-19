@@ -152,7 +152,7 @@ module CardTerminals
       end
 
       def smckt_auth1_expiration
-        properties['card_smkt_autCxd']
+        Fugit.parse(properties['card_smkt_autCxd'].to_s)&.to_t&.to_date
       end
 
       def smckt_auth2_type
@@ -160,7 +160,7 @@ module CardTerminals
       end
 
       def smckt_auth2_expiration
-        properties['card_smkt_aut2Cxd']
+        Fugit.parse(properties['card_smkt_aut2Cxd'].to_s)&.to_t&.to_date
       end
 
   private

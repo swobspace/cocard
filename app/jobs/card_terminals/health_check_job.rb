@@ -54,8 +54,8 @@ class CardTerminals::HealthCheckJob < ApplicationJob
             toaster(card_terminal, :alert, text)
           end
 
-          auth1_expiration = Fugit.parse(info.smckt_auth1_expiration)&.to_t&.to_date
-          auth2_expiration = Fugit.parse(info.smckt_auth2_expiration)&.to_t&.to_date
+          auth1_expiration = info.smckt_auth1_expiration
+          auth2_expiration = info.smckt_auth2_expiration
           if auth2_expiration.present? and auth2_expiration <= Date.current
             text = "ACHTUNG: SMC-KT Gültigkeit abgelaufen am #{auth2_expiration} " +
                    "(#{info.smckt_auth2_type}), bitte ersetzen!"
