@@ -365,6 +365,13 @@ de:
       slot3_plug_cycles: Steckzyklen Slot 3
       slot4_plug_cycles: Steckzyklen Slot 4
       identification: Identifikation
+      smckt_iccsn: SMC-KT ICCSN
+      smckt_version: SMC-KT Kartenversion
+      smckt_slot: SMC-KT Slot
+      smckt_auth1_type: SMC-KT Auth1 Typ
+      smckt_auth1_expiration: SMC-KT Auth2 Ablaufdatum
+      smckt_auth2_type: SMC-KT Auth1 Typ
+      smckt_auth2_expiration: SMC-KT Auth2 Ablaufdatum
     rmi_info: RMI-Abfrage der Terminal-Eigenschaften
     statistics: Statistische Daten
     edit_identification: |
