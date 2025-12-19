@@ -53,6 +53,7 @@ module CardTerminals
       #
       if @card_terminal.save
         @card_terminal.touch
+        update_or_create_card
       else
         Rails.logger.warn("WARN:: could not create or save card terminal #{@card_terminal.mac}: " +
           @card_terminal.errors.full_messages.join('; '))
@@ -61,8 +62,26 @@ module CardTerminals
     end
 
     private
-
     attr_reader :info
+
+    def update_or_create_card
+      iccsn = info.smckt_iccsn
+      return if (iccsn.blank? or iccsn == '-')
+      expiration = info.smckt_auth2_expiration || info.smckt_auth1_expiration
+      card = Card.find_or_create_by(iccsn: iccsn) do |c|
+                    c.card_type = 'SMC-KT'
+                    c.expiration_date = expiration
+                  end
+      if info.smckt_slot > 0
+        slot = CardTerminalSlot.find_or_create_by!(card_terminal_id: @card_terminal.id,
+                                                   slotid: info.smckt_slot)
+              # remove slot reference from older other card
+        if slot.card && slot.card != card
+          slot.card.update(card_terminal_slot_id: nil)
+        end
+        card.update(card_terminal_slot_id: slot.id)
+      end
+    end
 
   end
 end
