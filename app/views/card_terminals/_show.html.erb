@@ -140,7 +140,11 @@
 
           <tr>
             <th class="w-25 pe-3">SMC-KT <%= t('attributes.iccsn')%>:</th>
-            <td><%= link_to(card_terminal.smckt&.iccsn,
+            <td>
+              <%= render ConditionIconComponent.new(
+                           item: card_terminal.smckt,
+                           small: true) %>
+                <%= link_to(card_terminal.smckt&.iccsn,
                             card_path(card_terminal.smckt),
                             class: 'primary-link') if card_terminal.smckt %></td>
           </tr>
