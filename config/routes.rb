@@ -76,7 +76,11 @@ Rails.application.routes.draw do
       post :verify_pin
       post :get_card
     end
-    resources :notes, module: :cards
+    resources :notes, module: :cards do
+      collection do
+        get :sindex
+      end
+    end
   end
 
   post "card_terminals", to: "card_terminals#index", 
@@ -99,7 +103,11 @@ Rails.application.routes.draw do
       get  :test_context_form
       post :test_context
     end
-    resources :notes, module: :card_terminals
+    resources :notes, module: :card_terminals do
+      collection do
+        get :sindex
+      end
+    end
     resource :kt_proxy, module: :card_terminals
   end
   resources :contexts
@@ -122,7 +130,11 @@ Rails.application.routes.draw do
     resources :logs, only: [:index, :show, :destroy], module: :connectors
     resources :card_terminals, only: [:index, :show, :destroy], module: :connectors
     resources :cards, only: [:index, :show, :destroy], module: :connectors
-    resources :notes, module: :connectors
+    resources :notes, module: :connectors do
+      collection do
+        get :sindex
+      end
+    end
     resource :ti_client, module: :connectors
   end
   resources :locations do

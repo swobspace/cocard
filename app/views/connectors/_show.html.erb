@@ -1,0 +1,193 @@
+<div class="row">
+  <div class="col-12 col-lg-6">
+    <table class="table table-sm table-borderless">
+
+      <tr>
+        <th class="w-25 pe-3"><%= t('attributes.name')%>:</th>
+        <td><%= @connector.name %></td>
+      </tr>
+
+      <tr>
+        <th class="w-25 pe-3"><%= t('attributes.short_name')%>:</th>
+        <td><%= @connector.short_name %></td>
+      </tr>
+
+      <tr>
+        <th class="w-25 pe-3"><%= t('attributes.ip')%>:</th>
+        <td><%= @connector.ip %></td>
+      </tr>
+
+      <tr>
+        <th class="w-25 pe-3"><%= t('attributes.admin_url')%>:</th>
+        <td><%= link_to nil, @connector.admin_url, target: '_blank', class: 'primary-link' %></td>
+      </tr>
+
+      <tr>
+        <th class="w-25 pe-3"><%= t('attributes.sds_url')%>:</th>
+        <td><%= @connector.sds_url %></td>
+      </tr>
+
+      <tr>
+        <th class="w-25 pe-3"><%= t('attributes.sds_updated_at')%>:</th>
+        <td><%= @connector.sds_updated_at&.localtime %></td>
+      </tr>
+
+      <tr>
+        <th class="w-25 pe-3"><%= t('attributes.manual_update')%>:</th>
+        <td>
+          <%= Cocard::States::flag(Cocard::States::WARNING) if @connector.manual_update %>
+          <%= @connector.manual_update %>
+        </td>
+      </tr>
+      <tr>
+        <th class="w-25 pe-3"><%= t('attributes.locations')%>:</th>
+        <td>
+          <% @connector.locations.each do |location| %>
+            <%= render LinkToComponent.new(item: location) %><br/>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <th class="w-25 pe-3"><%= t('controller.tags')%>:</th>
+        <td>
+          <%= render TagListComponent.new(item: @connector) %>
+        </td>
+      </tr>
+      <tr>
+        <th class="w-25 pe-3"><%= t('attributes.description')%>:</th>
+        <td><%= @connector.description %></td>
+      </tr>
+      <tr>
+        <th class="w-25 pe-3"><%= t('attributes.firmware_version')%>:</th>
+        <td><%= @connector.firmware_version %></td>
+      </tr>
+      <% if can?(:read, @connector, :id_contract) %>
+        <tr>
+          <th class="w-25 pe-3"><%= t('attributes.id_contract')%>:</th>
+          <td>
+            <%= content_tag :span,
+              "data-controller": "show-secret",
+              "data-show-secret-secret-value": @connector.id_contract do %>
+              <span data-show-secret-target="content">
+                <%= '*' * @connector.id_contract.length %>
+              </span>
+              <i class="fa-solid fa-eye"
+                data-action="click->show-secret#toggleSecret"
+                data-show-secret-target="icon"></i>
+            <% end if @connector.id_contract.present? %>
+          </td>
+        </tr>
+      <% end %>
+      <tr>
+        <th class="w-25 pe-3"><%= t('attributes.serial')%>:</th>
+        <td><%= @connector.serial %></td>
+      </tr>
+
+      <tr>
+        <th class="w-25 pe-3"><%= t('attributes.authentication')%>:</th>
+        <td>
+          <%= t(@connector.authentication, scope: :authentications) %>
+          <% if @connector.authentication == 'basicauth' %>
+            [ <%= @connector.auth_user %> ]
+          <% end %>
+        </td>
+      </tr>
+
+      <tr>
+        <th class="w-25 pe-3"><%= t('attributes.use_tls')%>:</th>
+        <td><%= render BooleanComponent.new(value: @connector.use_tls,
+                                            text: :text) %></td>
+      </tr>
+
+      <tr>
+        <th class="w-25 pe-3"><%= t('attributes.iccsn')%>:</th>
+        <td><%= @connector.iccsn %></td>
+      </tr>
+
+      <tr>
+        <th class="w-25 pe-3"><%= t('attributes.expiration_date')%>:</th>
+        <td><%= render ExpirationDateComponent.new(item: @connector) %></td>
+      </tr>
+
+      <tr>
+        <th class="w-25 pe-3"><%= t('attributes.boot_mode')%>:</th>
+        <td><%= t(@connector.boot_mode, scope: :boot_mode) %></td>
+      </tr>
+
+
+    </table>
+  </div>
+
+
+  <div class="col-12 col-lg-6">
+    <%= render Connector::TIClientComponent.new(
+                 connector: @connector, 
+                 readonly: cannot?(:manage, TIClient)
+               )
+    %>
+    <div class="card-title border-bottom bg-light mt-2 pt-2 ps-2">
+      <h6><%= t('attributes.product_information')%></h6>
+    </div>
+    <pre>
+<%= @connector.product_information&.to_s %>
+    </pre>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12 col-lg-6">
+    <div class="card-title border-bottom bg-light pt-2 ps-2">
+      <h6><%= t('attributes.status')%></h6>
+    </div>
+    <table class="table table-sm table-borderless">
+      <tr>
+        <th class="w-25 pe-3"><%= t('attributes.last_check')%>:</th>
+        <td>
+          <%= render IsCurrentComponent.new(item: @connector, attr: :last_check) %>
+        </td>
+      </tr>
+      <tr>
+        <th class="w-25 pe-3"><%= t('attributes.last_ok')%>:</th>
+        <td>
+          <%= render IsCurrentComponent.new(item: @connector, attr: :last_ok) %>
+        </td>
+      </tr>
+      <tr>
+        <th class="w-25 pe-3"><%= t('attributes.vpnti_online')%>:</th>
+        <td><%= render BooleanComponent.new(value: @connector.vpnti_online,
+                                            text: :unicode) %></td>
+      </tr>
+      <tr>
+        <th class="w-25 pe-3"><%= t('attributes.soap_request_success')%>:</th>
+        <td><%= render BooleanComponent.new(value: @connector.soap_request_success,
+                                            text: :unicode) %></td>
+      </tr>
+
+      <tr>
+        <th class="w-25 pe-3"><%= t('attributes.condition')%>:</th>
+        <td><%= @connector.condition_message %></td>
+      </tr>
+
+      <tr>
+        <th class="w-25 pe-3"><%= t('cocard.card_terminals_count')%>:</th>
+        <td><%= @connector.card_terminals.count %></td>
+      </tr>
+
+    </table>
+  </div>
+
+  <div class="col-12 col-lg-6">
+    <div class="card-title border-bottom bg-light pt-2 ps-2">
+      <h6><%= t('cocard.assigned_contexts')%></h6>
+    </div>
+    <div id="list_contexts">
+      <%= render partial: 'connector_contexts/list',
+                 locals: { connector: @connector }%>
+    </div>
+    <div class="card-title border-bottom bg-light pt-2 ps-2">
+      <h6><%= t('cocard.assigned_certificates')%></h6>
+    </div>
+    <%= render partial: 'connectors/client_certificates/client_certificate', 
+               collection: @connector.client_certificates, as: :cert %>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<%= turbo_frame_tag('side_notes') do %>
+    <div class="text-end mt-2 mb-1">
+      <%= link_to(t('cocard.new_note'), new_polymorphic_path([@notable, :note]),
+                  class: 'btn btn-sm btn-outline-secondary',
+                  data: {"turbo-frame" => "modal"}) if can? :create, Note %>
+      <%= link_to raw(%Q[<i class="fas fa-table"></i>]),
+                      '#notes-tab',
+                      data: { "turbo-frame" => "_top" },
+                      class: 'btn btn-outline-secondary btn-sm' %>
+
+    </div>
+    
+
+    <% if @notes.size > 0 %>
+      <%= render partial: 'postit', collection: @notes, as: :note %>
+    <% end %>
+<% end %>
+
