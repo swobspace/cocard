@@ -2,6 +2,10 @@ require "rails_helper"
 
 RSpec.describe CardTerminals::NotesController, type: :routing do
   describe "routing" do
+    it "routes to #sindex" do
+      expect(get: "/card_terminals/88/notes/sindex").to route_to("card_terminals/notes#sindex", card_terminal_id: '88')
+    end
+
     it "routes to #index" do
       expect(get: "/card_terminals/88/notes").to route_to("card_terminals/notes#index", card_terminal_id: '88')
     end

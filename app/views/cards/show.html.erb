@@ -1,7 +1,48 @@
 <%= turbo_stream_from :verify_pins %>
 <%= turbo_stream_from @card %>
 
-<%= render partial: 'show', locals: { card: @card } %>
+<div class="card mb-3" id="<%= dom_id(@card) %>">
+  <div class="card-header">
+    <div class="d-flex w-100">
+      <div>
+        <span class="subtitle">
+          <%= t('activerecord.models.card') %>: 
+          #<%= @card.id %>
+        </span>
+        <h4 class="title"><%= @card.card_type %>: <%= @card %></h4>
+      </div>
+      <div class="ms-3 pt-3">
+        <%= render ConditionIconComponent.new(item: @card) %>
+      </div>
+      <div role="toolbar" class="ms-auto pt-3">
+        <% if can?(:get_certificate, @card) %>
+          <%= render Card::GetCertificateButtonComponent.new(card: @card) %>
+        <% end %>
+        <%= render AcknowledgeButtonComponent.new(
+                     notable: @card, small: false,
+                     readonly: cannot?(:manage, @card)
+                   )
+         %>
+        <%= copy_link(@card) %>
+        <%= edit_link(@card) %>
+        <%= delete_link(@card) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <div class="row">
+      <div class="col-xl-10">
+        <%= render partial: 'show', locals: { card: @card } %>
+      </div>
+      <div class="col-xl-2 bg-light">
+        <div class="mb-3">
+          <%= turbo_frame_tag("side_notes", src: sindex_card_notes_path(@card),                                             refresh: "morph") %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <%= back_link %>
 
