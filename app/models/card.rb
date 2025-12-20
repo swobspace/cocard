@@ -9,7 +9,7 @@ class Card < ApplicationRecord
   has_many :logs, as: :loggable, dependent: :destroy
 
   belongs_to :card_terminal_slot, optional: true
-  has_one :card_terminal, through: :card_terminal_slot
+  has_one :card_terminal, through: :card_terminal_slot, dependent: :nullify
   has_many :card_contexts, dependent: :destroy
   has_many :contexts, through: :card_contexts
   belongs_to :location, optional: true
@@ -31,6 +31,7 @@ class Card < ApplicationRecord
   before_save :update_condition
   before_save :update_location
   before_save :update_acknowledge_id
+  before_save :clear_card_terminal_slot, if: ->(card) { card.deleted? }
   validates :iccsn, presence: true, uniqueness: { case_sensitive: false }
 
   # -- common methods
@@ -43,8 +44,12 @@ class Card < ApplicationRecord
   end
 
   def update_condition
+    # -- SOFT DELETE
+    if deleted?
+      set_condition( Cocard::States::NOTHING,
+                     "Karte gelöscht" )
     # -- NOTHING
-    if (!operational_state&.operational)
+    elsif (!operational_state&.operational)
       msg = operational_state&.name || "Karte nicht in Betrieb"
       set_condition( Cocard::States::NOTHING, msg )
     elsif card_terminal_slot&.card_terminal_id.nil?
@@ -104,5 +109,9 @@ class Card < ApplicationRecord
   end
 
 private
+
+  def clear_card_terminal_slot
+    self[:card_terminal_slot_id] = nil
+  end
 
 end

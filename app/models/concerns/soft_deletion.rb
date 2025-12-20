@@ -9,8 +9,12 @@ module SoftDeletion
 
   def soft_delete
     if has_attribute? :deleted_at
-      update_column :deleted_at, Time.current
+      update(deleted_at: Time.current)
     end
+  end
+
+  def deleted?
+    deleted_at.present?
   end
 
 end
