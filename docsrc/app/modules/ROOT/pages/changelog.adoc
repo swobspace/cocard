@@ -5,6 +5,7 @@
 * RISE TIClient: Kartenterminal dem Konnektor hinzufügen (wenn der Konnektor trotz vorhandenem KTProxy das Kartenterminal nicht sieht)
 * OutdatedJob: setzt Karten und Kartenterminals auf Status NOTHING, wenn länger als ein Tag kein Update mehr erfolgt ist. Das verhindert, dass Objekte, die beim letzten Check als OK erkannt wurden im Zustand OK verbleiben, auch wenn wochenlang gar keine Informationen zu dem Objekt ermittelt werden konnten.
 * SoftDelete für Konnektoren und Kartenterminals (und weiterhin für Karten)
+* Health-Check bei Kartenterminals prüft nun die Verfügbarkeit einer gültigen SMC-KT
 
 == 0.9.5 - 2025-12-06
 
