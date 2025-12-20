@@ -59,6 +59,11 @@ Rails.application.configure do
         class: "CleanupExpiredAcknowledgesJob",
         description: "Cleanup expired acknowledges"
       },
+      check_for_outdated: {
+        cron: '31 04 * * *',
+        class: "OutdatedJob",
+        description: "Check for outdated Cards/CardTerminals"
+      },
       reboot_connectors: {
         cron: Cocard.cron_reboot_connectors,
         class: "Connectors::RebootJob",

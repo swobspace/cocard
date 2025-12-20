@@ -16,6 +16,8 @@ module ConnectorConcerns
       .where(manual_update: false)
     end
 
+    scope :current, -> { where("connectors.last_check > ?", 1.hour.before(Time.current)) }
+
     scope :with_description_containing, ->(query) { joins(:rich_text_description).merge(ActionText::RichText.where <<~SQL, "%" + query + "%") }
     body ILIKE ?
    SQL

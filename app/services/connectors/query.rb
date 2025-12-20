@@ -76,6 +76,10 @@ module Connectors
           query = query.where(soap_request_success: to_boolean(value))
         when :vpnti_online
           query = query.where(vpnti_online: to_boolean(value))
+        when :deleted
+          if to_boolean(value)
+            query = query.unscope(where: :deleted_at).where.not(deleted_at: nil)
+          end
         when :limit
           @limit = value.to_i
         when :search

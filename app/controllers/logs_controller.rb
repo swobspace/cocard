@@ -30,7 +30,7 @@ class LogsController < ApplicationController
     elsif params[:acknowledged]
       @logs = Log.valid.acknowledged
     else
-      @logs = Log.valid.not_acknowledged
+      @logs = Log.current.valid.not_acknowledged
     end
     ordered = @logs
     @pagy, @logs = pagy(ordered, count: ordered.count)

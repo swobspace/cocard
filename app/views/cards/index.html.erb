@@ -148,3 +148,19 @@
 <br />
 
 <%= back_link %>
+<% if params[:expired] %>
+  <%= button_to(raw(%Q[<i class="fa-solid fa-trash"></i> ] +
+                   t('cards.delete_expired')),
+                delete_expired_cards_path(),
+                method: :delete,
+                form: {
+                  data: {
+                    "turbo-frame": "logs",
+                    "turbo-confirm": t('cards.delete_expired_confirm')
+                  }
+                },
+                class: 'btn btn-danger me-1') if current_user.is_admin?
+   %>
+
+<% end %>
+

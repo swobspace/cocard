@@ -67,6 +67,7 @@ Rails.application.routes.draw do
     resources :logs, only: [:index, :show, :destroy], module: :cards
     collection do
       get :sindex
+      delete :delete_expired
     end
     member do
       get :copy
@@ -75,7 +76,11 @@ Rails.application.routes.draw do
       post :verify_pin
       post :get_card
     end
-    resources :notes, module: :cards
+    resources :notes, module: :cards do
+      collection do
+        get :sindex
+      end
+    end
   end
 
   post "card_terminals", to: "card_terminals#index", 
@@ -86,19 +91,23 @@ Rails.application.routes.draw do
       get :sindex
     end
     member do
-      get :ping
       post :check
+      get  :edit_identification
+      get  :edit_idle_message
       post :fetch_idle_message
       post :fetch_proxy
-      get :edit_idle_message
-      put :update_idle_message
+      put  :update_idle_message
+      get  :ping
       post :reboot
       post :remote_pairing
-      get :edit_identification
-      get :test_context_form
+      get  :test_context_form
       post :test_context
     end
-    resources :notes, module: :card_terminals
+    resources :notes, module: :card_terminals do
+      collection do
+        get :sindex
+      end
+    end
     resource :kt_proxy, module: :card_terminals
   end
   resources :contexts
@@ -108,12 +117,12 @@ Rails.application.routes.draw do
       get :sindex
     end
     member do
+      post :check
       post :fetch_sds
       post :get_resource_information
       post :get_card_terminals
       post :get_cards
       get :ping
-      post :check
       post :reboot
       get :test_context_form
       post :test_context
@@ -121,7 +130,11 @@ Rails.application.routes.draw do
     resources :logs, only: [:index, :show, :destroy], module: :connectors
     resources :card_terminals, only: [:index, :show, :destroy], module: :connectors
     resources :cards, only: [:index, :show, :destroy], module: :connectors
-    resources :notes, module: :connectors
+    resources :notes, module: :connectors do
+      collection do
+        get :sindex
+      end
+    end
     resource :ti_client, module: :connectors
   end
   resources :locations do

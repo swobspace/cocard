@@ -10,11 +10,12 @@
     <%= render 'card_context_fields', f: builder %>
   <% end %>
 
-  <div data-nested-form-target="add_item">
-    <%= link_to t('contexts.add'), "#",
-              data: { action: "nested-form#add_association" },
-              class: 'btn btn-outline-secondary float-end'
-     %>
-  </div>
-
+  <% if f.object.card_type == 'SMC-B' %>
+    <div data-nested-form-target="add_item">
+      <%= link_to t('contexts.add'), "#",
+                data: { action: "nested-form#add_association" },
+                class: 'btn btn-outline-secondary float-end'
+       %>
+    </div>
+  <% end %>
 </div>

@@ -70,6 +70,7 @@ shared_context "card_terminal variables" do
       plugged_in: 'Switch 17/4',
       supplier: 'ACME Ltd. International',
       last_ok: ts - 1.month,
+      last_check: Time.current,
       network: network,
       connector: conn,
     )

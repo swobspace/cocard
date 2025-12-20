@@ -15,8 +15,7 @@
         <i class="fa-solid fa-clipboard" title="Notiz"></i>
       <% end %>
     <% end %>
-    <%= link_to note.notable, note.notable,
-        class: 'primary-link', "data-turbo-frame": '_top' %>
+    <span class="text-primary ms-1"><%= t(note.type, scope: 'notes') %></span>
   </div>
 
   <div>

@@ -10,6 +10,7 @@ class Log < ApplicationRecord
   validates :action, :last_seen, :level, :message, presence: true
 
   scope :valid, -> { where(is_valid: true) }
+  scope :current, -> { where("logs.last_seen > ?", (2*Cocard::grace_period).before(Time.current)) }
 
   # -- common methods
   def to_s

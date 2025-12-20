@@ -19,7 +19,8 @@ RSpec.describe Card, type: :model do
       expiration_date: 2.years.after(Date.current),
       updated_at: Time.current,
       operational_state: opsta,
-      certificate: "some string"
+      certificate: "some string",
+      last_check: Time.current
     )
   end
   it { is_expected.to have_many(:logs) }
@@ -85,7 +86,7 @@ RSpec.describe Card, type: :model do
 
     # it { expect(card.condition).to eq(Cocard::States::NOTHING) }
 
-    describe "wit operational_state == not operational" do
+    describe "with operational_state == not operational" do
       it "-> NOTHING" do
         card.update(condition: Cocard::States::OK)
         card.reload
@@ -197,6 +198,18 @@ RSpec.describe Card, type: :model do
         expect {
           card.update_condition
         }.not_to change(card, :condition)
+      end
+    end
+
+    describe "with last check > 1 day" do
+      it "-> NOTHING" do
+        card.update(condition: Cocard::States::OK)
+        card.reload
+        allow(card).to receive(:last_check).at_least(:once).and_return(25.hours.before(Time.current))
+        expect {
+          card.update_condition
+        }.to change(card, :condition).to(Cocard::States::NOTHING)
+        expect(card.condition_message).to match(/Keine aktuellen Daten verfügbar/)
       end
     end
   end
@@ -322,6 +335,24 @@ RSpec.describe Card, type: :model do
       expect {
         card.update(last_check: Time.current)
       }.not_to change(card, :tag_list)
+    end
+  end
+
+  describe "#soft_delete" do
+    let!(:slot) { FactoryBot.create(:card_terminal_slot, slotid: 4, card: card) }
+    before(:each) do
+      card.soft_delete
+      card.reload
+    end
+
+    it "changes condition, condition_message and deleted_at" do
+      expect(card.condition).to eq(Cocard::States::NOTHING)
+      expect(card.condition_message).to match("Karte gelöscht")
+      expect(card.deleted_at).not_to be_nil
+    end
+
+    it "clears card_terminal_slot" do
+      expect(card.card_terminal_slot_id).to be_nil
     end
   end
 

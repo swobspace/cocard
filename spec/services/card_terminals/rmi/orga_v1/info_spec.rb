@@ -10,7 +10,7 @@ module CardTerminals
       "net_lan_ipAddr" => "127.1.2.3",
       "net_lan_ipAddrStatic" => "192.168.1.1",
       "net_lan_ipAddrDhcp" => "127.1.2.3",
-      "rmi_smcb_pinEnabled" => true, 
+      "rmi_smcb_pinEnabled" => true,
       "rmi_pairingEHealthTerminal_enabled" => true,
       "update_serverIpAddr" => "192.0.2.10",
       "update_fileName" => "somestuff.boot",
@@ -25,6 +25,13 @@ module CardTerminals
       "card_slot4_plugCycles" => "104",
       "vendor_deviceManufacturerId" => 'INGHC',
       "vendor_deviceModelName" => 'ORGA6100',
+      "card_smkt_iccsn" => '80276123456789011111',
+      "card_smkt_version" => '4.4.1',
+      "card_smkt_slotNum" => '4',
+      "card_smkt_autType" => 'RSA',
+      "card_smkt_autCxd" => '11.11.2026',
+      "card_smkt_aut2Type" => 'ECC',
+      "card_smkt_aut2Cxd" => '30.08.2030',
     }}
 
     subject { CardTerminals::RMI::OrgaV1::Info.new(properties) }
@@ -51,6 +58,15 @@ module CardTerminals
     it { expect(subject.product_vendor_id).to eq("INGHC") }
     it { expect(subject.product_code).to eq("ORGA6100") }
     it { expect(subject.identification).to eq("INGHC-ORGA6100") }
+    it { expect(subject.smckt_iccsn).to eq("80276123456789011111") }
+    it { expect(subject.smckt_version).to eq("4.4.1") }
+    it { expect(subject.smckt_slot).to eq("4") }
+    it { expect(subject.smckt_auth1_type).to eq("RSA") }
+    it { expect(subject.smckt_auth1_expiration).to eq("2026-11-11".to_date) }
+    it { expect(subject.smckt_auth1_expiration).to be_kind_of(Date) }
+    it { expect(subject.smckt_auth2_type).to eq("ECC") }
+    it { expect(subject.smckt_auth2_expiration).to eq("2030-08-30".to_date) }
+    it { expect(subject.smckt_auth2_expiration).to be_kind_of(Date) }
 
     it "contains all attributes" do
       expect(CardTerminals::RMI::OrgaV1::Info::ATTRIBUTES).to contain_exactly(
@@ -77,6 +93,13 @@ module CardTerminals
           slot3_plug_cycles
           slot4_plug_cycles
           identification
+          smckt_iccsn
+          smckt_version
+          smckt_slot
+          smckt_auth1_type
+          smckt_auth1_expiration
+          smckt_auth2_type
+          smckt_auth2_expiration
         ]
       )
     end

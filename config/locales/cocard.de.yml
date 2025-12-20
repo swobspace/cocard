@@ -4,6 +4,7 @@ de:
   true: Ja
   false: Nein
   cocard:
+    acknowledges: Acknowledges
     action: Aktion
     new_card: Neue Karte
     new_card_manual_warning: |
@@ -330,6 +331,7 @@ de:
       Ohne Kontext kann der Konnektor keine Informationen abfragen
       (Ausnahme: Service Directory SDS)
     check_connectivity: Verbindungstest
+    deleted: Gelöschte Konnektoren
   card_terminals:
     with_smcb: KT mit SMC-B
     update_ip_from_current: Vom Konnektor gemeldete IP übernehmen
@@ -364,6 +366,13 @@ de:
       slot3_plug_cycles: Steckzyklen Slot 3
       slot4_plug_cycles: Steckzyklen Slot 4
       identification: Identifikation
+      smckt_iccsn: SMC-KT ICCSN
+      smckt_version: SMC-KT Kartenversion
+      smckt_slot: SMC-KT Slot
+      smckt_auth1_type: SMC-KT Auth1 Typ
+      smckt_auth1_expiration: SMC-KT Auth1 Ablaufdatum
+      smckt_auth2_type: SMC-KT Auth2 Typ
+      smckt_auth2_expiration: SMC-KT Auth2 Ablaufdatum
     rmi_info: RMI-Abfrage der Terminal-Eigenschaften
     statistics: Statistische Daten
     edit_identification: |
@@ -377,6 +386,7 @@ de:
       hier gesetzten Informationen wieder überschrieben.
     rmi_check: Prüfung via IP
     fetch_proxy: Hole Proxy vom TIClient
+    deleted: Gelöschte Kartenterminals
   cards:
     no_contexts_assigned: |
       ACHTUNG! Es ist noch kein Kontext zugeordnet!
@@ -387,6 +397,15 @@ de:
     expired_in_use: Abgelaufene Karten in Benutzung
     deleted: Gelöschte Karten
     reset_card_terminal: Zuordnung zum Kartenterminal löschen
+    delete_expired: Abgelaufene Karten löschen
+    delete_expired_confirm: >
+        Abgelaufene Karten löschen?
+        Die Karten werden aus den Standard-Ansichten entfernt, sind
+        aber weiter über >gelöschte Karten< einsehbar. Es werden nur
+        Karten entfernt, die mindestens seit 4 Wochen abgelaufen und keinem
+        Kartenterminal mehr zugeordnet sind.
+        Neuere abgelaufene Karten müssen einzeln gelöscht werden.
+
   ti_clients:
     fetch_kt_proxies: Proxies vom TIClient holen
     hint_all: |

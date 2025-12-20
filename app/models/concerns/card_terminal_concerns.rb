@@ -14,6 +14,8 @@ module CardTerminalConcerns
       where("card_terminals.condition > ?", Cocard::States::OK)
     end
 
+    scope :current, -> { where("card_terminals.last_check > ?", 7.days.before(Time.current)) }
+
     scope :with_description_containing, ->(query) { joins(:rich_text_description).merge(ActionText::RichText.where <<~SQL, "%" + query + "%") }
     body ILIKE ?
    SQL

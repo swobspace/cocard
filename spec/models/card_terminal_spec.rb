@@ -29,7 +29,8 @@ RSpec.describe CardTerminal, type: :model do
       location: location,
       network: network,
       connected: false,
-      last_ok: Time.current
+      last_ok: Time.current,
+      last_check: Time.current
     )
   end
 
@@ -152,6 +153,16 @@ RSpec.describe CardTerminal, type: :model do
             ct.update_condition
           }.to change(ct, :condition).to(Cocard::States::NOTHING)
           expect(ct.condition_message).to match(/Kartenterminal nicht in Betrieb/)
+        end
+      end
+
+      describe "with last_check > 1d" do
+        it "-> NOTHING" do
+          expect(ct).to receive(:last_check).at_least(:once).and_return(25.hours.before(Time.current))
+          expect {
+            ct.update_condition
+          }.to change(ct, :condition).to(Cocard::States::NOTHING)
+          expect(ct.condition_message).to match(/Keine aktuellen Daten verfügbar/)
         end
       end
 

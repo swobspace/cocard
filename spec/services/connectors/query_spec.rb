@@ -62,6 +62,8 @@ module Connectors
       )
     end
 
+    let!(:conn4) { FactoryBot.create(:connector, deleted_at: 1.minute.before(Time.current)) }
+
     let(:connectors) { Connector.all.with_rich_text_description }
 
     # check for class methods
@@ -215,6 +217,15 @@ module Connectors
       before(:each) do
         @matching = [conn2, conn3]
         @nonmatching = [conn1]
+      end
+      it_behaves_like "a connectors query"
+    end
+
+    context "with deleted: true" do
+      subject { Query.new(connectors, {deleted: true}) }
+      before(:each) do
+        @matching = [conn4]
+        @nonmatching = [conn1, conn2, conn3]
       end
       it_behaves_like "a connectors query"
     end

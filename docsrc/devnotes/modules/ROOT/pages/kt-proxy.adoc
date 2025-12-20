@@ -1,6 +1,6 @@
 = KT-Proxy Stuff (RISE TI-Gateway)
 :author: Wolfgang Barth
-:navdate: 2025-10-26
+:revdate: 2025-10-26
 :imagesdir: ../images
 
 #work in progress#

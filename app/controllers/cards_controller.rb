@@ -1,5 +1,9 @@
 class CardsController < ApplicationController
-  before_action :set_card, only: [:show, :edit, :update, :destroy]
+  skip_load_and_authorize_resource
+  before_action :set_card, only: %i[show edit update destroy
+                                    copy get_certificate get_pin_status
+                                    verify_pin get_card]
+  authorize_resource
   before_action :add_breadcrumb_show, only: [:show]
 
   # GET /cards
@@ -24,7 +28,7 @@ class CardsController < ApplicationController
     elsif params[:acknowledged]
       @cards = Card.acknowledged
     else
-      @cards = Card.failed.not_acknowledged
+      @cards = Card.current.failed.not_acknowledged
     end
     ordered = @cards
     @pagy, @cards = pagy(ordered, count: ordered.count)
@@ -173,10 +177,17 @@ class CardsController < ApplicationController
     respond_with(@card, location: polymorphic_path([@locatable, :cards]))
   end
 
+  def delete_expired
+    @cards = Card.where("expiration_date < ?", 4.weeks.before(Time.current))
+                 .where(card_terminal_slot_id: nil)
+    @cards.update_all(deleted_at: Time.current)
+    redirect_to cards_path(expired: true)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_card
-      @card = Card.find(params[:id])
+      @card = Card.with_deleted.find(params[:id])
     end
 
     def set_context

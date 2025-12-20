@@ -49,6 +49,23 @@ class CardTerminals::HealthCheckJob < ApplicationJob
             toaster(card_terminal, :info, text)
           end
 
+          if info.smckt_slot == 0
+            text = "ACHTUNG: keine SMC-KT erkannt, bitte Terminal prüfen"
+            toaster(card_terminal, :alert, text)
+          end
+
+          auth1_expiration = info.smckt_auth1_expiration
+          auth2_expiration = info.smckt_auth2_expiration
+          if auth2_expiration.present? and auth2_expiration <= Date.current
+            text = "ACHTUNG: SMC-KT Gültigkeit abgelaufen am #{auth2_expiration} " +
+                   "(#{info.smckt_auth2_type}), bitte ersetzen!"
+            toaster(card_terminal, :alert, text)
+          elsif auth1_expiration.present? and auth1_expiration <= Date.current
+            text = "ACHTUNG: SMC-KT Gültigkeit abgelaufen am #{auth1_expiration} " +
+                   "(#{info.smckt_auth1_type}), bitte ersetzen!"
+            toaster(card_terminal, :alert, text)
+          end
+
           # check_value(card_terminal, info, :dhcp_enabled)
           # check_value(card_terminal, info, :ntp_server)
           # check_value(card_terminal, info, :ntp_enabled)

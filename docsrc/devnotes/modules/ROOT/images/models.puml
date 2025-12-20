@@ -23,6 +23,7 @@ class Connector  {
   connector_services: jsonb
   last_check: timestamp
   last_ok: timestamp
+  deleted_at: timestamp
   condition: integer
   condition_message: string
   soap_request_success: boolean
@@ -61,6 +62,7 @@ class CardTerminal {
   condition: integer
   last_ok: timestamp
   last_check: timestamp
+  deleted_at: timestamp
   firmware_version: string
   identification: string
   acknowledge_id: bigint
@@ -128,6 +130,8 @@ class Card {
   condition: integer
   condition_message: string
   acknowledge_id: bigint
+  last_check: timestamp
+  last_ok: timestamp
   deleted_at: timestamp
   object_system_version: string
   card_terminal_slot_id

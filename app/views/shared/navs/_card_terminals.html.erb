@@ -10,18 +10,6 @@
       <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
             t('controller.card_terminals')),
           main_app.card_terminals_path, class: "dropdown-item" %>
-      <%= link_to raw( '<span class="fa-solid fa-person-digging" aria-hidden="true"></span> ' +
-            t('controller.card_terminals')),
-          main_app.card_terminals_path(acknowledged: true), class: "dropdown-item" %>
-      <%= link_to raw(Cocard::States.flag(Cocard::States::WARNING) + ' Aktuelle Probleme'),
-          main_app.card_terminals_path(failed: true, acknowledged: false), class: "dropdown-item" %>
-      <% if can? :create, CardTerminal %>
-        <%= link_to raw('<span class="fas fa-fw fa-plus" aria-hidden="true"></span> ' +
-                        t('cocard.new_card_terminal')),
-              main_app.new_card_terminal_path,
-              class: "dropdown-item" %>
-      <% end %>
-      <div class="dropdown-divider"></div>
       <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
             t('card_terminals.with_smcb')),
           main_app.card_terminals_path(with_smcb: 1), class: "dropdown-item" %>
@@ -31,13 +19,23 @@
                   "data-turbo-prefetch": false
        %>
       <div class="dropdown-divider"></div>
+      <%= link_to raw( '<span class="fa-solid fa-person-digging" aria-hidden="true"></span> ' +
+            t('controller.card_terminals')),
+          main_app.card_terminals_path(acknowledged: true), class: "dropdown-item" %>
+      <%= link_to raw(Cocard::States.flag(Cocard::States::WARNING) + ' Aktuelle Probleme'),
+          main_app.card_terminals_path(failed: true, acknowledged: false), class: "dropdown-item" %>
+      <% if current_user&.is_admin? %>
+        <%= link_to raw( '<span class="fa-solid fa-fw fa-trash" aria-hidden="true"></span> ' +
+              t('card_terminals.deleted')), main_app.card_terminals_path(deleted: true), 
+              class: "dropdown-item" %>
+      <% end %>
+      <div class="dropdown-divider"></div>
       <% if can? :manage, CardTerminal %>
         <%= link_to raw('<span class="fa-solid fa-fw fa-message" aria-hidden="true"></span> ' +
                         t('cocard.set_idle_messages')),
               main_app.idle_messages_edit_path,
               class: "dropdown-item" %>
       <% end %>
-      <div class="dropdown-divider"></div>
       <%= link_to raw('<span class="fa-solid fw fa-triangle-exclamation" aria-hidden="true"></span> ' +
                       t('card_terminals.duplicate_ips')),
             main_app.reports_duplicate_terminal_ips_path,
@@ -49,6 +47,14 @@
                            </span> ] + t('card_terminals.rmi_check')),
                     main_app.new_duck_terminal_path,
                     class: "dropdown-item" %>
+      <% end %>
+
+      <% if can? :create, CardTerminal %>
+        <div class="dropdown-divider"></div>
+        <%= link_to raw('<span class="fas fa-fw fa-plus" aria-hidden="true"></span> ' +
+                        t('cocard.new_card_terminal')),
+              main_app.new_card_terminal_path,
+              class: "dropdown-item" %>
       <% end %>
     </div>
   </li>

@@ -29,7 +29,12 @@ class ConditionIconComponent < ViewComponent::Base
       @size = "btn"
     end
 
-    case item.condition
+    if deleted
+      @color = "secondary"
+      @icon = "fa-solid fa-fw fa-trash"
+      @text = "NOTHING"
+    else
+      case item.condition
       when Cocard::States::CRITICAL
         @color = "danger"
         @icon = "fa-solid fa-fw fa-circle-exclamation"
@@ -50,6 +55,7 @@ class ConditionIconComponent < ViewComponent::Base
         @color = "secondary"
         @icon = "fa-solid fa-fw fa-circle-xmark"
         @text = "NOTHING"
+      end
     end
   end
 
@@ -81,7 +87,7 @@ private
 
   def outdated?
     unless item.updated_at.nil?
-      item.updated_at < period.before(Time.current)
+      !deleted && (item.updated_at < period.before(Time.current))
     end
   end
 
@@ -93,4 +99,7 @@ private
     ( outdated? ) ? "" : "text-white"
   end
 
+  def deleted
+    item.respond_to?(:deleted_at) and item.deleted_at.present?
+  end
 end

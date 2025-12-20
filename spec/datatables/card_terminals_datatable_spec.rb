@@ -168,7 +168,7 @@ RSpec.describe CardTerminalsDatatable, type: :model do
   describe "column 4: connector.name" do
     let(:myparams) { ActiveSupport::HashWithIndifferentAccess.new(
       columns: {"4"=> {search: {value: "127", regex: "false"}}},
-      order: {"0"=>{column: "4", dir: "asc"}},
+      order: {"0"=>{column: "2", dir: "asc"}},
       start: "0",
       length: "10",
       search: {value: "", regex: "false"}

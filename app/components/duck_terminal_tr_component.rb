@@ -24,6 +24,8 @@ class DuckTerminalTrComponent < ViewComponent::Base
         "bg-success bg-opacity-25"
       when Cocard::States::WARNING
         "bg-warning bg-opacity-50"
+      when Cocard::States::CRITICAL
+        "bg-danger bg-opacity-50"
       else
         "bg-info bg-opacity-25"
       end

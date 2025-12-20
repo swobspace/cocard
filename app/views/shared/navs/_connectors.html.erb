@@ -10,10 +10,18 @@
       <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
             t('controller.connectors')),
           main_app.connectors_path, class: "dropdown-item" %>
+      <div class="dropdown-divider"></div>
       <%= link_to raw( '<span class="fa-solid fa-fw fa-person-digging" aria-hidden="true"></span> ' +
             t('controller.connectors')),
           main_app.connectors_path(acknowledged: true), class: "dropdown-item" %>
+      <% if current_user&.is_admin? %>
+        <%= link_to raw( '<span class="fa-solid fa-fw fa-trash" aria-hidden="true"></span> ' +
+              t('connectors.deleted')), main_app.connectors_path(deleted: true),
+              class: "dropdown-item" %>
+      <% end %>
+
       <% if can? :create, Connector %>
+        <div class="dropdown-divider"></div>
         <%= link_to raw('<span class="fas fa-fw fa-plus" aria-hidden="true"></span> ' +
                         t('cocard.new_connector')),
               main_app.new_connector_path,

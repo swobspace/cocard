@@ -1,6 +1,15 @@
 = Changelog
 
-== 0.9.4 - 2025-12-06
+== 0.9.6 - 2025-12-20
+
+* RISE TIClient: Kartenterminal dem Konnektor hinzufügen (wenn der Konnektor trotz vorhandenem KTProxy das Kartenterminal nicht sieht)
+* OutdatedJob: setzt Karten und Kartenterminals auf Status NOTHING, wenn länger als ein Tag kein Update mehr erfolgt ist. Das verhindert, dass Objekte, die beim letzten Check als OK erkannt wurden im Zustand OK verbleiben, auch wenn wochenlang gar keine Informationen zu dem Objekt ermittelt werden konnten.
+* SoftDelete für Konnektoren und Kartenterminals (und weiterhin für Karten)
+* Health-Check bei Kartenterminals prüft nun die Verfügbarkeit einer gültigen SMC-KT
+* Notizen bei Konnektor, Karte und Kartenterminal als Seitenleiste wie im Dashboard
+* Layout Anzeige Kartenterminal überarbeitet
+
+== 0.9.5 - 2025-12-06
 
 * Kontext-Check zum Konnektor: Abfrage eines beliebigen Kontextes beim Konnektor über GetResourceInformation.
 * RISE TIClient: Abfrage der Kartenterminals und deren Zustände am Konnektor über die Proxy-Funktion des TI-Clients - erfordert Aktivierung (z.Z. nur manuell z.B. via Bruno möglich)

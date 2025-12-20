@@ -24,6 +24,13 @@ module CardTerminals
         slot3_plug_cycles
         slot4_plug_cycles
         identification
+        smckt_iccsn
+        smckt_version
+        smckt_slot
+        smckt_auth1_type
+        smckt_auth1_expiration
+        smckt_auth2_type
+        smckt_auth2_expiration
       ]
 
       def initialize(properties)
@@ -126,6 +133,34 @@ module CardTerminals
 
       def identification
         "#{product_vendor_id}-#{product_code}"
+      end
+
+      def smckt_iccsn
+        properties['card_smkt_iccsn']
+      end
+
+      def smckt_version
+        properties['card_smkt_version']
+      end
+
+      def smckt_slot
+        properties['card_smkt_slotNum']
+      end
+
+      def smckt_auth1_type
+        properties['card_smkt_autType']
+      end
+
+      def smckt_auth1_expiration
+        Fugit.parse(properties['card_smkt_autCxd'].to_s)&.to_t&.to_date
+      end
+
+      def smckt_auth2_type
+        properties['card_smkt_aut2Type']
+      end
+
+      def smckt_auth2_expiration
+        Fugit.parse(properties['card_smkt_aut2Cxd'].to_s)&.to_t&.to_date
       end
 
   private

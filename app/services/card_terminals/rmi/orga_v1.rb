@@ -592,6 +592,13 @@ module CardTerminals
                     card_slot4_plugCycles
                     vendor_deviceManufacturerId
                     vendor_deviceModelName
+                    card_smkt_iccsn
+                    card_smkt_version
+                    card_smkt_slotNum
+                    card_smkt_autType
+                    card_smkt_autCxd
+                    card_smkt_aut2Type
+                    card_smkt_aut2Cxd
                   ]
         if firmware_version >= '3.9.1'
           props << "rmi_pairingEHealthTerminal_enabled"
