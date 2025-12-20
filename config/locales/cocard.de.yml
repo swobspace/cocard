@@ -4,6 +4,7 @@ de:
   true: Ja
   false: Nein
   cocard:
+    acknowledges: Acknowledges
     action: Aktion
     new_card: Neue Karte
     new_card_manual_warning: |

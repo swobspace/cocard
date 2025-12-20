@@ -8,11 +8,18 @@
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarCardDropdown">
       <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
-            t('controller.cards')), main_app.cards_path, class: "dropdown-item" %>
-      <%= link_to raw('<span class="fa-solid fa-person-digging" aria-hidden="true"></span> ' +
-            t('controller.cards')), main_app.cards_path(acknowledged: true), 
-            class: "dropdown-item" %>
+            "Alle Karten"), main_app.cards_path, class: "dropdown-item" %>
+      <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
+            'SMC-B'), main_app.cards_path(card_type: 'SMC-B'), class: "dropdown-item" %>
+      <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
+            'SMC-KT'), main_app.cards_path(card_type: 'SMC-KT'), class: "dropdown-item" %>
+      <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
+            'HBA'), main_app.cards_path(card_type: 'HBA'), class: "dropdown-item" %>
+
       <div class="dropdown-divider"></div>
+      <%= link_to raw('<span class="fa-solid fa-person-digging" aria-hidden="true"></span> ' +
+            "Karten mit Acknowledge"), main_app.cards_path(acknowledged: true), 
+            class: "dropdown-item" %>
       <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
             t('cards.expired')), main_app.cards_path(expired: true), 
             class: "dropdown-item" %>
@@ -30,14 +37,6 @@
       <%= link_to raw( '<span class="fa-solid fa-fw fa-rotate-right" aria-hidden="true"></span> ' +
             t('controller.verify_pins')), main_app.verify_pins_path, class: "dropdown-item" %>
       <% end %>
-      <div class="dropdown-divider"></div>
-      <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
-            'SMC-B'), main_app.cards_path(card_type: 'SMC-B'), class: "dropdown-item" %>
-      <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
-            'SMC-KT'), main_app.cards_path(card_type: 'SMC-KT'), class: "dropdown-item" %>
-      <%= link_to raw( '<span class="fas fa-fw fa-table" aria-hidden="true"></span> ' +
-            'HBA'), main_app.cards_path(card_type: 'HBA'), class: "dropdown-item" %>
-
       <% if can? :create, Card %>
         <div class="dropdown-divider"></div>
         <%= link_to raw('<span class="fas fa-fw fa-plus" aria-hidden="true"></span> ' +
