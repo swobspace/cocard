@@ -65,42 +65,67 @@
 <%= back_link %>
 
 <% unless @card_terminal.deleted_at %>
-  <div class="card my-3">
-    <div class="card-header">
-      <div class="d-flex w-100">
-        <div >
-          <h4 class="title"> 
-            <%= t('controller.cards') %>
-          </h4>
+
+  <ul class="nav nav-tabs mt-3" id="CardTerminalsTab" role="tablist" data-turbo-permanent>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="cards-tab" data-bs-toggle="tab" data-bs-target="#cards-tab-pane" type="button" role="tab" aria-controls="cards-tab-pane" aria-selected="false">Karten</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="twp-tab" data-bs-toggle="tab" data-bs-target="#twp-tab-pane" type="button" role="tab" aria-controls="twp-tab-pane" aria-selected="true">Arbeitsplätze</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="logs-tab" data-bs-toggle="tab" data-bs-target="#logs-tab-pane" type="button" role="tab" aria-controls="logs-tab-pane" aria-selected="true">Logs</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="notes-tab" data-bs-toggle="tab" data-bs-target="#notes-tab-pane" type="button" role="tab" aria-controls="notes-tab-pane" aria-selected="false">Notizen</button>
+    </li>
+  </ul>
+
+  <div class="tab-content" id="CardTerminalsTabContent" data-turbo-permanent>
+    <div class="tab-pane fade show active" id="cards-tab-pane" role="tabpanel" aria-labelledby="cards-tab" tabindex="0">
+      <div class="card my-3">
+        <div class="card-header">
+          <div class="d-flex w-100">
+            <div >
+              <h4 class="title"> 
+                <%= t('controller.cards') %>
+              </h4>
+            </div>
+          </div>
+        </div>
+        <div class="m-2">
+          <%= render 'cards', cards: @card_terminal.cards.order(:slotid) %>
         </div>
       </div>
     </div>
-    <div class="m-2">
-      <%= render 'cards', cards: @card_terminal.cards.order(:slotid) %>
-    </div>
-  </div>
 
-  <div class="card my-3">
-    <div class="card-header">
-      <div class="d-flex w-100">
-        <div >
-          <h4 class="title"> 
-            <%= t('controller.workplaces') %>
-          </h4>
+    <div class="tab-pane fade" id="twp-tab-pane" role="tabpanel" aria-labelledby="twp-tab" tabindex="0">
+      <div class="card my-3">
+        <div class="card-header">
+          <div class="d-flex w-100">
+            <div >
+              <h4 class="title"> 
+                <%= t('controller.workplaces') %>
+              </h4>
+            </div>
+          </div>
+        </div>
+        <div class="m-2">
+          <%= render 'terminal_workplaces', terminal_workplaces: @card_terminal.terminal_workplaces %>
         </div>
       </div>
     </div>
-    <div class="m-2">
-      <%= render 'terminal_workplaces', terminal_workplaces: @card_terminal.terminal_workplaces %>
+
+    <div class="tab-pane fade" id="logs-tab-pane" role="tabpanel" aria-labelledby="logs-tab" tabindex="0">
+      <%= turbo_frame_tag("logs", src: card_terminal_logs_path(@card_terminal, valid: 1),
+                                  refresh: "morph") %>
+
     </div>
-  </div>
-
-  <%= turbo_frame_tag("logs", src: card_terminal_logs_path(@card_terminal, valid: 1),
-                              refresh: "morph") %>
-
-  <div id="notes-tab">
-  <%= turbo_frame_tag("notes", src: polymorphic_path([@card_terminal, :notes], active: 1),
-                               refresh: "morph") %>
+    <div class="tab-pane fade" id="notes-tab-pane" role="tabpanel" aria-labelledby="notes-tab" tabindex="0">
+      <%= turbo_frame_tag("notes", 
+                          src: polymorphic_path([@card_terminal, :notes], active: 1),
+                          refresh: "morph") %>
+    </div>
   </div>
 
 <% end %>
