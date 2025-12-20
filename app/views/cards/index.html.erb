@@ -156,11 +156,7 @@
                 form: {
                   data: {
                     "turbo-frame": "logs",
-                    "turbo-confirm": t('cards.delete_expired') + '? ' +
-                      "Die Karten werden aus den Standard-Ansichten entfernt, sind " +
-                      "aber weiter über >gelöschte Karten< einsehbar. Es werden nur " +
-                      "Karten entfernt, die mindestens seit 4 Wochen abgelaufen sind. " +
-                      "Neuere abgelaufene Karten müssen einzeln gelöscht werden."
+                    "turbo-confirm": t('cards.delete_expired_confirm')
                   }
                 },
                 class: 'btn btn-danger me-1') if current_user.is_admin?

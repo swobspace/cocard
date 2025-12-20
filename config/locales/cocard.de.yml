@@ -397,6 +397,14 @@ de:
     deleted: Gelöschte Karten
     reset_card_terminal: Zuordnung zum Kartenterminal löschen
     delete_expired: Abgelaufene Karten löschen
+    delete_expired_confirm: >
+        Abgelaufene Karten löschen?
+        Die Karten werden aus den Standard-Ansichten entfernt, sind
+        aber weiter über >gelöschte Karten< einsehbar. Es werden nur
+        Karten entfernt, die mindestens seit 4 Wochen abgelaufen und keinem
+        Kartenterminal mehr zugeordnet sind.
+        Neuere abgelaufene Karten müssen einzeln gelöscht werden.
+
   ti_clients:
     fetch_kt_proxies: Proxies vom TIClient holen
     hint_all: |
