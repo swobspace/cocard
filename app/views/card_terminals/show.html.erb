@@ -3,7 +3,64 @@
 <%= turbo_stream_from @card_terminal %>
 <%= turbo_stream_from @card_terminal.connector if @card_terminal.connector.present? %>
 
-<%= render partial: 'show', locals: { card_terminal: @card_terminal } %>
+<div class="card mb-3" id="<%= dom_id(@card_terminal) %>">
+  <div class="card-header">
+    <div class="d-flex w-100">
+      <div>
+        <span class="subtitle">
+          <%= t('activerecord.models.card_terminal') %>: 
+          #<%= @card_terminal.id %>
+        </span>
+        <h4 class="title"><%= @card_terminal %></h4>
+      </div>
+      <div class="ms-3 pt-3">
+        <%= render ConditionIconComponent.new(item: @card_terminal) %>
+      </div>
+      <div role="toolbar" class="ms-auto pt-3">
+        <%= render RebootButtonComponent.new(item: @card_terminal) if (can? :reboot, @card_terminal) %>
+        <%= render CardTerminal::PairingButtonComponent
+                   .new(card_terminal: @card_terminal) if (can? :manage, @card_terminal) %>
+        <%= link_to(raw(%Q[<i class="fa-solid fw fa-info-circle"></i>]),
+                    new_duck_terminal_path(
+                      identification: @card_terminal.identification,
+                      firmware_version: @card_terminal.firmware_version,
+                      ip: @card_terminal.ip
+                    ),
+                    title: t('card_terminals.rmi_info'),
+                    class: "btn btn-secondary me-1") if can? :manage, CardTerminal %>
+        <%= link_to(raw(%Q[<i class="fa-solid fa-fw fa-list-check"></i>]),
+                    test_context_form_card_terminal_path(@card_terminal),
+                    title: "Test eines Kontextes",
+                    class: 'btn btn-secondary me-1') if @card_terminal.connector.present?
+         %>
+        <%= render HealthCheckButtonComponent.new(item: @card_terminal) %>
+        <%= render AcknowledgeButtonComponent.new(
+                     notable: @card_terminal, small: false,
+                     readonly: cannot?(:manage, @card_terminal)
+                   )
+         %>
+        <%= edit_link(@card_terminal) %>
+        <%= delete_link(@card_terminal) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <div class="row">
+      <div class="col-xl-10">
+        <%= render partial: 'show', locals: { card_terminal: @card_terminal } %>
+      </div>
+      <div class="col-xl-2 bg-light">
+        <div class="mb-3">
+          <%= turbo_frame_tag("side_notes", 
+                               src: sindex_card_terminal_notes_path(@card_terminal),
+                               refresh: "morph") %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <%= back_link %>
 
@@ -41,7 +98,9 @@
   <%= turbo_frame_tag("logs", src: card_terminal_logs_path(@card_terminal, valid: 1),
                               refresh: "morph") %>
 
+  <div id="notes-tab">
   <%= turbo_frame_tag("notes", src: polymorphic_path([@card_terminal, :notes], active: 1),
                                refresh: "morph") %>
+  </div>
 
 <% end %>
