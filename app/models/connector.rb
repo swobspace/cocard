@@ -33,6 +33,7 @@ class Connector < ApplicationRecord
   before_save :ensure_sds_url
   before_save :ensure_admin_url
   before_save :update_acknowledge_id
+  before_save :clear_connector_dependencies, if: ->(conn) { conn.deleted? }
   validates :ip, presence: true, uniqueness: true
   validates :short_name, uniqueness: { case_insensitive: true, allow_blank: true }
   validates :authentication, inclusion: { in: authentications.keys }
@@ -122,6 +123,11 @@ private
     else
       name
     end
+  end
+
+  def clear_connector_dependencies
+    connector_contexts.clear
+    card_terminals.delete_all
   end
 
 end

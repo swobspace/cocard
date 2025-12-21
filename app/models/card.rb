@@ -31,7 +31,7 @@ class Card < ApplicationRecord
   before_save :update_condition
   before_save :update_location
   before_save :update_acknowledge_id
-  before_save :clear_card_terminal_slot, if: ->(card) { card.deleted? }
+  before_save :clear_card_dependencies, if: ->(card) { card.deleted? }
   validates :iccsn, presence: true, uniqueness: { case_sensitive: false }
 
   # -- common methods
@@ -110,8 +110,9 @@ class Card < ApplicationRecord
 
 private
 
-  def clear_card_terminal_slot
+  def clear_card_dependencies
     self[:card_terminal_slot_id] = nil
+    card_contexts.clear
   end
 
 end

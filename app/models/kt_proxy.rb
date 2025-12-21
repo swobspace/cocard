@@ -1,7 +1,7 @@
 class KTProxy < ApplicationRecord
   include KTProxyConcerns
   # -- associations
-  belongs_to :card_terminal, optional: true
+  belongs_to :card_terminal, ->{ unscope(where: :deleted_at) }, optional: true
   belongs_to :ti_client
 
   # -- configuration

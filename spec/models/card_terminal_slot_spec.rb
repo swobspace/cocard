@@ -20,5 +20,19 @@ RSpec.describe CardTerminalSlot, type: :model do
     expect(f).to validate_uniqueness_of(:slotid).scoped_to(:card_terminal_id)
   end
 
+  describe "with deleted card" do
+    let!(:slot) { FactoryBot.create(:card_terminal_slot, slotid: 4, card_terminal: ct ) }
+    let!(:card) { FactoryBot.create(:card, card_terminal_slot_id: slot.id) }
+
+    before(:each) do
+      card.update_column(:deleted_at, Time.current)
+      slot.reload
+    end
+
+    it "slot.card shows card" do
+      expect(slot.card).to eq(card)
+    end
+  end
+
 
 end

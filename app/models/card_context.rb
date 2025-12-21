@@ -1,6 +1,7 @@
 class CardContext < ApplicationRecord
   # -- associations
-  belongs_to :card, optional: true, inverse_of: :card_contexts, touch: true
+  belongs_to :card, ->{ unscope(where: :deleted_at) }, 
+                    optional: true, inverse_of: :card_contexts, touch: true
   belongs_to :context, optional: false, inverse_of: :card_contexts
 
   # -- configuration
