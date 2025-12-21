@@ -33,9 +33,11 @@
         <%= link_to raw( '<span class="fa-solid fa-fw fa-trash" aria-hidden="true"></span> ' +
               t('cards.deleted')), main_app.cards_path(deleted: true), 
               class: "dropdown-item" %>
-      <div class="dropdown-divider"></div>
-      <%= link_to raw( '<span class="fa-solid fa-fw fa-rotate-right" aria-hidden="true"></span> ' +
-            t('controller.verify_pins')), main_app.verify_pins_path, class: "dropdown-item" %>
+      <% end %>
+      <% if can? :verify, VerifyPin %>
+        <div class="dropdown-divider"></div>
+        <%= link_to raw( '<span class="fa-solid fa-fw fa-rotate-right" aria-hidden="true"></span> ' +
+              t('controller.verify_pins')), main_app.verify_pins_path, class: "dropdown-item" %>
       <% end %>
       <% if can? :create, Card %>
         <div class="dropdown-divider"></div>
