@@ -3,7 +3,7 @@
 <%= turbo_stream_from @card_terminal %>
 <%= turbo_stream_from @card_terminal.connector if @card_terminal.connector.present? %>
 
-<div class="card mb-3" id="<%= dom_id(@card_terminal) %>">
+<div class="card mb-3">
   <div class="card-header">
     <div class="d-flex w-100">
       <div>
