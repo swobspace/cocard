@@ -18,12 +18,19 @@
     <span class="text-primary ms-1"><%= t(note.type, scope: 'notes') %></span>
   </div>
 
-  <div>
+  <div class="my-1">
     <%= truncate(note.message.to_plain_text, length: 200) %>
   </div>
 
+  <% if note.mail_to.present? %>
+    <div class="text-black-50"> 
+      <i class="fa-solid fa-envelope"></i> <%= note.mail_to %> 
+    </div>
+  <% end %>
+
   <div class="d-flex justify-content-xl-between">
     <div class="text-black-50">
+      <i class="fa-solid fa-user"></i>
       <%= note.user.shortname %>
     </div>
 

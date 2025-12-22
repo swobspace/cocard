@@ -36,7 +36,9 @@ class NotesController < ApplicationController
 
   # GET /notes/new
   def new
-    @note = @notable.notes.build(type: params[:type] || :plain)
+    Rails.logger.debug("DEBUG:: #{mail_params}")
+    @note = @notable.notes.build({type: (params[:type] || :plain)}.merge(mail_params))
+    Rails.logger.debug("DEBUG:: #{@note.inspect}")
     respond_with(@note)
   end
 
@@ -97,8 +99,10 @@ class NotesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def note_params
-      params.require(:note).permit(:notable_id, :notable_type, :type, 
-                                   :valid_until, :message)
+      params.require(:note)
+            .permit(:notable_id, :notable_type, :type, 
+                    :valid_until, :message, :subject, :mail_to)
+            .reject {|k,v| ['subject', 'mail_to'].include?(k) && v.blank?}
     end
 
     def default_note_params
@@ -115,6 +119,29 @@ class NotesController < ApplicationController
         user_id: current_user.id
       }   
     end 
+
+    def mail_params
+      if params[:mail]
+        {
+          subject: default_mail_subject,
+          mail_to: default_mail_to
+        }
+      else
+        { }
+      end
+    end
+
+    def default_mail_subject
+      if @notable.respond_to?(:to_subject)
+        @notable.to_subject
+      else
+        @notable.to_s
+      end
+    end
+        
+    def default_mail_to
+      "-"
+    end
 
     def add_breadcrumb_index
       # skip

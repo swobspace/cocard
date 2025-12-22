@@ -1,8 +1,14 @@
 <%= turbo_frame_tag('side_notes') do %>
     <div class="text-end mt-2 mb-1">
-      <%= link_to(t('cocard.new_note'), new_polymorphic_path([@notable, :note]),
-                  class: 'btn btn-sm btn-outline-secondary',
-                  data: {"turbo-frame" => "modal"}) if can? :create, Note %>
+      <% if can? :create, Note %>
+        <%= link_to(t('cocard.new_note'), new_polymorphic_path([@notable, :note]),
+                    class: 'btn btn-sm btn-outline-secondary',
+                    data: {"turbo-frame" => "modal"}) %>
+        <%= link_to(t('cocard.new_mail'), 
+                    new_polymorphic_path([@notable, :note], params: { mail: 1 }),
+                    class: 'btn btn-sm btn-outline-secondary',
+                    data: {"turbo-frame" => "modal"}) %>
+      <% end %>
       <%= link_to raw(%Q[<i class="fas fa-table"></i>]),
                       '#notes-tab',
                       data: { "turbo-frame" => "_top" },
