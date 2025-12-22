@@ -13,6 +13,7 @@ RSpec.describe Cocard, type: :model do
       allow(Cocard::CONFIG).to receive(:[]).with('card_terminal_defaults').and_return({})
       allow(Cocard::CONFIG).to receive(:[]).with('mail_from').and_return(nil)
       allow(Cocard::CONFIG).to receive(:[]).with('mail_to').and_return(nil)
+      allow(Cocard::CONFIG).to receive(:[]).with('smtp_settings').and_return(nil)
       allow(ENV).to receive(:[]).with('CRON_REBOOT_CONNECTORS').and_return(nil)
       allow(ENV).to receive(:[]).with('AUTO_REBOOT_CONNECTORS_NOTE').and_return(nil)
     end
@@ -25,9 +26,13 @@ RSpec.describe Cocard, type: :model do
     it { expect(Cocard.card_terminal_defaults).to eq({}) }
     it { expect(Cocard.mail_from).to eq('root') }
     it { expect(Cocard.mail_to).to eq([]) }
+    it { expect(Cocard.smtp_settings).to eq(nil) }
   end
 
   describe "with settings" do
+    let(:smtp_settings) do
+      { 'address' => 'somehost', 'port' => 25 }
+    end
     let(:ct_defaults) {{
       "ntp_server"  => "198.51.100.2",
       "ntp_enabled" => true,
@@ -48,6 +53,7 @@ RSpec.describe Cocard, type: :model do
       allow(Cocard::CONFIG).to receive(:[]).with('card_terminal_defaults').and_return(ct_defaults)
       allow(Cocard::CONFIG).to receive(:[]).with('mail_from').and_return('from@example.org')
       allow(Cocard::CONFIG).to receive(:[]).with('mail_to').and_return(['somebody@example.net'])
+      allow(Cocard::CONFIG).to receive(:[]).with('smtp_settings').and_return(smtp_settings)
 
       expect(Cocard.enable_ticlient).to be_truthy
       expect(Cocard.ktproxy_defaults).to include(card_terminal_port: 4742)
@@ -60,6 +66,7 @@ RSpec.describe Cocard, type: :model do
       ) 
       expect(Cocard.mail_from).to eq('from@example.org')
       expect(Cocard.mail_to).to eq(['somebody@example.net'])
+      expect(Cocard.smtp_settings).to include(address: 'somehost', port: 25)
     end
 
     it "uses default if ENV not valid" do

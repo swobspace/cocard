@@ -81,7 +81,9 @@ module CardTerminalConcerns
       "firmware_version" => firmware_version,
       "serial" => serial,
       "id_product" => id_product,
-      "network" => network.to_s
+      "network" => network.to_s,
+      "identification" => identification,
+      "room" => room
     }
   end
 

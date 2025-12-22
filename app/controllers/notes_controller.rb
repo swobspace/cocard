@@ -53,6 +53,7 @@ class NotesController < ApplicationController
       if @note.save
         format.turbo_stream { flash.now[:notice] = "Note successfully created" }
         Notes::Processor.new(note: @note).call(:create)
+        NoteMailer.with(note: @note).send_note.deliver_later
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -140,7 +141,7 @@ class NotesController < ApplicationController
     end
         
     def default_mail_to
-      "-"
+      Cocard.mail_to
     end
 
     def add_breadcrumb_index
