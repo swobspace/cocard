@@ -11,6 +11,8 @@ RSpec.describe Cocard, type: :model do
       allow(Cocard::CONFIG).to receive(:[]).with('ktproxy_defaults').and_return(nil)
       allow(Cocard::CONFIG).to receive(:[]).with('ktproxy_equal_ports').and_return(nil)
       allow(Cocard::CONFIG).to receive(:[]).with('card_terminal_defaults').and_return({})
+      allow(Cocard::CONFIG).to receive(:[]).with('mail_from').and_return(nil)
+      allow(Cocard::CONFIG).to receive(:[]).with('mail_to').and_return(nil)
       allow(ENV).to receive(:[]).with('CRON_REBOOT_CONNECTORS').and_return(nil)
       allow(ENV).to receive(:[]).with('AUTO_REBOOT_CONNECTORS_NOTE').and_return(nil)
     end
@@ -21,6 +23,8 @@ RSpec.describe Cocard, type: :model do
     it { expect(Cocard.cron_reboot_connectors).to eq('5 1 * * 1') }
     it { expect(Cocard.auto_reboot_connectors_note).to be_falsey }
     it { expect(Cocard.card_terminal_defaults).to eq({}) }
+    it { expect(Cocard.mail_from).to eq('root') }
+    it { expect(Cocard.mail_to).to eq([]) }
   end
 
   describe "with settings" do
@@ -42,6 +46,8 @@ RSpec.describe Cocard, type: :model do
       allow(Cocard::CONFIG).to receive(:[]).with('ktproxy_defaults').and_return({card_terminal_port: 4742})
       allow(Cocard::CONFIG).to receive(:[]).with('ktproxy_equal_ports').and_return(true)
       allow(Cocard::CONFIG).to receive(:[]).with('card_terminal_defaults').and_return(ct_defaults)
+      allow(Cocard::CONFIG).to receive(:[]).with('mail_from').and_return('from@example.org')
+      allow(Cocard::CONFIG).to receive(:[]).with('mail_to').and_return(['somebody@example.net'])
 
       expect(Cocard.enable_ticlient).to be_truthy
       expect(Cocard.ktproxy_defaults).to include(card_terminal_port: 4742)
@@ -52,6 +58,8 @@ RSpec.describe Cocard, type: :model do
         tftp_server: '127.0.1.2',
         tftp_file: 'firmware.dat'
       ) 
+      expect(Cocard.mail_from).to eq('from@example.org')
+      expect(Cocard.mail_to).to eq(['somebody@example.net'])
     end
 
     it "uses default if ENV not valid" do

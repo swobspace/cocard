@@ -97,6 +97,14 @@ EOTMPL
     Hash(fetch_config('card_terminal_defaults', {})).symbolize_keys
   end
 
+  def self.mail_from
+    fetch_config('mail_from', 'root')
+  end
+    
+  def self.mail_to
+    Array(fetch_config('mail_to', nil))
+  end
+
   Rails.application.routes.default_url_options = {
     host: (ENV['URL_HOST'] || 'localhost'),
     port: (ENV['URL_PORT'] || '3000'),
