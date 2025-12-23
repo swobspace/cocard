@@ -51,6 +51,7 @@ Für den Einsatz von Rootless-Containern nutzt man idealerweise einen eigenen Be
 ----
 /etc/containers/systemd/users/1001/cocard
 ├── xref:attachment$podman/quadlet/env.production[env.production]
+├── xref:attachment$podman/quadlet/cocard.yml[cocard.yml]
 ├── xref:attachment$podman/quadlet/cocard.container[cocard.container]
 ├── xref:attachment$podman/quadlet/cocard.network[cocard.network]
 ├── xref:attachment$podman/quadlet/cocard-postgres.container[cocard-postgres.container]

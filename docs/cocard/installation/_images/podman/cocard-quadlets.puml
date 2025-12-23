@@ -51,6 +51,10 @@ file env #lightblue [
   ./env.production
 ]
 
+file yml <<optional>> #lightblue [
+  ./cocard.yml
+]
+
 network #-- cocard
 network #-- postgres
 network #-- redis

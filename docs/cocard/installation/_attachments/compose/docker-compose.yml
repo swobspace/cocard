@@ -22,7 +22,7 @@ services:
 
   worker:
     <<: *base
-    command: bundle exec good_job start --queues="cocard_production_default:4;cocard_production_rmi:1;turbo_streams_production:2;*:1"
+    command: bundle exec good_job start --threads=12 --queues="cocard_production_default:4;cocard_production_rmi:4;turbo_streams_production:2;*:1"
     restart: on-failure
 
   redis:
