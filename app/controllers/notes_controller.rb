@@ -20,7 +20,7 @@ class NotesController < ApplicationController
 
   def sindex
     if @notable
-      @notes = @notable.notes.active.current
+      @notes = @notable.notes.active
     else
       @notes = Note.object_notes.active.current
     end
@@ -53,7 +53,9 @@ class NotesController < ApplicationController
       if @note.save
         format.turbo_stream { flash.now[:notice] = "Note successfully created" }
         Notes::Processor.new(note: @note).call(:create)
-        NoteMailer.with(note: @note).send_note.deliver_later
+        if Cocard.use_mail? && note.subject.present?
+          NoteMailer.with(note: @note).send_note.deliver_later
+        end
       else
         format.html { render :new, status: :unprocessable_entity }
       end
