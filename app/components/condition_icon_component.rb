@@ -100,6 +100,6 @@ private
   end
 
   def deleted
-    item.respond_to?(:deleted_at) and item.deleted_at.present?
+    item.respond_to?(:deleted?) and item.deleted?
   end
 end

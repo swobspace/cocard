@@ -64,7 +64,7 @@
 
 <%= back_link %>
 
-<% unless @card_terminal.deleted_at %>
+<% unless @card_terminal.deleted? %>
 
   <ul class="nav nav-tabs mt-3" id="CardTerminalsTab" role="tablist" data-turbo-permanent>
     <li class="nav-item" role="presentation">
