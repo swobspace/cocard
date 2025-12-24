@@ -27,6 +27,7 @@ RSpec.describe Cocard, type: :model do
     it { expect(Cocard.mail_from).to eq('root') }
     it { expect(Cocard.mail_to).to eq([]) }
     it { expect(Cocard.smtp_settings).to eq(nil) }
+    it { expect(Cocard.use_mail?).to be_falsey }
   end
 
   describe "with settings" do
@@ -67,6 +68,7 @@ RSpec.describe Cocard, type: :model do
       expect(Cocard.mail_from).to eq('from@example.org')
       expect(Cocard.mail_to).to eq(['somebody@example.net'])
       expect(Cocard.smtp_settings).to include(address: 'somehost', port: 25)
+      expect(Cocard.use_mail?).to be_truthy
     end
 
     it "uses default if ENV not valid" do

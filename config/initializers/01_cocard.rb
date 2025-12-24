@@ -109,6 +109,10 @@ EOTMPL
     fetch_config('smtp_settings', nil)&.symbolize_keys
   end
 
+  def self.use_mail?
+    self.smtp_settings.present?
+  end
+
   Rails.application.routes.default_url_options = {
     host: (ENV['URL_HOST'] || 'localhost'),
     port: (ENV['URL_PORT'] || '3000'),
