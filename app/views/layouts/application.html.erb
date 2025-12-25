@@ -21,7 +21,7 @@
     <%= turbo_stream_from(current_user || "not-logged-in") %>
     <turbo-frame id="modal" data-turbo-permanent></turbo-frame>
     <nav class="navbar navbar-expand-xl navbar-dark bg-primary fixed-top" role="navigation">
-      <div class="container-fluid" data-turbo-permanent>
+      <div class="container-fluid" id="navbarMain" data-turbo-permanent>
         <a class="navbar-brand" href="<%= main_app.root_path if defined?(main_app.root_path)%>#">Cocard</a>
         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
           <span class="navbar-toggler-icon"></span>
