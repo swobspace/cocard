@@ -71,4 +71,6 @@ smtp_settings:
 
 Der Mailversand erfolgt ausschließlich via SMTP. Eine Beschreibung möglicher Konfigurationen siehe link:https://guides.rubyonrails.org/v7.2/action_mailer_basics.html#example-action-mailer-configuration[Rails Guides: Action Mailer Basics].
 
+IMPORTANT:: Der Mailversand erfolgt über den Worker, die Konfigurationsdatei `cocard.yml` muss daher auch beim Worker mit eingebunden sein. Die Beispiele für `docker-compose`, `systemd-quadlets` und Quickstart (`podman pods`) wurden aktualisiert.
+
 NOTE:: Ein einfaches Setup wäre, wenn man den Host, auf dem Cocard läuft, für SMTP-Empfang und Versand konfiguriert und Cocard dann über `address` einfach die öffentliche IP oder FQDN des Hosts übergibt. Dann kann man die sichere Konfiguration am Host selbst vornehmen und auf Authentifikation bei Versand aus einem lokalen Container heraus ggf. verzichten.

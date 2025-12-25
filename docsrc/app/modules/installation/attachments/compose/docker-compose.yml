@@ -3,6 +3,8 @@ x-base: &base
   image: ghcr.io/swobspace/cocard:latest
   volumes:
     - dc-cocard-storage:/rails/storage
+    - dc-cocard-tmp:/rails/tmp
+    - ./cocard.yml:/rails/config/cocard.yml
   depends_on:
     redis:
       condition: service_started
@@ -46,3 +48,4 @@ volumes:
   dc-cocard-redis:
   dc-cocard-postgres:
   dc-cocard-storage:
+  dc-cocard-tmp:

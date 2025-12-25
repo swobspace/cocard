@@ -345,6 +345,10 @@ smtp_settings:
 </div>
 <div class="dlist">
 <dl>
+<dt class="hdlist1">IMPORTANT</dt>
+<dd>
+<p>Der Mailversand erfolgt über den Worker, die Konfigurationsdatei <code>cocard.yml</code> muss daher auch beim Worker mit eingebunden sein. Die Beispiele für <code>docker-compose</code>, <code>systemd-quadlets</code> und Quickstart (<code>podman pods</code>) wurden aktualisiert.</p>
+</dd>
 <dt class="hdlist1">NOTE</dt>
 <dd>
 <p>Ein einfaches Setup wäre, wenn man den Host, auf dem Cocard läuft, für SMTP-Empfang und Versand konfiguriert und Cocard dann über <code>address</code> einfach die öffentliche IP oder FQDN des Hosts übergibt. Dann kann man die sichere Konfiguration am Host selbst vornehmen und auf Authentifikation bei Versand aus einem lokalen Container heraus ggf. verzichten.</p>
