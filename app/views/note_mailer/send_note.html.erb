@@ -1,6 +1,4 @@
-<%= link_to(@note.notable, polymorphic_url(@note.notable)) %>
-
 <%= @note.message %>
 
-<p>Sender: <%= @note.user %></p>
-
+<%= render partial: "#{@note.notable.class.name.underscore}",
+           locals: { notable: @note.notable } %>

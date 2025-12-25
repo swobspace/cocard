@@ -1,0 +1,48 @@
+<table class="table table-sm table-borderless mt">
+
+  <tr class="border-top">
+    <th ><%= t('attributes.name')%>:</th>
+    <td>
+      <%= link_to(notable.name, polymorphic_url(notable), target: '_blank') %>
+    </td>
+  </tr>
+
+  <tr>
+    <th ><%= t('attributes.short_name')%>:</th>
+    <td><%= notable.short_name %></td>
+  </tr>
+
+  <tr>
+    <th ><%= t('attributes.ip')%>:</th>
+    <td><%= notable.ip %></td>
+  </tr>
+
+  <tr class="border-top">
+    <th ><%= t('attributes.last_check')%>:</th>
+    <td>
+      <%= render IsCurrentComponent.new(item: notable, attr: :last_check) %>
+    </td>
+  </tr>
+  <tr>
+    <th ><%= t('attributes.last_ok')%>:</th>
+    <td>
+      <%= render IsCurrentComponent.new(item: notable, attr: :last_ok) %>
+    </td>
+  </tr>
+  <tr>
+    <th ><%= t('attributes.vpnti_online')%>:</th>
+    <td><%= render BooleanComponent.new(value: notable.vpnti_online,
+                                        text: :unicode) %></td>
+  </tr>
+
+   <tr>
+      <th ><%= t('attributes.soap_request_success')%>:</th>
+      <td><%= render BooleanComponent.new(value: notable.soap_request_success,
+                                          text: :unicode) %></td>
+    </tr>
+
+    <tr>
+      <th ><%= t('attributes.condition')%>:</th>
+      <td><%= notable.condition_message %></td>
+    </tr>
+</table>
