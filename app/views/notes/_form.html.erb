@@ -4,8 +4,14 @@
   <div class="form-input">
     <%= form.input :type, as: :hidden
        %>
-    <%= form.input :message, as: :rich_text_area
-       %>
+    <% if note.subject.present? %>
+      <%= form.input :mail_to, disabled: note.persisted? %>
+      <%= form.input :subject, disabled: note.persisted? %>
+      <%= form.input :message, as: :rich_text_area, disabled: note.persisted?  %>
+    <% else %>
+      <%= form.input :message, as: :rich_text_area %>
+    <% end %>
+
     <%= form.input :valid_until, html5: true, wrapper: :horizontal_datetime
        %>
 

@@ -201,6 +201,8 @@ Class Note {
   message: rich_text
   valid_until: datetime
   type: integer
+  mail_to: string
+  subject: string
   user_id
 }
 

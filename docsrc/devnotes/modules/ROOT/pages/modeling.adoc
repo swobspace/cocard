@@ -300,6 +300,8 @@ bin/rails g scaffold Note \
   valid_until:datetime \
   type:integer \
   message:rich_text \
+  subject:string \
+  mail_to:string \
   --no-stylesheets --no-javascripts --no-helper
 ----
 

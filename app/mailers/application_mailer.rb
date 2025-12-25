@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: -> { Cocard.mail_from }, to: ->{ Cocard.mail_to }
   layout "mailer"
 end

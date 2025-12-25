@@ -212,7 +212,7 @@
         </tr>
       </table>
 
-      <% if Cocard.enable_ticlient and @card_terminal.deleted_at.nil? %>
+      <% if Cocard.enable_ticlient and !@card_terminal.deleted? %>
        <div class="border border-primary-subtle rounded-2">
         <% if @kt_proxy.present? %>
           <%= render partial: 'show_kt_proxy',

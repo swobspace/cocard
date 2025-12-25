@@ -1,0 +1,66 @@
+<table class="table table-sm table-borderless mt">
+  <tr class="border-top">
+    <th ><%= t('attributes.iccsn')%>:</th>
+    <td>
+      <%= link_to(notable.iccsn, polymorphic_url(notable), target: '_blank') %>
+    </td>
+  </tr>
+  <tr>
+    <th ><%= t('attributes.card_holder_name')%>:</th>
+    <td><%= notable.card_holder_name %></td>
+  </tr>
+  <tr>
+    <th ><%= t('attributes.card_type')%>:</th>
+    <td><%= notable.card_type %></td>
+  </tr>
+  <tr>
+    <th ><%= t('attributes.slotid')%>:</th>
+    <td><%= notable.slotid %></td>
+  </tr>
+  <tr>
+    <th ><%= t('attributes.expiration_date')%>:</th>
+    <td><%= render ExpirationDateComponent.new(item: notable) %></td>
+  </tr>
+  <tr>
+    <th ><%= t('attributes.object_system_version')%>:</th>
+    <td><%= render CheckValueComponent.new(
+              value: notable.object_system_version,
+              condition: notable.object_system_version < "4.4.0",
+              message: "Karte ist RSA-only (kein ECC verfügbar)",
+              render: notable.object_system_version.presence)
+        %>
+    </td>
+  </tr>
+  <tr class="border-top">
+    <th ><%= t('attributes.condition')%>:</th>
+    <td><%= notable.condition_message %></td>
+  </tr>
+  <% if notable.card_type == 'SMC-B' %>
+    <tr>
+      <th ><%= t('attributes.pin_status')%>:</th>
+      <td><%= render Card::PinStatusComponent.new(card: notable) %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <th ><%= t('attributes.last_check')%>:</th>
+    <td><%= render IsCurrentComponent.new(item: notable, attr: :last_check) %></td>
+  </tr>
+  <tr>
+    <th ><%= t('attributes.last_ok')%>:</th>
+    <td><%= render IsCurrentComponent.new(item: notable, attr: :last_ok) %></td>
+  </tr>
+  <tr class="border-top">
+    <th ><%= t('attributes.connector')%>:</th>
+    <td>
+      <%= render LinkToComponent.new(item: notable.card_terminal&.connector) %>
+    </td>
+  </tr>
+  <tr>
+    <th ><%= t('attributes.card_terminal')%>:</th>
+    <td>
+      <%= render LinkToComponent.new(item: notable.card_terminal) %>
+    </td>
+  </tr>
+
+</table>
+

@@ -32,6 +32,7 @@ de:
     new_location: Neuer Standort
     new_network: Neues Netzwerk
     new_note: Neue Notiz
+    new_mail: Neue Mail
     all_notes: Alle Notizen
     current_notes: Aktuelle Notizen
     new_operational_state: Neuer Betriebszustand
@@ -187,6 +188,7 @@ de:
     loggable_type: Typ
     mac: MAC
     mac6: MAC6
+    mail_to: Mail an
     mandant: Mandant
     manual_update: manuelles Update
     message: Nachricht
@@ -224,6 +226,7 @@ de:
     sn: Nachname
     state: Status
     status: Status
+    subject: Betreff
     supplier: Lieferant
     tag: Tag
     tag_list_input: Tags
