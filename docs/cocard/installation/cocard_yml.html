@@ -330,7 +330,10 @@ ktproxy_defaults:
 <div class="listingblock">
 <div class="title">cocard.yml: Settings für Mailversand</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">smtp_settings:
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">mail_from: cocard@example.com
+mail_to: myticketsystem@example.com
+
+smtp_settings:
   address: myhost.example.com
   port: 25
   domain: example.com

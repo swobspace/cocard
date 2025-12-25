@@ -59,6 +59,9 @@ card_terminal_defaults:
 .cocard.yml: Settings für Mailversand
 [source,yml]
 ----
+mail_from: cocard@example.com
+mail_to: myticketsystem@example.com
+
 smtp_settings:
   address: myhost.example.com
   port: 25
