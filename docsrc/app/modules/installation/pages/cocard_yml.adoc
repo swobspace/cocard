@@ -1,8 +1,7 @@
 = Erweiterte Konfiguration
 :author: Wolfgang Barth
-:revdate: 2025-09-10
+:revdate: 2025-12-25
 
-#FIXME# #work in progress#
 
 Die erweiterte Konfiguration über die Konfigurationsdatei `cocard.yml` ist komplett optional. Die Datei wird nur benötigt, wenn Konfiguration für eine der hier beschriebenen Funktionen erforderlich ist. Andernfalls kann die Datei komplett entfallen.
 
@@ -55,3 +54,18 @@ card_terminal_defaults:
   firmware_version: 3.9.2
 ----
 
+=== Mailversand
+
+.cocard.yml: Settings für Mailversand
+[source,yml]
+----
+smtp_settings:
+  address: myhost.example.com
+  port: 25
+  domain: example.com
+  enable_starttls_auto: false
+----
+
+Der Mailversand erfolgt ausschließlich via SMTP. Eine Beschreibung möglicher Konfigurationen siehe link:https://guides.rubyonrails.org/v7.2/action_mailer_basics.html#example-action-mailer-configuration[Rails Guides: Action Mailer Basics].
+
+NOTE:: Ein einfaches Setup wäre, wenn man den Host, auf dem Cocard läuft, für SMTP-Empfang und Versand konfiguriert und Cocard dann über `address` einfach die öffentliche IP oder FQDN des Hosts übergibt. Dann kann man die sichere Konfiguration am Host selbst vornehmen und auf Authentifikation bei Versand aus einem lokalen Container heraus ggf. verzichten.
