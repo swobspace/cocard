@@ -7,7 +7,7 @@ class NoteMailer < ApplicationMailer
 
 private
   def mail_from
-    if @user.email.present?
+    if @user && @user.email.present?
       @user.email
     else
       Cocard.mail_from

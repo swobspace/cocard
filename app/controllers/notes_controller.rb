@@ -52,9 +52,9 @@ class NotesController < ApplicationController
     respond_with(@task, location: location) do |format|
       if @note.save
         format.turbo_stream { flash.now[:notice] = "Note successfully created" }
-        Notes::Processor.new(note: @note, user: current_user).call(:create)
+        Notes::Processor.new(note: @note).call(:create)
         if Cocard.use_mail? && @note.subject.present?
-          NoteMailer.with(note: @note).send_note.deliver_later
+          NoteMailer.with(note: @note, user: current_user).send_note.deliver_later
         end
       else
         format.html { render :new, status: :unprocessable_entity }
