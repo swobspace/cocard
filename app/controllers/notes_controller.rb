@@ -53,7 +53,7 @@ class NotesController < ApplicationController
       if @note.save
         format.turbo_stream { flash.now[:notice] = "Note successfully created" }
         Notes::Processor.new(note: @note).call(:create)
-        if Cocard.use_mail? && @note.subject.present?
+        if Cocard.use_mail? && @note.with_mail
           NoteMailer.with(note: @note, user: current_user).send_note.deliver_later
         end
       else
@@ -104,7 +104,7 @@ class NotesController < ApplicationController
     def note_params
       params.require(:note)
             .permit(:notable_id, :notable_type, :type, 
-                    :valid_until, :message, :subject, :mail_to)
+                    :valid_until, :message, :subject, :mail_to, :with_mail)
             .reject {|k,v| ['subject', 'mail_to'].include?(k) && v.blank?}
     end
 
@@ -126,6 +126,7 @@ class NotesController < ApplicationController
     def mail_params
       if params[:mail]
         {
+          with_mail: true,
           subject: default_mail_subject,
           mail_to: default_mail_to
         }

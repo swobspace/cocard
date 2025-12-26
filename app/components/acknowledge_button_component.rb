@@ -28,7 +28,7 @@ class AcknowledgeButtonComponent < ViewComponent::Base
 
   def button_action
     if @current.nil?
-      new_polymorphic_path([notable, :note], type: type)
+      new_polymorphic_path([notable, :note], type: type, mail: 1)
     else
       polymorphic_path([notable, current])
     end

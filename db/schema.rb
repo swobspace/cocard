@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_12_22_105746) do
+ActiveRecord::Schema[7.2].define(version: 2025_12_26_095157) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -403,6 +403,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_12_22_105746) do
     t.datetime "updated_at", null: false
     t.string "subject"
     t.string "mail_to"
+    t.boolean "with_mail", default: false
     t.index ["notable_type", "notable_id"], name: "index_notes_on_notable"
     t.index ["user_id"], name: "index_notes_on_user_id"
   end

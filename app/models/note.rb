@@ -14,6 +14,9 @@ class Note < ApplicationRecord
   # -- validations and callbacks
   validates :user_id, :message, presence: true
   validates :type, inclusion: { in: types.keys }
+  validates :subject, :mail_to, presence: true, if: -> { with_mail }
+
+  before_save :check_mail
 
   # -- common methods
 
@@ -38,4 +41,12 @@ class Note < ApplicationRecord
     valid_until.nil? || valid_until >= Time.current
   end
 
+
+private
+  def check_mail
+    unless with_mail
+      self[:subject] = ""
+      self[:mail_to] = ""
+    end
+  end
 end

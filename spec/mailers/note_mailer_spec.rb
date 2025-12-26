@@ -6,14 +6,13 @@ RSpec.describe NoteMailer, type: :mailer do
   let(:note) do 
     FactoryBot.create(:note, 
       notable: conn,
+      with_mail: 1,
       subject: conn.to_s,
       mail_to: "ticketsystem@example.org",
       message: "Some very long text stuff"
     )
   end
   let(:mail) { NoteMailer.with(note: note, user: user).send_note }
-
-  it {puts mail.inspect }
 
   describe "without user email set" do
     before(:each) do

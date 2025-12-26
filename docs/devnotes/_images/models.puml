@@ -203,6 +203,7 @@ Class Note {
   type: integer
   mail_to: string
   subject: string
+  with_mail: boolean
   user_id
 }
 
