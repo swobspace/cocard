@@ -124,7 +124,7 @@ class NotesController < ApplicationController
     end 
 
     def mail_params
-      if params[:mail]
+      if params[:mail] == "1"
         {
           with_mail: true,
           subject: default_mail_subject,

@@ -28,7 +28,7 @@ class AcknowledgeButtonComponent < ViewComponent::Base
 
   def button_action
     if @current.nil?
-      new_polymorphic_path([notable, :note], type: type, mail: 1)
+      new_polymorphic_path([notable, :note], type: type, mail: with_mail)
     else
       polymorphic_path([notable, current])
     end
@@ -46,6 +46,14 @@ class AcknowledgeButtonComponent < ViewComponent::Base
       true
     else
       notable.condition >= Cocard::States::WARNING
+    end
+  end
+
+  def with_mail
+    if [Connector, Card, CardTerminal].include?(notable.class)
+      1
+    else
+      0
     end
   end
 

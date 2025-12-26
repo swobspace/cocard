@@ -4,11 +4,11 @@
   <div class="form-input">
     <%= form.input :type, as: :hidden %>
 
-    <% if note.subject.present? %>
+    <% if note.with_mail %>
       <div data-controller="toggle-fields">
         <div class="mb-3">
           <div class="form-check form-switch">
-            <%= form.check_box :with_mail, checked: note.subject.present?,
+            <%= form.check_box :with_mail, checked: note.with_mail,
                   class: "form-check-input",
                   data: { "toggle-fields-target": :input },
                   disabled: note.persisted?
@@ -26,7 +26,7 @@
     <% end %>
 
     <%= form.input :message, as: :rich_text_area, 
-          disabled: (note.persisted? && note.subject.present?)  %>
+          disabled: (note.persisted? && note.with_mail)  %>
 
     <%= form.input :valid_until, html5: true, wrapper: :horizontal_datetime
        %>
