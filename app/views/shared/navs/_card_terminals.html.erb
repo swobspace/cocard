@@ -48,6 +48,11 @@
                     main_app.new_duck_terminal_path,
                     class: "dropdown-item" %>
       <% end %>
+      <%= link_to raw(%Q[<span class="fa-solid fw fa-circle-check" 
+                               aria-hidden="true">
+                         </span> ] + t('attributes.arp_check')),
+                  main_app.new_arp_card_terminals_path,
+                  class: "dropdown-item" %>
 
       <% if can? :create, CardTerminal %>
         <div class="dropdown-divider"></div>

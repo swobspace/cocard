@@ -244,6 +244,33 @@ class CardTerminalsController < ApplicationController
     end
   end
 
+  def new_arp
+  end
+
+  def arp_check
+    arp = params[:arp_list]
+    entries = arp.strip.split(/\n/)
+    entries.map{|x| x.split(/\s+/)}.each do |ip,mac|
+      next if mac.downcase !~ /[0-9a-f]{2}:/
+      ct = CardTerminal.where(mac: mac).first
+      if ct.present? and ct.ip.to_s == ip.to_s
+        unless params[:only_differences]
+          msg = "CardTerminal #{ct.mac} found, IP #{ip} matches"
+          poster(:success, ip, mac, ct, msg) 
+        end
+      elsif ct.present?
+        msg = "CardTerminal #{ct.mac} found, but ip #{ip} doesn't match cocard (#{ct.ip})"
+        poster(:warning, ip, mac, ct, msg)
+      elsif CardTerminal.where(ip: ip).any?
+        msg = "CardTerminal #{mac} not found, but ip #{ip} exists in cocard"
+        poster(:warning, ip, mac, ct, msg)
+      else
+        msg = "CardTerminal #{mac} not found, IP #{ip} not found"
+        poster(:danger, ip, mac, ct, msg)
+      end
+    end;nil
+    render :new_arp
+  end
 
   # DELETE /card_terminals/1
   def destroy
@@ -341,6 +368,16 @@ class CardTerminalsController < ApplicationController
         end
       else
         flash[:alert] = "Kontext-Test fehlgeschlagen! " + result.error_messages.join("; ")
+      end
+    end
+
+    def poster(status, ip, mac, ct, message)
+      unless status.nil?
+        Turbo::StreamsChannel.broadcast_prepend_to(
+          :arp_check,
+          target: 'arp-checked',
+          partial: "card_terminals/arp_entry",
+          locals: {status: status, ip: ip, mac: mac, ct: ct, message: message})
       end
     end
 

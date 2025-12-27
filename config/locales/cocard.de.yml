@@ -109,6 +109,8 @@ de:
     accessibility: Test Erreichbarkeit
     action: Aktion
     admin_url: Admin-URL
+    arp_check: ARP-Abgleich
+    arp_list: ARP-Liste
     authentication: Authentifikation
     auth_user: Benutzer
     auth_password: Passwort

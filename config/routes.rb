@@ -89,6 +89,8 @@ Rails.application.routes.draw do
     resources :logs, only: [:index, :show, :destroy], module: :card_terminals
     collection do
       get :sindex
+      get :new_arp
+      post :arp_check
     end
     member do
       post :check

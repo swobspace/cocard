@@ -7,7 +7,8 @@
 [source,sh]
 ----
 nmap -p 443 <network vlan kt>
-arp -an -i <vlan kt> | cut -d " " -f 2,4 | sed 's/[()]//g'
+arp -an -i <vlan kt> | cut -d " " -f 2,4 | sed 's/[()]//g' |\
+  egrep -v incomplete | less
 ...
 10.2xx.1xx.59 00:0d:f8:07:1e:91
 10.2xx.1xx.36 00:0d:f8:05:cc:0f
