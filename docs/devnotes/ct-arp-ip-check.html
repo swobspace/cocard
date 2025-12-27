@@ -169,7 +169,8 @@
 <div class="title">Ab</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">nmap -p 443 &lt;network vlan kt&gt;
-arp -an -i &lt;vlan kt&gt; | cut -d " " -f 2,4 | sed 's/[()]//g'
+arp -an -i &lt;vlan kt&gt; | cut -d " " -f 2,4 | sed 's/[()]//g' |\
+  egrep -v incomplete | less
 ...
 10.2xx.1xx.59 00:0d:f8:07:1e:91
 10.2xx.1xx.36 00:0d:f8:05:cc:0f

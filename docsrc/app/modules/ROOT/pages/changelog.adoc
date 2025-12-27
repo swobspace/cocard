@@ -3,7 +3,8 @@
 == 0.9.7-dev - unreleased
 
 * diverse Bugfixes im Zusammenhang mit SoftDelete.
-* Notizen als Mail versenden. Dabei werden Informationen zum Objekt (Konnektor, Kartenterminal, Karte) automatisch ergänzt.
+* Notizen/Acknowledges als Mail versenden. Dabei werden Informationen zum Objekt (Konnektor, Kartenterminal, Karte) automatisch ergänzt.
+* ARP-Abgleich für Kartenterminals
 
 == 0.9.6 - 2025-12-20
 
