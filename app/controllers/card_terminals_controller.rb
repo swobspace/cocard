@@ -255,17 +255,17 @@ class CardTerminalsController < ApplicationController
       ct = CardTerminal.where(mac: mac).first
       if ct.present? and ct.ip.to_s == ip.to_s
         unless params[:only_differences]
-          msg = "CardTerminal #{ct.mac} found, IP #{ip} matches"
+          msg = "Kartenterminal #{ct.mac} gefunden, IP #{ip} ok"
           poster(:success, ip, mac, ct, msg) 
         end
       elsif ct.present?
-        msg = "CardTerminal #{ct.mac} found, but ip #{ip} doesn't match cocard (#{ct.ip})"
+        msg = "Kartenterminal #{ct.mac} gefunden, aber mit abweichender IP #{ip} (Cocard: #{ct.ip})"
         poster(:warning, ip, mac, ct, msg)
       elsif CardTerminal.where(ip: ip).any?
-        msg = "CardTerminal #{mac} not found, but ip #{ip} exists in cocard"
+        msg = "Kartenterminal #{mac} per MAC nicht gefunden, aber IP #{ip} existiert in Cocard"
         poster(:warning, ip, mac, ct, msg)
       else
-        msg = "CardTerminal #{mac} not found, IP #{ip} not found"
+        msg = "Kartenterminal nicht gefunden, weder per MAC #{mac} noch per IP #{ip}"
         poster(:danger, ip, mac, ct, msg)
       end
     end;nil
