@@ -24,6 +24,7 @@
 ** xref:ct/idle-messages-edit.adoc[]
 ** xref:ct/duck-terminal.adoc[]
 ** xref:ct/smcb-remote-pin.adoc[]
+** xref:ct/ct-arp-check.adoc[]
 
 * xref:card/card.adoc[]
 ** xref:card/card-new.adoc[]

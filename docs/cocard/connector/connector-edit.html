@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Konnektor anlegen/bearbeiten :: Cocard</title>
+    <link rel="prev" href="connector.html">
+    <link rel="next" href="connector-autoreboot.html">
     <meta name="generator" content="Antora 3.1.14">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -125,6 +127,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../ct/smcb-remote-pin.html">Remote PIN für SMC-B Karten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ct/ct-arp-check.html">ARP-Abgleich</a>
   </li>
 </ul>
   </li>
@@ -369,7 +374,7 @@
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-note" title="Hinweis"></i>
 </td>
 <td class="content">
 Für die Abfrage des Service Directory Service (SDS) verwendet Cocard TLS, wenn die <em>SDS-URL</em> mit <code>https</code> beginnt. Der Schalter <em>TLS verwenden</em> spielt hier keine Rolle.
@@ -381,7 +386,7 @@ Für die Abfrage des Service Directory Service (SDS) verwendet Cocard TLS, wenn 
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-note" title="Hinweis"></i>
 </td>
 <td class="content">
 Die KoCoBox ignoriert die Einstellung <em>Zugriff auf Diensteverzeichnis auch via HTTP ermöglichen</em>, wenn <em>Verbindung nur via TLS</em> aktiv ist. In dem Falle kann die SDS-Abfrage nur via TLS erfolgen.
@@ -407,7 +412,7 @@ Die KoCoBox ignoriert die Einstellung <em>Zugriff auf Diensteverzeichnis auch vi
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-note" title="Hinweis"></i>
 </td>
 <td class="content">
 Cocard kann sich derzeit nur über Client-Zertifikate authentifizieren, eine Authentifikation via User/Passwort ist nicht möglich und ist zur Zeit auch nicht geplant.
@@ -485,7 +490,7 @@ Cocard kann sich derzeit nur über Client-Zertifikate authentifizieren, eine Aut
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-note" title="Hinweis"></i>
 </td>
 <td class="content">
 User/Passwort-Authentifikation lässt sich auf der KoCoBox Firmware v5.5.12 nur noch aktivieren, wenn Authentisierungsmodus-LDAP ausgeschaltet ist.
@@ -506,7 +511,7 @@ User/Passwort-Authentifikation lässt sich auf der KoCoBox Firmware v5.5.12 nur 
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-note" title="Hinweis"></i>
 </td>
 <td class="content">
 In Cocard kann man pro Konnektor nur einen Benutzer hinterlegen. Auf Konnektorseite kann man aber diesen Benutzer für mehrere Client-Systeme verwenden (zumindest bei der KoCoBox).
@@ -516,6 +521,10 @@ In Cocard kann man pro Konnektor nur einen Benutzer hinterlegen. Auf Konnektorse
 </div>
 </div>
 </div>
+<nav class="pagination">
+  <span class="prev"><a href="connector.html">Konnektor</a></span>
+  <span class="next"><a href="connector-autoreboot.html">Automatischer Reboot</a></span>
+</nav>
 </article>
   </div>
 </main>

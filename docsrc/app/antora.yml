@@ -10,11 +10,21 @@ asciidoc:
     lang: de-DE
     author: Wolfgang Barth
     Email: wob@swobspace.net
-    revision: 0.9.4
-    revdate: 2025-11-24
+    revision: 0.9.7
+    revdate: 2025-12-28
     rights:  Copyright 2024 - 2025 (C) Wolfgang Barth
     language: de-DE
     toc-title: Inhalt
     chapter-label: Kapitel
     figure-caption: Abbildung
+    page-pagination: true
+    icons: font
+    toc: ~
+    note-caption: Hinweis
+    tip-caption: Tipp
+    important-caption: Wichtig
+    caution-caption: Achtung
+    warning-caption: Warnung
+    builddate: $(date +"%Y-%m-%d")
+
 

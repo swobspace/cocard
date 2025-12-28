@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>TI-Client (RISE TI Gateway) :: Cocard</title>
+    <link rel="prev" href="../admin/ldap-authentication.html">
+    <link rel="next" href="activate-api.html">
     <meta name="generator" content="Antora 3.1.14">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -125,6 +127,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../ct/smcb-remote-pin.html">Remote PIN für SMC-B Karten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ct/ct-arp-check.html">ARP-Abgleich</a>
   </li>
 </ul>
   </li>
@@ -414,13 +419,17 @@
 </tr>
 </tbody>
 </table>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">NOTE</dt>
-<dd>
-<p>Die Version des TI-Clients muss &gt;= 2.6.1 sein. Mit älteren Versionen ist das REST-API nicht vorhanden/nutzbar.</p>
-</dd>
-</dl>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Hinweis"></i>
+</td>
+<td class="content">
+Die Version des TI-Clients muss &gt;= 2.6.1 sein. Mit älteren Versionen ist das REST-API nicht vorhanden/nutzbar.
+</td>
+</tr>
+</table>
 </div>
 <div class="sect2">
 <h3 id="_aktivierung_rest_api_ti_client"><a class="anchor" href="#_aktivierung_rest_api_ti_client"></a>Aktivierung REST-API TI-Client</h3>
@@ -438,6 +447,10 @@
 </div>
 </div>
 </div>
+<nav class="pagination">
+  <span class="prev"><a href="../admin/ldap-authentication.html">LDAP-Authentifikation</a></span>
+  <span class="next"><a href="activate-api.html">REST-API aktivieren</a></span>
+</nav>
 </article>
   </div>
 </main>

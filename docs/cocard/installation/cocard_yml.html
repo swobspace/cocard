@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Erweiterte Konfiguration :: Cocard</title>
+    <link rel="prev" href="configuration.html">
+    <link rel="next" href="checkmk.html">
     <meta name="generator" content="Antora 3.1.14">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -125,6 +127,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../ct/smcb-remote-pin.html">Remote PIN für SMC-B Karten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ct/ct-arp-check.html">ARP-Abgleich</a>
   </li>
 </ul>
   </li>
@@ -358,21 +363,37 @@ smtp_settings:
 <div class="paragraph">
 <p>Der Mailversand erfolgt ausschließlich via SMTP. Eine Beschreibung möglicher Konfigurationen siehe <a href="https://guides.rubyonrails.org/v7.2/action_mailer_basics.html#example-action-mailer-configuration">Rails Guides: Action Mailer Basics</a>.</p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">IMPORTANT</dt>
-<dd>
-<p>Der Mailversand erfolgt über den Worker, die Konfigurationsdatei <code>cocard.yml</code> muss daher auch beim Worker mit eingebunden sein. Die Beispiele für <code>docker-compose</code>, <code>systemd-quadlets</code> und Quickstart (<code>podman pods</code>) wurden aktualisiert.</p>
-</dd>
-<dt class="hdlist1">NOTE</dt>
-<dd>
-<p>Ein einfaches Setup wäre, wenn man den Host, auf dem Cocard läuft, für SMTP-Empfang und Versand konfiguriert und Cocard dann über <code>address</code> einfach die öffentliche IP oder FQDN des Hosts übergibt. Dann kann man die sichere Konfiguration am Host selbst vornehmen und auf Authentifikation bei Versand aus einem lokalen Container heraus ggf. verzichten.</p>
-</dd>
-</dl>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Wichtig"></i>
+</td>
+<td class="content">
+Der Mailversand erfolgt über den Worker, die Konfigurationsdatei <code>cocard.yml</code> muss daher auch beim Worker mit eingebunden sein. Die Beispiele für <code>docker-compose</code>, <code>systemd-quadlets</code> und Quickstart (<code>podman pods</code>) wurden aktualisiert.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Hinweis"></i>
+</td>
+<td class="content">
+Ein einfaches Setup wäre, wenn man den Host, auf dem Cocard läuft, für SMTP-Empfang und Versand konfiguriert und Cocard dann über <code>address</code> einfach die öffentliche IP oder FQDN des Hosts übergibt. Dann kann man die sichere Konfiguration am Host selbst vornehmen und auf Authentifikation bei Versand aus einem lokalen Container heraus ggf. verzichten.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 </div>
+<nav class="pagination">
+  <span class="prev"><a href="configuration.html">Standard-Konfiguration</a></span>
+  <span class="next"><a href="checkmk.html">CheckMK Integration</a></span>
+</nav>
 </article>
   </div>
 </main>

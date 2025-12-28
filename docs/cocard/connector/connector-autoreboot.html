@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Automatischer Reboot von Konnektoren :: Cocard</title>
+    <link rel="prev" href="connector-edit.html">
+    <link rel="next" href="../ct/card-terminal.html">
     <meta name="generator" content="Antora 3.1.14">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -125,6 +127,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../ct/smcb-remote-pin.html">Remote PIN für SMC-B Karten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ct/ct-arp-check.html">ARP-Abgleich</a>
   </li>
 </ul>
   </li>
@@ -298,7 +303,7 @@
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-note" title="Hinweis"></i>
 </td>
 <td class="content">
 Derzeit werden nur KoCoBoxen unterstützt, einfach weil ich keinen Zugriff und keine Testmöglichkeiten für andere Konnektoren habe.
@@ -322,13 +327,17 @@ Derzeit werden nur KoCoBoxen unterstützt, einfach weil ich keinen Zugriff und k
 </div>
 <div class="title">Abbildung 1. Aktivierung des automatischen Reboots beim Konnektor</div>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">NOTE</dt>
-<dd>
-<p>Das Feld erscheint nur, wenn der Konnektor von Cocard bereits ausgelesen und der Konnektor als unterstützt erkannt wurde. Bei einer Neuanlage liegen die notwendigen Informationen noch nicht vor, daher zeigt Cocard das Feld im Formular "Neuer Konnektor" nicht an.</p>
-</dd>
-</dl>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Hinweis"></i>
+</td>
+<td class="content">
+Das Feld erscheint nur, wenn der Konnektor von Cocard bereits ausgelesen und der Konnektor als unterstützt erkannt wurde. Bei einer Neuanlage liegen die notwendigen Informationen noch nicht vor, daher zeigt Cocard das Feld im Formular "Neuer Konnektor" nicht an.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -349,7 +358,7 @@ CRON_REBOOT_CONNECTORS="30 6 * * 1,4"
 <p>Zur Beschreibung der Cron-Syntax siehe <a href="https://de.wikipedia.org/wiki/Cron" class="bare">https://de.wikipedia.org/wiki/Cron</a>.</p>
 </div>
 <div class="paragraph">
-<p>NOTE::Wenn der angegebene String keine gültige Cron-Syntax aufweist erfolgt ein Fallback auf den Default. Prüfen kann man die aktuellen Croneinstellungen über <span class="menuseq"><b class="menu">Jobs</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Cron</b></span> (siehe auch nächster Abschnitt).</p>
+<p>NOTE:Wenn der angegebene String keine gültige Cron-Syntax aufweist erfolgt ein Fallback auf den Default. Prüfen kann man die aktuellen Croneinstellungen über <span class="menuseq"><b class="menu">Jobs</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Cron</b></span> (siehe auch nächster Abschnitt).</p>
 </div>
 </div>
 </div>
@@ -387,6 +396,10 @@ AUTO_REBOOT_CONNECTORS_NOTE=yes
 </div>
 </div>
 </div>
+<nav class="pagination">
+  <span class="prev"><a href="connector-edit.html">Konnektor anlegen/bearbeiten</a></span>
+  <span class="next"><a href="../ct/card-terminal.html">Kartenterminal</a></span>
+</nav>
 </article>
   </div>
 </main>

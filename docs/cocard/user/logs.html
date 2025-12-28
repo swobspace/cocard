@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Event Logs :: Cocard</title>
+    <link rel="prev" href="conditions.html">
+    <link rel="next" href="acknowledges.html">
     <meta name="generator" content="Antora 3.1.14">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -125,6 +127,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../ct/smcb-remote-pin.html">Remote PIN für SMC-B Karten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ct/ct-arp-check.html">ARP-Abgleich</a>
   </li>
 </ul>
   </li>
@@ -289,7 +294,7 @@
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-note" title="Hinweis"></i>
 </td>
 <td class="content">
 Die Begriffe Event Log, Log, Logeintrag unterscheiden sich derzeit nicht in Ihrer Bedeutung, da Cocard derzeit noch keine Subscriptions vom Konnektor bezieht (aktive Benachrichtigungen, die der Konnektor bei einem Ereignis versendet, etwa Karte wurde gesteckt).
@@ -396,7 +401,7 @@ Bei Cocard-internen Meldungen entspricht der Level der Text-Bezeichnung des <a h
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-note" title="Hinweis"></i>
 </td>
 <td class="content">
 Auf Fehler mit dem Level <code>Fatal</code> sollte man umgehen reagieren. Bei <code>EC_CRL_Out_Of_Date</code> hat die automatische Aktualisierung der Certificate Revocation List (CRL) nicht geklappt. Sobald der Konnektor den VPN-Tunnel zur TI neu aufbaut kommt dieser nicht mehr zustande und die TI ist nicht mehr erreichbar.
@@ -426,6 +431,10 @@ Auf Fehler mit dem Level <code>Fatal</code> sollte man umgehen reagieren. Bei <c
 </div>
 </div>
 </div>
+<nav class="pagination">
+  <span class="prev"><a href="conditions.html">Zustände</a></span>
+  <span class="next"><a href="acknowledges.html">Notizen und Acknowledges</a></span>
+</nav>
 </article>
   </div>
 </main>

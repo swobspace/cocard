@@ -93,7 +93,7 @@ Die Nutzung dieser Funktionen ist komplett optional. Einzige Einschränkung: bei
 |===
 
 
-NOTE:: Die Version des TI-Clients muss >= 2.6.1 sein. Mit älteren Versionen ist das REST-API nicht vorhanden/nutzbar.
+NOTE: Die Version des TI-Clients muss >= 2.6.1 sein. Mit älteren Versionen ist das REST-API nicht vorhanden/nutzbar.
 
 === Aktivierung REST-API TI-Client
 

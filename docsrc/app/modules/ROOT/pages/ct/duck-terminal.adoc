@@ -6,7 +6,7 @@
 
 Kartenterminals mit einem Remote-Management-Interface (RMI) kann man auch über die IP-Adresse prüfen, ohne dass das Kartenterminal vorher in Cocard angelegt oder über einen Konnektor gefunden wurde. Ist das Kartenterminal mit der MAC-Adresse aus der IP-Prüfung noch nicht in Cocard vorhanden, wird es neu angelegt.
 
-IMPORTANT:: Voraussetzung ist, dass das Kartenterminal von Cocard unterstützt wird (derzeit nur Orga6141 ab Firmware-Version 3.9.0), die Administration per Web freigeschaltet wurde und die Admin-PIN Cocard bekannt ist.
+IMPORTANT: Voraussetzung ist, dass das Kartenterminal von Cocard unterstützt wird (derzeit nur Orga6141 ab Firmware-Version 3.9.0), die Administration per Web freigeschaltet wurde und die Admin-PIN Cocard bekannt ist.
 
 TIP:: Eine einfache Prüfung über die IP mit den im Screenshot unten angegebenen Werten für Identifikation und Firmware-Version gibt zurück, ob das Kartenterminal per RMI abgefragt werden kann.
 

@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Karte anlegen/bearbeiten :: Cocard</title>
+    <link rel="prev" href="card.html">
+    <link rel="next" href="../admin/contexts.html">
     <meta name="generator" content="Antora 3.1.14">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -125,6 +127,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../ct/smcb-remote-pin.html">Remote PIN für SMC-B Karten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ct/ct-arp-check.html">ARP-Abgleich</a>
   </li>
 </ul>
   </li>
@@ -288,7 +293,7 @@ In manchen Fällen ist eine Voraberfassung durchaus sinnvoll, etwa wenn man die 
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-note" title="Hinweis"></i>
 </td>
 <td class="content">
 Cocard identifiziert die Karte ausschließlich über die ICCSN. Wenn die Karte bereits erfasst wird, bevor die ICCSN bekannt ist (z.B. während einer laufenden Bestellung), dann trägt man einen Dummy als ICCSN ein. Vor Inbetriebnahme der Karte muss dann unbedingt die ICCSN korrigiert werden, andernfalls legt Cocard eine weitere Karte an und die schon erfassten Daten werden nicht dorthin übernommen!
@@ -457,6 +462,10 @@ Cocard identifiziert die Karte ausschließlich über die ICCSN. Wenn die Karte b
 </div>
 </div>
 </div>
+<nav class="pagination">
+  <span class="prev"><a href="card.html">Karte</a></span>
+  <span class="next"><a href="../admin/contexts.html">Kontexte</a></span>
+</nav>
 </article>
   </div>
 </main>

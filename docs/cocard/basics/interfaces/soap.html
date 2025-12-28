@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>SOAP :: Cocard</title>
+    <link rel="prev" href="../how-it-works.html">
+    <link rel="next" href="rmi.html">
     <meta name="generator" content="Antora 3.1.14">
     <link rel="stylesheet" href="../../../_/css/site.css">
     <script>var uiRootPath = '../../../_'</script>
@@ -125,6 +127,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../../ct/smcb-remote-pin.html">Remote PIN für SMC-B Karten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../ct/ct-arp-check.html">ARP-Abgleich</a>
   </li>
 </ul>
   </li>
@@ -303,15 +308,23 @@
 <div class="paragraph">
 <p>Beispiel: Der Konnektor liefert bei der Abfrage eines Kartenterminals die IP-Adresse zurück, mit der das Kartenterminal gepairt wurde. Wenn wegen DHCP das Kartenterminal inzwischen eine andere IP-Adresse hat, liefert der Konnektor immer noch die ursprüngliche Adresse zurück. Die Information stimmt jetzt nicht mehr mit der Realität überein.</p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">NOTE</dt>
-<dd>
-<p>Idealerweise definiert man einen eigenen Kontext für Cocard: <code>cocard - cocard - Konnektor</code> (Mandant <code>cocard</code>, Clientsystem <code>cocard</code>, Arbeitsplatz <code>Konnektor</code>). Den Kontext weist man in Cocard dem Konnektor zu. Am Konnektor selbst ordnet man alle SMC-Bs dem Mandanten <code>cocard</code> zu und den Arbeitsplatz <code>Konnektor</code>, der wiederum alle vorhandenen Kartenterminals zugewiesen bekommt.
-Das stellt sicher, dass Cocard auch alles "sieht".</p>
-</dd>
-</dl>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Hinweis"></i>
+</td>
+<td class="content">
+Idealerweise definiert man einen eigenen Kontext für Cocard: <code>cocard - cocard - Konnektor</code> (Mandant <code>cocard</code>, Clientsystem <code>cocard</code>, Arbeitsplatz <code>Konnektor</code>). Den Kontext weist man in Cocard dem Konnektor zu. Am Konnektor selbst ordnet man alle SMC-Bs dem Mandanten <code>cocard</code> zu und den Arbeitsplatz <code>Konnektor</code>, der wiederum alle vorhandenen Kartenterminals zugewiesen bekommt.
+Das stellt sicher, dass Cocard auch alles "sieht".
+</td>
+</tr>
+</table>
 </div>
+<nav class="pagination">
+  <span class="prev"><a href="../how-it-works.html">Wie funktioniert Cocard?</a></span>
+  <span class="next"><a href="rmi.html">RMI</a></span>
+</nav>
 </article>
   </div>
 </main>

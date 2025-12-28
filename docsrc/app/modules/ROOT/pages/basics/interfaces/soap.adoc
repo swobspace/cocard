@@ -14,5 +14,5 @@ In der Praxis bedeutet das: man bekommt eventuell nicht alles zu sehen, was man 
 
 Beispiel: Der Konnektor liefert bei der Abfrage eines Kartenterminals die IP-Adresse zurück, mit der das Kartenterminal gepairt wurde. Wenn wegen DHCP das Kartenterminal inzwischen eine andere IP-Adresse hat, liefert der Konnektor immer noch die ursprüngliche Adresse zurück. Die Information stimmt jetzt nicht mehr mit der Realität überein.
 
-NOTE:: Idealerweise definiert man einen eigenen Kontext für Cocard: `cocard - cocard - Konnektor` (Mandant `cocard`, Clientsystem `cocard`, Arbeitsplatz `Konnektor`). Den Kontext weist man in Cocard dem Konnektor zu. Am Konnektor selbst ordnet man alle SMC-Bs dem Mandanten `cocard` zu und den Arbeitsplatz `Konnektor`, der wiederum alle vorhandenen Kartenterminals zugewiesen bekommt.
+NOTE: Idealerweise definiert man einen eigenen Kontext für Cocard: `cocard - cocard - Konnektor` (Mandant `cocard`, Clientsystem `cocard`, Arbeitsplatz `Konnektor`). Den Kontext weist man in Cocard dem Konnektor zu. Am Konnektor selbst ordnet man alle SMC-Bs dem Mandanten `cocard` zu und den Arbeitsplatz `Konnektor`, der wiederum alle vorhandenen Kartenterminals zugewiesen bekommt.
 Das stellt sicher, dass Cocard auch alles "sieht".

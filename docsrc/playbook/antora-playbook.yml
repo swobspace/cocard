@@ -30,6 +30,23 @@ ui:
       contents: ./ui-bundle/supplemental/partials/footer-content.hbs
     - path: partials/footer-scripts.hbs
       contents: ./ui-bundle/supplemental/partials/footer-scripts.hbs
+asciidoc:
+  attributes:
+    lang: de-DE
+    language: de-DE
+    toc-title: Inhalt
+    chapter-label: Kapitel
+    figure-caption: Abbildung
+    page-pagination: true
+    icons: font
+    toc: ~
+    note-caption: Hinweis
+    tip-caption: Tipp
+    important-caption: Wichtig
+    caution-caption: Achtung
+    warning-caption: Warnung
+    builddate: $(date +"%Y-%m-%d")
+
 antora:
   extensions:
     - require: '@antora/lunr-extension'

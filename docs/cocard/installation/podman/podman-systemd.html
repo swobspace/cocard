@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Podman mit Systemd und Quadlets für Produktiv-Umgebungen :: Cocard</title>
+    <link rel="prev" href="../../first-steps.html">
+    <link rel="next" href="reverse-proxy.html">
     <meta name="generator" content="Antora 3.1.14">
     <link rel="stylesheet" href="../../../_/css/site.css">
     <script>var uiRootPath = '../../../_'</script>
@@ -125,6 +127,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../../ct/smcb-remote-pin.html">Remote PIN für SMC-B Karten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../ct/ct-arp-check.html">ARP-Abgleich</a>
   </li>
 </ul>
   </li>
@@ -433,7 +438,7 @@ export DBUS_SESSION_BUS_ADDRESS="unix:path=${XDG_RUNTIME_DIR}/bus"</code></pre>
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
+<i class="fa icon-tip" title="Tipp"></i>
 </td>
 <td class="content">
 Setze die Variablen in .<code>bashrc</code> von User <code>poddy</code>.
@@ -456,7 +461,7 @@ chmod 700 -R /etc/containers/systemd/users/1001</code></pre>
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-important" title="Important"></i>
+<i class="fa icon-important" title="Wichtig"></i>
 </td>
 <td class="content">
 Bitte die Secrets in <code>env.production</code> ändern. die Datei enhält Anweisungen dazu.
@@ -545,6 +550,10 @@ $&gt; ping &lt;ipadresse&gt;</code></pre>
 </div>
 </div>
 </div>
+<nav class="pagination">
+  <span class="prev"><a href="../../first-steps.html">Erste Schritte</a></span>
+  <span class="next"><a href="reverse-proxy.html">Reverse Proxy</a></span>
+</nav>
 </article>
   </div>
 </main>
