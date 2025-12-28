@@ -38,7 +38,4 @@ if @rtic.present?
     end
   end 
 end   
-
-
-
- ---- 
+---- 

@@ -14,7 +14,7 @@ Die Kopfzeile enthält neben dem Namen und der IP-Adresse den Gesamtstatus des K
 
 === Allgemeine Information
 
-Viele Felder aus der allgemeinen Information sind bereits in xref:admin/connector-edit.adoc[] beschrieben. Weitere Felder werden aus den Konnektor-Informationen extrahiert:
+Viele Felder aus der allgemeinen Information sind bereits in xref:connector/connector-edit.adoc[] beschrieben. Weitere Felder werden aus den Konnektor-Informationen extrahiert:
 
 [%autowidth]
 |===
@@ -68,7 +68,7 @@ Dieser Abschnitt stellt die Produktinformationen als einfachen Text dar, die die
 
 === Zugewiesene Kontexte und Zertifikaten
 
-Anzeige von Zugewiesenen Kontexten und Zertifikaten. Zur Pflege von Kontexten und Zertifikaten siehe xref:admin/contexts.adoc[] und xref:admin/connector-edit.adoc[]
+Anzeige von Zugewiesenen Kontexten und Zertifikaten. Zur Pflege von Kontexten und Zertifikaten siehe xref:admin/contexts.adoc[] und xref:connector/connector-edit.adoc[]
 
 == Manuelles Update
 

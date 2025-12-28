@@ -34,4 +34,4 @@ image:ROOT:connector/connector-new-context.png[]
 
 NOTE: Obige Kurzanleitung geht davon aus, dass der Zugriff auf den Konnektor ohne Authentifikation möglich ist. Für einen authentifizierten Zugriff via Client-Zertifikat muss zuerst das Client-Zertifikat in Cocard hinterlegt werden. Eine Authentifikation via User/Passwort ist mit Cocard derzeit nicht möglich.
 
-xref:admin/connector-edit.adoc#_mit_tls_mit_authentifikation_per_client_zertifikat[Konnektorzugriff mit Client-Zertifikat einrichten]
+xref:connector/connector-edit.adoc#_mit_tls_mit_authentifikation_per_client_zertifikat[Konnektorzugriff mit Client-Zertifikat einrichten]

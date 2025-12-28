@@ -52,7 +52,7 @@ image::ct/card-terminal-action-buttons.png[]
 
 === Allgemeine Information
 
-Viele Felder aus der allgemeinen Information sind bereits in xref:admin/card-terminal-edit.adoc[] beschrieben. Weitere Felder werden aus den Kartenterminal-Informationen extrahiert:
+Viele Felder aus der allgemeinen Information sind bereits in xref:ct/card-terminal-edit.adoc[] beschrieben. Weitere Felder werden aus den Kartenterminal-Informationen extrahiert:
 
 [%autowidth]
 |===
@@ -150,5 +150,5 @@ image::ct/card-terminal-show-idle-message.png[]
 NOTE: Cocard zeigt hier nur den in Cocard gespeicherten und bekannten Wert ab.
 Ohne eine Änderung/Abfrage ist der Wert zunächst in Cocard leer. Verändert man später über die Weboberfläche des Kartenterminals manuell den Wert des Ruhebildschirms, bekommt Cocard das nicht automatisch mit. Die Werte können daher vom tatsächlichen Display abweichen. Im Zweifel einfach noch einmal den Reload-Button betätigen.
 
-Für die Massenpflege von mehreren Kartenterminals gleichzeitig gibt es ein eigenes Formular (siehe xref:admin/idle-messages-edit.adoc[]).
+Für die Massenpflege von mehreren Kartenterminals gleichzeitig gibt es ein eigenes Formular (siehe xref:ct/idle-messages-edit.adoc[]).
 

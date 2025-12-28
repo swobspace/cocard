@@ -97,7 +97,7 @@ NOTE:: Die Version des TI-Clients muss >= 2.6.1 sein. Mit älteren Versionen ist
 
 === Aktivierung REST-API TI-Client
 
-Für die Aktivierung des REST-API siehe xref:admin/ti-client/activate-api.adoc[].
+Für die Aktivierung des REST-API siehe xref:ti-client/activate-api.adoc[].
 
 == Installation und Konfiguration
 

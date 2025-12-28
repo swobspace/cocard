@@ -34,7 +34,7 @@ image::verify-pin/verify-pins-index-annotated.png[]
 
 === Ablauf
 
-Nach dem Auslösen des Buttons zur Sammelverifizierung (2) aktualisiert Cocard zunächst die Karteninformationen zur ersten Karte, dann sendet Cocard  die Anfrage `VerifyPin` an den Konnektor für die erste Karte und den ersten Kontext. Der Konnektor sendet die Anfrage weiter an das zuständige Kartenterminal. Das Kartenterminal fordert jetzt zur PIN-Eingabe auf. Ist Auto-Pin für das Kartenterminal in Cocard aktiviert (siehe xref:admin/smcb-remote-pin.adoc#_cocard_einstellungen_beim_kartenterminal[]), sendet Cocard die hinterlegte PIN selbständig an das Kartenterminal. Wenn nicht, muss die PIN am Kartenterminal manuell eingegeben werden.
+Nach dem Auslösen des Buttons zur Sammelverifizierung (2) aktualisiert Cocard zunächst die Karteninformationen zur ersten Karte, dann sendet Cocard  die Anfrage `VerifyPin` an den Konnektor für die erste Karte und den ersten Kontext. Der Konnektor sendet die Anfrage weiter an das zuständige Kartenterminal. Das Kartenterminal fordert jetzt zur PIN-Eingabe auf. Ist Auto-Pin für das Kartenterminal in Cocard aktiviert (siehe xref:ct/smcb-remote-pin.adoc#_cocard_einstellungen_beim_kartenterminal[]), sendet Cocard die hinterlegte PIN selbständig an das Kartenterminal. Wenn nicht, muss die PIN am Kartenterminal manuell eingegeben werden.
 
 Nach erfolgter PIN-Eingabe meldet der Konnektor Erfolg zurück. Ohne PIN-Eingabe bricht der Konnektor nach einer Wartezeit von 30-40 Sekunden die Operation ab und meldet den Abbruch. Sind weitere Karten und/oder Kontexte zu verifizieren, wartet Cocard 5 Sekunden und startet den nächsten Durchlauf.
 

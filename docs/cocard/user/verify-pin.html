@@ -97,43 +97,43 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="connector.html">Konnektor</a>
+    <a class="nav-link" href="../connector/connector.html">Konnektor</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../admin/connector-edit.html">Konnektor anlegen/bearbeiten</a>
+    <a class="nav-link" href="../connector/connector-edit.html">Konnektor anlegen/bearbeiten</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../admin/connector-autoreboot.html">Automatischer Reboot</a>
+    <a class="nav-link" href="../connector/connector-autoreboot.html">Automatischer Reboot</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="card-terminal.html">Kartenterminal</a>
+    <a class="nav-link" href="../ct/card-terminal.html">Kartenterminal</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../admin/card-terminal-edit.html">Kartenterminal anlegen/bearbeiten</a>
+    <a class="nav-link" href="../ct/card-terminal-edit.html">Kartenterminal anlegen/bearbeiten</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="card-terminal-health-check.html">Health-Check</a>
+    <a class="nav-link" href="../ct/card-terminal-health-check.html">Health-Check</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../admin/idle-messages-edit.html">Ruhebildschirme setzen</a>
+    <a class="nav-link" href="../ct/idle-messages-edit.html">Ruhebildschirme setzen</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../admin/duck-terminal.html">Kartenterminal über IP-Adresse prüfen</a>
+    <a class="nav-link" href="../ct/duck-terminal.html">Kartenterminal über IP-Adresse prüfen</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../admin/smcb-remote-pin.html">Remote PIN für SMC-B Karten</a>
+    <a class="nav-link" href="../ct/smcb-remote-pin.html">Remote PIN für SMC-B Karten</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="card.html">Karte</a>
+    <a class="nav-link" href="../card/card.html">Karte</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../admin/card-new.html">Karte anlegen/bearbeiten</a>
+    <a class="nav-link" href="../card/card-new.html">Karte anlegen/bearbeiten</a>
   </li>
 </ul>
   </li>
@@ -169,10 +169,10 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="../admin/ti-client/index.html">TI-Client (RISE TI Gateway)</a>
+    <a class="nav-link" href="../ti-client/index.html">TI-Client (RISE TI Gateway)</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../admin/ti-client/activate-api.html">REST-API aktivieren</a>
+    <a class="nav-link" href="../ti-client/activate-api.html">REST-API aktivieren</a>
   </li>
 </ul>
   </li>
@@ -353,7 +353,7 @@
 <div class="sect2">
 <h3 id="_ablauf"><a class="anchor" href="#_ablauf"></a>Ablauf</h3>
 <div class="paragraph">
-<p>Nach dem Auslösen des Buttons zur Sammelverifizierung (2) aktualisiert Cocard zunächst die Karteninformationen zur ersten Karte, dann sendet Cocard  die Anfrage <code>VerifyPin</code> an den Konnektor für die erste Karte und den ersten Kontext. Der Konnektor sendet die Anfrage weiter an das zuständige Kartenterminal. Das Kartenterminal fordert jetzt zur PIN-Eingabe auf. Ist Auto-Pin für das Kartenterminal in Cocard aktiviert (siehe <a href="../admin/smcb-remote-pin.html#_cocard_einstellungen_beim_kartenterminal" class="xref page">admin/smcb-remote-pin.adoc#_cocard_einstellungen_beim_kartenterminal</a>), sendet Cocard die hinterlegte PIN selbständig an das Kartenterminal. Wenn nicht, muss die PIN am Kartenterminal manuell eingegeben werden.</p>
+<p>Nach dem Auslösen des Buttons zur Sammelverifizierung (2) aktualisiert Cocard zunächst die Karteninformationen zur ersten Karte, dann sendet Cocard  die Anfrage <code>VerifyPin</code> an den Konnektor für die erste Karte und den ersten Kontext. Der Konnektor sendet die Anfrage weiter an das zuständige Kartenterminal. Das Kartenterminal fordert jetzt zur PIN-Eingabe auf. Ist Auto-Pin für das Kartenterminal in Cocard aktiviert (siehe <a href="../ct/smcb-remote-pin.html#_cocard_einstellungen_beim_kartenterminal" class="xref page">ct/smcb-remote-pin.adoc#_cocard_einstellungen_beim_kartenterminal</a>), sendet Cocard die hinterlegte PIN selbständig an das Kartenterminal. Wenn nicht, muss die PIN am Kartenterminal manuell eingegeben werden.</p>
 </div>
 <div class="paragraph">
 <p>Nach erfolgter PIN-Eingabe meldet der Konnektor Erfolg zurück. Ohne PIN-Eingabe bricht der Konnektor nach einer Wartezeit von 30-40 Sekunden die Operation ab und meldet den Abbruch. Sind weitere Karten und/oder Kontexte zu verifizieren, wartet Cocard 5 Sekunden und startet den nächsten Durchlauf.</p>

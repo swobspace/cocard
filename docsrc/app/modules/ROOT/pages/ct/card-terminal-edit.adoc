@@ -4,7 +4,7 @@
 :imagesdir: ../../images
 :experimental: true
 
-Kartenterminals, die mit einem Konnektor verbunden sind, werden automatisch erkannt und angelegt. Eine Neuanlage von Kartenterminals ist nur dann notwendig, wenn das Kartenterminal noch nicht angeschlossen ist, aber bereits inventarisiert werden soll. Oder wenn es sich um ein mobiles Gerät handelt, das keine permanente Online-Verbindung zum Konnektor aufrecht erhält. Alternativ kann man das Kartenterminal auch über einen Check via IP in Cocard aufnehmen, sofern das Kartenterminal dafür unterstützt wird. Details siehe xref:admin/duck-terminal.adoc[]
+Kartenterminals, die mit einem Konnektor verbunden sind, werden automatisch erkannt und angelegt. Eine Neuanlage von Kartenterminals ist nur dann notwendig, wenn das Kartenterminal noch nicht angeschlossen ist, aber bereits inventarisiert werden soll. Oder wenn es sich um ein mobiles Gerät handelt, das keine permanente Online-Verbindung zum Konnektor aufrecht erhält. Alternativ kann man das Kartenterminal auch über einen Check via IP in Cocard aufnehmen, sofern das Kartenterminal dafür unterstützt wird. Details siehe xref:ct/duck-terminal.adoc[]
 
 Für die Neuanlage genügt die MAC-Adresse oder alternativ die Seriennummer. Alle anderen Felder sind optional.
 
@@ -50,7 +50,7 @@ Das Formular besteht aus 2 Bereichen: der obere Bereich (bis zu dem gelben Hinwe
 |Freitext zur Dokumentation weiterer Informationen
 
 |SMC-B Auto-PIN-Mode
-|Wenn das Kartenterminal von Cocard unterstützt wird sendet Cocard die PIN für eine SMC-B an das Kartenterminal, wenn der Konnektor eine Pin-Verifizierung anfordert. xref:admin/smcb-remote-pin.adoc[Unterstützte Kartenterminals]. Mögliche Werte sind `Aus`, `On Demand` und `Automatisch`. Bei `On Demand` muss die PIN-Verifizierung vom Anwender über einen Button in Cocard manuell ausgelöst werden, bei `Auto` übernimmt das ein Hintergrundjob, sobald Cocard feststellt, dass eine PIN zu verifizieren ist.
+|Wenn das Kartenterminal von Cocard unterstützt wird sendet Cocard die PIN für eine SMC-B an das Kartenterminal, wenn der Konnektor eine Pin-Verifizierung anfordert. xref:ct/smcb-remote-pin.adoc[Unterstützte Kartenterminals]. Mögliche Werte sind `Aus`, `On Demand` und `Automatisch`. Bei `On Demand` muss die PIN-Verifizierung vom Anwender über einen Button in Cocard manuell ausgelöst werden, bei `Auto` übernimmt das ein Hintergrundjob, sobald Cocard feststellt, dass eine PIN zu verifizieren ist.
 
 |MAC
 |MAC-Adresse des Kartenterminals. Wird von Cocard zur eindeutigen Identifikation des Kartenterminals genutzt

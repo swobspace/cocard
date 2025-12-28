@@ -34,7 +34,7 @@ Mit dem Button image:common/health-check-button.png[] führt Cocard einen Health
 |Cocard prüft, ob das Terminal Zugriff auf die SMC-KT hat und ob das Zertifikat noch gültig ist.
 |===
 
-Der Health-Check aktualisiert gleichzeitig statistische Daten in Cocard wie die Anzahl der Steckzyklen der einzelnen Slots. Weitere Parameter des Kartenterminals können über den xref:admin/duck-terminal.adoc[IP-Check] abgefragt werden.
+Der Health-Check aktualisiert gleichzeitig statistische Daten in Cocard wie die Anzahl der Steckzyklen der einzelnen Slots. Weitere Parameter des Kartenterminals können über den xref:ct/duck-terminal.adoc[IP-Check] abgefragt werden.
 
 .IP-Check eines Kartenterminals
 image::ct/card-terminal-action-buttons-ipcheck.png[]
