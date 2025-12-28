@@ -23,7 +23,7 @@ RSpec.describe AcknowledgeButtonComponent, type: :component do
       it "shows ack button" do
         render_inline(described_class.new(notable: log, readonly: false))
         expect(page).to have_css('a[class="btn btn-sm btn-warning me-1"]')
-        expect(page).to have_css(%Q[a[href="#{new_log_note_path(log, type: :acknowledge, mail: 1)}"]])
+        expect(page).to have_css(%Q[a[href="#{new_log_note_path(log, type: :acknowledge, mail: 0)}"]])
       end
 
       it "readonly - does not show ack button" do
