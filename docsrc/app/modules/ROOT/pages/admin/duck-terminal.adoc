@@ -1,6 +1,6 @@
 = Kartenterminal über IP-Adresse prüfen
 :author: Wolfgang Barth
-:revdate: 2025-10-06
+:revdate: 2025-12-28
 :imagesdir: ../../images
 :experimental: true
 
@@ -29,6 +29,7 @@ image::ct/duck-terminal-show.png[]
 
 Im unteren Abschnitt _Kartenterminals mit der IP ..._ werden alle Kartenterminals angezeigt, die in Cocard die bei der Abfrage verwendete IP konfiguriert haben. Falls mehr als ein Eintrag erscheint ist die IP-Adresse in Cocard mehr als einmal vorhanden. Bei einem rot hinterlegten Kartenterminal ist sehr wahrscheinlich die in Cocard hinterlegte IP-Adresse falsch.
 
-Ist das Kartenterminal bereits in Cocard vorhanden, kann man auch aus der Anzeige heraus die IP-Prüfung starten (Pfeil). IP-Adresse, Identifikation und Firmware-Version werden in das Formular übernommen, dabei kann die Firmware-Version bei Bedarf noch angepasst werden, z.B. wenn die Angabe zur Firmware-Version in Cocard veraltet ist.
+Ist das Kartenterminal bereits in Cocard vorhanden, kann man auch aus der Anzeige heraus die IP-Prüfung starten. IP-Adresse, Identifikation und Firmware-Version werden in das Formular übernommen, dabei kann die Firmware-Version bei Bedarf noch angepasst werden, z.B. wenn die Angabe zur Firmware-Version in Cocard veraltet ist.
 
-image::ct/duck-terminal-from-ct.png[]
+
+image::ct/card-terminal-action-buttons-ipcheck.png[]

@@ -1,0 +1,39 @@
+= Wie funktioniert Cocard?
+:author: Wolfgang Barth
+:revdate: 2025-12-28
+:imagesdir: ../../images
+
+== Verwendete Schnittstellen
+Cocard verwendet verschiedene Schnittstellen zur Informationsgewinnung und Steuerung der TI-Komponenten:
+
+[%autowidth]
+|===
+|API | Beschreibung |Für  |Spezifikation
+
+|SOAP
+|Offizielle, von der Gematik definierte Schnittstelle zur für Primärsystemen zu den lokalen TI-Komponenten über den Konnektor
+|Alle von der Gematik zertifizierten Konnektoren, Kartenterminals und Karten (Cocard: primär SMC-B und SMC-KT)
+|https://gemspec.gematik.de/docs/gemSpec/gemSpec_Kon/latest/[Gematik gemSpec_Kon]
+
+|RMI
+|Remote-Management-Interface für Kartenterminals
+|Nur Kartenterminals Orga6141 ab Firmware v3.9.0
+|https://worldline.com/content/dam/worldline/local/de-de/documents/Remote-Management-Interface-ORGA-6141-online.pdf[RMI Orga6141-online]
+
+|KoCoBox WebAPI
+|Undokumentiertes WebAPI der KoCoBox-Konnektoren. Manges Dokumentation ist die Funktion bei Firmwareupdates nicht gesichert
+|KoCoBox Einbox-Konnektoren mit Firmware v5.5.16
+|[-]
+
+|RISE TI-Client REST-API
+|REST-API für den TI-Client von RISE. Darüber ist auch ein Zugriff auf den Konnektor möglich
+|Nur bei Einsatz des RISE-TI-Clients
+|Zugang zur geschützten Online-Dokumentation bitte bei RISE erfragen
+
+|===
+
+Die primäre Schnittstelle ist SOAP. Cocard erreicht darüber alle zugelassenen Konnektoren, Kartenterminals und Karten (SMC-B, SMC-KT). Cocard lässt sich daher in allen lokalen TI-Umgebungen einsetzen, auch wenn die anderen Schnittstellen nicht genutzt werden können.
+
+RMI, KoCoBox WebAPI und RISE TI-Client REST-API erweitern den Funktionsumfang von Cocard zum Teil erheblich, sind aber nur nutzbar, wenn die jeweiligen Komponenten auch zum Einsatz kommen. Die wesentlichen Funktionen von Cocard wie Informationsgewinnung, Monitoring und Inventarisierung sind aber nicht auf diese spezialisierten Schnittstellen angewiesen.
+
+

@@ -1,0 +1,18 @@
+= SOAP
+:author: Wolfgang Barth
+:revdate: 2025-12-28
+:imagesdir: ../../../images
+
+Die von der Gematik definierte SOAP-Schnittstelle in https://gemspec.gematik.de/docs/gemSpec/gemSpec_Kon/latest/[Gematik gemSpec_Kon] wird ergänzt durch den https://gemspec.gematik.de/docs/gemILF/gemILF_PS/latest/[Implementierungsleitfaden Primärsysteme] und ist sehr umfangreich. Das soll sicherstellen, dass einzelne Komponenten ausgetauscht werden können, ohne die Schnittstellen auf der Seite der Primärsysteme ändern zu müssen. Die Grundregeln dabei sind:
+
+* Das Clientsystem (Primärsystem) identifiziert sich über seine `ClientSystemId` (Name des Clientsystems, Beispiel: `iMedOne`), in der Regel mit Authentifikation (Client-Zertifikat oder User/Passwort)
+* Die Authorisierung - also was das Clientsystem darf - erfolgt über den sogenannten xref:admin/contexts.adoc[Kontext], ein Tripel aus `ClientSystemId`, `MandantID`, `WorkplaceID`. Der Kontext wird am Konnektor gepflegt, das Clientsystem bekommt nur zu sehen, was der Konnektor erlaubt.
+* Der Kontext wirkt zusätzlich als Filter. Da das Clientsystem bei jeder Operation immer einen Kontext mitsenden muss, ist das Ergebnis quasi eine Schnittmenge aus dem, was der Konnektor dem Clientsystem insgesamt erlaubt und was das Clientsystem konkret anfragt.
+* Der Konnektor liefert an Informationen immer, was er gespeichert hat, eine Informationsabfrage darf keine Rückfrage an Kartenterminals auslösen.
+
+In der Praxis bedeutet das: man bekommt eventuell nicht alles zu sehen, was man gerne sehen würde (weil das Infomodell am Konnektor nicht alles erlaubt) und in manchen Fällen weicht die Information von der Realität ab.
+
+Beispiel: Der Konnektor liefert bei der Abfrage eines Kartenterminals die IP-Adresse zurück, mit der das Kartenterminal gepairt wurde. Wenn wegen DHCP das Kartenterminal inzwischen eine andere IP-Adresse hat, liefert der Konnektor immer noch die ursprüngliche Adresse zurück. Die Information stimmt jetzt nicht mehr mit der Realität überein.
+
+NOTE:: Idealerweise definiert man einen eigenen Kontext für Cocard: `cocard - cocard - Konnektor` (Mandant `cocard`, Clientsystem `cocard`, Arbeitsplatz `Konnektor`). Den Kontext weist man in Cocard dem Konnektor zu. Am Konnektor selbst ordnet man alle SMC-Bs dem Mandanten `cocard` zu und den Arbeitsplatz `Konnektor`, der wiederum alle vorhandenen Kartenterminals zugewiesen bekommt.
+Das stellt sicher, dass Cocard auch alles "sieht".

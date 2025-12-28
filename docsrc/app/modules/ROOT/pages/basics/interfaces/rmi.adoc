@@ -1,0 +1,14 @@
+= RMI
+:author: Wolfgang Barth
+:revdate: 2025-12-28
+:imagesdir: ../../../images
+
+Das Remote-Management-Interface des Orga6141 online erlaubt neben der Abfrage und dem Setzen verschiedener Parameter auch die Workflows _Remote-PIN-Eingabe_ und _Kartenterminal pairen_.
+
+|===
+|Funktion/Referenz | Beschreibung
+
+
+|===
+
+#TBD#

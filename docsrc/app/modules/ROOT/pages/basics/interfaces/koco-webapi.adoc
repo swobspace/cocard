@@ -1,0 +1,6 @@
+= KoCoBox WebAPI
+:author: Wolfgang Barth
+:revdate: 2025-12-28
+:imagesdir: ../../../images
+
+#TBD#

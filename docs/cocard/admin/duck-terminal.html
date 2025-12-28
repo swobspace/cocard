@@ -55,22 +55,25 @@
     <a class="nav-link" href="../user/common.html">Allgemeines zur Oberfläche</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../user/conditions.html">Zustände</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../user/connector.html">Konnektor</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="../user/card-terminal.html">Kartenterminal</a>
+    <a class="nav-link" href="../basics/how-it-works.html">Wie funktioniert Cocard?</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../user/card-terminal-health-check.html">Health-Check</a>
+    <a class="nav-link" href="../basics/interfaces/soap.html">SOAP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../basics/interfaces/rmi.html">RMI</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../basics/interfaces/koco-webapi.html">KoCoBox WebAPI</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../basics/interfaces/ticlient-rest.html">RISE TI-Client REST-API</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../user/card.html">Karte</a>
+    <a class="nav-link" href="../user/conditions.html">Zustände</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../user/logs.html">Event Logs</a>
@@ -94,35 +97,50 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Administration</span>
+    <a class="nav-link" href="../user/connector.html">Konnektor</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <span class="nav-text">Konnektor</span>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="connector-edit.html">Konnektor anlegen/bearbeiten</a>
   </li>
-  <li class="nav-item" data-depth="3">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="connector-autoreboot.html">Automatischer Reboot</a>
   </li>
 </ul>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="card-terminal-edit.html">Kartenterminal anlegen/bearbeiten</a>
+    <a class="nav-link" href="../user/card-terminal.html">Kartenterminal</a>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="3">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="card-terminal-edit.html">Kartenterminal anlegen/bearbeiten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/card-terminal-health-check.html">Health-Check</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="idle-messages-edit.html">Ruhebildschirme setzen</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="3">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="duck-terminal.html">Kartenterminal über IP-Adresse prüfen</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="smcb-remote-pin.html">Remote PIN für SMC-B Karten</a>
   </li>
 </ul>
   </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../user/card.html">Karte</a>
+<ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="card-new.html">Karte anlegen/bearbeiten</a>
   </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Administration</span>
+<ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="contexts.html">Kontexte</a>
   </li>
@@ -142,22 +160,19 @@
     <a class="nav-link" href="authorities.html">Berechtigungen</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="smcb-remote-pin.html">Remote PIN für SMC-B Karten</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="client-certificates.html">Client-Zertifikate</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="ldap-authentication.html">LDAP-Authentifikation</a>
   </li>
-  <li class="nav-item" data-depth="2">
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="ti-client/index.html">TI-Client (RISE TI Gateway)</a>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="3">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="ti-client/activate-api.html">REST-API aktivieren</a>
-  </li>
-</ul>
   </li>
 </ul>
   </li>
@@ -252,8 +267,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Cocard</a></li>
-    <li>Administration</li>
-    <li><a href="card-terminal-edit.html">Kartenterminal anlegen/bearbeiten</a></li>
+    <li><a href="../user/card-terminal.html">Kartenterminal</a></li>
     <li><a href="duck-terminal.html">Kartenterminal über IP-Adresse prüfen</a></li>
   </ul>
 </nav>
@@ -320,11 +334,11 @@
 <p>Im unteren Abschnitt <em>Kartenterminals mit der IP &#8230;&#8203;</em> werden alle Kartenterminals angezeigt, die in Cocard die bei der Abfrage verwendete IP konfiguriert haben. Falls mehr als ein Eintrag erscheint ist die IP-Adresse in Cocard mehr als einmal vorhanden. Bei einem rot hinterlegten Kartenterminal ist sehr wahrscheinlich die in Cocard hinterlegte IP-Adresse falsch.</p>
 </div>
 <div class="paragraph">
-<p>Ist das Kartenterminal bereits in Cocard vorhanden, kann man auch aus der Anzeige heraus die IP-Prüfung starten (Pfeil). IP-Adresse, Identifikation und Firmware-Version werden in das Formular übernommen, dabei kann die Firmware-Version bei Bedarf noch angepasst werden, z.B. wenn die Angabe zur Firmware-Version in Cocard veraltet ist.</p>
+<p>Ist das Kartenterminal bereits in Cocard vorhanden, kann man auch aus der Anzeige heraus die IP-Prüfung starten. IP-Adresse, Identifikation und Firmware-Version werden in das Formular übernommen, dabei kann die Firmware-Version bei Bedarf noch angepasst werden, z.B. wenn die Angabe zur Firmware-Version in Cocard veraltet ist.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../_images/ct/duck-terminal-from-ct.png" alt="duck terminal from ct">
+<img src="../_images/ct/card-terminal-action-buttons-ipcheck.png" alt="card terminal action buttons ipcheck">
 </div>
 </div>
 </article>

@@ -1,13 +1,11 @@
 = Kartenterminal: Health-Check
 :navtitle: Health-Check
 :author: Wolfgang Barth
-:revdate: 2025-09-27
+:revdate: 2025-12-28
 :imagesdir: ../../images
 
-NOTE: Der Health-Check führt einige Prüfungen über das Remote-Management-Interface (RMI) des Kartenterminals durch. Cocard unterstützt RMI bisher nur für das Orga6141 ab Version 3.9.0.
-
 .Aktionschaltfläche eines Kartenterminals
-image::ct/card-terminal-action-buttons.png[]
+image::ct/card-terminal-action-buttons-healthcheck.png[]
 
 Mit dem Button image:common/health-check-button.png[] führt Cocard einen Health-Check des Kartenterminals durch.
 
@@ -30,14 +28,23 @@ Mit dem Button image:common/health-check-button.png[] führt Cocard einen Health
 |MAC-Adresse
 |RMI
 |Stimmt die MAC-Adresse am Terminal mit der MAC-Adresse in Cocard überein? Falls nicht, ist sehr wahrscheinlich die in Cocard eingetragene IP-Adresse falsch und es wird ein anderes Terminal geprüft.
+
+|SMC-KT
+|RMI
+|Cocard prüft, ob das Terminal Zugriff auf die SMC-KT hat und ob das Zertifikat noch gültig ist.
 |===
 
-Darüber hinaus werden per RMI weitere Werte geprüft, wenn in xref:installation:cocard_yml.adoc[`cocard.yml`] Defaultwerte gesetzt wurden. Die Konfiguration in `cocard.yml` ist komplett optional.
+Der Health-Check aktualisiert gleichzeitig statistische Daten in Cocard wie die Anzahl der Steckzyklen der einzelnen Slots. Weitere Parameter des Kartenterminals können über den xref:admin/duck-terminal.adoc[IP-Check] abgefragt werden.
+
+.IP-Check eines Kartenterminals
+image::ct/card-terminal-action-buttons-ipcheck.png[]
+
 
 == Beispiel-Ausgaben
 
-==== Erfolgreicher Check
-Im ersten Beispiel können Werte per RMI vom Kartenterminal abgefragt werden. MAC-Adresse und Name stimmen mit der Cocard-Konfiguration überein, die IP-Adresse in Cocard ist daher korrekt. Darüber hinaus sind Defaultwerte für NTP und TFTP gesetzt, der NTP-Server stimmt überein, der Eintrag für den TFTP-Server am Kartenterminal weicht vom Default ab.
+=== Erfolgreicher Check
+
+Im ersten Beispiel können Werte per RMI vom Kartenterminal abgefragt werden. MAC-Adresse und Name stimmen mit der Cocard-Konfiguration überein, die IP-Adresse in Cocard ist daher korrekt. Die SMC-KT ist erreichbar und gültig, daher erfolgt hier keine Ausgabe.
 
 .Erfolgreicher Check: MAC und Terminalname stimmen mit der Cocard-Konfiguration überein.
 image::ct/ct-health-check-ok.png[]
