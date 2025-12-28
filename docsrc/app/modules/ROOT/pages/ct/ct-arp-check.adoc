@@ -29,6 +29,8 @@ Der ARP-Abgleich eignet sich gut für nicht aktive Kartenterminals, also Kartent
 nmap -p 443 192.0.2.0/24
 ----
 
+Welches Tool man verwendet spielt am Ende keine Rolle. Wichtig ist nur, dass jede IP aus dem Netzwerk irgendwie angesprochen wird und kein Firewalling das Senden der Scan-Pakete in das Netzwerk verhindert. Das Kartenterminal muss noch nicht einmal auf den Dienst antworten, da immer erst die ARP-Auflösung zwischen MAC und IP stattfindet, bevor überhaupt ein IP-Paket an das Terminal gesendet werden kann.
+
 IMPORTANT: ARP-Tabellen können je nach eingesetzter Hardware sehr kurzlebig sein. Daher sollte man die ARP-Tabelle unmittelbar nach dem Netzwerkscan auslesen, um auch alle erreichbaren Geräte zu erfassen.
 
 Wie man die ARP-Tabellen aus den Netzwerkkomponenten ausliest hängt von der eingesetzten Hardware ab. Das sprengt den Rahmen der Dokumentation zu Cocard. Als Beispiel sei hier ein Linux-Router aufgeführt, über den die ARP-Tabelle des Netzwerksegmentes mit den Kartenterminals ausgelesen werden kann:
