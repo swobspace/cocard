@@ -45,7 +45,7 @@ class AcknowledgeButtonComponent < ViewComponent::Base
     if notable.kind_of? Log
       true
     else
-      notable.condition >= Cocard::States::WARNING
+      notable.condition != Cocard::States::OK
     end
   end
 
