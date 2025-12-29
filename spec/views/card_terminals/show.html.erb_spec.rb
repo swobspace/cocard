@@ -22,6 +22,8 @@ RSpec.describe "card_terminals/show", type: :view do
     allow(controller).to receive(:current_ability) { @ability }
     allow(controller).to receive(:controller_name) { 'card_terminals' }
     allow(controller).to receive(:action_name) { 'show' }
+    user = FactoryBot.create(:user)
+    allow(controller).to receive(:current_user) { user }
 
     # assign(:card_terminal, CardTerminal.create!(
     @card_terminal = CardTerminal.create!(
