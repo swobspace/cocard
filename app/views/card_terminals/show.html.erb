@@ -1,6 +1,7 @@
 <%= render 'shared/turbo-cache-control' %>
 
 <%= turbo_stream_from @card_terminal %>
+<%= turbo_stream_from [ current_user, @card_terminal ] %>
 <%= turbo_stream_from @card_terminal.connector if @card_terminal.connector.present? %>
 
 <div class="card mb-3">

@@ -28,7 +28,6 @@
           <thead>
             <tr>
                   <th><%= t('attributes.card_terminal') %></th>
-                  <th class="nosort notvisible">Health</th>
                   <th class="text-center"><%= t('attributes.condition') %></th>
                   <th><%= t('attributes.condition_message') %></th>
                   <th><%= t('attributes.uuid') %></th>
@@ -46,7 +45,6 @@
           <tfoot class="search">
             <tr>
                   <th></th>
-                  <th class="nosearch"></th>
                   <th></th>
                   <th></th>
                   <th></th>
@@ -83,10 +81,6 @@
                                 data: { "turbo-frame": "_top" },
                                 class: "btn btn-sm btn-warning me-2") if can?(:manage, DuckTerminal)and kt_proxy.card_terminal.nil? %>
 
-                </td>
-                <td>
-                  <%= render HealthCheckButtonComponent.new(item: kt_proxy.card_terminal,
-                                                            variant: :small) %>
                 </td>
                 <td class="text-center">
                   <%= render ConditionIconComponent.new(item: kt_proxy.card_terminal, 

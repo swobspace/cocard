@@ -1,6 +1,7 @@
 <%= render 'shared/turbo-cache-control' %>
 
 <%= turbo_stream_from @connector %>
+<%= turbo_stream_from [ current_user, @connector ] %>
 
 <div class="card mb-3">
   <div class="card-header">

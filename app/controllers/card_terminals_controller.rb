@@ -374,7 +374,7 @@ class CardTerminalsController < ApplicationController
     def poster(status, ip, mac, ct, message)
       unless status.nil?
         Turbo::StreamsChannel.broadcast_prepend_to(
-          :arp_check,
+          [current_user, :arp_check],
           target: 'arp-checked',
           partial: "card_terminals/arp_entry",
           locals: {status: status, ip: ip, mac: mac, ct: ct, message: message})

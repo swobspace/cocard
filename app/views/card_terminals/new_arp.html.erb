@@ -1,4 +1,4 @@
-<%= turbo_stream_from :arp_check %>
+<%= turbo_stream_from [current_user, :arp_check] %>
 
 <%= turbo_frame_tag :new_arp do %>
   <%= render FormComponent.new(title: t('attributes.arp_check')) do %>
