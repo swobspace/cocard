@@ -1,9 +1,11 @@
 = SOAP
 :author: Wolfgang Barth
-:revdate: 2025-12-28
+:revdate: 2025-12-31
 :imagesdir: ../../../images
 
-Die von der Gematik definierte SOAP-Schnittstelle in https://gemspec.gematik.de/docs/gemSpec/gemSpec_Kon/latest/[Gematik gemSpec_Kon] wird ergänzt durch den https://gemspec.gematik.de/docs/gemILF/gemILF_PS/latest/[Implementierungsleitfaden Primärsysteme] und ist sehr umfangreich. Das soll sicherstellen, dass einzelne Komponenten ausgetauscht werden können, ohne die Schnittstellen auf der Seite der Primärsysteme ändern zu müssen. Die Grundregeln dabei sind:
+Die von der Gematik definierte SOAP-Schnittstelle (https://gemspec.gematik.de/docs/gemSpec/gemSpec_Kon/latest/[Gematik gemSpec_Kon], ergänzt durch den https://gemspec.gematik.de/docs/gemILF/gemILF_PS/latest/[Implementierungsleitfaden Primärsysteme]) stellt sicher, dass einzelne Komponenten ausgetauscht werden können, ohne die Schnittstellen auf der Seite der Primärsysteme ändern zu müssen.
+
+Aus dem umfangreichen Werk sind for allem folgende Grundregeln wichtig für das Verständnis der Kommunikation zwischen Primärsystem (hier: Cocard) und dem Konnektor:
 
 * Das Clientsystem (Primärsystem) identifiziert sich über seine `ClientSystemId` (Name des Clientsystems, Beispiel: `iMedOne`), in der Regel mit Authentifikation (Client-Zertifikat oder User/Passwort)
 * Die Authorisierung - also was das Clientsystem darf - erfolgt über den sogenannten xref:admin/contexts.adoc[Kontext], ein Tripel aus `ClientSystemId`, `MandantID`, `WorkplaceID`. Der Kontext wird am Konnektor gepflegt, das Clientsystem bekommt nur zu sehen, was der Konnektor erlaubt.

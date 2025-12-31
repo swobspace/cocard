@@ -12,3 +12,7 @@ Das Remote-Management-Interface des Orga6141 online erlaubt neben der Abfrage un
 |===
 
 #TBD#
+
+== Ressourcen
+
+* https://worldline.com/content/dam/worldline/local/de-de/documents/Remote-Management-Interface-ORGA-6141-online.pdf[Online-Dokumentation des Remote Management Interface (PDF)]

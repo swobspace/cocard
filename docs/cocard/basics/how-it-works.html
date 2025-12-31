@@ -30,8 +30,8 @@
     </div>
     <div id="topbar-nav" class="navbar-menu">
       <div class="navbar-end">
-          <div class="navbar-item dark">Cocard</div>
            <a class="navbar-item" href="../../devnotes/index.html">DevNotes</a>
+          <div class="navbar-item dark">Dokumentation</div>
       </div>
     </div>
   </nav>
@@ -42,7 +42,7 @@
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
-    <h3 class="title"><a href="../index.html">Cocard</a></h3>
+    <h3 class="title"><a href="../index.html">Dokumentation</a></h3>
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
@@ -240,23 +240,23 @@
 </div>
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
-    <span class="title">Cocard</span>
+    <span class="title">Dokumentation</span>
     <span class="version">default</span>
   </div>
   <ul class="components">
-    <li class="component is-current">
-      <a class="title" href="../index.html">Cocard</a>
-      <ul class="versions">
-        <li class="version is-current is-latest">
-          <a href="../index.html">default</a>
-        </li>
-      </ul>
-    </li>
     <li class="component">
       <a class="title" href="../../devnotes/index.html">DevNotes</a>
       <ul class="versions">
         <li class="version is-latest">
           <a href="../../devnotes/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../index.html">Dokumentation</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">default</a>
         </li>
       </ul>
     </li>
@@ -271,6 +271,7 @@
   <a href="../index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
+    <li><a href="../index.html">Dokumentation</a></li>
     <li><a href="../index.html">Cocard</a></li>
     <li><a href="how-it-works.html">Wie funktioniert Cocard?</a></li>
   </ul>
@@ -325,7 +326,7 @@
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">RISE TI-Client REST-API</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">REST-API für den TI-Client von RISE. Darüber ist auch ein Zugriff auf den Konnektor möglich</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Nur bei Einsatz des RISE-TI-Clients</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nur bei Einsatz des RISE-TI-Clients mit KT-Proxys</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Zugang zur geschützten Online-Dokumentation bitte bei RISE erfragen</p></td>
 </tr>
 </tbody>
@@ -335,6 +336,69 @@
 </div>
 <div class="paragraph">
 <p>RMI, KoCoBox WebAPI und RISE TI-Client REST-API erweitern den Funktionsumfang von Cocard zum Teil erheblich, sind aber nur nutzbar, wenn die jeweiligen Komponenten auch zum Einsatz kommen. Die wesentlichen Funktionen von Cocard wie Informationsgewinnung, Monitoring und Inventarisierung sind aber nicht auf diese spezialisierten Schnittstellen angewiesen.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_informationsgewinnung"><a class="anchor" href="#_informationsgewinnung"></a>Informationsgewinnung</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Die drei primären Jobs für die Informationsgewinnung sind:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Konnektor: <code>GetResourceInformation</code> (alle 3min)</p>
+</li>
+<li>
+<p>Kartenterminals: <code>GetCardTerminals</code> (alle 5min)</p>
+</li>
+<li>
+<p>Karten: <code>GetCards</code> (alle 7min)</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_konnektor"><a class="anchor" href="#_konnektor"></a>Konnektor</h3>
+<div class="paragraph">
+<p>Mit <code>GetResourceInformation</code> fragt Cocard beim Konnektor einmal den Verbindungszustand zur TI und aktuelle Betriebszustände wie <code>EC_Time_Sync_Not_Successful</code> ab. Aktuelle Betriebszustände werden im Dashboard unter <em>Ereignisse</em> aufgeführt.</p>
+</div>
+<div class="paragraph">
+<p>Zur Nutzung der SOAP-Schnittstelle gehört das Service-Directory, dort steht kurz gesagt welche Abfragen ein Primärsystem stellen kann und wie diese zu formatieren sind. Bei der ersten Inbetriebnahme holt man die sogenannte SDS-Datei <code>connector.sds</code> manuell per Button, nach Einrichtung erfolgt die Abfrage der SDS-Datei einmal pro Tag. Die Datei wird nur bei Firmware-Updates aktualisiert.</p>
+</div>
+<div class="paragraph">
+<p>Zur Abfrage der Laufzeit des Konnektor-Zertifikates nutzt Cocard den Aufruf <code>CheckCertificateExpiration</code>. Das ist die einzige Möglichkeit, über die SOAP-Schnittstelle an die ICCSN und die Laufzeit des Zertfikates zu kommen. Die Abfrage erfolgt ebenfalls einmal pro Tag.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Hinweis"></i>
+</td>
+<td class="content">
+Manche Konnektoren (z.B. RISE vKonn) liefern einen Fehler bei <code>CheckCertificateExpiration</code>, wenn ein HBA steckt. Ursache ist eine nicht ganz eindeutige Spezifikation des SOAP-Aufrufes, die die Hersteller unterschiedlich interpretieren.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_kartenterminals"><a class="anchor" href="#_kartenterminals"></a>Kartenterminals</h3>
+<div class="paragraph">
+<p>Cocard nutzt den Aufruf <code>GetCardTerminals</code> mandantenweit, der Arbeitsplatz in dem Kontext spielt daher keine Rolle. Wichtig ist daher nur, dass die Kartenterminals über den im Kontext verwendeten Mandanten erreichbar sind. Idealerweise verwendet man einen separaten Kontext für Cocard wie <code>cocard - cocard - Konnektor</code> (Mandant - Clientsystem - Arbeitsplatz) und ordnet alle Kartenterminals dem Arbeitsplatz zu (hier: <code>Konnektor</code>). Wenn der Arbeitsplatz dann mit dem Mandanten (hier: <code>cocard</code>) verknüpft wird, bekommt Cocard alle Kartenterminals zu sehen. Die Funktion des Kontextes wird in <a href="interfaces/soap.html" class="xref page">SOAP</a> ausführlicher erklärt.</p>
+</div>
+<div class="paragraph">
+<p>Zur Pflege von Kontexten in Cocard siehe <a href="../admin/contexts.html" class="xref page">Kontexte</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_karten"><a class="anchor" href="#_karten"></a>Karten</h3>
+<div class="paragraph">
+<p>Mit dem Aufruf <code>GetCards</code> mandantenweit erfolgt die Abfrage von SMC-Bs und SMC-KTs ebenfalls mandantenweit. HBAs werden ebenfalls inventarisiert, wenn diese bei der Abfrage gerade in einem Terminal stecken.</p>
+</div>
+<div class="paragraph">
+<p>Für die SMC-KTs gelten die gleichen Regeln wie für die Kartenterminals. SMC-Bs dagegen müssen am Konnektor explizit dem Mandanten zugeordnet werden, den Cocard im Kontext der Abfrage benutzt. Andernfalls "sieht" Cocard die SMC-Bs nicht.</p>
+</div>
 </div>
 </div>
 </div>

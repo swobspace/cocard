@@ -30,8 +30,8 @@
     </div>
     <div id="topbar-nav" class="navbar-menu">
       <div class="navbar-end">
-          <div class="navbar-item dark">Cocard</div>
            <a class="navbar-item" href="../../devnotes/index.html">DevNotes</a>
+          <div class="navbar-item dark">Dokumentation</div>
       </div>
     </div>
   </nav>
@@ -42,7 +42,7 @@
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
-    <h3 class="title"><a href="../index.html">Cocard</a></h3>
+    <h3 class="title"><a href="../index.html">Dokumentation</a></h3>
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
@@ -240,23 +240,23 @@
 </div>
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
-    <span class="title">Cocard</span>
+    <span class="title">Dokumentation</span>
     <span class="version">default</span>
   </div>
   <ul class="components">
-    <li class="component is-current">
-      <a class="title" href="../index.html">Cocard</a>
-      <ul class="versions">
-        <li class="version is-current is-latest">
-          <a href="../index.html">default</a>
-        </li>
-      </ul>
-    </li>
     <li class="component">
       <a class="title" href="../../devnotes/index.html">DevNotes</a>
       <ul class="versions">
         <li class="version is-latest">
           <a href="../../devnotes/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../index.html">Dokumentation</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">default</a>
         </li>
       </ul>
     </li>
@@ -271,7 +271,7 @@
   <a href="../index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="../index.html">Cocard</a></li>
+    <li><a href="../index.html">Dokumentation</a></li>
     <li><a href="card-terminal.html">Kartenterminal</a></li>
     <li><a href="ct-arp-check.html">ARP-Abgleich</a></li>
   </ul>
@@ -331,6 +331,9 @@ Der ARP-Abgleich ändert keine Daten in Cocard und verwendet nur die Eingabelist
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">nmap -p 443 192.0.2.0/24</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Welches Tool man verwendet spielt am Ende keine Rolle. Wichtig ist nur, dass jede IP aus dem Netzwerk irgendwie angesprochen wird und kein Firewalling das Senden der Scan-Pakete in das Netzwerk verhindert. Das Kartenterminal muss noch nicht einmal auf den Dienst antworten, da immer erst die ARP-Auflösung zwischen MAC und IP stattfindet, bevor überhaupt ein IP-Paket an das Terminal gesendet werden kann.</p>
 </div>
 <div class="admonitionblock important">
 <table>

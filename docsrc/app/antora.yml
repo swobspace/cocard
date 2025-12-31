@@ -1,5 +1,5 @@
 name: cocard
-title: Cocard
+title: Dokumentation
 version: ~
 nav:
 - modules/ROOT/nav.adoc

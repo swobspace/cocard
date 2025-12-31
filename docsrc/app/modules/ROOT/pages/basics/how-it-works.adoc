@@ -1,6 +1,6 @@
 = Wie funktioniert Cocard?
 :author: Wolfgang Barth
-:revdate: 2025-12-28
+:revdate: 2025-12-31
 :imagesdir: ../../images
 
 == Verwendete Schnittstellen
@@ -27,7 +27,7 @@ Cocard verwendet verschiedene Schnittstellen zur Informationsgewinnung und Steue
 
 |RISE TI-Client REST-API
 |REST-API für den TI-Client von RISE. Darüber ist auch ein Zugriff auf den Konnektor möglich
-|Nur bei Einsatz des RISE-TI-Clients
+|Nur bei Einsatz des RISE-TI-Clients mit KT-Proxys
 |Zugang zur geschützten Online-Dokumentation bitte bei RISE erfragen
 
 |===
@@ -37,3 +37,32 @@ Die primäre Schnittstelle ist SOAP. Cocard erreicht darüber alle zugelassenen 
 RMI, KoCoBox WebAPI und RISE TI-Client REST-API erweitern den Funktionsumfang von Cocard zum Teil erheblich, sind aber nur nutzbar, wenn die jeweiligen Komponenten auch zum Einsatz kommen. Die wesentlichen Funktionen von Cocard wie Informationsgewinnung, Monitoring und Inventarisierung sind aber nicht auf diese spezialisierten Schnittstellen angewiesen.
 
 
+== Informationsgewinnung
+
+Die drei primären Jobs für die Informationsgewinnung sind:
+
+* Konnektor: `GetResourceInformation` (alle 3min)
+* Kartenterminals: `GetCardTerminals` (alle 5min)
+* Karten: `GetCards` (alle 7min)
+
+=== Konnektor
+
+Mit `GetResourceInformation` fragt Cocard beim Konnektor einmal den Verbindungszustand zur TI und aktuelle Betriebszustände wie `EC_Time_Sync_Not_Successful` ab. Aktuelle Betriebszustände werden im Dashboard unter _Ereignisse_ aufgeführt.
+
+Zur Nutzung der SOAP-Schnittstelle gehört das Service-Directory, dort steht kurz gesagt welche Abfragen ein Primärsystem stellen kann und wie diese zu formatieren sind. Bei der ersten Inbetriebnahme holt man die sogenannte SDS-Datei `connector.sds` manuell per Button, nach Einrichtung erfolgt die Abfrage der SDS-Datei einmal pro Tag. Die Datei wird nur bei Firmware-Updates aktualisiert.
+
+Zur Abfrage der Laufzeit des Konnektor-Zertifikates nutzt Cocard den Aufruf `CheckCertificateExpiration`. Das ist die einzige Möglichkeit, über die SOAP-Schnittstelle an die ICCSN und die Laufzeit des Zertfikates zu kommen. Die Abfrage erfolgt ebenfalls einmal pro Tag.
+
+NOTE: Manche Konnektoren (z.B. RISE vKonn) liefern einen Fehler bei `CheckCertificateExpiration`, wenn ein HBA steckt. Ursache ist eine nicht ganz eindeutige Spezifikation des SOAP-Aufrufes, die die Hersteller unterschiedlich interpretieren.
+
+=== Kartenterminals
+
+Cocard nutzt den Aufruf `GetCardTerminals` mandantenweit, der Arbeitsplatz in dem Kontext spielt daher keine Rolle. Wichtig ist daher nur, dass die Kartenterminals über den im Kontext verwendeten Mandanten erreichbar sind. Idealerweise verwendet man einen separaten Kontext für Cocard wie `cocard - cocard - Konnektor` (Mandant - Clientsystem - Arbeitsplatz) und ordnet alle Kartenterminals dem Arbeitsplatz zu (hier: `Konnektor`). Wenn der Arbeitsplatz dann mit dem Mandanten (hier: `cocard`) verknüpft wird, bekommt Cocard alle Kartenterminals zu sehen. Die Funktion des Kontextes wird in xref:basics/interfaces/soap.adoc[] ausführlicher erklärt.
+
+Zur Pflege von Kontexten in Cocard siehe xref:admin/contexts.adoc[].
+
+=== Karten
+
+Mit dem Aufruf `GetCards` mandantenweit erfolgt die Abfrage von SMC-Bs und SMC-KTs ebenfalls mandantenweit. HBAs werden ebenfalls inventarisiert, wenn diese bei der Abfrage gerade in einem Terminal stecken.
+
+Für die SMC-KTs gelten die gleichen Regeln wie für die Kartenterminals. SMC-Bs dagegen müssen am Konnektor explizit dem Mandanten zugeordnet werden, den Cocard im Kontext der Abfrage benutzt. Andernfalls "sieht" Cocard die SMC-Bs nicht.
