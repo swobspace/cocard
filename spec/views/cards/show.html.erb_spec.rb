@@ -57,7 +57,8 @@ RSpec.describe "cards/show", type: :view do
       cert_subject_o: "987654",
       private_information: "StrengGeheim"
     )
-    @card.create_card_terminal_slot(card_terminal_id: ct.id, slotid: 22232)
+    slot = FactoryBot.create(:card_terminal_slot, card_terminal_id: ct.id, slotid: 22232)
+    @card.update(card_terminal_slot: slot)
     @card.contexts << context
     @card.reload
   end

@@ -1,8 +1,9 @@
 <%= render 'shared/turbo-cache-control' %>
 
 <%= turbo_stream_from @connector %>
+<%= turbo_stream_from [ current_user, @connector ] %>
 
-<div class="card mb-3" id="<%= dom_id(@connector) %>">
+<div class="card mb-3">
   <div class="card-header">
     <div class="d-flex w-100">
       <div >
@@ -71,7 +72,7 @@
 <%= back_link %>
 <%= new_link Connector %>
 
-<% unless @connector.deleted_at %>
+<% unless @connector.deleted? %>
   <ul class="nav nav-tabs mt-3" id="ConnectorsTab" role="tablist" data-turbo-permanent>
     <li class="nav-item" role="presentation">
       <button class="nav-link active" id="card-terminals-tab" data-bs-toggle="tab" data-bs-target="#card-terminals-tab-pane" type="button" role="tab" aria-controls="card-terminals-tab-pane" aria-selected="false">Kartenterminals</button>

@@ -23,4 +23,5 @@ rmi.reboot() do |result|
   result.on_unsupported do
     ...
   end
-end----
+end
+----

@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe CardTerminalConcerns, type: :model do
+  let(:location) { FactoryBot.create(:location, lid: 'LACK') }
   let(:connector) do
     FactoryBot.create(:connector, name: 'TIK-123-XXX', short_name: 'K128')
   end
@@ -306,7 +307,12 @@ RSpec.describe CardTerminalConcerns, type: :model do
       expect(ct.ip.to_s).to eq("127.51.100.17")
       expect(ct2.ip.to_s).to eq("127.51.100.17")
     end
-
-
+  end
+  describe "#to_subject" do
+    it {expect(ct.to_subject).to eq("#KLG 08F6AD: ")}
+    it "set subject with location" do
+      allow(ct).to receive(:location).and_return(location) 
+      expect(ct.to_subject).to eq("LACK - #KLG 08F6AD: ")
+    end
   end
 end

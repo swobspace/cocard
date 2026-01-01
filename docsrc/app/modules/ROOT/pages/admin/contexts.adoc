@@ -1,17 +1,17 @@
 = Kontexte
 :author: Wolfgang Barth
-:revdate: 2024-09-18
+:revdate: 2026-01-01
 :imagesdir: ../../images
 
 == Überblick
 
-Jede Anfrage an den Konnektor benötigt gemäß der Definition der Gematik einen Aufrufkontext. Der Aufrufkontext besteht aus dem Triplet
+Jede Anfrage an den Konnektor benötigt gemäß der Definition der Gematik einen Aufrufkontext. Der Aufrufkontext - der Einfachheit halber in Cocard nur Kontext genannt -  besteht aus dem Triplet
 
 ----
 Mandant - Clientsystem - Arbeitsplatz
 ----
 
-Der Aufrufkontext wirkt als Filter. Anfragen zu bestimmten Kartenlesegeräten oder Karten, die im Infomodell nicht die Kombination aus den drei Werten besitzen, werden abgelehnt bzw. oder das Ergebnis ist ggf. eine leere Liste. Mit aktivierter Authentifikation wird zusätzlich geprüft, ob die Anfrage unter dem Namen des Clientsystems erfolgt ist. Eine Abfrage z.B. des Kontextes `Ein1 - iMedOne - Konnektor` ist nur möglich, wenn die Authentifikation als Client `iMedOne` erfolgt. Andernfalls wird die Anfrage abgelehnt.
+Der Kontext wirkt als Filter. Anfragen zu bestimmten Kartenlesegeräten oder Karten, die im Infomodell nicht die Kombination aus den drei Werten besitzen, werden abgelehnt bzw. oder das Ergebnis ist ggf. eine leere Liste. Mit aktivierter Authentifikation wird zusätzlich geprüft, ob die Anfrage unter dem Namen des Clientsystems erfolgt ist. Eine Abfrage z.B. des Kontextes `cocard - cocard - Konnektor` ist nur möglich, wenn die Authentifikation als Client `cocard` erfolgt.
 
 Die Abfrage von Kartenterminals (`GetCardTerminals`) und Karten (`GetCards`) erfolgt mandantenweit, d.h. der Konnektor gibt eine Liste aller Kartenterminals bzw. Karten zurück, die im Infomodell dem Mandanten zugewiesen sind, unabhängig vom Clientsystem und dem Arbeitsplatz. Trotzdem müssen Clientsystem und Arbeitsplatz grundsätzlich im Infomodell des Konnektors vorhanden sein, sonst filtert der Konnektor ggf. Einträge heraus und die Liste ist unvollständig oder leer.
 
@@ -26,8 +26,43 @@ Neben den drei Angaben Mandant, Clientsystem gibt die Möglichkeit, eine kurze B
 
 Das Triplet wird zusammen mit der Beschreibung in Auswahllisten und der Konnektor- und Kartenansicht angezeigt (siehe Abbildung).
 
+=== Default-Kontext (Empfehlung)
+
+Ein Default-Kontext, der alle Informationen abfragen darf erleichtert die Konfiguration in Cocard erheblich:
+
+* Auf dem Konnektor legt man einen Mandanten `cocard`, ein Clientsystem `cocard` und einen Default-Arbeitsplatz `Konnektor` an.
+* Der Mandant `cocard` bekommt alle SMB-Cs zugeordnet, sowie den Arbeitsplatz `Konnektor` unter dem Client `cocard`.
+* Alle Kartenterminals ordnet man dann dem Arbeitsplatz `Konnektor` zu.
+
+Mit dem Kontext `cocard - cocard - Konnektor` kann Cocard jetzt alle Terminals und alle Karten abfragen.
+
+NOTE: Der Kontext `cocard - cocard - Konnektor` sollte in Cocard immer nur dem Konnektor, nie einer SMC-B zugeordnet werden.
+
+== Kontexte eines Konnektors
+
+.Zugewiesene Kontexte eines Konnektors
+image::context/connector-assigned-contexts.png[]
+
+Für einige Operationen verwendet Cocard nur den ersten Kontext. Der erste Kontext sollte daher derjenige sein, mit dem Cocard nach Möglichkeit alle Informationen abrufen kann. Für die Abfrage aller Kartenterminals und aller Karten werden alle hinterlegten Kontexte genutzt, damit Cocard alle Informationen abfragen kann, auch wenn der Default-Kontext nicht global über alles berechtigt wurde.
+
+Die Reihenfolge kann durch einfaches Drag and Drop mit der Maus verändert werden, wenn der Benutzer die entsprechenden Berechtigungen für das Konnektor-Management hat.
+Mit dem Button beim Kontextseintrag kann man prüfen, ob der Kontext auch auf dem Konnektor vorhanden ist:
+
+image::context/connector-context-check.png[]
+
+Bei zertifikatsbasierter Authentifikation ist ein zum Clientsystem gehöriges Zertifikat erforderlich, das auch auf dem Konnektor dazu hinterlegt ist.
+Klappt die Authentifikation nicht, liefert der Kontext-Check eine entsprechende Fehlermeldung:
+
+image::context/connector-context-check-auth-failure.png[]
+
+== Kontexte einer SMC-B
+
 .Zugewiesene Kontexte einer SMC-B Karte
 image:context/card-assigned-contexts.png[]
+
+Für jeden Kontext, der einer SMC-B zugeordnet führt Cocard mit jeder Kartenabfrage auch eine PIN-Status-Prüfung durch. Der PIN-Status aller Kontexte muss ok sein, nur dann kann der Gesamtstatus der Karte auch mit OK gekennzeichnet werden. Im Umkehrschluss bedeutet das: nur die tatsächlich benötigten Kontexte sollten einer SMC-B zugeordnet sein. Hilfskontexte wie `cocard - cocard - Konnektor`, die in erster Linie der Informationsgewinnung dienen, mit denen aber keine produktiven kryptographischen Operationen ausgeführt werden, sollten nie bei einer SMC-B eingetragen sein.
+
+== Kontext-Anzeige und zugeordnete Objekte
 
 In der Anzeige des Kontextes finden sich eine Übersicht von SMC-B-Karten und Konnektoren, die diesen Kontext nutzen.
 

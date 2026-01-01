@@ -3,6 +3,8 @@ x-base: &base
   image: ghcr.io/swobspace/cocard:latest
   volumes:
     - dc-cocard-storage:/rails/storage
+    - dc-cocard-tmp:/rails/tmp
+    - ./cocard.yml:/rails/config/cocard.yml
   depends_on:
     redis:
       condition: service_started
@@ -22,7 +24,7 @@ services:
 
   worker:
     <<: *base
-    command: bundle exec good_job start --queues="cocard_production_default:4;cocard_production_rmi:1;turbo_streams_production:2;*:1"
+    command: bundle exec good_job start --threads=12 --queues="cocard_production_default:4;cocard_production_rmi:4;turbo_streams_production:2;*:1"
     restart: on-failure
 
   redis:
@@ -46,3 +48,4 @@ volumes:
   dc-cocard-redis:
   dc-cocard-postgres:
   dc-cocard-storage:
+  dc-cocard-tmp:

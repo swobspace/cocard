@@ -42,4 +42,28 @@ RSpec.describe Note, type: :model do
 
     it { expect(Note.object_notes).to contain_exactly(conn_note) }
   end
+
+  describe "with_mail" do
+    let(:user) { FactoryBot.create(:user) }
+    context "== 1" do
+      it "checks for subject and mail_to" do
+        note = FactoryBot.build(:note, :with_connector, user: user, with_mail: 1)
+        expect {
+          note.save
+        }.not_to change(Note, :count)
+      end
+    end
+
+    context "== 0" do
+      it "clears subject and mail_to" do
+        note = FactoryBot.build(:note, :with_connector, user: user, with_mail: 0,
+                                subject: "Some Stuff", mail_to: "anybody@example.com")
+        note.save
+        note.reload
+        expect(note.subject).to be_blank
+        expect(note.mail_to).to be_blank
+        
+      end
+    end
+  end
 end

@@ -287,4 +287,16 @@ RSpec.describe Connector, type: :model do
     end
   end
 
+  describe "#soft_delete" do
+    let(:conn) { FactoryBot.create(:connector) }
+    let!(:ct)   { FactoryBot.create(:card_terminal, :with_mac, connector: conn) }
+
+    it "deletes collection but not card terminal" do
+      expect(conn.card_terminals).to contain_exactly(ct)
+      expect {
+        conn.soft_delete
+      }.to change(conn.card_terminals, :count).by(-1)
+    end
+  end
+
 end

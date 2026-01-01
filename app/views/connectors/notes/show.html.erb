@@ -2,12 +2,23 @@
 
   <table class="table table-sm table-borderless">
   
-    <tr>
-      <th class="w-10 pe-3">
-        <%= t('activerecord.models.' + @note.notable.class&.name&.to_s.underscore )%>:
-      </th>
-      <td><%= @note.notable %></td>
-    </tr>
+    <% if @note.with_mail %>
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.mail_to')%>:</th>
+        <td><%= @note.mail_to %></td>
+      </tr>
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.subject')%>:</th>
+        <td><%= @note.subject %></td>
+      </tr>
+    <% else %>
+      <tr>
+        <th class="w-10 pe-3">
+          <%= t('activerecord.models.' + @note.notable.class&.name&.to_s.underscore )%>:
+        </th>
+        <td><%= @note.notable %></td>
+      </tr>
+    <% end %>
 
     <tr>
       <th class="w-10 pe-3"><%= t('attributes.message')%>:</th>

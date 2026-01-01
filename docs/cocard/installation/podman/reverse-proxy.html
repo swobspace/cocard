@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Reverse Proxy zur Absicherung von Cocard :: Cocard</title>
+    <link rel="prev" href="podman-systemd.html">
+    <link rel="next" href="../configuration.html">
     <meta name="generator" content="Antora 3.1.14">
     <link rel="stylesheet" href="../../../_/css/site.css">
     <script>var uiRootPath = '../../../_'</script>
@@ -28,8 +30,8 @@
     </div>
     <div id="topbar-nav" class="navbar-menu">
       <div class="navbar-end">
-          <div class="navbar-item dark">Cocard</div>
            <a class="navbar-item" href="../../../devnotes/index.html">DevNotes</a>
+          <div class="navbar-item dark">Dokumentation</div>
       </div>
     </div>
   </nav>
@@ -40,7 +42,7 @@
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
-    <h3 class="title"><a href="../../index.html">Cocard</a></h3>
+    <h3 class="title"><a href="../../index.html">Dokumentation</a></h3>
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
@@ -55,40 +57,94 @@
     <a class="nav-link" href="../../user/common.html">Allgemeines zur Oberfläche</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../../user/conditions.html">Zustände</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../../user/connector.html">Konnektor</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="../../user/card-terminal.html">Kartenterminal</a>
+    <a class="nav-link" href="../../basics/how-it-works.html">Wie funktioniert Cocard?</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../user/card-terminal-health-check.html">Health-Check</a>
+    <a class="nav-link" href="../../basics/interfaces/soap.html">SOAP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../basics/interfaces/rmi.html">RMI</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../basics/interfaces/koco-webapi.html">KoCoBox WebAPI</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../basics/interfaces/ticlient-rest.html">RISE TI-Client REST-API</a>
   </li>
 </ul>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../../user/card.html">Karte</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../../user/logs.html">Event Logs</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../../user/acknowledges.html">Notizen und Acknowledges</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../../user/ti-lagebild.html">TI-Lagebild</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../../user/verify-pin.html">PIN-Verifizierung</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../../user/workplaces.html">Arbeitsplätze</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../admin/client-certificates.html">Client-Zertifikate</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../user/logs.html">Event Logs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../admin/contexts.html">Kontexte</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../user/acknowledges.html">Notizen und Acknowledges</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../user/verify-pin.html">PIN-Verifizierung</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../../user/tags.html">Tags</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../user/ti-lagebild.html">TI-Lagebild</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../user/conditions.html">Zustände</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../connector/connector.html">Konnektor</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../connector/connector-edit.html">Konnektor anlegen/bearbeiten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../connector/connector-autoreboot.html">Automatischer Reboot</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../ct/card-terminal.html">Kartenterminal</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../ct/card-terminal-edit.html">Kartenterminal anlegen/bearbeiten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../ct/card-terminal-health-check.html">Health-Check</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../ct/idle-messages-edit.html">Ruhebildschirme setzen</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../ct/duck-terminal.html">Kartenterminal über IP-Adresse prüfen</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../ct/smcb-remote-pin.html">Remote PIN für SMC-B Karten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../ct/ct-arp-check.html">ARP-Abgleich</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../card/card.html">Karte</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../card/card-new.html">Karte anlegen/bearbeiten</a>
   </li>
 </ul>
   </li>
@@ -96,36 +152,6 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Administration</span>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <span class="nav-text">Konnektor</span>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../admin/connector-edit.html">Konnektor anlegen/bearbeiten</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../admin/connector-autoreboot.html">Automatischer Reboot</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="../../admin/card-terminal-edit.html">Kartenterminal anlegen/bearbeiten</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../admin/idle-messages-edit.html">Ruhebildschirme setzen</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../admin/duck-terminal.html">Kartenterminal über IP-Adresse prüfen</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../../admin/card-new.html">Karte anlegen/bearbeiten</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../../admin/contexts.html">Kontexte</a>
-  </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../../admin/locations.html">Standorte</a>
   </li>
@@ -142,22 +168,20 @@
     <a class="nav-link" href="../../admin/authorities.html">Berechtigungen</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../../admin/smcb-remote-pin.html">Remote PIN für SMC-B Karten</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../../admin/client-certificates.html">Client-Zertifikate</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../../admin/ldap-authentication.html">LDAP-Authentifikation</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="../../admin/ti-client/index.html">TI-Client (RISE TI Gateway)</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../admin/ti-client/activate-api.html">REST-API aktivieren</a>
+</ul>
   </li>
 </ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../ti-client/index.html">TI-Client (RISE TI Gateway)</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../ti-client/activate-api.html">REST-API aktivieren</a>
   </li>
 </ul>
   </li>
@@ -220,23 +244,23 @@
 </div>
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
-    <span class="title">Cocard</span>
+    <span class="title">Dokumentation</span>
     <span class="version">default</span>
   </div>
   <ul class="components">
-    <li class="component is-current">
-      <a class="title" href="../../index.html">Cocard</a>
-      <ul class="versions">
-        <li class="version is-current is-latest">
-          <a href="../../index.html">default</a>
-        </li>
-      </ul>
-    </li>
     <li class="component">
       <a class="title" href="../../../devnotes/index.html">DevNotes</a>
       <ul class="versions">
         <li class="version is-latest">
           <a href="../../../devnotes/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../../index.html">Dokumentation</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">default</a>
         </li>
       </ul>
     </li>
@@ -251,7 +275,7 @@
   <a href="../../index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="../../index.html">Cocard</a></li>
+    <li><a href="../../index.html">Dokumentation</a></li>
     <li><a href="../index.html">Installation</a></li>
     <li><a href="reverse-proxy.html">Reverse Proxy</a></li>
   </ul>
@@ -336,7 +360,7 @@ systemctl --user enable podman.socket</code></pre>
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-note" title="Hinweis"></i>
 </td>
 <td class="content">
 Ich benutze Apache nicht länger als Reverse Proxy, das Folgende ist daher nur eine Gedankenstütze und keine lauffähige abschließende Konfiguration.
@@ -372,12 +396,16 @@ Ich benutze Apache nicht länger als Reverse Proxy, das Folgende ist daher nur e
 </div>
 </div>
 </div>
+<nav class="pagination">
+  <span class="prev"><a href="podman-systemd.html">Systemd und Quadlets</a></span>
+  <span class="next"><a href="../configuration.html">Standard-Konfiguration</a></span>
+</nav>
 </article>
   </div>
 </main>
 </div>
 <footer class="footer">
-  <span>Wolfgang Barth (C) 2024-2025</span>
+  <span>Wolfgang Barth (C) 2024-2026</span>
 </footer>
 <script src="../../../_/js/site.js"></script>
 <script async src="../../../_/js/vendor/highlight.js"></script>

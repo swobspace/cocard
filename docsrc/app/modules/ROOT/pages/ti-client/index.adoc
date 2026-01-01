@@ -1,0 +1,106 @@
+= TI-Client (RISE TI Gateway)
+:author: Wolfgang Barth
+:revdate: 2025-11-24
+:imagesdir: ../../../images
+
+Der klassische Zugriff von Primärsystemen (KIS, PVS, Cocard, etc.) erfolgt über die von der Gematik definierten SOAP-Schnittstellen. Die Art des Konnektors spielt hierbei keine Rolle - Einbox-Konnektor, High-Speed-Konnektor oder virtueller Konnektor eines TI-Gateways - werden gleichermaßen durch die SOAP-Schnittstelle unterstützt.
+
+Ein TI-Gateway wie das von RISE bringt zusätzliche Herausforderungen bei der Anbindung von Kartenterminals mit sich: der Konnektor kennt die IP-Adresse des Kartenterminals selbst nicht mehr und kann es nicht direkt erreichen. Die Verbindung läuft über einen Kartenterminal-Proxy (KT-Proxy) - in beide Richtungen. Die folgende Abbildung zeigt das prinzipielle Schema der Anbindung:
+
+image::ti-client/schema.svg[]
+
+Der KT-Proxy läuft auf einem sogenannten _TI-Client_. Jeder virtuelle Konnektor hat genau einen TI-Client. Auf jedem TI-Client laufen mehrere KT-Proxys, für jedes Kartenterminal genau ein KT-Proxy. In größeren Umgebungen läuft der TI-Client technisch gesehen als Docker-Container auf einem Host (meist ein Linux-Host).
+
+image::ti-client/ticlient.svg[]
+
+Das Konstrukt ist wesentlich komplexer als wenn Kartenterminal und Einbox-Konnektor im gleichen Netzwerk sitzen. Und damit auch anfälliger gegen Störeinflüsse. Cocard unterstützt in diesem Szenario über die SOAP-Schnittstelle hinaus weitere Funktionen und nutzt damit das REST-API von RISE.
+
+Die Nutzung dieser Funktionen ist komplett optional. Einzige Einschränkung: beim TI-Gateway meldet der Konnektor über die SOAP-Abfrage immer nur die Wireguard-IP als IP des Kartenterminals. In Cocard erscheint in diesem Falle eine Warnung, das "gemeldete" und "tatsächliche" IP des Kartenterminals von einander abweichen.
+
+== Unterstützte Funktionen und Abhängigkeiten
+
+.Legende zu den Stufen
+[cols="1,5"]
+|===
+|Stufe | Beschreibung
+
+|Basis
+|Cocard-interne Funktionen ohne REST-API
+
+|Stufe 2
+|Nutzung REST-API für Funktionen auf dem TI-Client. Dazu aktiviert man die Benutzerverwaltung am TI-Client und generiert ein Applikationszugang mit der Applikation 'cocard'.
+
+|Stufe 3
+|Nutzung des TI-Clients als Konnektor-Proxy, um mit dem REST-API auch den Konnektor ansprechen/steuern zu können. Die Konnektor-Proxy-Funktion muss per REST einmal aktiviert werden.
+
+|===
+
+
+[cols="5,1,1,1"]
+|===
+|Funktion | Basis | Stufe 2 | Stufe 3
+
+|KT-Proxy in Cocard anlegen/pflegen und manuell auf den TI-Client übertragen
+|✅
+|✅
+|✅
+
+|KT-Proxy in Cocard anlegen/pflegen. Dabei wir der KT-Proxy auf dem TI-Client automatisch angelegt/aktualisiert.
+|❌
+|✅
+|✅
+
+|Alle KT-Proxys des TI-Clients abfragen und bei Bedarf in Cocard anlegen
+|❌
+|✅
+|✅
+
+|Abfrage des Schedulers: _Hindergrundaufgaben_
+|❌
+|✅
+|✅
+
+|Remote-PIN+: Abfrage der verfügbaren SMB-Cs und Anzeige des Remote-PIN+ Status falls Remote-PIN+ für die SMC-B konfiguriert wurde
+|❌
+|✅
+|✅
+
+|Anzeige aller dem Konnektor bekannten Kartenterminals und deren Zustand (z.B. AKTIV, nicht verbunden)
+|❌
+|❌
+|✅
+
+|Kartenterminal dem Konnektor zuweisen (Wechsel von BEKANNT -> ZUGEWIESEN). Diese Funktion ist auch als Sammelaktion für alle Kartenterminals verfügbar, die derzeit nur BEKANNT sind.
+|❌
+|❌
+|✅
+
+|Kartenterminal pairen: dabei startet Cocard den Pairing-Vorgang am Konnektor, danach wird das Kartenterminal in den Pairing-Modus versetzt. Cocard sendet dann das Finalisieren an den Konnektor. Sobald die PIN-Abfrage am Kartenterminal erscheint, sendet Cocard das OK an das Kartenterminal und der Konnektor schließt den Vorgang ab (ZUGEWIESEN -> AKTIV)
+|❌
+|❌
+|✅
+
+|Kartenterminal erneut verbinden, wenn das Kartenterminal zwar im Zustand AKTIV ist, aber derzeit nicht mit dem Konnektor verbunden. Diese Funktion ist auch als Sammelaktion für alle Terminals verfügbar, die im Zustand (AKTIV, nicht verbunden) sind.
+|❌
+|❌
+|✅
+
+|Aktivierung eines Kartenterminals, das sich im Zustand GEPAIRT befindet (GEPAIRT->AKTIV)
+|❌
+|❌
+|✅
+
+|===
+
+
+NOTE: Die Version des TI-Clients muss >= 2.6.1 sein. Mit älteren Versionen ist das REST-API nicht vorhanden/nutzbar.
+
+=== Aktivierung REST-API TI-Client
+
+Für die Aktivierung des REST-API siehe xref:ti-client/activate-api.adoc[].
+
+== Installation und Konfiguration
+
+
+
+xref:installation:cocard_yml.adoc[Aktivierung und Konfiguration]

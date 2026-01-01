@@ -1,0 +1,8 @@
+= KoCoBox WebAPI
+:author: Wolfgang Barth
+:revdate: 2025-12-31
+:imagesdir: ../../../images
+
+für die KoCoBox gibt es kein offizielles API zur Fernsteuerung. Alle Tools wie auch Cocard ahmen die Aufrufe der Admin-Weboberfläche nach. Ein undokumentiertes API zu nutzen birgt auch immer die Gefahr, dass bei der nächsten Änderung der Weboberfläche die Aufrufe nicht mehr funktionieren.
+
+Cocard stellt daher als einzige Funktion für die KoCoBox den Reboot des Konnektors bereit. Die Integration weiterer Funktionen außerhalb der SOAP-Aufrufe ist nicht vorgesehen.

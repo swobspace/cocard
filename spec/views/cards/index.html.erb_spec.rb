@@ -78,7 +78,8 @@ RSpec.describe "cards/index", type: :view do
         private_information: "StrengGeheim"
       )
     ]
-    card1.create_card_terminal_slot(card_terminal_id: ct.id, slotid: 22888)
+    slot = FactoryBot.create(:card_terminal_slot, card_terminal_id: ct.id, slotid: 22888)
+    card1.update(card_terminal_slot: slot)
     card1.reload
   end
 

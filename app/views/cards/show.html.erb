@@ -1,7 +1,7 @@
 <%= turbo_stream_from :verify_pins %>
 <%= turbo_stream_from @card %>
 
-<div class="card mb-3" id="<%= dom_id(@card) %>">
+<div class="card mb-3">
   <div class="card-header">
     <div class="d-flex w-100">
       <div>
@@ -46,7 +46,7 @@
 
 <%= back_link %>
 
-<% unless @card.deleted_at %>
+<% unless @card.deleted? %>
   <%= turbo_frame_tag("logs", src: card_logs_path(@card, valid: 1), 
                               refresh: "morph") %>
 

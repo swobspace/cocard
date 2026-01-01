@@ -34,7 +34,6 @@
           <thead>
             <tr>
               <th class="bg-info-subtle"><%= t('attributes.card_terminal') %></th>
-              <th class="nosort notvisible">Health</th>
               <th class="bg-info-subtle notvisible"><%= t('attributes.location') %></th>
               <th class="bg-info-subtle notvisible"><%= t('attributes.room') %></th>
               <th class="text-start bg-info-subtle"><%= t('attributes.condition') %></th>
@@ -62,7 +61,6 @@
               <th></th>
               <th></th>
               <th></th>
-              <th></th>
             </tr>
           </tfoot>
           <tbody>
@@ -71,10 +69,6 @@
                 <td>
                   <%= render LinkToComponent.new(item: terminal.card_terminal,
                                                  label_method: :name) %>
-                </td>
-                <td>
-                  <%= render HealthCheckButtonComponent.new(item: terminal.card_terminal,
-                                                            variant: :small) %>
                 </td>
                 <td> <%= terminal.card_terminal&.location&.lid %> </td>
                 <td> <%= terminal.card_terminal&.room %> </td>

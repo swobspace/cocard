@@ -1,5 +1,12 @@
 = Changelog
 
+== 0.9.7 - 2026-01-01
+
+* diverse Bugfixes im Zusammenhang mit SoftDelete.
+* Notizen/Acknowledges als Mail versenden. Dabei werden Informationen zum Objekt (Konnektor, Kartenterminal, Karte) automatisch ergänzt.
+* ARP-Abgleich für Kartenterminals
+* Überarbeitung der Dokumentation
+
 == 0.9.6 - 2025-12-20
 
 * RISE TIClient: Kartenterminal dem Konnektor hinzufügen (wenn der Konnektor trotz vorhandenem KTProxy das Kartenterminal nicht sieht)
@@ -163,7 +170,7 @@ für Objekte, die aus anderen Gründen nicht mehr aktualisiert werden.
 
 == 0.6.3 - 2025-01-17
 * Workflow für die PIN-Verifizierung aller Karten eines Terminals verbessert.
-* Neu: Hintergrundjob für die automatische PIN-Verifizierung (nur unterstützte Terminals). SMC-B Auto-PIN-Mode muss hierfür am Kartenterminal gleich `Automatisch` sein. xref:admin/card-terminal-edit.adoc[Mehr zur automatischen PIN-Verifizierung]
+* Neu: Hintergrundjob für die automatische PIN-Verifizierung (nur unterstützte Terminals). SMC-B Auto-PIN-Mode muss hierfür am Kartenterminal gleich `Automatisch` sein. xref:ct/card-terminal-edit.adoc[Mehr zur automatischen PIN-Verifizierung]
 * Neu: Einzelne Einträge des TI-Lagebildes können gemutet werden, um nicht relevante Einträge aus dem Gesamtstatus herauszunehmen
 * Fix: TI-Lagebild: die Anzeige der fehlerhaften Dienste korrigiert.
 
@@ -186,7 +193,7 @@ für Objekte, die aus anderen Gründen nicht mehr aktualisiert werden.
 
 == 0.5.0 - 2024-12-08
 
-* Neu: xref:admin/connector-edit.adoc#_authentifikation_per_userpasswort[Client-Authentifikation am Konnektor mit User/Passwort] (alternativ zum Client-Zertifikat)
+* Neu: xref:connector/connector-edit.adoc#_authentifikation_per_userpasswort[Client-Authentifikation am Konnektor mit User/Passwort] (alternativ zum Client-Zertifikat)
 * Fix: Löschen von Objekten mit verbesserter Fehlermeldung
 * Einzelne Logs auf ungültig setzen (bisher nur alle veralteten Logs auf einmal)
 
@@ -238,7 +245,7 @@ für Objekte, die aus anderen Gründen nicht mehr aktualisiert werden.
 
 == 0.3.8 - 2024-09-14
 
-* xref:admin/smcb-remote-pin.adoc[Remote-SMC-B PIN Support für ORGA 6141 online]
+* xref:ct/smcb-remote-pin.adoc[Remote-SMC-B PIN Support für ORGA 6141 online]
 
 == 0.3.7 - 2024-09-14
 

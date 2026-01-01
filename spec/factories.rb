@@ -124,6 +124,9 @@ FactoryBot.define do
     trait :with_log do
       association :notable, factory: [:log, :with_connector]
     end
+    trait :with_connector do
+      association :notable, factory: :connector
+    end
   end
 
   factory :operational_state do

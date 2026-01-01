@@ -1,0 +1,4 @@
+<%= @note.message %>
+
+<%= render partial: "#{@note.notable.class.name.underscore}",
+           locals: { notable: @note.notable } %>

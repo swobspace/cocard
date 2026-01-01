@@ -1,0 +1,94 @@
+<table class="table table-sm table-borderless mt">
+
+  <tr class="border-top">
+    <th ><%= t('attributes.name')%>:</th>
+    <td>
+      <%= link_to(notable.name, polymorphic_url(notable), target: '_blank') %>
+    </td>
+  </tr>
+
+  <tr>
+    <th ><%= t('attributes.ip')%>:</th>
+    <td><%= link_to(notable.ip, notable.admin_url,
+                    class: 'primary-link',
+                    target: '_blank'
+                   ) if notable.admin_url.present?
+         %></td>
+  </tr>
+
+
+  <tr>
+    <th ><%= t('attributes.mac')%>:</th>
+    <td><%= notable.mac %></td>
+  </tr>
+
+  <tr>
+    <th ><%= t('attributes.location')%>:</th>
+    <td>
+      <%= notable.location %>
+    </td>
+  </tr>
+
+  <tr>
+    <th ><%= t('attributes.room')%>:</th>
+    <td><%= notable.room %></td>
+  </tr>
+
+  <tr class="border-top">
+    <th class="">SMC-KT <%= t('attributes.iccsn')%>:</th>
+    <td>
+        <%= link_to(notable.smckt&.iccsn,
+                    card_url(notable.smckt),
+                    class: 'primary-link') if notable.smckt %></td>
+  </tr>
+
+  <tr>
+    <th class="">SMC-KT <%= t('attributes.expiration_date')%>:</th>
+    <td><%= render ExpirationDateComponent.new(item: notable.smckt) %></td>
+  </tr>
+
+  <tr>
+    <th ><%= t('attributes.firmware_version')%>:</th>
+    <td><%= notable.firmware_version %></td>
+  </tr>
+
+  <tr>
+    <th ><%= t('attributes.identification')%>:</th>
+    <td><%= notable.identification %></td>
+  </tr>
+
+  <tr class="border-top">
+    <th class=""><%= t('attributes.connected')%>:</th>
+    <td><%= render CardTerminal::ConnectedComponent.new(card_terminal: notable) %></td>
+  </tr>
+
+  <tr>
+    <th class=""><%= t('attributes.condition')%>:</th>
+    <td><%= notable.condition_message %></td>
+  </tr>
+
+  <tr>
+    <th class=""><%= t('attributes.last_check')%>:</th>
+    <td><%= render IsCurrentComponent.new(item: notable, attr: :last_check) %></td>
+  </tr>
+  <tr>
+    <th class=""><%= t('attributes.last_ok')%>:</th>
+    <td>
+      <%= render IsCurrentComponent.new(item: notable, attr: :last_ok) %>
+    </td>
+  </tr>
+
+
+  <tr class="border-top">
+    <th ><%= t('attributes.connector')%>:</th>
+    <td><%= notable.connector %></td>
+  </tr>
+
+  <tr>
+    <th ><%= t('attributes.ct_id')%>:</th>
+    <td><%= notable.ct_id %></td>
+  </tr>
+
+
+</table>
+

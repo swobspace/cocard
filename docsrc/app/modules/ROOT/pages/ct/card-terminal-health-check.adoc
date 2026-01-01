@@ -1,0 +1,86 @@
+= Kartenterminal: Health-Check
+:navtitle: Health-Check
+:author: Wolfgang Barth
+:revdate: 2025-12-28
+:imagesdir: ../../images
+
+.Aktionschaltfläche eines Kartenterminals
+image::ct/card-terminal-action-buttons-healthcheck.png[]
+
+Mit dem Button image:common/health-check-button.png[] führt Cocard einen Health-Check des Kartenterminals durch.
+
+[%autowidth]
+|===
+|Was | Voraussetzung | Beschreibung
+
+|Ping
+|
+|Erreichbarkeit per Ping
+
+|TCP/443
+|
+|Erreichbarkeit des RMI-Interfaces und der Weboberfläche des Kartenteminals
+
+|Terminalname
+|RMI
+|Stimmt der Name des Terminals in Cocard mit dem auf dem Terminal überein?
+
+|MAC-Adresse
+|RMI
+|Stimmt die MAC-Adresse am Terminal mit der MAC-Adresse in Cocard überein? Falls nicht, ist sehr wahrscheinlich die in Cocard eingetragene IP-Adresse falsch und es wird ein anderes Terminal geprüft.
+
+|SMC-KT
+|RMI
+|Cocard prüft, ob das Terminal Zugriff auf die SMC-KT hat und ob das Zertifikat noch gültig ist.
+|===
+
+Der Health-Check aktualisiert gleichzeitig statistische Daten in Cocard wie die Anzahl der Steckzyklen der einzelnen Slots. Weitere Parameter des Kartenterminals können über den xref:ct/duck-terminal.adoc[IP-Check] abgefragt werden.
+
+.IP-Check eines Kartenterminals
+image::ct/card-terminal-action-buttons-ipcheck.png[]
+
+
+== Beispiel-Ausgaben
+
+=== Erfolgreicher Check
+
+Im ersten Beispiel können Werte per RMI vom Kartenterminal abgefragt werden. MAC-Adresse und Name stimmen mit der Cocard-Konfiguration überein, die IP-Adresse in Cocard ist daher korrekt. Die SMC-KT ist erreichbar und gültig, daher erfolgt hier keine Ausgabe.
+
+.Erfolgreicher Check: MAC und Terminalname stimmen mit der Cocard-Konfiguration überein.
+image::ct/ct-health-check-ok.png[]
+
+=== Falsche IP-Adresse in Cocard
+
+In diesem Beispiel meldet das Kartenterminal eine andere MAC-Adresse zurück als in Cocard hinterlegt. Daher ist hier sehr wahrscheinlich die in Cocard hinterlegte IP-Adresse falsch und Cocard fragt ein anderes Kartenterminal. In Umgebungen mit per DHCP vergebener dynamischer IP-Adresse können IP-Wechsel schon mal vorkommen.
+
+.MAC-Adressen stimmen nicht überein! Cocard prüft vermutlich das falsche Terminal (IP-Adresse in Cocard ist falsch)
+image::ct/ct-health-check-wrong-ip.png[]
+
+=== Ping nicht möglich
+
+Ist ein Ping gar nicht möglich, sollte man im Abschnitt _Status_ prüfen, ob das Terminal doch ggf. mit einem Konnektor verbunden ist. Falls ja, ist hier auch die in Cocard hinterlegte IP-Adresse nicht mehr aktuell.
+
+image::ct/ct-health-check-ping-failed.png[]
+
+=== RMI-Port nicht erreichbar
+
+Wenn der Port TCP/443 nicht erreichbar ist, Ping aber durchaus funktioniert wird die Verbindung möglicherweise durch eine Firewall gefiltert.
+
+.RMI-Port TCP/443 nicht erreichbar
+image::ct/ct-health-check-rmi-port-error.png[]
+
+=== Zeitsperre aktiv
+
+Bei zu vielen Fehlversuchen - etwa wenn die verwendete Admin-PIN falsch ist - sperrt das Kartenterminal den Zugriff für einige Zeit.
+
+.Guard time active: zu viele Fehler beim Login - Zeitsperre aktiv
+image::ct/ct-health-check-guard-time-active.png[]
+
+=== Kartenterminal in einem nicht erreichbaren Netzwerk
+
+Wenn Cocard und Konnektor in unterschiedlichen Netzwerken stehen, ist es denkbar, dass der Konnektor zwar mit dem Kartenterminal sprechen kann, aber Cocard keinen direkten Zugriff darauf hat. In diesem Falle kann man in Cocard beim Netzwerk in den Einstellungen Ping deaktivieren. Beim Health-Check gibt Cocard dann eine entsprechende Info aus:
+
+.Ping für das Netzwerk des Kartenterminals deaktiviert
+image::ct/ct-health-check-ping-deactivated.png[]
+
+Cocard verzichtet dann auch bei den periodischen Abfragen des Kartenterminals auf einen Ping und verlässt sich ausschließlich auf den Zustand, den der Konnektor vermeldet.

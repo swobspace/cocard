@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Kartenterminal anlegen/bearbeiten :: Cocard</title>
+    <link rel="prev" href="card-terminal.html">
+    <link rel="next" href="card-terminal-health-check.html">
+    <meta name="generator" content="Antora 3.1.14">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">Cocard</a>
+      <div class="navbar-item search hide-for-print">
+        <div id="search-field" class="field">
+          <input id="search-input" type="text" placeholder="Suche ...">
+        </div>
+      </div>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="abstand">
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+           <a class="navbar-item" href="../../devnotes/index.html">DevNotes</a>
+          <div class="navbar-item dark">Dokumentation</div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="cocard" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Dokumentation</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Cocard</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/dashboard.html">Dashboard</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/common.html">Allgemeines zur Oberfläche</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../basics/how-it-works.html">Wie funktioniert Cocard?</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../basics/interfaces/soap.html">SOAP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../basics/interfaces/rmi.html">RMI</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../basics/interfaces/koco-webapi.html">KoCoBox WebAPI</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../basics/interfaces/ticlient-rest.html">RISE TI-Client REST-API</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/workplaces.html">Arbeitsplätze</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/client-certificates.html">Client-Zertifikate</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/logs.html">Event Logs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/contexts.html">Kontexte</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/acknowledges.html">Notizen und Acknowledges</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/verify-pin.html">PIN-Verifizierung</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/tags.html">Tags</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/ti-lagebild.html">TI-Lagebild</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../user/conditions.html">Zustände</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../connector/connector.html">Konnektor</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connector/connector-edit.html">Konnektor anlegen/bearbeiten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connector/connector-autoreboot.html">Automatischer Reboot</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="card-terminal.html">Kartenterminal</a>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="card-terminal-edit.html">Kartenterminal anlegen/bearbeiten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="card-terminal-health-check.html">Health-Check</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="idle-messages-edit.html">Ruhebildschirme setzen</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="duck-terminal.html">Kartenterminal über IP-Adresse prüfen</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="smcb-remote-pin.html">Remote PIN für SMC-B Karten</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ct-arp-check.html">ARP-Abgleich</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../card/card.html">Karte</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../card/card-new.html">Karte anlegen/bearbeiten</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Administration</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/locations.html">Standorte</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/networks.html">Netzwerke</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/operational_states.html">Betriebszustände</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/jobs.html">Jobverwaltung</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/authorities.html">Berechtigungen</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../admin/ldap-authentication.html">LDAP-Authentifikation</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../ti-client/index.html">TI-Client (RISE TI Gateway)</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ti-client/activate-api.html">REST-API aktivieren</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../changelog.html">Changelog</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../installation/index.html">Installation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../installation/podman/quickstart.html">Quickstart: podman pods</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../first-steps.html">Erste Schritte</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../installation/podman/podman-compose.html">Quickstart: docker-compose</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../first-steps.html">Erste Schritte</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/podman/podman-systemd.html">Systemd und Quadlets</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/podman/reverse-proxy.html">Reverse Proxy</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Konfiguration</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../installation/configuration.html">Standard-Konfiguration</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../installation/cocard_yml.html">Erweiterte Konfiguration</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/checkmk.html">CheckMK Integration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Dokumentation</span>
+    <span class="version">default</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../devnotes/index.html">DevNotes</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../devnotes/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../index.html">Dokumentation</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">default</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Dokumentation</a></li>
+    <li><a href="card-terminal.html">Kartenterminal</a></li>
+    <li><a href="card-terminal-edit.html">Kartenterminal anlegen/bearbeiten</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Kartenterminal anlegen/bearbeiten</h1>
+<div class="paragraph">
+<p>Kartenterminals, die mit einem Konnektor verbunden sind, werden automatisch erkannt und angelegt. Eine Neuanlage von Kartenterminals ist nur dann notwendig, wenn das Kartenterminal noch nicht angeschlossen ist, aber bereits inventarisiert werden soll. Oder wenn es sich um ein mobiles Gerät handelt, das keine permanente Online-Verbindung zum Konnektor aufrecht erhält. Alternativ kann man das Kartenterminal auch über einen Check via IP in Cocard aufnehmen, sofern das Kartenterminal dafür unterstützt wird. Details siehe <a href="duck-terminal.html" class="xref page">Kartenterminal über IP-Adresse prüfen</a></p>
+</div>
+<div class="paragraph">
+<p>Für die Neuanlage genügt die MAC-Adresse oder alternativ die Seriennummer. Alle anderen Felder sind optional.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Wichtig"></i>
+</td>
+<td class="content">
+Wenn Kartenterminals vorab zur Inventarisierung erfasst werden, bitte immer die MAC-Adresse als Identifikationsmerkmal mit angeben. Dann kann Cocard später, wenn das Kartenterminal erstmals online geht, das Terminal korrekt zuordnen und weitere Daten ergänzen.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/ct/card-terminal-edit.png" alt="card terminal edit">
+</div>
+</div>
+<div class="paragraph">
+<p>Das Formular besteht aus 2 Bereichen: der obere Bereich (bis zu dem gelben Hinweis) sind Felder, die ein Administrator (Rolle Admin oder CardTerminalManager) selbst pflegt. Die Felder unten sind werden von Cocard aktualisiert und sind nur für die Ersterfassung gedacht, wenn das Kartenterminal noch nicht online ist.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Felder Kartenterminal anlegen/bearbeiten</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Feld</th>
+<th class="tableblock halign-left valign-top">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Anzeigename</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name zur Identifikation des Kartenterminals</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ort</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zuordnung zu einem <a href="../admin/locations.html" class="xref page">Standort</a>. Wenn für die IP-Adresse des Kartenterminals ein <a href="../admin/networks.html" class="xref page">Netzwerk</a> gepflegt ist, dann aktualisiert Coccard den Standort automatisch. Soll Cocard den Standort nicht verändern, dann darf im Umkehrschluss für diese IP kein Netzwerk in den Stammdaten vorhanden sein.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Raum</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Freitextfeld für die Lokalisation des Kartenterminals</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Netzwerk, Dose, Switch</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Freitextfeld für Angaben zum Netzwerkanschluss</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ansprechpartner</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Freitextfeld für Kontaktinformationen</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lieferdatum</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lieferant</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Seriennummer</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Modellbezeichnung</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Produktname oder ähnliches</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Beschreibung</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Freitext zur Dokumentation weiterer Informationen</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SMC-B Auto-PIN-Mode</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wenn das Kartenterminal von Cocard unterstützt wird sendet Cocard die PIN für eine SMC-B an das Kartenterminal, wenn der Konnektor eine Pin-Verifizierung anfordert. <a href="smcb-remote-pin.html" class="xref page">Unterstützte Kartenterminals</a>. Mögliche Werte sind <code>Aus</code>, <code>On Demand</code> und <code>Automatisch</code>. Bei <code>On Demand</code> muss die PIN-Verifizierung vom Anwender über einen Button in Cocard manuell ausgelöst werden, bei <code>Auto</code> übernimmt das ein Hintergrundjob, sobald Cocard feststellt, dass eine PIN zu verifizieren ist.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MAC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MAC-Adresse des Kartenterminals. Wird von Cocard zur eindeutigen Identifikation des Kartenterminals genutzt</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IP-Adresse</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IPv4-Adresse des Kartenterminals</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Slots</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Anzahl der verfügbaren Slots</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Konnektor</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Konnektor, mit dem das Kartenterminal verbunden ist. Wenn ein Kartenterminal abgebaut wird und nicht mehr erreichbar ist kann man hier den Konnektor entfernen, um Fehlalarme im Dashboard zu vermeiden.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Hinweis"></i>
+</td>
+<td class="content">
+Für die vollautomatische PIN-Verifizierung darf eine SMC-B-Karte keinen Fehlversuch haben (Verbleibende Versuche: 3). Sobald eine PIN falsch eingegeben wurde und die Anzahl der verbleibenden Versuche kleiner als 3 ist verzichtet der Hintergrundjob auf eine PIN-Eingabe. Das soll verhindern, dass eine falsch konfigurierte <code>DEFAULT_SMC_PIN</code> alle Karten in kurzer Zeit sperrt.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Achtung"></i>
+</td>
+<td class="content">
+Bei Nutzung des Auto-PIN-Features bitte immer erst mit einem Kartenterminal und einer Karte testen, um Fehlkonfigurationen frühzeitig zu erkennen. Im Worst-Case könnten alle SMC-B-Karten in kürzester Zeit gesperrt werden und die Eingabe einer PUK erfordern!
+</td>
+</tr>
+</table>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="card-terminal.html">Kartenterminal</a></span>
+  <span class="next"><a href="card-terminal-health-check.html">Health-Check</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <span>Wolfgang Barth (C) 2024-2026</span>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/vendor/medium-zoom.min.js"></script>
+<script>mediumZoom('img:not(.copy-icon');</script>
+<script src="../../_/js/vendor/lunr.js"></script>
+<script src="../../_/js/vendor/lunr-languages.js"></script>
+<script src="../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../.." data-snippet-length="100" data-stylesheet="../../_/css/search.css"></script>
+<script async src="../../search-index.js"></script>
+  </body>
+</html>

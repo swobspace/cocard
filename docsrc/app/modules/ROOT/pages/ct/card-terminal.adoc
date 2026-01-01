@@ -1,0 +1,154 @@
+= Kartenterminal
+:author: Wolfgang Barth
+:revdate: 2025-09-19
+:imagesdir: ../../images
+:experimental: true
+
+== Übersicht
+
+Die Anzeige eines Kartenterminals besteht aus 4 Bereichen: die allgemeine Information (links oben), Status (links unten), Daten des Kartenterminals (rechts oben) und Produktinformation (rechts unten).
+
+image::ct/ct-show.png[]
+
+Die Kopfzeile enthält neben dem Namen den Gesamtstatus des Kartenterminals eine Aktionsschaltfläche.
+
+=== Aktionsschaltfläche (action buttons)
+
+Die angezeigten Button in der Aktionschaltfläche sind abhängig von Berechtigungen des Benutzers und vom Zustand des Kartenterminals.
+
+.Aktionsschaltfläche - Buttons variieren je nach Zustand des Terminals
+image::ct/card-terminal-action-buttons.png[]
+
+[%autowidth,cols="a,,"]
+|===
+|Button | Beschreibung | Sichtbarkeit
+
+|image::common/reboot-button.png[]
+|Reboot des Kartenterminals
+|Wenn ein Reboot für das Terminal unterstützt wird.
+
+|image::common/remote-pairing-button.png[]
+|Startet den Remote-Pairing-Vorgang. Anschließend muss der Pairing-Vorgang manuell am Konnektor gestartet werden.
+|Wenn das Remote-Pairing vom Terminal unterstützt wird und das Terminal nicht mit einem Konnektor verbunden ist (Status->online == false)
+
+|image::common/health-check-button.png[]
+|Health-Check: prüft Erreichbarkeit per Ping und die TCP-Ports für HTTPS. Unterstützt Cocard das RMI-Interface des Kartenterminals, werden zusätzlich MAC-Adresse und Terminalname überprüft.
+|
+
+|image::common/ack-button.png[]
+|Acknowledge-Button
+|Wenn ein Fehlerzustand vorliegt (WARNING, CRITICAL, UNKNOWN)
+
+|image::common/edit-button.png[]
+|Bearbeiten des Kartenterminals
+|
+
+|image::common/delete.png[]
+|Löschen des Kartenterminals
+|
+
+|===
+
+
+=== Allgemeine Information
+
+Viele Felder aus der allgemeinen Information sind bereits in xref:ct/card-terminal-edit.adoc[] beschrieben. Weitere Felder werden aus den Kartenterminal-Informationen extrahiert:
+
+[%autowidth]
+|===
+|Feld | Beschreibung
+
+|SMC-KT ICCSN
+|Die ICCSN der zum Kartenterminal gehörigen SMC-KT
+
+|SMC-KT Ablaufdatum
+|Ablaufdatum des Zertfikates der SMC-KT
+|===
+
+Beide Werte sind auch in der Übersichttabelle aller Kartenterminals einblendbar.
+
+=== Status
+
+[%autowidth]
+|===
+|Feld | Beschreibung
+
+|online
+|Ist das Kartenterminal mit dem Konnektor verbunden?
+
+|Zustand
+|Gesamtzustand des Kartenterminals; wird auch in der Kopfzeile angezeigt.
+
+
+|zuletzt aktualisiert
+|Zuletzt ausgeführte Überprüfung des Kartenterminals. Wenn der Wert älter als 7min ist (Intervall der Kartenterminalabfrage), ist ggf. die automatische Kartenterminalabfrage deaktiviert (manuelles Update). Oder es stimmt etwas mit der Überwachung nicht - evtl. ist der Abfragejob deaktiviert.
+
+|zuletzt OK
+|Zeitstempel, wann der Kartenterminal zuletzt den Zustand OK hatte. Zeigt an, wie lange ein Nicht-OK-Zustand bereits besteht.
+
+|===
+
+=== Daten des Kartenterminals
+
+[%autowidth]
+|===
+|Feld | Beschreibung
+
+|Konnektor
+|Konnektor, mit dem das Kartenterminal verbunden ist. Die Anzeige ist schon allgemeinen Abschnitt vorhanden und damit redundant, wird hier aber wiederholt, um mit einem Screenshot dieses Ausschnitts alles Infos parat zu haben.
+
+|Name
+|Name, den der Konnektor zurückmeldet. Ist der Anzeigename leer, wird der Name automatisch in den Anzeigenamen übernommen. Der Anzeigename kann überschrieben werden, der Name nicht.
+
+|CT_ID
+|CT_ID, die der Konnektor für das Kartenterminal vergeben hat.
+
+|MAC
+|MAC-Adresse. Wird für die eineindeutige Identifizierung des Kartenterminals in Cocard verwendet.
+
+|Gefundene IP
+|IP, die der Konnektor zurückmeldet. Die gefundene IP wird als IP-Adresse übernommen, wenn die IP-Adresse noch leer ist. Siehe Abschnitt _Gefundene IP_ weiter unten.
+
+|Netzwerk
+|Ist unter Netzwerke ein zur IP passendes Netzwerk vorhanden, wird es hier angezeigt.
+
+|Slots
+|Anzahl der Slots des Kartenterminals.
+
+|Firmware Version
+|Die Version wird aus der Produktinformation extrahiert
+
+|===
+
+=== Produktinformation
+
+Dieser Abschnitt stellt die Produktinformationen als einfachen Text dar, die die Gematik in der Kartenterminal-Spezifikation festgelegt hat.
+
+== Gefundene IP
+
+Es kommt manchmal vor, dass Kartenterminals die IP verlieren - aus welchen Gründen auch immer. Cocard überschreibt bei einer Änderung der vom Konnektor gefundene IP-Adresse nicht die konfigurierte IP, sondern speichert diese IP in einem separaten Feld. Ist bei der ersten Inbetriebnahme des Kartenterminals am Konnektor die IP noch leer, wird die gefundene IP automatisch übernommen, in allen anderen Fällen nicht.
+
+Unterscheiden sich die Einträge in IP-Adresse und gefundene IP, dann wechselt der Status des Kartenterminals auf `UNKNOWN` und Cocard zeigt rechts unter der gefundenen IP-Adresse eine Warnung an. Mit dem Button image:common/update-button.png[] kann man die gefundene IP in das Feld IP-Adresse übernehmen.
+
+.Kartenterminal mit IP Mismatch
+image::ct/ct-show-ip-missmatch.png[]
+
+Ein IP-Mismatch wird auch im Dashboard angezeigt:
+
+.Anzeige eines Kartenterminals mit IP-Mismatch im Dashboard
+image::dashboard/dashboard-ct-ip-missmatch.png[]
+
+== Ruhebildschirm setzen/abfragen
+
+NOTE: Derzeit wird nur das nur ORGA 6141 online mit Firmware Version >= 3.9.0 unterstützt.
+
+Wird das Kartenterminal unterstützt, erscheint eine zusätzliche Zeile _Anzeige im Display_ (auch "Ruhebildschirm" genannt) bei der Anzeige eines Kartenterminals. Cocard fragt den Wert nicht selbständig ab. die Abfrage erfolgt manuell mit dem Reload-Button.
+
+.Anzeige des Ruhebildschirms, sofern unterstützt
+image::ct/card-terminal-show-idle-message.png[]
+
+NOTE: Cocard zeigt hier nur den in Cocard gespeicherten und bekannten Wert ab.
+Ohne eine Änderung/Abfrage ist der Wert zunächst in Cocard leer. Verändert man später über die Weboberfläche des Kartenterminals manuell den Wert des Ruhebildschirms, bekommt Cocard das nicht automatisch mit. Die Werte können daher vom tatsächlichen Display abweichen. Im Zweifel einfach noch einmal den Reload-Button betätigen.
+
+Für die Massenpflege von mehreren Kartenterminals gleichzeitig gibt es ein eigenes Formular (siehe xref:ct/idle-messages-edit.adoc[]).
+

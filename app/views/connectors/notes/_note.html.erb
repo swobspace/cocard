@@ -1,6 +1,11 @@
 <%= tag.tr id: dom_id(note), class: "#{'invalid' unless note.is_active}" do %>
   <td><%= note.created_at&.localtime&.to_s %></td>
   <td><%= t(note.type, scope: 'notes') %></td>
+  <td>
+    <% if note.with_mail %>
+      <i class="fa-solid fa-envelope"></i>
+    <% end %>
+  </td>
   <td><%= truncate(note.message.to_plain_text, length: 200) %></td>
   <td class="text-end"><%= note.valid_until&.localtime&.to_s %></td>
   <td><%= note.user %></td>

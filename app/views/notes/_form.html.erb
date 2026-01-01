@@ -2,10 +2,32 @@
 <%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
 
   <div class="form-input">
-    <%= form.input :type, as: :hidden
-       %>
-    <%= form.input :message, as: :rich_text_area
-       %>
+    <%= form.input :type, as: :hidden %>
+
+    <% if note.with_mail %>
+      <div data-controller="toggle-fields">
+        <div class="mb-3">
+          <div class="form-check form-switch">
+            <%= form.check_box :with_mail, checked: note.with_mail,
+                  class: "form-check-input",
+                  data: { "toggle-fields-target": :input },
+                  disabled: note.persisted?
+             %>
+            <%= form.label :with_mail, 'Mail',
+                           class: 'form-check-label' %>
+          </div>
+        </div>
+
+        <div data-toggle-fields-target="hidden" data-value=true>
+          <%= form.input :mail_to, disabled: note.persisted? %>
+          <%= form.input :subject, disabled: note.persisted? %>
+        </div>
+      </div>
+    <% end %>
+
+    <%= form.input :message, as: :rich_text_area, 
+          disabled: (note.persisted? && note.with_mail)  %>
+
     <%= form.input :valid_until, html5: true, wrapper: :horizontal_datetime
        %>
 

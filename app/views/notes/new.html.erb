@@ -1,4 +1,11 @@
-<%= render ModalComponent.new(title: t('wobapphelpers.actions.new', 
-                                       model: t(@note.type, scope: 'notes'))) do %>
+<%= render ModalComponent.new(
+      title: if @note.type == 'acknowledge'
+               "Acknowledge"
+             elsif @note.with_mail
+               "Notiz mit Mail"
+             else
+               t(@note.type, scope: 'notes')
+             end
+    ) do %>
   <%= render 'form', notable: @notable, note: @note %>
 <% end %>

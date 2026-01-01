@@ -72,7 +72,7 @@ module Logs
       
         it "renders a response with 422 status (i.e. to display the 'new' template)" do
           post connector_notes_url(connector), params: { note: invalid_attributes }
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
         end
       
       end
@@ -81,7 +81,10 @@ module Logs
     describe "PATCH /update" do
       context "with valid parameters" do
         let(:new_attributes) {{
-          valid_until: '2024-01-01'
+          valid_until: '2024-01-01',
+          with_mail: true,
+          subject: 'Some Stuff',
+          mail_to: 'anybody@example.com'
         }}
 
         it "updates the requested note" do
@@ -89,6 +92,9 @@ module Logs
           patch connector_note_url(connector,note), params: { note: new_attributes }
           note.reload
           expect(note.valid_until.to_s).to eq('2024-01-01 00:00:00 UTC')
+          expect(note.with_mail).to be_truthy
+          expect(note.subject).to eq("Some Stuff")
+          expect(note.mail_to).to eq("anybody@example.com")
         end
 
         it "redirects to the note" do
@@ -105,7 +111,7 @@ module Logs
         it "renders a response with 422 status (i.e. to display the 'edit' template)" do
           note = Note.create! valid_attributes
           patch connector_note_url(connector,note), params: { note: invalid_attributes }
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
         end
       
       end

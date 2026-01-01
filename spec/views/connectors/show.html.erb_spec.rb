@@ -9,7 +9,8 @@ RSpec.describe "connectors/show", type: :view do
     allow(controller).to receive(:current_ability) { @ability }
     allow(controller).to receive(:controller_name) { 'connectors' }
     allow(controller).to receive(:action_name) { 'show' }
-    @current_user = FactoryBot.create(:user, sn: 'Mustermann', givenname: 'Max')
+    current_user = FactoryBot.create(:user, sn: 'Mustermann', givenname: 'Max')
+    allow(controller).to receive(:current_user) { current_user }
 
     assign(:connector, Connector.create!(
       name: "Name",

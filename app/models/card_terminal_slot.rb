@@ -1,7 +1,7 @@
 class CardTerminalSlot < ApplicationRecord
   # -- associations
   belongs_to :card_terminal
-  has_one :card, dependent: :nullify
+  has_one :card, ->{ unscope(where: :deleted_at) }, dependent: :nullify
   # -- configuration
   # -- validations and callbacks
   validates_uniqueness_of :slotid, scope: :card_terminal_id

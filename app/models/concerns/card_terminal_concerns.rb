@@ -81,7 +81,9 @@ module CardTerminalConcerns
       "firmware_version" => firmware_version,
       "serial" => serial,
       "id_product" => id_product,
-      "network" => network.to_s
+      "network" => network.to_s,
+      "identification" => identification,
+      "room" => room
     }
   end
 
@@ -132,5 +134,13 @@ module CardTerminalConcerns
     return nil if ip.nil?
     return nil if ip.to_s == '0.0.0.0'
     "https://#{ip}"
+  end
+
+  def to_subject
+    if location.present? 
+      "#{location.lid} - #KLG #{mac[-6..-1]}: "
+    else
+      "#KLG #{mac[-6..-1]}: "
+    end
   end
 end

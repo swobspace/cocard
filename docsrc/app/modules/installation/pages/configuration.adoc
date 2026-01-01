@@ -110,11 +110,11 @@ ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT=******
 |Passwort für den Zugang zur Weboberfläche
 
 |CRON_REBOOT_CONNECTORS
-|Cron-Eintrag für den Auto-Reboot-Job (siehe auch xref:ROOT:admin/connector-autoreboot.adoc[])
+|Cron-Eintrag für den Auto-Reboot-Job (siehe auch xref:ROOT:connector/connector-autoreboot.adoc[])
 
 |AUTO_REBOOT_CONNECTORS_NOTE
 |Soll bei einem Auto-Reboot eine Notiz erzeugt werden? Mögliche Werte: yes, no. Default: no.
-(siehe auch xref:ROOT:admin/connector-autoreboot.adoc[])
+(siehe auch xref:ROOT:connector/connector-autoreboot.adoc[])
 
 |
 ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY,

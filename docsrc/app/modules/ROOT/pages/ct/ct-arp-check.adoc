@@ -1,0 +1,45 @@
+= ARP-Abgleich von Kartenterminals
+:navtitle: ARP-Abgleich
+:author: Wolfgang Barth
+:revdate: 2025-12-28
+:imagesdir: ../../images
+:experimental: true
+
+Größere Installationen mit mehreren hundert Kartenterminals an unterschiedlichen Standorten verselbständigen sich gerne, inbesondere wenn die Telematik-Umgebung schon einige Jahre im Einsatz ist. Solange man die IP eines Kartenterminals kennt und das Terminal ein Orga6141 ist, kann man dieses in Cocard über den xref:ct/duck-terminal.adoc[IP-Check] prüfen. Es wird dabei neu inventarisiert, wenn Cocard unter der MAC-Adresse noch kein Kartenterminal erfasst hat.
+
+Was aber, wenn die Information zur IP-Adresse schon etwas älter ist und kein Kartenterminal darauf anwortet? https://de.wikipedia.org/wiki/Address_Resolution_Protocol[ARP] ist eine mögliche Antwort. Dazu benötigt man eine Liste von IP-Adressen mit der zugehörigen aktuellen MAC-Adresse. Diese kopiert man im menu:ARP-Abgleich[] mit Cut-and-Paste in das Eingabefeld _ARP-Liste_.
+
+.ARP-Abgleich, Eingabe einer Liste aus der ARP-Tabelle
+image::ct/ct-arp-abgleich-input.png[]
+
+Die Prüfung vergleicht die eingegebenen Daten mit dem in Cocard gepflegten Daten. Kartenterminals werden in Cocard über die MAC-Adresse identifiziert. Wenn man den Haken bei _nur Abweichungen_ belässt, bekommt man nur Einträge, die von den Daten in Cocard abweichen.
+
+NOTE: Der ARP-Abgleich ändert keine Daten in Cocard und verwendet nur die Eingabeliste sowie in Cocard gespeicherte Daten. Dabei erfolgt weder ein Zugriff auf den Konnektor via SOAP noch ein RMI-Zugriff auf die Kartenterminals.
+
+.ARP-Abgleich: Ergebnis, nur die Abweichungen zu Cocard
+image::ct/ct-arp-abgleich-result.png[]
+
+== ARP-Liste generieren
+
+Der ARP-Abgleich eignet sich gut für nicht aktive Kartenterminals, also Kartenterminals, die irgendwo laufen aber nicht mit dem Konnektor verbunden sind. Inaktive Terminals ohne Netzwerkverkehr sind zunächst nicht in der ARP-Tabelle des Switches oder Router aufgeführt. Man führt daher zunächst einen Netzwerkscan durch, um alle aktiven Geräte in einem Netzwerk-Segment anzusprechen und in die ARP-Tabelle "zu zwingen". In unserem Beispiel befinden sich die Kartenterminals in einem eigenen Netzwerk `192.0.2.0/24`:
+
+.Netzwerkscan mit nmap
+[source,bash]
+----
+nmap -p 443 192.0.2.0/24
+----
+
+Welches Tool man verwendet spielt am Ende keine Rolle. Wichtig ist nur, dass jede IP aus dem Netzwerk irgendwie angesprochen wird und kein Firewalling das Senden der Scan-Pakete in das Netzwerk verhindert. Das Kartenterminal muss noch nicht einmal auf den Dienst antworten, da immer erst die ARP-Auflösung zwischen MAC und IP stattfindet, bevor überhaupt ein IP-Paket an das Terminal gesendet werden kann.
+
+IMPORTANT: ARP-Tabellen können je nach eingesetzter Hardware sehr kurzlebig sein. Daher sollte man die ARP-Tabelle unmittelbar nach dem Netzwerkscan auslesen, um auch alle erreichbaren Geräte zu erfassen.
+
+Wie man die ARP-Tabellen aus den Netzwerkkomponenten ausliest hängt von der eingesetzten Hardware ab. Das sprengt den Rahmen der Dokumentation zu Cocard. Als Beispiel sei hier ein Linux-Router aufgeführt, über den die ARP-Tabelle des Netzwerksegmentes mit den Kartenterminals ausgelesen werden kann:
+
+
+.Linux-Router, Kartenterminals im VLAN 100
+[source,bash]
+----
+arp -an -i vlan100 | cut -d " " -f 2,4 | \
+  sed 's/[()]//g' | egrep -v incomplete
+----
+

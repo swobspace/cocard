@@ -10,6 +10,7 @@ Image=ghcr.io/swobspace/cocard:latest
 ContainerName=cocard
 Volume=cocard-storage.volume:/rails/storage
 Volume=cocard-tmp.volume:/rails/tmp
+# Volume=./cocard.yml:/rails/config/cocard.yml:ro,z
 Network=cocard.network
 # Network=traefik.network
 # PublishPort=3000

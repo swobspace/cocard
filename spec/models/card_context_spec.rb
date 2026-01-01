@@ -16,4 +16,22 @@ RSpec.describe CardContext, type: :model do
     expect(f).to validate_uniqueness_of(:context_id).scoped_to(:card_id)
     expect(f).to validate_uniqueness_of(:card_id).scoped_to(:context_id)
   end
+
+  describe "soft_delete card" do
+    let(:card) { FactoryBot.create(:card) }
+    let!(:ctx) { FactoryBot.create(:context) }
+
+    before(:each) do 
+      card.contexts << ctx
+      card.reload
+    end
+
+    it "destroys all card contexts" do
+      card.reload
+      expect(card.contexts).to contain_exactly(ctx)
+      card.soft_delete
+      card.reload
+      expect(card.contexts).to be_empty
+    end
+  end
 end
