@@ -6,13 +6,15 @@
 *** xref:basics/interfaces/rmi.adoc[]
 *** xref:basics/interfaces/koco-webapi.adoc[]
 *** xref:basics/interfaces/ticlient-rest.adoc[]
-** xref:user/conditions.adoc[]
-** xref:user/logs.adoc[]
-** xref:user/acknowledges.adoc[]
-** xref:user/ti-lagebild.adoc[]
-** xref:user/verify-pin.adoc[]
 ** xref:user/workplaces.adoc[]
+** xref:admin/client-certificates.adoc[]
+** xref:user/logs.adoc[]
+** xref:admin/contexts.adoc[]
+** xref:user/acknowledges.adoc[]
+** xref:user/verify-pin.adoc[]
 ** xref:user/tags.adoc[]
+** xref:user/ti-lagebild.adoc[]
+** xref:user/conditions.adoc[]
 
 * xref:connector/connector.adoc[]
 ** xref:connector/connector-edit.adoc[]
@@ -30,15 +32,15 @@
 ** xref:card/card-new.adoc[]
 
 * Administration
-** xref:admin/contexts.adoc[]
 ** xref:admin/locations.adoc[]
 ** xref:admin/networks.adoc[]
 ** xref:admin/operational_states.adoc[]
 ** xref:admin/jobs.adoc[]
 ** xref:admin/authorities.adoc[]
-** xref:admin/client-certificates.adoc[]
-// *** xref:certs/telematik-ca.adoc[]
 ** xref:admin/ldap-authentication.adoc[]
+
+
+// *** xref:certs/telematik-ca.adoc[]
 
 * xref:ti-client/index.adoc[]
 ** xref:ti-client/activate-api.adoc[]
