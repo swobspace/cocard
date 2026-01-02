@@ -4,8 +4,9 @@ import "@hotwired/turbo-rails"
 import * as bootstrap from "bootstrap"
 window.bootstrap = bootstrap
 
-import "trix"
-import "@rails/actiontext"
-
 import "./controllers"
+
+require("trix")
+require("@rails/actiontext")
+
 
