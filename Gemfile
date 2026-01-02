@@ -3,7 +3,7 @@ source "https://rubygems.org"
 ruby "~> 3.3.8"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.2.0"
+gem "rails", "~> 8.0.0"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 # gem "sprockets-rails"
@@ -66,7 +66,7 @@ end
 gem 'simple_form'
 gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers',
                    branch: 'master'
-gem 'rails-i18n', '~> 7.0.0'
+gem 'rails-i18n', '~> 8.0.0'
 gem 'view_component'
 gem 'cancancan'
 gem "wobauth", git: "https://github.com/swobspace/wobauth.git", branch: "main"
