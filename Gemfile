@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "~> 3.3.8"
+ruby "~> 3.4.8"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.0.0"
@@ -104,7 +104,7 @@ gem "immutable_struct", "~> 1.2"
 
 gem "net-ping", "~> 2.0"
 
-gem "good_job", "~> 4.11.0"
+gem "good_job", "~> 4.13.0"
 
 gem "acts_as_list", "~> 1.1"
 
