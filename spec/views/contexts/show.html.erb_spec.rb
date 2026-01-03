@@ -17,10 +17,6 @@ RSpec.describe "contexts/show", type: :view do
 
     @cards = []
     @connectors = []
-    @pagy_cards = instance_double(Pagy)
-    @pagy_connectors = instance_double(Pagy)
-    allow(@pagy_cards).to receive(:pages).and_return(1)
-    allow(@pagy_connectors).to receive(:pages).and_return(1)
   end
 
   it "renders attributes in <p>" do
