@@ -69,5 +69,4 @@ Rails.application.configure do
 
   # -- wob
   config.cache_store = :memory_store, { size: 32.megabytes }
-  config.active_job.queue_adapter = :test
 end
