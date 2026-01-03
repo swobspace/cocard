@@ -39,7 +39,7 @@ podman run --rm -it cocard /bin/bash
 podman tag cocard ghcr.io/swobspace/cocard:{cocardversion}
 podman tag cocard ghcr.io/swobspace/cocard:stable
 podman tag cocard ghcr.io/swobspace/cocard:latest
-podman tag cocard ghcr.io/swobspace/cocard:rails80
+podman tag cocard ghcr.io/swobspace/cocard:rails81
 ----
 
 === Push Image
