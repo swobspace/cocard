@@ -1,6 +1,83 @@
 = RISE TI-Client REST-API
 :author: Wolfgang Barth
-:revdate: 2025-12-28
+:revdate: 2026-01-04
 :imagesdir: ../../../images
 
-#TBD#
+
+[%autowidth]
+|===
+|Bereich | Beschreibung
+
+|KT-Proxy
+|Abfrage von vorhandenen KT-Proxys am TI-Client. Anlage, Änderung und Löschung eines KT-Proxys
+
+|Remote-PIN-Plus
+|Abfrage der vorhandenen Konfiguration und der unterstützten Karten. Anzeige im TI-Client.
+
+|Hintergrundaufgaben
+|Abfrage des Status (Running, Stopped) - Der Status wird im TI-Client angezeigt.
+
+|Konnektor
+|Ausführung einiger Konnektor-Funktionen über den Proxy. Die Liste der genutzten Funktionen sind in der folgenden Tabelle aufgeführt.
+
+|===
+
+Für die folgenden Funktionen muss die Proxy-Funktion für den Konnektor am TI-Client explizit aktiviert sein.
+
+.Funktionen auf dem Konnektor
+[%autowidth,cols="m,"]
+|===
+|Funktion/Referenz | Beschreibung
+
+|get_terminal(s)
+|Abfrage aller odder eines einzelnen Terminals
+
+|discover
+|Suchabfrage (neuer) Terminals auf dem Konnektor
+
+|add
+|Terminal hinzufügen
+
+|assign
+|Bekanntes Terminal zuweisen
+
+|initialize_pairing,
+finalize_pairing
+|Funktionen für das Pairing. Cocard verwendet diese Funktionen implizit über den Pairing-Button.
+
+|change_correlation
+|Statusänderung eines Kartenterminals. Cocard nutzt diese Funktion, um ein gepairtes Kartenterminal in den Zustand aktiv zu versetzen.
+
+|begin_session
+|Aufbau der TLS-Verbindung zum Kartenterminal. Für aktive Kartenterminals, die aktuell nicht verbunden sind.
+
+|===
+
+////
+app/services/rise/ti_client/card_terminals.rb 
+    def get_proxies
+    def get_proxy(kt_proxy)
+    def create_proxy(kt_proxy)
+    def update_proxy(kt_proxy)
+    def delete_proxy(kt_proxy)
+
+app/services/rise/ti_client/remote_pin_plus.rb 
+    def get_configurations
+    def supported_cards
+
+app/services/rise/ti_client/system.rb 
+    def get_scheduler
+
+app/services/rise/ti_client/konnektor/terminals.rb 
+    def get_terminals
+    def get_terminal(ct_id)
+    def discover
+    def assign(ct_id)
+    def begin_session(ct_id)
+    def end_session(ct_id)
+    def add(kt_proxy)
+    def change_correlation(ct_id, correlation)
+    def initialize_pairing(ct_id)
+    def finalize_pairing(session_data)
+
+////

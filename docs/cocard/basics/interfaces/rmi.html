@@ -293,10 +293,10 @@
 <div class="paragraph">
 <p>Das Remote-Management-Interface des Orga6141 online erlaubt neben der Abfrage und dem Setzen verschiedener Parameter auch die Workflows <em>Remote-PIN-Eingabe</em> und <em>Kartenterminal pairen</em>.</p>
 </div>
-<table class="tableblock frame-all grid-all stretch">
+<table class="tableblock frame-all grid-all fit-content">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col>
+<col>
 </colgroup>
 <thead>
 <tr>
@@ -304,10 +304,35 @@
 <th class="tableblock halign-left valign-top">Beschreibung</th>
 </tr>
 </thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>reboot</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Startet das Kartenterminal neu</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>get_info</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Abfrage verschiedener Informationen wie MAC-Adresse, Name, Seriennummer, IP-Adresse etc. sowie Statistik-Informationen wie letzter Reboot oder Anzahl der Steckzyklen in den Kartenslots.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>get_idle_message</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Abfrage der Anzeige im Ruhebildschirm</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>set_idle_message(message)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Änderung der Anzeige im Ruhebildschirm</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>verify_pin(iccsn)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Verifizierung der PIN einer SMC-B. Dabei wird auf die Anfrage des Konnektors gewartet und wenn die hinterlegte PIN gesendet, sobald die Abfrage eintrifft. Cocard startet bei der PIN-Verifizierung zunächst diese RMI-Funktion und sendet dann an den Konnektor die PIN-Abfrage.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>remote_pairing</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wie bei der PIN-Verifizierung wartet diese Funktion auf die Anfrage vom Konnektor. Sobald diese erfolgt, wird die Bestätigung des Pairings gesendet.
+Die Pairing-Funktion des Kartenterminals kann hierüber unabhängig vom Konnektor gestartet werden, die Funktion lässt sich daher mit jedem Konnektor ausführen. Wichtig ist nur, dass immer zuerst die Pairing-Funktion des Kartenterminals gestartet wird und erst danach das Pairing am Konnektor eingeleitet wird, sonst verpasst die RMI-Funktion die Anfrage des Konnektors.</p>
+<p class="tableblock">Beim RISE TI-Client mit aktiviertem Proxy unterstützt Cocard einen automatischen Ablauf über eine Ein-Knopf-Bedienung.</p></td>
+</tr>
+</tbody>
 </table>
-<div class="paragraph">
-<p><mark>TBD</mark></p>
-</div>
 </div>
 </div>
 <div class="sect1">
