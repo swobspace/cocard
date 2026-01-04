@@ -1,5 +1,5 @@
 class ApplicationDatatable
-  include Pagy::Backend
+  include Pagy::Method
   delegate :params, :link_to, :link_to_unless, :link_to_if,
            :show_link, :edit_link, :delete_link, :dom_id, 
            :render,

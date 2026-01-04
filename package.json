@@ -3,9 +3,10 @@
   "private": true,
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets",
-    "build:css:compile": "sass ./app/assets/stylesheets/application.bootstrap.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules",
-    "build:css:prefix": "postcss ./app/assets/builds/application.css --use=autoprefixer --output=./app/assets/builds/application.css",
-    "build:css": "yarn build:css:compile && yarn build:css:prefix",
+    "build:css:compile": "sass ./app/assets/stylesheets/entrypoints:./app/assets/builds --no-source-map --load-path=node_modules",
+    "build:css:prefix": "postcss ./app/assets/builds/application.bootstrap.css ./app/assets/builds/fontawesome.css --use=autoprefixer --replace",
+    "build:css:fontawesome": "cp -r ./node_modules/@fortawesome/fontawesome-free/webfonts ./public/.",
+    "build:css": "yarn build:css:compile && yarn build:css:prefix && yarn build:css:fontawesome",
     "watch:css": "nodemon --watch ./app/assets/stylesheets/ --ext scss --exec \"yarn build:css\""
   },
   "browserslist": [
@@ -17,11 +18,11 @@
     "@antora/site-generator": "^3.1.0"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "6",
+    "@fortawesome/fontawesome-free": "7",
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^8.0.4",
     "@popperjs/core": "^2.11.8",
-    "@rails/actiontext": "^7.2.0",
+    "@rails/actiontext": "^8.1.0",
     "@shopify/draggable": "^1.1.3",
     "@swobspace/stimulus-polymorphic-select": "https://github.com/swobspace/stimulus-polymorphic-select.git",
     "@yaireo/tagify": "^4.35.1",

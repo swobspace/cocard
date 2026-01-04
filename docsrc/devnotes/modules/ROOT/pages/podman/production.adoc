@@ -1,9 +1,9 @@
 = Podman for Production
 :author: Wolfgang Barth
-:revdate: 2025-05-13
+:revdate: 2026-01-04
 :navtitle: Podman
-:cocardversion: 0.8.0
-:rubyversion: 3.3
+:cocardversion: 0.9.8
+:rubyversion: 3.4
 
 Just a memo for todos and code snippets ...
 
