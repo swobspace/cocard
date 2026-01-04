@@ -2,6 +2,8 @@
 
 == 0.9.9-dev - unreleased
 
+* Überarbeitung der Dokumentation
+
 == 0.9.8 - 2026-01-04
 
 * Upgrade Framework auf Rails 8.1 / Ruby 3.4
