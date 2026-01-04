@@ -1,12 +1,13 @@
 source "https://rubygems.org"
 
-ruby "~> 3.3.8"
+ruby "~> 3.4.8"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.2.0"
+gem "rails", "~> 8.1.0"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
-gem "sprockets-rails"
+# gem "sprockets-rails"
+gem 'propshaft'
 
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
@@ -65,7 +66,7 @@ end
 gem 'simple_form'
 gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers',
                    branch: 'master'
-gem 'rails-i18n', '~> 7.0.0'
+gem 'rails-i18n', '~> 8.1.0'
 gem 'view_component'
 gem 'cancancan'
 gem "wobauth", git: "https://github.com/swobspace/wobauth.git", branch: "main"
@@ -103,13 +104,13 @@ gem "immutable_struct", "~> 1.2"
 
 gem "net-ping", "~> 2.0"
 
-gem "good_job", "~> 4.11.0"
+gem "good_job", "~> 4.13.0"
 
 gem "acts_as_list", "~> 1.1"
 
 gem "liquid", "~> 5.5"
 
-gem "pagy", "~> 9.0"
+gem "pagy", "~> 43.2"
 
 gem "highline", "~> 3.0", require: false
 

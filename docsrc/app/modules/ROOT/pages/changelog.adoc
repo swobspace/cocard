@@ -2,6 +2,9 @@
 
 == 0.9.8-dev - unreleased
 
+* Upgrade Framework auf Rails 8.1 / Ruby 3.4
+* keine inhaltlichen Änderungen
+
 == 0.9.7 - 2026-01-01
 
 * diverse Bugfixes im Zusammenhang mit SoftDelete.
