@@ -1,5 +1,7 @@
 = Changelog
 
+== 0.9.9-dev - unreleased
+
 == 0.9.8 - 2026-01-04
 
 * Upgrade Framework auf Rails 8.1 / Ruby 3.4
