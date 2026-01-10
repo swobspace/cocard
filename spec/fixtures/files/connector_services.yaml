@@ -1,36 +1,217 @@
 ---
-"@xmlns": http://ws.gematik.de/int/version/ProductInformation/v1.1
 "@xmlns:ns2": http://ws.gematik.de/conn/ServiceDirectory/v3.1
 "@xmlns:ns3": http://ws.gematik.de/conn/ServiceInformation/v2.0
-TLSMandatory: false
-ClientAutMandatory: false
+TLSMandatory: true
+ClientAutMandatory: true
 ProductInformation:
-  InformationDate: '2024-04-13T19:51:22.263+02:00'
+  "@xmlns:VERS": http://ws.gematik.de/int/version/ProductInformation/v1.1
+  InformationDate: '2025-05-27T00:00:00.000+00:00'
   ProductMiscellaneous:
-    ProductName: KoCoBox MED+
-    ProductVendorName: KoCo Connector
+    ProductName: RISE HSK
+    ProductVendorName: Research Industrial Systems Engineering (RISE) Forschungs-,
+      Entwicklungs- und Großprojektberatung GmbH
   ProductIdentification:
-    ProductCode: kocobox
+    ProductCode: RHSK
     ProductVersion:
       Local:
-        FWVersion: 5.1.8
-        HWVersion: 2.0.0
-    ProductVendorID: KOCOC
+        FWVersion: 2.0.3
+        HWVersion: 1.1.0
+    ProductVendorID: RISEG
   ProductTypeInformation:
-    ProductType: Konnektor
-    ProductTypeVersion: 5.1.0
+    ProductType: vkon
+    ProductTypeVersion: 5.61.0
 ServiceInformation:
   Service:
+  - "@Name": CardService
+    Abstract: Der Konnektor verwaltet eine Liste aller Karten (CM_CARD_LIST), die
+      in die vom Konnektor verwalteten Kartenterminals gesteckt sind (CTM_CT_LIST).
+      Alle Ereignisse und Operationen, die sich auf Karten beziehen, werden durch
+      diesen Basisdienst gekapselt.
+    Versions:
+      Version:
+      - "@Version": 8.1.2
+        Abstract: Der Konnektor verwaltet eine Liste aller Karten (CM_CARD_LIST),
+          die in die vom Konnektor verwalteten Kartenterminals gesteckt sind (CTM_CT_LIST).
+          Alle Ereignisse und Operationen, die sich auf Karten beziehen, werden durch
+          diesen Basisdienst gekapselt.
+        EndpointTLS:
+          "@Location": https://10.162.41.236:443/webservices/cardservice
+        "@TargetNamespace": http://ws.gematik.de/conn/CardService/WSDL/v8.1
+      - "@Version": 8.1.1
+        Abstract: Der Konnektor verwaltet eine Liste aller Karten (CM_CARD_LIST),
+          die in die vom Konnektor verwalteten Kartenterminals gesteckt sind (CTM_CT_LIST).
+          Alle Ereignisse und Operationen, die sich auf Karten beziehen, werden durch
+          diesen Basisdienst gekapselt.
+        EndpointTLS:
+          "@Location": https://10.162.41.236:443/webservices/cardservice
+        "@TargetNamespace": http://ws.gematik.de/conn/CardService/WSDL/v8.1
+      - "@Version": 8.1.0
+        Abstract: Der Konnektor verwaltet eine Liste aller Karten (CM_CARD_LIST),
+          die in die vom Konnektor verwalteten Kartenterminals gesteckt sind (CTM_CT_LIST).
+          Alle Ereignisse und Operationen, die sich auf Karten beziehen, werden durch
+          diesen Basisdienst gekapselt.
+        EndpointTLS:
+          "@Location": https://10.162.41.236:443/webservices/cardservice
+        "@TargetNamespace": http://ws.gematik.de/conn/CardService/WSDL/v8.1
+  - "@Name": CertificateService
+    Abstract: Der Zertifikatsdienst bietet eine Schnittstelle zur Überprüfung der
+      Gültigkeit von Zertifikaten an. Dies geschieht auf Grundlage des durch den Vertrauensanker
+      TSL-CA-SignerZertifikat und eine aktuelle, gültige TSL aufgespannten Vertrauensraums
+      sowie unter Berücksichtigung von aktuellen Statusinformationen (OCSP, CRL).
+      Die Zertifikatsprüfung wird sowohl für nonQES- als auch für QES-Zertifikate
+      unterstützt.
+    Versions:
+      Version:
+      - "@Version": 6.0.0
+        Abstract: Der Zertifikatsdienst bietet eine Schnittstelle zur Überprüfung
+          der Gültigkeit von Zertifikaten an. Dies geschieht auf Grundlage des durch
+          den Vertrauensanker TSL-CA-SignerZertifikat und eine aktuelle, gültige TSL
+          aufgespannten Vertrauensraums sowie unter Berücksichtigung von aktuellen
+          Statusinformationen (OCSP, CRL). Die Zertifikatsprüfung wird sowohl für
+          nonQES- als auch für QES-Zertifikate unterstützt.
+        EndpointTLS:
+          "@Location": https://10.162.41.236:443/webservices/certificateservice
+        "@TargetNamespace": http://ws.gematik.de/conn/CertificateService/WSDL/v6.0
+      - "@Version": 6.0.1
+        Abstract: Der Zertifikatsdienst bietet eine Schnittstelle zur Überprüfung
+          der Gültigkeit von Zertifikaten an. Dies geschieht auf Grundlage des durch
+          den Vertrauensanker TSL-CA-SignerZertifikat und eine aktuelle, gültige TSL
+          aufgespannten Vertrauensraums sowie unter Berücksichtigung von aktuellen
+          Statusinformationen (OCSP, CRL). Die Zertifikatsprüfung wird sowohl für
+          nonQES- als auch für QES-Zertifikate unterstützt.
+        EndpointTLS:
+          "@Location": https://10.162.41.236:443/webservices/certificateservice
+        "@TargetNamespace": http://ws.gematik.de/conn/CertificateService/WSDL/v6.0
+  - "@Name": EventService
+    Abstract: Der Systeminformationsdienst stellt Basisdiensten, Fachmodulen und Clientsystemen
+      sowohl aktiv (Push-Mechanismus) wie passiv (Pull-Mechanismus) Informationen
+      zur Verfügung. Dabei erhebt er selbst keine Daten, sondern dient nur als zentraler
+      Mechanismus, der von anderen Basisdiensten und Fachmodulen zur Verteilung und
+      Bereitstellung derer Informationen verwendet werden kann.
+    Versions:
+      Version:
+        "@Version": 7.2.0
+        Abstract: Der Systeminformationsdienst stellt Basisdiensten, Fachmodulen und
+          Clientsystemen sowohl aktiv (Push-Mechanismus) wie passiv (Pull-Mechanismus)
+          Informationen zur Verfügung. Dabei erhebt er selbst keine Daten, sondern
+          dient nur als zentraler Mechanismus, der von anderen Basisdiensten und Fachmodulen
+          zur Verteilung und Bereitstellung derer Informationen verwendet werden kann.
+        EndpointTLS:
+          "@Location": https://10.162.41.236:443/webservices/eventservice
+        "@TargetNamespace": http://ws.gematik.de/conn/EventService/WSDL/v7.2
+  - "@Name": EncryptionService
+    Abstract: Der Verschlüsselungsdienst bietet Schnittstellen zum hybriden und symmetrischen
+      Ver- und Entschlüsseln von Dokumenten an.
+    Versions:
+      Version:
+      - "@Version": 6.1.0
+        Abstract: Der Verschlüsselungsdienst bietet Schnittstellen zum hybriden und
+          symmetrischen Ver- und Entschlüsseln von Dokumenten an.
+        EndpointTLS:
+          "@Location": https://10.162.41.236:443/webservices/encryptionservice
+        "@TargetNamespace": http://ws.gematik.de/conn/EncryptionService/WSDL/v6.1
+      - "@Version": 6.1.1
+        Abstract: Der Verschlüsselungsdienst bietet Schnittstellen zum hybriden und
+          symmetrischen Ver- und Entschlüsseln von Dokumenten an.
+        EndpointTLS:
+          "@Location": https://10.162.41.236:443/webservices/encryptionservice
+        "@TargetNamespace": http://ws.gematik.de/conn/EncryptionService/WSDL/v6.1
+  - "@Name": CardTerminalService
+    Abstract: Die Aufgabe des Kartenterminaldienstes ist das Management aller vom
+      Konnektor adressierbaren Kartenterminals. Dies umfasst alle administrativen
+      Prozesse. Ferner kapselt der Kartenterminaldienst die Zugriffe auf Kartenterminals
+      durch Basisdienste und Fachmodule.
+    Versions:
+      Version:
+        "@Version": 1.1.0
+        Abstract: Die Aufgabe des Kartenterminaldienstes ist das Management aller
+          vom Konnektor adressierbaren Kartenterminals. Dies umfasst alle administrativen
+          Prozesse. Ferner kapselt der Kartenterminaldienst die Zugriffe auf Kartenterminals
+          durch Basisdienste und Fachmodule.
+        EndpointTLS:
+          "@Location": https://10.162.41.236:443/webservices/cardterminalservice
+        "@TargetNamespace": http://ws.gematik.de/conn/CardTerminalService/WSDL/v1.1
+  - "@Name": KVKService
+    Abstract: Versichertendaten von KVK lesen
+    Versions:
+      Version:
+        "@Version": 4.0.0
+        Abstract: Versichertendaten von KVK lesen
+        EndpointTLS:
+          "@Location": https://10.162.41.236:443/fm/kvkservice
+        "@TargetNamespace": http://ws.gematik.de/conn/vsds/KvkService/v4.0
+  - "@Name": AuthSignatureService
+    Abstract: Der Authentifizierungsdienst bietet Clientsystemen und Fachmodulen eine
+      Schnittstelle zum Signieren von Binärstrings zum Zweck der externen Authentisierung.
+    Versions:
+      Version:
+      - "@Version": 7.4.0
+        Abstract: Der Authentifizierungsdienst bietet Clientsystemen und Fachmodulen
+          eine Schnittstelle zum Signieren von Binärstrings zum Zweck der externen
+          Authentisierung.
+        EndpointTLS:
+          "@Location": https://10.162.41.236:443/webservices/authsignatureservice
+        "@TargetNamespace": http://ws.gematik.de/conn/AuthSignatureService/WSDL/v7.4
+      - "@Version": 7.4.1
+        Abstract: Der Authentifizierungsdienst bietet Clientsystemen und Fachmodulen
+          eine Schnittstelle zum Signieren von Binärstrings zum Zweck der externen
+          Authentisierung.
+        EndpointTLS:
+          "@Location": https://10.162.41.236:443/webservices/authsignatureservice
+        "@TargetNamespace": http://ws.gematik.de/conn/AuthSignatureService/WSDL/v7.4
+  - "@Name": SignatureService
+    Abstract: Der Signaturdienst bietet Clientsystemen und Fachmodulen eine Schnittstelle
+      zum Signieren von Dokumenten und Prüfen von Dokumentensignaturen und zum Signieren
+      von Binärstrings zum Zweck der externen Authentisierung.
+    Versions:
+      Version:
+      - "@Version": 7.4.0
+        Abstract: Der Signaturdienst bietet Clientsystemen und Fachmodulen eine Schnittstelle
+          zum Signieren von Dokumenten und Prüfen von Dokumentensignaturen und zum
+          Signieren von Binärstrings zum Zweck der externen Authentisierung.
+        EndpointTLS:
+          "@Location": https://10.162.41.236:443/webservices/signatureservice/v7.4
+        "@TargetNamespace": http://ws.gematik.de/conn/SignatureService/WSDL/v7.4
+      - "@Version": 7.4.2
+        Abstract: Der Signaturdienst bietet Clientsystemen und Fachmodulen eine Schnittstelle
+          zum Signieren von Dokumenten und Prüfen von Dokumentensignaturen und zum
+          Signieren von Binärstrings zum Zweck der externen Authentisierung.
+        EndpointTLS:
+          "@Location": https://10.162.41.236:443/webservices/signatureservice/v7.4
+        "@TargetNamespace": http://ws.gematik.de/conn/SignatureService/WSDL/v7.4
+      - "@Version": 7.5.5
+        Abstract: Der Signaturdienst bietet Clientsystemen und Fachmodulen eine Schnittstelle
+          zum Signieren von Dokumenten und Prüfen von Dokumentensignaturen und zum
+          Signieren von Binärstrings zum Zweck der externen Authentisierung.
+        EndpointTLS:
+          "@Location": https://10.162.41.236:443/webservices/signatureservice/v7.5
+        "@TargetNamespace": http://ws.gematik.de/conn/SignatureService/WSDL/v7.5
+  - "@Name": VSDService
+    Abstract: VSD von eGK lesen
+    Versions:
+      Version:
+        "@Version": 5.2.0
+        Abstract: VSD von eGK lesen
+        EndpointTLS:
+          "@Location": https://10.162.41.236:443/fm/vsdservice
+        "@TargetNamespace": http://ws.gematik.de/conn/vsds/VSDService/v5.2
+  - "@Name": AMTSService
+    Abstract: Fachanwendung eMP/AMTS-Datenmanagement verwenden
+    Versions:
+      Version:
+        "@Version": 1.0.0
+        Abstract: Initiale Version (der Stufe A) der Fachanwendung eMP/AMTS-Datenmanagement
+        EndpointTLS:
+          "@Location": https://10.162.41.236:443/fm/amtsservice
+        "@TargetNamespace": http://ws.gematik.de/conn/amts/AMTSService/v1.0
   - "@Name": NFDService
     Abstract: NFD auf eGK verwalten
     Versions:
       Version:
         "@Version": 1.0.0
         Abstract: Initiale Version
-        Endpoint:
-          "@Location": http://10.200.149.3:80/service/fm/nfdm/nfdservice
         EndpointTLS:
-          "@Location": https://10.200.149.3:443/service/fm/nfdm/nfdservice
+          "@Location": https://10.162.41.236:443/fm/nfdservice
         "@TargetNamespace": http://ws.gematik.de/conn/nfds/NFDService/WSDL/v1.0
   - "@Name": DPEService
     Abstract: DPE auf eGK verwalten
@@ -38,210 +219,6 @@ ServiceInformation:
       Version:
         "@Version": 1.0.0
         Abstract: Initiale Version
-        Endpoint:
-          "@Location": http://10.200.149.3:80/service/fm/nfdm/dpeservice
         EndpointTLS:
-          "@Location": https://10.200.149.3:443/service/fm/nfdm/dpeservice
+          "@Location": https://10.162.41.236:443/fm/dpeservice
         "@TargetNamespace": http://ws.gematik.de/conn/nfds/DPEService/WSDL/v1.0
-  - "@Name": PHRService
-    Abstract: IHE-Schnittstelle zur Dokumentenverwaltung
-    Versions:
-      Version:
-      - "@Version": 1.3.0
-        Abstract: Initiale Version
-        Endpoint:
-          "@Location": http://10.200.149.3:80/service/fm/epa/phrservice
-        EndpointTLS:
-          "@Location": https://10.200.149.3:443/service/fm/epa/phrservice
-        "@TargetNamespace": http://ws.gematik.de/conn/phrs/PHRService/WSDL/v1.3
-      - "@Version": 2.0.1
-        Abstract: Initiale Version
-        Endpoint:
-          "@Location": http://10.200.149.3:80/service/fm/epa/v2/phrservice
-        EndpointTLS:
-          "@Location": https://10.200.149.3:443/service/fm/epa/v2/phrservice
-        "@TargetNamespace": http://ws.gematik.de/conn/phrs/PHRService/WSDL/v2.0
-  - "@Name": PHRManagementService
-    Abstract: Schnittstelle zur Administration und Rechtevergabe der Akte
-    Versions:
-      Version:
-      - "@Version": 1.3.0
-        Abstract: Initiale Version
-        Endpoint:
-          "@Location": http://10.200.149.3:80/service/fm/epa/phrmanagementservice
-        EndpointTLS:
-          "@Location": https://10.200.149.3:443/service/fm/epa/phrmanagementservice
-        "@TargetNamespace": http://ws.gematik.de/conn/phrs/PHRManagementService/WSDL/v1.3
-      - "@Version": 2.0.0
-        Abstract: Initiale Version
-        Endpoint:
-          "@Location": http://10.200.149.3:80/service/fm/epa/v2/phrmanagementservice
-        EndpointTLS:
-          "@Location": https://10.200.149.3:443/service/fm/epa/v2/phrmanagementservice
-        "@TargetNamespace": http://ws.gematik.de/conn/phrs/PHRManagementService/WSDL/v2.0
-      - "@Version": 2.0.1
-        Abstract: Initiale Version
-        Endpoint:
-          "@Location": http://10.200.149.3:80/service/fm/epa/v2/phrmanagementservice
-        EndpointTLS:
-          "@Location": https://10.200.149.3:443/service/fm/epa/v2/phrmanagementservice
-        "@TargetNamespace": http://ws.gematik.de/conn/phrs/PHRManagementService/WSDL/v2.0
-  - "@Name": AMTSService
-    Abstract: Fachanwendung eMP/AMTS-Datenmanagement verwenden
-    Versions:
-      Version:
-        "@Version": 1.0.0
-        Abstract: Initiale Version (der Stufe A) der Fachanwendung eMP/AMTS-Datenmanagement
-        Endpoint:
-          "@Location": http://10.200.149.3:80/service/fm/amts/amtsservice
-        EndpointTLS:
-          "@Location": https://10.200.149.3:443/service/fm/amts/amtsservice
-        "@TargetNamespace": http://ws.gematik.de/conn/amts/AMTSService/v1.0
-  - "@Name": CertificateService
-    Abstract: Service mit Operationen zum Zertifikatsdienst
-    Versions:
-      Version:
-      - "@Version": 6.0.0
-        Abstract: Operationen zum Zertifikatsdienstdienst gemäß WSDL 6.0.0
-        Endpoint:
-          "@Location": http://10.200.149.3:80/service/certificateservice
-        EndpointTLS:
-          "@Location": https://10.200.149.3:443/service/certificateservice
-        "@TargetNamespace": http://ws.gematik.de/conn/CertificateService/WSDL/v6.0
-      - "@Version": 6.0.1
-        Abstract: Operationen zum Zertifikatsdienstdienst gemäß WSDL 6.0.1
-        Endpoint:
-          "@Location": http://10.200.149.3:80/service/certificateservice
-        EndpointTLS:
-          "@Location": https://10.200.149.3:443/service/certificateservice
-        "@TargetNamespace": http://ws.gematik.de/conn/CertificateService/WSDL/v6.0
-  - "@Name": CardService
-    Abstract: Service mit Operationen zum Kartendienst
-    Versions:
-      Version:
-      - "@Version": 8.1.0
-        Abstract: Operationen zum Kartendienst gemäß WSDL 8.1.0
-        Endpoint:
-          "@Location": http://10.200.149.3:80/service/cardservice
-        EndpointTLS:
-          "@Location": https://10.200.149.3:443/service/cardservice
-        "@TargetNamespace": http://ws.gematik.de/conn/CardService/WSDL/v8.1
-      - "@Version": 8.1.1
-        Abstract: Operationen zum Kartendienst gemäß WSDL 8.1.1
-        Endpoint:
-          "@Location": http://10.200.149.3:80/service/cardservice
-        EndpointTLS:
-          "@Location": https://10.200.149.3:443/service/cardservice
-        "@TargetNamespace": http://ws.gematik.de/conn/CardService/WSDL/v8.1
-      - "@Version": 8.1.2
-        Abstract: Operationen zum Kartendienst gemäß WSDL 8.1.2
-        Endpoint:
-          "@Location": http://10.200.149.3:80/service/cardservice
-        EndpointTLS:
-          "@Location": https://10.200.149.3:443/service/cardservice
-        "@TargetNamespace": http://ws.gematik.de/conn/CardService/WSDL/v8.1
-  - "@Name": CardTerminalService
-    Abstract: Service mit Operationen zum Kartenterminaldienst
-    Versions:
-      Version:
-        "@Version": 1.1.0
-        Abstract: Operationen zum Kartenterminaldienst gemäß WSDL 1.1.0
-        Endpoint:
-          "@Location": http://10.200.149.3:80/service/cardterminalservice
-        EndpointTLS:
-          "@Location": https://10.200.149.3:443/service/cardterminalservice
-        "@TargetNamespace": http://ws.gematik.de/conn/CardTerminalService/WSDL/v1.1
-  - "@Name": VSDService
-    Abstract: VSD von eGK lesen
-    Versions:
-      Version:
-        "@Version": 5.2.0
-        Abstract: Operationen zum Fachmodul VSDM gemäß WSDL 5.2.0
-        Endpoint:
-          "@Location": http://10.200.149.3:80/service/fmvsdm
-        EndpointTLS:
-          "@Location": https://10.200.149.3:443/service/fmvsdm
-        "@TargetNamespace": http://ws.gematik.de/conn/vsds/VSDService/v5.2
-  - "@Name": KVKService
-    Abstract: Versichertendaten von KVK lesen
-    Versions:
-      Version:
-        "@Version": 4.0.0
-        Abstract: Operation zum KVK-Handling gemäß WSDL 4.0.0
-        Endpoint:
-          "@Location": http://10.200.149.3:80/service/kvkservice
-        EndpointTLS:
-          "@Location": https://10.200.149.3:443/service/kvkservice
-        "@TargetNamespace": http://ws.gematik.de/conn/vsds/KvkService/v4.0
-  - "@Name": EventService
-    Abstract: Service mit Operationen zum Systeminformationservice
-    Versions:
-      Version:
-        "@Version": 7.2.0
-        Abstract: Operationen zum Systeminformationservice gemäß WSDL 7.2.0
-        Endpoint:
-          "@Location": http://10.200.149.3:80/service/systeminformationservice
-        EndpointTLS:
-          "@Location": https://10.200.149.3:443/service/systeminformationservice
-        "@TargetNamespace": http://ws.gematik.de/conn/EventService/WSDL/v7.2
-  - "@Name": SignatureService
-    Abstract: Signaturdienst
-    Versions:
-      Version:
-      - "@Version": 7.4.0
-        Abstract: Signaturdienst gemäß WSDL 7.4.0
-        Endpoint:
-          "@Location": http://10.200.149.3:80/service/signservice
-        EndpointTLS:
-          "@Location": https://10.200.149.3:443/service/signservice
-        "@TargetNamespace": http://ws.gematik.de/conn/SignatureService/WSDL/v7.4
-      - "@Version": 7.4.2
-        Abstract: Signaturdienst gemäß WSDL 7.4.2
-        Endpoint:
-          "@Location": http://10.200.149.3:80/service/signservice
-        EndpointTLS:
-          "@Location": https://10.200.149.3:443/service/signservice
-        "@TargetNamespace": http://ws.gematik.de/conn/SignatureService/WSDL/v7.4
-      - "@Version": 7.5.5
-        Abstract: Signaturdienst gemäß WSDL 7.5.5
-        Endpoint:
-          "@Location": http://10.200.149.3:80/service/v75/signservice
-        EndpointTLS:
-          "@Location": https://10.200.149.3:443/service/v75/signservice
-        "@TargetNamespace": http://ws.gematik.de/conn/SignatureService/WSDL/v7.5
-  - "@Name": EncryptionService
-    Abstract: Service zum Ver-/Entschlüsseln
-    Versions:
-      Version:
-      - "@Version": 6.1.0
-        Abstract: Service zum Ver-/Entschlüsseln gemäß WSDL 6.1.0
-        Endpoint:
-          "@Location": http://10.200.149.3:80/service/encryptionservice
-        EndpointTLS:
-          "@Location": https://10.200.149.3:443/service/encryptionservice
-        "@TargetNamespace": http://ws.gematik.de/conn/EncryptionService/WSDL/v6.1
-      - "@Version": 6.1.1
-        Abstract: Service zum Ver-/Entschlüsseln gemäß WSDL 6.1.1
-        Endpoint:
-          "@Location": http://10.200.149.3:80/service/encryptionservice
-        EndpointTLS:
-          "@Location": https://10.200.149.3:443/service/encryptionservice
-        "@TargetNamespace": http://ws.gematik.de/conn/EncryptionService/WSDL/v6.1
-  - "@Name": AuthSignatureService
-    Abstract: Service zur Authentifizierung
-    Versions:
-      Version:
-      - "@Version": 7.4.0
-        Abstract: Service zur Authentifizierung gemäß WSDL 7.4.0
-        Endpoint:
-          "@Location": http://10.200.149.3:80/service/authsignatureservice
-        EndpointTLS:
-          "@Location": https://10.200.149.3:443/service/authsignatureservice
-        "@TargetNamespace": http://ws.gematik.de/conn/AuthSignatureService/WSDL/v7.4
-      - "@Version": 7.4.1
-        Abstract: Service zur Authentifizierung gemäß WSDL 7.4.1
-        Endpoint:
-          "@Location": http://10.200.149.3:80/service/authsignatureservice
-        EndpointTLS:
-          "@Location": https://10.200.149.3:443/service/authsignatureservice
-        "@TargetNamespace": http://ws.gematik.de/conn/AuthSignatureService/WSDL/v7.4
