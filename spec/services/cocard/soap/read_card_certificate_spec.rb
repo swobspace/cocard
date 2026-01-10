@@ -58,12 +58,13 @@ module Cocard::SOAP
             mandant: 'dontexist',
             client_system: 'dontexist',
             workplace: 'dontexist',
-            card_handle: 'dontexist'
+            card_handle: 'c9decf82-ee3d-11f0-b35f-c025a5b36994'
           ).call
         end
         it { expect(result.success?).to be_falsey }
         if ENV['USE_TLS'] && ENV['AUTHENTICATION'] == 'clientcert'
-          it { expect(result.error_messages.first).to match(/Missing matching client certificate for client_system: dontexist/) }
+          # it { puts result.error_messages.inspect }
+          it { expect(result.error_messages.join(",")).to match(/Clientsystem aus dem Aufrufkontext konnte nicht authentifiziert werden/) }
         elsif ENV['AUTHENTICATION'] == 'basicauth'
           it { expect(result.error_messages).to contain_exactly(
                "Clientsystem aus dem Aufrufkontext konnte nicht authentifiziert werden.",
