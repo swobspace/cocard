@@ -58,7 +58,7 @@ result.cards.each do |cc|
 end
 
 cards.each do |c|
-  puts "#{c.card_type}: #{c.to_s}"
+  printf "\n#{c.card_type}: #{c.to_s}"
   if c.card_type == 'SMC-B'
     cert_ref_list = %w( C.AUT C.ENC C.SIG )
   elsif c.card_type == 'HBA'
@@ -88,6 +88,6 @@ cards.each do |c|
     cert = Cocard::Certificate.new(rawcert)
     puts cert.cert.to_text
   end
-
+  puts ""
 end
 
