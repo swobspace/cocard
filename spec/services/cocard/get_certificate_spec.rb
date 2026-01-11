@@ -14,8 +14,15 @@ module Cocard
       File.read(file)
     end
 
+    let(:certificate2_yml) do
+      file = File.join(Rails.root, 'spec', 'fixtures', 'files', 'read_card_certificate_response_array.yml')
+      File.read(file)
+    end
+
     let(:fake_ok)  { Fake.new(true, [], 
                               YAML.unsafe_load(certificate_yml)) }
+    let(:fake_ok2)  { Fake.new(true, [], 
+                              YAML.unsafe_load(certificate2_yml)) }
     let(:fake_err) { Fake.new(false, ['something is wrong'], nil) }
 
     #
@@ -83,7 +90,7 @@ module Cocard
         it { expect(subject.call.error_messages).to include("No Context assigned!") }
       end
 
-      describe "successful call" do
+      describe "successful call (1) single cert" do
         before(:each) do
           expect(Cocard::SOAP::ReadCardCertificate).to receive(:new).and_return(soap)
           expect(soap).to receive(:call).and_return(fake_ok)
@@ -96,18 +103,46 @@ module Cocard
             subject.call
           end
           it { expect(card.card_handle).to eq('ee676b27-5b40-4a40-9c65-979cc3113a1e') }
-          it { expect(card.certificate).to match(/\AMIIFgTCCBGmgAwIBAgIDRmTb/) }
+          it { expect(card.certificate).to match(/\AMIIF2jCCBMKgAwIBAgIDR3XzMA0GCSqGS/) }
           # it { expect(card.cert).to be_kind_of(OpenSSL::X509::Certificate) }
-          it { expect(card.name).to eq("Institutsambulanz - Dr. Lepping") }
-          it { expect(card.cert_subject_cn).to eq("Institutsambulanz - Dr. Lepping") }
-          it { expect(card.cert_subject_title).to eq("Dr. med.") }
-          it { expect(card.cert_subject_sn).to eq("Lepping") }
-          it { expect(card.cert_subject_givenname).to eq("Thomas") }
-          it { expect(card.cert_subject_street).to eq("Mühlenstraße  31-35") }
-          it { expect(card.cert_subject_postalcode).to eq("53518") }
-          it { expect(card.cert_subject_l).to eq("Adenau") }
-          it { expect(card.telematikid).to eq("1-20477412100") }
-          it { expect(card.bsnr).to eq("477412100") }
+          it { expect(card.name).to eq("Marienhaus Klinikum St. Elisabeth Saarlouis KH-Apotheke") }
+          it { expect(card.cert_subject_cn).to eq("Marienhaus Klinikum St. Elisabeth Saarlouis KH-Apotheke") }
+          it { expect(card.cert_subject_title).to eq("") }
+          it { expect(card.cert_subject_sn).to eq("") }
+          it { expect(card.cert_subject_givenname).to eq("") }
+          it { expect(card.cert_subject_street).to eq("Kapuzinerstraße  4") }
+          it { expect(card.cert_subject_postalcode).to eq("66740") }
+          it { expect(card.cert_subject_l).to eq("Saarlouis") }
+          it { expect(card.telematikid).to eq("5-2-261000331-900") }
+          it { expect(card.bsnr).to eq("5-2-261000331-900") }
+        end
+      end
+
+      describe "successful call (2) more than one cert" do
+        before(:each) do
+          expect(Cocard::SOAP::ReadCardCertificate).to receive(:new).and_return(soap)
+          expect(soap).to receive(:call).and_return(fake_ok2)
+        end
+        it { expect(subject.call.success?).to be_truthy }
+        it { expect(subject.call.certificate).to be_kind_of(Cocard::Certificate) }
+
+        describe 'get some information' do
+          before(:each) do
+            subject.call
+          end
+          it { expect(card.card_handle).to eq('ee676b27-5b40-4a40-9c65-979cc3113a1e') }
+          it { expect(card.certificate).to match(/\AMIIEOTCCA\+CgAwIBAgIDR3X3MAoGCCqGSM49BAMC/) }
+          # it { expect(card.cert).to be_kind_of(OpenSSL::X509::Certificate) }
+          it { expect(card.name).to eq("Marienhaus Klinikum St. Elisabeth Saarlouis KH-Apotheke") }
+          it { expect(card.cert_subject_cn).to eq("Marienhaus Klinikum St. Elisabeth Saarlouis KH-Apotheke") }
+          it { expect(card.cert_subject_title).to eq("") }
+          it { expect(card.cert_subject_sn).to eq("") }
+          it { expect(card.cert_subject_givenname).to eq("") }
+          it { expect(card.cert_subject_street).to eq("Kapuzinerstraße  4") }
+          it { expect(card.cert_subject_postalcode).to eq("66740") }
+          it { expect(card.cert_subject_l).to eq("Saarlouis") }
+          it { expect(card.telematikid).to eq("5-2-261000331-900") }
+          it { expect(card.bsnr).to eq("5-2-261000331-900") }
         end
       end
     end
