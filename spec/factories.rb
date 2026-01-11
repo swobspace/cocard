@@ -37,6 +37,11 @@ FactoryBot.define do
     iccsn { generate(:iccsn) }
   end
 
+  factory :card_certificate do
+    card
+    cert_ref { "C.AUT" }
+  end
+
   factory :card_context do
     card
     context
