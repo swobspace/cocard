@@ -81,7 +81,13 @@ cards.each do |c|
     puts result
     next
   end
-  pp result.response.dig(:read_card_certificate_response, 
-                         :x509_data_info_list, :x509_data_info)
+  data_infos = Array(result.response.dig(:read_card_certificate_response, 
+                                         :x509_data_info_list, :x509_data_info))
+  data_infos.each do |di|
+    rawcert = di.dig(:x509_data, :x509_certificate)
+    cert = Cocard::Certificate.new(rawcert)
+    puts cert.cert.to_text
+  end
+
 end
 
