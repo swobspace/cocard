@@ -223,6 +223,7 @@ end
 ----
 bin/rails g model CardCertificate \
   card:belongs_to \
+  crypt:string \
   cert_ref:string \
   issuer:text \
   serial_number:string \

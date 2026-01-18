@@ -57,12 +57,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_11_093253) do
     t.string "cert_ref", default: ""
     t.text "certificate"
     t.datetime "created_at", null: false
+    t.string "crypt", default: ""
     t.date "expiration_date"
     t.text "issuer"
     t.string "serial_number", default: ""
     t.text "subject_name"
     t.datetime "updated_at", null: false
-    t.index ["card_id", "cert_ref"], name: "index_card_certificates_on_card_id_and_cert_ref", unique: true
+    t.index ["card_id", "cert_ref", "crypt"], name: "index_card_certificates_on_card_id_and_cert_ref_and_crypt", unique: true
     t.index ["card_id"], name: "index_card_certificates_on_card_id"
   end
 

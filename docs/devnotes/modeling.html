@@ -418,6 +418,7 @@ end</code></pre>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g model CardCertificate \
   card:belongs_to \
+  crypt:string \
   cert_ref:string \
   issuer:text \
   serial_number:string \

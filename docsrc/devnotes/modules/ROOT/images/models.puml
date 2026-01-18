@@ -148,6 +148,7 @@ class Card {
 }
 
 class CardCertificate {
+  crypt: string
   cert_ref: string
   issuer: text
   serial_number: string
