@@ -33,11 +33,11 @@ module Cocard
     end
 
     def certificate
-      @certificate ||= Cocard::Certificate.new(x509_certificate)
+      @certificate ||= Cocard::Certificate.new(x509_certificate).cert
     end
 
     def expiration_date
-      certificate.cert.not_after.to_date.to_s
+      certificate.not_after.to_date.to_s
     end
 
   private
