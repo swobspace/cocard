@@ -51,37 +51,26 @@ result.cards.each do |cc|
   end
 end
 
-cards.each do |c|
-  printf "\n#{c.card_type}: #{c.to_s}\n"
-  if c.card_type == 'SMC-B'
-    cert_ref_list = %w( C.AUT C.ENC C.SIG )
-  elsif c.card_type == 'HBA'
-    cert_ref_list = %w( C.AUT C.ENC C.QES)
-  else
-    puts "... skipping"
-    next
+cards.each do |card|
+  printf "\n#{card.card_type}: #{card.to_s}\n"
+
+  Cards::FetchCertificates.new(card: card).call do |result|
+
+    result.on_success do |message, card_certificates|
+      puts message
+      card_certificates.each do |crt|
+        puts "=== Crypt: #{crt.crypt}, CertRef: #{crt.cert_ref} ==="
+        puts crt.issuer
+        puts crt.serial_number
+        puts crt.subject_name
+        puts crt.expiration_date
+        puts crt.inspect
+      end
+    end
+
+    result.on_failure do |message|
+      puts message
+    end
   end
-  result = Cocard::SOAP::ReadCardCertificate.new(
-             card_handle: c.card_handle,
-             connector: connector,
-             mandant: ctx&.mandant,
-             client_system: ctx&.client_system,
-             workplace: ctx&.workplace,
-             cert_ref_list: cert_ref_list,
-             crypt: crypt,
-             user_id: 'cocard'
-           ).call
-  unless result.success?
-    puts result
-    next
-  end
-  data_infos = Array(result.response.dig(:read_card_certificate_response, 
-                                         :x509_data_info_list, :x509_data_info))
-  data_infos.each do |di|
-    crt = Cocard::CardCertificate.new(di)
-    puts "=== CertRef: #{crt.cert_ref} ==="
-    puts crt.certificate.to_text
-  end
-  puts ""
 end
 

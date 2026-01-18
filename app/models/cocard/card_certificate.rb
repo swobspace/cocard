@@ -1,12 +1,14 @@
 module Cocard
   class CardCertificate
+    attr_reader :crypt
 
     ATTRIBUTES = %i( cert_ref issuer serial_number subject_name certificate
-                     expiration_date )
+                     expiration_date crypt)
 
-    def initialize(card_cert_hash)
+    def initialize(card_cert_hash, crypt)
       if card_cert_hash.has_key?(:cert_ref) and card_cert_hash.has_key?(:x509_data)
         @hash = card_cert_hash 
+        @crypt = crypt
       else
         raise "Missing card cert hash"
       end
@@ -42,6 +44,17 @@ module Cocard
 
     def expiration_date
       certificate.not_after.to_date.to_s
+    end
+
+    def save(card:)
+      ::CardCertificate.find_or_create_by!(card_id: card.id,
+                                         cert_ref: cert_ref,
+                                         crypt: crypt) do |cc|
+        Cocard::CardCertificate::ATTRIBUTES.each do |attr|
+          next if [:card_id, :cert_ref, :crypt].include?(attr)
+          cc.send("#{attr}=", cc.send(attr))
+        end
+      end
     end
 
   private
