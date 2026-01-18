@@ -40,6 +40,7 @@ FactoryBot.define do
   factory :card_certificate do
     card
     cert_ref { "C.AUT" }
+    crypt { "ECC" }
   end
 
   factory :card_context do

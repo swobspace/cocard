@@ -10,6 +10,8 @@ RSpec.describe CardCertificate, type: :model do
 
   it { is_expected.to belong_to(:card) }
   it { is_expected.to validate_presence_of(:cert_ref) }
+  it { is_expected.to validate_presence_of(:card_id) }
+  it { is_expected.to validate_presence_of(:crypt) }
   it { is_expected.to validate_inclusion_of(:cert_ref).in_array(CardCertificate::REF_TYPES) }
 
   it 'should get plain factory working' do
@@ -17,7 +19,7 @@ RSpec.describe CardCertificate, type: :model do
     g = FactoryBot.create(:card_certificate)
     expect(f).to be_valid
     expect(g).to be_valid
-    expect(f).to validate_uniqueness_of(:cert_ref).scoped_to(:card_id)
+    expect(f).to validate_uniqueness_of(:cert_ref).scoped_to(:card_id, :crypt)
   end
 
   describe "#to_s" do
