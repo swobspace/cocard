@@ -32,8 +32,12 @@ module Cocard
       hash.dig(:x509_data, :x509_certificate)
     end
 
+    def cocard_cert
+      @certificate ||= Cocard::Certificate.new(x509_certificate)
+    end
+   
     def certificate
-      @certificate ||= Cocard::Certificate.new(x509_certificate).cert
+      cocard_cert.cert
     end
 
     def expiration_date

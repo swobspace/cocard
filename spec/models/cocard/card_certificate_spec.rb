@@ -30,6 +30,7 @@ module Cocard
       it { expect(subject.issuer).to eq("CN=D-Trust.SMCB-CA3,OU=Institution des Gesundheitswesens-CA der Telematikinfrastruktur,O=D-TRUST GmbH,C=DE") }
       it { expect(subject.serial_number).to eq("4683251") }
       it { expect(subject.subject_name).to be_nil }
+      it { expect(subject.cocard_cert).to be_kind_of Cocard::Certificate }
       it { expect(subject.certificate).to be_kind_of OpenSSL::X509::Certificate }
       it { expect(subject.expiration_date).to eq("2026-08-15") }
     end
