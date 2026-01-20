@@ -64,7 +64,6 @@ cards.each do |card|
         puts crt.serial_number
         puts crt.subject_name
         puts crt.expiration_date
-        puts crt.inspect
       end
     end
 
