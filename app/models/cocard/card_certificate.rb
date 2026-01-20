@@ -39,21 +39,25 @@ module Cocard
     end
    
     def certificate
+      x509_certificate.to_s
+    end
+
+    def openssl_cert
       cocard_cert.cert
     end
 
+
     def expiration_date
-      certificate.not_after.to_date.to_s
+      openssl_cert.not_after.to_date.to_s
     end
 
     def save(card:)
       ::CardCertificate.find_or_create_by!(card_id: card.id,
-                                         cert_ref: cert_ref,
-                                         crypt: crypt) do |cc|
-        Cocard::CardCertificate::ATTRIBUTES.each do |attr|
-          next if [:card_id, :cert_ref, :crypt].include?(attr)
-          cc.send("#{attr}=", cc.send(attr))
-        end
+                                           cert_ref: cert_ref, crypt: crypt ) do |cc|
+          ATTRIBUTES.each do |attr|
+            next if [:card_id, :cert_ref, :crypt].include?(attr)
+            cc.send("#{attr}=", self.send(attr))
+          end
       end
     end
 
