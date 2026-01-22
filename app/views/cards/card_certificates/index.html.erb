@@ -3,7 +3,7 @@
     <div class="card-header">
       <div class="d-flex justify-content-between">
         <h4 class="me-4 pt-1"><%= t('controller.card_certificates')%></h4>
-        <%= render FetchCardCertificatesButtonComponent.new(item: @certable) %>
+        <%= render FetchCardCertificatesButtonComponent.new(item: @certable) if can? :manage, Card %>
       </div>
     </div>
     <%= content_tag :table, role: :datatable,
