@@ -117,6 +117,7 @@ Rails.application.routes.draw do
     end
     resource :kt_proxy, module: :card_terminals
   end
+  resources :card_certificates, only: [:show, :index]
   resources :contexts
   resources :connector_contexts, only: [:show, :update]
   resources :connectors do

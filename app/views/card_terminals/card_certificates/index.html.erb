@@ -1,2 +1,59 @@
-<h1>CardCertificates#index</h1>
-<p>Find me in app/views/card_certificates/index.html.erb</p>
+<%= render 'shared/turbo-cache-control' %>
+
+<h2><%= t('controller.card_certificates') %> für: <%= @certable %> </h2>
+
+<div data-controller="datatables">
+  <%= content_tag :table, role: :datatable,
+        id: "card_certificates_table",
+        class: "table table-bordered table-responsive",
+        data: {
+          'datatables-target': 'datatable',
+          order: [[0, 'asc']].to_json
+        } do %>
+    <thead>
+      <tr>
+        <th><%= t('attributes.card') %></th>
+        <th><%= t('attributes.crypt') %></th>
+        <th><%= t('attributes.cert_ref') %></th>
+        <th><%= t('attributes.expiration_date') %></th>
+        <th><%= t('attributes.subject_name') %></th>
+        <th><%= t('attributes.issuer') %></th>
+        <th><%= t('attributes.serial_number') %></th>
+        <th class="nosort"><%= t('cocard.action') %></th>
+      </tr>
+    </thead>
+    <tfoot class="search">
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th class="nosearch"></th>
+      </tr>
+    </tfoot>
+    <tbody>
+      <% @card_certificates.each do |card_certificate| %>
+        <%= content_tag(:tr, id: dom_id(card_certificate), class: dom_class(card_certificate)) do %>
+          <td><%= render LinkToComponent.new(item: card_certificate.card) %></td>
+          <td><%= card_certificate.crypt %></td>
+          <td><%= card_certificate.cert_ref %></td>
+          <td><%= render ExpirationDateComponent.new(item: card_certificate) %></td>
+          <td><%= card_certificate.subject_name %></td>
+          <td><%= card_certificate.issuer %></td>
+          <td><%= card_certificate.serial_number %></td>
+          <td class="text-nowrap">
+            <%= show_link card_certificate %>
+          </td>
+
+        <% end %>
+      <% end %>
+    </tbody>
+  <% end %>
+</div>
+
+<br />
+
+<%= back_link %>
