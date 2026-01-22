@@ -113,7 +113,7 @@ module Cards
           end
           expect(called_back).to be_truthy
           card.reload
-          puts card.card_certificates.pluck(:cert_ref, :crypt, :expiration_date)
+          # puts card.card_certificates.pluck(:cert_ref, :crypt, :expiration_date)
           expect(card.card_certificates.count).to eq(4)
         end
 
