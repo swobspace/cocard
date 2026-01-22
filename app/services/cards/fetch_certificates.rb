@@ -60,7 +60,7 @@ module Cards
               @card_certificates << card_certificate if card_certificate.present?
             end
             
-            yield Cocard::Status.success("bingo", @card_certificates)
+            yield Cocard::Status.success("Kartenzertifikate erfolgreich eingelesen", @card_certificates)
           else
             error_messages = result.error_messages
             yield Cocard::Status.failure(error_messages.join("; "))
