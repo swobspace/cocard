@@ -81,7 +81,11 @@ Rails.application.routes.draw do
         get :sindex
       end
     end
-    resources :card_certificates, module: :cards, only: [:index, :show]
+    resources :card_certificates, module: :cards, only: [:index, :show] do
+      collection do
+        post :fetch
+      end
+    end
   end
 
   post "card_terminals", to: "card_terminals#index", 

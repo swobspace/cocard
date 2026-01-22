@@ -1,8 +1,9 @@
 <%= turbo_frame_tag('card_certificates') do %>
   <div class="card mt-3">
     <div class="card-header">
-      <div class="row">
+      <div class="d-flex justify-content-between">
         <h4 class="me-4 pt-1"><%= t('controller.card_certificates')%></h4>
+        <%= render FetchCardCertificatesButtonComponent.new(item: @certable) %>
       </div>
     </div>
     <%= content_tag :table, role: :datatable,
@@ -33,7 +34,7 @@
             <td><%= truncate(card_certificate.issuer, length: 60) %></td>
             <td><%= card_certificate.serial_number %></td>
             <td class="text-nowrap">
-              <%= show_link card_certificate %>
+              <%= show_link card_certificate, data: {"turbo-frame": "_top"} %>
             </td>
 
           <% end %>
