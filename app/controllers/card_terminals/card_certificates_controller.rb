@@ -4,15 +4,38 @@ module CardTerminals
 
     def fetch
       # -- get Cards
-      connector = ct.connector
+      connector = @certable.connector
       ctx       = connector.contexts.first
       result = Cocard::GetCards.new(connector:  connector, context: ctx,
-                                    ct_id: ct.ct_id).call
+                                    ct_id: @certable.ct_id).call
       if result.success?
+        cards = []
+        result.cards.each do |cc|
+          creator = Cards::Creator.new(connector: connector, cc: cc, context: ctx)
+          if creator.save
+            cards << creator.card
+          end
+        end
+        ok_msgs = []
+        err_msgs = []
+        cards.each do |card|
+          next unless ['HBA', 'SMC-B'].include?(card.card_type)
+          Cards::FetchCertificates.new(card: card).call do |result|
+            result.on_success do |message, card_certificates|
+              ok_msgs << "#{card.iccsn} #{card.card_type}: #{message}"
+            end
+
+            result.on_failure do |message|
+              err_msgs << "#{card.iccsn} #{card.card_type}: #{message}"
+            end
+          end
+        end
+        flash[:success] = ok_msgs.join("; ") if ok_msgs.any?
+        flash[:alert] = err_msgs.join("; ") if err_msgs.any?
       else
         flash[:alert] = "Karten können nicht gelesen werden"
       end
-      redirect_to :index
+      redirect_to card_terminal_card_certificates_path(@certable)
     end
 
     private
