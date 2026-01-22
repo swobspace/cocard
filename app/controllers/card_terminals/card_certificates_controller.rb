@@ -19,7 +19,7 @@ module CardTerminals
         ok_msgs = []
         err_msgs = []
         cards.each do |card|
-          next unless ['HBA', 'SMC-B'].include?(card.card_type)
+          next unless card.certable?
           Cards::FetchCertificates.new(card: card).call do |result|
             result.on_success do |message, card_certificates|
               ok_msgs << "#{card.iccsn} #{card.card_type}: #{message}"

@@ -33,7 +33,7 @@ module Cards
       if @context.blank?
         error_messages << "No Context assigned!"
       end
-      unless ['HBA', 'SMC-B'].include?(@card.card_type)
+      unless @card.certable?
         error_messages << "ReadCardCertificate supports only HBA|SMC-B"
       end
 

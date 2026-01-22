@@ -4,7 +4,7 @@ module Cards
 
     def fetch
       card = @certable
-      if ['HBA', 'SMC-B'].include?(card.card_type)
+      if card.certable?
         Cards::FetchCertificates.new(card: card).call do |result|
           result.on_success do |message, card_certificates|
             flash[:success] = "#{card.iccsn} #{card.card_type}: #{message}"
