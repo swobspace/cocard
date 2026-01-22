@@ -1,5 +1,11 @@
 <%= render 'shared/turbo-cache-control' %>
 
+<div class="alert alert-warning" role="alert">
+    Hinweis: Cocard lädt Kartenzertifikate nicht automatisch. 
+    Hier sind nur Kartenzertifikate aufgeführt, die manuell über das 
+    Kartenterminal oder die Karte abgefragt wurden!.
+</div>
+
 <h2><%= t('controller.card_certificates') %> </h2>
 <% if @certable.present? %>
   <div >
