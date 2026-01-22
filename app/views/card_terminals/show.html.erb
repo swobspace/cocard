@@ -18,7 +18,7 @@
         <%= render ConditionIconComponent.new(item: @card_terminal) %>
       </div>
       <div role="toolbar" class="ms-auto pt-3">
-        <%= render FetchCardCertificatesButtonComponent.new(item: @card_terminal) if (can? :fetch_card_certificates, @card_terminal) %>
+        <%= render FetchCardCertificatesButtonComponent.new(item: @card_terminal) if (can? :manage, Card) %>
         <%= render RebootButtonComponent.new(item: @card_terminal) if (can? :reboot, @card_terminal) %>
         <%= render CardTerminal::PairingButtonComponent
                    .new(card_terminal: @card_terminal) if (can? :manage, @card_terminal) %>

@@ -1,0 +1,44 @@
+<%= turbo_frame_tag('card_certificates') do %>
+  <div class="card mt-3">
+    <div class="card-header">
+      <div class="row">
+        <h4 class="me-4 pt-1"><%= t('controller.card_certificates')%></h4>
+      </div>
+    </div>
+    <%= content_tag :table, role: :datatable,
+          id: "card_certificates_table",
+          class: "table table-sm mx-2",
+          data: {
+            'datatables-target': 'datatable',
+            order: [[0, 'asc']].to_json
+          } do %>
+      <thead>
+        <tr>
+          <th><%= t('attributes.crypt') %></th>
+          <th><%= t('attributes.cert_ref') %></th>
+          <th><%= t('attributes.expiration_date') %></th>
+          <th><%= t('attributes.subject_name') %></th>
+          <th><%= t('attributes.issuer') %></th>
+          <th><%= t('attributes.serial_number') %></th>
+          <th class="nosort"><%= t('cocard.action') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @card_certificates.each do |card_certificate| %>
+          <%= content_tag(:tr, id: dom_id(card_certificate), class: dom_class(card_certificate)) do %>
+            <td><%= card_certificate.crypt %></td>
+            <td><%= card_certificate.cert_ref %></td>
+            <td><%= render ExpirationDateComponent.new(item: card_certificate) %></td>
+            <td><%= truncate(card_certificate.subject_name, length: 60) %></td>
+            <td><%= truncate(card_certificate.issuer, length: 60) %></td>
+            <td><%= card_certificate.serial_number %></td>
+            <td class="text-nowrap">
+              <%= show_link card_certificate %>
+            </td>
+
+          <% end %>
+        <% end %>
+      </tbody>
+    <% end %>
+  </div>
+<% end %>
