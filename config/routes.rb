@@ -110,6 +110,11 @@ Rails.application.routes.draw do
         get :sindex
       end
     end
+    resources :card_certificates, module: :card_terminals do
+      collection do
+        post :fetch
+      end
+    end
     resource :kt_proxy, module: :card_terminals
   end
   resources :contexts

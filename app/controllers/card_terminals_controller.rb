@@ -6,6 +6,7 @@ class CardTerminalsController < ApplicationController
                                              fetch_idle_message fetch_proxy
                                              update_idle_message
                                              ping reboot remote_pairing
+                                             fetch_card_certificates
                                              test_context_form test_context]
   authorize_resource
   before_action :add_breadcrumb_show, only: [:show]
