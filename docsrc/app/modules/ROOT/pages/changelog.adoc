@@ -3,6 +3,7 @@
 == 0.9.9-dev - unreleased
 
 * Überarbeitung der Dokumentation
+* Manuelles Einlesen aller Zertifikate auf einer SMC-B/einem HBA; entweder nur die Karte oder alle Karten in einem Kartenterminal
 
 == 0.9.8 - 2026-01-04
 
