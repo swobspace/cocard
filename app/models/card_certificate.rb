@@ -1,4 +1,6 @@
 class CardCertificate < ApplicationRecord
+  include CardCertificateConcerns
+
   # -- associations
   belongs_to :card
 
