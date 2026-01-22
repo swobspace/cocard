@@ -13,6 +13,7 @@
     <thead>
       <tr>
         <th><%= t('attributes.card') %></th>
+        <th><%= t('attributes.card_type') %></th>
         <th><%= t('attributes.crypt') %></th>
         <th><%= t('attributes.cert_ref') %></th>
         <th><%= t('attributes.expiration_date') %></th>
@@ -31,6 +32,7 @@
         <th></th>
         <th></th>
         <th></th>
+        <th></th>
         <th class="nosearch"></th>
       </tr>
     </tfoot>
@@ -38,6 +40,7 @@
       <% @card_certificates.each do |card_certificate| %>
         <%= content_tag(:tr, id: dom_id(card_certificate), class: dom_class(card_certificate)) do %>
           <td><%= render LinkToComponent.new(item: card_certificate.card) %></td>
+          <td><%= card_certificate.card&.card_type %></td>
           <td><%= card_certificate.crypt %></td>
           <td><%= card_certificate.cert_ref %></td>
           <td><%= render ExpirationDateComponent.new(item: card_certificate) %></td>
