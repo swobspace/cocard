@@ -4,7 +4,11 @@ class CardCertificatesController < ApplicationController
 
   # GET /card_certificates
   def index
-    @card_certificates = @certable.card_certificates
+    if @certable
+      @card_certificates = @certable.card_certificates
+    else
+      @card_certificates = CardCertificate.all
+    end
     respond_with(@card_certificates)
   end
 

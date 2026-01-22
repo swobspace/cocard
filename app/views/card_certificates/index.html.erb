@@ -1,6 +1,11 @@
 <%= render 'shared/turbo-cache-control' %>
 
-<h2><%= t('controller.card_certificates') %> für: <%= @certable %> </h2>
+<h2><%= t('controller.card_certificates') %> </h2>
+<% if @certable.present? %>
+  <div >
+    für <%= @certable %>
+  </div>
+<% end %>
 
 <div data-controller="datatables">
   <%= content_tag :table, role: :datatable,
@@ -44,8 +49,8 @@
           <td><%= card_certificate.crypt %></td>
           <td><%= card_certificate.cert_ref %></td>
           <td><%= render ExpirationDateComponent.new(item: card_certificate) %></td>
-          <td><%= card_certificate.subject_name %></td>
-          <td><%= card_certificate.issuer %></td>
+          <td><%= truncate(card_certificate.subject_name, length: 60) %></td>
+          <td><%= truncate(card_certificate.issuer, length: 60) %></td>
           <td><%= card_certificate.serial_number %></td>
           <td class="text-nowrap">
             <%= show_link card_certificate %>
