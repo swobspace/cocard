@@ -27,7 +27,7 @@ module Cocard
     end
 
     def subject_name
-      hash.dig(:x509_data, :x509_serial_number)
+      hash.dig(:x509_data, :x509_subject_name)
     end
 
     def x509_certificate
