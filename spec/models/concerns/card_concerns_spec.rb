@@ -99,4 +99,23 @@ RSpec.describe CardConcerns, type: :model do
     it { expect(Card.verifiable_auto).to contain_exactly(card2) }
   end
 
+  describe "certable?" do
+    it "SMC-B is certable" do
+      expect(card).to receive(:card_type).at_least(:once).and_return('SMC-B')
+      expect(card.certable?).to be_truthy
+    end
+    it "HBA is certable" do
+      expect(card).to receive(:card_type).at_least(:once).and_return('HBA')
+      expect(card.certable?).to be_truthy
+    end
+    it "SMC-K is not certable" do
+      expect(card).to receive(:card_type).at_least(:once).and_return('SMC-K')
+      expect(card.certable?).to be_falsey
+    end
+    it "SMC-KT is not certable" do
+      expect(card).to receive(:card_type).at_least(:once).and_return('SMC-KT')
+      expect(card.certable?).to be_falsey
+    end
+  end
+
 end

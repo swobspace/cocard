@@ -52,6 +52,7 @@ de:
     card_terminal_data: Daten des Kartenterminals
     certificate_data: Daten des Zertfikats
     fetch_sds: Abfrage SDS
+    fetch_card_certificates: Kartenzertifikate einlesen (HBA, SMC-B)
     get_resource_information: Abfrage Konnektor
     get_cards_terminal: Abfrage Kartenterminals
     get_cards: Abfrage Karten
@@ -87,6 +88,7 @@ de:
   activerecord:
     models:
       card: Karte
+      card_certificate: Kartenzertifikat
       card_terminal: Kartenterminal
       client_certificate: Client-Zertifikat
       context: Kontext
@@ -117,6 +119,7 @@ de:
     boot_mode: Automatischer Reboot
     bsnr: BSNR
     card: Karte
+    card_certificate: Kartenzertifikat
     card_handle: CardHandle
     card_holder_name: CardHolder
     card_terminal: Kartenterminal
@@ -126,6 +129,7 @@ de:
     card_type: Kartentyp
     certificate: Zertifikat
     cert: Zertifikat (PEM)
+    cert_ref: Zweck
     cert_subject_cn: (CN)
     cert_subject_title: Titel
     cert_subject_sn: Name
@@ -155,6 +159,7 @@ de:
     correlation: Beziehung
     created_at: Erstellt
     creator: Ersteller
+    crypt: Crypt
     ct_id: CT_ID
     ct_id_and_slot: CT_ID/Slot
     current_ip: Gefundene IP
@@ -176,6 +181,7 @@ de:
     insert_time: eingesteckt seit
     ip: IP-Adresse
     is_valid: gültig?
+    issuer: Aussteller
     lanr: LANR
     lid: Standort-Kürzel
     last_ok: zuletzt OK
@@ -217,6 +223,7 @@ de:
     sds_url: SDS-URL
     search: Suche
     serial: Seriennummer
+    serial_number: Seriennummer
     short: Kurz
     short_name: Kurzbezeichnung
     since: seit
@@ -229,6 +236,7 @@ de:
     state: Status
     status: Status
     subject: Betreff
+    subject_name: Subject
     supplier: Lieferant
     tag: Tag
     tag_list_input: Tags
@@ -250,8 +258,11 @@ de:
 
   controller:
     cards: Karten
+    cards/card_certificates: Kartenzertifikate
     cards/logs: Karten/Logs
+    card_certificates: Kartenzertifikate
     card_terminals: Kartenterminals
+    card_terminals/card_certificates: Kartenzertifikate
     card_terminals/logs: Kartenterminals/Logs
     card_terminals/kt_proxies: KT-Proxys
     client_certificates: Client-Zertifikate

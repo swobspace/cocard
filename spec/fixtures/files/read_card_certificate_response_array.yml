@@ -1,0 +1,52 @@
+---
+:read_card_certificate_response:
+  :status:
+    :result: !ruby/string:Nori::StringWithAttributes
+      str: OK
+      attributes: {}
+  :x509_data_info_list:
+    :x509_data_info:
+    - :cert_ref: !ruby/string:Nori::StringWithAttributes
+        str: C.ENC
+        attributes: {}
+      :x509_data:
+        :x509_issuer_serial:
+          :x509_issuer_name: !ruby/string:Nori::StringWithAttributes
+            str: CN=D-Trust.SMCB-CA5,OU=Institution des Gesundheitswesens-CA der Telematikinfrastruktur,O=D-TRUST
+              GmbH,C=DE
+            attributes: {}
+          :x509_serial_number: !ruby/string:Nori::StringWithAttributes
+            str: '4683255'
+            attributes: {}
+        :x509_subject_name: !ruby/string:Nori::StringWithAttributes
+          str: CN=Marienhaus Klinikum St. Elisabeth Saarlouis KH-Apotheke,2.5.4.5=#131731302e3830323736303031373331303030303035373531,O=5-2-261000331-900,STREET=Kapuzinerstraße  4,2.5.4.17=#0c053636373430,L=Saarlouis,ST=Saarland,C=DE
+          attributes: {}
+        :x509_certificate: !ruby/string:Nori::StringWithAttributes
+          str: MIIEOTCCA+CgAwIBAgIDR3X3MAoGCCqGSM49BAMCMIGJMQswCQYDVQQGEwJERTEVMBMGA1UECgwMRC1UUlVTVCBHbWJIMUgwRgYDVQQLDD9JbnN0aXR1dGlvbiBkZXMgR2VzdW5kaGVpdHN3ZXNlbnMtQ0EgZGVyIFRlbGVtYXRpa2luZnJhc3RydWt0dXIxGTAXBgNVBAMMEEQtVHJ1c3QuU01DQi1DQTUwHhcNMjIwMjA5MDU0MzUzWhcNMjcwMjA5MDU0MzUyWjCB4jELMAkGA1UEBhMCREUxETAPBgNVBAgMCFNhYXJsYW5kMRIwEAYDVQQHDAlTYWFybG91aXMxDjAMBgNVBBEMBTY2NzQwMRwwGgYDVQQJDBNLYXB1emluZXJzdHJhw59lICA0MRowGAYDVQQKDBE1LTItMjYxMDAwMzMxLTkwMDEgMB4GA1UEBRMXMTAuODAyNzYwMDE3MzEwMDAwMDU3NTExQDA+BgNVBAMMN01hcmllbmhhdXMgS2xpbmlrdW0gU3QuIEVsaXNhYmV0aCBTYWFybG91aXMgS0gtQXBvdGhla2UwWjAUBgcqhkjOPQIBBgkrJAMDAggBAQcDQgAEkx8URMHdesV2NFJBYi4imWDJ7MlEm7jx6sSq38xP+45cOk/tpJ97rTd5yiqzYRaqvPPTn9WfSGLloXliYzLw0KOCAdkwggHVMB8GA1UdIwQYMBaAFECaSyjeqUJqrI0QSDcEQb0cUcIYMGkGBSskCAMDBGAwXqQfMB0xCzAJBgNVBAYTAkRFMQ4wDAYDVQQKDAVES1RJRzA7MDkwNzA1MBUME0tyYW5rZW5oYXVzYXBvdGhla2UwCQYHKoIUAEwENxMRNS0yLTI2MTAwMDMzMS05MDAwRAYIKwYBBQUHAQEEODA2MDQGCCsGAQUFBzABhihodHRwOi8vRC1UUlVTVC1TTUNCLUNBNS5vY3NwLmQtdHJ1c3QubmV0MFEGA1UdIARKMEgwOwYIKoIUAEwEgSMwLzAtBggrBgEFBQcCARYhaHR0cDovL3d3dy5nZW1hdGlrLmRlL2dvL3BvbGljaWVzMAkGByqCFABMBEwwcQYDVR0fBGowaDBmoGSgYoZgbGRhcDovL2RpcmVjdG9yeS5kLXRydXN0Lm5ldC9DTj1ELVRydXN0LlNNQ0ItQ0E1LE89RC1UUlVTVCUyMEdtYkgsQz1ERT9jZXJ0aWZpY2F0ZXJldm9jYXRpb25saXN0MB0GA1UdDgQWBBTSxvy4XzDw/aek4Ghch0XXRw1DQDAOBgNVHQ8BAf8EBAMCAwgwDAYDVR0TAQH/BAIwADAKBggqhkjOPQQDAgNHADBEAiBidpuNlewZr8JUxV7Yrt16Zc5qs/YUu/Pha59C2ZZlTQIgV6XhCpeyLeaoAzHFWkGJKvkQcA53kU3IhfpNuXd17mI=
+          attributes: {}
+    - :cert_ref: !ruby/string:Nori::StringWithAttributes
+        str: C.AUT
+        attributes: {}
+      :x509_data:
+        :x509_issuer_serial:
+          :x509_issuer_name: !ruby/string:Nori::StringWithAttributes
+            str: CN=D-Trust.SMCB-CA5,OU=Institution des Gesundheitswesens-CA der Telematikinfrastruktur,O=D-TRUST
+              GmbH,C=DE
+            attributes: {}
+          :x509_serial_number: !ruby/string:Nori::StringWithAttributes
+            str: '4683254'
+            attributes: {}
+        :x509_subject_name: !ruby/string:Nori::StringWithAttributes
+          str: CN=Marienhaus Klinikum St. Elisabeth Saarlouis KH-Apotheke,2.5.4.5=#131731302e3830323736303031373331303030303035373531,O=5-2-261000331-900,STREET=Kapuzinerstraße  4,2.5.4.17=#0c053636373430,L=Saarlouis,ST=Saarland,C=DE
+          attributes: {}
+        :x509_certificate: !ruby/string:Nori::StringWithAttributes
+          str: MIIETzCCA/WgAwIBAgIDR3X2MAoGCCqGSM49BAMCMIGJMQswCQYDVQQGEwJERTEVMBMGA1UECgwMRC1UUlVTVCBHbWJIMUgwRgYDVQQLDD9JbnN0aXR1dGlvbiBkZXMgR2VzdW5kaGVpdHN3ZXNlbnMtQ0EgZGVyIFRlbGVtYXRpa2luZnJhc3RydWt0dXIxGTAXBgNVBAMMEEQtVHJ1c3QuU01DQi1DQTUwHhcNMjIwMjA5MDU0MzUzWhcNMjcwMjA5MDU0MzUyWjCB4jELMAkGA1UEBhMCREUxETAPBgNVBAgMCFNhYXJsYW5kMRIwEAYDVQQHDAlTYWFybG91aXMxDjAMBgNVBBEMBTY2NzQwMRwwGgYDVQQJDBNLYXB1emluZXJzdHJhw59lICA0MRowGAYDVQQKDBE1LTItMjYxMDAwMzMxLTkwMDEgMB4GA1UEBRMXMTAuODAyNzYwMDE3MzEwMDAwMDU3NTExQDA+BgNVBAMMN01hcmllbmhhdXMgS2xpbmlrdW0gU3QuIEVsaXNhYmV0aCBTYWFybG91aXMgS0gtQXBvdGhla2UwWjAUBgcqhkjOPQIBBgkrJAMDAggBAQcDQgAEQ79M8L43lIaAde5loOuGPUEoa3WxA2/qz4YTOFCOBJ2C9VuKZqN16vaTEMvL3ggTC5zuEesG7V2kKXmPI2YCi6OCAe4wggHqMBMGA1UdJQQMMAoGCCsGAQUFBwMCMB8GA1UdIwQYMBaAFECaSyjeqUJqrI0QSDcEQb0cUcIYMGkGBSskCAMDBGAwXqQfMB0xCzAJBgNVBAYTAkRFMQ4wDAYDVQQKDAVES1RJRzA7MDkwNzA1MBUME0tyYW5rZW5oYXVzYXBvdGhla2UwCQYHKoIUAEwENxMRNS0yLTI2MTAwMDMzMS05MDAwRAYIKwYBBQUHAQEEODA2MDQGCCsGAQUFBzABhihodHRwOi8vRC1UUlVTVC1TTUNCLUNBNS5vY3NwLmQtdHJ1c3QubmV0MFEGA1UdIARKMEgwOwYIKoIUAEwEgSMwLzAtBggrBgEFBQcCARYhaHR0cDovL3d3dy5nZW1hdGlrLmRlL2dvL3BvbGljaWVzMAkGByqCFABMBE0wcQYDVR0fBGowaDBmoGSgYoZgbGRhcDovL2RpcmVjdG9yeS5kLXRydXN0Lm5ldC9DTj1ELVRydXN0LlNNQ0ItQ0E1LE89RC1UUlVTVCUyMEdtYkgsQz1ERT9jZXJ0aWZpY2F0ZXJldm9jYXRpb25saXN0MB0GA1UdDgQWBBTjpVRqm7d2MQPj01JiBkk726HABTAOBgNVHQ8BAf8EBAMCB4AwDAYDVR0TAQH/BAIwADAKBggqhkjOPQQDAgNIADBFAiAYXroVp8Y8rmmxoMqjYJO6+fSVz6haFtQ01fmQgbkx4gIhAIYQkyMNXRW9bSy8pwGbYBJJ1H+9Al6U8K8bwgng+zH+
+          attributes: {}
+  :@xmlns:ns9: urn:oasis:names:tc:SAML:1.0:assertion
+  :@xmlns:ns8: http://www.w3.org/2000/09/xmldsig#
+  :@xmlns:ns7: urn:oasis:names:tc:dss:1.0:core:schema
+  :@xmlns:ns6: http://ws.gematik.de/conn/CertificateServiceCommon/v2.0
+  :@xmlns:ns5: http://ws.gematik.de/tel/error/v2.0
+  :@xmlns:ns4: http://ws.gematik.de/conn/CertificateService/v6.0
+  :@xmlns:ns3: http://ws.gematik.de/conn/ConnectorContext/v2.0
+  :@xmlns:ns2: http://ws.gematik.de/conn/ConnectorCommon/v5.0

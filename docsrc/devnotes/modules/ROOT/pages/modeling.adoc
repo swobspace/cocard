@@ -217,6 +217,21 @@ class Card < ApplicationRecord
 end
 ----
 
+== model CardCertificate
+
+[source,sh]
+----
+bin/rails g model CardCertificate \
+  card:belongs_to \
+  crypt:string \
+  cert_ref:string \
+  issuer:text \
+  serial_number:string \
+  subject_name:text \
+  certificate:text \
+  expiration_date:date
+----
+
 == model OperationalState
 
 [source,sh]

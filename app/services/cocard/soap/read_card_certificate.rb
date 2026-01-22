@@ -9,6 +9,9 @@ module Cocard::SOAP
       @client_system = options.fetch(:client_system)
       @workplace     = options.fetch(:workplace)
       @card_handle   = options.fetch(:card_handle)
+      @cert_ref_list = Array(options.fetch(:cert_ref_list, 'C.AUT'))
+      @crypt         = options.fetch(:crypt, nil)
+      @user_id       = options.fetch(:user_id, nil)
     end
 
     def soap_message
@@ -17,11 +20,28 @@ module Cocard::SOAP
         "CCTX:Context" => {
           "CONN:MandantId"      => @mandant,
           "CONN:ClientSystemId" => @client_system,
-          "CONN:WorkplaceId"    => @workplace  },
+          "CONN:WorkplaceId"    => @workplace,
+        }.merge(context_userid),
         "CERT:CertRefList" => {
-          "CERT:CertRef" => 'C.ENC'
+          "CERT:CertRef" => @cert_ref_list
         }
-      }
+      }.merge(crypt_options)
+    end
+
+    def crypt_options
+      if @crypt.present? and ['ECC', 'RSA'].include?(@crypt)
+        { "CERT:Crypt" => @crypt }
+      else
+        { }
+      end
+    end
+
+    def context_userid
+      if @user_id.present?
+        { "CONN:UserId" => @user_id }
+      else
+        { }
+      end
     end
 
     def wsdl_content

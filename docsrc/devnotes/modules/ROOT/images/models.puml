@@ -136,7 +136,7 @@ class Card {
   object_system_version: string
   card_terminal_slot_id
   --
-  certificate:text
+  certificate: text
   cert_subject_cn: string
   cert_subject_title: string
   cert_subject_sn: string
@@ -145,6 +145,17 @@ class Card {
   cert_subject_postalcode: string
   cert_subject_l: string
   cert_subject_o: string
+}
+
+class CardCertificate {
+  crypt: string
+  cert_ref: string
+  issuer: text
+  serial_number: string
+  subject_name: text
+  certificate: text
+  expiration_date: date
+  card_id
 }
 
 class Workplace {
@@ -247,6 +258,7 @@ Location "0..1" -- "*" CardTerminal
 CardContext . (Card, Context)
 CardTerminal "1" - "*" CardTerminalSlot
 CardTerminalSlot "1" - "0..1" Card
+CardCertificate "*" -- "1" Card
 CardTerminal "*" -- "*" Workplace
 KTProxy "1" -- "1" CardTerminal 
 TerminalWorkplaces . (CardTerminal, Workplace) 

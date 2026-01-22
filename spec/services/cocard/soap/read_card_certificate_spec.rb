@@ -31,7 +31,10 @@ module Cocard::SOAP
         mandant: ENV['CONN_MANDANT'],
         client_system: ENV['CONN_CLIENT_SYSTEM_ID'],
         workplace: ENV['CONN_WORKPLACE_ID'],
-        card_handle: ENV['CARD_HANDLE']
+        card_handle: ENV['CARD_HANDLE'],
+        cert_ref_list: %w( C.AUT C.ENC ),
+        crypt: 'ECC',
+        user_id: 'cocard'
       )
     end
 
@@ -78,8 +81,10 @@ module Cocard::SOAP
 
       describe "successful call" do
         let(:result) { subject.call }
-        it { pp  result.response }
 
+        it { puts subject.soap_message }
+
+        it { pp  result.response }
         it { expect(result.success?).to be_truthy }
         it { expect(result.response.keys).to contain_exactly(:read_card_certificate_response) }
       end

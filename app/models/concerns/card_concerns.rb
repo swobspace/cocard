@@ -40,4 +40,8 @@ module CardConcerns
     ( name.blank? ) ? card_holder_name : name
   end
 
+  def certable?
+    ['HBA', 'SMC-B'].include?(card_type)
+  end
+
 end
