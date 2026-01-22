@@ -6,7 +6,11 @@
           <%= t('activerecord.models.card_certificate') %>: 
           #<%= @card_certificate.id %>
         </span>
-        <h4 class="title"><%= @card_certificate %></h4>
+        <h4 class="title">
+          <%= @card_certificate.card %> -
+          <%= @card_certificate.crypt %> - 
+          <%= @card_certificate.cert_ref %> 
+        </h4>
       </div>
       <div role="toolbar" class="pt-3">
       </div>
@@ -15,54 +19,50 @@
 
   <div class="card-body">
     <div class="row">
-      <div class="col-lg-6">
-        <table class="table table-sm table-borderless">
-        
-          <tr>
-            <th class="w-10 pe-3"><%= t('attributes.card')%>:</th>
-            <td><%= render LinkToComponent.new(item: @card_certificate.card) %></td>
-          </tr>
+      <table class="table table-sm table-borderless">
+      
+        <tr>
+          <th class="w-10 pe-3"><%= t('attributes.card')%>:</th>
+          <td><%= render LinkToComponent.new(item: @card_certificate.card) %></td>
+        </tr>
 
-          <tr>
-            <th class="w-10 pe-3"><%= t('attributes.crypt')%>:</th>
-            <td><%= @card_certificate.crypt %></td>
-          </tr>
+        <tr>
+          <th class="w-10 pe-3"><%= t('attributes.crypt')%>:</th>
+          <td><%= @card_certificate.crypt %></td>
+        </tr>
 
-          <tr>
-            <th class="w-10 pe-3"><%= t('attributes.cert_ref')%>:</th>
-            <td><%= @card_certificate.cert_ref %></td>
-          </tr>
+        <tr>
+          <th class="w-10 pe-3"><%= t('attributes.cert_ref')%>:</th>
+          <td><%= @card_certificate.cert_ref %></td>
+        </tr>
 
-          <tr>
-            <th class="w-10 pe-3"><%= t('attributes.subject_name')%>:</th>
-            <td><%= @card_certificate.subject_name %></td>
-          </tr>
+        <tr>
+          <th class="w-10 pe-3"><%= t('attributes.subject_name')%>:</th>
+          <td><%= @card_certificate.subject_name %></td>
+        </tr>
 
-          <tr>
-            <th class="w-10 pe-3"><%= t('attributes.issuer')%>:</th>
-            <td><%= @card_certificate.issuer %></td>
-          </tr>
+        <tr>
+          <th class="w-10 pe-3"><%= t('attributes.issuer')%>:</th>
+          <td><%= @card_certificate.issuer %></td>
+        </tr>
 
-          <tr>
-            <th class="w-10 pe-3"><%= t('attributes.serial_number')%>:</th>
-            <td><%= @card_certificate.serial_number %></td>
-          </tr>
+        <tr>
+          <th class="w-10 pe-3"><%= t('attributes.serial_number')%>:</th>
+          <td><%= @card_certificate.serial_number %></td>
+        </tr>
 
-          <tr>
-            <th class="w-10 pe-3"><%= t('attributes.expiration_date')%>:</th>
-            <td>
-              <%= render ExpirationDateComponent.new(item: @card_certificate) %>
-            </td>
-          </tr>
+        <tr>
+          <th class="w-10 pe-3"><%= t('attributes.expiration_date')%>:</th>
+          <td>
+            <%= render ExpirationDateComponent.new(item: @card_certificate) %>
+          </td>
+        </tr>
 
-        </table>
-      </div>
-      <div class="col-lg-6">
-        <pre>
+      </table>
+      <pre>
 <%= @card_certificate.to_text %>
-        </pre>
-      </div>
-    </div>
+      </pre>
   </div>
+</div>
 </div>
 <%= back_link %>

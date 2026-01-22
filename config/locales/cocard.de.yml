@@ -52,6 +52,7 @@ de:
     card_terminal_data: Daten des Kartenterminals
     certificate_data: Daten des Zertfikats
     fetch_sds: Abfrage SDS
+    fetch_card_certificates: Kartenzertifikate einlesen (HBA, SMC-B)
     get_resource_information: Abfrage Konnektor
     get_cards_terminal: Abfrage Kartenterminals
     get_cards: Abfrage Karten
