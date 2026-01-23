@@ -5,6 +5,7 @@
 * Überarbeitung der Dokumentation
 * Manuelles Einlesen aller Zertifikate auf einer SMC-B/einem HBA; entweder nur die Karte oder alle Karten in einem Kartenterminal
 * Support für Konnektor-Zertifikate mit brainpoolP256r1
+* Bearbeiten von Tags nun möglich.
 
 == 0.9.8 - 2026-01-04
 

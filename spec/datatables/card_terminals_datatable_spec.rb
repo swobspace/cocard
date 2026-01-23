@@ -474,7 +474,6 @@ RSpec.describe CardTerminalsDatatable, type: :model do
     it { expect(parse_json(subject, "recordsTotal")).to eq(3) }
     it { expect(parse_json(subject, "recordsFiltered")).to eq(1) }
     it { expect(parse_json(subject, "data/0")).to eq(card_terminal2array(ct2)) }
-    it { puts card_terminal2array(ct1) }
   end 
 
 
