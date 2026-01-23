@@ -1,6 +1,6 @@
 = Allgemeines zur Oberfläche
 :author: Wolfgang Barth
-:revdate: 2024-10-04
+:revdate: 2026-01-23
 :imagesdir: ../../images
 :experimental: true
 
@@ -22,9 +22,19 @@ Neben der Sichtbarkeit via _Column Visibility_ kann man die angezeigten Inhalte 
 
 Filterung, angezeigte Spalten und Sortierung bleiben für einige Stunden erhalten, auch wenn man zwischendurch in einen anderen Bereich von Cocard wechselt. Um die Standardansicht wieder herzustellen nutzt man den Button _Reset_ oberhalb der Tabelle.
 
+=== Tabellenbereich
+
+Die angezeigte Tabelle passt sich der Bildschirmbreite an, die Tabelle ist - im Neudeutsch - _Responsive_. Bei einem schmalen Browser und einer Tabelle wie bei Kartenterminals mit ihren unzähligen Spalten kommt es durchaus vor, dass nicht alle Spalten sichtbar sind, die über _Sichtbare Spalten_ ausgewählt wurden. Wenn sich der Browser nicht weiter verbreitern lässt, muss man daher einige Spalten aus den _Sichtbaren Spalten_ entfernen. Auf den Export hat die aktuelle Sichtbarkeit keinen Einfluss, siehe _Exportfunktionen_ weiter unten.
+
 === Fußbereich
 
 .Fußbereich von Tabellen
 image::common/table-bottom.png[]
 
 Im Fußbereich findet man links Informationen zur Anzahl der Einträge und ob ggf. ein Filter aktiv ist. Rechts ist ein Navigator, der zwischen den angezeigten Seiten hin- und her schaltet.
+
+=== Exportfunktionen
+
+Für den Export von Tabellendaten gibt es mehrere Möglichkeiten: Excel, CSV und PDF. Hier werden alle Spalten exportiert, die unter _Sichtbare Spalten_ ausgewählt wurden - unabhängig davon, ob diese gerade auf dem Bildschirm sichtbar sind. Vor einem Export sollte man daher immer auch einen Blick auf die _Sichtbaren Spalten_ werfen.
+
+IMPORTANT: Der Excel-Export setzt keine besonderen Typ für die Spalten, Excel interpretiert daher die ICCSN als besonders große Zahl und stellt diese als Float dar - damit gehen die letzten Stellen verloren. Ähnliches passiert bei bestimmten IP-Adressen. Für den Export von ICCSN und IP-Adressen wählt man daher besser den CSV-Export und importiert die CSV-Datei nach Excel/Calc explizit mit dem Typ `Text` für die Problem-Spalten.
