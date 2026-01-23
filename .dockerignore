@@ -39,4 +39,5 @@
 /public/assets
 
 /local
-/docker
+/docker/*
+!/docker/openssl.cnf.new
