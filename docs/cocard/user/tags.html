@@ -294,7 +294,7 @@
 <p>Bei den Objekten selbst wird das wird das Tag einfach als Zusatzinformation mit angezeigt, bei tabellarischen Übersichten als eigene Spalte, die man sich einblenden kann.</p>
 </div>
 <div class="paragraph">
-<p>Die objektübergreifende Suche in der Menü-Leiste kann gezielt für die Suche nach Tags verwendet werden, wenn man das Prefix <code>tag:</code> zum Suchbegriff ergänzt:</p>
+<p>Die objektübergreifende Suche in der Menü-Leiste kann gezielt für die Suche nach Tags verwendet werden, wenn man das Prefix <code>tag=</code> zum Suchbegriff ergänzt:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -309,6 +309,18 @@
 </td>
 <td class="content">
 die objektübergreifende Suche schließt nur Konnektor, Kartenterminals und Karten ein, nicht aber Standorte.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tipp"></i>
+</td>
+<td class="content">
+Die Suche lässt sich durch weitere Suchbegriffe einschränken, getrennt mit Leerzeichen. Es ist allerdings nur ein Suchbegriff ohne Schlüsselwort möglich. Beispiel: <code>tag=test iccsn=80276 HBA</code> - aber nicht <code>tag=test 80276 HBA</code>. In letzerem Fall wird nur der erste Suchbegriff ohne Schlüsselwort verwendet, alle weiteren werden ignoriert.
 </td>
 </tr>
 </table>
