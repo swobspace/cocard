@@ -31,6 +31,10 @@ module CardTerminals
         smckt_auth1_expiration
         smckt_auth2_type
         smckt_auth2_expiration
+        tls_kt_ecgroup
+        tls_kt_pubkey_algo
+        tls_konn_ecgroup
+        tls_konn_pubkey_algo
       ]
 
       def initialize(properties)
@@ -161,6 +165,22 @@ module CardTerminals
 
       def smckt_auth2_expiration
         Fugit.parse(properties['card_smkt_aut2Cxd'].to_s)&.to_t&.to_date
+      end
+
+      def tls_kt_ecgroup
+        properties['tls_server_ecGroup']
+      end
+
+      def tls_kt_pubkey_algo
+        properties['tls_server_pubKeyAlgo']
+      end
+
+      def tls_konn_ecgroup
+        properties['tls_client_ecGroup']
+      end
+
+      def tls_konn_pubkey_algo
+        properties['tls_client_pubKeyAlgo']
       end
 
   private

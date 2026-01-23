@@ -391,6 +391,10 @@ de:
       smckt_auth1_expiration: SMC-KT Auth1 Ablaufdatum
       smckt_auth2_type: SMC-KT Auth2 Typ
       smckt_auth2_expiration: SMC-KT Auth2 Ablaufdatum
+      tls_kt_ecgroup: TLS-Verbindung EC Gruppe  Kartenterminal
+      tls_kt_pubkey_algo: TLS-Verbindung PubKey Algo Kartenterminal
+      tls_konn_ecgroup: TLS-Verbindung EC Gruppe Konnektor
+      tls_konn_pubkey_algo: TLS-Verbindung PubKey Algo Konnektor
     rmi_info: RMI-Abfrage der Terminal-Eigenschaften
     statistics: Statistische Daten
     edit_identification: |

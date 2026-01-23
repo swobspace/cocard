@@ -6,6 +6,7 @@
 * Manuelles Einlesen aller Zertifikate auf einer SMC-B/einem HBA; entweder nur die Karte oder alle Karten in einem Kartenterminal
 * Support für Konnektor-Zertifikate mit brainpoolP256r1
 * Bearbeiten von Tags nun möglich.
+* Anzeige der TLS-Verbindungsparameter Kartenterminal-Konnektor beim IP-Check des Kartenterminals
 
 == 0.9.8 - 2026-01-04
 
