@@ -26,7 +26,7 @@ class CardTerminalsDatatable < ApplicationDatatable
         column <<  ct.ip.to_s
         column <<  ct.connected.to_s
         column <<  ct.location&.lid
-        column <<  ct.tag_list.join(", ")
+        column <<  render(TagListComponent.new(item: ct))
         column <<  ct.room
         column <<  ct.plugged_in
         column <<  ct.contact
