@@ -23,7 +23,7 @@ class CardTerminalsDatatable < ApplicationDatatable
                             ) if ct.connector)
         column <<  ct.name
         column <<  ct.mac.to_s
-        column <<  ct.ip.to_s
+        column <<  link_admin_url(ct)
         column <<  ct.connected.to_s
         column <<  ct.location&.lid
         column <<  render(TagListComponent.new(item: ct))
@@ -165,5 +165,13 @@ class CardTerminalsDatatable < ApplicationDatatable
         slot3_plug_cycles
         slot4_plug_cycles
      ]
+  end
+
+  def link_admin_url(card_terminal)
+    link_to(card_terminal.ip, card_terminal.admin_url,
+            class: 'primary-link',
+            target: '_blank'
+            ) if card_terminal.admin_url.present?
+
   end
 end
