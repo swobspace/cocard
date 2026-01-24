@@ -7,6 +7,7 @@
 * Support für Konnektor-Zertifikate mit brainpoolP256r1
 * Bearbeiten von Tags nun möglich.
 * Anzeige der TLS-Verbindungsparameter Kartenterminal-Konnektor beim IP-Check des Kartenterminals
+* RISE TIClient: Trennen und Verbinden der TLS-Verbindung eines gepairten Kartenterminals
 
 == 0.9.8 - 2026-01-04
 
