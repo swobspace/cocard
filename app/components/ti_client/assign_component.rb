@@ -65,26 +65,35 @@ class TIClient::AssignComponent < ViewComponent::Base
                                                  id: terminal.ct_id,
                                                  correlation: "AKTIV")
     elsif getrennt
-      begin_session_ti_client_terminal_path(ti_client_id: ti_client.id,
-                                            id: terminal.ct_id)
+      begin_session
     else
       nil
     end
   end
 
+  def begin_session
+    begin_session_ti_client_terminal_path(ti_client_id: ti_client.id,
+                                          id: terminal.ct_id)
+  end
+
+  def end_session
+    end_session_ti_client_terminal_path(ti_client_id: ti_client.id,
+                                        id: terminal.ct_id)
+  end
+
   def button_class
     if bekannt
-      "btn btn-sm btn-warning me-1"
+      "btn btn-sm btn-warning"
     elsif zugewiesen
-      "btn btn-sm btn-warning me-1"
+      "btn btn-sm btn-warning"
     elsif gepairt
-      "btn btn-sm btn-warning me-1"
+      "btn btn-sm btn-warning"
     elsif aktiv
-      "btn btn-sm btn-success me-1"
+      "btn btn-sm btn-success"
     elsif getrennt
-      "btn btn-sm btn-warning me-1"
+      "btn btn-sm btn-warning"
     elsif notfound
-      "btn btn-sm btn-warning me-1"
+      "btn btn-sm btn-warning"
     end
   end
 

@@ -1,4 +1,4 @@
-<div id="<%= helpers.terminal_button_id(terminal.ct_id, :assign) %>">
+<div id="<%= helpers.terminal_button_id(terminal.ct_id, :assign) %>" class="btn-group">
   <% if action.present? %>
     <%= button_to(action,
                   method: :post,
@@ -11,5 +11,24 @@
       <%= icon %>
     </button>
   <% end %>
+  <button type="button" class="<%= button_class %> dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="visually-hidden">Toggle Dropdown</span>
+  </button>
+  <ul class="dropdown-menu">
+    <% if aktiv || getrennt %>
+      <li>
+        <%= link_to "Verbindung trennen", end_session,
+                    data: {turbo_method: :post},
+                    class: "dropdown-item"
+         %>
+      </li>
+      <li>
+        <%= link_to "Verbindung herstellen", begin_session,
+                    data: {turbo_method: :post},
+                    class: "dropdown-item"
+         %>
+      </li>
+    <% end %>
+  </ul>
 </div>
 
