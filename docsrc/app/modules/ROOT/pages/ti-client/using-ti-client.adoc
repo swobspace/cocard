@@ -1,0 +1,48 @@
+= TI-Client nutzen
+:author: Wolfgang Barth
+:revdate: 2026-01-25
+:imagesdir: ../../images
+:experimental: true
+
+.Anzeige des TI-Clients
+image::ti-client/ti-client-show.png[]
+
+Der obere Abschnitt des TI-Clients enthält neben den Daten zum TI-Client auf der linken Seite einige zusätzliche Funktionen auf rechte Seite:
+
+* Status der Hintergrundaufgaben des TI-Clients. Die Abfrage erfolgt zum Zeitpunkt des Aufrufs der Seite.
+* Alle aktiven Terminals am Konnektor verbinden
+* alle bekannten Terminals zuweisen.
+
+Für die beiden letzten Funktionen ist die Aktivierung der Proxy-Funktion des TI-Clients erforderlich. Im unteren Teil folgen drei Tabellen mit Informationen zu den zum TI-Client zugeordneten Kartenterminals und KT-Proxys:
+
+* Die Tabelle KT-Proxys zeigt alle in Cocard mit dem TI-Client verbundenen KT-Proxys an.
+* In der Tabelle Kartenterminals auf dem Konnektor werden die Kartenterminals, so wie sie der Konnektor im Augenblick sieht, abgefragt und mit Informationen aus Cocard ergänzt. Hier erscheinen daher nur Kartenterminals, die für den Konnektor sichtbar sind. Für die Abfrage beim Konnektor muss wieder die Proxy-Funktion des TI-Clients aktiviert sein.
+* Die Tabelle Remote PIN Plus zeigt die Konfigurationen auf dem TI-Client an, sofern welche hinterlegt sind. Es werden alle SMC-Bs aufgelistet, auf die der Konnektor Zugriff hat. Wenn es keine Remote PIN+ Konfiguration gibt, wir der Status als `CONFIGURABLE` ausgewiesen.
+
+
+.Tabelle Kartenterminals auf dem Konnektor
+image::ti-client/ti-client-konnektor-terminals.png[]
+
+Mit dem Button unter menu:Aktion[] kann man die meisten Funktionen ausführen, die der Konnektor für die Kartenterminals vorhält:
+
+* Ein bekanntes Terminal zuweisen
+* Ein zugewiesenes Terminal pairen
+* Ein aktives, nicht verbundenes Terminal verbinden
+
+Angezeigt wird jeweils nur die in dem aktuellen Zustand sinnvolle Aktion.
+
+.Aktionsbuttons für Terminals mit unterschiedlichen Zuständen
+image::ti-client/ti-client-konnektor-terminals-actions.png[]
+
+Die Funktion _Pairen_ führt mehrere Schritte aus: zuerst wird der Konnektor für das Pairen vorbereitet. Danach wird das Kartenterminal in den Wartezustand (Warten auf Pairing-Anfrage) versetzt. Der Konnektor sendet dann die eigentliche Pairing-Anfrage an das Kartenterminal, und Cocard veranlasst das Kartenterminal die Pairing-Anfrage zu bestätigen. Für das Pairen genügt hier  ein einziger Knopfdruck.
+
+Hinter dem Dropdown-Menü beim Button verbergen sich die Funktionen _Verbindung trennen_ und _Verbindung herstellen_. 
+
+image::ti-client/ti-client-begin-end-session.png[]
+
+Mit Verbindung ist hier die TLS-Verbindung zum Kartenterminal gemeint. 
+
+
+
+.Tabelle Remote-PIN+
+image::ti-client/ti-client-remote-pin-plus.png[]

@@ -46,7 +46,13 @@ module Cocard
                  client_system: context&.client_system,
                  workplace: context&.workplace).call
       if result.error_messages.blank? and result.success?
-        rawcert = result.response[:read_card_certificate_response][:x509_data_info_list][:x509_data_info][:x509_data][:x509_certificate]
+        data_info = result.response.dig(:read_card_certificate_response, 
+                                        :x509_data_info_list, :x509_data_info)
+        if data_info.kind_of? Array
+          rawcert = data_info[0].dig(:x509_data, :x509_certificate)
+        else
+          rawcert = data_info.dig(:x509_data, :x509_certificate)
+        end
         cert = Cocard::Certificate.new(rawcert)
         card.name = cert.cn if card.name.blank?
         card.cert_subject_cn = cert.cn

@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 module CardTerminalsDatatableHelper
+  include AbstractController::Rendering
   include ApplicationHelper
   def card_terminal2array(ct)
     [].tap do |column|
@@ -14,7 +15,7 @@ module CardTerminalsDatatableHelper
       column <<  ct.ip.to_s
       column <<  ct.connected.to_s
       column <<  ct.location&.lid
-      column <<  ct.tag_list.join(", ")
+      column <<  "RENDER"
       column <<  ct.room
       column <<  ct.plugged_in
       column <<  ct.contact

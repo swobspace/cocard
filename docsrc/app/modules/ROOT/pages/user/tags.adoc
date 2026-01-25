@@ -1,6 +1,6 @@
 = Tags
 :author: Wolfgang Barth
-:revdate: 2025-06-28
+:revdate: 2026-01-23
 :imagesdir: ../../images
 :experimental: true
 
@@ -8,8 +8,10 @@ Tags sind einfache Textbezeichner, die man an die Objekte Konnektor, Karte, Kart
 
 Bei den Objekten selbst wird das wird das Tag einfach als Zusatzinformation mit angezeigt, bei tabellarischen Übersichten als eigene Spalte, die man sich einblenden kann.
 
-Die objektübergreifende Suche in der Menü-Leiste kann gezielt für die Suche nach Tags verwendet werden, wenn man das Prefix `tag:` zum Suchbegriff ergänzt:
+Die objektübergreifende Suche in der Menü-Leiste kann gezielt für die Suche nach Tags verwendet werden, wenn man das Prefix `tag=` zum Suchbegriff ergänzt:
 
 image::tags/search-tags.png[]
 
 NOTE: die objektübergreifende Suche schließt nur Konnektor, Kartenterminals und Karten ein, nicht aber Standorte.
+
+TIP: Die Suche lässt sich durch weitere Suchbegriffe einschränken, getrennt mit Leerzeichen. Es ist allerdings nur ein Suchbegriff ohne Schlüsselwort möglich. Beispiel: `tag=test iccsn=80276 HBA` - aber nicht `tag=test 80276 HBA`. In letzerem Fall wird nur der erste Suchbegriff ohne Schlüsselwort verwendet, alle weiteren werden ignoriert.

@@ -34,6 +34,11 @@
               t('cards.deleted')), main_app.cards_path(deleted: true), 
               class: "dropdown-item" %>
       <% end %>
+      <% if can? :manage, Card %>
+        <div class="dropdown-divider"></div>
+        <%= link_to raw( '<span class="fa-solid fa-fw fa-table" aria-hidden="true"></span> ' +
+              t('controller.card_certificates')), main_app.card_certificates_path, class: "dropdown-item" %>
+      <% end %>
       <% if can? :verify, VerifyPin %>
         <div class="dropdown-divider"></div>
         <%= link_to raw( '<span class="fa-solid fa-fw fa-rotate-right" aria-hidden="true"></span> ' +

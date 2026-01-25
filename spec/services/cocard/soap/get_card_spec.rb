@@ -58,13 +58,13 @@ module Cocard::SOAP
             mandant: 'dontexist',
             client_system: 'dontexist',
             workplace: 'dontexist',
-            iccsn: '01234567890123456789',
+            iccsn: ENV['CARD_ICCSN']
           ).call
         end
         it { expect(result.success?).to be_falsey }
 
         if ENV['USE_TLS'] && ENV['AUTHENTICATION'] == 'clientcert'
-          it { expect(result.error_messages.first).to match(/Missing matching client certificate for client_system: dontexist/) }
+          it { expect(result.error_messages.join(",")).to match(/Clientsystem aus dem Aufrufkontext konnte nicht authentifiziert werden/) }
         elsif ENV['AUTHENTICATION'] == 'basicauth'
           it { expect(result.error_messages).to contain_exactly(
                "Clientsystem aus dem Aufrufkontext konnte nicht authentifiziert werden.",
@@ -83,12 +83,12 @@ module Cocard::SOAP
             mandant: ENV['CONN_MANDANT'],
             client_system: ENV['CONN_CLIENT_SYSTEM_ID'],
             workplace: ENV['CONN_WORKPLACE_ID'],
-            iccsn: '01234567890123456789',
+            iccsn: '80276001731000009999'
           ).call
         end
         it { expect(result.success?).to be_falsey }
         it { expect(result.error_messages).to contain_exactly(
-               "S:Server", "Keine Karte zur angegebenen Iccsn gefunden", "code: 4099")}
+               "soap:Server", "Keine Karte zur angegebenen Iccsn gefunden", "code: 4099; detail: ")}
       end
 
       describe "successful call" do

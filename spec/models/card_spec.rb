@@ -25,6 +25,7 @@ RSpec.describe Card, type: :model do
   end
   it { is_expected.to have_many(:logs) }
   it { is_expected.to belong_to(:acknowledge).optional }
+  it { is_expected.to have_many(:card_certificates).dependent(:destroy) }
   it { is_expected.to have_many(:notes).dependent(:destroy) }
   it { is_expected.to have_many(:plain_notes).dependent(:destroy) }
   it { is_expected.to have_many(:acknowledges).dependent(:destroy) }

@@ -45,7 +45,7 @@ RSpec.describe Connector, type: :model do
     end
 
     describe "#identification" do
-      it { expect(connector.identification).to eq("KOCOC-kocobox") }
+      it { expect(connector.identification).to eq("RISEG-RHSK") }
     end
 
     describe "#service_information" do

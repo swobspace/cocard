@@ -1,0 +1,7 @@
+<%= button_to(button_action,
+              id: 'fetch_card_certificates_' + dom_id(item),
+              title: t('cocard.fetch_card_certificates'),
+              data: { "turbo": false },
+              class: "#{button_css}") do %>
+  <i class="fa-solid fa-fw fa-sim-card"></i>
+<% end %>

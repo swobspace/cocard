@@ -23,6 +23,10 @@ image::ct/card-terminal-action-buttons.png[]
 |===
 |Button | Beschreibung | Sichtbarkeit
 
+|image::common/card-certificate-button.png[]
+|Einlesen von SMC-B/HBA-Kartenzertifikaten
+|
+
 |image::common/reboot-button.png[]
 |Reboot des Kartenterminals
 |Wenn ein Reboot für das Terminal unterstützt wird.

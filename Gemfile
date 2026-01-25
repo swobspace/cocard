@@ -94,7 +94,7 @@ gem "faker", "~> 3.3", :groups => [:test, :development]
 gem "faraday"
 
 # workaround: KoCoBox reboot doesn't work with v0.7.0
-gem "net-http", "0.6.0"
+gem "net-http",  "~> 0.9.0"
 
 gem "nori", "~> 2.7"
 

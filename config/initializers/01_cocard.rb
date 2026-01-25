@@ -119,4 +119,8 @@ EOTMPL
     protocol: (ENV['URL_PROTOCOL'] || 'http'),
   }
 
+  ActionMailer::Base.default_url_options = {
+    host: (ENV['URL_HOST'] || 'localhost'),
+  }
+
 end

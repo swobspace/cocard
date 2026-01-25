@@ -412,6 +412,24 @@ end</code></pre>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_model_cardcertificate"><a class="anchor" href="#_model_cardcertificate"></a>model CardCertificate</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g model CardCertificate \
+  card:belongs_to \
+  crypt:string \
+  cert_ref:string \
+  issuer:text \
+  serial_number:string \
+  subject_name:text \
+  certificate:text \
+  expiration_date:date</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_model_operationalstate"><a class="anchor" href="#_model_operationalstate"></a>model OperationalState</h2>
 <div class="sectionbody">
 <div class="listingblock">

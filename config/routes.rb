@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :tags
   resources :terminal_workplaces, only: [:index]
   resource :duck_terminal, only: [:new, :show]
   get "reports/duplicate_terminal_ips"
@@ -81,6 +82,11 @@ Rails.application.routes.draw do
         get :sindex
       end
     end
+    resources :card_certificates, module: :cards, only: [:index, :show] do
+      collection do
+        post :fetch
+      end
+    end
   end
 
   post "card_terminals", to: "card_terminals#index", 
@@ -110,8 +116,14 @@ Rails.application.routes.draw do
         get :sindex
       end
     end
+    resources :card_certificates, module: :card_terminals do
+      collection do
+        post :fetch
+      end
+    end
     resource :kt_proxy, module: :card_terminals
   end
+  resources :card_certificates, only: [:show, :index]
   resources :contexts
   resources :connector_contexts, only: [:show, :update]
   resources :connectors do

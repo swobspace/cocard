@@ -20,6 +20,8 @@ module Cocard
       @mandant   = @context.mandant
       @client_system  = @context.client_system
       @workplace = @context.workplace
+      @mandant_wide = options.fetch(:mandant_wide, true)
+      @ct_id = options.fetch(:ct_id, nil)
     end
 
     # service.call()
@@ -32,7 +34,9 @@ module Cocard
                  connector: connector,
                  mandant: mandant,
                  client_system: client_system,
-                 workplace: workplace).call
+                 workplace: workplace,
+                 ct_id: @ct_id,
+                 mandant_wide: @mandant_wide).call
       if result.success?
         entry = result.response.dig(:get_cards_response, :cards, :card) || []
         cts = (entry.kind_of? Hash) ? [entry] : entry

@@ -1,0 +1,39 @@
+<%= turbo_frame_tag('taggings') do %>
+  <div class="card mt-3">
+    <div class="card-header">
+      <div class="d-flex justify-content-between">
+        <h4 class="me-4 pt-1"><%= t('controller.taggings')%></h4>
+      </div>
+    </div>
+    <div data-controller="datatables">
+      <%= content_tag :table, role: :datatable,
+            id: "tag_taggings_table",
+            class: "table table-sm mx-2",
+            data: {
+              'datatables-target': 'datatable',
+              order: [[0, 'asc']].to_json
+            } do %>
+        <thead>
+          <tr>
+            <th class="w-25"><%= t('attributes.type') %></th>
+            <th><%= t('attributes.name') %></th>
+          </tr>
+        </thead>
+        <tfoot class="search">
+          <tr>
+            <th></th>
+            <th></th>
+          </tr>
+        </tfoot>
+        <tbody>
+          <% tag.taggings.each do |x| %>
+            <%= content_tag(:tr) do %>
+              <td class="w-25"><%= t(x.taggable_type.underscore, scope: 'activerecord.models') %></td>
+              <td><%= render LinkToComponent.new(item: x.taggable) %></td>
+            <% end %>
+          <% end %>
+        </tbody>
+      <% end %>
+    </div>
+  </div>
+<% end %>

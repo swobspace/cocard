@@ -229,6 +229,7 @@ RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
 # Final stage for app image
 FROM base
+COPY docker/openssl.cnf.new /etc/ssl/openssl.cnf
 
 # Install packages needed for deployment
 RUN apt-get update -qq &amp;&amp; \

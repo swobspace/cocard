@@ -146,6 +146,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../card/card-new.html">Karte anlegen/bearbeiten</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../card/read-certs.html">Kartenzertifikate lesen</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -181,7 +184,19 @@
     <a class="nav-link" href="../ti-client/index.html">TI-Client (RISE TI Gateway)</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ti-client/step-by-step.html">Inbetriebnahme Step-by-Step</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../ti-client/activate-api.html">REST-API aktivieren</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ti-client/create-ti-client.html">TI-Client erstellen</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ti-client/create-ktproxy.html">KT-Proxy anlegen</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ti-client/using-ti-client.html">TI-Client nutzen</a>
   </li>
 </ul>
   </li>
@@ -318,6 +333,12 @@
 </div>
 </div>
 <div class="sect2">
+<h3 id="_tabellenbereich"><a class="anchor" href="#_tabellenbereich"></a>Tabellenbereich</h3>
+<div class="paragraph">
+<p>Die angezeigte Tabelle passt sich der Bildschirmbreite an, die Tabelle ist - im Neudeutsch - <em>Responsive</em>. Bei einem schmalen Browser und einer Tabelle wie bei Kartenterminals mit ihren unzähligen Spalten kommt es durchaus vor, dass nicht alle Spalten sichtbar sind, die über <em>Sichtbare Spalten</em> ausgewählt wurden. Wenn sich der Browser nicht weiter verbreitern lässt, muss man daher einige Spalten aus den <em>Sichtbaren Spalten</em> entfernen. Auf den Export hat die aktuelle Sichtbarkeit keinen Einfluss, siehe <em>Exportfunktionen</em> weiter unten.</p>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_fußbereich"><a class="anchor" href="#_fußbereich"></a>Fußbereich</h3>
 <div class="imageblock">
 <div class="content">
@@ -327,6 +348,24 @@
 </div>
 <div class="paragraph">
 <p>Im Fußbereich findet man links Informationen zur Anzahl der Einträge und ob ggf. ein Filter aktiv ist. Rechts ist ein Navigator, der zwischen den angezeigten Seiten hin- und her schaltet.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_exportfunktionen"><a class="anchor" href="#_exportfunktionen"></a>Exportfunktionen</h3>
+<div class="paragraph">
+<p>Für den Export von Tabellendaten gibt es mehrere Möglichkeiten: Excel, CSV und PDF. Hier werden alle Spalten exportiert, die unter <em>Sichtbare Spalten</em> ausgewählt wurden - unabhängig davon, ob diese gerade auf dem Bildschirm sichtbar sind. Vor einem Export sollte man daher immer auch einen Blick auf die <em>Sichtbaren Spalten</em> werfen.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Wichtig"></i>
+</td>
+<td class="content">
+Der Excel-Export setzt keine besonderen Typ für die Spalten, Excel interpretiert daher die ICCSN als besonders große Zahl und stellt diese als Float dar - damit gehen die letzten Stellen verloren. Ähnliches passiert bei bestimmten IP-Adressen. Für den Export von ICCSN und IP-Adressen wählt man daher besser den CSV-Export und importiert die CSV-Datei nach Excel/Calc explizit mit dem Typ <code>Text</code> für die Problem-Spalten.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>

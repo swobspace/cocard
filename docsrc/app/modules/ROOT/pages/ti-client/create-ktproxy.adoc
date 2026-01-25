@@ -1,0 +1,26 @@
+= KT-Proxy anlegen
+:author: Wolfgang Barth
+:revdate: 2026-01-25
+:imagesdir: ../../images
+:experimental: true
+
+Wenn ein Kartenterminal noch keinen KT-Proxy zugewiesen hat, erscheint ein Button btn:[KT-Proxy generieren] im Abschnitt menu:KT-Proxy (TI-Gateway)[].
+
+NOTE: Der Button erscheint, sobald in der Konfiguration generell die Verwendung von TI-Clients aktiviert wurde. Auch dann, wenn das Kartenterminal noch an einem Konnektor hängt, der das TI-Gateway gar nicht nutzt (z.B. Standalone Konnektor). Das soll den Wechsel vorhandener Terminals zu einem TI-Gateway erleichtern.
+
+.Anzeige Kartenterminal, Abschnitt KT-Proxy
+image::ti-client/ct-add-ktproxy.png[]
+
+Idealerweise setzt man die Defaultwerte in der Konfiguration (siehe)
+xref:installation:cocard_yml.adoc#_ti_client_rise_ti_gateway[]). Das Kartenterminal wird automatisch zugeordnet, der TI-Client ebenfalls, wenn das Kartenterminal bereits mit einem passenden Konnektor verbunden ist. Zur Vorbereitung eines Umzuges kann man aber manuell auch den TI-Client explizit auswählen.
+
+.Anlage eines KT-Proxys mit vorausgefüllten Werten
+image::ti-client/ktproxy-new.png[]
+
+
+Ist der KT-Proxy angelegt, erscheint beim Kartenterminal eine erweiterte Anzeige menu:TI-Client[]:
+
+.Kartenterminal, Abschnitt TI-Gateway
+image::ti-client/ct-show-ktproxy.png[]
+
+NOTE: Der Abschnitt menu:TI-Gateway: Konnektor[] erscheint nur, wenn die Proxy-Funktion am TI-Client für den Konnektorzugriff aktiviert wurde (siehe xref:ti-client/activate-api.adoc#_aktivierung_vkonnektor_proxy[]) und der Zugriff auf den Konnektor erfolgreich war.

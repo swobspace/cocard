@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_03_102541) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_11_093253) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -50,6 +50,21 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_03_102541) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "card_certificates", force: :cascade do |t|
+    t.bigint "card_id", null: false
+    t.string "cert_ref", default: ""
+    t.text "certificate"
+    t.datetime "created_at", null: false
+    t.string "crypt", default: ""
+    t.date "expiration_date"
+    t.text "issuer"
+    t.string "serial_number", default: ""
+    t.text "subject_name"
+    t.datetime "updated_at", null: false
+    t.index ["card_id", "cert_ref", "crypt"], name: "index_card_certificates_on_card_id_and_cert_ref_and_crypt", unique: true
+    t.index ["card_id"], name: "index_card_certificates_on_card_id"
   end
 
   create_table "card_contexts", force: :cascade do |t|
@@ -556,6 +571,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_03_102541) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "card_certificates", "cards"
   add_foreign_key "card_contexts", "cards"
   add_foreign_key "card_contexts", "contexts"
   add_foreign_key "card_terminal_slots", "card_terminals"

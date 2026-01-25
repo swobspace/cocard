@@ -146,6 +146,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../../card/card-new.html">Karte anlegen/bearbeiten</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../card/read-certs.html">Kartenzertifikate lesen</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -181,7 +184,19 @@
     <a class="nav-link" href="../../ti-client/index.html">TI-Client (RISE TI Gateway)</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../ti-client/step-by-step.html">Inbetriebnahme Step-by-Step</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../../ti-client/activate-api.html">REST-API aktivieren</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../ti-client/create-ti-client.html">TI-Client erstellen</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../ti-client/create-ktproxy.html">KT-Proxy anlegen</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../ti-client/using-ti-client.html">TI-Client nutzen</a>
   </li>
 </ul>
   </li>
@@ -288,9 +303,83 @@
 </aside>
 <article class="doc">
 <h1 class="page">RISE TI-Client REST-API</h1>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Bereich</th>
+<th class="tableblock halign-left valign-top">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">KT-Proxy</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Abfrage von vorhandenen KT-Proxys am TI-Client. Anlage, Änderung und Löschung eines KT-Proxys</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Remote-PIN-Plus</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Abfrage der vorhandenen Konfiguration und der unterstützten Karten. Anzeige im TI-Client.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hintergrundaufgaben</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Abfrage des Status (Running, Stopped) - Der Status wird im TI-Client angezeigt.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Konnektor</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ausführung einiger Konnektor-Funktionen über den Proxy. Die Liste der genutzten Funktionen sind in der folgenden Tabelle aufgeführt.</p></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
-<p><mark>TBD</mark></p>
+<p>Für die folgenden Funktionen muss die Proxy-Funktion für den Konnektor am TI-Client explizit aktiviert sein.</p>
 </div>
+<table class="tableblock frame-all grid-all fit-content">
+<caption class="title">Table 1. Funktionen auf dem Konnektor</caption>
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Funktion/Referenz</th>
+<th class="tableblock halign-left valign-top">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>get_terminal(s)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Abfrage aller odder eines einzelnen Terminals</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>discover</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Suchabfrage (neuer) Terminals auf dem Konnektor</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>add</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Terminal hinzufügen</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>assign</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bekanntes Terminal zuweisen</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>initialize_pairing,
+finalize_pairing</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Funktionen für das Pairing. Cocard verwendet diese Funktionen implizit über den Pairing-Button.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>change_correlation</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Statusänderung eines Kartenterminals. Cocard nutzt diese Funktion, um ein gepairtes Kartenterminal in den Zustand aktiv zu versetzen.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>begin_session</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Aufbau der TLS-Verbindung zum Kartenterminal. Für aktive Kartenterminals, die aktuell nicht verbunden sind.</p></td>
+</tr>
+</tbody>
+</table>
 <nav class="pagination">
   <span class="prev"><a href="koco-webapi.html">KoCoBox WebAPI</a></span>
   <span class="next"><a href="../../user/workplaces.html">Arbeitsplätze</a></span>

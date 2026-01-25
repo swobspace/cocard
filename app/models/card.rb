@@ -7,6 +7,7 @@ class Card < ApplicationRecord
 
   # -- associations
   has_many :logs, as: :loggable, dependent: :destroy
+  has_many :card_certificates, dependent: :destroy
 
   belongs_to :card_terminal_slot, optional: true
   has_one :card_terminal, through: :card_terminal_slot, dependent: :nullify

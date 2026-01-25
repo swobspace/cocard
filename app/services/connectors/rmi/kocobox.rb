@@ -37,6 +37,7 @@ module Connectors
           r1 = conn.post('/j_security_check') do |req|
             params = { j_username: koco_admin, j_password: koco_passwd }
             req.body = URI.encode_www_form(params)
+            req.headers['Content-Type'] = 'application/x-www-form-urlencoded'
           end
         rescue Faraday::Error => e
           errmsg = "Login failed - #{e.response_body}"

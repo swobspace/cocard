@@ -37,6 +37,10 @@ module CardTerminals
       "card_smkt_autCxd" => '11.11.2026',
       "card_smkt_aut2Type" => 'ECC',
       "card_smkt_aut2Cxd" => '30.08.2030',
+      "tls_client_ecGroup" => "secp256r1",
+      "tls_client_pubKeyAlgo" => "EC",
+      "tls_server_ecGroup" => "brainpoolP256r1",
+      "tls_server_pubKeyAlgo" => "EC"
     }}
 
     let(:info) { CardTerminals::RMI::OrgaV1::Info.new(properties) }
@@ -70,6 +74,10 @@ module CardTerminals
     it { expect(subject.smckt_auth2_type).to eq("ECC") }
     it { expect(subject.smckt_auth2_expiration).to eq("2030-08-30".to_date) }
     it { expect(subject.smckt_auth2_expiration).to be_kind_of(Date) }
+    it { expect(subject.tls_konn_ecgroup).to eq("secp256r1") }
+    it { expect(subject.tls_konn_pubkey_algo).to eq("EC") }
+    it { expect(subject.tls_kt_ecgroup).to eq("brainpoolP256r1") }
+    it { expect(subject.tls_kt_pubkey_algo).to eq("EC") }
 
     describe "with some defaults" do
       before(:each) do

@@ -58,13 +58,13 @@ module Cocard::SOAP
             mandant: 'dontexist',
             client_system: 'dontexist',
             workplace: 'dontexist',
-            card_handle: 'dontexist'
+            card_handle: ENV['CARD_HANDLE']
           ).call
         end
         it { expect(result.success?).to be_falsey }
 
         if ENV['USE_TLS'] && ENV['AUTHENTICATION'] == 'clientcert'
-          it { expect(result.error_messages.first).to match(/Missing matching client certificate for client_system: dontexist/) }
+          it { expect(result.error_messages.join(",")).to match(/Clientsystem aus dem Aufrufkontext konnte nicht authentifiziert werden/) }
         elsif ENV['AUTHENTICATION'] == 'basicauth'
           it { expect(result.error_messages).to contain_exactly(
                "Karte nicht als gesteckt identifiziert", "S:Server", 

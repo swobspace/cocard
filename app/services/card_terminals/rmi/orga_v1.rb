@@ -599,6 +599,10 @@ module CardTerminals
                     card_smkt_autCxd
                     card_smkt_aut2Type
                     card_smkt_aut2Cxd
+                    tls_client_ecGroup
+                    tls_client_pubKeyAlgo
+                    tls_server_ecGroup
+                    tls_server_pubKeyAlgo
                   ]
         if firmware_version >= '3.9.1'
           props << "rmi_pairingEHealthTerminal_enabled"

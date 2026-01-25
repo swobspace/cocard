@@ -1,17 +1,46 @@
 = RMI
 :author: Wolfgang Barth
-:revdate: 2025-12-28
+:revdate: 2026-01-04
 :imagesdir: ../../../images
 
 Das Remote-Management-Interface des Orga6141 online erlaubt neben der Abfrage und dem Setzen verschiedener Parameter auch die Workflows _Remote-PIN-Eingabe_ und _Kartenterminal pairen_.
 
+[%autowidth,cols="m,"]
 |===
 |Funktion/Referenz | Beschreibung
 
+|reboot
+|Startet das Kartenterminal neu
+
+|get_info
+|Abfrage verschiedener Informationen wie MAC-Adresse, Name, Seriennummer, IP-Adresse etc. sowie Statistik-Informationen wie letzter Reboot oder Anzahl der Steckzyklen in den Kartenslots.
+
+|get_idle_message
+|Abfrage der Anzeige im Ruhebildschirm
+
+|set_idle_message(message)
+|Änderung der Anzeige im Ruhebildschirm
+
+|verify_pin(iccsn)
+|Verifizierung der PIN einer SMC-B. Dabei wird auf die Anfrage des Konnektors gewartet und wenn die hinterlegte PIN gesendet, sobald die Abfrage eintrifft. Cocard startet bei der PIN-Verifizierung zunächst diese RMI-Funktion und sendet dann an den Konnektor die PIN-Abfrage.
+
+|remote_pairing
+|Wie bei der PIN-Verifizierung wartet diese Funktion auf die Anfrage vom Konnektor. Sobald diese erfolgt, wird die Bestätigung des Pairings gesendet.
+Die Pairing-Funktion des Kartenterminals kann hierüber unabhängig vom Konnektor gestartet werden, die Funktion lässt sich daher mit jedem Konnektor ausführen. Wichtig ist nur, dass immer zuerst die Pairing-Funktion des Kartenterminals gestartet wird und erst danach das Pairing am Konnektor eingeleitet wird, sonst verpasst die RMI-Funktion die Anfrage des Konnektors.
+
+Beim RISE TI-Client mit aktiviertem Proxy unterstützt Cocard einen automatischen Ablauf über eine Ein-Knopf-Bedienung.
 
 |===
 
-#TBD#
+
+////
+    def reboot
+    def get_info
+    def get_idle_message
+    def set_idle_message(message)
+    def verify_pin(iccsn)
+    def remote_pairing
+////
 
 == Ressourcen
 

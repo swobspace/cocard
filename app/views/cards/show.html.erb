@@ -52,5 +52,10 @@
 
   <%= turbo_frame_tag("notes", src: polymorphic_path([@card, :notes], active: 1),
                                refresh: "morph") %>
+
+  <% if @card.certable? %>
+    <%= turbo_frame_tag("card_certificates", src: card_card_certificates_path(@card),
+                                 refresh: "morph") %>
+  <% end %>
 <% end %>
 
