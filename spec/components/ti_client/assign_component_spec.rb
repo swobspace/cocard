@@ -41,7 +41,7 @@ RSpec.describe TIClient::AssignComponent, type: :component do
       expect(terminal).to receive(:connected).at_least(:once).and_return(true)
       render_inline(described_class.new(ti_client: ti_client, terminal: terminal))
       expect(page).to have_css('i[class="fa-solid fa-fw fa-check"]')
-      expect(page).to have_css('button[class="btn btn-sm btn-success me-1"]')
+      expect(page).to have_css('button[class="btn btn-sm btn-success"]')
     end
   end
 
@@ -51,7 +51,7 @@ RSpec.describe TIClient::AssignComponent, type: :component do
       expect(terminal).to receive(:connected).at_least(:once).and_return(false)
       render_inline(described_class.new(ti_client: ti_client, terminal: terminal))
       expect(page).to have_css('i[class="fa-solid fa-fw fa-check"]')
-      expect(page).to have_css('button[class="btn btn-sm btn-warning me-1"]')
+      expect(page).to have_css('button[class="btn btn-sm btn-warning"]')
     end
   end
 
