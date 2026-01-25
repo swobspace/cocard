@@ -309,7 +309,7 @@
 <div class="title">Abbildung 1. Anzeige des TI-Clients</div>
 </div>
 <div class="paragraph">
-<p>Der obere Abschnitt des TI-Clients enthält neben den Daten zum TI-Client (linke Seite) einige zusätzliche Funktionen (rechte Seite):</p>
+<p>Der obere Abschnitt des TI-Clients enthält neben den Daten zum TI-Client auf der linken Seite einige zusätzliche Funktionen auf rechte Seite:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -330,10 +330,10 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Die Tabelle KT-Proxys zeigt alle mit dem TI-Client verbundenen KT-Proxys an.</p>
+<p>Die Tabelle KT-Proxys zeigt alle in Cocard mit dem TI-Client verbundenen KT-Proxys an.</p>
 </li>
 <li>
-<p>In der Tabelle Kartenterminals auf dem Konnektor werden die Kartenterminals, so wie sie der Konnektor im Augenblick sieht, abgefragt und mit Informationen aus Cocard ergänzt. Dort tauchen daher nur Kartenterminals auf, die für den Konnektor sichtbar sind. Für die Abfrage beim Konnektor muss wieder die Proxy-Funktion des TI-Clients aktiviert sein.</p>
+<p>In der Tabelle Kartenterminals auf dem Konnektor werden die Kartenterminals, so wie sie der Konnektor im Augenblick sieht, abgefragt und mit Informationen aus Cocard ergänzt. Hier erscheinen daher nur Kartenterminals, die für den Konnektor sichtbar sind. Für die Abfrage beim Konnektor muss wieder die Proxy-Funktion des TI-Clients aktiviert sein.</p>
 </li>
 <li>
 <p>Die Tabelle Remote PIN Plus zeigt die Konfigurationen auf dem TI-Client an, sofern welche hinterlegt sind. Es werden alle SMC-Bs aufgelistet, auf die der Konnektor Zugriff hat. Wenn es keine Remote PIN+ Konfiguration gibt, wir der Status als <code>CONFIGURABLE</code> ausgewiesen.</p>
@@ -363,7 +363,7 @@
 </ul>
 </div>
 <div class="paragraph">
-<p>Hinter dem Dropdown-Menü beim Button verbergen sich die Funktionen <em>Verbindung trennen</em> und <em>Verbindung herstellen</em>. Mit Verbindung ist hier die TLS-Verbindung zum Kartenterminal gemeint. Angezeigt wird jeweils nur die in dem aktuellen Zustand sinnvolle Aktion.</p>
+<p>Angezeigt wird jeweils nur die in dem aktuellen Zustand sinnvolle Aktion.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -372,7 +372,18 @@
 <div class="title">Abbildung 3. Aktionsbuttons für Terminals mit unterschiedlichen Zuständen</div>
 </div>
 <div class="paragraph">
-<p>Die Funktion <em>Pairen</em> führt mehrere Schritte aus: zuerst wird der Konnektor für das Pairen vorbereitet. Danach wird das Kartenterminal in den Wartezustand (Warten auf Pairing-Anfrage) versetzt. Der Konnektor sendet dann die eigentliche Pairing-Anfrage an das Kartenterminal, und Cocard veranlasst das Kartenterminal die Pairing-Anfrage zu bestätigen. Pairen sozusagen mit einem einzigen Knopfdruck.</p>
+<p>Die Funktion <em>Pairen</em> führt mehrere Schritte aus: zuerst wird der Konnektor für das Pairen vorbereitet. Danach wird das Kartenterminal in den Wartezustand (Warten auf Pairing-Anfrage) versetzt. Der Konnektor sendet dann die eigentliche Pairing-Anfrage an das Kartenterminal, und Cocard veranlasst das Kartenterminal die Pairing-Anfrage zu bestätigen. Für das Pairen genügt hier  ein einziger Knopfdruck.</p>
+</div>
+<div class="paragraph">
+<p>Hinter dem Dropdown-Menü beim Button verbergen sich die Funktionen <em>Verbindung trennen</em> und <em>Verbindung herstellen</em>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/ti-client/ti-client-begin-end-session.png" alt="ti client begin end session">
+</div>
+</div>
+<div class="paragraph">
+<p>Mit Verbindung ist hier die TLS-Verbindung zum Kartenterminal gemeint.</p>
 </div>
 <div class="imageblock">
 <div class="content">
