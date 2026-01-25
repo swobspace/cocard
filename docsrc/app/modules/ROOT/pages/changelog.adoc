@@ -1,5 +1,7 @@
 = Changelog
 
+== 1.0.0-dev - unreleased
+
 == 0.9.9 - 2026-01-25
 
 * Überarbeitung der Dokumentation
