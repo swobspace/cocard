@@ -34,7 +34,10 @@
             <td><%= truncate(card_certificate.issuer, length: 60) %></td>
             <td><%= card_certificate.serial_number %></td>
             <td class="text-nowrap">
-              <%= show_link card_certificate, data: {"turbo-frame": "_top"} %>
+              <%= show_link card_certificate, 
+                            class: 'btn btn-sm btn-secondary',
+                            data: {"turbo-frame": "_top"} 
+               %>
             </td>
 
           <% end %>
