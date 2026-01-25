@@ -1,0 +1,11 @@
+= TI-Client in Betrieb nehmen: Übersicht
+:navtitle: Inbetriebnahme Step-by-Step
+:author: Wolfgang Barth
+:revdate: 2026-01-25
+:imagesdir: ../../images
+:experimental: true
+
+* xref:installation:cocard_yml.adoc[TI-Client in der Konfiguration aktivieren und Defaultwerte für den KT-Proxy hinterlegen]
+* xref:ti-client/activate-api.adoc[]
+* xref:ti-client/create-ti-client.adoc[]
+* xref:ti-client/create-ktproxy.adoc[]

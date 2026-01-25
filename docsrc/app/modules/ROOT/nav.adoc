@@ -44,6 +44,11 @@
 // *** xref:certs/telematik-ca.adoc[]
 
 * xref:ti-client/index.adoc[]
+** xref:ti-client/step-by-step.adoc[]
 ** xref:ti-client/activate-api.adoc[]
+** xref:ti-client/create-ti-client.adoc[]
+** xref:ti-client/create-ktproxy.adoc[]
+** xref:ti-client/using-ti-client.adoc[]
+
 
 * xref:changelog.adoc[]

@@ -1,0 +1,20 @@
+= TI-Client erstellen
+:author: Wolfgang Barth
+:revdate: 2026-01-25
+:imagesdir: ../../images
+:experimental: true
+
+Jeder Konnektor bekommt genau einen TI-Client. Dazu gibt es beim Konnektor einen neuen Abschnitt menu:TI-Client[] und einen Button btn:[TI-Client hinzufügen].
+
+.Konnektor-Anzeige: Abschnitt TI-Client
+image::ti-client/konn-add-ti-client.png[]
+
+.Neuen TI-Client erstellen.
+image::ti-client/ti-client-new.png[]
+
+Für die Nutzung des REST-APIs muss es auf dem TI-Client einen API-Benutzer `cocard` geben, das generierte Secret trägt man hier unter Client-Secret ein
+(siehe xref:ti-client/activate-api.adoc[]).
+
+Anschließend wird der TI-Client beim Konnektor im Abschnitt menu:TI-Client[] mit angezeigt.
+
+image::ti-client/konn-show-ti-client.png[]
