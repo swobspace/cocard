@@ -30,6 +30,7 @@
 
 * xref:card/card.adoc[]
 ** xref:card/card-new.adoc[]
+** xref:card/read-certs.adoc[]
 
 * Administration
 ** xref:admin/locations.adoc[]

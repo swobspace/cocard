@@ -1,0 +1,24 @@
+= Kartenzertifikate lesen (HBA, SMC-B)
+:navtitle: Kartenzertifikate lesen
+:author: Wolfgang Barth
+:revdate: 2026-01-25
+:imagesdir: ../../images
+:experimental: true
+
+Eine Karte besitzt in der Regel mehr als ein Zertifikat. Bei SMC-B und HBA kann man diese Zertifikate abfragen. Ein Satz an Zertifikaten besteht aus einem Zertifikat für Authentifikation (`C.AUT`), einem für Verschlüsselung (`C.ENC`) und einem für die Signatur (`C.SIG` bei SMC-B bzw. `C.QES` bei HBA für die qualifizierte elektronische Signatur).
+Während des Übergangs von RSA auf ECC in der Telematik besitzen die Karten normalerweise 2 solcher Sätze, einmal mit RSA, einmal mit ECC. Ältere Karten haben gelegentlich nur RSA (abhängig von Herausgeber und Ausgabedatum), die neuesten Karten sind bereits ECC-only (Stand Januar 2026).
+
+Jedes dieser Zertifikate hat ein eigenes Ablaufdatum. Zum Jahreswechsel 2025/2026 hat das durchaus zu Problemen bei HBAs geführt, deren RSA-Zertifikat für die elektronische Signatur zum 31.21.2025 endete. Auf den Karten ist nur ein Gültigkeitsdatum angedruckt, auch wenn es Zertifikate auf der Karte gibt, die eine viel kürzere Laufzeit aufweisen.
+
+Cocard ermöglich das Einlesen aller Kartenzertifikate und erlaubt damit die Anzeige der einzelnen Ablaufdaten. Bei SMC-Bs und HBAs erscheint dazu in Cocard unten in der Anzeige eine weitere Tabelle. Mit dem Button 
+image:common/card-certificate-button.png[] liest man alle Zertifikate ein. Der Vorgang ist je Karte nur einmal nötig, Cocard speichert die Zertifikate in der Datenbank.
+
+.Tabelle Kartenzerifikate bei SMC-B und HBA
+image::card/card-card-certificates-index.png[]
+
+Alternativ liest man die Zertifikate aller Karten eines Kartenterminals ein. Dazu enthält die Aktionsschaltfläche des Kartenterminals ebenfall den Button _Zertifikate einlesen_. Dabei werden nur SMC-Bs und HBAs berücksichtigt, eGKs uns SMC-KTs werden ignoriert.
+
+.Aktionsschaltfläche eines Kartenterminals
+image::ct/card-terminal-action-buttons.png[]
+
+NOTE: Die Kartenzertifikate sind für die Funktion von Cocard nicht erforderlich. Das Einlesen erfolgt nur manuell, weil beim Lesezugriff auf den HBA dieser blockiert wird und für eine Verwendung mit anderen Primärsystemen erneut gesteckt werden muss.

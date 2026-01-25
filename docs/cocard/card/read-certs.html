@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>TI-Client: REST-API aktivieren :: Cocard</title>
-    <link rel="prev" href="index.html">
-    <link rel="next" href="../changelog.html">
+    <title>Kartenzertifikate lesen (HBA, SMC-B) :: Cocard</title>
+    <link rel="prev" href="card-new.html">
+    <link rel="next" href="../admin/locations.html">
     <meta name="generator" content="Antora 3.1.14">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -141,13 +141,13 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="../card/card.html">Karte</a>
+    <a class="nav-link" href="card.html">Karte</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../card/card-new.html">Karte anlegen/bearbeiten</a>
+    <a class="nav-link" href="card-new.html">Karte anlegen/bearbeiten</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../card/read-certs.html">Kartenzertifikate lesen</a>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="read-certs.html">Kartenzertifikate lesen</a>
   </li>
 </ul>
   </li>
@@ -181,10 +181,10 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="index.html">TI-Client (RISE TI Gateway)</a>
+    <a class="nav-link" href="../ti-client/index.html">TI-Client (RISE TI Gateway)</a>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="activate-api.html">REST-API aktivieren</a>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ti-client/activate-api.html">REST-API aktivieren</a>
   </li>
 </ul>
   </li>
@@ -279,8 +279,8 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Dokumentation</a></li>
-    <li><a href="index.html">TI-Client (RISE TI Gateway)</a></li>
-    <li><a href="activate-api.html">REST-API aktivieren</a></li>
+    <li><a href="card.html">Karte</a></li>
+    <li><a href="read-certs.html">Kartenzertifikate lesen</a></li>
   </ul>
 </nav>
 </div>
@@ -289,58 +289,48 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">TI-Client: REST-API aktivieren</h1>
-<div class="sect1">
-<h2 id="_aktivierung_api_ti_client"><a class="anchor" href="#_aktivierung_api_ti_client"></a>Aktivierung API TI-Client</h2>
-<div class="sectionbody">
+<h1 class="page">Kartenzertifikate lesen (HBA, SMC-B)</h1>
 <div class="paragraph">
-<p>Im Auslieferungszustand ist der TI-Client per Weboberfläche nur von <code>localhost</code> aus erreichbar. Ab Version 2.6.1 legt man in der Benutzerverwaltung mindestens einen Benutzer an. Der Benutzer hat als Administrator volle Zugriffsrechte via Weboberfläche wie wenn die Adminoberfläche per <code>localhost</code> aufgerufen wird.</p>
+<p>Eine Karte besitzt in der Regel mehr als ein Zertifikat. Bei SMC-B und HBA kann man diese Zertifikate abfragen. Ein Satz an Zertifikaten besteht aus einem Zertifikat für Authentifikation (<code>C.AUT</code>), einem für Verschlüsselung (<code>C.ENC</code>) und einem für die Signatur (<code>C.SIG</code> bei SMC-B bzw. <code>C.QES</code> bei HBA für die qualifizierte elektronische Signatur).
+Während des Übergangs von RSA auf ECC in der Telematik besitzen die Karten normalerweise 2 solcher Sätze, einmal mit RSA, einmal mit ECC. Ältere Karten haben gelegentlich nur RSA (abhängig von Herausgeber und Ausgabedatum), die neuesten Karten sind bereits ECC-only (Stand Januar 2026).</p>
+</div>
+<div class="paragraph">
+<p>Jedes dieser Zertifikate hat ein eigenes Ablaufdatum. Zum Jahreswechsel 2025/2026 hat das durchaus zu Problemen bei HBAs geführt, deren RSA-Zertifikat für die elektronische Signatur zum 31.21.2025 endete. Auf den Karten ist nur ein Gültigkeitsdatum angedruckt, auch wenn es Zertifikate auf der Karte gibt, die eine viel kürzere Laufzeit aufweisen.</p>
+</div>
+<div class="paragraph">
+<p>Cocard ermöglich das Einlesen aller Kartenzertifikate und erlaubt damit die Anzeige der einzelnen Ablaufdaten. Bei SMC-Bs und HBAs erscheint dazu in Cocard unten in der Anzeige eine weitere Tabelle. Mit dem Button
+<span class="image"><img src="../_images/common/card-certificate-button.png" alt="card certificate button"></span> liest man alle Zertifikate ein. Der Vorgang ist je Karte nur einmal nötig, Cocard speichert die Zertifikate in der Datenbank.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../_images/ti-client/ti-client-users.png" alt="ti client users">
+<img src="../_images/card/card-card-certificates-index.png" alt="card card certificates index">
 </div>
-<div class="title">Abbildung 1. Benutzerverwaltung auf dem TI-Client</div>
+<div class="title">Abbildung 1. Tabelle Kartenzerifikate bei SMC-B und HBA</div>
 </div>
 <div class="paragraph">
-<p>Mit der Anlage des ersten Benutzers aktiviert man gleichzeitig das REST-API des TI-Clients. Danach legt man die Applikation <code>cocard</code> an. Das dabei kurz angezeigte Client-Secret notiert man und trägt es in Cocard beim TI-Client zusammen mit der Zugriffs-URL ein.</p>
+<p>Alternativ liest man die Zertifikate aller Karten eines Kartenterminals ein. Dazu enthält die Aktionsschaltfläche des Kartenterminals ebenfall den Button <em>Zertifikate einlesen</em>. Dabei werden nur SMC-Bs und HBAs berücksichtigt, eGKs uns SMC-KTs werden ignoriert.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../_images/ti-client/ti-client-applications.png" alt="ti client applications">
+<img src="../_images/ct/card-terminal-action-buttons.png" alt="card terminal action buttons">
 </div>
-<div class="title">Abbildung 2. Verwaltung von Applikationen</div>
+<div class="title">Abbildung 2. Aktionsschaltfläche eines Kartenterminals</div>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="../_images/ti-client/ti-client-edit.png" alt="ti client edit">
-</div>
-<div class="title">Abbildung 3. TI-Client in Cocard anlegen/bearbeiten</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_aktivierung_vkonnektor_proxy"><a class="anchor" href="#_aktivierung_vkonnektor_proxy"></a>Aktivierung vKonnektor-Proxy</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><mark>FIXME</mark></p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>PUT /v1/manager/konnektor/default/proxy-activation
-
-body:
-{
-  "username": "superadmin",
-  "password": "strenggeheim;-)"
-}</pre>
-</div>
-</div>
-</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Hinweis"></i>
+</td>
+<td class="content">
+Die Kartenzertifikate sind für die Funktion von Cocard nicht erforderlich. Das Einlesen erfolgt nur manuell, weil beim Lesezugriff auf den HBA dieser blockiert wird und für eine Verwendung mit anderen Primärsystemen erneut gesteckt werden muss.
+</td>
+</tr>
+</table>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="index.html">TI-Client (RISE TI Gateway)</a></span>
-  <span class="next"><a href="../changelog.html">Changelog</a></span>
+  <span class="prev"><a href="card-new.html">Karte anlegen/bearbeiten</a></span>
+  <span class="next"><a href="../admin/locations.html">Standorte</a></span>
 </nav>
 </article>
   </div>
