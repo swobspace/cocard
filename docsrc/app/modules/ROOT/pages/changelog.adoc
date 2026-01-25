@@ -1,6 +1,6 @@
 = Changelog
 
-== 0.9.9-dev - unreleased
+== 0.9.9 - 2026-01-25
 
 * Überarbeitung der Dokumentation
 * Manuelles Einlesen aller Zertifikate auf einer SMC-B/einem HBA; entweder nur die Karte oder alle Karten in einem Kartenterminal
@@ -8,6 +8,7 @@
 * Bearbeiten von Tags nun möglich.
 * Anzeige der TLS-Verbindungsparameter Kartenterminal-Konnektor beim IP-Check des Kartenterminals
 * RISE TIClient: Trennen und Verbinden der TLS-Verbindung eines gepairten Kartenterminals
+* RISE TIClient: Dokumentation überarbeitet
 
 == 0.9.8 - 2026-01-04
 
