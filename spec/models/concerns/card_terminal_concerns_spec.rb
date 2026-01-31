@@ -314,5 +314,9 @@ RSpec.describe CardTerminalConcerns, type: :model do
       allow(ct).to receive(:location).and_return(location) 
       expect(ct.to_subject).to eq("LACK - #KLG 08F6AD: ")
     end
+    it "works without mac address" do
+      allow(ct).to receive(:mac).and_return(nil) 
+      expect(ct.to_subject).to eq("#KLG: ")
+    end
   end
 end
