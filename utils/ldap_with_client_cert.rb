@@ -7,6 +7,7 @@ require "#{File.dirname(__FILE__)}/../config/environment.rb"
 
 connector = Connector.where("name ILIKE ?", '%01-Spielwiese').first
 client_certificate = ClientCertificate.where(client_system: 'cocard').first
+mail = ARGV[0] || "intensiv.wnd@marienhaus.kim.telematik"
 
 # fetch server cert
 
@@ -37,12 +38,19 @@ ldap_options = {
 ldap = Wobaduser::LDAP.new(ldap_options: ldap_options)
 
 search = Wobaduser::User.search(ldap: ldap, 
-                                filter: '(mail=intensiv.wnd@marienhaus.kim.telematik)')
+                                filter: "(mail=#{mail})")
 puts search.success?
 puts search.entries.count
 
 entry = search.entries.first
 puts entry.entry.telematikid
 puts entry.entry.mail
+# puts entry.entry.inspect
+
+encoded_cert = entry.entry['usercertificate;binary'].first
+cert = OpenSSL::X509::Certificate.new(encoded_cert)
+puts cert.subject.to_utf8
+puts cert.to_text
+
 
 
