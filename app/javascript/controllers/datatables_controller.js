@@ -103,16 +103,17 @@ export default class extends Controller {
   }
 
   simpleOptions(options) {
-    options.dom =  "<'row '<'col-sm-12'tr>>" +
-                   "<'row mt-2 justify-content-between'<'col-md-auto me-auto mt-1'l><'col-md-auto me-auto mt-2'i><'col-md-auto ms-auto'p>>"
+    options.layout = {
+      topEnd: 'null'
+    }
     options.pagingType = "numbers"
   }
 
 
   buttonOptions(options) {
-    options.dom = "<'row mt-2 justify-content-between'<'col-md-auto me-auto'l><'col-md-auto'B>>" +
-                    "<'row mt-2 justify-content-md-center'<'col-sm-12'tr>>" +
-                    "<'row mt-2 justify-content-between'<'col-md-auto me-auto'i><'col-md-auto ms-auto'p>>"
+    options.layout = {
+      topEnd: 'buttons'
+    }
     options.buttons = {
       dom: {
         button: {
@@ -175,7 +176,9 @@ export default class extends Controller {
 	    th.insertAdjacentHTML('afterbegin', _this.searchField(column, ''))
 	  }
         }
-        $('input[name=idx'+column+']').on( 'keyup change', function() {
+        // console.log(dtable.table().node().id)
+        // use node id of table explicit
+        $('table#'+dtable.table().node().id+' input[name=idx'+column+']').on('keyup change', function() {
           search(column, this.value)
         })
       }
@@ -185,7 +188,7 @@ export default class extends Controller {
   process_search_input(dtable) {
     const search = this.createSearchWithDebounce(dtable)
     dtable.columns().eq(0).each((colIdx) => {
-      $('input[name=idx'+colIdx+']').on( 'keyup change', function() {
+      $('table#'+dtable.table().node().id+' input[name=idx'+colIdx+']').on('keyup change', function() {
 	search(colIdx, this.value)
       })
     })
