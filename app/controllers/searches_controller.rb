@@ -14,7 +14,7 @@ private
 
   def connectors
     # Connectors::Query.new(Connector.all, search: searchstring).all
-    relation = Connector.all
+    relation = Connector.with_deleted
     Connectors::Query.new(relation, searchopts).all.distinct
   end
 
@@ -24,14 +24,14 @@ private
 
   def card_terminals
     # CardTerminals::Query.new(CardTerminal.all, search: searchstring).all
-    relation = CardTerminal.left_outer_joins(:location, :connector,
+    relation = CardTerminal.with_deleted.left_outer_joins(:location, :connector,
                                              card_terminal_slots: :card)
     CardTerminals::Query.new(relation, searchopts).all.distinct
   end
 
   def cards
     # Cards::Query.new(Card.all, search: searchstring).all
-    relation =  Card.left_outer_joins(:location, :operational_state)
+    relation =  Card.with_deleted.left_outer_joins(:location, :operational_state)
     Cards::Query.new(relation, searchopts).all.distinct
   end
 

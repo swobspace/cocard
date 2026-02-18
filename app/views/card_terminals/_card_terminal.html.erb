@@ -1,4 +1,9 @@
-<%= link_to card_terminal_path(card_terminal), class: 'list-group-item list-group-item-action' do %>
+<%= link_to card_terminal_path(card_terminal), 
+    class: if card_terminal.deleted?
+             'list-group-item list-group-item-action bg-danger-subtle'
+           else
+             'list-group-item list-group-item-action'
+           end do %>
   <div>
     <div class="d-flex justify-content-between">
       <span class="subtitle">

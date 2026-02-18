@@ -1,4 +1,9 @@
-<%= link_to card_path(card), class: 'list-group-item list-group-item-action' do %>
+<%= link_to card_path(card), 
+    class: if card.deleted?
+             'list-group-item list-group-item-action bg-danger-subtle'
+           else
+             'list-group-item list-group-item-action'
+           end do %>
   <div>
     <span class="subtitle">
       <%= t('activerecord.models.card') %>:
