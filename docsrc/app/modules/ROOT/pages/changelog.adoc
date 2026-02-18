@@ -3,6 +3,7 @@
 == 1.0.0-dev - unreleased
 
 * Bugfixes
+* SoftDeleted Objekte (Karte, Kartenterminal, Konnektor) werden in die globale Suche mit eingeschlossen und im Suchergebnis farblich gekennzeichnet
 
 == 0.9.9 - 2026-01-25
 
