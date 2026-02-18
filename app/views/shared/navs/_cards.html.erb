@@ -29,12 +29,10 @@
       <%= link_to raw( '<span class="fa-solid fa-fw fa-trash" aria-hidden="true"></span> ' +
             t('cards.expired_and_outdated')), main_app.cards_path(expired: true, outdated:true), 
             class: "dropdown-item" %>
-      <% if current_user&.is_admin? %>
+      <% if can? :manage, Card %>
         <%= link_to raw( '<span class="fa-solid fa-fw fa-trash" aria-hidden="true"></span> ' +
               t('cards.deleted')), main_app.cards_path(deleted: true), 
               class: "dropdown-item" %>
-      <% end %>
-      <% if can? :manage, Card %>
         <div class="dropdown-divider"></div>
         <%= link_to raw( '<span class="fa-solid fa-fw fa-table" aria-hidden="true"></span> ' +
               t('controller.card_certificates')), main_app.card_certificates_path, class: "dropdown-item" %>
