@@ -91,6 +91,7 @@ de:
       card: Karte
       card_certificate: Kartenzertifikat
       card_terminal: Kartenterminal
+      card_terminal_slot: Kartenterminal-Slot
       client_certificate: Client-Zertifikat
       context: Kontext
       connector: Konnektor
@@ -127,6 +128,7 @@ de:
     card_terminal_ids: Kartenterminals
     card_terminal_ip: IP des Terminals
     card_terminal_port: Port des Terminals
+    card_terminal_slot: Slot
     card_type: Kartentyp
     certificate: Zertifikat
     cert: Zertifikat (PEM)
@@ -264,6 +266,7 @@ de:
     card_certificates: Kartenzertifikate
     card_terminals: Kartenterminals
     card_terminals/card_certificates: Kartenzertifikate
+    card_terminals/card_terminal_slots: Kartenterminal-Slots
     card_terminals/logs: Kartenterminals/Logs
     card_terminals/kt_proxies: KT-Proxys
     client_certificates: Client-Zertifikate
