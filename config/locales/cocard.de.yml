@@ -264,6 +264,7 @@ de:
     cards/card_certificates: Kartenzertifikate
     cards/logs: Karten/Logs
     card_certificates: Kartenzertifikate
+    card_terminal_slots: Kartenterminal-Slots
     card_terminals: Kartenterminals
     card_terminals/card_certificates: Kartenzertifikate
     card_terminals/card_terminal_slots: Kartenterminal-Slots
