@@ -128,8 +128,7 @@ export default class extends Controller {
                                 window.location.reload();
                               }},
                  { "extend": 'csv',
-	           "exportOptions": { "columns": ':visible',
-                                      "search": ':applied' } },
+	           "exportOptions": { "search": ':applied' } },
                  { "extend": 'excel',
 	           "exportOptions": { "columns": ':visible',
                                       "search": ':applied' } },
