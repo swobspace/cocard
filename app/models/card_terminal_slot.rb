@@ -7,6 +7,7 @@ class CardTerminalSlot < ApplicationRecord
   # -- configuration
   # -- validations and callbacks
   validates_uniqueness_of :slotid, scope: :card_terminal_id
+  validates :slotid, presence: true, uniqueness: { scope: :card_terminal_id }
   after_commit :update_card_location
   # -- common methods
 

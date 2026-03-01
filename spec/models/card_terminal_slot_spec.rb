@@ -11,6 +11,7 @@ RSpec.describe CardTerminalSlot, type: :model do
 
   it { is_expected.to belong_to(:card_terminal) }
   it { is_expected.to have_one(:card).optional }
+  it { is_expected.to validate_presence_of(:slotid) }
 
   it 'should get plain factory working' do
     f = FactoryBot.create(:card_terminal_slot)
