@@ -93,6 +93,12 @@
                 <%= t('controller.cards') %>
               </h4>
             </div>
+            <div class="ms-auto">
+              <%= link_to(t('controller.card_terminal_slots'),
+                          card_terminal_card_terminal_slots_path(@card_terminal),
+                          class: "btn btn-sm btn-outline-secondary") if can? :manage, CardTerminalSlot
+               %>
+            </div>
           </div>
         </div>
         <div class="m-2">
