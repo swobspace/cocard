@@ -10,10 +10,12 @@
       <%= form.label :card_id, t('attributes.card'),
                       class: 'col-sm-3 col-form-label' %>
       <div class="col-sm-9">
-        <%= select_tag :card_id, 
+        <%= select_tag :card_id,
                         options_from_collection_for_select(Card.all, "id", "to_s",
                                                            @card_terminal_slot.card&.id),
-              { include_blank: true , class: "form-control" } %>
+              { include_blank: true,
+                data: { controller: 'select' },
+                class: "form-control" } %>
        </div>
     </div>
 
