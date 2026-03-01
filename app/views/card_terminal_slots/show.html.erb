@@ -19,8 +19,13 @@
     <table class="table table-sm table-borderless">
     
       <tr>
+        <th class="w-10 pe-3"><%= t('attributes.connector')%>:</th>
+        <td><%= render LinkToComponent.new(item: @card_terminal_slot.card_terminal&.connector) %></td>
+      </tr>
+
+      <tr>
         <th class="w-10 pe-3"><%= t('attributes.card_terminal')%>:</th>
-        <td><%= @card_terminal_slot.card_terminal %></td>
+        <td><%= render LinkToComponent.new(item: @card_terminal_slot.card_terminal) %></td>
       </tr>
 
       <tr>
@@ -30,7 +35,7 @@
 
       <tr>
         <th class="w-10 pe-3"><%= t('attributes.card')%>:</th>
-        <td><%= @card_terminal_slot.card %></td>
+        <td><%= render LinkToComponent.new(item: @card_terminal_slot.card) %></td>
       </tr>
     </table>
   </div>

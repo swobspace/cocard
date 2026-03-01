@@ -9,7 +9,7 @@ RSpec.describe CardTerminals::CardTerminalSlotsController, type: :request do
   }
 
   let(:invalid_attributes) {
-    { slotid: -1 }
+    { slotid: nil }
   }
 
   before(:each) do
@@ -79,14 +79,14 @@ RSpec.describe CardTerminals::CardTerminalSlotsController, type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        { card_id: card.id }
+        { slotid: 17 }
       }
 
       it "updates the requested card_terminal_slot" do
         card_terminal_slot = CardTerminalSlot.create! valid_attributes
         patch card_terminal_card_terminal_slot_url(ct,card_terminal_slot), params: { card_terminal_slot: new_attributes }
         card_terminal_slot.reload
-        expect(card_terminal_slot.card.iccsn).to eq(card.iccsn)
+        expect(card_terminal_slot.slotid).to eq(17)
       end
 
       it "redirects to the card_terminal_slot" do
