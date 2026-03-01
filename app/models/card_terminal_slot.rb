@@ -11,6 +11,10 @@ class CardTerminalSlot < ApplicationRecord
   after_commit :update_card_location
   # -- common methods
 
+  def to_s
+    "#{card_terminal.to_s} / #{slotid}"
+  end
+
   def update_card_location
     if card&.persisted? and ['SMC-B', 'SMC-KT'].include?(card.card_type)
       card.update_column(:location_id, card_terminal&.location_id)
