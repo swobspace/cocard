@@ -1,5 +1,12 @@
 = Changelog
 
+== 1.0.0 - 2026-03-01
+
+* Bugfixes
+* SoftDeleted Objekte (Karte, Kartenterminal, Konnektor) werden in die globale Suche mit eingeschlossen und im Suchergebnis farblich gekennzeichnet
+* Berechtigungen Kartenzertifikate lesen für CardManager
+* Manuelle Anlage von Kartenterminal-Slots für die Zuordnung von Karten zu Kartenterminals, die Cocard nicht selbst erreichen kann.
+
 == 0.9.9 - 2026-01-25
 
 * Überarbeitung der Dokumentation

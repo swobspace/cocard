@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # resources :card_terminal_slots
   resources :tags
   resources :terminal_workplaces, only: [:index]
   resource :duck_terminal, only: [:new, :show]
@@ -121,6 +122,7 @@ Rails.application.routes.draw do
         post :fetch
       end
     end
+    resources :card_terminal_slots, module: :card_terminals
     resource :kt_proxy, module: :card_terminals
   end
   resources :card_certificates, only: [:show, :index]

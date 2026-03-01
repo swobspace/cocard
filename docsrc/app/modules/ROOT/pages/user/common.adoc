@@ -1,6 +1,6 @@
 = Allgemeines zur Oberfläche
 :author: Wolfgang Barth
-:revdate: 2026-01-23
+:revdate: 2026-03-01
 :imagesdir: ../../images
 :experimental: true
 
@@ -11,7 +11,7 @@ Für die Anzeige von Listen verwendet Cocard überwiegend Tabellen. Als Beispiel
 .Übersicht Konnektoren
 image::connector/connectors-index.png[]
 
-Die angezeigten Spalten lassen sich über _Column Visibility_ verändern. In vielen Fällen zeigt Cocard in der Standardansicht nicht alle Spalten. Das verwendete Plugin zeigt nun immer nur soviele Spalten an wie Platz auf dem Bildschirm ist. D.h. es ist durchaus möglich, dass Spalten, die über die Sichtbarkeit eingeblendet sein sollen aus Platzgründen doch nicht angezeigt werden. Dann sollte man die angezeigten Spalten reduzieren, bis die gewünschte Spalte doch erscheint. Beim Export als CSV oder Excel werden die ausgewählten Spalten exportiert, also ggf. auch solche, die nicht angezeigt werden, weil der Bildschirm zu schmal ist.
+Die angezeigten Spalten lassen sich über _Column Visibility_ verändern. In vielen Fällen zeigt Cocard in der Standardansicht nicht alle Spalten. Das verwendete Plugin zeigt nun immer nur soviele Spalten an wie Platz auf dem Bildschirm ist. D.h. es ist durchaus möglich, dass Spalten, die über die Sichtbarkeit eingeblendet sein sollen aus Platzgründen doch nicht angezeigt werden. Dann sollte man die angezeigten Spalten reduzieren, bis die gewünschte Spalte doch erscheint. Beim Export als CSV oder Excel werden die sichtbaren Spalten exportiert.
 
 === Kopfbereich
 
@@ -24,7 +24,7 @@ Filterung, angezeigte Spalten und Sortierung bleiben für einige Stunden erhalte
 
 === Tabellenbereich
 
-Die angezeigte Tabelle passt sich der Bildschirmbreite an, die Tabelle ist - im Neudeutsch - _Responsive_. Bei einem schmalen Browser und einer Tabelle wie bei Kartenterminals mit ihren unzähligen Spalten kommt es durchaus vor, dass nicht alle Spalten sichtbar sind, die über _Sichtbare Spalten_ ausgewählt wurden. Wenn sich der Browser nicht weiter verbreitern lässt, muss man daher einige Spalten aus den _Sichtbaren Spalten_ entfernen. Auf den Export hat die aktuelle Sichtbarkeit keinen Einfluss, siehe _Exportfunktionen_ weiter unten.
+Die angezeigte Tabelle passt sich der Bildschirmbreite an, die Tabelle ist - im Neudeutsch - _Responsive_. Bei einem schmalen Browser und einer Tabelle wie bei Kartenterminals mit ihren unzähligen Spalten kommt es durchaus vor, dass nicht alle Spalten sichtbar sind, die über _Sichtbare Spalten_ ausgewählt wurden. Wenn sich der Browser nicht weiter verbreitern lässt, muss man daher einige Spalten aus den _Sichtbaren Spalten_ entfernen.
 
 === Fußbereich
 
@@ -35,6 +35,6 @@ Im Fußbereich findet man links Informationen zur Anzahl der Einträge und ob gg
 
 === Exportfunktionen
 
-Für den Export von Tabellendaten gibt es mehrere Möglichkeiten: Excel, CSV und PDF. Hier werden alle Spalten exportiert, die unter _Sichtbare Spalten_ ausgewählt wurden - unabhängig davon, ob diese gerade auf dem Bildschirm sichtbar sind. Vor einem Export sollte man daher immer auch einen Blick auf die _Sichtbaren Spalten_ werfen.
+Für den Export von Tabellendaten gibt es mehrere Möglichkeiten: Excel, CSV und PDF. Bei Excel und PDF werden immer nur die sichtbaren Spalten exportiert, der CSV-Export enthält dagegen immer alle Spalten. Die Fähigkeiten von PDF sind wegen des festen Seitenaufbaus beschränkt. Wenn man zu viele Spalten exportiert wird der über den Seitenrand hinaus gehende Inhalt abgeschnitten. Je nach Anwendungsfall wird ein Excelexport mit anschließender Konvertierung nach PDF zu besseren Ergebnissen führen.
 
 IMPORTANT: Der Excel-Export setzt keine besonderen Typ für die Spalten, Excel interpretiert daher die ICCSN als besonders große Zahl und stellt diese als Float dar - damit gehen die letzten Stellen verloren. Ähnliches passiert bei bestimmten IP-Adressen. Für den Export von ICCSN und IP-Adressen wählt man daher besser den CSV-Export und importiert die CSV-Datei nach Excel/Calc explizit mit dem Typ `Text` für die Problem-Spalten.

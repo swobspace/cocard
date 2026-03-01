@@ -24,12 +24,10 @@
           main_app.card_terminals_path(acknowledged: true), class: "dropdown-item" %>
       <%= link_to raw(Cocard::States.flag(Cocard::States::WARNING) + ' Aktuelle Probleme'),
           main_app.card_terminals_path(failed: true, acknowledged: false), class: "dropdown-item" %>
-      <% if current_user&.is_admin? %>
+      <div class="dropdown-divider"></div>
         <%= link_to raw( '<span class="fa-solid fa-fw fa-trash" aria-hidden="true"></span> ' +
               t('card_terminals.deleted')), main_app.card_terminals_path(deleted: true), 
               class: "dropdown-item" %>
-      <% end %>
-      <div class="dropdown-divider"></div>
       <% if can? :manage, CardTerminal %>
         <%= link_to raw('<span class="fa-solid fa-fw fa-message" aria-hidden="true"></span> ' +
                         t('cocard.set_idle_messages')),

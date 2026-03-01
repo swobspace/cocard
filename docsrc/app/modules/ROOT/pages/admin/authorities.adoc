@@ -1,6 +1,6 @@
 = Berechtigungen
 :author: Wolfgang Barth
-:revdate: 2024-08-31
+:revdate: 2026-02-21
 
 Berechtigungen werden in Cocard über Rollen vergeben. Jede Rolle kann für sich alleine vergeben werden und enthält alle für die Aufgabe notwendigen Berechtigungen. Die Rolle `Admin` hat eine Sonderstellung: sie darf alles, die Vergabe zusätzlicher Rollen wird ignoriert.
 
@@ -35,6 +35,7 @@ Ein Administrator hat alle Zugriffsrechte. Sofern die Rolle vorhanden ist, werde
 * Alles Lesen (*)
 ** Card#private_information (Geschützte Informationen) lesen
 * Vollzugriff auf Karten
+* Kartenzertfikate einlesen
 * Erstellen von Acknowledges für Logeinträge
 
 == Rolle VerifyPin

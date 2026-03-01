@@ -40,7 +40,7 @@ class Ability
       end
 
       if @user.role?(:card_manager)
-        can :manage, Card
+        can :manage, [Card, CardCertificate]
         can :manage, Note, notable_type: ['Log', 'Card']
         can [:read, :verify], VerifyPin
       else

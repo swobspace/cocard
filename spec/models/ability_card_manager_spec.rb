@@ -16,6 +16,12 @@ RSpec.shared_examples "a CardManager" do
   it { is_expected.to be_able_to(:update, Card.new) }
   it { is_expected.to be_able_to(:destroy, Card.new) }
 
+  it { is_expected.to be_able_to(:manage, CardCertificate.new) }
+  it { is_expected.to be_able_to(:create, CardCertificate.new) }
+  it { is_expected.to be_able_to(:update, CardCertificate.new) }
+  it { is_expected.to be_able_to(:destroy, CardCertificate.new) }
+  it { is_expected.to be_able_to(:fetch, CardCertificate) }
+
   [ CardTerminal, Connector, Network, Location, OperationalState,
     Log, Workplace, Context, ClientCertificate,
     TerminalWorkplace, CardContext, ConnectorContext ].each do |model|

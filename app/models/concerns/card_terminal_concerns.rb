@@ -137,7 +137,9 @@ module CardTerminalConcerns
   end
 
   def to_subject
-    if location.present? 
+    if mac.nil?
+      "#KLG: "
+    elsif location.present? 
       "#{location.lid} - #KLG #{mac[-6..-1]}: "
     else
       "#KLG #{mac[-6..-1]}: "

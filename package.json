@@ -35,7 +35,7 @@
     "esbuild": "^0.27.0",
     "jszip": "^3.10.1",
     "nodemon": "^3.1.0",
-    "pdfmake": "^0.2.10",
+    "pdfmake": "^0.3.0",
     "postcss": "^8.4.38",
     "postcss-cli": "^11.0.0",
     "sass": "^1.72.0",

@@ -4,13 +4,16 @@ RSpec.describe CardTerminalSlot, type: :model do
   let!(:location) { FactoryBot.create(:location, lid: 'ACX') }
   let(:ct) do
     FactoryBot.create(:card_terminal, :with_mac, 
+      name: "MyCardTerminal",
       location: location,
       ip: '127.6.19.23'
     )
   end
+  let(:slot1) { FactoryBot.create(:card_terminal_slot, slotid: 17, card_terminal: ct) }
 
   it { is_expected.to belong_to(:card_terminal) }
   it { is_expected.to have_one(:card).optional }
+  it { is_expected.to validate_presence_of(:slotid) }
 
   it 'should get plain factory working' do
     f = FactoryBot.create(:card_terminal_slot)
@@ -18,6 +21,10 @@ RSpec.describe CardTerminalSlot, type: :model do
     expect(f).to be_valid
     expect(g).to be_valid
     expect(f).to validate_uniqueness_of(:slotid).scoped_to(:card_terminal_id)
+  end
+
+  describe "#to_s" do
+    it { expect(slot1.to_s).to eq("#{ct.to_s} / #{slot1.slotid}") }
   end
 
   describe "with deleted card" do

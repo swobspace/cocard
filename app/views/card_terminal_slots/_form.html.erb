@@ -1,0 +1,26 @@
+<%= simple_form_for([@card_terminal, @card_terminal_slot]) do |form| %>
+<%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
+
+  <div class="form-input">
+    <%= form.association :card_terminal, disabled: true
+       %>
+    <%= form.input :slotid
+       %>
+    <div class="row mb-3">
+      <%= form.label :card_id, t('attributes.card'),
+                      class: 'col-sm-3 col-form-label' %>
+      <div class="col-sm-9">
+        <%= select_tag :card_id,
+                        options_from_collection_for_select(Card.all, "id", "to_s",
+                                                           @card_terminal_slot.card&.id),
+              { include_blank: true,
+                data: { controller: 'select' },
+                class: "form-control" } %>
+       </div>
+    </div>
+
+
+    <%= form.button :submit, class: 'btn btn-primary' %>
+    <%= cancel_button %>
+  </div>
+<% end %>
