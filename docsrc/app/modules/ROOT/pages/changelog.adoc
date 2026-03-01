@@ -1,6 +1,6 @@
 = Changelog
 
-== 1.0.0-dev - unreleased
+== 1.0.0 - 2026-03-01
 
 * Bugfixes
 * SoftDeleted Objekte (Karte, Kartenterminal, Konnektor) werden in die globale Suche mit eingeschlossen und im Suchergebnis farblich gekennzeichnet
