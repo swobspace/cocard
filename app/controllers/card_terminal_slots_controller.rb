@@ -29,8 +29,10 @@ class CardTerminalSlotsController < ApplicationController
     @card_terminal_slot = @card_terminal.card_terminal_slots.build(card_terminal_slot_params)
 
     if @card_terminal_slot.save
-      card = Card.find(params[:card_id])
-      card.update(card_terminal_slot_id: @card_terminal_slot.id)
+      if params[:card_id].present?
+        card = Card.find(params[:card_id])
+        card.update(card_terminal_slot_id: @card_terminal_slot.id)
+      end
     end
     respond_with(@card_terminal_slot, location: location)
   end
@@ -67,7 +69,7 @@ class CardTerminalSlotsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def card_terminal_slot_params
-      params.require(:card_terminal_slot).permit(:card_terminal_id, :slotid, :card_id)
+      params.require(:card_terminal_slot).permit(:card_terminal_id, :slotid)
     end
 
     def location
