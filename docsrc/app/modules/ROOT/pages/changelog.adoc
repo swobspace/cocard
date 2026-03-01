@@ -1,5 +1,8 @@
 = Changelog
 
+== 1.0.1-dev - unreleased
+
+
 == 1.0.0 - 2026-03-01
 
 * Bugfixes
