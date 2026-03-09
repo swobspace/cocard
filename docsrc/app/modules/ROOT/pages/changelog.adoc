@@ -2,6 +2,8 @@
 
 == 1.0.1-dev - unreleased
 
+* Bugfixes
+
 
 == 1.0.0 - 2026-03-01
 
