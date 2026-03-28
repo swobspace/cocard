@@ -299,4 +299,13 @@ RSpec.describe Connector, type: :model do
     end
   end
 
+  describe "#soft_delete" do
+    let!(:conn) { FactoryBot.create(:connector, deleted_at: Time.current) }
+    it "undeletes connector" do
+      expect(conn.deleted?).to be_truthy
+      conn.undelete; conn.reload
+      expect(conn.deleted?).to be_falsey
+    end
+  end
+
 end

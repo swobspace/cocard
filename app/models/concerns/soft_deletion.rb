@@ -13,6 +13,12 @@ module SoftDeletion
     end
   end
 
+  def undelete
+    if has_attribute? :deleted_at
+      update(deleted_at: nil)
+    end
+  end
+
   def deleted?
     deleted_at.present?
   end
