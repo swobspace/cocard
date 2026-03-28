@@ -1,5 +1,7 @@
 = Changelog
 
+== 1.0.2-dev - unreleased
+
 == 1.0.1 - 26-03-28
 
 * Bugfixes und Security Updates for Rails
