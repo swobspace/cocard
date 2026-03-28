@@ -1,6 +1,6 @@
 class ConnectorsController < ApplicationController
   skip_load_and_authorize_resource
-  before_action :set_connector, only: %i[show edit update destroy 
+  before_action :set_connector, only: %i[show edit update destroy undelete
                                          check fetch_sds get_resource_information
                                          get_card_terminals get_cards ping reboot
                                          test_context_form test_context]
@@ -78,6 +78,11 @@ class ConnectorsController < ApplicationController
   # PATCH/PUT /connectors/1
   def update
     @connector.update(connector_params)
+    respond_with(@connector)
+  end
+
+  def undelete
+    @connector.undelete
     respond_with(@connector)
   end
 

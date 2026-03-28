@@ -34,6 +34,11 @@ RSpec.describe CardsController, type: :routing do
       expect(put: "/cards/1").to route_to("cards#update", id: "1")
     end
 
+    it "routes to #undelete via PATCH" do
+      expect(patch: "/cards/1/undelete").to route_to("cards#undelete", id: "1")
+    end
+
+
     it "routes to #update via PATCH" do
       expect(patch: "/cards/1").to route_to("cards#update", id: "1")
     end

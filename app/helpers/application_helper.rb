@@ -55,4 +55,33 @@ module ApplicationHelper
     "terminal_#{action.to_s}_button_#{new_id}"
   end
 
+  def delete_link(poly, options = {})
+    mypoly, obj = get_parts(poly)
+    return unless can?(:destroy, obj)
+    options.symbolize_keys!
+    if obj.respond_to?(:deleted_at) and obj.deleted_at.present?
+      undelete_icon = raw(%Q[<i class="fa-solid fa-trash-arrow-up"></i>])
+      # link_to undelete_icon, polymorphic_path(mypoly, deleted_at: ""), 
+      #        class: 'btn btn-warning'
+      button_to(polymorphic_path(Array(mypoly).unshift(:undelete)), class: 'btn btn-warning',
+                method: :patch) do
+        undelete_icon
+      end
+    else
+      options = delete_link_defaults.merge(options)
+      options[:title] ||= title(obj, :destroy)
+      options[:data][:turbo_confirm] ||= confirm_message(obj)
+      link_to icon_delete, mypoly, options
+    end
+  end
+
+  private
+    def delete_link_defaults
+      { 
+        remote: false,
+        class: 'btn btn-danger me-1',
+        data: { turbo_method: :delete }
+      }
+    end
+
 end

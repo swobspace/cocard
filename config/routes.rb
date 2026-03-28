@@ -72,6 +72,7 @@ Rails.application.routes.draw do
       delete :delete_expired
     end
     member do
+      patch :undelete
       get :copy
       post :get_certificate
       post :get_pin_status
@@ -100,6 +101,7 @@ Rails.application.routes.draw do
       post :arp_check
     end
     member do
+      patch :undelete
       post :check
       get  :edit_identification
       get  :edit_idle_message
@@ -133,6 +135,7 @@ Rails.application.routes.draw do
       get :sindex
     end
     member do
+      patch :undelete
       post :check
       post :fetch_sds
       post :get_resource_information
