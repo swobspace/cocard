@@ -1,5 +1,10 @@
 = Changelog
 
+== 1.0.1 - 26-03-28
+
+* Bugfixes und Security Updates for Rails
+
+
 == 1.0.0 - 2026-03-01
 
 * Bugfixes

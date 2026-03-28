@@ -24,6 +24,7 @@ RSpec.describe CardTerminal, type: :model do
       current_ip: '127.2.3.4',
       connector: connector,
       name: 'ACME Term',
+      displayname: 'DisplayNameCT',
       ct_id: 'CT_ID_0123',
       mac: '11:22:33:44:88:dd',
       location: location,
@@ -67,6 +68,13 @@ RSpec.describe CardTerminal, type: :model do
 
   describe "#to_s" do
     it { expect(ct.to_s).to match('ACME Term (ACX)') }
+
+    describe "with empty name" do
+      it "use displayname" do
+        expect(ct).to receive(:name).and_return("")
+        expect(ct.to_s).to eq("DisplayNameCT (ACX)")
+      end
+    end
   end
 
   describe "#fullname" do

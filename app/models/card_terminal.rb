@@ -49,7 +49,11 @@ class CardTerminal < ApplicationRecord
 
   # -- common methods
   def to_s
-    "#{name} (#{location&.lid})"
+    if name.present?
+      "#{name} (#{location&.lid})"
+    else
+      "#{displayname} (#{location&.lid})"
+    end
   end
 
   def fullname
