@@ -1,6 +1,7 @@
 class ConnectorsController < ApplicationController
+  include SoftDeletionController
   skip_load_and_authorize_resource
-  before_action :set_connector, only: %i[show edit update destroy undelete
+  before_action :set_connector, only: %i[show edit update destroy
                                          check fetch_sds get_resource_information
                                          get_card_terminals get_cards ping reboot
                                          test_context_form test_context]
@@ -81,11 +82,6 @@ class ConnectorsController < ApplicationController
     respond_with(@connector)
   end
 
-  def undelete
-    @connector.undelete
-    respond_with(@connector)
-  end
-
   def fetch_sds
     result = ConnectorServices::Fetch.new(connector: @connector).call
     unless result.success?
@@ -156,7 +152,7 @@ class ConnectorsController < ApplicationController
 
   # DELETE /connectors/1
   def destroy
-    unless @connector.soft_delete
+    unless @connector.destroy
       flash[:alert] = @connectors.errors.full_messages.join("; ")
     end
     respond_with(@connector, location: polymorphic_path([@locatable, :connectors]))

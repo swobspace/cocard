@@ -59,15 +59,28 @@ module ApplicationHelper
     mypoly, obj = get_parts(poly)
     return unless can?(:destroy, obj)
     options.symbolize_keys!
-    if obj.respond_to?(:deleted_at) and obj.deleted_at.present?
-      undelete_icon = raw(%Q[<i class="fa-solid fa-trash-arrow-up"></i>])
-      # link_to undelete_icon, polymorphic_path(mypoly, deleted_at: ""), 
-      #        class: 'btn btn-warning'
-      button_to(polymorphic_path(Array(mypoly).unshift(:undelete)), class: 'btn btn-warning',
-                method: :patch) do
-        undelete_icon
+
+    # soft_deletable?
+    if obj.respond_to?(:deleted_at) 
+      if obj.deleted_at.present? # aka soft_deleted?
+        button_to(polymorphic_path(Array(mypoly).unshift(:undelete)), 
+                  class: 'btn btn-warning',
+                  title: "Undelete: Objekt wieder herstellen?",
+                  data: { "turbo-confirm": "Soll das Objekt wieder hergestellt werden?" },
+                  method: :patch) do
+          raw(%Q[<i class="fa-solid fa-trash-arrow-up"></i>])
+        end
+      else
+        button_to(polymorphic_path(Array(mypoly).unshift(:soft_delete)), 
+                  class: 'btn btn-danger',
+                  title: "SoftDelete (Objekt ist wieder herstellbar",
+                  data: { "turbo-confirm": "SoftDelete: das Objekt wird aus den normalen Ansichten entfernt, ist aber wieder herstellbar" },
+                  method: :patch) do
+          raw(%Q[<i class="fa-regular fa-trash-can"></i>])
+        end
       end
     else
+      # plain rails models
       options = delete_link_defaults.merge(options)
       options[:title] ||= title(obj, :destroy)
       options[:data][:turbo_confirm] ||= confirm_message(obj)

@@ -1,6 +1,7 @@
 class CardTerminalsController < ApplicationController
+  include SoftDeletionController
   skip_load_and_authorize_resource
-  before_action :set_card_terminal, only: %i[show edit update destroy undelete
+  before_action :set_card_terminal, only: %i[show edit update destroy
                                              check edit_identification 
                                              edit_idle_message 
                                              fetch_idle_message fetch_proxy
@@ -86,11 +87,6 @@ class CardTerminalsController < ApplicationController
   # PATCH/PUT /card_terminals/1
   def update
     @card_terminal.update(card_terminal_params)
-    respond_with(@card_terminal)
-  end
-
-  def undelete
-    @card_terminal.undelete
     respond_with(@card_terminal)
   end
 
