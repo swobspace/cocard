@@ -42,6 +42,10 @@ RSpec.describe CardTerminalsController, type: :routing do
       expect(patch: "/card_terminals/1/undelete").to route_to("card_terminals#undelete", id: "1")
     end
 
+    it "routes to #soft_delete via PATCH" do
+      expect(patch: "/card_terminals/1/soft_delete").to route_to("card_terminals#soft_delete", id: "1")
+    end
+
     it "routes to #update via PUT" do
       expect(put: "/card_terminals/1").to route_to("card_terminals#update", id: "1")
     end

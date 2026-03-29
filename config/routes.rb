@@ -73,6 +73,7 @@ Rails.application.routes.draw do
     end
     member do
       patch :undelete
+      patch :soft_delete
       get :copy
       post :get_certificate
       post :get_pin_status
@@ -102,6 +103,7 @@ Rails.application.routes.draw do
     end
     member do
       patch :undelete
+      patch :soft_delete
       post :check
       get  :edit_identification
       get  :edit_idle_message
@@ -136,6 +138,7 @@ Rails.application.routes.draw do
     end
     member do
       patch :undelete
+      patch :soft_delete
       post :check
       post :fetch_sds
       post :get_resource_information
