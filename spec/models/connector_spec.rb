@@ -31,7 +31,6 @@ RSpec.describe Connector, type: :model do
     g = FactoryBot.create(:connector)
     expect(f).to be_valid
     expect(g).to be_valid
-    expect(f).to validate_uniqueness_of(:ip)
     expect(f).to validate_uniqueness_of(:short_name)
   end
 

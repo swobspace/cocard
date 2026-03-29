@@ -11,7 +11,7 @@ let(:conn) { FactoryBot.create(:connector) }
     it "shows undelete button" do
       expect(conn).to receive(:deleted_at).and_return(Time.current)
       render_inline(described_class.new(poly: conn))
-      expect(page).to have_css('button[class="btn btn-warning me-1"]')
+      expect(page).to have_css('button[class="btn btn-warning"]')
     end
   end
 

@@ -2,7 +2,7 @@
   <div class="btn-group me-1">
     <%= button_to(polymorphic_path([:undelete] + poly),
                   class: 'btn btn-warning',
-                  title: "Undelete: Objekt wieder herstellen?",
+                  title: "Undelete",
                   data: { "turbo-confirm": "Soll das Objekt wieder hergestellt werden?" },
                   method: :patch) do %>
         <i class="fa-solid fa-trash-arrow-up"></i>
@@ -14,10 +14,9 @@
       <li>
         <%= link_to raw(%Q[<i class="fa-solid fa-fw fa-trash"></i>])+"Entgültig löschen", 
                     polymorphic_path(poly),
-                    class: 'dropdown-item',
+                    class: "dropdown-item",
                     data: { turbo_method: :delete,
-                            "turbo-confirm": "Objekt löschen? Das Objekt kann danach nicht wieder hergestellt werden!" },
-                      class: "dropdown-item"
+                            "turbo-confirm": "Objekt löschen? Das Objekt kann danach nicht wieder hergestellt werden!" }
          %>
       </li>
     </ul>
@@ -26,7 +25,7 @@
 <% else %>
   <%= button_to(polymorphic_path(poly.unshift(:soft_delete)),
                   class: 'btn btn-danger me-1',
-                  title: "SoftDelete (Objekt ist wieder herstellbar",
+                  title: "SoftDelete",
                   data: { "turbo-confirm": "SoftDelete: das Objekt wird aus den normalen Ansichten entfernt, ist aber wieder herstellbar" },
                   method: :patch) do %>
         <i class="fa-regular fa-trash-can"></i>

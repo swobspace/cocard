@@ -160,9 +160,24 @@ Rails.application.routes.draw do
     resource :ti_client, module: :connectors
   end
   resources :locations do
-    resources :connectors, only: [:index, :show, :destroy], module: :locations
-    resources :card_terminals, only: [:index, :show, :destroy], module: :locations
-    resources :cards, only: [:index, :show, :destroy], module: :locations
+    resources :connectors, only: [:index, :show, :destroy], module: :locations do
+      member do
+        patch :undelete
+        patch :soft_delete
+      end
+    end
+    resources :card_terminals, only: [:index, :show, :destroy], module: :locations do
+      member do
+        patch :undelete
+        patch :soft_delete
+      end
+    end
+    resources :cards, only: [:index, :show, :destroy], module: :locations do
+      member do
+        patch :undelete
+        patch :soft_delete
+      end
+    end
     resources :networks, only: [:index, :show, :destroy], module: :locations
   end
   root to: 'home#index'
