@@ -1,0 +1,18 @@
+<% if soft_deleted? %>
+  <%= button_to(polymorphic_path(Array(poly).unshift(:undelete)),
+                  class: 'btn btn-warning me-1',
+                  title: "Undelete: Objekt wieder herstellen?",
+                  data: { "turbo-confirm": "Soll das Objekt wieder hergestellt werden?" },
+                  method: :patch) do %>
+        <i class="fa-solid fa-trash-arrow-up"></i>
+  <% end %>
+
+<% else %>
+  <%= button_to(polymorphic_path(Array(poly).unshift(:soft_delete)),
+                  class: 'btn btn-danger me-1',
+                  title: "SoftDelete (Objekt ist wieder herstellbar",
+                  data: { "turbo-confirm": "SoftDelete: das Objekt wird aus den normalen Ansichten entfernt, ist aber wieder herstellbar" },
+                  method: :patch) do %>
+        <i class="fa-regular fa-trash-can"></i>
+  <% end %>
+<% end %>
