@@ -12,10 +12,11 @@
     </button>
     <ul class="dropdown-menu dropdown-menu-dark bg-danger">
       <li>
-        <%= link_to "Entgültig löschen", polymorphic_path(poly),
-                      class: 'dropdown-item',
-                      data: {turbo_method: :delete,
-                             "turbo-confirm": "Objekt löschen? Das Objekt kann danach nicht wieder hergestellt werden!" },
+        <%= link_to raw(%Q[<i class="fa-solid fa-fw fa-trash"></i>])+"Entgültig löschen", 
+                    polymorphic_path(poly),
+                    class: 'dropdown-item',
+                    data: { turbo_method: :delete,
+                            "turbo-confirm": "Objekt löschen? Das Objekt kann danach nicht wieder hergestellt werden!" },
                       class: "dropdown-item"
          %>
       </li>
