@@ -3,6 +3,7 @@
 == 1.0.2-dev - unreleased
 
 * Undelete/final Delete für SoftDeleted Objekte
+* Bugfixes und Security Updates
 
 == 1.0.1 - 26-03-28
 
