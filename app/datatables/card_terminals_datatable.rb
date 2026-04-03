@@ -15,8 +15,10 @@ class CardTerminalsDatatable < ApplicationDatatable
         column <<  ct.condition_message
         column <<  link_to(ct.displayname, @view.card_terminal_path(ct),
                            class: 'primary-link')
-        column <<  link_to(ct.ct_id, @view.card_terminal_path(ct),
-                           class: 'primary-link')
+        column <<  (link_to(ct.ct_id, @view.card_terminal_path(ct),
+                            class: 'primary-link'
+                           ) if ct.ct_id)
+                           
         column <<  (link_to(ct.connector&.name,
                             @view.connector_path(ct.connector),
                             class: 'primary-link'
