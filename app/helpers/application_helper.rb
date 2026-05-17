@@ -55,4 +55,30 @@ module ApplicationHelper
     "terminal_#{action.to_s}_button_#{new_id}"
   end
 
+  def delete_link(poly, options = {})
+    mypoly, obj = get_parts(poly)
+    return unless can?(:destroy, obj)
+    options.symbolize_keys!
+
+    # soft_deletable?
+    if obj.respond_to?(:deleted_at) 
+      render SoftDeleteButtonComponent.new(poly: poly)
+    else
+      # plain rails models
+      options = delete_link_defaults.merge(options)
+      options[:title] ||= title(obj, :destroy)
+      options[:data][:turbo_confirm] ||= confirm_message(obj)
+      link_to icon_delete, mypoly, options
+    end
+  end
+
+  private
+    def delete_link_defaults
+      { 
+        remote: false,
+        class: 'btn btn-danger me-1',
+        data: { turbo_method: :delete }
+      }
+    end
+
 end

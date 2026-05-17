@@ -45,12 +45,9 @@ RSpec.describe "CardTerminals", type: :feature, js: true do
     expect(page).to have_content("ORGA-DINGDONG001 (AXC)".to_s)
     expect(CardTerminal.count).to eq(1)
     accept_confirm do
-      find('a[title="Kartenterminal löschen"]').click
+      find('button[title="SoftDelete"]').click
     end
-    within "#card_terminals" do
-      expect(page).to have_content "0 bis 0 von 0 Einträgen"
-    end
-    expect(CardTerminal.count).to eq(0)
+    expect(page).to have_css('button[title="Undelete"]')
   end
 
   it "edit terminal" do

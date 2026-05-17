@@ -72,6 +72,8 @@ Rails.application.routes.draw do
       delete :delete_expired
     end
     member do
+      patch :undelete
+      patch :soft_delete
       get :copy
       post :get_certificate
       post :get_pin_status
@@ -100,6 +102,8 @@ Rails.application.routes.draw do
       post :arp_check
     end
     member do
+      patch :undelete
+      patch :soft_delete
       post :check
       get  :edit_identification
       get  :edit_idle_message
@@ -133,6 +137,8 @@ Rails.application.routes.draw do
       get :sindex
     end
     member do
+      patch :undelete
+      patch :soft_delete
       post :check
       post :fetch_sds
       post :get_resource_information
@@ -154,9 +160,24 @@ Rails.application.routes.draw do
     resource :ti_client, module: :connectors
   end
   resources :locations do
-    resources :connectors, only: [:index, :show, :destroy], module: :locations
-    resources :card_terminals, only: [:index, :show, :destroy], module: :locations
-    resources :cards, only: [:index, :show, :destroy], module: :locations
+    resources :connectors, only: [:index, :show, :destroy], module: :locations do
+      member do
+        patch :undelete
+        patch :soft_delete
+      end
+    end
+    resources :card_terminals, only: [:index, :show, :destroy], module: :locations do
+      member do
+        patch :undelete
+        patch :soft_delete
+      end
+    end
+    resources :cards, only: [:index, :show, :destroy], module: :locations do
+      member do
+        patch :undelete
+        patch :soft_delete
+      end
+    end
     resources :networks, only: [:index, :show, :destroy], module: :locations
   end
   root to: 'home#index'

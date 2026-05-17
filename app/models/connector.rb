@@ -34,7 +34,7 @@ class Connector < ApplicationRecord
   before_save :ensure_admin_url
   before_save :update_acknowledge_id
   before_save :clear_connector_dependencies, if: ->(conn) { conn.deleted? }
-  validates :ip, presence: true, uniqueness: true
+  validates_presence_of :ip
   validates :short_name, uniqueness: { case_insensitive: true, allow_blank: true }
   validates :authentication, inclusion: { in: authentications.keys }
 

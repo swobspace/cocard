@@ -1,5 +1,10 @@
 = Changelog
 
+== 1.0.2 - 2026-05-17
+
+* Undelete/final Delete für SoftDeleted Objekte
+* Bugfixes und Security Updates
+
 == 1.0.1 - 26-03-28
 
 * Bugfixes und Security Updates for Rails

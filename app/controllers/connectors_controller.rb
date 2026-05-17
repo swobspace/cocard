@@ -1,6 +1,7 @@
 class ConnectorsController < ApplicationController
+  include SoftDeletionController
   skip_load_and_authorize_resource
-  before_action :set_connector, only: %i[show edit update destroy 
+  before_action :set_connector, only: %i[show edit update destroy
                                          check fetch_sds get_resource_information
                                          get_card_terminals get_cards ping reboot
                                          test_context_form test_context]
@@ -151,7 +152,7 @@ class ConnectorsController < ApplicationController
 
   # DELETE /connectors/1
   def destroy
-    unless @connector.soft_delete
+    unless @connector.destroy
       flash[:alert] = @connectors.errors.full_messages.join("; ")
     end
     respond_with(@connector, location: polymorphic_path([@locatable, :connectors]))

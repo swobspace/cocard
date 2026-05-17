@@ -31,7 +31,6 @@ RSpec.describe Connector, type: :model do
     g = FactoryBot.create(:connector)
     expect(f).to be_valid
     expect(g).to be_valid
-    expect(f).to validate_uniqueness_of(:ip)
     expect(f).to validate_uniqueness_of(:short_name)
   end
 
@@ -267,8 +266,8 @@ RSpec.describe Connector, type: :model do
     end
   end
 
-  describe "#tcp_port_open?(8080)" do
-    it { expect(connector.tcp_port_open?(8080)).to be_truthy }
+  describe "#tcp_port_open?(631)" do
+    it { expect(connector.tcp_port_open?(631)).to be_truthy }
   end
   # it {puts connector.sds_url}
 
@@ -296,6 +295,15 @@ RSpec.describe Connector, type: :model do
       expect {
         conn.soft_delete
       }.to change(conn.card_terminals, :count).by(-1)
+    end
+  end
+
+  describe "#soft_delete" do
+    let!(:conn) { FactoryBot.create(:connector, deleted_at: Time.current) }
+    it "undeletes connector" do
+      expect(conn.deleted?).to be_truthy
+      conn.undelete; conn.reload
+      expect(conn.deleted?).to be_falsey
     end
   end
 

@@ -38,12 +38,9 @@ RSpec.describe "Card", type: :feature, js: true do
     expect(page).to have_content("SMC-B: iccsn1234 - Some Card Holder".to_s)
     expect(Card.count).to eq(1)
     accept_confirm do
-      find('a[title="Karte löschen"]').click
+      find('button[title="SoftDelete"]').click
     end
-    within "#cards_table_wrapper" do
-      expect(page).to have_content "0 bis 0 von 0 Einträgen"
-    end
-    expect(Card.count).to eq(0)
+    expect(page).to have_css('button[title="Undelete"]')
   end
 
   it "copy card" do

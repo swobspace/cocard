@@ -1,4 +1,5 @@
 class CardTerminalsController < ApplicationController
+  include SoftDeletionController
   skip_load_and_authorize_resource
   before_action :set_card_terminal, only: %i[show edit update destroy
                                              check edit_identification 
@@ -274,7 +275,7 @@ class CardTerminalsController < ApplicationController
 
   # DELETE /card_terminals/1
   def destroy
-    unless @card_terminal.soft_delete
+    unless @card_terminal.destroy
       flash[:alert] = @card_terminal.errors.full_messages.join("; ")
     end
     respond_with(@card_terminal, location: polymorphic_path([@locatable, :card_terminals]))

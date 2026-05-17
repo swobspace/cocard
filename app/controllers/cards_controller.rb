@@ -1,4 +1,5 @@
 class CardsController < ApplicationController
+  include SoftDeletionController
   skip_load_and_authorize_resource
   before_action :set_card, only: %i[show edit update destroy
                                     copy get_certificate get_pin_status
@@ -173,7 +174,7 @@ class CardsController < ApplicationController
 
   # DELETE /cards/1
   def destroy
-    @card.soft_delete
+    @card.destroy
     respond_with(@card, location: polymorphic_path([@locatable, :cards]))
   end
 

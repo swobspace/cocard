@@ -357,4 +357,18 @@ RSpec.describe Card, type: :model do
     end
   end
 
+  describe "#soft_delete" do
+    before(:each) do
+      card.soft_delete
+      card.reload
+    end
+    
+    it "undeletes card" do
+      expect(card.deleted?).to be_truthy
+      card.undelete; card.reload
+      expect(card.deleted?).to be_falsey
+    end
+  end
+
+
 end

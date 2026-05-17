@@ -46,6 +46,14 @@ RSpec.describe ConnectorsController, type: :routing do
       expect(patch: "/connectors/1").to route_to("connectors#update", id: "1")
     end
 
+    it "routes to #undelete via PATCH" do
+      expect(patch: "/connectors/1/undelete").to route_to("connectors#undelete", id: "1")
+    end
+
+    it "routes to #soft_delete via PATCH" do
+      expect(patch: "/connectors/1/soft_delete").to route_to("connectors#soft_delete", id: "1")
+    end
+
     it "routes to #fetch_sds via POST" do
       expect(post: "/connectors/1/fetch_sds").to route_to("connectors#fetch_sds", id: "1")
     end
