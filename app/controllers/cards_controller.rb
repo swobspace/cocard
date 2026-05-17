@@ -174,7 +174,7 @@ class CardsController < ApplicationController
 
   # DELETE /cards/1
   def destroy
-    @card.soft_delete
+    @card.destroy
     respond_with(@card, location: polymorphic_path([@locatable, :cards]))
   end
 
