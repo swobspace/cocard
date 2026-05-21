@@ -19,6 +19,7 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.acronym "SDS"
   inflect.acronym "SOAP"
   inflect.acronym "TI"
+  inflect.acronym "VZD"
   inflect.irregular "single_picture", "situation_picture"
 end
 
