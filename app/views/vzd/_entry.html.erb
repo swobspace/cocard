@@ -1,0 +1,39 @@
+<div class="col">
+  <div class="card h-100">
+    <div class="card-header">
+      <%= entry.displayname %> 
+    </div>
+    <div class="card-body">
+      <table class="table">
+        <tbody>
+         <tr>
+           <th>Telematik ID</th>
+           <td>
+             <%= entry.telematikid %>
+           </td>
+         </tr>
+         <tr>
+           <th>Name</th>
+           <td><%= entry.sn %></td>
+         </tr>
+         <tr>
+           <th>Vorname</th>
+           <td><%= entry.givenname %></td>
+         </tr>
+         <tr>
+           <th>Adresse</th>
+           <td><%= entry.postalcode %> <%= entry.l %>, <%= entry.street %></td>
+         </tr>
+         <tr>
+           <th>Mailadressen</th>
+           <td><%= entry.mails.join("<br/>").html_safe %></td>
+         </tr>
+         <tr>
+           <th>last changed</th>
+           <td><%= entry.changedatetime %></td>
+         </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
