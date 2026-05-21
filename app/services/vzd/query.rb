@@ -5,6 +5,7 @@ module VZD
   class Query
     attr_reader :search_options, :connector, :client_certificate
 
+    SEARCHES = %i( sn givenname displayname organization l mail telematikid )
     ##
     # possible search options:
     # * :sn, :givenname, :displayname, :l, :organization, :mail
@@ -74,8 +75,6 @@ module VZD
 
     def build_query
       filter = []
-      # search_string = [] # for global search_option :search
-      # search_value  = search_options.fetch(:search, false) # for global option :search
       search_options.each do |key,value|
         case key 
         when *string_fields
@@ -100,16 +99,8 @@ module VZD
       end
     end
 
-    def cast_fields
-      [ ]
-    end
-
     def string_fields
-      [ :sn, :givenname, :displayname, :mail, :l, :telematikid, :organization ]
-    end
-
-    def id_fields
-      [ ]
+      SEARCHES
     end
 
     def to_boolean(value)
