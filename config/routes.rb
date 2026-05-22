@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get "vzd/index"
+  post "vzd/index"
   get "vzd/search"
   # resources :card_terminal_slots
   resources :tags

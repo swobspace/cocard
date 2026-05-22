@@ -85,6 +85,7 @@ de:
     card_terminal_rmi_not_reachable: RMI nicht erreichbar
     set_idle_messages: Ruhebildschirme setzen
     health_check: Health-Check
+    search: Suche
 
   activerecord:
     models:
@@ -170,6 +171,7 @@ de:
     description: Beschreibung
     description_ap: Beschreibung AP
     displayname: Anzeigename
+    domainid: Domain ID
     expiration_date: Ablaufdatum
     fachrichtung: Fachrichtung
     firmware_version: Firmware Version
@@ -185,6 +187,7 @@ de:
     ip: IP-Adresse
     is_valid: gültig?
     issuer: Aussteller
+    l: Ort
     lanr: LANR
     lid: Standort-Kürzel
     last_ok: zuletzt OK
@@ -212,6 +215,7 @@ de:
     object_system_version: ObjSysVer
     operational: in Betrieb
     operational_state: Betriebszustand
+    organization: Organisation
     outgoing_ip: Ausgehende IP
     outgoing_port: Ausgehender Port
     passphrase: Passphrase
@@ -221,6 +225,7 @@ de:
     port: Port
     private_information: Geschützte Information
     product_information: Produktinformation
+    professionoid: Profession OID
     real_ip: reale IP
     room: Raum
     sds_url: SDS-URL

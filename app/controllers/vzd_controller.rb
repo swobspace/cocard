@@ -7,6 +7,7 @@ class VZDController < ApplicationController
   end
 
   def search
+    add_breadcrumb("VZD-Suche", vzd_search_path)
   end
 
   private
