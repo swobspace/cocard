@@ -5,7 +5,9 @@ module VZD
   class Query
     attr_reader :search_options, :connector, :client_certificate
 
-    SEARCHES = %i( sn givenname displayname organization l mail telematikid )
+    SEARCHES = %i( cn sn givenname displayname organization l mail telematikid 
+                   entrytype personalentry domainid specialization 
+                   professionoid)
     ##
     # possible search options:
     # * :sn, :givenname, :displayname, :l, :organization, :mail

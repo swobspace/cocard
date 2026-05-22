@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/swobspace/wobaduser
-  revision: 7cd45c8ca633e95e958522108b72a1ce1d6772c2
+  revision: 57fe2430f305a7675ddb8277c1d921c06ccd00ae
   branch: master
   specs:
     wobaduser (1.0.0)
@@ -182,7 +182,7 @@ GEM
     faraday-cookie_jar (0.0.8)
       faraday (>= 0.8.0)
       http-cookie (>= 1.0.0)
-    faraday-net_http (3.4.2)
+    faraday-net_http (3.4.3)
       net-http (~> 0.5)
     faraday-net_http_persistent (2.3.1)
       faraday (~> 2.5)
@@ -286,7 +286,7 @@ GEM
       net-imap
       net-pop
       net-smtp
-    marcel (1.1.0)
+    marcel (1.2.1)
     matrix (0.4.3)
     method_source (1.1.0)
     mini_magick (5.3.1)
@@ -453,7 +453,7 @@ GEM
       ffi (~> 1.12)
       logger
     rubyzip (3.3.0)
-    savon (2.15.1)
+    savon (2.17.1)
       akami (~> 1.2)
       builder (>= 2.1.2)
       gyoku (~> 1.2)
@@ -461,7 +461,7 @@ GEM
       mail (~> 2.5)
       nokogiri (>= 1.8.1)
       nori (~> 2.4)
-      wasabi (>= 3.7, < 6)
+      wasabi (>= 5.1.0, < 6)
     securerandom (0.4.1)
     selenium-webdriver (4.44.0)
       base64 (~> 0.2)
@@ -489,7 +489,7 @@ GEM
       concurrent-ruby (~> 1.0)
     uri (1.1.1)
     useragent (0.16.11)
-    view_component (4.10.0)
+    view_component (4.11.0)
       actionview (>= 7.1.0)
       activesupport (>= 7.1.0)
       concurrent-ruby (~> 1)
@@ -516,7 +516,7 @@ GEM
     xpath (3.2.0)
       nokogiri (~> 1.8)
     yaml (0.4.0)
-    zeitwerk (2.7.5)
+    zeitwerk (2.8.1)
 
 PLATFORMS
   aarch64-linux

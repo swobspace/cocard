@@ -301,6 +301,7 @@ de:
     ti_clients/terminals: Kartenterminals auf dem Konnektor (RISE)
     users: Benutzer
     verify_pins: PIN-Verifizierung
+    vzd: VZD
     workplaces: Arbeitsplätze
 
   contexts:

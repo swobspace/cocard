@@ -7,10 +7,18 @@
       <table class="table">
         <tbody>
          <tr>
+           <th>CN</th>
+           <td><%= entry.cn %></td>
+         </tr>
+         <tr>
            <th>Telematik ID</th>
            <td>
              <%= entry.telematikid %>
            </td>
+         </tr>
+         <tr>
+           <th>domainid</th>
+           <td><%= entry.domainid %></td>
          </tr>
          <tr>
            <th>Name</th>
@@ -25,11 +33,31 @@
            <td><%= entry.postalcode %> <%= entry.l %>, <%= entry.street %></td>
          </tr>
          <tr>
+           <th>Organisation</th>
+           <td><%= entry.organization %></td>
+         </tr>
+         <tr>
            <th>Mailadressen</th>
            <td><%= entry.mails.join("<br/>").html_safe %></td>
          </tr>
          <tr>
-           <th>last changed</th>
+           <th>Entry Type</th>
+           <td><%= entry.entrytype %></td>
+         </tr>
+         <tr>
+           <th>Persönlicher Eintrag</th>
+           <td><%= entry.personalentry %></td>
+         </tr>
+         <tr>
+           <th>Spezialisierung</th>
+           <td><%= entry.specialization %></td>
+         </tr>
+         <tr>
+           <th>Profession OID</th>
+           <td><%= entry.professionoid %></td>
+         </tr>
+         <tr>
+           <th>Zuletzt geändert</th>
            <td><%= entry.changedatetime %></td>
          </tr>
         </tbody>
