@@ -1,0 +1,328 @@
+oids:
+  # betriebsstätten
+  - reference: oid_praxis_arzt 
+    name: Betriebsstätte Arzt 
+    oid: 1.2.276.0.76.4.50
+  - reference: oid_zahnarztpraxis
+    name: Zahnarztpraxis
+    oid: 1.2.276.0.76.4.51
+  - reference: oid_praxis_psychotherapeut
+    name: Betriebsstätte Psychotherapeut
+    oid: 1.2.276.0.76.4.52
+  - reference: oid_krankenhaus
+    name: Krankenhaus
+    oid: 1.2.276.0.76.4.53
+  - reference: oid_oeffentliche_apotheke
+    name: Öffentliche Apotheke
+    oid: 1.2.276.0.76.4.54
+  - reference: oid_krankenhausapotheke
+    name: Krankenhausapotheke
+    oid: 1.2.276.0.76.4.55
+  - reference: oid_bundeswehrapotheke
+    name: Bundeswehrapotheke
+    oid: 1.2.276.0.76.4.56
+  - reference: oid_mobile_einrichtung_rettungsdienst
+    name: Betriebsstätte Mobile Einrichtung Rettungsdienst
+    oid: 1.2.276.0.76.4.57
+  - reference: oid_bs_gematik
+    name: Betriebsstätte gematik
+    oid: 1.2.276.0.76.4.58
+  - reference: oid_kostentraeger
+    name: Betriebsstätte Kostenträger
+    oid: 1.2.276.0.76.4.59
+  - reference: oid_leo_zahnaerzte
+    name: Betriebsstätte Leistungserbringerorganisation Vertragszahnärzte
+    oid: 1.2.276.0.76.4.187
+  - reference: oid_adv_ktr
+    name: AdV-Umgebung bei Kostenträger
+    oid: 1.2.276.0.76.4.190
+  - reference: oid_leo_kassenaerztliche_vereinigung
+    name: Betriebsstätte Leistungserbringerorganisation Kassenärztliche Vereinigung
+    oid: 1.2.276.0.76.4.210
+  - reference: oid_bs_gkv_spitzenverband
+    name: Betriebsstätte GKV-Spitzenverband
+    oid: 1.2.276.0.76.4.223
+  - reference: oid_leo_krankenhausverband
+    name: Betriebsstätte Mitgliedsverband der Krankenhäuser
+    oid: 1.2.276.0.76.4.226
+  - reference: oid_leo_dktig
+    name: Betriebsstätte der Deutsche Krankenhaus TrustCenter und Informationsverarbeitung GmbH
+    oid: 1.2.276.0.76.4.227
+  - reference: oid_leo_dkg
+    name: Betriebsstätte der Deutschen Krankenhausgesellschaft
+    oid: 1.2.276.0.76.4.228
+  - reference: oid_leo_apothekerverband
+    name: Betriebsstätte Apothekerverband
+    oid: 1.2.276.0.76.4.224
+  - reference: oid_leo_dav
+    name: Betriebsstätte Deutscher Apothekerverband
+    oid: 1.2.276.0.76.4.225
+  - reference: oid_leo_baek
+    name: Betriebsstätte der Bundesärztekammer
+    oid: 1.2.276.0.76.4.229
+  - reference: oid_leo_aerztekammer
+    name: Betriebsstätte einer Ärztekammer
+    oid: 1.2.276.0.76.4.230
+  - reference: oid_leo_zahnaerztekammer
+    name: Betriebsstätte einer Zahnärztekammer
+    oid: 1.2.276.0.76.4.231
+  - reference: oid_leo-kbv
+    name: Betriebsstätte der Kassenärztlichen Bundesvereinigung
+    oid: 1.2.276.0.76.4.242
+  - reference: oid_leo-bzaek
+    name: Betriebsstätte der Bundeszahnärztekammer
+    oid: 1.2.276.0.76.4.243
+  - reference: oid_leo-kzbv
+    name: Betriebsstätte der Kassenzahnärztlichen Bundesvereinigung
+    oid: 1.2.276.0.76.4.244
+  - reference: oid_institution-pflege
+    name: Betriebsstätte Gesundheits-, Kranken- und Altenpflege
+    oid: 1.2.276.0.76.4.245
+  - reference: oid_institution-geburtshilfe
+    name: Betriebsstätte Geburtshilfe
+    oid: 1.2.276.0.76.4.246
+  - reference: oid_praxis-physiotherapeut
+    name: Betriebsstätte Physiotherapie
+    oid: 1.2.276.0.76.4.247
+  - reference: oid_institution-augenoptiker
+    name: Betriebsstätte Augenoptiker
+    oid: 1.2.276.0.76.4.248
+  - reference: oid_institution-hoerakustiker
+    name: Betriebsstätte Hörakustiker
+    oid: 1.2.276.0.76.4.249
+  - reference: oid_institution-orthopaedieschuhmacher
+    name: Betriebsstätte Orthopädieschuhmacher
+    oid: 1.2.276.0.76.4.250
+  - reference: oid_institution-orthopaedietechniker
+    name: Betriebsstätte Orthopädietechniker
+    oid: 1.2.276.0.76.4.251
+  - reference: oid_institution-zahntechniker
+    name: Betriebsstätte Zahntechniker
+    oid: 1.2.276.0.76.4.252
+  - reference: oid_institution-rettungsleitstellen
+    name: Rettungsleitstelle
+    oid: 1.2.276.0.76.4.253
+  - reference: oid_sanitaetsdienst-bundeswehr
+    name: Betriebsstätte Sanitätsdienst Bundeswehr
+    oid: 1.2.276.0.76.4.254
+  - reference: oid_institution-oegd
+    name: Betriebsstätte Öffentlicher Gesundheitsdienst
+    oid: 1.2.276.0.76.4.255
+  - reference: oid_institution-arbeitsmedizin
+    name: Betriebsstätte Arbeitsmedizin
+    oid: 1.2.276.0.76.4.256
+  - reference: oid_institution-vorsorge-reha
+    name: Betriebsstätte Vorsorge- und Rehabilitation
+    oid: 1.2.276.0.76.4.257
+  - reference: oid_epa_ktr
+    name: ePA KTR-Zugriffsautorisierung
+    oid: 1.2.276.0.76.4.273
+  - reference: oid_pflegeberatung
+    name: Betriebsstätte Pflegeberatung nach § 7a SGB XI
+    oid: 1.2.276.0.76.4.262
+  - reference: oid_leo_psychotherapeuten
+    name: Betriebsstätte Psychotherapeutenkammer
+    oid: 1.2.276.0.76.4.263
+  - reference: oid_leo_bptk
+    name: Betriebsstätte Bundespsychotherapeutenkammer
+    oid: 1.2.276.0.76.4.264
+  - reference: oid_leo_lak
+    name: Betriebsstätte Landesapothekerkammer
+    oid: 1.2.276.0.76.4.265
+  - reference: oid_leo_bak
+    name: Betriebsstätte Bundesapothekerkammer
+    oid: 1.2.276.0.76.4.266
+  - reference: oid_leo_egbr
+    name: Betriebsstätte elektronisches Gesundheitsberuferegister
+    oid: 1.2.276.0.76.4.267
+  - reference: oid_leo_handwerkskammer
+    name: Betriebsstätte Handwerkskammer
+    oid: 1.2.276.0.76.4.268
+  - reference: oid_gesundheitsdatenregister
+    name: Betriebsstätte Register für Gesundheitsdaten
+    oid: 1.2.276.0.76.4.269
+  - reference: oid_abrechnungsdienstleister
+    name: Betriebsstätte Abrechnungsdienstleister
+    oid: 1.2.276.0.76.4.270
+  - reference: oid_pkv_verband
+    name: Betriebsstätte PKV-Verband
+    oid: 1.2.276.0.76.4.271
+  - reference: oid_praxis-ergotherapeut
+    name: Ergotherapiepraxis
+    oid: 1.2.276.0.76.4.278
+  - reference: oid_praxis-logopaede
+    name: Logopaedische Praxis
+    oid: 1.2.276.0.76.4.279
+  - reference: oid_praxis-podologe
+    name: Podologiepraxis
+    oid: 1.2.276.0.76.4.280
+  - reference: oid_praxis-ernaehrungstherapeut
+    name: Ernährungstherapeutische Praxis
+    oid: 1.2.276.0.76.4.281
+  - reference: oid_bs-weitere-kostentraeger
+    name: Betriebsstätte Weitere Kostenträger im Gesundheitswesen
+    oid: 1.2.276.0.76.4.284
+  - reference: oid_org-gesundheitsversorgung
+    name: Weitere Organisationen der Gesundheitsversorgung
+    oid: 1.2.276.0.76.4.285
+  - reference: oid_kim-anbieter
+    name: KIM-Hersteller und -Anbieter
+    oid: 1.2.276.0.76.4.286
+  - reference: oid_diga
+    name: DiGA-Hersteller und -Anbieter
+    oid: 1.2.276.0.76.4.282
+  - reference: oid_tim-anbieter
+    name: TIM-Hersteller und -Anbieter
+    oid: 1.2.276.0.76.4.295
+  - reference: oid_ncpeh
+    name: NCPeH Fachdienst
+    oid: 1.2.276.0.76.4.292
+  - reference: oid_ombudsstelle
+    name: Ombudsstelle eines Kostenträgers
+    oid: 1.2.276.0.76.4.303
+  - reference: oid_bs-opto-audio
+    name: Betriebsstätte Augenoptiker und Hörakustiker
+    oid: 1.2.276.0.76.4.304
+  - reference: oid_bs-orthopaed-hw
+    name: Betriebsstätte Orthopädieschuhmacher und Orthopädietechniker
+    oid: 1.2.276.0.76.4.306
+  - reference: oid_bs-himi
+    name: Betriebsstätte Hilfsmittelerbringer
+    oid: 1.2.276.0.76.4.311
+  - reference: oid_bs-friseur
+    name: Betriebsstätte Frisör
+    oid: 1.2.276.0.76.4.314
+  - reference: oid_bs-soziother
+    name: Betriebsstätte Soziotherapie
+    oid: 1.2.276.0.76.4.317
+
+  # Berufsgruppen
+  - reference: oid_arzt
+    name: Ärztin/Arzt
+    oid: 1.2.276.0.76.4.30
+  - reference: oid_zahnarzt
+    name: Zahnärztin/Zahnarzt
+    oid: 1.2.276.0.76.4.31
+  - reference: oid_apotheker
+    name: Apotheker/-in
+    oid: 1.2.276.0.76.4.32
+  - reference: oid_apothekerassistent
+    name: Apothekerassistent/-in
+    oid: 1.2.276.0.76.4.33
+  - reference: oid_pharmazieingenieur
+    name: Pharmazieingenieur/-in
+    oid: 1.2.276.0.76.4.34
+  - reference: oid_pharm_techn_assistent
+    name: pharmazeutisch-technische/-r Assistent/-in
+    oid: 1.2.276.0.76.4.35
+  - reference: oid_pharm_kaufm_angestellter
+    name: pharmazeutisch-kaufmännische/-r Angestellte
+    oid: 1.2.276.0.76.4.36
+  - reference: oid_apothekenhelfer
+    name: Apothekenhelfer/-in
+    oid: 1.2.276.0.76.4.37
+  - reference: oid_apothekenassistent
+    name: Apothekenassistent/-in
+    oid: 1.2.276.0.76.4.38
+  - reference: oid_pharm_assistent
+    name: Pharmazeutische/-r Assistent/-in
+    oid: 1.2.276.0.76.4.39
+  - reference: oid_apothekenfacharbeiter
+    name: Apothekenfacharbeiter/-in
+    oid: 1.2.276.0.76.4.40
+  - reference: oid_pharmaziepraktikant
+    name: Pharmaziepraktikant/-in
+    oid: 1.2.276.0.76.4.41
+  - reference: oid_famulant
+    name: Stud.pharm. oder Famulant/-in
+    oid: 1.2.276.0.76.4.42
+  - reference: oid_pta_praktikant
+    name: PTA-Praktikant/-in
+    oid: 1.2.276.0.76.4.43
+  - reference: oid_pka_auszubildender
+    name: PKA Auszubildende/-r
+    oid: 1.2.276.0.76.4.44
+  - reference: oid_psychotherapeut
+    name: Psychotherapeut/-in
+    oid: 1.2.276.0.76.4.45
+  - reference: oid_ps_psychotherapeut
+    name: Psychologische/-r Psychotherapeut/-in
+    oid: 1.2.276.0.76.4.46
+  - reference: oid_kuj_psychotherapeut
+    name: Kinder- und Jugendlichenpsychotherapeut/-in
+    oid: 1.2.276.0.76.4.47
+  - reference: oid_rettungsassistent
+    name: Rettungsassistent/-in
+    oid: 1.2.276.0.76.4.48
+  - reference: oid_versicherter
+    name: Versicherte/-r
+    oid: 1.2.276.0.76.4.49
+  - reference: oid_notfallsanitaeter
+    name: Notfallsanitäter/-in
+    oid: 1.2.276.0.76.4.178
+  - reference: oid_pfleger-hpc
+    name: Gesundheits- und Krankenpfleger/-in, Gesundheits- und Kinderkrankenpfleger/-in 
+    oid: 1.2.276.0.76.4.232
+  - reference: oid_altenpfleger-hpc
+    name: Altenpfleger/-in
+    oid: 1.2.276.0.76.4.233
+  - reference: oid_pflegefachkraft-hpc
+    name: Pflegefachfrauen und Pflegefachmänner
+    oid: 1.2.276.0.76.4.234
+  - reference: oid_hebamme-hpc
+    name: Hebamme 
+    oid: 1.2.276.0.76.4.235
+  - reference: oid_physiotherapeut-hpc
+    name: Physiotherapeut/-in 
+    oid: 1.2.276.0.76.4.236
+  - reference: oid_augenoptiker-hpc
+    name: Augenoptiker/-in  
+    oid: 1.2.276.0.76.4.237
+  - reference: oid_hoerakustiker-hpc
+    name: Hörakustiker/-in
+    oid: 1.2.276.0.76.4.238
+  - reference: oid_orthopaedieschuhmacher-hpc
+    name: Orthopädieschuhmacher/-in 
+    oid: 1.2.276.0.76.4.239
+  - reference: oid_orthopaedietechniker-hpc
+    name: Orthopädietechniker/-in 
+    oid: 1.2.276.0.76.4.240
+  - reference: oid_zahntechniker-hpc
+    name: Zahntechniker/-in 
+    oid: 1.2.276.0.76.4.241
+  - reference: oid_ergotherapeut-hpc
+    name: Ergotherapeut/-in
+    oid: 1.2.276.0.76.4.274
+  - reference: oid_logopaede-hpc
+    name: Logopäde/Logopädin
+    oid: 1.2.276.0.76.4.275
+  - reference: oid_podologe-hpc
+    name: Podologe/Podologin
+    oid: 1.2.276.0.76.4.276
+  - reference: oid_ernaehrungstherapeut-hpc
+    name: Leistungserbringer/-in Ernährungstherapie
+    oid: 1.2.276.0.76.4.277
+  - reference: oid_opto-audio-hpc
+    name: Augenoptiker/-in und Hörakustiker/-in
+    oid: 1.2.276.0.76.4.308
+  - reference: oid_orthopaed-hpc
+    name: Orthopädieschuhmacher/-in und Orthopädietechniker/-in
+    oid: 1.2.276.0.76.4.305
+  - reference: oid_himi-hpc
+    name: Hilfsmittelerbringer/-in
+    oid: 1.2.276.0.76.4.312
+  - reference: oid_friseur-hpc
+    name: Frisör/-in
+    oid: 1.2.276.0.76.4.313
+  - reference: oid_soziotherapeut
+    name: Leistungserbringer/-in Soziotherapie
+    oid: 1.2.276.0.76.4.316
+  - reference: oid_ssss-therapeut
+    name: Leistungserbringer/in Stimm-, Sprech-, Sprach- und Schluck-Therapie
+    oid: 1.2.276.0.76.4.318
+  - reference: oid_masseur-mbm-hpc
+    name: Masseur/-in und medizinische/-r Bademeister/-in
+    oid: 1.2.276.0.76.4.315
+  - reference: oid_diaetassistent
+    name: Diätassistent/-in
+    oid: 1.2.276.0.76.4.319
