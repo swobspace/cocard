@@ -54,7 +54,7 @@
          </tr>
          <tr>
            <th>Profession OID</th>
-           <td><%= entry.professionoid %></td>
+           <td><%= entry.professionoid %> (<%= Oid.where(oid: entry.professionoid).first&.name %>)</td>
          </tr>
          <tr>
            <th>Zuletzt geändert</th>

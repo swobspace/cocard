@@ -59,7 +59,11 @@
         <div class="mb-3 row">
           <%= label_tag :professionoid, t('attributes.professionoid'), class: "col-sm-2 col-form-label" %>
           <div class="col-sm-10">
-            <%= text_field_tag "professionoid", nil, class: "form-control" %>
+            <%= select_tag "professionoid",
+                  options_from_collection_for_select(Oid.all, 'oid', 'to_label', nil),
+                  include_blank: true,                                                                      data: { controller: :select }
+              %>
+            </select>
           </div>
         </div>
 
