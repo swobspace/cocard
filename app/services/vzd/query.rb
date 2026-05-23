@@ -80,7 +80,7 @@ module VZD
       search_options.each do |key,value|
         case key 
         when *string_fields
-          filter << "(#{key.to_s}=#{value}*)"
+          filter << "(#{key.to_s}=*#{value}*)"
         when :limit
           @limit = value.to_i
         end
