@@ -1,6 +1,9 @@
 class VZDController < ApplicationController
   skip_load_and_authorize_resource
+  skip_before_action :add_breadcrumb_index
+
   def index
+    add_breadcrumb("VZD-Suchergebnis", vzd_index_path(search_params))
     vzd = VZD::Query.new(connector: connector, client_certificate: client_certificate, 
                          search_options: search_params)
     @entries = vzd.all
