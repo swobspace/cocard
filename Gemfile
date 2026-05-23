@@ -98,7 +98,8 @@ gem "net-http",  "~> 0.9.0"
 
 gem "nori", "~> 2.7"
 
-gem "savon", "~> 2.15"
+# fix to 2.15.1, later version are breaking raw xml
+gem "savon", "~> 2.15.1"
 
 gem "immutable_struct", "~> 1.2"
 

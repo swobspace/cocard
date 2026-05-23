@@ -124,7 +124,7 @@ GEM
     bcrypt (3.1.22)
     bigdecimal (4.1.2)
     bindex (0.8.1)
-    bootsnap (1.24.4)
+    bootsnap (1.24.5)
       msgpack (~> 1.2)
     builder (3.3.0)
     cancancan (3.6.1)
@@ -453,7 +453,7 @@ GEM
       ffi (~> 1.12)
       logger
     rubyzip (3.3.0)
-    savon (2.17.1)
+    savon (2.15.1)
       akami (~> 1.2)
       builder (>= 2.1.2)
       gyoku (~> 1.2)
@@ -461,7 +461,7 @@ GEM
       mail (~> 2.5)
       nokogiri (>= 1.8.1)
       nori (~> 2.4)
-      wasabi (>= 5.1.0, < 6)
+      wasabi (>= 3.7, < 6)
     securerandom (0.4.1)
     selenium-webdriver (4.44.0)
       base64 (~> 0.2)
@@ -565,7 +565,7 @@ DEPENDENCIES
   rails-i18n (~> 8.1.0)
   redis (>= 4.0.1)
   rspec-rails
-  savon (~> 2.15)
+  savon (~> 2.15.1)
   selenium-webdriver
   shoulda-matchers
   simple_form
