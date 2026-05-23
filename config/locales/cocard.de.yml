@@ -36,6 +36,7 @@ de:
     all_notes: Alle Notizen
     current_notes: Aktuelle Notizen
     new_operational_state: Neuer Betriebszustand
+    new_oid: Neue OID
     new_tag: Neues Tag
     new_workplace: Neuer Arbeitsplatz
     import_options: Import-Optionen
