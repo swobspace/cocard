@@ -102,6 +102,7 @@ de:
       log: Log
       network: Netzwerk
       note: Notiz
+      oid: OID
       operational_state: Betriebszustand
       user: User
       tag: Tag
@@ -213,6 +214,7 @@ de:
     notable: Notiz für
     note: Notiz
     object_system_version: ObjSysVer
+    oid: OID
     operational: in Betrieb
     operational_state: Betriebszustand
     organization: Organisation
@@ -227,6 +229,7 @@ de:
     product_information: Produktinformation
     professionoid: Profession OID
     real_ip: reale IP
+    reference: Referenz
     room: Raum
     sds_url: SDS-URL
     search: Suche
@@ -294,6 +297,7 @@ de:
     logs/notes: Notizen
     networks: Netzwerke
     notes: Notizen
+    oids: OIDs
     operational_states: Betriebszustände
     searches: Suche
     situation_picture: Lagebild TI
