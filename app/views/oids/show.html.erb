@@ -1,0 +1,40 @@
+<div class="card mb-3">
+  <div class="card-header">
+    <div class="d-flex w-100 justify-content-between">
+      <div>
+        <span class="subtitle">
+          <%= t('activerecord.models.oid') %>: 
+          #<%= @oid.id %>
+        </span>
+        <h4 class="title"><%= @oid %></h4>
+      </div>
+      <div role="toolbar" class="pt-3">
+        <%= edit_link(@oid) %>
+        <%= delete_link(@oid) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <table class="table table-sm table-borderless">
+    
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.oid')%>:</th>
+        <td><%= @oid.oid %></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.name')%>:</th>
+        <td><%= @oid.name %></td>
+      </tr>
+
+      <tr>
+        <th class="w-10 pe-3"><%= t('attributes.reference')%>:</th>
+        <td><%= @oid.reference %></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<%= back_link %>
+<%= new_link Oid %>

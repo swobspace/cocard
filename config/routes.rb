@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :oids
   get "vzd/index"
   post "vzd/index"
   get "vzd/search"

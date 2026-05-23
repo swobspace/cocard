@@ -376,6 +376,18 @@ bin/rails g scaffold TIClient \
   --no-stylesheets --no-javascripts --no-helper
 ----
 
+== model Oid (Profession OID)
+
+[source,sh]
+----
+bin/rails g scaffold Oid \
+  oid:string:index \
+  name:string \
+  reference:string \
+  --no-stylesheets --no-javascripts --no-helper
+----
+
+
 == HABTM Tables
 
 === ConnectorLocation
