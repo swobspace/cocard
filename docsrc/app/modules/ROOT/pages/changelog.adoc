@@ -1,8 +1,8 @@
 = Changelog
 
-== 1.0.3-dev - unreleased
+== 1.0.3 - 2026-05-24
 
-* VZD-Suche
+* VZD-Suche. Verwendet wird derzeit der erste Konnektor, der OK ist mit dem Zertifikat für das Clientsystem "cocard".
 
 == 1.0.2 - 2026-05-17
 
