@@ -248,6 +248,12 @@ Class TIClient {
   connector_id
 }
 
+Class Oid {
+  oid: string
+  name: string
+  reference: string
+}
+
 Network "*" - "1" Location
 Network "1" -- "*" CardTerminal
 Location "*" -- "*" Connector

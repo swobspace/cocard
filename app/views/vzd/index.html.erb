@@ -1,0 +1,9 @@
+<%= turbo_frame_tag 'vzd' do %>
+  <h1>VZD Suchergebnis</h1>
+
+  <div class="row row-cols-1 row-cols-md-2 g-4">
+    <%= render partial: "entry", collection: @entries, as: :entry %>
+  </div>
+
+  <%= link_to "Neue Suche", vzd_search_path, class: 'btn btn-secondary mt-3' %>
+<% end %>

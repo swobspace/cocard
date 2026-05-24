@@ -1,0 +1,88 @@
+<%= turbo_frame_tag 'vzd' do %>
+  <div class="container">
+    <%= form_tag(vzd_index_path, method: :post, role: "form",
+          class: 'form-horizontal card') do |f| %>
+
+      <div class="card-header">
+        <legend class="offset-sm-2 col-sm-10"><%= t('controller.vzd') %></legend>
+      </div>
+      <div class="card-body">
+        <div class="mb-3 row">
+          <%= label_tag :mail, t('attributes.mail'), class: "col-sm-2 col-form-label" %>
+          <div class="col-sm-10">
+            <%= text_field_tag "mail", nil, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <%= label_tag :displayname, t('attributes.displayname'), class: "col-sm-2 col-form-label" %>
+          <div class="col-sm-10">
+            <%= text_field_tag "displayname", nil, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <%= label_tag :sn, t('attributes.sn'), class: "col-sm-2 col-form-label" %>
+          <div class="col-sm-10">
+            <%= text_field_tag "sn", nil, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <%= label_tag :givenname, t('attributes.givenname'), class: "col-sm-2 col-form-label" %>
+          <div class="col-sm-10">
+            <%= text_field_tag "givenname", nil, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <%= label_tag :l, t('attributes.l'), class: "col-sm-2 col-form-label" %>
+          <div class="col-sm-10">
+            <%= text_field_tag "l", nil, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <%= label_tag :telematikid, t('attributes.telematikid'), class: "col-sm-2 col-form-label" %>
+          <div class="col-sm-10">
+            <%= text_field_tag "telematikid", nil, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <%= label_tag :domainid, t('attributes.domainid'), class: "col-sm-2 col-form-label" %>
+          <div class="col-sm-10">
+            <%= text_field_tag "domainid", nil, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <%= label_tag :professionoid, t('attributes.professionoid'), class: "col-sm-2 col-form-label" %>
+          <div class="col-sm-10">
+            <%= select_tag "professionoid",
+                  options_from_collection_for_select(Oid.all, 'oid', 'to_label', nil),
+                  include_blank: true,                                                                      data: { controller: :select }
+              %>
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <%= label_tag :organization, t('attributes.organization'), class: "col-sm-2 col-form-label" %>
+          <div class="col-sm-10">
+            <%= text_field_tag "organization", nil, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <div class="col-sm-10 offset-sm-2">
+            <%= submit_tag(t('cocard.search'),
+                  class: 'btn btn-primary') %>
+            <%= cancel_button %>
+          </div>
+        </div>
+
+      </div>
+    <% end %>
+  </div>
+<% end %>

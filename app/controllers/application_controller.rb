@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery prepend: true
 
   # -- authorization
-  load_and_authorize_resource unless: :devise_controller?
+  load_and_authorize_resource unless: (:devise_controller? || controller_name == 'vzd')
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   rescue_from CanCan::AccessDenied, with: :access_denied
 

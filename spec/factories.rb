@@ -1,4 +1,8 @@
 FactoryBot.define do
+  sequence :aoid do |n|
+    "1.2.3.4.5.6.#{n}"
+  end
+
   sequence :aname do |n|
     "aname_#{n}"
   end
@@ -133,6 +137,11 @@ FactoryBot.define do
     trait :with_connector do
       association :notable, factory: :connector
     end
+  end
+
+  factory :oid do
+    oid { generate(:aoid) }
+    name { generate(:name) }
   end
 
   factory :operational_state do

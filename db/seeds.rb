@@ -24,7 +24,7 @@ Wobauth::User.transaction do
 end
 
 # only for datasets with uniq attribute
-[OperationalState].each do |myklass|
+[OperationalState, Oid].each do |myklass|
   mytable = myklass.name.underscore.pluralize
   config = YAML.load_file(File.join(Rails.root, 'db', "#{mytable}.yml"))
   myklass.create(config[mytable])

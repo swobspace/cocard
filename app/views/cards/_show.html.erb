@@ -182,7 +182,12 @@
         </tr>
         <tr>
           <th class="w-25 pe-3"><%= t('attributes.telematikid')%>:</th>
-          <td><%= card.telematikid %></td>
+          <td>
+            <%= card.telematikid %>
+            <%= link_to("VZD", vzd_index_path(telematikid: card.telematikid),
+                        class: "btn btn-secondary btn-sm ms-2") if card.telematikid.present?
+             %>
+          </td>
         </tr>
       </table>
     </div>
