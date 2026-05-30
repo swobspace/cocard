@@ -2,6 +2,8 @@
 
 == 1.0.4-dev - unreleased
 
+* VZD: Konfiguration zu verwendenden Konnektors
+
 == 1.0.3 - 2026-05-24
 
 * VZD-Suche. Verwendet wird derzeit der erste Konnektor, der OK ist mit dem Zertifikat für das Clientsystem "cocard".

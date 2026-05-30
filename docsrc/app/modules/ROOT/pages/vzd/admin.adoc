@@ -1,0 +1,25 @@
+= VZD: Administration
+:navtitle: Administration
+:author: Wolfgang Barth
+:revdate: 2026-05-30
+:imagesdir: ../../images
+:experimental: true
+
+Cocard verwendet für die VZD-Abfrage den ersten Konnektor, der im Status OK ist. In diesem Falle ist keine weitere Konfiguration notwendig. Wenn dies nicht erwünscht ist, lässt sich der Konnektor auch explizit über die Konfiguration festlegen.
+
+== Konfiguration des Konnektors
+
+Die Fixierung von VZD auf einen bestimmten Konnektor erfolgt in der Datei `cocard.yml` (siehe auch xref:installation:cocard_yml.adoc[]):
+
+.cocard.yml: Explizites setzen eines festen Konnektors für VZD
+[source,yml]
+----
+vzd_connector_ip: 127.0.0.4
+----
+
+== Welches Zertifikat wird verwendet?
+
+Zunächst wird der Konnektor ermittelt. Wenn kein Konnektor explizit bestimmt wurde, wird der erste Konnektor genommen, der den Status `OK` hat. Jeder Konnektor hat einen oder mehrere Kontexte zugeordnet. Aus dem ersten Kontext (fett, siehe Abbildung) wird das Clientsystem ermittelt und dann das zum Clientsystem gehörige Zertfikat ausgewählt. Sofern der Konnektor korrekt konfiguriert ist - und nur dann hat er den Status `OK` - sollte VZD ohne jede weitere Konfiguration funktionieren.
+
+.Kontexte und Zertifikate des Konnektors
+image::vzd/vzd-connector-contexts-and-certs.png[]

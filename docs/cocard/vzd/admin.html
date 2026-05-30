@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>KT-Proxy anlegen :: Cocard</title>
-    <link rel="prev" href="create-ti-client.html">
-    <link rel="next" href="using-ti-client.html">
+    <title>VZD: Administration :: Cocard</title>
+    <link rel="prev" href="index.html">
+    <link rel="next" href="../admin/locations.html">
     <meta name="generator" content="Antora 3.1.14">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -153,10 +153,10 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="../vzd/index.html">Verzeichnisdienst (VZD)</a>
+    <a class="nav-link" href="index.html">Verzeichnisdienst (VZD)</a>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../vzd/admin.html">Administration</a>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="admin.html">Administration</a>
   </li>
 </ul>
   </li>
@@ -190,22 +190,22 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="index.html">TI-Client (RISE TI Gateway)</a>
+    <a class="nav-link" href="../ti-client/index.html">TI-Client (RISE TI Gateway)</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="step-by-step.html">Inbetriebnahme Step-by-Step</a>
+    <a class="nav-link" href="../ti-client/step-by-step.html">Inbetriebnahme Step-by-Step</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="activate-api.html">REST-API aktivieren</a>
+    <a class="nav-link" href="../ti-client/activate-api.html">REST-API aktivieren</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="create-ti-client.html">TI-Client erstellen</a>
-  </li>
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="create-ktproxy.html">KT-Proxy anlegen</a>
+    <a class="nav-link" href="../ti-client/create-ti-client.html">TI-Client erstellen</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="using-ti-client.html">TI-Client nutzen</a>
+    <a class="nav-link" href="../ti-client/create-ktproxy.html">KT-Proxy anlegen</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ti-client/using-ti-client.html">TI-Client nutzen</a>
   </li>
 </ul>
   </li>
@@ -300,8 +300,8 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Dokumentation</a></li>
-    <li><a href="index.html">TI-Client (RISE TI Gateway)</a></li>
-    <li><a href="create-ktproxy.html">KT-Proxy anlegen</a></li>
+    <li><a href="index.html">Verzeichnisdienst (VZD)</a></li>
+    <li><a href="admin.html">Administration</a></li>
   </ul>
 </nav>
 </div>
@@ -310,62 +310,45 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">KT-Proxy anlegen</h1>
+<h1 class="page">VZD: Administration</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>Wenn ein Kartenterminal noch keinen KT-Proxy zugewiesen hat, erscheint ein Button <b class="button">KT-Proxy generieren</b> im Abschnitt <b class="menuref">KT-Proxy (TI-Gateway)</b>.</p>
+<p>Cocard verwendet für die VZD-Abfrage den ersten Konnektor, der im Status OK ist. In diesem Falle ist keine weitere Konfiguration notwendig. Wenn dies nicht erwünscht ist, lässt sich der Konnektor auch explizit über die Konfiguration festlegen.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Hinweis"></i>
-</td>
-<td class="content">
-Der Button erscheint, sobald in der Konfiguration generell die Verwendung von TI-Clients aktiviert wurde. Auch dann, wenn das Kartenterminal noch an einem Konnektor hängt, der das TI-Gateway gar nicht nutzt (z.B. Standalone Konnektor). Das soll den Wechsel vorhandener Terminals zu einem TI-Gateway erleichtern.
-</td>
-</tr>
-</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_konfiguration_des_konnektors"><a class="anchor" href="#_konfiguration_des_konnektors"></a>Konfiguration des Konnektors</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Die Fixierung von VZD auf einen bestimmten Konnektor erfolgt in der Datei <code>cocard.yml</code> (siehe auch <a href="../installation/cocard_yml.html" class="xref page">Erweiterte Konfiguration</a>):</p>
+</div>
+<div class="listingblock">
+<div class="title">cocard.yml: Explizites setzen eines festen Konnektors für VZD</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">vzd_connector_ip: 127.0.0.4</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_welches_zertifikat_wird_verwendet"><a class="anchor" href="#_welches_zertifikat_wird_verwendet"></a>Welches Zertifikat wird verwendet?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Zunächst wird der Konnektor ermittelt. Wenn kein Konnektor explizit bestimmt wurde, wird der erste Konnektor genommen, der den Status <code>OK</code> hat. Jeder Konnektor hat einen oder mehrere Kontexte zugeordnet. Aus dem ersten Kontext (fett, siehe Abbildung) wird das Clientsystem ermittelt und dann das zum Clientsystem gehörige Zertfikat ausgewählt. Sofern der Konnektor korrekt konfiguriert ist - und nur dann hat er den Status <code>OK</code> - sollte VZD ohne jede weitere Konfiguration funktionieren.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../_images/ti-client/ct-add-ktproxy.png" alt="ct add ktproxy">
+<img src="../_images/vzd/vzd-connector-contexts-and-certs.png" alt="vzd connector contexts and certs">
 </div>
-<div class="title">Abbildung 1. Anzeige Kartenterminal, Abschnitt KT-Proxy</div>
+<div class="title">Abbildung 1. Kontexte und Zertifikate des Konnektors</div>
 </div>
-<div class="paragraph">
-<p>Idealerweise setzt man die Defaultwerte in der Konfiguration (siehe)
-<a href="../installation/cocard_yml.html#_ti_client_rise_ti_gateway" class="xref page">installation:cocard_yml.adoc#_ti_client_rise_ti_gateway</a>). Das Kartenterminal wird automatisch zugeordnet, der TI-Client ebenfalls, wenn das Kartenterminal bereits mit einem passenden Konnektor verbunden ist. Zur Vorbereitung eines Umzuges kann man aber manuell auch den TI-Client explizit auswählen.</p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="../_images/ti-client/ktproxy-new.png" alt="ktproxy new">
-</div>
-<div class="title">Abbildung 2. Anlage eines KT-Proxys mit vorausgefüllten Werten</div>
-</div>
-<div class="paragraph">
-<p>Ist der KT-Proxy angelegt, erscheint beim Kartenterminal eine erweiterte Anzeige <b class="menuref">TI-Client</b>:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../_images/ti-client/ct-show-ktproxy.png" alt="ct show ktproxy">
-</div>
-<div class="title">Abbildung 3. Kartenterminal, Abschnitt TI-Gateway</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Hinweis"></i>
-</td>
-<td class="content">
-Der Abschnitt <b class="menuref">TI-Gateway: Konnektor</b> erscheint nur, wenn die Proxy-Funktion am TI-Client für den Konnektorzugriff aktiviert wurde (siehe <a href="activate-api.html#_aktivierung_vkonnektor_proxy" class="xref page">ti-client/activate-api.adoc#_aktivierung_vkonnektor_proxy</a>) und der Zugriff auf den Konnektor erfolgreich war.
-</td>
-</tr>
-</table>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="create-ti-client.html">TI-Client erstellen</a></span>
-  <span class="next"><a href="using-ti-client.html">TI-Client nutzen</a></span>
+  <span class="prev"><a href="index.html">Verzeichnisdienst (VZD)</a></span>
+  <span class="next"><a href="../admin/locations.html">Standorte</a></span>
 </nav>
 </article>
   </div>

@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>KT-Proxy anlegen :: Cocard</title>
-    <link rel="prev" href="create-ti-client.html">
-    <link rel="next" href="using-ti-client.html">
+    <title>Verzeichnisdienst (VZD) :: Cocard</title>
+    <link rel="prev" href="../card/read-certs.html">
+    <link rel="next" href="admin.html">
     <meta name="generator" content="Antora 3.1.14">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -151,12 +151,12 @@
   </li>
 </ul>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="../vzd/index.html">Verzeichnisdienst (VZD)</a>
+    <a class="nav-link" href="index.html">Verzeichnisdienst (VZD)</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../vzd/admin.html">Administration</a>
+    <a class="nav-link" href="admin.html">Administration</a>
   </li>
 </ul>
   </li>
@@ -190,22 +190,22 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="index.html">TI-Client (RISE TI Gateway)</a>
+    <a class="nav-link" href="../ti-client/index.html">TI-Client (RISE TI Gateway)</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="step-by-step.html">Inbetriebnahme Step-by-Step</a>
+    <a class="nav-link" href="../ti-client/step-by-step.html">Inbetriebnahme Step-by-Step</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="activate-api.html">REST-API aktivieren</a>
+    <a class="nav-link" href="../ti-client/activate-api.html">REST-API aktivieren</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="create-ti-client.html">TI-Client erstellen</a>
-  </li>
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="create-ktproxy.html">KT-Proxy anlegen</a>
+    <a class="nav-link" href="../ti-client/create-ti-client.html">TI-Client erstellen</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="using-ti-client.html">TI-Client nutzen</a>
+    <a class="nav-link" href="../ti-client/create-ktproxy.html">KT-Proxy anlegen</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ti-client/using-ti-client.html">TI-Client nutzen</a>
   </li>
 </ul>
   </li>
@@ -300,8 +300,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Dokumentation</a></li>
-    <li><a href="index.html">TI-Client (RISE TI Gateway)</a></li>
-    <li><a href="create-ktproxy.html">KT-Proxy anlegen</a></li>
+    <li><a href="index.html">Verzeichnisdienst (VZD)</a></li>
   </ul>
 </nav>
 </div>
@@ -310,9 +309,44 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">KT-Proxy anlegen</h1>
+<h1 class="page">Verzeichnisdienst (VZD)</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>Wenn ein Kartenterminal noch keinen KT-Proxy zugewiesen hat, erscheint ein Button <b class="button">KT-Proxy generieren</b> im Abschnitt <b class="menuref">KT-Proxy (TI-Gateway)</b>.</p>
+<p>Der Verzeichnisdienst VZD ist das Adressbuch der Telematik und enthält die wesentlichen Informationen zu Organisationen und Personen, für die ein Zertifikat ausgestellt wurde - einschließlich dem Zertifikat selbst (HBA und SMB-C). Wenn über eine Telematik-ID mehrere SMC-Bs ausgestellt wurden, werden diese unter ein und demselben Verzeichniseintrag zusammengefasst.</p>
+</div>
+<div class="paragraph">
+<p>Der Verzeichnisdienst basiert auf LDAP, kann also prinzipell von jedem LDAP-fähigem Adressbuch abgefragt werden (z.B. via Thunderbird). Die primäre Anwendung des VZD ist die Adressensuche für KIM.</p>
+</div>
+<div class="paragraph">
+<p>Idealerweise führt man die VZD-Suche direkt in seinem KIM-Client durch. Wenn dort die Such- und Auswahlmöglichkeiten aber zu keinen Treffer führen, hilft gegebenfalls Cocard weiter. Ein Beispiel: will man Dr. Mustermann in einer Gemeinschaftspraxis eine KIM-Nachricht senden, hilft die Suche nach <code>Mustermann</code> oft nicht weiter. Viele LDAP-Clients führen nur eine Suche nach <code>Mustermann*</code> aus. Wenn jetzt der Anzeigename im Verzeichnis aber <code>Dres. Musterfrau &amp; Mustermann</code> lautet, bleibt die Suche erfolglos.
+Cocard dagegen durchsucht das gewählte Textfeld immer mit <code>*suchtext*</code> (Ausnahme: Profession OID).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_suche"><a class="anchor" href="#_suche"></a>Suche</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Die Suche im VZD erreicht man über den Eintrag <b class="menuref">VZD</b> in der Menüzeile. Im folgenden Beispiel wird nach Krankenhäusern in Neuwied gesucht:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/vzd/vzd-search.png" alt="vzd search">
+</div>
+<div class="title">Abbildung 1. Suche nach OID="Krankenhaus", Ort="Neuwied"</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Wichtig"></i>
+</td>
+<td class="content">
+Liefert die Suche zu viele Ergebnisse, gibt der Verzeichnisdienst nichts aus. Eine leere Trefferliste kann also auch eine viel zu grobe Suche mit zu vielen möglichen Treffern als Ursache haben.
+</td>
+</tr>
+</table>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -321,51 +355,22 @@
 <i class="fa icon-note" title="Hinweis"></i>
 </td>
 <td class="content">
-Der Button erscheint, sobald in der Konfiguration generell die Verwendung von TI-Clients aktiviert wurde. Auch dann, wenn das Kartenterminal noch an einem Konnektor hängt, der das TI-Gateway gar nicht nutzt (z.B. Standalone Konnektor). Das soll den Wechsel vorhandener Terminals zu einem TI-Gateway erleichtern.
+Bewährt hat sich die zusätzliche Angabe des Ortes bei jeder Suche. Je nach Suche genügt das aber manchmal nicht: Ort + Betriebsstätte Arzt liefert bereits in mittelgroßen Städten zu viele mögliche Treffer und die Ergebnisliste bleibt leer.
 </td>
 </tr>
 </table>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../_images/ti-client/ct-add-ktproxy.png" alt="ct add ktproxy">
+<img src="../_images/vzd/vzd-search-result.png" alt="vzd search result">
 </div>
-<div class="title">Abbildung 1. Anzeige Kartenterminal, Abschnitt KT-Proxy</div>
+<div class="title">Abbildung 2. Anzeige der Suchergebnisse bei erfolgreicher Suche</div>
 </div>
-<div class="paragraph">
-<p>Idealerweise setzt man die Defaultwerte in der Konfiguration (siehe)
-<a href="../installation/cocard_yml.html#_ti_client_rise_ti_gateway" class="xref page">installation:cocard_yml.adoc#_ti_client_rise_ti_gateway</a>). Das Kartenterminal wird automatisch zugeordnet, der TI-Client ebenfalls, wenn das Kartenterminal bereits mit einem passenden Konnektor verbunden ist. Zur Vorbereitung eines Umzuges kann man aber manuell auch den TI-Client explizit auswählen.</p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="../_images/ti-client/ktproxy-new.png" alt="ktproxy new">
-</div>
-<div class="title">Abbildung 2. Anlage eines KT-Proxys mit vorausgefüllten Werten</div>
-</div>
-<div class="paragraph">
-<p>Ist der KT-Proxy angelegt, erscheint beim Kartenterminal eine erweiterte Anzeige <b class="menuref">TI-Client</b>:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../_images/ti-client/ct-show-ktproxy.png" alt="ct show ktproxy">
-</div>
-<div class="title">Abbildung 3. Kartenterminal, Abschnitt TI-Gateway</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Hinweis"></i>
-</td>
-<td class="content">
-Der Abschnitt <b class="menuref">TI-Gateway: Konnektor</b> erscheint nur, wenn die Proxy-Funktion am TI-Client für den Konnektorzugriff aktiviert wurde (siehe <a href="activate-api.html#_aktivierung_vkonnektor_proxy" class="xref page">ti-client/activate-api.adoc#_aktivierung_vkonnektor_proxy</a>) und der Zugriff auf den Konnektor erfolgreich war.
-</td>
-</tr>
-</table>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="create-ti-client.html">TI-Client erstellen</a></span>
-  <span class="next"><a href="using-ti-client.html">TI-Client nutzen</a></span>
+  <span class="prev"><a href="../card/read-certs.html">Kartenzertifikate lesen</a></span>
+  <span class="next"><a href="admin.html">Administration</a></span>
 </nav>
 </article>
   </div>
