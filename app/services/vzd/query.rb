@@ -3,7 +3,7 @@
 #
 module VZD
   class Query
-    attr_reader :search_options, :connector, :client_certificate
+    attr_reader :search_options, :connector, :client_certificate, :errors
 
     SEARCHES = %i( cn sn givenname displayname organization l mail telematikid 
                    entrytype personalentry domainid specialization 
@@ -14,21 +14,25 @@ module VZD
     #
     #
     def initialize(connector:, client_certificate:, search_options: {})
+      @errors             = []
       @connector          = connector
-      @client_certificate = client_certificate || default_client_certificate
+      @client_certificate = client_certificate
       @search_options     = search_options.symbolize_keys
 
       unless @client_certificate.kind_of? ClientCertificate
-        raise ArgumentError, 
-              "Client certificate has wrong type #{@client_certificate.class.name}"
+        @errors << "Client certificate has wrong type #{@client_certificate.class.name}"
       end
 
       @ldap  = ldap_connection
       @limit = 0
       @ldap_filter = build_query
       if @ldap_filter.blank?
-        raise RuntimeError, "LDAP filter is empty or contains no valid search params"
+        @errors << "LDAP filter is empty or contains no valid search params"
       end
+    end
+
+    def success?
+      @errors.empty?
     end
 
     def query
@@ -45,10 +49,6 @@ module VZD
 
   private
     attr_reader :connector, :client_certificate, :ldap, :ldap_filter, :limit
-
-    def default_client_certificate
-      ClientCertificate.where(client_system: 'cocard').first
-    end
 
     def tls_options
       {
