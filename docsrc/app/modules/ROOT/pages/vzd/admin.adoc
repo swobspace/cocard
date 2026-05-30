@@ -19,7 +19,9 @@ vzd_connector_ip: 127.0.0.4
 
 == Welches Zertifikat wird verwendet?
 
-Zunächst wird der Konnektor ermittelt. Wenn kein Konnektor explizit bestimmt wurde, wird der erste Konnektor genommen, der den Status `OK` hat. Jeder Konnektor hat einen oder mehrere Kontexte zugeordnet. Aus dem ersten Kontext (fett, siehe Abbildung) wird das Clientsystem ermittelt und dann das zum Clientsystem gehörige Zertfikat ausgewählt. Sofern der Konnektor korrekt konfiguriert ist - und nur dann hat er den Status `OK` - sollte VZD ohne jede weitere Konfiguration funktionieren.
+Zunächst wird der Konnektor ermittelt: wenn kein Konnektor explizit bestimmt wurde, wird der erste Konnektor genommen, der den Status `OK` hat. Jeder Konnektor hat einen oder mehrere Kontexte zugeordnet. Aus dem ersten Kontext (fett, siehe Abbildung) wird das Clientsystem ermittelt und dann das zum Clientsystem gehörige Zertfikat ausgewählt. Sofern der Konnektor korrekt konfiguriert ist - und nur dann hat er den Status `OK` - sollte VZD ohne jede weitere Konfiguration funktionieren.
 
 .Kontexte und Zertifikate des Konnektors
 image::vzd/vzd-connector-contexts-and-certs.png[]
+
+NOTE: VZD ist bisher nur für TLS-Verbindungen mit Clientzertifikat möglich. Passwort-basierte Authentifikation am Konnektor oder ganz unverschlüsselte Verbindungen sind nicht möglich.
