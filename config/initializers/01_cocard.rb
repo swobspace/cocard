@@ -97,6 +97,15 @@ EOTMPL
     Hash(fetch_config('card_terminal_defaults', {})).symbolize_keys
   end
 
+  def self.vzd_connector
+    ip = fetch_config('vzd_connector_ip', nil)
+    if ip.present?
+      Connector.where(ip: ip).first
+    else
+      nil
+    end
+  end
+
   def self.mail_from
     fetch_config('mail_from', 'root')
   end

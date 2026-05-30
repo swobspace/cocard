@@ -55,18 +55,21 @@ module VZD
       let(:filter) {{telematikid: '5-2-260710873'}}
       it { expect(subject.first.telematikid).to eq('5-2-260710873') }
       it { expect(subject.first.displayname).to eq('Verbund-Krankenhaus Linz-Remagen') }
+      it { expect(subject.errors.empty?).to be_truthy }
     end
 
     context "with :mail" do
       let(:filter) {{mail: 'intensiv.wnd@marienhaus'}}
       it { expect(subject.first.mails).to include('intensiv.wnd@marienhaus.kim.telematik') }
       it { expect(subject.first.displayname).to eq('Marienhaus Klinikum St. Wendel-Ottweiler') }
+      it { expect(subject.errors.empty?).to be_truthy }
     end
 
     context "with :displayname" do
       let(:filter) {{displayname: 'Marienhaus Klinikum St. Wendel'}}
       it { expect(subject.first.mails).to include('intensiv.wnd@marienhaus.kim.telematik') }
       it { expect(subject.first.displayname).to eq('Marienhaus Klinikum St. Wendel-Ottweiler') }
+      it { expect(subject.errors.empty?).to be_truthy }
     end
 
   end

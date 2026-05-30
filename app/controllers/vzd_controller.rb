@@ -15,11 +15,12 @@ class VZDController < ApplicationController
 
   private
     def connector
-      Connector.ok.first
+      Cocard.vzd_connector || Connector.ok.first
     end
 
     def client_certificate
-      ClientCertificate.where(client_system: 'cocard').first
+      client_system = connector.contexts.first&.client_system
+      connector.client_certificate(client_system)
     end
 
     def search_params

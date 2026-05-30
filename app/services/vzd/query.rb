@@ -15,19 +15,19 @@ module VZD
     #
     def initialize(connector:, client_certificate:, search_options: {})
       @errors             = []
+      @limit              = 0
+      @ldap               = nil
       @connector          = connector
       @client_certificate = client_certificate
       @search_options     = search_options.symbolize_keys
+      @ldap_filter        = build_query
 
-      unless @client_certificate.kind_of? ClientCertificate
+      if !@client_certificate.kind_of?(ClientCertificate)
         @errors << "Client certificate has wrong type #{@client_certificate.class.name}"
-      end
-
-      @ldap  = ldap_connection
-      @limit = 0
-      @ldap_filter = build_query
-      if @ldap_filter.blank?
+      elsif @ldap_filter.blank?
         @errors << "LDAP filter is empty or contains no valid search params"
+      else
+        @ldap  = ldap_connection
       end
     end
 
@@ -52,8 +52,8 @@ module VZD
 
     def tls_options
       {
-        cert: client_certificate.certificate,
-        key: client_certificate.private_key,
+        cert: client_certificate&.certificate,
+        key: client_certificate&.private_key,
         verify_mode: OpenSSL::SSL::VERIFY_NONE,
         verify_hostname: false
       }
@@ -61,7 +61,7 @@ module VZD
 
     def ldap_options 
       {
-        host: connector.ip.to_s,
+        host: connector&.ip.to_s,
         port: 636,
         base: "dc=data,dc=vzd",
         encryption: {
