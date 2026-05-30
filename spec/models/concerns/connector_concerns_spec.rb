@@ -178,4 +178,19 @@ RSpec.describe ConnectorConcerns, type: :model do
     end
   end
 
+  describe "#client_certificate" do
+    let(:conn) { FactoryBot.create(:connector) }
+    let(:cert1) { FactoryBot.create(:client_certificate) }
+    let(:cert2) { FactoryBot.create(:client_certificate) }
+    before(:each) do
+      conn.client_certificates = [cert1, cert2]
+      conn.reload
+      cert1.update_column(:client_system, 'ClientA'); cert1.reload
+      cert2.tag_list = ['ClientB']; cert2.reload
+    end
+
+    it { puts conn.client_certificates.pluck(:client_system) }
+    it { expect(conn.client_certificate('ClientA')).to eq(cert1) }
+    it { expect(conn.client_certificate('ClientB')).to eq(cert2) }
+  end
 end

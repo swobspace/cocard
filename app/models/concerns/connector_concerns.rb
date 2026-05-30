@@ -80,4 +80,10 @@ module ConnectorConcerns
     card_terminals.joins(card_terminal_slots: :card)
     .where("cards.card_type = 'SMC-B'")
   end
+
+  def client_certificate(client_system)
+    client_certificates.where(client_system: client_system).first ||
+      client_certificates.tagged_with(client_system).first
+  end
+
 end
