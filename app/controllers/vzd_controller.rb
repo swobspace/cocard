@@ -6,7 +6,13 @@ class VZDController < ApplicationController
     add_breadcrumb("VZD-Suchergebnis", vzd_index_path(search_params))
     vzd = VZD::Query.new(connector: connector, client_certificate: client_certificate, 
                          search_options: search_params)
-    @entries = vzd.all
+    if vzd.success?
+      @entries = vzd.all
+    else
+      @entries = []
+      # @errors = vzd.errors
+      flash.now[:alert] = vzd.errors.join("; ")
+    end
   end
 
   def search
