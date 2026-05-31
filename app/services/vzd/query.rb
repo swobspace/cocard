@@ -22,10 +22,12 @@ module VZD
       @search_options     = search_options.symbolize_keys
       @ldap_filter        = build_query
 
-      if !@client_certificate.kind_of?(ClientCertificate)
-        @errors << "Client certificate has wrong type #{@client_certificate.class.name}"
+      if @connector.authentication != "clientcert"
+        @errors << "Nur Authentifikation mit Clientzertifikat wird unterstützt"
+      elsif !@client_certificate.kind_of?(ClientCertificate)
+        @errors << "Clientzertifikat hat falschen Typ #{@client_certificate.class.name}"
       elsif @ldap_filter.blank?
-        @errors << "LDAP filter is empty or contains no valid search params"
+        @errors << "LDAP Filter ist leer oder enthält keine gültigen Suchparameter"
       else
         @ldap  = ldap_connection
       end
