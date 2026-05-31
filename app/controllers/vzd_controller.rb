@@ -17,6 +17,10 @@ class VZDController < ApplicationController
 
   def search
     add_breadcrumb("VZD-Suche", vzd_search_path)
+    @info = "Konnektor: #{connector}, Client: #{connector.contexts.first&.client_system ||'Kein Kontext zugewiesen'}, Clientzertifikat: #{client_certificate || 'Zertifikat fehlt'}"
+    unless config_ok?
+      flash[:alert] = "Keine Suche möglich, bitte die Konfiguration überprüfen: " + @info
+    end
   end
 
   private
@@ -44,5 +48,8 @@ class VZDController < ApplicationController
       [ ]
     end
 
+    def config_ok?
+      connector.present? && client_certificate.present?
+    end
 
 end
