@@ -336,13 +336,75 @@
 <h2 id="_welches_zertifikat_wird_verwendet"><a class="anchor" href="#_welches_zertifikat_wird_verwendet"></a>Welches Zertifikat wird verwendet?</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Zunächst wird der Konnektor ermittelt. Wenn kein Konnektor explizit bestimmt wurde, wird der erste Konnektor genommen, der den Status <code>OK</code> hat. Jeder Konnektor hat einen oder mehrere Kontexte zugeordnet. Aus dem ersten Kontext (fett, siehe Abbildung) wird das Clientsystem ermittelt und dann das zum Clientsystem gehörige Zertfikat ausgewählt. Sofern der Konnektor korrekt konfiguriert ist - und nur dann hat er den Status <code>OK</code> - sollte VZD ohne jede weitere Konfiguration funktionieren.</p>
+<p>Zunächst wird der Konnektor ermittelt: wenn kein Konnektor explizit bestimmt wurde, wird der erste Konnektor genommen, der den Status <code>OK</code> hat. Jeder Konnektor hat einen oder mehrere Kontexte zugeordnet. Aus dem ersten Kontext (fett, siehe Abbildung) wird das Clientsystem ermittelt und dann das zum Clientsystem gehörige Zertfikat ausgewählt. Sofern der Konnektor korrekt konfiguriert ist - und nur dann hat er den Status <code>OK</code> - sollte VZD ohne jede weitere Konfiguration funktionieren.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="../_images/vzd/vzd-connector-contexts-and-certs.png" alt="vzd connector contexts and certs">
 </div>
 <div class="title">Abbildung 1. Kontexte und Zertifikate des Konnektors</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Hinweis"></i>
+</td>
+<td class="content">
+VZD ist bisher nur für TLS-Verbindungen mit Clientzertifikat möglich. Passwort-basierte Authentifikation am Konnektor oder ganz unverschlüsselte Verbindungen sind nicht möglich.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_profession_oid"><a class="anchor" href="#_profession_oid"></a>Profession OID</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Mit der Suche über OIDs  kann man die Suchmenge gezielt etwa auf "Krankenhaus" oder "Betriebsstätte Arzt" einschränken. Cocard enthält eine Liste von OIDs, die aber standardmäßig nur installiert ist, wenn die Datenbank neu erstellt wird.</p>
+</div>
+<div class="paragraph">
+<p>Um bei bereits bestehender Datenbank die OIDs nachzuladen führt man - abhängig von der Installationsvariante - einen der folgenden Befehle aus.</p>
+</div>
+<div class="sect2">
+<h3 id="_systemd_mit_quadlets"><a class="anchor" href="#_systemd_mit_quadlets"></a>Systemd mit Quadlets</h3>
+<div class="listingblock">
+<div class="title">Podman mit Systemd-Integration und User poddy</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman exec cocard bin/rails db:seed</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_docker_compose"><a class="anchor" href="#_docker_compose"></a>Docker Compose</h3>
+<div class="listingblock">
+<div class="title">docker-compose aus dem Installationsverzeichnis</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker-compose exec app bin/rails db:seed</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_podman_pods"><a class="anchor" href="#_podman_pods"></a>Podman Pods</h3>
+<div class="listingblock">
+<div class="title">podman pods</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman exec play-cocard-app bin/rails db:seed</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Hinweis"></i>
+</td>
+<td class="content">
+Im Zweifel kann man den Namen des Cocard-Applikation-Containers auch mit <code>docker ps</code> bzw. <code>podman ps</code> herausfinden.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 </div>

@@ -2,7 +2,8 @@
 
 == 1.0.4-dev - unreleased
 
-* VZD: Konfiguration zu verwendenden Konnektors
+* VZD-Suche: Konfiguration zu verwendenden Konnektors
+* Dokumentation zur VZD-Suche
 
 == 1.0.3 - 2026-05-24
 

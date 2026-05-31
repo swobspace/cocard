@@ -25,3 +25,35 @@ Zunächst wird der Konnektor ermittelt: wenn kein Konnektor explizit bestimmt wu
 image::vzd/vzd-connector-contexts-and-certs.png[]
 
 NOTE: VZD ist bisher nur für TLS-Verbindungen mit Clientzertifikat möglich. Passwort-basierte Authentifikation am Konnektor oder ganz unverschlüsselte Verbindungen sind nicht möglich.
+
+== Profession OID
+
+Mit der Suche über OIDs  kann man die Suchmenge gezielt etwa auf "Krankenhaus" oder "Betriebsstätte Arzt" einschränken. Cocard enthält eine Liste von OIDs, die aber standardmäßig nur installiert ist, wenn die Datenbank neu erstellt wird.
+
+Um bei bereits bestehender Datenbank die OIDs nachzuladen führt man - abhängig von der Installationsvariante - einen der folgenden Befehle aus.
+
+=== Systemd mit Quadlets
+
+.Podman mit Systemd-Integration und User poddy
+[source,bash]
+----
+podman exec cocard bin/rails db:seed
+----
+
+=== Docker Compose
+
+.docker-compose aus dem Installationsverzeichnis
+[source,bash]
+----
+docker-compose exec app bin/rails db:seed
+----
+
+=== Podman Pods
+
+.podman pods
+[source,bash]
+----
+podman exec play-cocard-app bin/rails db:seed
+----
+
+NOTE: Im Zweifel kann man den Namen des Cocard-Applikation-Containers auch mit `docker ps` bzw. `podman ps` herausfinden.
