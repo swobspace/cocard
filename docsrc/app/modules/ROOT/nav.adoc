@@ -32,6 +32,9 @@
 ** xref:card/card-new.adoc[]
 ** xref:card/read-certs.adoc[]
 
+* xref:vzd/index.adoc[]
+** xref:vzd/admin.adoc[]
+
 * Administration
 ** xref:admin/locations.adoc[]
 ** xref:admin/networks.adoc[]

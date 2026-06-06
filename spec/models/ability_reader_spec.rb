@@ -11,7 +11,7 @@ RSpec.shared_examples "a Reader" do
   it { is_expected.not_to be_able_to(:read, Card.new, :private_information) }
   it { is_expected.not_to be_able_to(:read, DuckTerminal.new) }
 
-  [ Card, CardTerminal, Connector, Network, Location, OperationalState,
+  [ Card, CardTerminal, Connector, Network, Note, Location, OperationalState,
     Log, Workplace, Context, ClientCertificate,
     TerminalWorkplace, CardContext, ConnectorContext ].each do |model|
       it { is_expected.not_to be_able_to(:manage, model.new) }

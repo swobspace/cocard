@@ -6,20 +6,31 @@ class VZDController < ApplicationController
     add_breadcrumb("VZD-Suchergebnis", vzd_index_path(search_params))
     vzd = VZD::Query.new(connector: connector, client_certificate: client_certificate, 
                          search_options: search_params)
-    @entries = vzd.all
+    if vzd.success?
+      @entries = vzd.all
+    else
+      @entries = []
+      # @errors = vzd.errors
+      flash.now[:alert] = vzd.errors.join("; ")
+    end
   end
 
   def search
     add_breadcrumb("VZD-Suche", vzd_search_path)
+    @info = "Konnektor: #{connector}, Client: #{connector&.contexts&.first&.client_system ||'Kein Kontext zugewiesen'}, Clientzertifikat: #{client_certificate || 'Zertifikat fehlt'}"
+    unless config_ok?
+      flash[:alert] = "Keine Suche möglich, bitte die Konfiguration überprüfen: " + @info
+    end
   end
 
   private
     def connector
-      Connector.ok.first
+      Cocard.vzd_connector || Connector.ok.first
     end
 
     def client_certificate
-      ClientCertificate.where(client_system: 'cocard').first
+      client_system = connector&.contexts&.first&.client_system
+      connector&.client_certificate(client_system)
     end
 
     def search_params
@@ -37,5 +48,8 @@ class VZDController < ApplicationController
       [ ]
     end
 
+    def config_ok?
+      connector.present? && client_certificate.present?
+    end
 
 end

@@ -1,5 +1,7 @@
 <%= turbo_frame_tag 'vzd' do %>
-  <h1>VZD Suchergebnis</h1>
+  <%= render partial: 'shared/flash_alert' %>
+  <%# @errors.join("; ") if @errors.present? %>
+  <h1 class="mb-3">VZD Suchergebnis</h1>
 
   <div class="row row-cols-1 row-cols-md-2 g-4">
     <%= render partial: "entry", collection: @entries, as: :entry %>

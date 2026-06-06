@@ -1,5 +1,11 @@
 = Changelog
 
+== 1.0.4 - 2026-06-06
+
+* VZD-Suche: Konfiguration zu verwendenden Konnektors
+* Dokumentation zur VZD-Suche
+* Rolle Reader: Recht für Notizen erstellen entfernt
+
 == 1.0.3 - 2026-05-24
 
 * VZD-Suche. Verwendet wird derzeit der erste Konnektor, der OK ist mit dem Zertifikat für das Clientsystem "cocard".

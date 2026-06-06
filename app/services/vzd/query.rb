@@ -3,7 +3,7 @@
 #
 module VZD
   class Query
-    attr_reader :search_options, :connector, :client_certificate
+    attr_reader :search_options, :connector, :client_certificate, :errors
 
     SEARCHES = %i( cn sn givenname displayname organization l mail telematikid 
                    entrytype personalentry domainid specialization 
@@ -14,21 +14,27 @@ module VZD
     #
     #
     def initialize(connector:, client_certificate:, search_options: {})
+      @errors             = []
+      @limit              = 0
+      @ldap               = nil
       @connector          = connector
-      @client_certificate = client_certificate || default_client_certificate
+      @client_certificate = client_certificate
       @search_options     = search_options.symbolize_keys
+      @ldap_filter        = build_query
 
-      unless @client_certificate.kind_of? ClientCertificate
-        raise ArgumentError, 
-              "Client certificate has wrong type #{@client_certificate.class.name}"
+      if @connector.authentication != "clientcert"
+        @errors << "Nur Authentifikation mit Clientzertifikat wird unterstützt"
+      elsif !@client_certificate.kind_of?(ClientCertificate)
+        @errors << "Clientzertifikat hat falschen Typ #{@client_certificate.class.name}"
+      elsif @ldap_filter.blank?
+        @errors << "LDAP Filter ist leer oder enthält keine gültigen Suchparameter"
+      else
+        @ldap  = ldap_connection
       end
+    end
 
-      @ldap  = ldap_connection
-      @limit = 0
-      @ldap_filter = build_query
-      if @ldap_filter.blank?
-        raise RuntimeError, "LDAP filter is empty or contains no valid search params"
-      end
+    def success?
+      @errors.empty?
     end
 
     def query
@@ -46,14 +52,10 @@ module VZD
   private
     attr_reader :connector, :client_certificate, :ldap, :ldap_filter, :limit
 
-    def default_client_certificate
-      ClientCertificate.where(client_system: 'cocard').first
-    end
-
     def tls_options
       {
-        cert: client_certificate.certificate,
-        key: client_certificate.private_key,
+        cert: client_certificate&.certificate,
+        key: client_certificate&.private_key,
         verify_mode: OpenSSL::SSL::VERIFY_NONE,
         verify_hostname: false
       }
@@ -61,7 +63,7 @@ module VZD
 
     def ldap_options 
       {
-        host: connector.ip.to_s,
+        host: connector&.ip.to_s,
         port: 636,
         base: "dc=data,dc=vzd",
         encryption: {

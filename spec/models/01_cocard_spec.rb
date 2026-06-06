@@ -14,6 +14,7 @@ RSpec.describe Cocard, type: :model do
       allow(Cocard::CONFIG).to receive(:[]).with('mail_from').and_return(nil)
       allow(Cocard::CONFIG).to receive(:[]).with('mail_to').and_return(nil)
       allow(Cocard::CONFIG).to receive(:[]).with('smtp_settings').and_return(nil)
+      allow(Cocard::CONFIG).to receive(:[]).with('vzd_connector_ip').and_return(nil)
       allow(ENV).to receive(:[]).with('CRON_REBOOT_CONNECTORS').and_return(nil)
       allow(ENV).to receive(:[]).with('AUTO_REBOOT_CONNECTORS_NOTE').and_return(nil)
     end
@@ -28,6 +29,7 @@ RSpec.describe Cocard, type: :model do
     it { expect(Cocard.mail_to).to eq([]) }
     it { expect(Cocard.smtp_settings).to eq(nil) }
     it { expect(Cocard.use_mail?).to be_falsey }
+    it { expect(Cocard.vzd_connector).to be_nil }
   end
 
   describe "with settings" do
@@ -40,6 +42,7 @@ RSpec.describe Cocard, type: :model do
       "tftp_server" => "127.0.1.2",
       "tftp_file"   => "firmware.dat"
     }}
+    let!(:conn) { FactoryBot.create(:connector, ip: '127.9.9.9') }
     it "uses ENV if valid?" do
       allow(ENV).to receive(:[]).with('CRON_REBOOT_CONNECTORS').and_return('1 2 3 4 5')
       allow(ENV).to receive(:[]).with('AUTO_REBOOT_CONNECTORS_NOTE').and_return('yes')
@@ -55,6 +58,7 @@ RSpec.describe Cocard, type: :model do
       allow(Cocard::CONFIG).to receive(:[]).with('mail_from').and_return('from@example.org')
       allow(Cocard::CONFIG).to receive(:[]).with('mail_to').and_return(['somebody@example.net'])
       allow(Cocard::CONFIG).to receive(:[]).with('smtp_settings').and_return(smtp_settings)
+      allow(Cocard::CONFIG).to receive(:[]).with('vzd_connector_ip').and_return('127.9.9.9')
 
       expect(Cocard.enable_ticlient).to be_truthy
       expect(Cocard.ktproxy_defaults).to include(card_terminal_port: 4742)
@@ -69,6 +73,7 @@ RSpec.describe Cocard, type: :model do
       expect(Cocard.mail_to).to eq(['somebody@example.net'])
       expect(Cocard.smtp_settings).to include(address: 'somehost', port: 25)
       expect(Cocard.use_mail?).to be_truthy
+      expect(Cocard.vzd_connector).to eq(conn)
     end
 
     it "uses default if ENV not valid" do
