@@ -4,6 +4,7 @@
 
 * VZD-Suche: Konfiguration zu verwendenden Konnektors
 * Dokumentation zur VZD-Suche
+* Rolle Reader: Recht für Notizen erstellen entfernt
 
 == 1.0.3 - 2026-05-24
 

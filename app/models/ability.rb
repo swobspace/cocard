@@ -24,12 +24,13 @@ class Ability
     elsif @user.authorities.present?
       can [:read, :navigate], :all
       can :manage, Report
-      can :create, Note
       cannot [:read, :navigate], ClientCertificate
       cannot [:read], DuckTerminal
 
       if @user.role?(:reader)
         # nothing for now
+      else
+        can :create, Note
       end
 
       if @user.role?(:connector_manager)
