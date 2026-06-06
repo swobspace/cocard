@@ -1,5 +1,7 @@
 = Changelog
 
+== 1.0.5-dev - unreleased
+
 == 1.0.4 - 2026-06-06
 
 * VZD-Suche: Konfiguration zu verwendenden Konnektors
