@@ -58,6 +58,18 @@ Folgende Umgebungsvariablen müssent im xref:installation:configuration.adoc[Set
 |RMI-Authentifikation: Passwort für Rolle `admin`
 
 |DEFAULT_SMCB_PIN=11111111
-|Environment-Variable; zur Zeit unterstützt Cocard nur eine einheitliche SMCB-PIN für alle Karten.
+|Environment-Variable; zur Zeit unterstützt Cocard nur eine einheitliche SMCB-PIN für alle Karten. Führende Nullen sind erlaubt, wenn die PIN als String/Environment-Wert gesetzt wird.
+
+|CHERRY_RMI_CA_FILE
+|Optional für Cherry ST-1506: Pfad zu einer CA-Datei, mit der Cocard das TLS-Zertifikat des Terminals prüft.
+
+|CHERRY_RMI_CA_PATH
+|Optional für Cherry ST-1506: Pfad zu einem CA-Verzeichnis, mit dem Cocard das TLS-Zertifikat des Terminals prüft.
+
+|CHERRY_RMI_INSECURE_TLS
+|Optional für Cherry ST-1506: Nur für Test/Lab. Wenn auf `true`, `1` oder `yes` gesetzt, wird TLS-Peer-Verifikation deaktiviert.
+
+|CHERRY_RMI_IDLE_TIMEOUT
+|Optional für Cherry ST-1506: Sekunden, die Cocard nach einer erfolgreich bestätigten PIN-Eingabe weiter auf weitere PIN-Anfragen derselben SMC-B wartet. Default: `15`.
 |===
 
