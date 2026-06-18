@@ -4,7 +4,7 @@ module CardTerminals
   #
   class RMI
     attr_reader :card_terminal
-    SUPPORTED_IDENTIFICATIONS = %w[ INGHC-ORGA6100 CHERRY-ST1506 CHERRY-ST-1506 ]
+    SUPPORTED_IDENTIFICATIONS = %w[ INGHC-ORGA6100 DECHY-ST1506 CHERRY-ST1506 CHERRY-ST-1506 ]
     #
     # rmi = CardTerminals::RMI.new(options)
     #

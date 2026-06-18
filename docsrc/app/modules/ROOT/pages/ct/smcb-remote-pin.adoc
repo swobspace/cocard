@@ -7,7 +7,7 @@ Bei neueren Kartenterminals kann man die PIN einer SMC-B-Karte remote eingegeben
 
 Cocard unterstützt die Remote-Eingabe, wenn alle nötigen Voraussetzungen dazu erfüllt sind. Löst ein Anwender die Aktion `VerifyPin` aus, startet Cocard zunächst eine Verbindung zum Kartenterminal und wartet auf die `VerifyPin`-Anfrage. Parallel dazu sendet Cocard die `VerifyPin`-Anfrage an den Konnektor, der diese an das Kartenterminal weitergibt. Das Kartenterminal benachrichtigt dann Cocard über die eingetroffene `VerifyPin`-Anfrage und Cocard sendet die fest hinterlegte PIN. Der Konnektor gibt Erfolg zurück, sofern kein Fehler auftritt.
 
-NOTE: Cocard unterstützt derzeit nur das Terminal ORGA 6141 online in der Firmware-Version 3.9.0
+NOTE: Cocard unterstützt derzeit ORGA 6141 online ab Firmware-Version 3.9.0 sowie Cherry ST-1506 (`DECHY-ST1506`).
 
 == Voraussetzungen für Remote-PIN-Eingabe
 
@@ -17,14 +17,21 @@ NOTE: Cocard unterstützt derzeit nur das Terminal ORGA 6141 online in der Firmw
 |===
 |Was | Beschreibung
 
-|Kartenterminal
-|ProductCode == `ORGA6100` && FirmwareVersion `\>= 3.9.0`
+|Kartenterminal ORGA
+|ORGA 6141 online: ProductCode == `ORGA6100` && FirmwareVersion `\>= 3.9.0`
 
-|RMI Remote SMC-B PIN
-|muss eingeschaltet sein, siehe Abbildung
+|Kartenterminal Cherry
+|Cherry ST-1506: wird von Cocard über die Identifikation `DECHY-ST1506` erkannt.
+
+|RMI Remote SMC-B PIN (ORGA)
+|muss eingeschaltet sein, siehe ORGA-Abbildung. Cocard prüft diese Einstellung vorab.
+
+|RMI Remote SMC-B PIN (Cherry)
+|muss am Terminal eingerichtet/aktiviert sein. Cocard kann derzeit keine gleichwertige Cherry-Einstellung vorab prüfen; Fehler werden erst bei `VerifyPin` sichtbar.
 |===
 
 
+.ORGA 6141: Remote SMC-B PIN aktivieren (nur ORGA)
 image:ct/orga6141-enable-remote-smcb-pin.png[]
 
 === Cocard: Einstellungen beim Kartenterminal
@@ -52,7 +59,7 @@ Folgende Umgebungsvariablen müssent im xref:installation:configuration.adoc[Set
 |Was | Beschreibung
 
 |DEFAULT_WS_AUTH_USER
-|RMI-Authentifikation: Rolle `admin`. Cocard prüft, ob `Remote SMC-B PIN` eingeschaltet ist, dazu ist die `admin`-Rolle erforderlich.
+|RMI-Authentifikation: Rolle `admin`. Bei ORGA prüft Cocard, ob `Remote SMC-B PIN` eingeschaltet ist; dazu ist die `admin`-Rolle erforderlich. Bei Cherry ST-1506 kann Cocard derzeit keine gleichwertige aktivierte Einstellung vorab prüfen; Fehler werden erst bei `VerifyPin` sichtbar.
 
 |DEFAULT_WS_AUTH_PASS
 |RMI-Authentifikation: Passwort für Rolle `admin`

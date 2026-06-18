@@ -18,7 +18,7 @@ module CardTerminals
 
     it do
       expect(CardTerminals::RMI::SUPPORTED_IDENTIFICATIONS).to contain_exactly(
-        'INGHC-ORGA6100', 'CHERRY-ST1506', 'CHERRY-ST-1506'
+        'INGHC-ORGA6100', 'DECHY-ST1506', 'CHERRY-ST1506', 'CHERRY-ST-1506'
       )
     end
   
@@ -115,6 +115,14 @@ module CardTerminals
 
       it { expect(subject.supported?).to be_truthy }
       it { expect(subject.rmi_port).to eq(443) }
+
+      context "when the connector reports DECHY-ST1506" do
+        before(:each) do
+          allow(ct).to receive(:identification).and_return('DECHY-ST1506')
+        end
+
+        it { expect(subject.supported?).to be_truthy }
+      end
 
       describe "#verify_pin" do
         let(:res) { Result.new(true, 'Success Message') }
