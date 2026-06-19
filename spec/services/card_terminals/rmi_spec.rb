@@ -16,7 +16,11 @@ module CardTerminals
       )
     end
 
-    it { expect(CardTerminals::RMI::SUPPORTED_IDENTIFICATIONS).to contain_exactly('INGHC-ORGA6100') }
+    it do
+      expect(CardTerminals::RMI::SUPPORTED_IDENTIFICATIONS).to contain_exactly(
+        'INGHC-ORGA6100', 'DECHY-ST1506', 'CHERRY-ST1506', 'CHERRY-ST-1506'
+      )
+    end
   
     subject { CardTerminals::RMI.new(card_terminal: ct) }
 
@@ -92,6 +96,79 @@ module CardTerminals
           expect(called_back).to be_truthy
         end
       end
+    end
+
+    ### Cherry ST-1506 ####################################################
+    describe "with Cherry ST-1506" do
+      let(:cherry_v1) do
+        instance_double(CardTerminals::RMI::CherryV1,
+          supported?: true,
+          rmi_port: 443,
+          available_actions: [:verify_pin]
+        )
+      end
+
+      before(:each) do
+        allow(ct).to receive(:identification).and_return('CHERRY-ST-1506')
+        expect(CardTerminals::RMI::CherryV1).to receive(:new).and_return(cherry_v1)
+      end
+
+      it { expect(subject.supported?).to be_truthy }
+      it { expect(subject.rmi_port).to eq(443) }
+
+      context "when the connector reports DECHY-ST1506" do
+        before(:each) do
+          allow(ct).to receive(:identification).and_return('DECHY-ST1506')
+        end
+
+        it { expect(subject.supported?).to be_truthy }
+      end
+
+      describe "#verify_pin" do
+        let(:res) { Result.new(true, 'Success Message') }
+        it "executes callback" do
+          expect(cherry_v1).to receive(:verify_pin).with(any_args).and_return(res)
+          called_back = false
+          subject.verify_pin("iccsn") do |result|
+            result.on_success do |message, value|
+              called_back = true
+            end
+          end
+          expect(called_back).to be_truthy
+        end
+      end
+
+      describe "#reboot" do
+        it "is unsupported" do
+          called_back = false
+          subject.reboot do |result|
+            result.on_unsupported { called_back = true }
+          end
+          expect(called_back).to be_truthy
+        end
+      end
+    end
+
+    describe "with Cherry ST-1506 product name metadata" do
+      let(:cherry_v1) do
+        instance_double(CardTerminals::RMI::CherryV1,
+          supported?: true,
+          rmi_port: 443,
+          available_actions: [:verify_pin]
+        )
+      end
+
+      before(:each) do
+        allow(ct).to receive(:identification).and_return('UNKNOWN')
+        product_information = instance_double('ProductInformation',
+          product_code: nil,
+          product_miscellaneous: { product_name: 'Cherry ST-1506' }
+        )
+        allow(ct).to receive(:product_information).and_return(product_information)
+        expect(CardTerminals::RMI::CherryV1).to receive(:new).and_return(cherry_v1)
+      end
+
+      it { expect(subject.supported?).to be_truthy }
     end
 
     ### Orga6141 v3.9.0 ##################################################
