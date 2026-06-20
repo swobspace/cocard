@@ -2,6 +2,8 @@
 
 == 1.0.5-dev - unreleased
 
+* Unterstützung für das Cherry ST-1506 (nur SMC-B Remote-PIN-Verifizierung)
+
 == 1.0.4 - 2026-06-06
 
 * VZD-Suche: Konfiguration zu verwendenden Konnektors

@@ -326,7 +326,7 @@
 <i class="fa icon-note" title="Hinweis"></i>
 </td>
 <td class="content">
-Cocard unterstützt derzeit nur das Terminal ORGA 6141 online in der Firmware-Version 3.9.0
+Cocard unterstützt derzeit ORGA 6141 online ab Firmware-Version 3.9.0 sowie Cherry ST-1506 (<code>DECHY-ST1506</code>).
 </td>
 </tr>
 </table>
@@ -351,16 +351,25 @@ Cocard unterstützt derzeit nur das Terminal ORGA 6141 online in der Firmware-Ve
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Kartenterminal</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ProductCode == <code>ORGA6100</code> &amp;&amp; FirmwareVersion <code>\&gt;= 3.9.0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kartenterminal ORGA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ORGA 6141 online: ProductCode == <code>ORGA6100</code> &amp;&amp; FirmwareVersion <code>\&gt;= 3.9.0</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">RMI Remote SMC-B PIN</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">muss eingeschaltet sein, siehe Abbildung</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kartenterminal Cherry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cherry ST-1506: wird von Cocard über die Identifikation <code>DECHY-ST1506</code> erkannt.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RMI Remote SMC-B PIN (ORGA)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">muss eingeschaltet sein, siehe ORGA-Abbildung. Cocard prüft diese Einstellung vorab.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RMI Remote SMC-B PIN (Cherry)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">muss am Terminal eingerichtet/aktiviert sein. Cocard kann derzeit keine gleichwertige Cherry-Einstellung vorab prüfen; Fehler werden erst bei <code>VerifyPin</code> sichtbar.</p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
+<div class="title">ORGA 6141: Remote SMC-B PIN aktivieren (nur ORGA)</div>
 <p><span class="image"><img src="../_images/ct/orga6141-enable-remote-smcb-pin.png" alt="orga6141 enable remote smcb pin"></span></p>
 </div>
 </div>
@@ -435,7 +444,7 @@ Bei Nutzung des Auto-PIN-Features bitte immer erst mit einem Kartenterminal und 
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DEFAULT_WS_AUTH_USER</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">RMI-Authentifikation: Rolle <code>admin</code>. Cocard prüft, ob <code>Remote SMC-B PIN</code> eingeschaltet ist, dazu ist die <code>admin</code>-Rolle erforderlich.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RMI-Authentifikation: Rolle <code>admin</code>. Bei ORGA prüft Cocard, ob <code>Remote SMC-B PIN</code> eingeschaltet ist; dazu ist die <code>admin</code>-Rolle erforderlich. Bei Cherry ST-1506 kann Cocard derzeit keine gleichwertige aktivierte Einstellung vorab prüfen; Fehler werden erst bei <code>VerifyPin</code> sichtbar.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DEFAULT_WS_AUTH_PASS</p></td>
@@ -443,7 +452,23 @@ Bei Nutzung des Auto-PIN-Features bitte immer erst mit einem Kartenterminal und 
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DEFAULT_SMCB_PIN=11111111</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Environment-Variable; zur Zeit unterstützt Cocard nur eine einheitliche SMCB-PIN für alle Karten.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Environment-Variable; zur Zeit unterstützt Cocard nur eine einheitliche SMCB-PIN für alle Karten. Führende Nullen sind erlaubt, wenn die PIN als String/Environment-Wert gesetzt wird.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CHERRY_RMI_CA_FILE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional für Cherry ST-1506: Pfad zu einer CA-Datei, mit der Cocard das TLS-Zertifikat des Terminals prüft.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CHERRY_RMI_CA_PATH</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional für Cherry ST-1506: Pfad zu einem CA-Verzeichnis, mit dem Cocard das TLS-Zertifikat des Terminals prüft.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CHERRY_RMI_INSECURE_TLS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional für Cherry ST-1506: Nur für Test/Lab. Wenn auf <code>true</code>, <code>1</code> oder <code>yes</code> gesetzt, wird TLS-Peer-Verifikation deaktiviert.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CHERRY_RMI_IDLE_TIMEOUT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional für Cherry ST-1506: Sekunden, die Cocard nach einer erfolgreich bestätigten PIN-Eingabe weiter auf weitere PIN-Anfragen derselben SMC-B wartet. Default: <code>15</code>.</p></td>
 </tr>
 </tbody>
 </table>
