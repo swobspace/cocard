@@ -47,8 +47,8 @@ module CardTerminals
 
     describe 'with valid product information' do
       before(:each) do
-        allow(ct).to receive(:firmware_version).and_return('3.9.0')
-        allow(ct).to receive(:firmware_version).and_return('3.9.0')
+        allow(ct).to receive(:firmware_version).and_return('3.9.2')
+        allow(ct).to receive(:firmware_version).and_return('3.9.2')
         allow(ct).to receive(:identification).and_return('INGHC-ORGA6100')
         ct.update(pin_mode: 'on_demand')
         ct.reload
@@ -59,7 +59,7 @@ module CardTerminals
         it "fetch idle message" do
           result = subject.get_idle_message
           expect(result.success?).to be_truthy
-          expect(result.value).to eq('K03 0B692')
+          expect(result.value).to eq('vKonn-01 0C8652')
         end
       end
 
@@ -72,7 +72,7 @@ module CardTerminals
         end
       end
 
-      describe "#get_info", :rmi => true do
+      describe "#get_info", :rmi1 => true do
         it "returns info object" do
           result = subject.get_info
           expect(result.success?).to be_truthy
@@ -80,9 +80,9 @@ module CardTerminals
           expect(result.value.terminalname).to eq("ORGA6100-0241000000B692")
           expect(result.value.dhcp_enabled).to be_truthy
           expect(result.value.macaddr).to eq("000DF80C8652")
-          expect(result.value.current_ip).to eq("10.200.149.235")
+          expect(result.value.current_ip).to eq("10.200.146.196")
           expect(result.value.static_ip).to eq("192.168.1.1")
-          expect(result.value.dhcp_ip).to eq("10.200.149.235")
+          expect(result.value.dhcp_ip).to eq("10.200.146.196")
           expect(result.value.remote_pin_enabled).to be_truthy
           expect(result.value.remote_pairing_enabled).to be_truthy
         end
