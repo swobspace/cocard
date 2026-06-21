@@ -26,7 +26,7 @@ module CardTerminals
       def available_actions
         return [] unless supported?
 
-        %i[ verify_pin ]
+        %i[ verify_pin get_info ]
       end
 
       def supported?
@@ -39,6 +39,18 @@ module CardTerminals
 
       def verify_pin(iccsn)
         self.class.with_verify_pin_lock(card_terminal.id) { verify_pin_without_lock(iccsn) }
+      end
+
+      def get_info
+        unless rmi_port_reachable?
+          return Result.new(success?: false, message: "RMI-Port #{rmi_port} unreachable!")
+        end
+
+        if ws_auth_pass.blank?
+          return Result.new(success?: false, message: 'DEFAULT_WS_AUTH_PASS is not configured!')
+        end
+
+        fetch_device_information
       end
 
       def verify_pin_without_lock(iccsn)
@@ -122,6 +134,146 @@ module CardTerminals
 
     private
       attr_reader :request
+
+      def fetch_device_information
+        @result = {}
+        @session = {}
+        @request = Request.new(session)
+        pending = {}
+        attempted_logout = false
+
+        self.class.with_eventmachine_lock do
+          EM.run do
+            ws = Faye::WebSocket::Client.new(ws_url, ['cobra'], ping: 15, tls: tls_options)
+            send_request = lambda do |message, action|
+              msg_id = JSON.parse(message).dig('header', 'msgId')
+              pending[msg_id] = action
+              ws.send(message)
+            end
+            close_after_logout = lambda do
+              if session[:management_session_id].present? && !attempted_logout
+                attempted_logout = true
+                send_request.call(request.logout, :logout)
+              else
+                ws.close
+              end
+            end
+            timeout = EM::Timer.new(15) do
+              if @result[:message].blank? && !@result[:success]
+                @result = { success: false, message: 'Timeout while requesting device information' }
+              end
+              close_after_logout.call
+            end
+
+            ws.on :open do |_event|
+              debug('>>> :open cherry remote management get-info >>>')
+              send_request.call(request.login(ws_auth_user, ws_auth_pass), :login)
+            end
+
+            ws.on :message do |event|
+              response = parse_ws_response(event.data)
+              unless response
+                if session[:management_session_id].present? && !attempted_logout
+                  attempted_logout = true
+                  send_request.call(request.logout, :logout)
+                else
+                  ws.close
+                end
+                next
+              end
+
+              debug2(response)
+              action = pending[response.in_reply_to_id]
+              if response.in_reply_to_id.blank? || action.blank?
+                if @result[:success] && attempted_logout
+                  ws.close
+                  next
+                end
+
+                @result = {
+                  success: false,
+                  message: "Unexpected ST-1506 management response: unknown inReplyToId #{response.in_reply_to_id.presence || '(missing)'}"
+                }
+                close_after_logout.call
+                next
+              end
+
+              unless response.success?
+                if action == :logout
+                  ws.close
+                  next
+                end
+
+                @result = { success: false, message: response.error.to_s }
+                if session[:management_session_id].present? && action != :login && !attempted_logout
+                  attempted_logout = true
+                  send_request.call(request.logout, :logout)
+                else
+                  ws.close
+                end
+                next
+              end
+
+              case action
+              when :login
+                if response.payload_type != 'LoginResponse'
+                  @result = { success: false, message: "Unexpected ST-1506 management response for LoginRequest: #{response.payload_type}" }
+                  ws.close
+                elsif response.session_id.blank?
+                  @result = { success: false, message: 'Login response did not contain a session id' }
+                  ws.close
+                else
+                  session[:management_session_id] = response.session_id
+                  send_request.call(request.get_device_information, :get_device_information)
+                end
+              when :get_device_information
+                information = response.device_information
+                if response.get_device_information_response? && information.present?
+                  @result = {
+                    success: true,
+                    message: 'Device information received',
+                    value: Info.new(information)
+                  }
+                  attempted_logout = true
+                  send_request.call(request.logout, :logout)
+                else
+                  @result = { success: false, message: "Unexpected ST-1506 management response for GetDeviceInformationRequest: #{response.payload_type}" }
+                  if session[:management_session_id].present? && !attempted_logout
+                    attempted_logout = true
+                    send_request.call(request.logout, :logout)
+                  else
+                    ws.close
+                  end
+                end
+              when :logout
+                ws.close
+              else
+                @result = { success: false, message: "Unexpected ST-1506 management action #{action}" }
+                close_after_logout.call
+              end
+            end
+
+            ws.on :error do |event|
+              @result = { success: false, message: event.message } unless @result[:success]
+              debug([:error, event.message])
+              close_after_logout.call
+            end
+
+            ws.on :close do |event|
+              timeout.cancel if timeout
+              debug([:close, event.code, event.reason])
+              ws = nil
+              EM.stop
+            end
+          end
+        end
+
+        if @result[:success]
+          Result.new(success?: true, message: @result[:message], value: @result[:value])
+        else
+          Result.new(success?: false, message: @result[:message] || 'Could not request device information')
+        end
+      end
 
       def fetch_smcb_authentication_key
         @result = {}
@@ -347,7 +499,7 @@ module CardTerminals
       def parse_ws_response(data)
         Response.new(data)
       rescue JSON::ParserError => e
-        @result = { success: false, message: "Invalid JSON from ST-1506: #{e.message}" }
+        @result = { success: false, message: "Invalid JSON from ST-1506: #{e.message}" } unless @result[:success]
         nil
       end
 

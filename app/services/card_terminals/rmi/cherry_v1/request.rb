@@ -20,6 +20,10 @@ module CardTerminals
         management_request('SmcbAuthenticationRequest', {})
       end
 
+      def get_device_information
+        management_request('GetDeviceInformationRequest', {})
+      end
+
       def authenticate_response(request_msg_id, response)
         smcb_response('AuthenticateResponse', request_msg_id, Response: response)
       end

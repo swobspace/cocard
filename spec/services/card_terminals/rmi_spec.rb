@@ -104,7 +104,7 @@ module CardTerminals
         instance_double(CardTerminals::RMI::CherryV1,
           supported?: true,
           rmi_port: 443,
-          available_actions: [:verify_pin]
+          available_actions: [:verify_pin, :get_info]
         )
       end
 
@@ -138,6 +138,25 @@ module CardTerminals
         end
       end
 
+      describe "#get_info" do
+        let(:info) { instance_double(CardTerminals::RMI::CherryV1::Info) }
+        let(:res) { Result.new(true, 'Success Message', info) }
+
+        it "executes callback" do
+          expect(cherry_v1).to receive(:get_info).and_return(res)
+          called_back = false
+          returned_info = nil
+          subject.get_info do |result|
+            result.on_success do |message, value|
+              called_back = true
+              returned_info = value
+            end
+          end
+          expect(called_back).to be_truthy
+          expect(returned_info).to eq(info)
+        end
+      end
+
       describe "#reboot" do
         it "is unsupported" do
           called_back = false
@@ -154,7 +173,7 @@ module CardTerminals
         instance_double(CardTerminals::RMI::CherryV1,
           supported?: true,
           rmi_port: 443,
-          available_actions: [:verify_pin]
+          available_actions: [:verify_pin, :get_info]
         )
       end
 

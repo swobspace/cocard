@@ -13,7 +13,7 @@ module CardTerminals
     # * :info  - CardTerminal::RMI::*::Info object
     #
     def initialize(options = {})
-      options.symbolize_keys
+      options = options.symbolize_keys
       @info = options.fetch(:info)
     end
 
@@ -37,13 +37,13 @@ module CardTerminals
         @card_terminal.name = info.terminalname
         @card_terminal.identification = info.identification
         @card_terminal.firmware_version = info.firmware_version
-        @card_terminal.serial = info.serial
-        @card_terminal.uptime_total = info.uptime_total
-        @card_terminal.uptime_reboot = info.uptime_reboot
-        @card_terminal.slot1_plug_cycles = info.slot1_plug_cycles
-        @card_terminal.slot2_plug_cycles = info.slot2_plug_cycles
-        @card_terminal.slot3_plug_cycles = info.slot3_plug_cycles
-        @card_terminal.slot4_plug_cycles = info.slot4_plug_cycles
+        assign_info_attribute(:serial)
+        assign_info_attribute(:uptime_total)
+        assign_info_attribute(:uptime_reboot)
+        assign_info_attribute(:slot1_plug_cycles)
+        assign_info_attribute(:slot2_plug_cycles)
+        assign_info_attribute(:slot3_plug_cycles)
+        assign_info_attribute(:slot4_plug_cycles)
       end
 
       # @card_terminal.last_check = Time.current
@@ -53,7 +53,10 @@ module CardTerminals
       #
       if @card_terminal.save
         @card_terminal.touch
-        update_or_create_card
+        result = update_or_create_card
+        return true if cherry_info? && result.nil?
+
+        result
       else
         Rails.logger.warn("WARN:: could not create or save card terminal #{@card_terminal.mac}: " +
           @card_terminal.errors.full_messages.join('; '))
@@ -64,9 +67,21 @@ module CardTerminals
     private
     attr_reader :info
 
+    def assign_info_attribute(attribute)
+      value = info.public_send(attribute)
+      return if cherry_info? && value.nil?
+
+      @card_terminal.public_send("#{attribute}=", value)
+    end
+
+    def cherry_info?
+      info.is_a?(CardTerminals::RMI::CherryV1::Info)
+    end
+
     def update_or_create_card
       iccsn = info.smckt_iccsn
       return if (iccsn.blank? or iccsn == '-')
+
       expiration = info.smckt_auth2_expiration || info.smckt_auth1_expiration
       card = Card.find_or_create_by(iccsn: iccsn) do |c|
                     c.card_type = 'SMC-KT'
