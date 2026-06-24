@@ -55,9 +55,11 @@ module Cocard::SOAP
                          attributes: soap_operation_attributes,
                          message: soap_message)
       rescue Savon::SOAPFault => error
-        fault = error.to_hash[:fault] || {}
+        fault_hash = error.to_hash
+        fault = (fault_hash[:fault] || fault_hash['fault'] || {}).with_indifferent_access
         details = fault.dig(:detail, :error, :trace)
-                       &.select {|k, v| [:code, :detail].include?(k)}
+                       &.with_indifferent_access
+                       &.select {|k, _v| %w[code detail].include?(k.to_s)}
                        &.map {|k,v| "#{k}: #{v}"}
                        &.join("; ")
         error_messages = [fault[:faultcode], fault[:faultstring], details]

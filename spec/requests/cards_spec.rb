@@ -194,6 +194,38 @@ RSpec.describe "/cards", type: :request do
     end
   end
 
+  describe "POST /verify_pin" do
+    let(:card) do
+      FactoryBot.create(:card,
+        card_terminal_slot: cts,
+        card_handle: 'card-handle-1',
+        card_type: 'SMC-B'
+      )
+    end
+    let(:rmi) { instance_double(CardTerminals::RMI, supported?: true, available_actions: [:verify_pin_while]) }
+    let(:verify_result) { Cocard::VerifyPin::Result.new(success?: true, error_messages: [], pin_verify: nil) }
+
+    before do
+      card.contexts << context
+      allow_any_instance_of(CardTerminal).to receive(:rmi).and_return(rmi)
+    end
+
+    it "uses the ST1506 retry helper inside verify_pin_while" do
+      helper = instance_double(Cocard::VerifyPinWithSt1506Retry, call: verify_result)
+      expect(rmi).to receive(:verify_pin_while).with(card.iccsn).once do |_iccsn, &block|
+        value = block.call
+        CardTerminals::RMI::Status.success('ok', value)
+      end
+      expect(Cocard::VerifyPinWithSt1506Retry).to receive(:new)
+        .with(card: card, context: context).once.and_return(helper)
+      expect(Cocard::VerifyPin).not_to receive(:new)
+
+      post verify_pin_card_url(card, context_id: context.id)
+
+      expect(response).to be_successful
+    end
+  end
+
   describe "DELETE /destroy" do
     it "soft_deletes the requested card" do
       card = Card.create! valid_attributes

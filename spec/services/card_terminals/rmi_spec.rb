@@ -33,6 +33,7 @@ module CardTerminals
       it { expect(subject.respond_to?(:get_idle_message)).to be_truthy }
       it { expect(subject.respond_to?(:set_idle_message)).to be_truthy }
       it { expect(subject.respond_to?(:verify_pin)).to be_truthy }
+      it { expect(subject.respond_to?(:verify_pin_while)).to be_truthy }
       it { expect(subject.respond_to?(:remote_pairing)).to be_truthy }
       it { expect(subject.respond_to?(:supported?)).to be_truthy }
     end
@@ -104,7 +105,7 @@ module CardTerminals
         instance_double(CardTerminals::RMI::CherryV1,
           supported?: true,
           rmi_port: 443,
-          available_actions: [:verify_pin, :get_info]
+          available_actions: [:verify_pin, :verify_pin_while, :get_info]
         )
       end
 
@@ -135,6 +136,28 @@ module CardTerminals
             end
           end
           expect(called_back).to be_truthy
+        end
+      end
+
+      describe "#verify_pin_while" do
+        let(:block_result) { instance_double('VerifyPinResult') }
+        let(:res) { Result.new(true, 'Success Message', block_result) }
+
+        it "returns a success status with the block result" do
+          expect(cherry_v1).to receive(:verify_pin_while).with('iccsn').and_yield.and_return(res)
+          called_block = false
+
+          status = subject.verify_pin_while('iccsn') { called_block = true }
+
+          called_back = false
+          value = nil
+          status.on_success do |_message, returned_value|
+            called_back = true
+            value = returned_value
+          end
+          expect(called_block).to be_truthy
+          expect(called_back).to be_truthy
+          expect(value).to eq(block_result)
         end
       end
 

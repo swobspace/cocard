@@ -94,6 +94,17 @@ module CardTerminals
       end
     end
 
+    def verify_pin_while(iccsn, &block)
+      return Status.unsupported unless supported? && available_actions.include?(:verify_pin_while)
+
+      result = rmi.verify_pin_while(iccsn, &block)
+      if result.success?
+        Status.success(result.message.to_s, result.value)
+      else
+        Status.failure(result.message.to_s)
+      end
+    end
+
     def remote_pairing
       timeout = 30
       if supported? && available_actions.include?(:remote_pairing)
