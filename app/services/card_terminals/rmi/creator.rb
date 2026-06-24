@@ -13,7 +13,7 @@ module CardTerminals
     # * :info  - CardTerminal::RMI::*::Info object
     #
     def initialize(options = {})
-      options = options.symbolize_keys
+      options.symbolize_keys
       @info = options.fetch(:info)
     end
 
@@ -54,7 +54,7 @@ module CardTerminals
       if @card_terminal.save
         @card_terminal.touch
         result = update_or_create_card
-        return true if cherry_info? && result.nil?
+        return true if missing_smckt_card_is_success? && result.nil?
 
         result
       else
@@ -69,13 +69,21 @@ module CardTerminals
 
     def assign_info_attribute(attribute)
       value = info.public_send(attribute)
-      return if cherry_info? && value.nil?
+      return if preserve_nil_terminal_attributes? && unavailable_terminal_attribute?(value)
 
       @card_terminal.public_send("#{attribute}=", value)
     end
 
-    def cherry_info?
-      info.is_a?(CardTerminals::RMI::CherryV1::Info)
+    def unavailable_terminal_attribute?(value)
+      value.nil? || value == 0
+    end
+
+    def preserve_nil_terminal_attributes?
+      info.respond_to?(:preserve_nil_terminal_attributes?) && info.preserve_nil_terminal_attributes?
+    end
+
+    def missing_smckt_card_is_success?
+      info.respond_to?(:missing_smckt_card_is_success?) && info.missing_smckt_card_is_success?
     end
 
     def update_or_create_card

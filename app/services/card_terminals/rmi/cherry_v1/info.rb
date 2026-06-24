@@ -205,6 +205,14 @@ module CardTerminals
         nil
       end
 
+      def preserve_nil_terminal_attributes?
+        true
+      end
+
+      def missing_smckt_card_is_success?
+        true
+      end
+
     private
       attr_reader :properties
 
