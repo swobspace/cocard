@@ -55,6 +55,15 @@ module CardTerminals
           expect(json['Header']).to include('MsgId', 'InReplyToId' => 'request-id', 'SessionId' => 'smcb-session')
           expect(json['Payload']).to eq('Code' => 'Pin', 'Pin' => '123456')
         end
+
+        it 'builds a GetDeviceInformationRequest with an empty payload and management session id' do
+          session = { management_session_id: 'management-session' }
+          json = JSON.parse(described_class.new(session).get_device_information)
+
+          expect(json).to include('payloadType' => 'GetDeviceInformationRequest')
+          expect(json['header']).to include('msgId', 'sessionId' => 'management-session')
+          expect(json['payload']).to eq({})
+        end
       end
 
       describe CherryV1::Response do
@@ -75,8 +84,27 @@ module CardTerminals
           expect(response_for('header' => { 'SessionId' => 'legacy-header-session' }).session_id).to eq('legacy-header-session')
         end
 
+        it 'exposes GetDeviceInformationResponse payload without breaking other response parsing' do
+          response = response_for(
+            'payloadType' => 'GetDeviceInformationResponse',
+            'payload' => { 'deviceName' => 'Cherry', 'ipAddress' => '192.0.2.10' }
+          )
+
+          expect(response).to be_get_device_information_response
+          expect(response.device_information).to eq('deviceName' => 'Cherry', 'ipAddress' => '192.0.2.10')
+          expect(response_for('PayloadType' => 'InputPinRequest', 'Payload' => { 'Slot' => 'Slot3' }).slot).to eq('Slot3')
+        end
+
         def response_for(message)
           described_class.new(message.to_json)
+        end
+      end
+
+      describe '#available_actions' do
+        it 'includes get_info and Cherry block verification while preserving verify_pin' do
+          card_terminal = FactoryBot.create(:card_terminal, :with_mac, ip: '192.0.2.10')
+
+          expect(described_class.new(card_terminal: card_terminal).available_actions).to contain_exactly(:verify_pin, :verify_pin_while, :get_info)
         end
       end
 
@@ -85,6 +113,395 @@ module CardTerminals
           card_terminal = FactoryBot.create(:card_terminal, :with_mac, ip: '192.0.2.10')
 
           expect(described_class.new(card_terminal: card_terminal).rmi_port).to eq(443)
+        end
+      end
+
+      describe CherryV1::Info do
+        let(:payload) do
+          {
+            'providerId' => 'DECHY',
+            'productShortName' => 'ST1506',
+            'deviceName' => 'Cherry ST-1506',
+            'ethernetMacAddress' => 'aa:bb:cc:dd:ee:ff',
+            'ipAddress' => '192.0.2.10',
+            'useDhcp' => true,
+            'networkMode' => 'Dhcp',
+            'fwVersion' => '3.2.1',
+            'buildVersion' => 'build-42',
+            'remotepin1' => 0,
+            'remotepin2' => 1,
+            'ntpSyncServer' => '192.0.2.53',
+            'smcktProductTypeVersion' => '2.0',
+            'smcktSerialNumber' => 'CHERRY-SERIAL-123',
+            'smcktPersonalization' => 'RSA,ECC',
+            'smcktExpirationDateAUT' => '20270131',
+            'smcktExpirationDateAUT2' => '20280229',
+            'smcktExpirationDateAUTD' => 'invalid'
+          }
+        end
+
+        it 'maps Cherry device information to the common info interface conservatively' do
+          info = described_class.new(payload)
+
+          expect(info.terminalname).to eq('Cherry ST-1506')
+          expect(info.identification).to eq('DECHY-ST1506')
+          expect(info.macaddr).to eq('AABBCCDDEEFF')
+          expect(info.current_ip).to eq('192.0.2.10')
+          expect(info.dhcp_enabled).to be(true)
+          expect(info.dhcp_ip).to eq('192.0.2.10')
+          expect(info.static_ip).to be_nil
+          expect(info.remote_pin_enabled).to be(true)
+          expect(info.ntp_enabled).to be(true)
+          expect(info.ntp_server).to eq('192.0.2.53')
+          expect(info.firmware_version).to eq('3.2.1')
+          expect(info.build_version).to eq('build-42')
+          expect(info.smckt_version).to eq('2.0')
+          expect(info.smckt_iccsn).to be_nil
+          expect(info.smckt_serial_number).to eq('CHERRY-SERIAL-123')
+          expect(info.smckt_slot).to eq(0)
+          expect(info.smckt_personalization).to eq('RSA,ECC')
+          expect(info.smckt_auth1_type).to be_nil
+          expect(info.smckt_auth1_expiration).to eq(Date.new(2027, 1, 31))
+          expect(info.smckt_auth2_type).to be_nil
+          expect(info.smckt_auth2_expiration).to eq(Date.new(2028, 2, 29))
+          expect(info.smckt_autd_expiration).to be_nil
+        end
+
+        it 'derives DHCP from networkMode and returns nil/safe defaults for unavailable attributes' do
+          info = described_class.new('networkMode' => 'StaticIp', 'ipAddress' => '192.0.2.20')
+
+          expect(info.dhcp_enabled).to be(false)
+          expect(info.static_ip).to eq('192.0.2.20')
+          expect(info.dhcp_ip).to be_nil
+          expect(info.macaddr).to be_nil
+          expect(info.serial).to be_nil
+          expect(info.uptime_total).to be_nil
+          expect(info.slot1_plug_cycles).to be_nil
+          expect(info.remote_pairing_enabled).to be_nil
+          expect(info.tls_kt_ecgroup).to be_nil
+        end
+
+        it 'keeps SMC-KT personalization conservative for supported protocol values' do
+          %w[RSA ECC RSA,ECC].each do |personalization|
+            info = described_class.new('smcktPersonalization' => personalization)
+
+            expect(info.smckt_personalization).to eq(personalization)
+            expect(info.smckt_auth1_type).to be_nil
+            expect(info.smckt_auth2_type).to be_nil
+          end
+        end
+      end
+
+      describe '#get_info' do
+        let(:card_terminal) { instance_double(CardTerminal, id: 1, ip: '192.0.2.10', rmi_port: 8443) }
+        let(:service) { described_class.new(card_terminal: card_terminal) }
+        let(:websocket) { FakeManagementWebSocket.new }
+        let(:timer) { instance_double(EM::Timer, cancel: true) }
+
+        before do
+          allow(card_terminal).to receive(:tcp_port_open?).with(8443).and_return(true)
+          allow(Faye::WebSocket::Client).to receive(:new).and_return(websocket)
+          allow(EM::Timer).to receive(:new).and_return(timer)
+          allow(EM).to receive(:stop)
+          allow(EM).to receive(:run) do |&block|
+            block.call
+            websocket.emit_open
+          end
+        end
+
+        it 'validates websocket credentials before opening the management websocket' do
+          with_env('DEFAULT_WS_AUTH_PASS' => nil) do
+            expect(Faye::WebSocket::Client).not_to receive(:new)
+
+            result = service.get_info
+
+            expect(result).not_to be_success
+            expect(result.message).to match(/DEFAULT_WS_AUTH_PASS/)
+          end
+        end
+
+        it 'logs in, requests device information, logs out, and returns Cherry info' do
+          websocket.on_send('LoginRequest') do |request|
+            websocket.emit_message(
+              'header' => { 'msgId' => 'login-response', 'inReplyToId' => request.dig('header', 'msgId') },
+              'payloadType' => 'LoginResponse',
+              'payload' => { 'sessionId' => 'management-session' }
+            )
+          end
+          websocket.on_send('GetDeviceInformationRequest') do |request|
+            expect(request.dig('header', 'sessionId')).to eq('management-session')
+            websocket.emit_message(
+              'header' => { 'msgId' => 'info-response', 'inReplyToId' => request.dig('header', 'msgId') },
+              'payloadType' => 'GetDeviceInformationResponse',
+              'payload' => { 'providerId' => 'DECHY', 'productShortName' => 'ST1506', 'deviceName' => 'Cherry' }
+            )
+          end
+          websocket.on_send('LogoutRequest') { websocket.close }
+
+          result = with_env('DEFAULT_WS_AUTH_PASS' => 'secret') { service.get_info }
+
+          expect(result).to be_success
+          expect(result.message).to eq('Device information received')
+          expect(result.value).to be_a(CherryV1::Info)
+          expect(result.value.identification).to eq('DECHY-ST1506')
+          expect(websocket.sent_payload_types).to eq(%w[LoginRequest GetDeviceInformationRequest LogoutRequest])
+        end
+
+        it 'preserves successful device information when cleanup logout response has no inReplyToId' do
+          websocket.on_send('LoginRequest') do |request|
+            websocket.emit_message(
+              'header' => { 'msgId' => 'login-response', 'inReplyToId' => request.dig('header', 'msgId') },
+              'payloadType' => 'LoginResponse',
+              'payload' => { 'sessionId' => 'management-session' }
+            )
+          end
+          websocket.on_send('GetDeviceInformationRequest') do |request|
+            websocket.emit_message(
+              'header' => { 'msgId' => 'info-response', 'inReplyToId' => request.dig('header', 'msgId') },
+              'payloadType' => 'GetDeviceInformationResponse',
+              'payload' => { 'providerId' => 'DECHY', 'productShortName' => 'ST1506', 'deviceName' => 'Cherry' }
+            )
+          end
+          websocket.on_send('LogoutRequest') do
+            websocket.emit_message(
+              'header' => { 'msgId' => 'logout-response' },
+              'payloadType' => 'LogoutResponse',
+              'payload' => {}
+            )
+          end
+
+          result = with_env('DEFAULT_WS_AUTH_PASS' => 'secret') { service.get_info }
+
+          expect(result).to be_success
+          expect(result.message).to eq('Device information received')
+          expect(result.value).to be_a(CherryV1::Info)
+          expect(result.value.identification).to eq('DECHY-ST1506')
+          expect(websocket.sent_payload_types).to eq(%w[LoginRequest GetDeviceInformationRequest LogoutRequest])
+          expect(websocket.close_count).to eq(1)
+        end
+
+        it 'preserves successful device information when cleanup logout JSON is malformed' do
+          websocket.on_send('LoginRequest') do |request|
+            websocket.emit_message(
+              'header' => { 'msgId' => 'login-response', 'inReplyToId' => request.dig('header', 'msgId') },
+              'payloadType' => 'LoginResponse',
+              'payload' => { 'sessionId' => 'management-session' }
+            )
+          end
+          websocket.on_send('GetDeviceInformationRequest') do |request|
+            websocket.emit_message(
+              'header' => { 'msgId' => 'info-response', 'inReplyToId' => request.dig('header', 'msgId') },
+              'payloadType' => 'GetDeviceInformationResponse',
+              'payload' => { 'providerId' => 'DECHY', 'productShortName' => 'ST1506', 'deviceName' => 'Cherry' }
+            )
+          end
+          websocket.on_send('LogoutRequest') { websocket.emit_raw('{not-json') }
+
+          result = with_env('DEFAULT_WS_AUTH_PASS' => 'secret') { service.get_info }
+
+          expect(result).to be_success
+          expect(result.message).to eq('Device information received')
+          expect(result.value).to be_a(CherryV1::Info)
+          expect(result.value.identification).to eq('DECHY-ST1506')
+          expect(websocket.sent_payload_types).to eq(%w[LoginRequest GetDeviceInformationRequest LogoutRequest])
+          expect(websocket.close_count).to eq(1)
+        end
+
+        it 'fails fast when a LoginRequest receives a successful non-login payload with a session id' do
+          websocket.on_send('LoginRequest') do |request|
+            websocket.emit_message(
+              'header' => { 'msgId' => 'unexpected-response', 'inReplyToId' => request.dig('header', 'msgId') },
+              'payloadType' => 'GetDeviceInformationResponse',
+              'payload' => { 'sessionId' => 'management-session', 'deviceName' => 'Cherry' }
+            )
+          end
+          websocket.on_send('GetDeviceInformationRequest') { raise 'unexpected GetDeviceInformationRequest' }
+
+          result = with_env('DEFAULT_WS_AUTH_PASS' => 'secret') { service.get_info }
+
+          expect(result).not_to be_success
+          expect(result.message).to eq('Unexpected ST-1506 management response for LoginRequest: GetDeviceInformationResponse')
+          expect(websocket.sent_payload_types).to eq(%w[LoginRequest])
+          expect(websocket.close_count).to eq(1)
+        end
+
+        it 'logs out best-effort after a post-login device-information error' do
+          websocket.on_send('LoginRequest') do |request|
+            websocket.emit_message(
+              'header' => { 'msgId' => 'login-response', 'inReplyToId' => request.dig('header', 'msgId') },
+              'payloadType' => 'LoginResponse',
+              'payload' => { 'sessionId' => 'management-session' }
+            )
+          end
+          websocket.on_send('GetDeviceInformationRequest') do |request|
+            websocket.emit_message(
+              'header' => { 'msgId' => 'info-response', 'inReplyToId' => request.dig('header', 'msgId') },
+              'payloadType' => 'GetDeviceInformationResponse',
+              'payload' => { 'error' => 'Internal error' }
+            )
+          end
+          websocket.on_send('LogoutRequest') { websocket.close }
+
+          result = with_env('DEFAULT_WS_AUTH_PASS' => 'secret') { service.get_info }
+
+          expect(result).not_to be_success
+          expect(result.message).to eq('Internal error')
+          expect(websocket.sent_payload_types).to eq(%w[LoginRequest GetDeviceInformationRequest LogoutRequest])
+          expect(websocket.close_count).to eq(1)
+        end
+
+        it 'fails fast and closes on a successful response with missing inReplyToId before login' do
+          websocket.on_send('LoginRequest') do
+            websocket.emit_message(
+              'header' => { 'msgId' => 'login-response' },
+              'payloadType' => 'LoginResponse',
+              'payload' => { 'sessionId' => 'management-session' }
+            )
+          end
+
+          result = with_env('DEFAULT_WS_AUTH_PASS' => 'secret') { service.get_info }
+
+          expect(result).not_to be_success
+          expect(result.message).to match(/unknown inReplyToId \(missing\)/)
+          expect(websocket.sent_payload_types).to eq(%w[LoginRequest])
+          expect(websocket.close_count).to eq(1)
+        end
+
+        it 'preserves a post-login protocol failure message when logout hangs until timeout' do
+          allow(EM::Timer).to receive(:new) do |_seconds, &block|
+            @timer_callback = block
+            timer
+          end
+          websocket.on_send('LoginRequest') do |request|
+            websocket.emit_message(
+              'header' => { 'msgId' => 'login-response', 'inReplyToId' => request.dig('header', 'msgId') },
+              'payloadType' => 'LoginResponse',
+              'payload' => { 'sessionId' => 'management-session' }
+            )
+          end
+          websocket.on_send('GetDeviceInformationRequest') do
+            websocket.emit_message(
+              'header' => { 'msgId' => 'info-response', 'inReplyToId' => 'unknown-request-id' },
+              'payloadType' => 'GetDeviceInformationResponse',
+              'payload' => { 'deviceName' => 'Cherry' }
+            )
+          end
+          websocket.on_send('LogoutRequest') { @timer_callback.call }
+
+          result = with_env('DEFAULT_WS_AUTH_PASS' => 'secret') { service.get_info }
+
+          expect(result).not_to be_success
+          expect(result.message).to match(/unknown inReplyToId unknown-request-id/)
+          expect(result.message).not_to eq('Timeout while requesting device information')
+          expect(websocket.sent_payload_types).to eq(%w[LoginRequest GetDeviceInformationRequest LogoutRequest])
+          expect(websocket.close_count).to eq(1)
+        end
+
+        it 'fails fast and logs out after login on a successful response with unknown inReplyToId' do
+          websocket.on_send('LoginRequest') do |request|
+            websocket.emit_message(
+              'header' => { 'msgId' => 'login-response', 'inReplyToId' => request.dig('header', 'msgId') },
+              'payloadType' => 'LoginResponse',
+              'payload' => { 'sessionId' => 'management-session' }
+            )
+          end
+          websocket.on_send('GetDeviceInformationRequest') do
+            websocket.emit_message(
+              'header' => { 'msgId' => 'info-response', 'inReplyToId' => 'unknown-request-id' },
+              'payloadType' => 'GetDeviceInformationResponse',
+              'payload' => { 'deviceName' => 'Cherry' }
+            )
+          end
+          websocket.on_send('LogoutRequest') { websocket.close }
+
+          result = with_env('DEFAULT_WS_AUTH_PASS' => 'secret') { service.get_info }
+
+          expect(result).not_to be_success
+          expect(result.message).to match(/unknown inReplyToId unknown-request-id/)
+          expect(websocket.sent_payload_types).to eq(%w[LoginRequest GetDeviceInformationRequest LogoutRequest])
+          expect(websocket.close_count).to eq(1)
+        end
+
+        it 'fails fast and logs out on an unexpected successful payload for the pending request' do
+          websocket.on_send('LoginRequest') do |request|
+            websocket.emit_message(
+              'header' => { 'msgId' => 'login-response', 'inReplyToId' => request.dig('header', 'msgId') },
+              'payloadType' => 'LoginResponse',
+              'payload' => { 'sessionId' => 'management-session' }
+            )
+          end
+          websocket.on_send('GetDeviceInformationRequest') do |request|
+            websocket.emit_message(
+              'header' => { 'msgId' => 'unexpected-response', 'inReplyToId' => request.dig('header', 'msgId') },
+              'payloadType' => 'LoginResponse',
+              'payload' => { 'sessionId' => 'other-session' }
+            )
+          end
+          websocket.on_send('LogoutRequest') { websocket.close }
+
+          result = with_env('DEFAULT_WS_AUTH_PASS' => 'secret') { service.get_info }
+
+          expect(result).not_to be_success
+          expect(result.message).to eq('Unexpected ST-1506 management response for GetDeviceInformationRequest: LoginResponse')
+          expect(websocket.sent_payload_types).to eq(%w[LoginRequest GetDeviceInformationRequest LogoutRequest])
+          expect(websocket.close_count).to eq(1)
+        end
+
+        it 'fails and closes on malformed management JSON' do
+          websocket.on_send('LoginRequest') { websocket.emit_raw('{not-json') }
+
+          result = with_env('DEFAULT_WS_AUTH_PASS' => 'secret') { service.get_info }
+
+          expect(result).not_to be_success
+          expect(result.message).to match(/Invalid JSON from ST-1506/)
+          expect(websocket.sent_payload_types).to eq(%w[LoginRequest])
+          expect(websocket.close_count).to eq(1)
+        end
+
+        class FakeManagementWebSocket
+          attr_reader :close_count, :handlers, :sent
+
+          def initialize
+            @close_count = 0
+            @handlers = {}
+            @sent = []
+            @send_handlers = {}
+          end
+
+          def on(event, &block)
+            handlers[event] = block
+          end
+
+          def send(message)
+            request = JSON.parse(message)
+            sent << request
+            @send_handlers.fetch(request['payloadType']).call(request)
+          end
+
+          def close
+            @close_count += 1
+            handlers[:close]&.call(OpenStruct.new(code: 1000, reason: 'closed'))
+          end
+
+          def emit_open
+            handlers.fetch(:open).call(OpenStruct.new)
+          end
+
+          def emit_message(message)
+            emit_raw(message.to_json)
+          end
+
+          def emit_raw(data)
+            handlers.fetch(:message).call(OpenStruct.new(data: data))
+          end
+
+          def on_send(payload_type, &block)
+            @send_handlers[payload_type] = block
+          end
+
+          def sent_payload_types
+            sent.map { |request| request['payloadType'] }
+          end
         end
       end
 
@@ -156,6 +573,35 @@ module CardTerminals
           stub_const('CardTerminals::RMI::CherryV1::TERMINAL_MUTEXES', {})
           stub_const('CardTerminals::RMI::CherryV1::TERMINAL_MUTEXES_MUTEX', Mutex.new)
 
+          instrumented_mutex = Class.new do
+            attr_reader :waiting_for_lock
+
+            def initialize
+              @mutex = Mutex.new
+              @state_mutex = Mutex.new
+              @locked = false
+              @waiting_for_lock = Queue.new
+            end
+
+            def synchronize
+              waiting_for_lock << true if locked?
+
+              @mutex.synchronize do
+                @state_mutex.synchronize { @locked = true }
+                begin
+                  yield
+                ensure
+                  @state_mutex.synchronize { @locked = false }
+                end
+              end
+            end
+
+            def locked?
+              @state_mutex.synchronize { @locked }
+            end
+          end.new
+          allow(described_class).to receive(:terminal_mutex_for).and_return(instrumented_mutex)
+
           release_first_call = Queue.new
           entered_body = Queue.new
           pop_with_timeout = ->(queue) { Timeout.timeout(1) { queue.pop } }
@@ -170,7 +616,7 @@ module CardTerminals
           expect(pop_with_timeout.call(entered_body)).to eq('first')
 
           second_thread = Thread.new { service.verify_pin('second') }
-          sleep 0.05
+          expect(pop_with_timeout.call(instrumented_mutex.waiting_for_lock)).to be(true)
           expect(entered_body).to be_empty
 
           release_first_call << true
@@ -220,6 +666,45 @@ module CardTerminals
 
           expect(result).to be_success
           expect(body_calls).to eq(1)
+        end
+      end
+
+      describe '#verify_pin_while' do
+        let(:card_terminal) { FactoryBot.create(:card_terminal, :with_mac, ip: '192.0.2.10') }
+        let(:service) { described_class.new(card_terminal: card_terminal) }
+        let(:key_result) { described_class::Result.new(success?: true, message: 'key', value: 'a' * 64) }
+
+        before do
+          allow(card_terminal).to receive(:rmi_port).and_return(8443)
+          allow(card_terminal).to receive(:tcp_port_open?).with(8443).and_return(true)
+        end
+
+        it 'validates the card slot and SMC-B key before starting the block listener' do
+          slot = FactoryBot.create(:card_terminal_slot, card_terminal: card_terminal, slotid: 2)
+          FactoryBot.create(:card, iccsn: '802760000000000004', card_terminal_slot: slot)
+          block_called = false
+
+          with_env('DEFAULT_SMCB_PIN' => '123456', 'DEFAULT_WS_AUTH_PASS' => 'secret') do
+            expect(service).to receive(:fetch_smcb_authentication_key).and_return(key_result)
+            expect(service).to receive(:connect_remote_smcb_api_while).with('a' * 64, 2).and_return(described_class::Result.new(success?: true, message: 'ok'))
+
+            result = service.verify_pin_while('802760000000000004') { block_called = true }
+
+            expect(result).to be_success
+            expect(block_called).to be(false)
+          end
+        end
+
+        it 'fails before fetching an SMC-B key when the ICCSN does not belong to this terminal' do
+          with_env('DEFAULT_SMCB_PIN' => '123456', 'DEFAULT_WS_AUTH_PASS' => 'secret') do
+            expect(service).not_to receive(:fetch_smcb_authentication_key)
+            expect(service).not_to receive(:connect_remote_smcb_api_while)
+
+            result = service.verify_pin_while('802760000000000099') { raise 'should not run' }
+
+            expect(result).not_to be_success
+            expect(result.message).to match(/not assigned|ICCSN/)
+          end
         end
       end
 
@@ -373,6 +858,367 @@ module CardTerminals
 
           def emit_message(data)
             handlers.fetch(:message).call(OpenStruct.new(data: data))
+          end
+        end
+      end
+
+      describe '#connect_remote_smcb_api_while' do
+        let(:card_terminal) { instance_double(CardTerminal, id: 1, ip: '192.0.2.10', rmi_port: 8443) }
+        let(:service) { described_class.new(card_terminal: card_terminal) }
+        let(:websocket) { FakeBlockWebSocket.new }
+        let(:key) { 'a' * 64 }
+        let(:timer) { instance_double(EM::Timer, cancel: true) }
+
+        before do
+          allow(Faye::WebSocket::Client).to receive(:new).and_return(websocket)
+          allow(EM::Timer).to receive(:new) do |_seconds, &block|
+            @timeout_callback = block
+            timer
+          end
+          allow(EM).to receive(:stop)
+          allow(EM).to receive(:reactor_running?).and_return(false)
+          allow(EM).to receive(:run) do |&block|
+            block.call
+            @exercise_websocket.call
+          end
+          allow(service).to receive(:toaster)
+        end
+
+        it 'runs the caller block only after SMC-B authentication, answers multiple authorized PIN requests, and returns the block value' do
+          block_started = Queue.new
+          release_block = Queue.new
+          events = []
+
+          @exercise_websocket = lambda do
+            expect(events).to be_empty
+            websocket.emit_message(authenticate_request)
+            expect(Timeout.timeout(1) { block_started.pop }).to eq(:started)
+            expect(websocket.sent_payload_types).to include('AuthenticateResponse')
+
+            websocket.emit_message(input_pin_request('pin-1', 'Slot1'))
+            websocket.emit_message(success_notify('notify-1'))
+            websocket.emit_message(input_pin_request('pin-2', 'Slot1'))
+            websocket.emit_message(success_notify('notify-2'))
+            release_block << true
+          end
+
+          result = with_env('DEFAULT_SMCB_PIN' => '123456') do
+            service.send(:connect_remote_smcb_api_while, key, 1) do
+              events << :block
+              block_started << :started
+              release_block.pop
+              :block_result
+            end
+          end
+
+          expect(events).to eq([:block])
+          expect(websocket.sent_payload_types.count('InputPinResponse')).to eq(2)
+          expect(websocket.close_count).to eq(1)
+          expect(result).to be_success
+          expect(result.value).to eq(:block_result)
+        end
+
+        it 'keeps the listener open after the block until pending PIN notify confirmations arrive' do
+          block_started = Queue.new
+          release_block = Queue.new
+
+          @exercise_websocket = lambda do
+            websocket.emit_message(authenticate_request)
+            Timeout.timeout(1) { block_started.pop }
+            websocket.emit_message(input_pin_request('pin-1', 'Slot1'))
+            release_block << true
+            sleep 0.05
+            expect(websocket.close_count).to eq(0)
+
+            websocket.emit_message(success_notify('notify-1'))
+          end
+
+          result = with_env('DEFAULT_SMCB_PIN' => '123456') do
+            service.send(:connect_remote_smcb_api_while, key, 1) do
+              block_started << true
+              release_block.pop
+            end
+          end
+
+          expect(websocket.close_count).to eq(1)
+          expect(result).to be_success
+        end
+
+        it 'rejects wrong-slot PIN requests and closes without sending the PIN' do
+          @exercise_websocket = lambda do
+            websocket.emit_message(authenticate_request)
+            websocket.emit_message(input_pin_request('pin-1', 'Slot2'))
+          end
+
+          result = with_env('DEFAULT_SMCB_PIN' => '123456') do
+            service.send(:connect_remote_smcb_api_while, key, 1) { sleep 0.01 }
+          end
+
+          expect(websocket.sent_payload_types).not_to include('InputPinResponse')
+          expect(websocket.close_count).to eq(1)
+          expect(result).not_to be_success
+          expect(result.message).to match(/not authorized/)
+        end
+
+        it 'waits for the caller block to finish before returning after a wrong-slot failure' do
+          block_started = Queue.new
+          release_block = Queue.new
+          block_finished = Queue.new
+          returned = Queue.new
+
+          @exercise_websocket = lambda do
+            websocket.emit_message(authenticate_request)
+            Timeout.timeout(1) { block_started.pop }
+            websocket.emit_message(input_pin_request('pin-1', 'Slot2'))
+          end
+
+          thread = Thread.new do
+            result = with_env('DEFAULT_SMCB_PIN' => '123456') do
+              service.send(:connect_remote_smcb_api_while, key, 1) do
+                block_started << true
+                release_block.pop
+                block_finished << true
+              end
+            end
+            returned << result
+            result
+          end
+
+          sleep 0.2
+          expect(returned).to be_empty
+
+          release_block << true
+          result = Timeout.timeout(1) { returned.pop }
+
+          expect(Timeout.timeout(1) { block_finished.pop }).to be(true)
+          expect(result).not_to be_success
+          expect(result.message).to match(/not authorized/)
+          expect(thread.value).to eq(result)
+        ensure
+          release_block << true if defined?(release_block)
+          thread&.join(1)
+        end
+
+        it 'fails without running the caller block when the auth timer fires before authentication' do
+          @exercise_websocket = lambda do
+            @timeout_callback.call
+          end
+
+          result = with_env('DEFAULT_SMCB_PIN' => '123456') do
+            service.send(:connect_remote_smcb_api_while, key, 1) { raise 'should not run' }
+          end
+
+          expect(result).not_to be_success
+          expect(result.message).to eq('Timeout during ST-1506 block PIN verification')
+        end
+
+        it 'preserves a pre-auth timeout result when listener shutdown join times out' do
+          allow(service).to receive(:smcb_total_timeout_seconds).and_return(0.01)
+          join_calls = 0
+          allow(Thread).to receive(:new).and_wrap_original do |original, *args, &thread_block|
+            thread = original.call(*args, &thread_block)
+            allow(thread).to receive(:join) do |_timeout = nil|
+              join_calls += 1
+              join_calls == 1 ? nil : true
+            end
+            allow(thread).to receive(:kill).and_return(thread)
+            thread
+          end
+
+          @exercise_websocket = lambda do
+            @timeout_callback.call
+          end
+
+          result = with_env('DEFAULT_SMCB_PIN' => '123456') do
+            service.send(:connect_remote_smcb_api_while, key, 1) { raise 'should not run' }
+          end
+
+          expect(result).not_to be_success
+          expect(result.message).to eq('Timeout during ST-1506 block PIN verification')
+        end
+
+        it 'does not spend the auth timeout while waiting for the EventMachine lock' do
+          allow(service).to receive(:smcb_total_timeout_seconds).and_return(0.02)
+          allow(described_class).to receive(:with_eventmachine_lock) do |&block|
+            expect(Faye::WebSocket::Client).not_to have_received(:new)
+            sleep 0.06
+            block.call
+          end
+
+          @exercise_websocket = lambda do
+            websocket.emit_message(authenticate_request)
+          end
+
+          result = with_env('DEFAULT_SMCB_PIN' => '123456') do
+            service.send(:connect_remote_smcb_api_while, key, 1) { :after_auth }
+          end
+
+          expect(Faye::WebSocket::Client).to have_received(:new).once
+          expect(websocket.close_count).to eq(1)
+          expect(result).to be_success
+          expect(result.value).to eq(:after_auth)
+        end
+
+        it 'does not stop another active reactor when startup times out before this listener starts' do
+          blocked_listener = Queue.new
+
+          allow(service).to receive(:smcb_total_timeout_seconds).and_return(0.01)
+          allow(EM).to receive(:reactor_running?).and_return(true)
+          expect(EM).not_to receive(:schedule)
+          expect(EM).not_to receive(:stop)
+          expect(Faye::WebSocket::Client).not_to receive(:new)
+          allow(described_class).to receive(:with_eventmachine_lock) do
+            blocked_listener.pop
+          end
+
+          result = with_env('DEFAULT_SMCB_PIN' => '123456') do
+            service.send(:connect_remote_smcb_api_while, key, 1) { raise 'should not run' }
+          end
+
+          expect(websocket.close_count).to eq(0)
+          expect(result).not_to be_success
+          expect(result.message).to eq('Timeout stopping ST-1506 block PIN verification listener')
+        ensure
+          blocked_listener << true if defined?(blocked_listener)
+        end
+
+        it 'ignores the auth timer after authentication while a slow caller block is running' do
+          block_started = Queue.new
+          block_finished = Queue.new
+
+          allow(service).to receive(:smcb_total_timeout_seconds).and_return(0.01)
+          @exercise_websocket = lambda do
+            websocket.emit_message(authenticate_request)
+            Timeout.timeout(1) { block_started.pop }
+            @timeout_callback.call
+          end
+
+          result = with_env('DEFAULT_SMCB_PIN' => '123456') do
+            service.send(:connect_remote_smcb_api_while, key, 1) do
+              block_started << true
+              sleep 0.05
+              block_finished << true
+              :slow_block_result
+            end
+          end
+
+          expect(timer).to have_received(:cancel)
+          expect(Timeout.timeout(1) { block_finished.pop }).to be(true)
+          expect(websocket.close_count).to eq(1)
+          expect(result).to be_success
+          expect(result.value).to eq(:slow_block_result)
+        end
+
+        it 'runs listener thread callbacks and the caller block through the Rails executor' do
+          block_started = Queue.new
+          release_block = Queue.new
+          listener_callback_wrapped = Queue.new
+          caller_wrapped = Queue.new
+          executor = Class.new do
+            def wrap
+              previous = Thread.current[:cherry_v1_executor_wrapped]
+              Thread.current[:cherry_v1_executor_wrapped] = true
+              yield
+            ensure
+              Thread.current[:cherry_v1_executor_wrapped] = previous
+            end
+          end.new
+
+          allow(Rails).to receive(:application).and_return(double('Rails application', executor: executor))
+          expect(service).to receive(:toaster) do
+            listener_callback_wrapped << Thread.current[:cherry_v1_executor_wrapped]
+          end
+
+          @exercise_websocket = lambda do
+            websocket.emit_message(authenticate_request)
+            Timeout.timeout(1) { block_started.pop }
+            websocket.emit_message(input_pin_request('pin-1', 'Slot1'))
+            websocket.emit_message(success_notify('notify-1'))
+            release_block << true
+          end
+
+          result = with_env('DEFAULT_SMCB_PIN' => '123456') do
+            service.send(:connect_remote_smcb_api_while, key, 1) do
+              caller_wrapped << Thread.current[:cherry_v1_executor_wrapped]
+              block_started << true
+              release_block.pop
+              :executor_wrapped
+            end
+          end
+
+          expect(Timeout.timeout(1) { listener_callback_wrapped.pop }).to be(true)
+          expect(Timeout.timeout(1) { caller_wrapped.pop }).to be(true)
+          expect(result).to be_success
+          expect(result.value).to eq(:executor_wrapped)
+        end
+
+        it 'converts block errors to a failure and closes the listener' do
+          @exercise_websocket = lambda do
+            websocket.emit_message(authenticate_request)
+            sleep 0.05
+          end
+
+          result = with_env('DEFAULT_SMCB_PIN' => '123456') do
+            service.send(:connect_remote_smcb_api_while, key, 1) { raise 'connector failed' }
+          end
+
+          expect(websocket.close_count).to eq(1)
+          expect(result).not_to be_success
+          expect(result.message).to match(/connector failed/)
+        end
+
+        def authenticate_request
+          {
+            'PayloadType' => 'AuthenticateRequest',
+            'Header' => { 'MsgId' => 'auth-1', 'SessionId' => 'session-1' },
+            'Payload' => { 'ApiVersion' => '1.0', 'Challenge' => 'b' * 64 }
+          }.to_json
+        end
+
+        def input_pin_request(msg_id, slot)
+          {
+            'PayloadType' => 'InputPinRequest',
+            'Header' => { 'MsgId' => msg_id, 'SessionId' => 'session-1' },
+            'Payload' => { 'Slot' => slot, 'MinLen' => 6, 'MaxLen' => 8 }
+          }.to_json
+        end
+
+        def success_notify(msg_id)
+          {
+            'PayloadType' => 'Notify',
+            'Header' => { 'MsgId' => msg_id, 'SessionId' => 'session-1' },
+            'Payload' => { 'Code' => 0 }
+          }.to_json
+        end
+
+        class FakeBlockWebSocket
+          attr_reader :close_count, :handlers, :sent
+
+          def initialize
+            @close_count = 0
+            @handlers = {}
+            @sent = []
+          end
+
+          def on(event, &block)
+            handlers[event] = block
+          end
+
+          def send(message)
+            sent << message
+          end
+
+          def close
+            @close_count += 1
+            handlers[:close]&.call(OpenStruct.new(code: 1000, reason: 'closed'))
+          end
+
+          def emit_message(data)
+            handlers.fetch(:message).call(OpenStruct.new(data: data))
+          end
+
+          def sent_payload_types
+            sent.map { |message| JSON.parse(message)['PayloadType'] }
           end
         end
       end

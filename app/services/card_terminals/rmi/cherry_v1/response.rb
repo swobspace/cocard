@@ -49,6 +49,14 @@ module CardTerminals
         payload['key'] || payload[:key]
       end
 
+      def device_information
+        get_device_information_response? ? payload : {}
+      end
+
+      def get_device_information_response?
+        payload_type == 'GetDeviceInformationResponse'
+      end
+
       def challenge
         payload['Challenge'] || payload[:Challenge]
       end
