@@ -25,6 +25,14 @@ module CardTerminals
       rmi.supported?
     end
 
+    def coordinated_verify_pin_supported?
+      supported? && rmi.coordinated_verify_pin_supported?
+    end
+
+    def coordinated_verify_pin_available?
+      coordinated_verify_pin_supported? && available_actions.include?(:verify_pin_while)
+    end
+
     def rmi_port
       rmi.rmi_port
     end
@@ -91,6 +99,19 @@ module CardTerminals
         end
       else
         yield Status.unsupported
+      end
+    end
+
+    def verify_pin_while(iccsn, &block)
+      unless coordinated_verify_pin_available?
+        return Status.unsupported
+      end
+
+      result = rmi.verify_pin_while(iccsn, &block)
+      if result.success?
+        Status.success(result.message.to_s, result.value)
+      else
+        Status.failure(result.message.to_s)
       end
     end
 

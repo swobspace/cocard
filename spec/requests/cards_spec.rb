@@ -194,6 +194,94 @@ RSpec.describe "/cards", type: :request do
     end
   end
 
+  describe "POST /verify_pin" do
+    let(:card) do
+      FactoryBot.create(:card,
+        card_terminal_slot: cts,
+        card_handle: 'card-handle-1',
+        card_type: 'SMC-B'
+      )
+    end
+    let(:rmi) do
+      instance_double(CardTerminals::RMI,
+                      coordinated_verify_pin_available?: true,
+                      coordinated_verify_pin_supported?: true)
+    end
+    let(:verify_result) { Cocard::VerifyPin::Result.new(success?: true, error_messages: [], pin_verify: nil) }
+
+    before do
+      ct.update!(pin_mode: :auto)
+      card.contexts << context
+      allow_any_instance_of(CardTerminal).to receive(:rmi).and_return(rmi)
+    end
+
+    it "uses coordinated PIN verification with plain VerifyPin" do
+      verify_pin = instance_double(Cocard::VerifyPin, call: verify_result)
+      expect(rmi).to receive(:verify_pin_while).with(card.iccsn).once do |_iccsn, &block|
+        value = block.call
+        CardTerminals::RMI::Status.success('ok', value)
+      end
+      expect(Cocard::VerifyPin).to receive(:new)
+        .with(card: card, context: context).once.and_return(verify_pin)
+
+      post verify_pin_card_url(card, context_id: context.id)
+
+      expect(response).to be_successful
+    end
+
+    it "renders an alert toast when coordinated PIN verification fails" do
+      expect(rmi).to receive(:verify_pin_while).with(card.iccsn).once
+        .and_return(CardTerminals::RMI::Status.failure('coordination failed'))
+
+      post verify_pin_card_url(card, context_id: context.id)
+
+      expect(response).to be_successful
+      expect(response.body).to include('bg-danger')
+      expect(response.body).to include('ERROR:: coordination failed')
+    end
+
+    it "keeps ORGA-shaped RMI on the legacy VerifyPin job path" do
+      legacy_rmi = instance_double(CardTerminals::RMI,
+                                   coordinated_verify_pin_available?: false,
+                                   coordinated_verify_pin_supported?: false)
+      allow_any_instance_of(CardTerminal).to receive(:rmi).and_return(legacy_rmi)
+      allow_any_instance_of(Cocard::PinVerificationRunner).to receive(:sleep)
+      verify_pin = instance_double(Cocard::VerifyPin, call: verify_result)
+
+      expect(legacy_rmi).not_to receive(:verify_pin_while)
+      expect(CardTerminals::RMI::VerifyPinJob).to receive(:perform_later).with(card: card)
+      expect(Cocard::VerifyPin).to receive(:new).with(card: card, context: context).once.and_return(verify_pin)
+
+      post verify_pin_card_url(card, context_id: context.id)
+
+      expect(response).to be_successful
+    end
+
+    it "renders an alert toast when legacy VerifyPin fails" do
+      legacy_rmi = instance_double(CardTerminals::RMI,
+                                   coordinated_verify_pin_available?: false,
+                                   coordinated_verify_pin_supported?: false)
+      allow_any_instance_of(CardTerminal).to receive(:rmi).and_return(legacy_rmi)
+      allow_any_instance_of(Cocard::PinVerificationRunner).to receive(:sleep)
+      failed_verify_result = Cocard::VerifyPin::Result.new(
+        success?: false,
+        error_messages: ['legacy verify failed'],
+        pin_verify: nil
+      )
+      verify_pin = instance_double(Cocard::VerifyPin, call: failed_verify_result)
+
+      expect(legacy_rmi).not_to receive(:verify_pin_while)
+      expect(CardTerminals::RMI::VerifyPinJob).to receive(:perform_later).with(card: card)
+      expect(Cocard::VerifyPin).to receive(:new).with(card: card, context: context).once.and_return(verify_pin)
+
+      post verify_pin_card_url(card, context_id: context.id)
+
+      expect(response).to be_successful
+      expect(response.body).to include('bg-danger')
+      expect(response.body).to include('ERROR:: legacy verify failed')
+    end
+  end
+
   describe "DELETE /destroy" do
     it "soft_deletes the requested card" do
       card = Card.create! valid_attributes

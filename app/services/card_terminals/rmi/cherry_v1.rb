@@ -26,10 +26,14 @@ module CardTerminals
       def available_actions
         return [] unless supported?
 
-        %i[ verify_pin get_info ]
+        %i[ verify_pin verify_pin_while get_info ]
       end
 
       def supported?
+        true
+      end
+
+      def coordinated_verify_pin_supported?
         true
       end
 
@@ -39,6 +43,14 @@ module CardTerminals
 
       def verify_pin(iccsn)
         self.class.with_verify_pin_lock(card_terminal.id) { verify_pin_without_lock(iccsn) }
+      end
+
+      def verify_pin_while(iccsn, &block)
+        unless block_given?
+          return Result.new(success?: false, message: 'Block is required for ST-1506 PIN verification')
+        end
+
+        self.class.with_verify_pin_lock(card_terminal.id) { verify_pin_while_without_lock(iccsn, &block) }
       end
 
       def get_info
@@ -54,29 +66,20 @@ module CardTerminals
       end
 
       def verify_pin_without_lock(iccsn)
-        unless rmi_port_reachable?
-          return Result.new(success?: false, message: "RMI-Port #{rmi_port} unreachable!")
-        end
+        preflight = verify_pin_preflight(iccsn)
+        return preflight unless preflight.success?
 
-        unless valid_smcb_pin?
-          return Result.new(success?: false, message: 'DEFAULT_SMCB_PIN must be 6 to 8 digits!')
-        end
-        if ws_auth_pass.blank?
-          return Result.new(success?: false, message: 'DEFAULT_WS_AUTH_PASS is not configured!')
-        end
-
-        card_slot_result = card_terminal_slot_for(iccsn)
-        return card_slot_result unless card_slot_result.success?
-
-        key_result = fetch_smcb_authentication_key
-        return key_result unless key_result.success?
-        unless valid_hex?(key_result.value, 64)
-          return Result.new(success?: false, message: 'Invalid ST-1506 SMC-B authentication key')
-        end
-
-        connect_remote_smcb_api(key_result.value, card_slot_result.value.slotid)
+        connect_remote_smcb_api(preflight.value[:key], preflight.value[:slot_id])
       end
       private :verify_pin_without_lock
+
+      def verify_pin_while_without_lock(iccsn, &block)
+        preflight = verify_pin_preflight(iccsn)
+        return preflight unless preflight.success?
+
+        connect_remote_smcb_api_while(preflight.value[:key], preflight.value[:slot_id], &block)
+      end
+      private :verify_pin_while_without_lock
 
       def self.with_verify_pin_lock(terminal_id)
         body_started = false
@@ -362,6 +365,33 @@ module CardTerminals
         end
       end
 
+      def verify_pin_preflight(iccsn)
+        unless rmi_port_reachable?
+          return Result.new(success?: false, message: "RMI-Port #{rmi_port} unreachable!")
+        end
+
+        unless valid_smcb_pin?
+          return Result.new(success?: false, message: 'DEFAULT_SMCB_PIN must be 6 to 8 digits!')
+        end
+        if ws_auth_pass.blank?
+          return Result.new(success?: false, message: 'DEFAULT_WS_AUTH_PASS is not configured!')
+        end
+
+        card_slot_result = card_terminal_slot_for(iccsn)
+        return card_slot_result unless card_slot_result.success?
+
+        key_result = fetch_smcb_authentication_key
+        return key_result unless key_result.success?
+        unless valid_hex?(key_result.value, 64)
+          return Result.new(success?: false, message: 'Invalid ST-1506 SMC-B authentication key')
+        end
+
+        Result.new(success?: true, message: 'ST-1506 PIN verification preflight complete', value: {
+          key: key_result.value,
+          slot_id: card_slot_result.value.slotid
+        })
+      end
+
       def connect_remote_smcb_api(key, authorized_slot_id)
         @result = {}
         @session = {}
@@ -488,12 +518,239 @@ module CardTerminals
         end
       end
 
+      def connect_remote_smcb_api_while(key, authorized_slot_id)
+        @result = {}
+        @session = {}
+        @request = Request.new(session)
+        listener_ready_events = Queue.new
+        auth_events = Queue.new
+        pending_pin_notifies = 0
+        block_finished = false
+        block_value = nil
+        authenticated = false
+        listener_ready_signaled = false
+        auth_signaled = false
+        closed = false
+        ws = nil
+        close_when_block_done = nil
+
+        signal_listener_ready = lambda do
+          next if listener_ready_signaled
+
+          listener_ready_signaled = true
+          listener_ready_events << true
+        end
+        signal_auth = lambda do |status|
+          next if auth_signaled
+
+          auth_signaled = true
+          auth_events << status
+        end
+        close_listener = lambda do
+          listener_ws = ws
+          next unless listener_ws
+
+          schedule_on_eventmachine do
+            listener_ws.close
+          end
+        end
+
+        listener_thread = Thread.new do
+          execute_with_rails_executor do
+            self.class.with_eventmachine_lock do
+              signal_listener_ready.call
+
+              EM.run do
+                ws = Faye::WebSocket::Client.new(ws_url, ['cobra-smcb'], ping: 15, tls: tls_options)
+                auth_timeout = EM::Timer.new(smcb_total_timeout_seconds) do
+                  next if authenticated || @result[:success] || @result[:message].present?
+
+                  @result = { success: false, message: 'Timeout during ST-1506 block PIN verification' }
+                  signal_auth.call(:failed)
+                  ws.close
+                end
+                pending_notify_timeout = nil
+                cancel_pending_notify_timeout = lambda do
+                  pending_notify_timeout.cancel if pending_notify_timeout
+                  pending_notify_timeout = nil
+                end
+
+                close_with_failure = lambda do |message|
+                  next if closed
+
+                  cancel_pending_notify_timeout.call
+                  @result = { success: false, message: message }
+                  signal_auth.call(:failed) unless authenticated
+                  ws.close
+                end
+                schedule_pending_notify_timeout = lambda do
+                  cancel_pending_notify_timeout.call
+                  pending_notify_timeout = EM::Timer.new(smcb_idle_timeout_seconds) do
+                    next if closed || pending_pin_notifies.zero?
+
+                    close_with_failure.call('Timeout waiting for ST-1506 PIN notify completion')
+                  end
+                end
+                close_when_block_done = lambda do
+                  next if closed
+                  next unless block_finished && pending_pin_notifies.zero?
+
+                  cancel_pending_notify_timeout.call
+                  @result = { success: true, message: 'PIN Verification complete', value: block_value } unless @result[:message].present?
+                  ws.close
+                end
+
+                ws.on :open do |_event|
+                  debug('>>> :open cherry remote SMC-B block >>>')
+                end
+
+                ws.on :message do |event|
+                  response = parse_ws_response(event.data)
+                  unless response
+                    signal_auth.call(:failed) unless authenticated
+                    ws.close
+                    next
+                  end
+
+                  debug2(response)
+                  session[:smcb_session_id] = response.session_id if response.session_id.present?
+
+                  if response.authenticate_request?
+                    unless valid_authenticate_request?(response)
+                      close_with_failure.call('Invalid ST-1506 SMC-B authenticate request')
+                      next
+                    end
+
+                    cmac = self.class.aes_cmac_hex(key, response.challenge)
+                    ws.send(request.authenticate_response(response.msg_id, cmac))
+                    authenticated = true
+                    auth_timeout.cancel if auth_timeout
+                    auth_timeout = nil
+                    signal_auth.call(:authenticated)
+                  elsif !authenticated
+                    close_with_failure.call("Unexpected ST-1506 SMC-B response before authentication: #{response.payload_type}")
+                  elsif response.notify?
+                    if response.success?
+                      pending_pin_notifies -= 1 if pending_pin_notifies.positive?
+                      cancel_pending_notify_timeout.call if pending_pin_notifies.zero?
+                      close_when_block_done.call
+                    else
+                      close_with_failure.call("ST-1506 notify code #{response.notify_code}")
+                    end
+                  elsif response.input_pin_request?
+                    unless authorized_pin_request?(response, authorized_slot_id)
+                      close_with_failure.call('ST-1506 PIN request slot is not authorized for this card')
+                      next
+                    end
+
+                    unless pin_allowed_for_request?(response)
+                      close_with_failure.call('Configured SMC-B PIN violates ST-1506 PIN length request')
+                      next
+                    end
+
+                    pending_pin_notifies += 1
+                    schedule_pending_notify_timeout.call
+                    toaster(:info, 'PIN-Anfrage vom ST-1506 erhalten, sende SMC-B PIN ...')
+                    ws.send(request.input_pin_response(response.msg_id, smcb_pin))
+                  elsif response.output_request?
+                    unless authorized_output_request?(response, authorized_slot_id)
+                      close_with_failure.call('ST-1506 output request slot is not authorized for this card')
+                      next
+                    end
+
+                    handle_output_request(ws, response)
+                    close_when_block_done.call
+                  elsif response.cancel?
+                    close_with_failure.call('ST-1506 canceled PIN request')
+                  end
+                end
+
+                ws.on :error do |event|
+                  @result = { success: false, message: event.message }
+                  signal_auth.call(:failed) unless authenticated
+                  debug([:error, event.message])
+                  ws.close
+                end
+
+                ws.on :close do |event|
+                  closed = true
+                  signal_auth.call(:failed) unless authenticated
+                  auth_timeout.cancel if auth_timeout
+                  cancel_pending_notify_timeout.call
+                  debug([:close, event.code, event.reason])
+                  ws = nil
+                  EM.stop
+                end
+              end
+            end
+          end
+        end
+
+        begin
+          Timeout.timeout(smcb_total_timeout_seconds + 1) { listener_ready_events.pop }
+          auth_status = Timeout.timeout(smcb_total_timeout_seconds) { auth_events.pop }
+
+          if auth_status == :authenticated
+            block_value = execute_with_rails_executor { yield }
+            block_finished = true
+            schedule_on_eventmachine do
+              if @result[:message].present?
+                close_listener.call
+              else
+                close_when_block_done.call
+              end
+            end
+          end
+        rescue Timeout::Error
+          if listener_ready_signaled
+            @result = { success: false, message: 'Timeout during ST-1506 PIN verification block' } unless @result[:message].present?
+            close_listener.call
+          else
+            @result = { success: false, message: 'Timeout stopping ST-1506 block PIN verification listener' } unless @result[:message].present?
+            listener_thread.kill unless listener_thread.join(1)
+            listener_thread.join(1)
+          end
+        rescue StandardError => e
+          @result = { success: false, message: "ST-1506 PIN verification block failed: #{e.message}" } unless @result[:message].present?
+          close_listener.call
+        ensure
+          unless listener_thread.join(smcb_total_timeout_seconds + 1)
+            @result = { success: false, message: 'Timeout stopping ST-1506 block PIN verification listener' } unless @result[:message].present?
+            close_listener.call
+            listener_thread.kill unless listener_thread.join(1)
+            listener_thread.join(1)
+          end
+        end
+
+        if @result[:success]
+          Result.new(success?: true, message: @result[:message], value: @result[:value])
+        else
+          Result.new(success?: false, message: @result[:message] || 'PIN Verification failed')
+        end
+      end
+
       def handle_output_request(ws, response)
         toaster(:info, response.message) if response.message.present?
         return unless response.expect_response?
 
         code = response.ok_button? ? 'OkButton' : 'Error'
         ws.send(request.output_response(response.msg_id, code))
+      end
+
+      def schedule_on_eventmachine(&block)
+        if EM.reactor_running?
+          EM.schedule(&block)
+        else
+          block.call
+        end
+      end
+
+      def execute_with_rails_executor
+        if defined?(Rails) && Rails.respond_to?(:application) && Rails.application.respond_to?(:executor)
+          Rails.application.executor.wrap { yield }
+        else
+          yield
+        end
       end
 
       def parse_ws_response(data)

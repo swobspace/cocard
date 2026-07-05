@@ -22,6 +22,11 @@ module CardTerminals
           )
         end
 
+        it 'exposes Creator capability methods for Cherry-specific get_info behavior' do
+          expect(info.preserve_nil_terminal_attributes?).to be(true)
+          expect(info.missing_smckt_card_is_success?).to be(true)
+        end
+
         it 'updates terminal fields but does not create or link an SMC-KT card without reliable ICCSN and slot' do
           creator = described_class.new(info: info)
 
@@ -56,6 +61,7 @@ module CardTerminals
             slot4_plug_cycles: 44
           )
 
+          allow(info).to receive(:slot1_plug_cycles).and_return(0)
           creator = described_class.new(info: info)
 
           expect(creator.save).to be_truthy
@@ -103,6 +109,11 @@ module CardTerminals
         let(:smckt_slot) { 4 }
         let(:info) { OrgaV1::Info.new(orga_properties) }
 
+        it 'relies on Creator-local defaults when ORGA info has no Cherry-specific hooks' do
+          expect(info).not_to respond_to(:preserve_nil_terminal_attributes?)
+          expect(info).not_to respond_to(:missing_smckt_card_is_success?)
+        end
+
         it 'creates and links an SMC-KT card for a positive slot and returns true' do
           creator = described_class.new(info: info)
 
@@ -119,6 +130,23 @@ module CardTerminals
           expect(card.card_terminal_slot).to eq(slot)
         end
 
+
+        it 'does not preserve existing terminal values when ORGA reports nil fields' do
+          terminal = FactoryBot.create(
+            :card_terminal,
+            mac: '0011223344AA',
+            serial: 'EXISTING-SERIAL',
+            uptime_total: 1234
+          )
+          orga_properties['vendor_serialNumber'] = nil
+          orga_properties['sys_uptime_durationTotal'] = nil
+
+          expect(described_class.new(info: info).save).to be_truthy
+
+          terminal.reload
+          expect(terminal.serial).to be_nil
+          expect(terminal.uptime_total).to be_nil
+        end
 
         it 'does not rewrite card type or expiration date for an existing card with the same ICCSN' do
           existing_card = FactoryBot.create(

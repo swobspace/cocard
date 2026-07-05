@@ -126,13 +126,8 @@ class CardsController < ApplicationController
       status  = :alert
       message = "CardTerminal #{ct} pin mode == off"
     else
-      # start background rmi job
-      CardTerminals::RMI::VerifyPinJob.perform_later(card: @card)
-      # wait some time
-      sleep 3
+      result = Cocard::PinVerificationRunner.new(card: @card).verify(context: set_context)
 
-      # start verify pin
-      result = Cocard::VerifyPin.new(card: @card, context: set_context).call
       unless result.success?
         status  = :alert
         message = (@card.to_s + "<br/>" +
