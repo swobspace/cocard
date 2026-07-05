@@ -41,31 +41,13 @@ module Cocard
     describe "with real pin status" do
       it { expect(subject.pin_result).to eq("ERROR") }
       it { expect(subject.status).to eq("Warning") }
-      it { expect(subject.error_code).to eq("4043") }
       it { expect(subject.error_text).to eq("Timeout bei der PIN-Eingabe") }
       it { expect(subject.left_tries).to eq(nil) }
     end
 
-    it "reads trace values from string-keyed hashes too" do
-      string_hash = {
-        'status' => {
-          'error' => {
-            'trace' => {
-              'code' => '4060',
-              'error_text' => 'Ressource belegt'
-            }
-          }
-        }
-      }
-      pin_verify = Cocard::PinVerify.new(string_hash)
-
-      expect(pin_verify.error_code).to eq('4060')
-      expect(pin_verify.error_text).to eq('Ressource belegt')
-    end
-
     describe "Cocard::PinVerify::ATTRIBUTES" do
       it { expect(Cocard::PinVerify::ATTRIBUTES).to contain_exactly(
-             :pin_result, :status, :error_code, :error_text, :left_tries ) }
+             :pin_result, :status, :error_text, :left_tries ) }
     end
   end
 end

@@ -126,39 +126,22 @@ class CardsController < ApplicationController
       status  = :alert
       message = "CardTerminal #{ct} pin mode == off"
     else
-      rmi = ct.rmi
-      if rmi.supported? && rmi.available_actions.include?(:verify_pin_while)
-        rmi_status = rmi.verify_pin_while(@card.iccsn) do
-          Cocard::VerifyPinWithSt1506Retry.new(card: @card, context: set_context).call
-        end
-        result = nil
-        rmi_status.on_success { |_message, value| result = value }
-        rmi_status.on_failure do |rmi_message|
-          status  = :alert
-          message = (@card.to_s + "<br/>" +
-                     "Kontext: #{@context}<br/>ERROR:: " + rmi_message).html_safe
-        end
+      # start background rmi job
+      CardTerminals::RMI::VerifyPinJob.perform_later(card: @card)
+      # wait some time
+      sleep 3
+
+      # start verify pin
+      result = Cocard::VerifyPin.new(card: @card, context: set_context).call
+      unless result.success?
+        status  = :alert
+        message = (@card.to_s + "<br/>" +
+                            "Kontext: #{@context}<br/>ERROR:: " +
+                            result.error_messages.join(', ')).html_safe
       else
-        # start background rmi job
-        CardTerminals::RMI::VerifyPinJob.perform_later(card: @card)
-        # wait some time
-        sleep 3
-
-        # start verify pin
-        result = Cocard::VerifyPin.new(card: @card, context: set_context).call
-      end
-
-      if result
-        unless result.success?
-          status  = :alert
-          message = (@card.to_s + "<br/>" +
-                              "Kontext: #{@context}<br/>ERROR:: " +
-                              result.error_messages.join(', ')).html_safe
-        else
-          status  = :success
-          message = (@card.to_s + "<br/>" + "Kontext: #{@context}<br/>" +
-                     "VERIFY PIN successful").html_safe
-        end
+        status  = :success
+        message = (@card.to_s + "<br/>" + "Kontext: #{@context}<br/>" +
+                   "VERIFY PIN successful").html_safe
       end
     end
 

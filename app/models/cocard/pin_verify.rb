@@ -1,7 +1,7 @@
 module Cocard
   class PinVerify
 
-    ATTRIBUTES = %i( pin_result status error_code error_text left_tries )
+    ATTRIBUTES = %i( pin_result status error_text left_tries )
 
     def initialize(hash)
       @hash = hash || {}
@@ -19,12 +19,8 @@ module Cocard
       hash.dig(:status, :result)
     end
 
-    def error_code
-      trace_value(:code)
-    end
-
     def error_text
-      trace_value(:error_text)
+      hash.dig(:status, :error, :trace, :error_text)
     end
 
     def left_tries
@@ -33,10 +29,5 @@ module Cocard
 
   private
     attr_reader :hash
-
-    def trace_value(key)
-      trace = hash.dig(:status, :error, :trace) || hash.dig('status', 'error', 'trace') || {}
-      trace[key] || trace[key.to_s]
-    end
   end
 end
