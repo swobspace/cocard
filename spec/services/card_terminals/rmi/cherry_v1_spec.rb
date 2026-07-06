@@ -1224,6 +1224,7 @@ module CardTerminals
 
           def initialize
             @close_count = 0
+            @closed = false
             @handlers = {}
             @sent = []
           end
@@ -1237,6 +1238,9 @@ module CardTerminals
           end
 
           def close
+            return if @closed
+
+            @closed = true
             @close_count += 1
             handlers[:close]&.call(OpenStruct.new(code: 1000, reason: 'closed'))
           end
