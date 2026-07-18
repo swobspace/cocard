@@ -1,5 +1,7 @@
 = Changelog
 
+== 1.0.6-dev - unreleased
+
 == 1.0.5 - 2026-07-18
 
 * Unterstützung für das Cherry ST-1506 (nur SMC-B Remote-PIN-Verifizierung)
