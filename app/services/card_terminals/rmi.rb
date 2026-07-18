@@ -4,7 +4,7 @@ module CardTerminals
   #
   class RMI
     attr_reader :card_terminal
-    SUPPORTED_IDENTIFICATIONS = %w[ INGHC-ORGA6100 ]
+    SUPPORTED_IDENTIFICATIONS = %w[ INGHC-ORGA6100 DECHY-ST1506 CHERRY-ST1506 CHERRY-ST-1506 ]
     #
     # rmi = CardTerminals::RMI.new(options)
     #
@@ -23,6 +23,14 @@ module CardTerminals
 
     def supported?
       rmi.supported?
+    end
+
+    def coordinated_verify_pin_supported?
+      supported? && rmi.coordinated_verify_pin_supported?
+    end
+
+    def coordinated_verify_pin_available?
+      coordinated_verify_pin_supported? && available_actions.include?(:verify_pin_while)
     end
 
     def rmi_port
@@ -94,6 +102,19 @@ module CardTerminals
       end
     end
 
+    def verify_pin_while(iccsn, &block)
+      unless coordinated_verify_pin_available?
+        return Status.unsupported
+      end
+
+      result = rmi.verify_pin_while(iccsn, &block)
+      if result.success?
+        Status.success(result.message.to_s, result.value)
+      else
+        Status.failure(result.message.to_s)
+      end
+    end
+
     def remote_pairing
       timeout = 30
       if supported? && available_actions.include?(:remote_pairing)
@@ -122,8 +143,25 @@ module CardTerminals
       when 'INGHC-ORGA6100'
         CardTerminals::RMI::OrgaV1.new(card_terminal: card_terminal)
       else
-        CardTerminals::RMI::Null.new(card_terminal: card_terminal)
+        if cherry_st1506?
+          CardTerminals::RMI::CherryV1.new(card_terminal: card_terminal)
+        else
+          CardTerminals::RMI::Null.new(card_terminal: card_terminal)
+        end
       end
+    end
+
+    def cherry_st1506?
+      product_miscellaneous = card_terminal.product_information&.product_miscellaneous || {}
+      candidates = [
+        card_terminal.identification,
+        card_terminal.id_product,
+        card_terminal.product_information&.product_code,
+        product_miscellaneous[:product_name],
+        product_miscellaneous['product_name']
+      ].compact.map(&:to_s)
+
+      candidates.any? { |candidate| candidate.match?(/ST[-_ ]?1506/i) }
     end
 
   end

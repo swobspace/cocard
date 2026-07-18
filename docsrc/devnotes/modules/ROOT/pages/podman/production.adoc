@@ -1,8 +1,8 @@
 = Podman for Production
 :author: Wolfgang Barth
-:revdate: 2026-05-31
+:revdate: 2026-07-18
 :navtitle: Podman
-:cocardversion: 1.0.4
+:cocardversion: 1.0.5
 :rubyversion: 3.4
 
 Just a memo for todos and code snippets ...

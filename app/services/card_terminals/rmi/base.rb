@@ -32,6 +32,10 @@ module CardTerminals
         false
       end
 
+      def coordinated_verify_pin_supported?
+        false
+      end
+
       def firmware_version
         card_terminal.firmware_version
       end

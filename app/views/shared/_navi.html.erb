@@ -9,5 +9,7 @@
   <%= render partial: 'shared/navs/vzd' %>
 </ul>
 
-<%= render partial: 'shared/navs/ti' %>
+<% if can? :navigate, :ti %>
+  <%= render partial: 'shared/navs/ti' %>
+<% end %>
 <%= render partial: 'shared/navs/search' %>
