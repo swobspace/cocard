@@ -86,7 +86,9 @@ class CardTerminalsController < ApplicationController
 
   # PATCH/PUT /card_terminals/1
   def update
-    @card_terminal.update(card_terminal_params)
+    unless @card_terminal.update(card_terminal_params)
+      flash[:alert] = @card_terminal.errors.full_messages.join("; ")
+    end
     respond_with(@card_terminal)
   end
 
