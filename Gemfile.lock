@@ -420,8 +420,8 @@ GEM
       prism (>= 1.6.0)
       rbs (>= 4.0.0)
       tsort
-    redis (6.0.0)
-      redis-client (= 0.30.1)
+    redis (5.4.1)
+      redis-client (>= 0.22.0)
     redis-client (0.30.1)
       connection_pool
     regexp_parser (2.12.0)
@@ -566,7 +566,7 @@ DEPENDENCIES
   puma (>= 5.0)
   rails (~> 8.1.0)
   rails-i18n (~> 8.1.0)
-  redis (>= 4.0.1)
+  redis (>= 4.0.1, < 6)
   rspec-rails
   savon (~> 2.15.1)
   selenium-webdriver
