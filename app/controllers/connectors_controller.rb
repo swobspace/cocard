@@ -1,7 +1,7 @@
 class ConnectorsController < ApplicationController
   include SoftDeletionController
   skip_load_and_authorize_resource
-  before_action :set_connector, only: %i[show edit update destroy
+  before_action :set_connector, only: %i[show edit update destroy connector_sds
                                          check fetch_sds get_resource_information
                                          get_card_terminals get_cards ping reboot
                                          test_context_form test_context]
@@ -41,6 +41,12 @@ class ConnectorsController < ApplicationController
       flash[:notice] = t('connectors.no_contexts_assigned')
     end
     respond_with(@connector)
+  end
+
+  def connector_sds
+    respond_with(@connector) do |format|
+      format.xml { render xml: @connector.sds_xml, :layout => false }
+    end
   end
 
   def ping

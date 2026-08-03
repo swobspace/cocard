@@ -7,6 +7,7 @@ class Ability
     alias_action :search, :search_form, :query, :to => :read
     alias_action :sindex, :ping, :to => :read
     alias_action :failed, :to => :read
+    alias_action :connector_sds, :to => :read
     alias_action :import_p12_form, :import_p12, :to => :create
     alias_action :undelete, :soft_delete, :to => :destroy
 

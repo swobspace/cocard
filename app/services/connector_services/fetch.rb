@@ -62,6 +62,7 @@ module ConnectorServices
       end
 
       connector.connector_services = sds.connector_services
+      connector.sds_xml            = response.body
       connector.sds_updated_at     = Time.current
       connector.firmware_version   = connector.product_information&.firmware_version
       final = connector.save
