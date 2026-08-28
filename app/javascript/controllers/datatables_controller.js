@@ -138,7 +138,7 @@ export default class extends Controller {
 	           "exportOptions": { "columns": ':visible',
 	                              "search": ':applied' } },
                  { "extend": 'print'},
-                 { "extend": 'colvis', "columns": ':gt(0)',
+                 { "extend": 'colvis', "columns": ':nth-child(n+2)',
                    "text": "Sichbare Spalten" }
                ]
     }
