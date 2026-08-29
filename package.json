@@ -33,7 +33,6 @@
     "datatables.net-buttons-bs5": "^4.0.0",
     "datatables.net-responsive-bs5": "^4.0.0",
     "esbuild": "^0.28.0",
-    "jquery": "^3.0.0",
     "jszip": "^3.10.1",
     "nodemon": "^3.1.0",
     "pdfmake": "^0.3.0",
