@@ -1,4 +1,4 @@
-import '../src/jquery.js'
+// import '../src/jquery.js'
 
 // used for Excel button, CSV button doesn't need it
 import JSZip from 'jszip'

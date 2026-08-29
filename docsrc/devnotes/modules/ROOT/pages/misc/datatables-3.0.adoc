@@ -1,0 +1,14 @@
+= Migration to datatables 3.0
+:author: Wolfgang Barth
+:revdate: 2026-08-28
+
+
+.Replace jquery selectors
+[%autowidth,cols="m,m,"]
+|===
+|JQuery Style |Native CSS | Bemerkungen
+
+|:gt(0) 
+|:nth-child(n+2)
+|`nth-child` in datatables wirkt nur auf sichtbare Spalten!
+|===
