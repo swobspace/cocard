@@ -4,9 +4,11 @@
 
 
 .Replace jquery selectors
-[%autowidth,cols="m,m"]
+[%autowidth,cols="m,m,"]
 |===
-|JQuery Style |Native CSS
+|JQuery Style |Native CSS | Bemerkungen
 
-|:gt(0) | :nth-child(n+2)
+|:gt(0) 
+|:nth-child(n+2)
+|`nth-child` in datatables wirkt nur auf sichtbare Spalten!
 |===
