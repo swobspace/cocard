@@ -165,6 +165,7 @@ export default class extends Controller {
 
   colvis_change_listener(dtable) {
     const search = this.createSearchWithDebounce(dtable)
+    const tbl = dtable.table().node()
     let _this = this
     dtable.on('column-visibility.dt', function (e, settings, column, state) {
       if (state) {
@@ -175,21 +176,30 @@ export default class extends Controller {
 	    th.insertAdjacentHTML('afterbegin', _this.searchField(column, ''))
 	  }
         }
-        // console.log(dtable.table().node().id)
-        // use node id of table explicit
-        $('table#'+dtable.table().node().id+' input[name=idx'+column+']').on('keyup change', function() {
-          search(column, this.value)
-        })
+	let sinput = tbl.querySelector(`tfoot tr th input[name="idx${column}"]`)
+	if (sinput) {
+	  ['keyup', 'change'].forEach(eventType => {
+	    sinput.addEventListener(eventType, function() {
+	      search(column, this.value)
+	    })
+	  })
+        }
       }
     })
   }
 
   process_search_input(dtable) {
     const search = this.createSearchWithDebounce(dtable)
+    const tbl = dtable.table().node()
     dtable.columns().eq(0).each((colIdx) => {
-      $('table#'+dtable.table().node().id+' input[name=idx'+colIdx+']').on('keyup change', function() {
-	search(colIdx, this.value)
-      })
+      let sinput = tbl.querySelector(`tfoot tr th input[name="idx${colIdx}"]`)
+      if (sinput) {
+        ['keyup', 'change'].forEach(eventType => {
+          sinput.addEventListener(eventType, function() {
+	    search(colIdx, this.value)
+          })
+        })
+      }
     })
   }
 
