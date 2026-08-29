@@ -5,6 +5,7 @@
 * Speicherung der `connector.sds` als XML-Format zusätzlich zum Hash
 * Anzeige von `connector.sds` (XML-Format)
 * Security Updates
+* Migration zu datatables 3.0, jquery-Abhängigkeiten entfernt
 
 == 1.0.5 - 2026-07-18
 
