@@ -3,7 +3,7 @@ module Cocard
   # Get resource information from connektor
   #
   class VerifyPin
-    Result = ImmutableStruct.new(:success?, :error_messages, :pin_verify)
+    Result = Data.define(:success?, :error_messages, :pin_verify)
 
     # service = Cocard::VerifyPin.new(options)
     #
@@ -38,7 +38,7 @@ module Cocard
       if error_messages.any?
         log_error(error_messages)
         return Result.new(success?: false, error_messages: error_messages, 
-                          pin_steatus: nil)
+                          pin_verify: nil)
       end
 
       #

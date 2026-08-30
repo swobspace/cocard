@@ -102,8 +102,6 @@ gem "nori", "~> 2.7"
 # fix to 2.15.1, later version are breaking raw xml
 gem "savon", "~> 2.15.1"
 
-gem "immutable_struct", "~> 1.2"
-
 gem "net-ping", "~> 2.0"
 
 gem "good_job", "~> 4.19.0"

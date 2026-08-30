@@ -3,7 +3,7 @@ module Cocard
   # Get card information per icssn
   #
   class ReadP12
-    Result = ImmutableStruct.new(:success?, :error_messages, :params)
+    Result = Data.define(:success?, :error_messages, :params)
 
     # service = Cocard::ReadP12.new(options)
     #

@@ -6,7 +6,7 @@ module ConnectorServices
   class Fetch
     attr_reader :connector
 
-    Result = ImmutableStruct.new(:success?, :error_messages, :sds)
+    Result = Data.define(:success?, :error_messages, :sds)
 
     # service = ConnectorServices::Fetch.new(connector: connector)
     #

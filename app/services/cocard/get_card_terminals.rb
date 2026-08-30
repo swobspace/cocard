@@ -3,7 +3,7 @@ module Cocard
   # Get resource information from connektor
   #
   class GetCardTerminals
-    Result = ImmutableStruct.new(:success?, :error_messages, :card_terminals)
+    Result = Data.define(:success?, :error_messages, :card_terminals)
 
     # service = Cocard::GetCardTerminals.new(options)
     #
