@@ -104,7 +104,7 @@ gem "savon", "~> 2.15.1"
 
 gem "net-ping", "~> 3.0"
 
-gem "good_job", "~> 4.19.0"
+gem "good_job", "~> 4.24.0"
 
 gem "acts_as_list", "~> 1.1"
 
