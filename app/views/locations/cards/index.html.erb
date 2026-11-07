@@ -104,7 +104,7 @@
             <td class="text-center"><%= card.slotid %></td>
             <td><%= card.card_handle %></td>
             <td><%= card.description %></td>
-            <td><%= card.insert_time %></td>
+            <td><%= card.insert_time&.localtime %></td>
             <td><%= card.card_holder_name %></td>
             <td><%= render ExpirationDateComponent.new(item: card) %></td>
             <td><%= card.operational_state %></td>
