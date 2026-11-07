@@ -1,5 +1,7 @@
 = Changelog
 
+== 1.0.7-dev - unreleased
+
 == 1.0.6 - 2026-11-07
 
 * Speicherung der `connector.sds` als XML-Format zusätzlich zum Hash
