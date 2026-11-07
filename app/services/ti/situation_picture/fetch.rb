@@ -5,7 +5,7 @@ module TI
     #
     class Fetch
       attr_reader :hash
-      Result = ImmutableStruct.new(:success?, :error_messages, :situation_picture)
+      Result = Data.define(:success?, :error_messages, :situation_picture)
       #
       # service = TI::SituationPicture::Fetch.new()
       #

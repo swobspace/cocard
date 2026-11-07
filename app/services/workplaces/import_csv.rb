@@ -2,7 +2,7 @@ require 'csv'
 module Workplaces
   class ImportCSV
     include BooleanHelper
-    Result = ImmutableStruct.new( :success?, :error_messages, :workplaces )
+    Result = Data.define( :success?, :error_messages, :workplaces )
 
     # service = Workplaces::ImportCSV.new(file: 'csvfile', ...)
     #

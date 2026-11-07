@@ -24,8 +24,14 @@
         </tr>
 
         <tr>
-          <th class="w-25 pe-3"><%= t('attributes.sds_url')%>:</th>
-          <td><%= @connector.sds_url %></td>
+          <th class="w-25 pe-3 pt-2"><%= t('attributes.sds_url')%>:</th>
+          <td>
+            <%= @connector.sds_url %>
+            <%= link_to "SDS/XML", 
+                        connector_sds_connector_path(@connector, format: :xml),
+                        class: 'btn btn-sm btn-outline-secondary ms-3'
+             %>
+          </td>
         </tr>
 
         <tr>

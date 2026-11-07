@@ -36,7 +36,7 @@ Rails.application.configure do
       ti_lagebild: {
         cron: '*/5 * * * *',
         class: "TI::GetSituationPictureJob",
-        description: "Get card terminals from connector",
+        description: "update TI Lagebild",
         set: { wait: 1.minute }
       },
       get_cards: {

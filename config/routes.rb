@@ -144,6 +144,7 @@ Rails.application.routes.draw do
       patch :undelete
       patch :soft_delete
       post :check
+      get :connector_sds
       post :fetch_sds
       post :get_resource_information
       post :get_card_terminals

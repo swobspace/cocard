@@ -4,7 +4,7 @@ module Cocard
   # Get card information per icssn
   #
   class GetCard
-    Result = ImmutableStruct.new(:success?, :error_messages, :card)
+    Result = Data.define(:success?, :error_messages, :card)
 
     # service = Cocard::GetCard.new(options)
     #

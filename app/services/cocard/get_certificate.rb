@@ -3,7 +3,7 @@ module Cocard
   # Get resource information from connektor
   #
   class GetCertificate
-    Result = ImmutableStruct.new(:success?, :error_messages, :certificate)
+    Result = Data.define(:success?, :error_messages, :certificate)
 
     # service = Cocard::GetCertificate.new(options)
     #

@@ -2,7 +2,7 @@ module Cocard
   # Coordinates PIN verification across terminal modes while keeping terminal-specific
   # listener decisions out of controllers and higher-level Cocard services.
   class PinVerificationRunner
-    Result = ImmutableStruct.new(:success?, :error_messages, :value)
+    Result = Data.define(:success?, :error_messages, :value)
 
     def initialize(options = {})
       options = options.symbolize_keys

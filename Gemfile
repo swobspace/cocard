@@ -28,7 +28,8 @@ gem "stimulus-rails"
 gem "cssbundling-rails"
 
 # Use Redis adapter to run Action Cable in production
-gem "redis", ">= 4.0.1"
+# <6 wegen action cable 2026-08-03 https://github.com/rails/rails/pull/58344
+gem "redis", ">= 4.0.1", "< 6"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -42,7 +43,7 @@ gem "redis", ">= 4.0.1"
 gem "bootsnap", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-gem "image_processing", "~> 1.2"
+# gem "image_processing", "~> 1.2"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -101,11 +102,9 @@ gem "nori", "~> 2.7"
 # fix to 2.15.1, later version are breaking raw xml
 gem "savon", "~> 2.15.1"
 
-gem "immutable_struct", "~> 1.2"
+gem "net-ping", "~> 3.0"
 
-gem "net-ping", "~> 2.0"
-
-gem "good_job", "~> 4.19.0"
+gem "good_job", "~> 4.24.0"
 
 gem "acts_as_list", "~> 1.1"
 

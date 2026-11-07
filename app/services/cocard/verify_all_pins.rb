@@ -8,7 +8,7 @@ module Cocard
   # Broadcasts results via TurboStream
   #
   class VerifyAllPins
-    Result = ImmutableStruct.new(:success?, :error_messages)
+    Result = Data.define(:success?, :error_messages)
 
     # service = Cocard::VerifyAllPins.new(options)
     #

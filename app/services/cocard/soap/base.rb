@@ -3,7 +3,7 @@ module Cocard::SOAP
   # Base class to be inherited by operation specific classes
   #
   class Base
-    Result = ImmutableStruct.new(:success?, :error_messages, :response)
+    Result = Data.define(:success?, :error_messages, :response)
 
     attr_reader :options
 
