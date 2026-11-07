@@ -1,13 +1,15 @@
 = Changelog
 
-== 1.0.6-dev - unreleased
+== 1.0.6 - 2026-11-07
 
 * Speicherung der `connector.sds` als XML-Format zusätzlich zum Hash
 * Anzeige von `connector.sds` (XML-Format)
+* Anzeige Zeitzone bei Karte eingesteckt seit einheitlich mit lokaler Zeitzone
 * Security Updates
 * Internals:
 ** Migration zu datatables 3.0, jquery-Abhängigkeiten entfernt
 ** Refactoring: ImmutableStruct durch ruby class Data ersetzt
+
 
 == 1.0.5 - 2026-07-18
 
