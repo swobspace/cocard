@@ -18,24 +18,39 @@ module Cocard
         Rails.logger.debug("DEBUG:: get_card_terminals from #{connector.name}")
 
         connector.connector_contexts.each do |con_ctx|
+          msg_prefix = "DEBUG:: #{connector.name} - #{con_ctx.context}: "
+          msg = msg_prefix + "start fetching card terminals"
+          Rails.logger.debug(msg)
           result = Cocard::GetCardTerminals.new(
                      connector: connector,
                      context: con_ctx.context
                    ).call
           if result.success?
-            msg = "DEBUG:: #{connector.name} - #{con_ctx.context}: " +
-                  "fetching card terminals successful"
+            msg = msg_prefix + "fetching card terminals successful"
             Rails.logger.debug(msg)
             result.card_terminals.each do |cct|
               creator = CardTerminals::Creator.new(connector: connector, cct: cct)
               if creator.save
+                msg = msg_prefix + "creator save successful"
+                Rails.logger.debug(msg)
                 TerminalWorkplaces::Crupdator.new(
                   card_terminal: creator.card_terminal,
                   mandant: con_ctx.context&.mandant,
                   client_system: con_ctx.context&.client_system,
                   workplaces: cct.workplaces
                 ).call
-                ::CardTerminal.remove_duplicate_ips(creator.card_terminal)
+                msg = msg_prefix + "Workplaces::Crupdator done"
+                Rails.logger.debug(msg)
+                begin
+                  Timeout::timeout(5) do
+                    ::CardTerminal.remove_duplicate_ips(creator.card_terminal)
+                  end
+                rescue
+                  msg = msg_prefix + "CardTerminals.remove_duplicate_ips timeout"
+                  Rails.logger.warn(msg)
+                end
+                msg = msg_prefix + "CardTerminals.remove_duplicate_ips done"
+                Rails.logger.debug(msg)
               end
             end
           else
