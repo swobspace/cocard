@@ -1,5 +1,7 @@
 = Changelog
 
+== 1.0.8-dev - unreleased
+
 == 1.0.7 - 2026-11-21
 
 * Security Updates (u.a. wegen rubyßhell https://heise.de/-11532469)
