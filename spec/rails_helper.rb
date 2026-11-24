@@ -30,7 +30,7 @@ Capybara.register_driver :my_playwright do |app|
     app,
     browser_type: :chromium,
     headless: ENV['HEADLESS'] != 'false',
-    vieport: { width: 1280, height: 1280 }
+    viewport: { width: 2000, height: 1280 }
   )
 end
 
