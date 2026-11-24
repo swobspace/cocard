@@ -93,7 +93,7 @@ RSpec.describe "/workplaces", type: :request do
     
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
         post workplaces_url, params: { workplace: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
     
     end
@@ -126,7 +126,7 @@ RSpec.describe "/workplaces", type: :request do
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
         workplace = Workplace.create! valid_attributes
         patch workplace_url(workplace), params: { workplace: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
     
     end

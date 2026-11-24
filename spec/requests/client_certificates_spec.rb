@@ -87,7 +87,7 @@ RSpec.describe "/client_certificates", type: :request do
       
         it "renders a response with 422 status (i.e. to display the 'new' template)" do
           post client_certificates_url, params: { client_certificate: invalid_attributes }
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
         end
       
       end
@@ -128,7 +128,7 @@ RSpec.describe "/client_certificates", type: :request do
       
         it "renders a response with 422 status (i.e. to display the 'new' template)" do
           post client_certificates_url, params: { client_certificate: invalid_attributes }
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
         end
       
       end
@@ -160,7 +160,7 @@ RSpec.describe "/client_certificates", type: :request do
 
         it "renders a response with 422 status" do
           post client_certificates_url, params: { client_certificate: valid_attributes }
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
         end
 
         it "redirects to the created client_certificate" do
@@ -179,7 +179,7 @@ RSpec.describe "/client_certificates", type: :request do
       
         it "renders a response with 422 status (i.e. to display the 'new' template)" do
           post client_certificates_url, params: { client_certificate: invalid_attributes }
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
         end
       
       end
@@ -216,7 +216,7 @@ RSpec.describe "/client_certificates", type: :request do
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
         client_certificate = ClientCertificate.create! valid_attributes
         patch client_certificate_url(client_certificate), params: { client_certificate: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
     
     end

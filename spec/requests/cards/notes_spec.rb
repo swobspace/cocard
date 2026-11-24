@@ -72,7 +72,7 @@ module Logs
       
         it "renders a response with 422 status (i.e. to display the 'new' template)" do
           post card_notes_url(card), params: { note: invalid_attributes }
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
         end
       
       end
@@ -105,7 +105,7 @@ module Logs
         it "renders a response with 422 status (i.e. to display the 'edit' template)" do
           note = Note.create! valid_attributes
           patch card_note_url(card,note), params: { note: invalid_attributes }
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
         end
       
       end
